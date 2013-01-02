@@ -565,7 +565,7 @@ public class KpParser extends KpANTLRParserBase {
 
 
     // $ANTLR start "parse_org_kermeta_kp_KermetaProject"
-    // Kp.g:496:1: parse_org_kermeta_kp_KermetaProject returns [org.kermeta.kp.KermetaProject element = null] : ( ( ( (a0_0= parse_org_kermeta_kp_ImportProject ) ) | (a1_0= parse_org_kermeta_kp_ReusableResource ) ) )* a2= 'project' (a3= TEXT ) ( (a4= 'extends' (a5_0= parse_org_kermeta_kp_ImportProjectSources ) ( (a6= ',' (a7_0= parse_org_kermeta_kp_ImportProjectSources ) ) )* ) )? a8= '{' ( (a9= 'mainClass' (a10= QUOTED_34_34 ) ) )? ( (a11= 'mainOperation' (a12= QUOTED_34_34 ) ) )? ( (a13= 'javaBasePackage' (a14= QUOTED_34_34 ) ) )? ( ( (a15_0= parse_org_kermeta_kp_ImportFile ) ) )* a16= '}' ;
+    // Kp.g:496:1: parse_org_kermeta_kp_KermetaProject returns [org.kermeta.kp.KermetaProject element = null] : ( ( (a0_0= parse_org_kermeta_kp_ReusableResource ) ) )* ( ( (a1_0= parse_org_kermeta_kp_ImportProject ) ) )* a2= 'project' (a3= TEXT ) ( (a4= 'extends' (a5_0= parse_org_kermeta_kp_ImportProjectSources ) ( (a6= ',' (a7_0= parse_org_kermeta_kp_ImportProjectSources ) ) )* ) )? a8= '{' ( (a9= 'mainClass' (a10= QUOTED_34_34 ) ) )? ( (a11= 'mainOperation' (a12= QUOTED_34_34 ) ) )? ( (a13= 'javaBasePackage' (a14= QUOTED_34_34 ) ) )? ( ( (a15_0= parse_org_kermeta_kp_ImportFile ) ) )* a16= '}' ;
     public final org.kermeta.kp.KermetaProject parse_org_kermeta_kp_KermetaProject() throws RecognitionException {
         org.kermeta.kp.KermetaProject element =  null;
         int parse_org_kermeta_kp_KermetaProject_StartIndex = input.index();
@@ -581,9 +581,9 @@ public class KpParser extends KpANTLRParserBase {
         Token a13=null;
         Token a14=null;
         Token a16=null;
-        org.kermeta.kp.ImportProject a0_0 = null;
+        org.kermeta.kp.ReusableResource a0_0 = null;
 
-        org.kermeta.kp.ReusableResource a1_0 = null;
+        org.kermeta.kp.ImportProject a1_0 = null;
 
         org.kermeta.kp.ImportProjectSources a5_0 = null;
 
@@ -596,148 +596,144 @@ public class KpParser extends KpANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 2) ) { return element; }
-            // Kp.g:499:1: ( ( ( ( (a0_0= parse_org_kermeta_kp_ImportProject ) ) | (a1_0= parse_org_kermeta_kp_ReusableResource ) ) )* a2= 'project' (a3= TEXT ) ( (a4= 'extends' (a5_0= parse_org_kermeta_kp_ImportProjectSources ) ( (a6= ',' (a7_0= parse_org_kermeta_kp_ImportProjectSources ) ) )* ) )? a8= '{' ( (a9= 'mainClass' (a10= QUOTED_34_34 ) ) )? ( (a11= 'mainOperation' (a12= QUOTED_34_34 ) ) )? ( (a13= 'javaBasePackage' (a14= QUOTED_34_34 ) ) )? ( ( (a15_0= parse_org_kermeta_kp_ImportFile ) ) )* a16= '}' )
-            // Kp.g:500:2: ( ( ( (a0_0= parse_org_kermeta_kp_ImportProject ) ) | (a1_0= parse_org_kermeta_kp_ReusableResource ) ) )* a2= 'project' (a3= TEXT ) ( (a4= 'extends' (a5_0= parse_org_kermeta_kp_ImportProjectSources ) ( (a6= ',' (a7_0= parse_org_kermeta_kp_ImportProjectSources ) ) )* ) )? a8= '{' ( (a9= 'mainClass' (a10= QUOTED_34_34 ) ) )? ( (a11= 'mainOperation' (a12= QUOTED_34_34 ) ) )? ( (a13= 'javaBasePackage' (a14= QUOTED_34_34 ) ) )? ( ( (a15_0= parse_org_kermeta_kp_ImportFile ) ) )* a16= '}'
+            // Kp.g:499:1: ( ( ( (a0_0= parse_org_kermeta_kp_ReusableResource ) ) )* ( ( (a1_0= parse_org_kermeta_kp_ImportProject ) ) )* a2= 'project' (a3= TEXT ) ( (a4= 'extends' (a5_0= parse_org_kermeta_kp_ImportProjectSources ) ( (a6= ',' (a7_0= parse_org_kermeta_kp_ImportProjectSources ) ) )* ) )? a8= '{' ( (a9= 'mainClass' (a10= QUOTED_34_34 ) ) )? ( (a11= 'mainOperation' (a12= QUOTED_34_34 ) ) )? ( (a13= 'javaBasePackage' (a14= QUOTED_34_34 ) ) )? ( ( (a15_0= parse_org_kermeta_kp_ImportFile ) ) )* a16= '}' )
+            // Kp.g:500:2: ( ( (a0_0= parse_org_kermeta_kp_ReusableResource ) ) )* ( ( (a1_0= parse_org_kermeta_kp_ImportProject ) ) )* a2= 'project' (a3= TEXT ) ( (a4= 'extends' (a5_0= parse_org_kermeta_kp_ImportProjectSources ) ( (a6= ',' (a7_0= parse_org_kermeta_kp_ImportProjectSources ) ) )* ) )? a8= '{' ( (a9= 'mainClass' (a10= QUOTED_34_34 ) ) )? ( (a11= 'mainOperation' (a12= QUOTED_34_34 ) ) )? ( (a13= 'javaBasePackage' (a14= QUOTED_34_34 ) ) )? ( ( (a15_0= parse_org_kermeta_kp_ImportFile ) ) )* a16= '}'
             {
-            // Kp.g:500:2: ( ( ( (a0_0= parse_org_kermeta_kp_ImportProject ) ) | (a1_0= parse_org_kermeta_kp_ReusableResource ) ) )*
+            // Kp.g:500:2: ( ( (a0_0= parse_org_kermeta_kp_ReusableResource ) ) )*
+            loop1:
+            do {
+                int alt1=2;
+                int LA1_0 = input.LA(1);
+
+                if ( (LA1_0==25) ) {
+                    alt1=1;
+                }
+
+
+                switch (alt1) {
+            	case 1 :
+            	    // Kp.g:501:3: ( (a0_0= parse_org_kermeta_kp_ReusableResource ) )
+            	    {
+            	    // Kp.g:501:3: ( (a0_0= parse_org_kermeta_kp_ReusableResource ) )
+            	    // Kp.g:502:4: (a0_0= parse_org_kermeta_kp_ReusableResource )
+            	    {
+            	    // Kp.g:502:4: (a0_0= parse_org_kermeta_kp_ReusableResource )
+            	    // Kp.g:503:5: a0_0= parse_org_kermeta_kp_ReusableResource
+            	    {
+            	    pushFollow(FOLLOW_parse_org_kermeta_kp_ReusableResource_in_parse_org_kermeta_kp_KermetaProject130);
+            	    a0_0=parse_org_kermeta_kp_ReusableResource();
+
+            	    state._fsp--;
+            	    if (state.failed) return element;
+            	    if ( state.backtracking==0 ) {
+
+            	      					if (terminateParsing) {
+            	      						throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
+            	      					}
+            	      					if (element == null) {
+            	      						element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
+            	      						incompleteObjects.push(element);
+            	      					}
+            	      					if (a0_0 != null) {
+            	      						if (a0_0 != null) {
+            	      							Object value = a0_0;
+            	      							addObjectToList(element, org.kermeta.kp.KpPackage.KERMETA_PROJECT__REUSABLE_RESOURCES, value);
+            	      							completedElement(value, true);
+            	      						}
+            	      						collectHiddenTokens(element);
+            	      						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_0_0_0_0, a0_0, true);
+            	      						copyLocalizationInfos(a0_0, element);
+            	      					}
+            	      				
+            	    }
+
+            	    }
+
+            	    if ( state.backtracking==0 ) {
+
+            	      				// expected elements (follow set)
+            	      				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_0, 1, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
+            	      				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_1, 1, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
+            	      				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 1);
+            	      			
+            	    }
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop1;
+                }
+            } while (true);
+
+            if ( state.backtracking==0 ) {
+
+              		// expected elements (follow set)
+              		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_0, 2, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
+              		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_1, 2, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
+              		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 2);
+              	
+            }
+            // Kp.g:539:2: ( ( (a1_0= parse_org_kermeta_kp_ImportProject ) ) )*
             loop2:
             do {
                 int alt2=2;
                 int LA2_0 = input.LA(1);
 
-                if ( ((LA2_0>=24 && LA2_0<=25)) ) {
+                if ( (LA2_0==24) ) {
                     alt2=1;
                 }
 
 
                 switch (alt2) {
             	case 1 :
-            	    // Kp.g:501:3: ( ( (a0_0= parse_org_kermeta_kp_ImportProject ) ) | (a1_0= parse_org_kermeta_kp_ReusableResource ) )
+            	    // Kp.g:540:3: ( (a1_0= parse_org_kermeta_kp_ImportProject ) )
             	    {
-            	    // Kp.g:501:3: ( ( (a0_0= parse_org_kermeta_kp_ImportProject ) ) | (a1_0= parse_org_kermeta_kp_ReusableResource ) )
-            	    int alt1=2;
-            	    int LA1_0 = input.LA(1);
+            	    // Kp.g:540:3: ( (a1_0= parse_org_kermeta_kp_ImportProject ) )
+            	    // Kp.g:541:4: (a1_0= parse_org_kermeta_kp_ImportProject )
+            	    {
+            	    // Kp.g:541:4: (a1_0= parse_org_kermeta_kp_ImportProject )
+            	    // Kp.g:542:5: a1_0= parse_org_kermeta_kp_ImportProject
+            	    {
+            	    pushFollow(FOLLOW_parse_org_kermeta_kp_ImportProject_in_parse_org_kermeta_kp_KermetaProject186);
+            	    a1_0=parse_org_kermeta_kp_ImportProject();
 
-            	    if ( (LA1_0==24) ) {
-            	        alt1=1;
+            	    state._fsp--;
+            	    if (state.failed) return element;
+            	    if ( state.backtracking==0 ) {
+
+            	      					if (terminateParsing) {
+            	      						throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
+            	      					}
+            	      					if (element == null) {
+            	      						element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
+            	      						incompleteObjects.push(element);
+            	      					}
+            	      					if (a1_0 != null) {
+            	      						if (a1_0 != null) {
+            	      							Object value = a1_0;
+            	      							addObjectToList(element, org.kermeta.kp.KpPackage.KERMETA_PROJECT__IMPORTED_PROJECTS, value);
+            	      							completedElement(value, true);
+            	      						}
+            	      						collectHiddenTokens(element);
+            	      						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_1_0_0_0, a1_0, true);
+            	      						copyLocalizationInfos(a1_0, element);
+            	      					}
+            	      				
             	    }
-            	    else if ( (LA1_0==25) ) {
-            	        alt1=2;
+
             	    }
-            	    else {
-            	        if (state.backtracking>0) {state.failed=true; return element;}
-            	        NoViableAltException nvae =
-            	            new NoViableAltException("", 1, 0, input);
 
-            	        throw nvae;
+            	    if ( state.backtracking==0 ) {
+
+            	      				// expected elements (follow set)
+            	      				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_1, 3, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
+            	      				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 3);
+            	      			
             	    }
-            	    switch (alt1) {
-            	        case 1 :
-            	            // Kp.g:502:4: ( (a0_0= parse_org_kermeta_kp_ImportProject ) )
-            	            {
-            	            // Kp.g:502:4: ( (a0_0= parse_org_kermeta_kp_ImportProject ) )
-            	            // Kp.g:503:5: (a0_0= parse_org_kermeta_kp_ImportProject )
-            	            {
-            	            // Kp.g:503:5: (a0_0= parse_org_kermeta_kp_ImportProject )
-            	            // Kp.g:504:6: a0_0= parse_org_kermeta_kp_ImportProject
-            	            {
-            	            pushFollow(FOLLOW_parse_org_kermeta_kp_ImportProject_in_parse_org_kermeta_kp_KermetaProject137);
-            	            a0_0=parse_org_kermeta_kp_ImportProject();
-
-            	            state._fsp--;
-            	            if (state.failed) return element;
-            	            if ( state.backtracking==0 ) {
-
-            	              						if (terminateParsing) {
-            	              							throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-            	              						}
-            	              						if (element == null) {
-            	              							element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
-            	              							incompleteObjects.push(element);
-            	              						}
-            	              						if (a0_0 != null) {
-            	              							if (a0_0 != null) {
-            	              								Object value = a0_0;
-            	              								addObjectToList(element, org.kermeta.kp.KpPackage.KERMETA_PROJECT__IMPORTED_PROJECTS, value);
-            	              								completedElement(value, true);
-            	              							}
-            	              							collectHiddenTokens(element);
-            	              							retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_0_0_0_0_0_0_0, a0_0, true);
-            	              							copyLocalizationInfos(a0_0, element);
-            	              						}
-            	              					
-            	            }
-
-            	            }
-
-            	            if ( state.backtracking==0 ) {
-
-            	              					// expected elements (follow set)
-            	              					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_0, 1, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-            	              					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_1, 1, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-            	              					addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 1);
-            	              				
-            	            }
-
-            	            }
-
-            	            if ( state.backtracking==0 ) {
-
-            	              				// expected elements (follow set)
-            	              				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_0, 2, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-            	              				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_1, 2, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-            	              				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 2);
-            	              			
-            	            }
-
-            	            }
-            	            break;
-            	        case 2 :
-            	            // Kp.g:540:8: (a1_0= parse_org_kermeta_kp_ReusableResource )
-            	            {
-            	            // Kp.g:540:8: (a1_0= parse_org_kermeta_kp_ReusableResource )
-            	            // Kp.g:541:5: a1_0= parse_org_kermeta_kp_ReusableResource
-            	            {
-            	            pushFollow(FOLLOW_parse_org_kermeta_kp_ReusableResource_in_parse_org_kermeta_kp_KermetaProject197);
-            	            a1_0=parse_org_kermeta_kp_ReusableResource();
-
-            	            state._fsp--;
-            	            if (state.failed) return element;
-            	            if ( state.backtracking==0 ) {
-
-            	              					if (terminateParsing) {
-            	              						throw new org.kermeta.kp.editor.mopp.KpTerminateParsingException();
-            	              					}
-            	              					if (element == null) {
-            	              						element = org.kermeta.kp.KpFactory.eINSTANCE.createKermetaProject();
-            	              						incompleteObjects.push(element);
-            	              					}
-            	              					if (a1_0 != null) {
-            	              						if (a1_0 != null) {
-            	              							Object value = a1_0;
-            	              							addObjectToList(element, org.kermeta.kp.KpPackage.KERMETA_PROJECT__REUSABLE_RESOURCES, value);
-            	              							completedElement(value, true);
-            	              						}
-            	              						collectHiddenTokens(element);
-            	              						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_0_0_1_0, a1_0, true);
-            	              						copyLocalizationInfos(a1_0, element);
-            	              					}
-            	              				
-            	            }
-
-            	            }
-
-            	            if ( state.backtracking==0 ) {
-
-            	              				// expected elements (follow set)
-            	              				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_0, 3, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
-            	              				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_1, 3, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
-            	              				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 3);
-            	              			
-            	            }
-
-            	            }
-            	            break;
 
             	    }
 
@@ -753,12 +749,11 @@ public class KpParser extends KpANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_0, 4, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
               		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_1, 4, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
               		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 4);
               	
             }
-            a2=(Token)match(input,11,FOLLOW_11_in_parse_org_kermeta_kp_KermetaProject238); if (state.failed) return element;
+            a2=(Token)match(input,11,FOLLOW_11_in_parse_org_kermeta_kp_KermetaProject227); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               		if (element == null) {
@@ -766,7 +761,7 @@ public class KpParser extends KpANTLRParserBase {
               			incompleteObjects.push(element);
               		}
               		collectHiddenTokens(element);
-              		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_1, null, true);
+              		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_2, null, true);
               		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
               	
             }
@@ -776,10 +771,10 @@ public class KpParser extends KpANTLRParserBase {
               		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_3, 5);
               	
             }
-            // Kp.g:591:2: (a3= TEXT )
-            // Kp.g:592:3: a3= TEXT
+            // Kp.g:590:2: (a3= TEXT )
+            // Kp.g:591:3: a3= TEXT
             {
-            a3=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_org_kermeta_kp_KermetaProject256); if (state.failed) return element;
+            a3=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_org_kermeta_kp_KermetaProject245); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               			if (terminateParsing) {
@@ -805,7 +800,7 @@ public class KpParser extends KpANTLRParserBase {
               					completedElement(value, false);
               				}
               				collectHiddenTokens(element);
-              				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_3, resolved, true);
+              				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4, resolved, true);
               				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a3, element);
               			}
               		
@@ -820,7 +815,7 @@ public class KpParser extends KpANTLRParserBase {
               		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 6);
               	
             }
-            // Kp.g:628:2: ( (a4= 'extends' (a5_0= parse_org_kermeta_kp_ImportProjectSources ) ( (a6= ',' (a7_0= parse_org_kermeta_kp_ImportProjectSources ) ) )* ) )?
+            // Kp.g:627:2: ( (a4= 'extends' (a5_0= parse_org_kermeta_kp_ImportProjectSources ) ( (a6= ',' (a7_0= parse_org_kermeta_kp_ImportProjectSources ) ) )* ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -829,12 +824,12 @@ public class KpParser extends KpANTLRParserBase {
             }
             switch (alt4) {
                 case 1 :
-                    // Kp.g:629:3: (a4= 'extends' (a5_0= parse_org_kermeta_kp_ImportProjectSources ) ( (a6= ',' (a7_0= parse_org_kermeta_kp_ImportProjectSources ) ) )* )
+                    // Kp.g:628:3: (a4= 'extends' (a5_0= parse_org_kermeta_kp_ImportProjectSources ) ( (a6= ',' (a7_0= parse_org_kermeta_kp_ImportProjectSources ) ) )* )
                     {
-                    // Kp.g:629:3: (a4= 'extends' (a5_0= parse_org_kermeta_kp_ImportProjectSources ) ( (a6= ',' (a7_0= parse_org_kermeta_kp_ImportProjectSources ) ) )* )
-                    // Kp.g:630:4: a4= 'extends' (a5_0= parse_org_kermeta_kp_ImportProjectSources ) ( (a6= ',' (a7_0= parse_org_kermeta_kp_ImportProjectSources ) ) )*
+                    // Kp.g:628:3: (a4= 'extends' (a5_0= parse_org_kermeta_kp_ImportProjectSources ) ( (a6= ',' (a7_0= parse_org_kermeta_kp_ImportProjectSources ) ) )* )
+                    // Kp.g:629:4: a4= 'extends' (a5_0= parse_org_kermeta_kp_ImportProjectSources ) ( (a6= ',' (a7_0= parse_org_kermeta_kp_ImportProjectSources ) ) )*
                     {
-                    a4=(Token)match(input,12,FOLLOW_12_in_parse_org_kermeta_kp_KermetaProject286); if (state.failed) return element;
+                    a4=(Token)match(input,12,FOLLOW_12_in_parse_org_kermeta_kp_KermetaProject275); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       				if (element == null) {
@@ -842,7 +837,7 @@ public class KpParser extends KpANTLRParserBase {
                       					incompleteObjects.push(element);
                       				}
                       				collectHiddenTokens(element);
-                      				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_0, null, true);
+                      				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_5_0_0_0, null, true);
                       				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a4, element);
                       			
                     }
@@ -852,10 +847,10 @@ public class KpParser extends KpANTLRParserBase {
                       				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 7, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
                       			
                     }
-                    // Kp.g:644:4: (a5_0= parse_org_kermeta_kp_ImportProjectSources )
-                    // Kp.g:645:5: a5_0= parse_org_kermeta_kp_ImportProjectSources
+                    // Kp.g:643:4: (a5_0= parse_org_kermeta_kp_ImportProjectSources )
+                    // Kp.g:644:5: a5_0= parse_org_kermeta_kp_ImportProjectSources
                     {
-                    pushFollow(FOLLOW_parse_org_kermeta_kp_ImportProjectSources_in_parse_org_kermeta_kp_KermetaProject312);
+                    pushFollow(FOLLOW_parse_org_kermeta_kp_ImportProjectSources_in_parse_org_kermeta_kp_KermetaProject301);
                     a5_0=parse_org_kermeta_kp_ImportProjectSources();
 
                     state._fsp--;
@@ -876,7 +871,7 @@ public class KpParser extends KpANTLRParserBase {
                       							completedElement(value, true);
                       						}
                       						collectHiddenTokens(element);
-                      						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_1, a5_0, true);
+                      						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_5_0_0_2, a5_0, true);
                       						copyLocalizationInfos(a5_0, element);
                       					}
                       				
@@ -891,7 +886,7 @@ public class KpParser extends KpANTLRParserBase {
                       				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 8);
                       			
                     }
-                    // Kp.g:671:4: ( (a6= ',' (a7_0= parse_org_kermeta_kp_ImportProjectSources ) ) )*
+                    // Kp.g:670:4: ( (a6= ',' (a7_0= parse_org_kermeta_kp_ImportProjectSources ) ) )*
                     loop3:
                     do {
                         int alt3=2;
@@ -904,12 +899,12 @@ public class KpParser extends KpANTLRParserBase {
 
                         switch (alt3) {
                     	case 1 :
-                    	    // Kp.g:672:5: (a6= ',' (a7_0= parse_org_kermeta_kp_ImportProjectSources ) )
+                    	    // Kp.g:671:5: (a6= ',' (a7_0= parse_org_kermeta_kp_ImportProjectSources ) )
                     	    {
-                    	    // Kp.g:672:5: (a6= ',' (a7_0= parse_org_kermeta_kp_ImportProjectSources ) )
-                    	    // Kp.g:673:6: a6= ',' (a7_0= parse_org_kermeta_kp_ImportProjectSources )
+                    	    // Kp.g:671:5: (a6= ',' (a7_0= parse_org_kermeta_kp_ImportProjectSources ) )
+                    	    // Kp.g:672:6: a6= ',' (a7_0= parse_org_kermeta_kp_ImportProjectSources )
                     	    {
-                    	    a6=(Token)match(input,13,FOLLOW_13_in_parse_org_kermeta_kp_KermetaProject353); if (state.failed) return element;
+                    	    a6=(Token)match(input,13,FOLLOW_13_in_parse_org_kermeta_kp_KermetaProject342); if (state.failed) return element;
                     	    if ( state.backtracking==0 ) {
 
                     	      						if (element == null) {
@@ -917,7 +912,7 @@ public class KpParser extends KpANTLRParserBase {
                     	      							incompleteObjects.push(element);
                     	      						}
                     	      						collectHiddenTokens(element);
-                    	      						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_2_0_0_0, null, true);
+                    	      						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_5_0_0_3_0_0_0, null, true);
                     	      						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a6, element);
                     	      					
                     	    }
@@ -927,10 +922,10 @@ public class KpParser extends KpANTLRParserBase {
                     	      						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_6, 9, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_2);
                     	      					
                     	    }
-                    	    // Kp.g:687:6: (a7_0= parse_org_kermeta_kp_ImportProjectSources )
-                    	    // Kp.g:688:7: a7_0= parse_org_kermeta_kp_ImportProjectSources
+                    	    // Kp.g:686:6: (a7_0= parse_org_kermeta_kp_ImportProjectSources )
+                    	    // Kp.g:687:7: a7_0= parse_org_kermeta_kp_ImportProjectSources
                     	    {
-                    	    pushFollow(FOLLOW_parse_org_kermeta_kp_ImportProjectSources_in_parse_org_kermeta_kp_KermetaProject387);
+                    	    pushFollow(FOLLOW_parse_org_kermeta_kp_ImportProjectSources_in_parse_org_kermeta_kp_KermetaProject376);
                     	    a7_0=parse_org_kermeta_kp_ImportProjectSources();
 
                     	    state._fsp--;
@@ -951,7 +946,7 @@ public class KpParser extends KpANTLRParserBase {
                     	      									completedElement(value, true);
                     	      								}
                     	      								collectHiddenTokens(element);
-                    	      								retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_4_0_0_2_0_0_1, a7_0, true);
+                    	      								retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_5_0_0_3_0_0_2, a7_0, true);
                     	      								copyLocalizationInfos(a7_0, element);
                     	      							}
                     	      						
@@ -1000,7 +995,7 @@ public class KpParser extends KpANTLRParserBase {
               		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_5, 12);
               	
             }
-            a8=(Token)match(input,14,FOLLOW_14_in_parse_org_kermeta_kp_KermetaProject461); if (state.failed) return element;
+            a8=(Token)match(input,14,FOLLOW_14_in_parse_org_kermeta_kp_KermetaProject450); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               		if (element == null) {
@@ -1008,7 +1003,7 @@ public class KpParser extends KpANTLRParserBase {
               			incompleteObjects.push(element);
               		}
               		collectHiddenTokens(element);
-              		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_5, null, true);
+              		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_6, null, true);
               		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a8, element);
               	
             }
@@ -1022,7 +1017,7 @@ public class KpParser extends KpANTLRParserBase {
               		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_12, 13);
               	
             }
-            // Kp.g:747:2: ( (a9= 'mainClass' (a10= QUOTED_34_34 ) ) )?
+            // Kp.g:746:2: ( (a9= 'mainClass' (a10= QUOTED_34_34 ) ) )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -1031,12 +1026,12 @@ public class KpParser extends KpANTLRParserBase {
             }
             switch (alt5) {
                 case 1 :
-                    // Kp.g:748:3: (a9= 'mainClass' (a10= QUOTED_34_34 ) )
+                    // Kp.g:747:3: (a9= 'mainClass' (a10= QUOTED_34_34 ) )
                     {
-                    // Kp.g:748:3: (a9= 'mainClass' (a10= QUOTED_34_34 ) )
-                    // Kp.g:749:4: a9= 'mainClass' (a10= QUOTED_34_34 )
+                    // Kp.g:747:3: (a9= 'mainClass' (a10= QUOTED_34_34 ) )
+                    // Kp.g:748:4: a9= 'mainClass' (a10= QUOTED_34_34 )
                     {
-                    a9=(Token)match(input,15,FOLLOW_15_in_parse_org_kermeta_kp_KermetaProject484); if (state.failed) return element;
+                    a9=(Token)match(input,15,FOLLOW_15_in_parse_org_kermeta_kp_KermetaProject473); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       				if (element == null) {
@@ -1044,7 +1039,7 @@ public class KpParser extends KpANTLRParserBase {
                       					incompleteObjects.push(element);
                       				}
                       				collectHiddenTokens(element);
-                      				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_6_0_0_1, null, true);
+                      				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_7_0_0_1, null, true);
                       				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a9, element);
                       			
                     }
@@ -1054,10 +1049,10 @@ public class KpParser extends KpANTLRParserBase {
                       				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_13, 14);
                       			
                     }
-                    // Kp.g:763:4: (a10= QUOTED_34_34 )
-                    // Kp.g:764:5: a10= QUOTED_34_34
+                    // Kp.g:762:4: (a10= QUOTED_34_34 )
+                    // Kp.g:763:5: a10= QUOTED_34_34
                     {
-                    a10=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_KermetaProject510); if (state.failed) return element;
+                    a10=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_KermetaProject499); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       					if (terminateParsing) {
@@ -1083,7 +1078,7 @@ public class KpParser extends KpANTLRParserBase {
                       							completedElement(value, false);
                       						}
                       						collectHiddenTokens(element);
-                      						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_6_0_0_2, resolved, true);
+                      						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_7_0_0_2, resolved, true);
                       						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a10, element);
                       					}
                       				
@@ -1118,7 +1113,7 @@ public class KpParser extends KpANTLRParserBase {
               		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_12, 16);
               	
             }
-            // Kp.g:812:2: ( (a11= 'mainOperation' (a12= QUOTED_34_34 ) ) )?
+            // Kp.g:811:2: ( (a11= 'mainOperation' (a12= QUOTED_34_34 ) ) )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1127,12 +1122,12 @@ public class KpParser extends KpANTLRParserBase {
             }
             switch (alt6) {
                 case 1 :
-                    // Kp.g:813:3: (a11= 'mainOperation' (a12= QUOTED_34_34 ) )
+                    // Kp.g:812:3: (a11= 'mainOperation' (a12= QUOTED_34_34 ) )
                     {
-                    // Kp.g:813:3: (a11= 'mainOperation' (a12= QUOTED_34_34 ) )
-                    // Kp.g:814:4: a11= 'mainOperation' (a12= QUOTED_34_34 )
+                    // Kp.g:812:3: (a11= 'mainOperation' (a12= QUOTED_34_34 ) )
+                    // Kp.g:813:4: a11= 'mainOperation' (a12= QUOTED_34_34 )
                     {
-                    a11=(Token)match(input,16,FOLLOW_16_in_parse_org_kermeta_kp_KermetaProject565); if (state.failed) return element;
+                    a11=(Token)match(input,16,FOLLOW_16_in_parse_org_kermeta_kp_KermetaProject554); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       				if (element == null) {
@@ -1140,7 +1135,7 @@ public class KpParser extends KpANTLRParserBase {
                       					incompleteObjects.push(element);
                       				}
                       				collectHiddenTokens(element);
-                      				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_7_0_0_1, null, true);
+                      				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_8_0_0_1, null, true);
                       				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a11, element);
                       			
                     }
@@ -1150,10 +1145,10 @@ public class KpParser extends KpANTLRParserBase {
                       				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_14, 17);
                       			
                     }
-                    // Kp.g:828:4: (a12= QUOTED_34_34 )
-                    // Kp.g:829:5: a12= QUOTED_34_34
+                    // Kp.g:827:4: (a12= QUOTED_34_34 )
+                    // Kp.g:828:5: a12= QUOTED_34_34
                     {
-                    a12=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_KermetaProject591); if (state.failed) return element;
+                    a12=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_KermetaProject580); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       					if (terminateParsing) {
@@ -1179,7 +1174,7 @@ public class KpParser extends KpANTLRParserBase {
                       							completedElement(value, false);
                       						}
                       						collectHiddenTokens(element);
-                      						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_7_0_0_2, resolved, true);
+                      						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_8_0_0_2, resolved, true);
                       						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a12, element);
                       					}
                       				
@@ -1212,7 +1207,7 @@ public class KpParser extends KpANTLRParserBase {
               		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_12, 19);
               	
             }
-            // Kp.g:875:2: ( (a13= 'javaBasePackage' (a14= QUOTED_34_34 ) ) )?
+            // Kp.g:874:2: ( (a13= 'javaBasePackage' (a14= QUOTED_34_34 ) ) )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1221,12 +1216,12 @@ public class KpParser extends KpANTLRParserBase {
             }
             switch (alt7) {
                 case 1 :
-                    // Kp.g:876:3: (a13= 'javaBasePackage' (a14= QUOTED_34_34 ) )
+                    // Kp.g:875:3: (a13= 'javaBasePackage' (a14= QUOTED_34_34 ) )
                     {
-                    // Kp.g:876:3: (a13= 'javaBasePackage' (a14= QUOTED_34_34 ) )
-                    // Kp.g:877:4: a13= 'javaBasePackage' (a14= QUOTED_34_34 )
+                    // Kp.g:875:3: (a13= 'javaBasePackage' (a14= QUOTED_34_34 ) )
+                    // Kp.g:876:4: a13= 'javaBasePackage' (a14= QUOTED_34_34 )
                     {
-                    a13=(Token)match(input,17,FOLLOW_17_in_parse_org_kermeta_kp_KermetaProject646); if (state.failed) return element;
+                    a13=(Token)match(input,17,FOLLOW_17_in_parse_org_kermeta_kp_KermetaProject635); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       				if (element == null) {
@@ -1234,7 +1229,7 @@ public class KpParser extends KpANTLRParserBase {
                       					incompleteObjects.push(element);
                       				}
                       				collectHiddenTokens(element);
-                      				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_8_0_0_1, null, true);
+                      				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_9_0_0_1, null, true);
                       				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a13, element);
                       			
                     }
@@ -1244,10 +1239,10 @@ public class KpParser extends KpANTLRParserBase {
                       				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_15, 20);
                       			
                     }
-                    // Kp.g:891:4: (a14= QUOTED_34_34 )
-                    // Kp.g:892:5: a14= QUOTED_34_34
+                    // Kp.g:890:4: (a14= QUOTED_34_34 )
+                    // Kp.g:891:5: a14= QUOTED_34_34
                     {
-                    a14=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_KermetaProject672); if (state.failed) return element;
+                    a14=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_KermetaProject661); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       					if (terminateParsing) {
@@ -1273,7 +1268,7 @@ public class KpParser extends KpANTLRParserBase {
                       							completedElement(value, false);
                       						}
                       						collectHiddenTokens(element);
-                      						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_8_0_0_2, resolved, true);
+                      						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_9_0_0_2, resolved, true);
                       						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a14, element);
                       					}
                       				
@@ -1304,7 +1299,7 @@ public class KpParser extends KpANTLRParserBase {
               		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_12, 22);
               	
             }
-            // Kp.g:936:2: ( ( (a15_0= parse_org_kermeta_kp_ImportFile ) ) )*
+            // Kp.g:935:2: ( ( (a15_0= parse_org_kermeta_kp_ImportFile ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -1317,15 +1312,15 @@ public class KpParser extends KpANTLRParserBase {
 
                 switch (alt8) {
             	case 1 :
-            	    // Kp.g:937:3: ( (a15_0= parse_org_kermeta_kp_ImportFile ) )
+            	    // Kp.g:936:3: ( (a15_0= parse_org_kermeta_kp_ImportFile ) )
             	    {
-            	    // Kp.g:937:3: ( (a15_0= parse_org_kermeta_kp_ImportFile ) )
-            	    // Kp.g:938:4: (a15_0= parse_org_kermeta_kp_ImportFile )
+            	    // Kp.g:936:3: ( (a15_0= parse_org_kermeta_kp_ImportFile ) )
+            	    // Kp.g:937:4: (a15_0= parse_org_kermeta_kp_ImportFile )
             	    {
-            	    // Kp.g:938:4: (a15_0= parse_org_kermeta_kp_ImportFile )
-            	    // Kp.g:939:5: a15_0= parse_org_kermeta_kp_ImportFile
+            	    // Kp.g:937:4: (a15_0= parse_org_kermeta_kp_ImportFile )
+            	    // Kp.g:938:5: a15_0= parse_org_kermeta_kp_ImportFile
             	    {
-            	    pushFollow(FOLLOW_parse_org_kermeta_kp_ImportFile_in_parse_org_kermeta_kp_KermetaProject733);
+            	    pushFollow(FOLLOW_parse_org_kermeta_kp_ImportFile_in_parse_org_kermeta_kp_KermetaProject722);
             	    a15_0=parse_org_kermeta_kp_ImportFile();
 
             	    state._fsp--;
@@ -1346,7 +1341,7 @@ public class KpParser extends KpANTLRParserBase {
             	      							completedElement(value, true);
             	      						}
             	      						collectHiddenTokens(element);
-            	      						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_9_0_0_0, a15_0, true);
+            	      						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_10_0_0_0, a15_0, true);
             	      						copyLocalizationInfos(a15_0, element);
             	      					}
             	      				
@@ -1380,7 +1375,7 @@ public class KpParser extends KpANTLRParserBase {
               		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_12, 24);
               	
             }
-            a16=(Token)match(input,18,FOLLOW_18_in_parse_org_kermeta_kp_KermetaProject774); if (state.failed) return element;
+            a16=(Token)match(input,18,FOLLOW_18_in_parse_org_kermeta_kp_KermetaProject763); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               		if (element == null) {
@@ -1388,7 +1383,7 @@ public class KpParser extends KpANTLRParserBase {
               			incompleteObjects.push(element);
               		}
               		collectHiddenTokens(element);
-              		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_10, null, true);
+              		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_0_0_0_11, null, true);
               		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a16, element);
               	
             }
@@ -1414,7 +1409,7 @@ public class KpParser extends KpANTLRParserBase {
 
 
     // $ANTLR start "parse_org_kermeta_kp_PackageEquivalence"
-    // Kp.g:988:1: parse_org_kermeta_kp_PackageEquivalence returns [org.kermeta.kp.PackageEquivalence element = null] : a0= 'packageEquivalence' (a1= QUOTED_34_34 ) (a2= '=' ) (a3= QUOTED_34_34 ) ;
+    // Kp.g:987:1: parse_org_kermeta_kp_PackageEquivalence returns [org.kermeta.kp.PackageEquivalence element = null] : a0= 'packageEquivalence' (a1= QUOTED_34_34 ) (a2= '=' ) (a3= QUOTED_34_34 ) ;
     public final org.kermeta.kp.PackageEquivalence parse_org_kermeta_kp_PackageEquivalence() throws RecognitionException {
         org.kermeta.kp.PackageEquivalence element =  null;
         int parse_org_kermeta_kp_PackageEquivalence_StartIndex = input.index();
@@ -1427,10 +1422,10 @@ public class KpParser extends KpANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 3) ) { return element; }
-            // Kp.g:991:1: (a0= 'packageEquivalence' (a1= QUOTED_34_34 ) (a2= '=' ) (a3= QUOTED_34_34 ) )
-            // Kp.g:992:2: a0= 'packageEquivalence' (a1= QUOTED_34_34 ) (a2= '=' ) (a3= QUOTED_34_34 )
+            // Kp.g:990:1: (a0= 'packageEquivalence' (a1= QUOTED_34_34 ) (a2= '=' ) (a3= QUOTED_34_34 ) )
+            // Kp.g:991:2: a0= 'packageEquivalence' (a1= QUOTED_34_34 ) (a2= '=' ) (a3= QUOTED_34_34 )
             {
-            a0=(Token)match(input,19,FOLLOW_19_in_parse_org_kermeta_kp_PackageEquivalence803); if (state.failed) return element;
+            a0=(Token)match(input,19,FOLLOW_19_in_parse_org_kermeta_kp_PackageEquivalence792); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               		if (element == null) {
@@ -1448,10 +1443,10 @@ public class KpParser extends KpANTLRParserBase {
               		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_17, 26);
               	
             }
-            // Kp.g:1006:2: (a1= QUOTED_34_34 )
-            // Kp.g:1007:3: a1= QUOTED_34_34
+            // Kp.g:1005:2: (a1= QUOTED_34_34 )
+            // Kp.g:1006:3: a1= QUOTED_34_34
             {
-            a1=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_PackageEquivalence821); if (state.failed) return element;
+            a1=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_PackageEquivalence810); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               			if (terminateParsing) {
@@ -1477,7 +1472,7 @@ public class KpParser extends KpANTLRParserBase {
               					completedElement(value, false);
               				}
               				collectHiddenTokens(element);
-              				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_1_0_0_2, resolved, true);
+              				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_1_0_0_3, resolved, true);
               				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, element);
               			}
               		
@@ -1491,10 +1486,10 @@ public class KpParser extends KpANTLRParserBase {
               		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_18, 27);
               	
             }
-            // Kp.g:1042:2: (a2= '=' )
-            // Kp.g:1043:3: a2= '='
+            // Kp.g:1041:2: (a2= '=' )
+            // Kp.g:1042:3: a2= '='
             {
-            a2=(Token)match(input,20,FOLLOW_20_in_parse_org_kermeta_kp_PackageEquivalence846); if (state.failed) return element;
+            a2=(Token)match(input,20,FOLLOW_20_in_parse_org_kermeta_kp_PackageEquivalence835); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               			if (element == null) {
@@ -1502,7 +1497,7 @@ public class KpParser extends KpANTLRParserBase {
               				incompleteObjects.push(element);
               			}
               			collectHiddenTokens(element);
-              			retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_1_0_0_3_0_0_0, null, true);
+              			retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_1_0_0_4_0_0_0, null, true);
               			copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
               		
             }
@@ -1521,10 +1516,10 @@ public class KpParser extends KpANTLRParserBase {
               		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_19, 29);
               	
             }
-            // Kp.g:1063:2: (a3= QUOTED_34_34 )
-            // Kp.g:1064:3: a3= QUOTED_34_34
+            // Kp.g:1062:2: (a3= QUOTED_34_34 )
+            // Kp.g:1063:3: a3= QUOTED_34_34
             {
-            a3=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_PackageEquivalence874); if (state.failed) return element;
+            a3=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_PackageEquivalence863); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               			if (terminateParsing) {
@@ -1550,7 +1545,7 @@ public class KpParser extends KpANTLRParserBase {
               					completedElement(value, false);
               				}
               				collectHiddenTokens(element);
-              				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_1_0_0_4, resolved, true);
+              				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_1_0_0_5, resolved, true);
               				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a3, element);
               			}
               		
@@ -1582,7 +1577,7 @@ public class KpParser extends KpANTLRParserBase {
 
 
     // $ANTLR start "parse_org_kermeta_kp_ImportFile"
-    // Kp.g:1102:1: parse_org_kermeta_kp_ImportFile returns [org.kermeta.kp.ImportFile element = null] : a0= 'import' (a1= QUOTED_34_34 ) ( (a2= 'using' a3= 'EMFBytecode' (a4= QUOTED_40_41 ) ( (a5= '{' ( ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) ) )* a7= '}' ) )? ) )? ;
+    // Kp.g:1101:1: parse_org_kermeta_kp_ImportFile returns [org.kermeta.kp.ImportFile element = null] : a0= 'import' (a1= QUOTED_34_34 ) ( (a2= 'using' a3= 'EMFBytecode' (a4= QUOTED_40_41 ) ( (a5= '{' ( ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) ) )* a7= '}' ) )? ) )? ;
     public final org.kermeta.kp.ImportFile parse_org_kermeta_kp_ImportFile() throws RecognitionException {
         org.kermeta.kp.ImportFile element =  null;
         int parse_org_kermeta_kp_ImportFile_StartIndex = input.index();
@@ -1600,10 +1595,10 @@ public class KpParser extends KpANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 4) ) { return element; }
-            // Kp.g:1105:1: (a0= 'import' (a1= QUOTED_34_34 ) ( (a2= 'using' a3= 'EMFBytecode' (a4= QUOTED_40_41 ) ( (a5= '{' ( ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) ) )* a7= '}' ) )? ) )? )
-            // Kp.g:1106:2: a0= 'import' (a1= QUOTED_34_34 ) ( (a2= 'using' a3= 'EMFBytecode' (a4= QUOTED_40_41 ) ( (a5= '{' ( ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) ) )* a7= '}' ) )? ) )?
+            // Kp.g:1104:1: (a0= 'import' (a1= QUOTED_34_34 ) ( (a2= 'using' a3= 'EMFBytecode' (a4= QUOTED_40_41 ) ( (a5= '{' ( ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) ) )* a7= '}' ) )? ) )? )
+            // Kp.g:1105:2: a0= 'import' (a1= QUOTED_34_34 ) ( (a2= 'using' a3= 'EMFBytecode' (a4= QUOTED_40_41 ) ( (a5= '{' ( ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) ) )* a7= '}' ) )? ) )?
             {
-            a0=(Token)match(input,21,FOLLOW_21_in_parse_org_kermeta_kp_ImportFile910); if (state.failed) return element;
+            a0=(Token)match(input,21,FOLLOW_21_in_parse_org_kermeta_kp_ImportFile899); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               		if (element == null) {
@@ -1621,10 +1616,10 @@ public class KpParser extends KpANTLRParserBase {
               		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_21, 31);
               	
             }
-            // Kp.g:1120:2: (a1= QUOTED_34_34 )
-            // Kp.g:1121:3: a1= QUOTED_34_34
+            // Kp.g:1119:2: (a1= QUOTED_34_34 )
+            // Kp.g:1120:3: a1= QUOTED_34_34
             {
-            a1=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_ImportFile928); if (state.failed) return element;
+            a1=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_ImportFile917); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               			if (terminateParsing) {
@@ -1650,7 +1645,7 @@ public class KpParser extends KpANTLRParserBase {
               					completedElement(value, false);
               				}
               				collectHiddenTokens(element);
-              				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_2, resolved, true);
+              				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_3, resolved, true);
               				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, element);
               			}
               		
@@ -1666,7 +1661,7 @@ public class KpParser extends KpANTLRParserBase {
               		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_12, 32);
               	
             }
-            // Kp.g:1158:2: ( (a2= 'using' a3= 'EMFBytecode' (a4= QUOTED_40_41 ) ( (a5= '{' ( ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) ) )* a7= '}' ) )? ) )?
+            // Kp.g:1157:2: ( (a2= 'using' a3= 'EMFBytecode' (a4= QUOTED_40_41 ) ( (a5= '{' ( ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) ) )* a7= '}' ) )? ) )?
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -1675,12 +1670,12 @@ public class KpParser extends KpANTLRParserBase {
             }
             switch (alt11) {
                 case 1 :
-                    // Kp.g:1159:3: (a2= 'using' a3= 'EMFBytecode' (a4= QUOTED_40_41 ) ( (a5= '{' ( ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) ) )* a7= '}' ) )? )
+                    // Kp.g:1158:3: (a2= 'using' a3= 'EMFBytecode' (a4= QUOTED_40_41 ) ( (a5= '{' ( ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) ) )* a7= '}' ) )? )
                     {
-                    // Kp.g:1159:3: (a2= 'using' a3= 'EMFBytecode' (a4= QUOTED_40_41 ) ( (a5= '{' ( ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) ) )* a7= '}' ) )? )
-                    // Kp.g:1160:4: a2= 'using' a3= 'EMFBytecode' (a4= QUOTED_40_41 ) ( (a5= '{' ( ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) ) )* a7= '}' ) )?
+                    // Kp.g:1158:3: (a2= 'using' a3= 'EMFBytecode' (a4= QUOTED_40_41 ) ( (a5= '{' ( ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) ) )* a7= '}' ) )? )
+                    // Kp.g:1159:4: a2= 'using' a3= 'EMFBytecode' (a4= QUOTED_40_41 ) ( (a5= '{' ( ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) ) )* a7= '}' ) )?
                     {
-                    a2=(Token)match(input,22,FOLLOW_22_in_parse_org_kermeta_kp_ImportFile958); if (state.failed) return element;
+                    a2=(Token)match(input,22,FOLLOW_22_in_parse_org_kermeta_kp_ImportFile947); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       				if (element == null) {
@@ -1688,7 +1683,7 @@ public class KpParser extends KpANTLRParserBase {
                       					incompleteObjects.push(element);
                       				}
                       				collectHiddenTokens(element);
-                      				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_3_0_0_0, null, true);
+                      				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_4_0_0_0, null, true);
                       				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
                       			
                     }
@@ -1698,7 +1693,7 @@ public class KpParser extends KpANTLRParserBase {
                       				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_23, 33);
                       			
                     }
-                    a3=(Token)match(input,23,FOLLOW_23_in_parse_org_kermeta_kp_ImportFile978); if (state.failed) return element;
+                    a3=(Token)match(input,23,FOLLOW_23_in_parse_org_kermeta_kp_ImportFile967); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       				if (element == null) {
@@ -1706,7 +1701,7 @@ public class KpParser extends KpANTLRParserBase {
                       					incompleteObjects.push(element);
                       				}
                       				collectHiddenTokens(element);
-                      				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_3_0_0_1, null, true);
+                      				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_4_0_0_1, null, true);
                       				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
                       			
                     }
@@ -1716,10 +1711,10 @@ public class KpParser extends KpANTLRParserBase {
                       				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_24, 34);
                       			
                     }
-                    // Kp.g:1188:4: (a4= QUOTED_40_41 )
-                    // Kp.g:1189:5: a4= QUOTED_40_41
+                    // Kp.g:1187:4: (a4= QUOTED_40_41 )
+                    // Kp.g:1188:5: a4= QUOTED_40_41
                     {
-                    a4=(Token)match(input,QUOTED_40_41,FOLLOW_QUOTED_40_41_in_parse_org_kermeta_kp_ImportFile1004); if (state.failed) return element;
+                    a4=(Token)match(input,QUOTED_40_41,FOLLOW_QUOTED_40_41_in_parse_org_kermeta_kp_ImportFile993); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       					if (terminateParsing) {
@@ -1748,7 +1743,7 @@ public class KpParser extends KpANTLRParserBase {
                       							completedElement(value, false);
                       						}
                       						collectHiddenTokens(element);
-                      						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_3_0_0_2, proxy, true);
+                      						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_4_0_0_2, proxy, true);
                       						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a4, element);
                       						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a4, proxy);
                       					}
@@ -1765,7 +1760,7 @@ public class KpParser extends KpANTLRParserBase {
                       				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_12, 35);
                       			
                     }
-                    // Kp.g:1230:4: ( (a5= '{' ( ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) ) )* a7= '}' ) )?
+                    // Kp.g:1229:4: ( (a5= '{' ( ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) ) )* a7= '}' ) )?
                     int alt10=2;
                     int LA10_0 = input.LA(1);
 
@@ -1774,12 +1769,12 @@ public class KpParser extends KpANTLRParserBase {
                     }
                     switch (alt10) {
                         case 1 :
-                            // Kp.g:1231:5: (a5= '{' ( ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) ) )* a7= '}' )
+                            // Kp.g:1230:5: (a5= '{' ( ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) ) )* a7= '}' )
                             {
-                            // Kp.g:1231:5: (a5= '{' ( ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) ) )* a7= '}' )
-                            // Kp.g:1232:6: a5= '{' ( ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) ) )* a7= '}'
+                            // Kp.g:1230:5: (a5= '{' ( ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) ) )* a7= '}' )
+                            // Kp.g:1231:6: a5= '{' ( ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) ) )* a7= '}'
                             {
-                            a5=(Token)match(input,14,FOLLOW_14_in_parse_org_kermeta_kp_ImportFile1050); if (state.failed) return element;
+                            a5=(Token)match(input,14,FOLLOW_14_in_parse_org_kermeta_kp_ImportFile1039); if (state.failed) return element;
                             if ( state.backtracking==0 ) {
 
                               						if (element == null) {
@@ -1787,7 +1782,7 @@ public class KpParser extends KpANTLRParserBase {
                               							incompleteObjects.push(element);
                               						}
                               						collectHiddenTokens(element);
-                              						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_3_0_0_3_0_0_0, null, true);
+                              						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_4_0_0_3_0_0_0, null, true);
                               						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a5, element);
                               					
                             }
@@ -1798,7 +1793,7 @@ public class KpParser extends KpANTLRParserBase {
                               						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 36);
                               					
                             }
-                            // Kp.g:1247:6: ( ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) ) )*
+                            // Kp.g:1246:6: ( ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) ) )*
                             loop9:
                             do {
                                 int alt9=2;
@@ -1811,15 +1806,15 @@ public class KpParser extends KpANTLRParserBase {
 
                                 switch (alt9) {
                             	case 1 :
-                            	    // Kp.g:1248:7: ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) )
+                            	    // Kp.g:1247:7: ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) )
                             	    {
-                            	    // Kp.g:1248:7: ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) )
-                            	    // Kp.g:1249:8: (a6_0= parse_org_kermeta_kp_PackageEquivalence )
+                            	    // Kp.g:1247:7: ( (a6_0= parse_org_kermeta_kp_PackageEquivalence ) )
+                            	    // Kp.g:1248:8: (a6_0= parse_org_kermeta_kp_PackageEquivalence )
                             	    {
-                            	    // Kp.g:1249:8: (a6_0= parse_org_kermeta_kp_PackageEquivalence )
-                            	    // Kp.g:1250:9: a6_0= parse_org_kermeta_kp_PackageEquivalence
+                            	    // Kp.g:1248:8: (a6_0= parse_org_kermeta_kp_PackageEquivalence )
+                            	    // Kp.g:1249:9: a6_0= parse_org_kermeta_kp_PackageEquivalence
                             	    {
-                            	    pushFollow(FOLLOW_parse_org_kermeta_kp_PackageEquivalence_in_parse_org_kermeta_kp_ImportFile1103);
+                            	    pushFollow(FOLLOW_parse_org_kermeta_kp_PackageEquivalence_in_parse_org_kermeta_kp_ImportFile1092);
                             	    a6_0=parse_org_kermeta_kp_PackageEquivalence();
 
                             	    state._fsp--;
@@ -1840,7 +1835,7 @@ public class KpParser extends KpANTLRParserBase {
                             	      											completedElement(value, true);
                             	      										}
                             	      										collectHiddenTokens(element);
-                            	      										retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_3_0_0_3_0_0_1_0_0_0, a6_0, true);
+                            	      										retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_4_0_0_3_0_0_1_0_0_0, a6_0, true);
                             	      										copyLocalizationInfos(a6_0, element);
                             	      									}
                             	      								
@@ -1874,7 +1869,7 @@ public class KpParser extends KpANTLRParserBase {
                               						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_20, 38);
                               					
                             }
-                            a7=(Token)match(input,18,FOLLOW_18_in_parse_org_kermeta_kp_ImportFile1184); if (state.failed) return element;
+                            a7=(Token)match(input,18,FOLLOW_18_in_parse_org_kermeta_kp_ImportFile1173); if (state.failed) return element;
                             if ( state.backtracking==0 ) {
 
                               						if (element == null) {
@@ -1882,7 +1877,7 @@ public class KpParser extends KpANTLRParserBase {
                               							incompleteObjects.push(element);
                               						}
                               						collectHiddenTokens(element);
-                              						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_3_0_0_3_0_0_2, null, true);
+                              						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_2_0_0_4_0_0_3_0_0_2, null, true);
                               						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a7, element);
                               					
                             }
@@ -1942,7 +1937,7 @@ public class KpParser extends KpANTLRParserBase {
 
 
     // $ANTLR start "parse_org_kermeta_kp_ImportProject"
-    // Kp.g:1317:1: parse_org_kermeta_kp_ImportProject returns [org.kermeta.kp.ImportProject element = null] : a0= 'importProject' (a1= TEXT ) ;
+    // Kp.g:1316:1: parse_org_kermeta_kp_ImportProject returns [org.kermeta.kp.ImportProject element = null] : a0= 'importProject' (a1= TEXT ) ;
     public final org.kermeta.kp.ImportProject parse_org_kermeta_kp_ImportProject() throws RecognitionException {
         org.kermeta.kp.ImportProject element =  null;
         int parse_org_kermeta_kp_ImportProject_StartIndex = input.index();
@@ -1953,10 +1948,10 @@ public class KpParser extends KpANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 5) ) { return element; }
-            // Kp.g:1320:1: (a0= 'importProject' (a1= TEXT ) )
-            // Kp.g:1321:2: a0= 'importProject' (a1= TEXT )
+            // Kp.g:1319:1: (a0= 'importProject' (a1= TEXT ) )
+            // Kp.g:1320:2: a0= 'importProject' (a1= TEXT )
             {
-            a0=(Token)match(input,24,FOLLOW_24_in_parse_org_kermeta_kp_ImportProject1261); if (state.failed) return element;
+            a0=(Token)match(input,24,FOLLOW_24_in_parse_org_kermeta_kp_ImportProject1250); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               		if (element == null) {
@@ -1974,10 +1969,10 @@ public class KpParser extends KpANTLRParserBase {
               		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_26, 42);
               	
             }
-            // Kp.g:1335:2: (a1= TEXT )
-            // Kp.g:1336:3: a1= TEXT
+            // Kp.g:1334:2: (a1= TEXT )
+            // Kp.g:1335:3: a1= TEXT
             {
-            a1=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_org_kermeta_kp_ImportProject1279); if (state.failed) return element;
+            a1=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_org_kermeta_kp_ImportProject1268); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               			if (terminateParsing) {
@@ -2006,7 +2001,7 @@ public class KpParser extends KpANTLRParserBase {
               					completedElement(value, false);
               				}
               				collectHiddenTokens(element);
-              				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_3_0_0_2, proxy, true);
+              				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_3_0_0_3, proxy, true);
               				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, element);
               				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, proxy);
               			}
@@ -2018,7 +2013,6 @@ public class KpParser extends KpANTLRParserBase {
             if ( state.backtracking==0 ) {
 
               		// expected elements (follow set)
-              		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_0, 43, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_0);
               		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_1, 43, org.kermeta.kp.editor.grammar.KpFollowSetProvider.FEATURE_1);
               		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 43);
               	
@@ -2040,7 +2034,7 @@ public class KpParser extends KpANTLRParserBase {
 
 
     // $ANTLR start "parse_org_kermeta_kp_ImportProjectSources"
-    // Kp.g:1379:1: parse_org_kermeta_kp_ImportProjectSources returns [org.kermeta.kp.ImportProjectSources element = null] : (a0= TEXT ) ;
+    // Kp.g:1377:1: parse_org_kermeta_kp_ImportProjectSources returns [org.kermeta.kp.ImportProjectSources element = null] : (a0= TEXT ) ;
     public final org.kermeta.kp.ImportProjectSources parse_org_kermeta_kp_ImportProjectSources() throws RecognitionException {
         org.kermeta.kp.ImportProjectSources element =  null;
         int parse_org_kermeta_kp_ImportProjectSources_StartIndex = input.index();
@@ -2050,13 +2044,13 @@ public class KpParser extends KpANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 6) ) { return element; }
-            // Kp.g:1382:1: ( (a0= TEXT ) )
-            // Kp.g:1383:2: (a0= TEXT )
+            // Kp.g:1380:1: ( (a0= TEXT ) )
+            // Kp.g:1381:2: (a0= TEXT )
             {
-            // Kp.g:1383:2: (a0= TEXT )
-            // Kp.g:1384:3: a0= TEXT
+            // Kp.g:1381:2: (a0= TEXT )
+            // Kp.g:1382:3: a0= TEXT
             {
-            a0=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_org_kermeta_kp_ImportProjectSources1319); if (state.failed) return element;
+            a0=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_org_kermeta_kp_ImportProjectSources1308); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               			if (terminateParsing) {
@@ -2118,7 +2112,7 @@ public class KpParser extends KpANTLRParserBase {
 
 
     // $ANTLR start "parse_org_kermeta_kp_ReusableResource"
-    // Kp.g:1426:1: parse_org_kermeta_kp_ReusableResource returns [org.kermeta.kp.ReusableResource element = null] : a0= 'resource' (a1= TEXT ) a2= '=' (a3= QUOTED_34_34 ) ( (a4= 'alternative' (a5= QUOTED_34_34 ) ( (a6= ',' (a7= QUOTED_34_34 ) ) )* ) )? ;
+    // Kp.g:1424:1: parse_org_kermeta_kp_ReusableResource returns [org.kermeta.kp.ReusableResource element = null] : a0= 'resource' (a1= TEXT ) a2= '=' (a3= QUOTED_34_34 ) ( (a4= 'alternative' (a5= QUOTED_34_34 ) ( (a6= ',' (a7= QUOTED_34_34 ) ) )* ) )? ;
     public final org.kermeta.kp.ReusableResource parse_org_kermeta_kp_ReusableResource() throws RecognitionException {
         org.kermeta.kp.ReusableResource element =  null;
         int parse_org_kermeta_kp_ReusableResource_StartIndex = input.index();
@@ -2135,10 +2129,10 @@ public class KpParser extends KpANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 7) ) { return element; }
-            // Kp.g:1429:1: (a0= 'resource' (a1= TEXT ) a2= '=' (a3= QUOTED_34_34 ) ( (a4= 'alternative' (a5= QUOTED_34_34 ) ( (a6= ',' (a7= QUOTED_34_34 ) ) )* ) )? )
-            // Kp.g:1430:2: a0= 'resource' (a1= TEXT ) a2= '=' (a3= QUOTED_34_34 ) ( (a4= 'alternative' (a5= QUOTED_34_34 ) ( (a6= ',' (a7= QUOTED_34_34 ) ) )* ) )?
+            // Kp.g:1427:1: (a0= 'resource' (a1= TEXT ) a2= '=' (a3= QUOTED_34_34 ) ( (a4= 'alternative' (a5= QUOTED_34_34 ) ( (a6= ',' (a7= QUOTED_34_34 ) ) )* ) )? )
+            // Kp.g:1428:2: a0= 'resource' (a1= TEXT ) a2= '=' (a3= QUOTED_34_34 ) ( (a4= 'alternative' (a5= QUOTED_34_34 ) ( (a6= ',' (a7= QUOTED_34_34 ) ) )* ) )?
             {
-            a0=(Token)match(input,25,FOLLOW_25_in_parse_org_kermeta_kp_ReusableResource1355); if (state.failed) return element;
+            a0=(Token)match(input,25,FOLLOW_25_in_parse_org_kermeta_kp_ReusableResource1344); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               		if (element == null) {
@@ -2156,10 +2150,10 @@ public class KpParser extends KpANTLRParserBase {
               		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_27, 45);
               	
             }
-            // Kp.g:1444:2: (a1= TEXT )
-            // Kp.g:1445:3: a1= TEXT
+            // Kp.g:1442:2: (a1= TEXT )
+            // Kp.g:1443:3: a1= TEXT
             {
-            a1=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_org_kermeta_kp_ReusableResource1373); if (state.failed) return element;
+            a1=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_org_kermeta_kp_ReusableResource1362); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               			if (terminateParsing) {
@@ -2185,7 +2179,7 @@ public class KpParser extends KpANTLRParserBase {
               					completedElement(value, false);
               				}
               				collectHiddenTokens(element);
-              				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5_0_0_2, resolved, true);
+              				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5_0_0_3, resolved, true);
               				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, element);
               			}
               		
@@ -2199,7 +2193,7 @@ public class KpParser extends KpANTLRParserBase {
               		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_28, 46);
               	
             }
-            a2=(Token)match(input,20,FOLLOW_20_in_parse_org_kermeta_kp_ReusableResource1394); if (state.failed) return element;
+            a2=(Token)match(input,20,FOLLOW_20_in_parse_org_kermeta_kp_ReusableResource1383); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               		if (element == null) {
@@ -2207,7 +2201,7 @@ public class KpParser extends KpANTLRParserBase {
               			incompleteObjects.push(element);
               		}
               		collectHiddenTokens(element);
-              		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5_0_0_3, null, true);
+              		retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5_0_0_5, null, true);
               		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
               	
             }
@@ -2217,10 +2211,10 @@ public class KpParser extends KpANTLRParserBase {
               		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_29, 47);
               	
             }
-            // Kp.g:1494:2: (a3= QUOTED_34_34 )
-            // Kp.g:1495:3: a3= QUOTED_34_34
+            // Kp.g:1492:2: (a3= QUOTED_34_34 )
+            // Kp.g:1493:3: a3= QUOTED_34_34
             {
-            a3=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_ReusableResource1412); if (state.failed) return element;
+            a3=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_ReusableResource1401); if (state.failed) return element;
             if ( state.backtracking==0 ) {
 
               			if (terminateParsing) {
@@ -2246,7 +2240,7 @@ public class KpParser extends KpANTLRParserBase {
               					completedElement(value, false);
               				}
               				collectHiddenTokens(element);
-              				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5_0_0_4, resolved, true);
+              				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5_0_0_7, resolved, true);
               				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a3, element);
               			}
               		
@@ -2263,7 +2257,7 @@ public class KpParser extends KpANTLRParserBase {
               		addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 48);
               	
             }
-            // Kp.g:1533:2: ( (a4= 'alternative' (a5= QUOTED_34_34 ) ( (a6= ',' (a7= QUOTED_34_34 ) ) )* ) )?
+            // Kp.g:1531:2: ( (a4= 'alternative' (a5= QUOTED_34_34 ) ( (a6= ',' (a7= QUOTED_34_34 ) ) )* ) )?
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -2272,12 +2266,12 @@ public class KpParser extends KpANTLRParserBase {
             }
             switch (alt13) {
                 case 1 :
-                    // Kp.g:1534:3: (a4= 'alternative' (a5= QUOTED_34_34 ) ( (a6= ',' (a7= QUOTED_34_34 ) ) )* )
+                    // Kp.g:1532:3: (a4= 'alternative' (a5= QUOTED_34_34 ) ( (a6= ',' (a7= QUOTED_34_34 ) ) )* )
                     {
-                    // Kp.g:1534:3: (a4= 'alternative' (a5= QUOTED_34_34 ) ( (a6= ',' (a7= QUOTED_34_34 ) ) )* )
-                    // Kp.g:1535:4: a4= 'alternative' (a5= QUOTED_34_34 ) ( (a6= ',' (a7= QUOTED_34_34 ) ) )*
+                    // Kp.g:1532:3: (a4= 'alternative' (a5= QUOTED_34_34 ) ( (a6= ',' (a7= QUOTED_34_34 ) ) )* )
+                    // Kp.g:1533:4: a4= 'alternative' (a5= QUOTED_34_34 ) ( (a6= ',' (a7= QUOTED_34_34 ) ) )*
                     {
-                    a4=(Token)match(input,26,FOLLOW_26_in_parse_org_kermeta_kp_ReusableResource1442); if (state.failed) return element;
+                    a4=(Token)match(input,26,FOLLOW_26_in_parse_org_kermeta_kp_ReusableResource1431); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       				if (element == null) {
@@ -2285,7 +2279,7 @@ public class KpParser extends KpANTLRParserBase {
                       					incompleteObjects.push(element);
                       				}
                       				collectHiddenTokens(element);
-                      				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5_0_0_5_0_0_1, null, true);
+                      				retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5_0_0_8_0_0_1, null, true);
                       				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a4, element);
                       			
                     }
@@ -2295,10 +2289,10 @@ public class KpParser extends KpANTLRParserBase {
                       				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_31, 49);
                       			
                     }
-                    // Kp.g:1549:4: (a5= QUOTED_34_34 )
-                    // Kp.g:1550:5: a5= QUOTED_34_34
+                    // Kp.g:1547:4: (a5= QUOTED_34_34 )
+                    // Kp.g:1548:5: a5= QUOTED_34_34
                     {
-                    a5=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_ReusableResource1468); if (state.failed) return element;
+                    a5=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_ReusableResource1457); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
 
                       					if (terminateParsing) {
@@ -2324,7 +2318,7 @@ public class KpParser extends KpANTLRParserBase {
                       							completedElement(value, false);
                       						}
                       						collectHiddenTokens(element);
-                      						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5_0_0_5_0_0_2, resolved, true);
+                      						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5_0_0_8_0_0_3, resolved, true);
                       						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a5, element);
                       					}
                       				
@@ -2341,7 +2335,7 @@ public class KpParser extends KpANTLRParserBase {
                       				addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_2, 50);
                       			
                     }
-                    // Kp.g:1588:4: ( (a6= ',' (a7= QUOTED_34_34 ) ) )*
+                    // Kp.g:1586:4: ( (a6= ',' (a7= QUOTED_34_34 ) ) )*
                     loop12:
                     do {
                         int alt12=2;
@@ -2354,12 +2348,12 @@ public class KpParser extends KpANTLRParserBase {
 
                         switch (alt12) {
                     	case 1 :
-                    	    // Kp.g:1589:5: (a6= ',' (a7= QUOTED_34_34 ) )
+                    	    // Kp.g:1587:5: (a6= ',' (a7= QUOTED_34_34 ) )
                     	    {
-                    	    // Kp.g:1589:5: (a6= ',' (a7= QUOTED_34_34 ) )
-                    	    // Kp.g:1590:6: a6= ',' (a7= QUOTED_34_34 )
+                    	    // Kp.g:1587:5: (a6= ',' (a7= QUOTED_34_34 ) )
+                    	    // Kp.g:1588:6: a6= ',' (a7= QUOTED_34_34 )
                     	    {
-                    	    a6=(Token)match(input,13,FOLLOW_13_in_parse_org_kermeta_kp_ReusableResource1514); if (state.failed) return element;
+                    	    a6=(Token)match(input,13,FOLLOW_13_in_parse_org_kermeta_kp_ReusableResource1503); if (state.failed) return element;
                     	    if ( state.backtracking==0 ) {
 
                     	      						if (element == null) {
@@ -2367,7 +2361,7 @@ public class KpParser extends KpANTLRParserBase {
                     	      							incompleteObjects.push(element);
                     	      						}
                     	      						collectHiddenTokens(element);
-                    	      						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5_0_0_5_0_0_3_0_0_0, null, true);
+                    	      						retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5_0_0_8_0_0_4_0_0_0, null, true);
                     	      						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a6, element);
                     	      					
                     	    }
@@ -2377,10 +2371,10 @@ public class KpParser extends KpANTLRParserBase {
                     	      						addExpectedElement(org.kermeta.kp.editor.grammar.KpFollowSetProvider.TERMINAL_33, 51);
                     	      					
                     	    }
-                    	    // Kp.g:1604:6: (a7= QUOTED_34_34 )
-                    	    // Kp.g:1605:7: a7= QUOTED_34_34
+                    	    // Kp.g:1602:6: (a7= QUOTED_34_34 )
+                    	    // Kp.g:1603:7: a7= QUOTED_34_34
                     	    {
-                    	    a7=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_ReusableResource1548); if (state.failed) return element;
+                    	    a7=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_ReusableResource1537); if (state.failed) return element;
                     	    if ( state.backtracking==0 ) {
 
                     	      							if (terminateParsing) {
@@ -2406,7 +2400,7 @@ public class KpParser extends KpANTLRParserBase {
                     	      									completedElement(value, false);
                     	      								}
                     	      								collectHiddenTokens(element);
-                    	      								retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5_0_0_5_0_0_3_0_0_1, resolved, true);
+                    	      								retrieveLayoutInformation(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5_0_0_8_0_0_4_0_0_2, resolved, true);
                     	      								copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a7, element);
                     	      							}
                     	      						
@@ -2483,45 +2477,45 @@ public class KpParser extends KpANTLRParserBase {
 
     public static final BitSet FOLLOW_parse_org_kermeta_kp_KermetaProject_in_start82 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_start89 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_org_kermeta_kp_ImportProject_in_parse_org_kermeta_kp_KermetaProject137 = new BitSet(new long[]{0x0000000003000800L});
-    public static final BitSet FOLLOW_parse_org_kermeta_kp_ReusableResource_in_parse_org_kermeta_kp_KermetaProject197 = new BitSet(new long[]{0x0000000003000800L});
-    public static final BitSet FOLLOW_11_in_parse_org_kermeta_kp_KermetaProject238 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_TEXT_in_parse_org_kermeta_kp_KermetaProject256 = new BitSet(new long[]{0x0000000000005000L});
-    public static final BitSet FOLLOW_12_in_parse_org_kermeta_kp_KermetaProject286 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_parse_org_kermeta_kp_ImportProjectSources_in_parse_org_kermeta_kp_KermetaProject312 = new BitSet(new long[]{0x0000000000006000L});
-    public static final BitSet FOLLOW_13_in_parse_org_kermeta_kp_KermetaProject353 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_parse_org_kermeta_kp_ImportProjectSources_in_parse_org_kermeta_kp_KermetaProject387 = new BitSet(new long[]{0x0000000000006000L});
-    public static final BitSet FOLLOW_14_in_parse_org_kermeta_kp_KermetaProject461 = new BitSet(new long[]{0x0000000000278000L});
-    public static final BitSet FOLLOW_15_in_parse_org_kermeta_kp_KermetaProject484 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_KermetaProject510 = new BitSet(new long[]{0x0000000000270000L});
-    public static final BitSet FOLLOW_16_in_parse_org_kermeta_kp_KermetaProject565 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_KermetaProject591 = new BitSet(new long[]{0x0000000000260000L});
-    public static final BitSet FOLLOW_17_in_parse_org_kermeta_kp_KermetaProject646 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_KermetaProject672 = new BitSet(new long[]{0x0000000000240000L});
-    public static final BitSet FOLLOW_parse_org_kermeta_kp_ImportFile_in_parse_org_kermeta_kp_KermetaProject733 = new BitSet(new long[]{0x0000000000240000L});
-    public static final BitSet FOLLOW_18_in_parse_org_kermeta_kp_KermetaProject774 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_parse_org_kermeta_kp_PackageEquivalence803 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_PackageEquivalence821 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_20_in_parse_org_kermeta_kp_PackageEquivalence846 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_PackageEquivalence874 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_parse_org_kermeta_kp_ImportFile910 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_ImportFile928 = new BitSet(new long[]{0x0000000000400002L});
-    public static final BitSet FOLLOW_22_in_parse_org_kermeta_kp_ImportFile958 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_23_in_parse_org_kermeta_kp_ImportFile978 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_QUOTED_40_41_in_parse_org_kermeta_kp_ImportFile1004 = new BitSet(new long[]{0x0000000000004002L});
-    public static final BitSet FOLLOW_14_in_parse_org_kermeta_kp_ImportFile1050 = new BitSet(new long[]{0x00000000000C0000L});
-    public static final BitSet FOLLOW_parse_org_kermeta_kp_PackageEquivalence_in_parse_org_kermeta_kp_ImportFile1103 = new BitSet(new long[]{0x00000000000C0000L});
-    public static final BitSet FOLLOW_18_in_parse_org_kermeta_kp_ImportFile1184 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_24_in_parse_org_kermeta_kp_ImportProject1261 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_TEXT_in_parse_org_kermeta_kp_ImportProject1279 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TEXT_in_parse_org_kermeta_kp_ImportProjectSources1319 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_25_in_parse_org_kermeta_kp_ReusableResource1355 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_TEXT_in_parse_org_kermeta_kp_ReusableResource1373 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_20_in_parse_org_kermeta_kp_ReusableResource1394 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_ReusableResource1412 = new BitSet(new long[]{0x0000000004000002L});
-    public static final BitSet FOLLOW_26_in_parse_org_kermeta_kp_ReusableResource1442 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_ReusableResource1468 = new BitSet(new long[]{0x0000000000002002L});
-    public static final BitSet FOLLOW_13_in_parse_org_kermeta_kp_ReusableResource1514 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_ReusableResource1548 = new BitSet(new long[]{0x0000000000002002L});
+    public static final BitSet FOLLOW_parse_org_kermeta_kp_ReusableResource_in_parse_org_kermeta_kp_KermetaProject130 = new BitSet(new long[]{0x0000000003000800L});
+    public static final BitSet FOLLOW_parse_org_kermeta_kp_ImportProject_in_parse_org_kermeta_kp_KermetaProject186 = new BitSet(new long[]{0x0000000001000800L});
+    public static final BitSet FOLLOW_11_in_parse_org_kermeta_kp_KermetaProject227 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_TEXT_in_parse_org_kermeta_kp_KermetaProject245 = new BitSet(new long[]{0x0000000000005000L});
+    public static final BitSet FOLLOW_12_in_parse_org_kermeta_kp_KermetaProject275 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_parse_org_kermeta_kp_ImportProjectSources_in_parse_org_kermeta_kp_KermetaProject301 = new BitSet(new long[]{0x0000000000006000L});
+    public static final BitSet FOLLOW_13_in_parse_org_kermeta_kp_KermetaProject342 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_parse_org_kermeta_kp_ImportProjectSources_in_parse_org_kermeta_kp_KermetaProject376 = new BitSet(new long[]{0x0000000000006000L});
+    public static final BitSet FOLLOW_14_in_parse_org_kermeta_kp_KermetaProject450 = new BitSet(new long[]{0x0000000000278000L});
+    public static final BitSet FOLLOW_15_in_parse_org_kermeta_kp_KermetaProject473 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_KermetaProject499 = new BitSet(new long[]{0x0000000000270000L});
+    public static final BitSet FOLLOW_16_in_parse_org_kermeta_kp_KermetaProject554 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_KermetaProject580 = new BitSet(new long[]{0x0000000000260000L});
+    public static final BitSet FOLLOW_17_in_parse_org_kermeta_kp_KermetaProject635 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_KermetaProject661 = new BitSet(new long[]{0x0000000000240000L});
+    public static final BitSet FOLLOW_parse_org_kermeta_kp_ImportFile_in_parse_org_kermeta_kp_KermetaProject722 = new BitSet(new long[]{0x0000000000240000L});
+    public static final BitSet FOLLOW_18_in_parse_org_kermeta_kp_KermetaProject763 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_parse_org_kermeta_kp_PackageEquivalence792 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_PackageEquivalence810 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_20_in_parse_org_kermeta_kp_PackageEquivalence835 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_PackageEquivalence863 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_21_in_parse_org_kermeta_kp_ImportFile899 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_ImportFile917 = new BitSet(new long[]{0x0000000000400002L});
+    public static final BitSet FOLLOW_22_in_parse_org_kermeta_kp_ImportFile947 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_23_in_parse_org_kermeta_kp_ImportFile967 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_QUOTED_40_41_in_parse_org_kermeta_kp_ImportFile993 = new BitSet(new long[]{0x0000000000004002L});
+    public static final BitSet FOLLOW_14_in_parse_org_kermeta_kp_ImportFile1039 = new BitSet(new long[]{0x00000000000C0000L});
+    public static final BitSet FOLLOW_parse_org_kermeta_kp_PackageEquivalence_in_parse_org_kermeta_kp_ImportFile1092 = new BitSet(new long[]{0x00000000000C0000L});
+    public static final BitSet FOLLOW_18_in_parse_org_kermeta_kp_ImportFile1173 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_24_in_parse_org_kermeta_kp_ImportProject1250 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_TEXT_in_parse_org_kermeta_kp_ImportProject1268 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_TEXT_in_parse_org_kermeta_kp_ImportProjectSources1308 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_25_in_parse_org_kermeta_kp_ReusableResource1344 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_TEXT_in_parse_org_kermeta_kp_ReusableResource1362 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_20_in_parse_org_kermeta_kp_ReusableResource1383 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_ReusableResource1401 = new BitSet(new long[]{0x0000000004000002L});
+    public static final BitSet FOLLOW_26_in_parse_org_kermeta_kp_ReusableResource1431 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_ReusableResource1457 = new BitSet(new long[]{0x0000000000002002L});
+    public static final BitSet FOLLOW_13_in_parse_org_kermeta_kp_ReusableResource1503 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_org_kermeta_kp_ReusableResource1537 = new BitSet(new long[]{0x0000000000002002L});
 
 }
