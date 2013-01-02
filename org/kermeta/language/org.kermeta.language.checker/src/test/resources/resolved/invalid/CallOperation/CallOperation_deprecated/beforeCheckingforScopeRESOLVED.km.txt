@@ -1,1 +1,1 @@
-called_feature_deprecated
+called_feature_should_not_be_deprecated
