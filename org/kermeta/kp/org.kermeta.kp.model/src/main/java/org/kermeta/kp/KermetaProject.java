@@ -113,7 +113,6 @@ public interface KermetaProject extends EObject {
 
 		/**
    * Returns the value of the '<em><b>Java Base Package</b></em>' attribute.
-   * The default value is <code>"default"</code>.
    * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Java Base Package</em>' attribute isn't clear,
@@ -123,7 +122,7 @@ public interface KermetaProject extends EObject {
    * @return the value of the '<em>Java Base Package</em>' attribute.
    * @see #setJavaBasePackage(String)
    * @see org.kermeta.kp.KpPackage#getKermetaProject_JavaBasePackage()
-   * @model default="default"
+   * @model
    * @generated
    */
 	String getJavaBasePackage();
