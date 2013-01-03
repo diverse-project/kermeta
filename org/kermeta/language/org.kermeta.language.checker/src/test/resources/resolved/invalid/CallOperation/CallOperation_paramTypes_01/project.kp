@@ -1,0 +1,12 @@
+resource library_standard ="platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/LATEST"
+
+importProject library_standard
+	
+
+	
+//metamodel test_hello
+project CallOperation_deprecated {
+
+	
+	import "${project.baseUri}/003_CallOperation_paramTypes_01.kmt"
+} 
