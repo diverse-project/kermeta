@@ -438,7 +438,7 @@ store i32 , i32* %"i"
 br label %llvmlabel9
 llvmlabel9:
 %"12" = load i32* %"i"
-%"13" = call i1 @kermeta_standard__Integer___equals(%"kermeta_standard__Object"* 10, i32 %"12")
+%"13" = icmp eq i32 %"12", 10
 %"13"
 llvmlabel10:
 %"14" = load i32* %"i"
@@ -446,7 +446,7 @@ llvmlabel10:
 %"15"
 call void @kermeta_io__StdIO___writeln(i8* %"14", %struct.kermeta_io__StdIO %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
 %"16" = load i32* %"i"
-%"17" = add i32 1, %"16"
+%"17" = add i32 %"16", 1
 store i32 %"17", i32* %"i"
 br label %llvmlabel10
 llvmlabel11:
