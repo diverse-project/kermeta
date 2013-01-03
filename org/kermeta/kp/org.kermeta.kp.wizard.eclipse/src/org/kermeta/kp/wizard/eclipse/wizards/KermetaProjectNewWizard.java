@@ -47,21 +47,23 @@ public class KermetaProjectNewWizard extends Wizard implements INewWizard {
 		return page;
 	}
 	
-	public void addKermetaNatureToProject(IProject project) {
+	public static void addKermetaNatureToProject(IProject project) {
 		IProjectDescription description;
 		try {
-			description = project.getDescription();
-		String[] natures = description.getNatureIds();
-		String[] newNatures = new String[natures.length + 1];
-		System.arraycopy(natures, 0, newNatures, 0, natures.length);
-		newNatures[natures.length] = org.kermeta.language.texteditor.eclipse.nature.Activator.NATURE_ID;
-		description.setNatureIds(newNatures);
-		project.setDescription(description, null);
+			description = project.getDescription();				
+			if (!description.hasNature(org.kermeta.language.texteditor.eclipse.nature.Activator.NATURE_ID)){
+				String[] natures = description.getNatureIds();			
+				String[] newNatures = new String[natures.length + 1];
+				System.arraycopy(natures, 0, newNatures, 0, natures.length);
+				newNatures[natures.length] = org.kermeta.language.texteditor.eclipse.nature.Activator.NATURE_ID;
+				description.setNatureIds(newNatures);
+				project.setDescription(description, null);
+				
+			}
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	
 	
@@ -107,14 +109,14 @@ public class KermetaProjectNewWizard extends Wizard implements INewWizard {
 		}
 	}
 	
-	private void createDefaultKp(IProject project,String path,IProgressMonitor monitor) throws CoreException{
+	public static IFile createDefaultKp(IProject project,String path,IProgressMonitor monitor) throws CoreException{
 		IContainer currentContainer = project;
 		IFile file = currentContainer.getFile(new Path(path));
 		
 		String contents = Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_NEW_KP_TEMPLATE_STRING);
 		
 		// replace variables with values from the user
-		contents = contents.replaceAll(Pattern.quote("${project.name}"), project.getName());
+		contents = contents.replaceAll(Pattern.quote("${project.name}"), project.getName().replaceAll(".", "_"));
 		contents = contents.replaceAll(Pattern.quote("${class.name}"), "MainClass");
 		contents = contents.replaceAll(Pattern.quote("${package.name}"), "mainPackage");
 		contents = contents.replaceAll(Pattern.quote("${operation.name}"), "mainOperation");
@@ -128,6 +130,7 @@ public class KermetaProjectNewWizard extends Wizard implements INewWizard {
 			stream.close();
 		} catch (IOException e) {
 		}
+		return file;
 	}
 	
 	
