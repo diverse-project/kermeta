@@ -116,7 +116,7 @@ public class KermetaProjectNewWizard extends Wizard implements INewWizard {
 		String contents = Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.P_NEW_KP_TEMPLATE_STRING);
 		
 		// replace variables with values from the user
-		contents = contents.replaceAll(Pattern.quote("${project.name}"), project.getName().replaceAll(".", "_"));
+		contents = contents.replaceAll(Pattern.quote("${project.name}"), project.getName().replaceAll(Pattern.quote("."), "_"));
 		contents = contents.replaceAll(Pattern.quote("${class.name}"), "MainClass");
 		contents = contents.replaceAll(Pattern.quote("${package.name}"), "mainPackage");
 		contents = contents.replaceAll(Pattern.quote("${operation.name}"), "mainOperation");

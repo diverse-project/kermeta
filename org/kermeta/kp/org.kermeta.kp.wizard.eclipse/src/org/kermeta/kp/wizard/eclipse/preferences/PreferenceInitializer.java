@@ -37,7 +37,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
 				"project ${project.name} {\n"+ 
 				"\tmainClass \"${project.name}#${package.name}::${class.name}\"\n"+ 
-				"\tmainOperation \"${operation.name}\""+
+				"\tmainOperation \"${operation.name}\"\n\n"+
 					
 				"\timport \"${project.baseUri}/src/main/kmt/${class.name}.kmt\"\n"+ 
 				"}\n"
