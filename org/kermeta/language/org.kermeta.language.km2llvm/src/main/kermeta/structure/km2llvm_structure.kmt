@@ -11,8 +11,7 @@ require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "../km2llvm_aspectGenerator.kmt"
 require "km2llvm_castFunctions.kmt"
-require "../behaviour/km2llvm_calls.kmt"
-require "../behaviour/km2llvm_cond_statements.kmt"
+require "../behaviour/km2llvm_behavior.kmt"
 
 using org::kermeta::language::km2llvm
 using kermeta::standard
@@ -34,6 +33,8 @@ aspect class Metamodel {
 
 
 aspect class Type {
+	operation isVoidType(ctx:Context) : Boolean is do result := false end
+
 	operation llvmType(ctx:Context) : String is abstract
 	
 	operation qualifiedNameLLVM() : String is do
@@ -48,12 +49,19 @@ aspect class Type {
 }
 
 
+aspect class VoidType {
+	method isVoidType(ctx:Context) : Boolean is do result := true end
+}
+
+
 aspect class Class {
+	method isVoidType(ctx:Context) : Boolean is do result := ctx.stdLibName.getValue(qualifiedNameLLVM)=="void" end
+	
 	method llvmType(ctx:Context) : String is do
 		result := ctx.stdLibName.getValue(qualifiedNameLLVM)
 		
 		if(result.isVoid) then
-			result := ctx.llvm.localVar(qualifiedNameLLVM)
+			result := ctx.llvm.pointer(ctx.llvm.localVar(qualifiedNameLLVM))
 		end
 	end
 	
@@ -108,7 +116,7 @@ aspect class Operation {
 	
 
 	method generateLLVM(ctx:Context) is do
-		var attrs : Sequence<String> init  Sequence<String>.new
+		var attrs : Sequence<LLVMVar> init  Sequence<LLVMVar>.new
 		
 		ctx.currentVarCpt := 1
 		
@@ -120,7 +128,7 @@ aspect class Operation {
 			// Creating the instance of the main Kermeta class.
 			ctx.operations.append(ctx.llvm.assign("%1", 
 				ctx.llvm.call(ctx.llvm.globalVar("create_"+owningClass.qualifiedNameLLVM), mainClassType, void))).append("\n")
-			attrs.add(mainClassType + " %1")
+			attrs.add(LLVMVar.new.initialise(mainClassType, " %1"))
 			// Calling the main Kermeta operation
 			ctx.operations.append(ctx.llvm.call(llvmName(ctx), type.llvmType(ctx), attrs)).append("\n")
 			// C operation must return an int (0 for ok)
@@ -130,9 +138,9 @@ aspect class Operation {
 
 		attrs.clear
 		// Creation of the parameters
-		ownedParameter.each{param | attrs.add(param.type.llvmType(ctx)+" "+ ctx.llvm.localVar(param.name)) }
+		ownedParameter.each{param | attrs.add(LLVMVar.new.initialise(param.type.llvmType(ctx), ctx.llvm.localVar(param.name))) }
 		// The last parameter is the calling object
-		attrs.add(ctx.llvm.pointer(ctx.llvm.localVar(owningClass.qualifiedNameLLVM))+" "+ctx.llvm.localVar("self"))
+		attrs.add(LLVMVar.new.initialise(ctx.llvm.pointer(ctx.llvm.localVar(owningClass.qualifiedNameLLVM)), ctx.llvm.localVar("self")))
 		ctx.operations.append(ctx.llvm.define(LinkageType.internal, type.llvmType(ctx), llvmName(ctx), attrs, void)).append("{\n")
 		body.generateLLVM(ctx)
 		ctx.operations.append(ctx.llvm.ret(ctx.llvm.~void, void)).append("\n")
@@ -153,15 +161,15 @@ aspect class Enumeration {
 	
 	method generateLLVM(ctx:Context) is do
 		// Generating the type of the enumeration
-		var attrs : Sequence<String> init  Sequence<String>.new
+		var attrs : Sequence<LLVMVar> init  Sequence<LLVMVar>.new
 		var typeName : String init ctx.llvm.localVar(qualifiedNameLLVM)
-		attrs.add("i8*")
+		attrs.add(LLVMVar.new.initialise("i8*", void))
 		ctx.types.append(ctx.llvm.type(typeName, attrs)).append("\n")
 		// For each literal, generating the singleton.
 		ownedLiteral.each{lit |
 			attrs.clear
 			var stringVarName : String init ctx.getStringVarName(lit.name)
-			attrs.add("i8* " + ctx.llvm.pointerString(lit.name, stringVarName))
+			attrs.add(LLVMVar.new.initialise("i8*", ctx.llvm.pointerString(lit.name, stringVarName)))
 			ctx.types.append(ctx.llvm.constStruct(typeName, ctx.llvm.globalVar(qualifiedNameLLVM+"#"+lit.name), attrs)).append("\n")
 		}
 	end
@@ -209,7 +217,7 @@ aspect class ClassDefinition {
 	
 	
 	operation generateLLVMGetters(ctx:Context) is do
-		var params : Sequence<String> init  Sequence<String>.new
+		var params : Sequence<LLVMVar> init  Sequence<LLVMVar>.new
 		var fctAttr: Sequence<FunctionAttr> init  Sequence<FunctionAttr>.new
 		var typeCD : String init ctx.llvm.pointer(ctx.llvm.localVar(qualifiedNameLLVM))
 		var selfVar : String init ctx.llvm.localVar("self")
@@ -219,7 +227,7 @@ aspect class ClassDefinition {
 		var cpt : Integer init superTypes.size + lowerTypes.size
 		var returnType : String
 		
-		params.add(typeCD + " " + selfVar)
+		params.add(LLVMVar.new.initialise(typeCD, selfVar))
 		fctAttr.add(FunctionAttr.~readonly)
 		fctAttr.add(FunctionAttr.inlinehint)
 		
@@ -241,10 +249,10 @@ aspect class ClassDefinition {
 	// Generates the llvm type corresponding to the class.
 	operation generateLLVMType(ctx:Context) is do
 		// Creating the supertype parameters
-		var list : Sequence<String> init superTypes.collect{st | ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM)) }
+		var list : Sequence<LLVMVar> init superTypes.collect{st | LLVMVar.new.initialise(ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM)), void) }
 		// Creating the lowertype parameters
-		list.addAll(lowerTypes.collect{st | ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM))})
-		ownedAttribute.each{attr | list.add(ctx.llvm.pointer(attr.type.llvmType(ctx))) }
+		list.addAll(lowerTypes.collect{st | LLVMVar.new.initialise(ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM)), void)})
+		ownedAttribute.each{attr | list.add(LLVMVar.new.initialise(ctx.llvm.pointer(attr.type.llvmType(ctx)), void)) }
 		ctx.types.append(ctx.llvm.type(ctx.llvm.localVar(qualifiedNameLLVM), list)).append("\n")
 	end
 	

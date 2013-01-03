@@ -1,0 +1,58 @@
+/* $Id:$ 
+ * Creation : December 23, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+package org::kermeta::language::behavior;
+
+require kermeta
+require "km2llvm_calls.kmt"
+require "km2llvm_cond_statements.kmt"
+require "km2llvm_literals.kmt"
+
+using org::kermeta::language::km2llvm
+using kermeta::standard
+
+
+aspect class Expression {
+	/**
+	* Generates the LLVM code and returns the corresponding line instead of putting it into a string buffer.
+	* However, all the LLVM code required for the line to work will ba added to a buffer.
+	*/
+	operation generateLLVMNoBuffer(ctx:Context) : String is do
+		result := "FIXME generateLLVMNoBuffer: "+self.toString
+	end
+}
+
+
+
+aspect class VariableDecl {
+	method generateLLVM(ctx:Context) is do
+		//FIXME must not use alloca but malloc
+		// allocating a variable.
+		ctx.operations.append(ctx.llvm.assign(ctx.llvm.localVar(identifier), ctx.llvm.alloca(type.type.llvmType(ctx)))).append("\n")
+		
+		if not initialization.isVoid then
+			// The initialisation is an assignment.
+			var assign : Assignment init Assignment.new
+			var callVar : CallVariable init CallVariable.new
+			
+			callVar.name := identifier
+			callVar.staticType := type.type
+			assign.target := callVar
+			assign.~value := initialization
+			assign.generateLLVM(ctx)
+			// Undo changes.
+			initialization := assign.~value
+		end
+	end
+}
+
+
+aspect class Assignment {
+	method generateLLVM(ctx:Context) is do
+		ctx.operations.append(ctx.llvm.store(target.llvmType(ctx), ~value.generateLLVMNoBuffer(ctx), target.llvmIdentifier(ctx))).append("\n")
+	end
+}

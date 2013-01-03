@@ -37,7 +37,6 @@ kermeta_standard__String___container:   # @kermeta_standard__String___container
 	.cfi_startproc
 # BB#0:
 	movq	%rdi, -8(%rsp)
-	movl	$2, -12(%rsp)
 	xorl	%eax, %eax
 	ret
 .Ltmp4:
@@ -738,16 +737,25 @@ main:                                   # @main
 pkgFoo__Main___main4:                   # @pkgFoo__Main___main4
 	.cfi_startproc
 # BB#0:
-	pushq	%rax
-.Ltmp94:
+	pushq	%rbp
+.Ltmp96:
 	.cfi_def_cfa_offset 16
+.Ltmp97:
+	.cfi_offset %rbp, -16
+	movq	%rsp, %rbp
+.Ltmp98:
+	.cfi_def_cfa_register %rbp
+	pushq	%rbx
+	pushq	%rax
+.Ltmp99:
+	.cfi_offset %rbx, -24
 	movl	$.Ls3, %edi
 	movl	$SINGLETON_kermeta_io__StdIO, %esi
 	callq	kermeta_io__StdIO___writeln
 	callq	create_pkgFoo__D
 	movq	%rax, %rdi
 	callq	pkgFoo__D___foo3
-	xorb	%al, %al
+	movb	$1, %al
 	testb	%al, %al
 	jne	.LBB43_2
 # BB#1:                                 # %llvmlabel3
@@ -758,14 +766,39 @@ pkgFoo__Main___main4:                   # @pkgFoo__Main___main4
 .LBB43_3:                               # %llvmlabel5
 	movl	$SINGLETON_kermeta_io__StdIO, %esi
 	callq	kermeta_io__StdIO___writeln
-	popq	%rax
+	movq	%rsp, %rax
+	leaq	-16(%rax), %rbx
+	movq	%rbx, %rsp
+	movl	$0, -16(%rax)
+	jmp	.LBB43_4
+	.align	16, 0x90
+.LBB43_5:                               # %label2
+                                        #   in Loop: Header=BB43_4 Depth=1
+	movl	(%rbx), %esi
+	movl	$.L.str2, %edi
+	xorb	%al, %al
+	callq	printf
+	incl	(%rbx)
+.LBB43_4:                               # %label1
+                                        # =>This Inner Loop Header: Depth=1
+	cmpl	$10, (%rbx)
+	jne	.LBB43_5
+# BB#6:                                 # %label3
+	leaq	-8(%rbp), %rsp
+	popq	%rbx
+	popq	%rbp
 	ret
-.Ltmp95:
-	.size	pkgFoo__Main___main4, .Ltmp95-pkgFoo__Main___main4
+.Ltmp100:
+	.size	pkgFoo__Main___main4, .Ltmp100-pkgFoo__Main___main4
 	.cfi_endproc
 
-	.type	.L.str,@object          # @.str
+	.type	.L.str2,@object         # @.str2
 	.section	.rodata.str1.1,"aMS",@progbits,1
+.L.str2:
+	.asciz	 "%d"
+	.size	.L.str2, 3
+
+	.type	.L.str,@object          # @.str
 .L.str:
 	.asciz	 "%s"
 	.size	.L.str, 3

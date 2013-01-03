@@ -8,7 +8,6 @@
 package org::kermeta::language::behavior;
 
 require kermeta
-require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "../structure/km2llvm_structure.kmt"
 
 using org::kermeta::language::km2llvm
@@ -18,86 +17,63 @@ using org::kermeta::language::llvm
 using org::kermeta::language::structure
 
 
-aspect class Expression {
-	operation generateLLVM4CallOperationTarget(ctx:Context) is do
-		ctx.operations.append("FIXME generateLLVM4CallOp: ").append(toString)
+aspect class CallExpression {
+	/**
+		Returns the possible identifier of the expression.
+		For instance with a CallVariable instance, the name is the variable.
+	*/
+	operation llvmIdentifier(ctx:Context) : String is do
+		result := "FIXME llvmIdentifier: " + self.toString
 	end
 	
+	
 	/**
-	* Generates the LLVM code and returns the corresponding line instead of putting it into a string buffer.
-	* However, all the LLVM code required for the line to work will ba added to a buffer.
+		Returns the type of the expression.
+		For instance with a CallVariable instance, the type is the type of the variable.
 	*/
-	operation generateLLVMNoBuffer(ctx:Context) : String is do
-		result := "FIXME generateLLVM4RightExpression: "+self.toString
-	end
-}
-
-
-
-aspect class BooleanLiteral {
-	method generateLLVMNoBuffer(ctx:Context) : String is do
-		if(~value) then result := ctx.llvm.~true
-		else result := ctx.llvm.~false
-		end
-	end
-}
-
-
-
-aspect class CallTypeLiteral {
-	method generateLLVM4CallOperationTarget(ctx:Context) is do
-		// When an operation is called using a type literal, it means that it is a singleton operation call.
-		ctx.currentOpCallParams.add(ctx.llvm.pointer(typeref.type.llvmType(ctx))+" @SINGLETON_"+typeref.type.qualifiedNameLLVM)
+	operation llvmType(ctx:Context) : String is do
+		result := "FIXME llvmType: " + self.toString
 	end
 }
 
 
 aspect class CallVariable {
-	method generateLLVM4CallOperationTarget(ctx:Context) is do
-		// When an operation is called using a call variable, it implies that the calling object is passed as the last argument of the LLVM operation.
-		ctx.currentOpCallParams.add(ctx.llvm.pointer(staticType.llvmType(ctx)) + " " + ctx.llvm.localVar(name))
+	method llvmIdentifier(ctx:Context) : String is do
+		result := ctx.llvm.localVar(name)
+	end
+	
+	method llvmType(ctx:Context) : String is do
+		result := staticType.llvmType(ctx)
+	end
+
+
+	method generateLLVMNoBuffer(ctx:Context) : String is do
+		// The content of the variable (a pointer) is store into a temp var.
+		var varName : String init ctx.nextOperationVar
+		// The load operation is appended to the string buf while the name of the temp var is returned.
+		ctx.operations.append(ctx.llvm.assign(varName, ctx.llvm.load(ctx.llvm.pointer(staticType.llvmType(ctx)), ctx.llvm.localVar(name)))).append("\n")
+		result := varName
 	end
 }
 
-
-aspect class VariableDecl {
-	method generateLLVM(ctx:Context) is do
-		ctx.operations.append(ctx.llvm.assign(ctx.llvm.localVar(identifier), initialization.generateLLVMNoBuffer(ctx))).append("\n")
-	end
-}
-
-
-aspect class StringLiteral {
-	method generateLLVM(ctx:Context) is do
-		// A string in LLVM is a char*. No String structure.
-		var varStr : String init ctx.nextOperationVar(ctx)
-		var strName : String init ctx.getStringVarName(~value)
-		var getEltPts : String init ctx.llvm.getelementptr(ctx.llvm.getStringType(~value), strName, ctx.llvm.i32, 0, ctx.llvm.i32, 0, false)
-		
-		// Setting the parameters of the call.
-		ctx.currentOpCallParams.add(varStr)
-		// Creating a String using as parameter the char*.
-		ctx.operations.append(ctx.llvm.assign(varStr, getEltPts)).append("\n")
-	end
-}
 
 
 aspect class CallSuperOperation {
 	method generateLLVMNoBuffer(ctx:Context) : String is do
 		// Looking for the super operation.
 		var op : Operation init superType.getOperation(staticOperation)
-		var attrs : Sequence<String> init  Sequence<String>.new
+		var attrs : Sequence<LLVMVar> init  Sequence<LLVMVar>.new
 		ctx.currentOpCallParams.clear
 		// Getting the variable corresponding to the super type (will be the parameter of the super call).
-		var varStr : String init ctx.nextOperationVar(ctx) // Declaring a local variable.
-		attrs.add(ctx.llvm.pointer(staticType.llvmType(ctx))+" "+ctx.llvm.localVar("self")) // The parameters of the call.
+		var varStr : String init ctx.nextOperationVar // Declaring a local variable.
+		attrs.add(LLVMVar.new.initialise(staticType.llvmType(ctx), ctx.llvm.localVar("self"))) // The parameters of the call.
 		ctx.operations.append(ctx.llvm.assign(varStr, 
-				ctx.llvm.call("@cast_"+staticType.qualifiedNameLLVM+"_"+superType.qualifiedNameLLVM, ctx.llvm.pointer(superType.llvmType(ctx)), attrs)
+				ctx.llvm.call("@cast_"+staticType.qualifiedNameLLVM+"_"+superType.qualifiedNameLLVM, superType.llvmType(ctx), attrs)
 				)).append("\n") // Casting self into the super type.
 		// Creating the super call.
 		attrs.clear
 		//TODO: put the other parameters of the operation.
-		attrs.add(ctx.llvm.pointer(superType.llvmType(ctx))+" "+varStr) // The parameters of the call.
+		attrs.add(LLVMVar.new.initialise(superType.llvmType(ctx), varStr)) // The parameters of the call.
 		result := ctx.llvm.call(op.llvmName(ctx), staticOperation.type.llvmType(ctx), attrs)
 	end
 }
@@ -106,7 +82,7 @@ aspect class CallSuperOperation {
 aspect class CallOperation {
 	// Generates the LLVM code corresponding to a call to the operation 'new'.
 	operation _generateLLVM4New(ctx:Context) : String is do
-		result := ctx.llvm.call(ctx.llvm.globalVar("create_"+staticType.qualifiedNameLLVM), ctx.llvm.pointer(staticType.llvmType(ctx)), void)
+		result := ctx.llvm.call(ctx.llvm.globalVar("create_"+staticType.qualifiedNameLLVM), staticType.llvmType(ctx), void)
 	end
 
 
@@ -114,26 +90,44 @@ aspect class CallOperation {
 	operation _generateLLVM4StdCall(ctx:Context) : String is do
 		// Each parameter expression is stored into a variable before the call.
 		// The ordered list of these variables are temporary stored into ctx.currentOpCallParams.
+		// FIXME: does not work with multiple call operations: foo(0, bar(1))
 		parameters.each{p| p.generateLLVM(ctx)}
 		
 		var paramsSize : Integer init ctx.currentOpCallParams.size
-		var strTmp : String
 		// For each variables (see the previous comment), the type must be defined using the parameters
 		// of the operation.
 		from var i : Integer init 0
 		until i>=paramsSize
 		loop
-			strTmp := ctx.currentOpCallParams.at(0)
-			ctx.currentOpCallParams.removeAt(0)
 			// Adding the type to the parameter.
-			ctx.currentOpCallParams.add(ctx.llvm.pointer(staticOperation.ownedParameter.at(i).type.llvmType(ctx))+" "+strTmp)
+			ctx.currentOpCallParams.at(i).type := staticOperation.ownedParameter.at(i).type.llvmType(ctx)
 			i := i + 1
 		end
 
 		// The last parameter is self.
-		target.generateLLVM4CallOperationTarget(ctx)
-		// Generating the call.
-		result := ctx.llvm.call(staticOperation.llvmName(ctx), staticOperation.type.llvmType(ctx), ctx.currentOpCallParams)
+		var clazz : Class init Class.new // Uses a class to get the llvm type name of the class definition owning the operation.
+		clazz.typeDefinition := staticOperation.owningClass
+		ctx.currentOpCallParams.add(LLVMVar.new.initialise(clazz.llvmType(ctx), target.generateLLVMNoBuffer(ctx)))
+		clazz.typeDefinition := void
+		
+		// Optimisation: some calls handling simple primitive type operations are shortened to their classical llvm use (e.g. operation plus in class Integer)
+		var cmd : LLVMGenerator init ctx.stdLibCmd.getValue(staticOperation.llvmName(ctx)) // Getting the command from the list.
+		if(cmd.isVoid) then // If no command
+			// Generating the call.
+			result := ctx.llvm.call(staticOperation.llvmName(ctx), staticOperation.type.llvmType(ctx), ctx.currentOpCallParams)
+		else // If one command
+			result := cmd.generateLLVMNoBuffer(ctx)
+		end
+		
+		// The call is appended to the buffer. If a value is returned, it is stored into a variable which is returned by the operation.
+		if staticOperation.type.isVoidType(ctx) then
+			ctx.operations.append(result).append("\n")
+			result := ""
+		else
+			var varTmp : String init ctx.nextOperationVar
+			ctx.operations.append(ctx.llvm.assign(varTmp, result)).append("\n")
+			result := varTmp
+		end
 	end
 
 
@@ -145,11 +139,6 @@ aspect class CallOperation {
 		else
 			result := _generateLLVM4StdCall(ctx)
 		end
-	end
-
-
-	method generateLLVM(ctx:Context) is do
-		ctx.operations.append(generateLLVMNoBuffer(ctx)).append("\n")
 	end
 }
 

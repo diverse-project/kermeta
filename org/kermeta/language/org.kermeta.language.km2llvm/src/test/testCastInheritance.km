@@ -1,158 +1,423 @@
 <?xml version="1.0" encoding="ASCII"?>
-<org_kermeta_language_structure:Metamodel xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior"
-    xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" name="test"
-    uri="http://www.kermeta.org/kermeta/2_0_0/">
-  <packages name="pkgFoo">
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
+<org_kermeta_language_structure:Metamodel
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/behavior"
+    xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/structure"
+    name="test"
+    uri="http://www.kermeta.org/kermeta/2_1_0/">
+  <packages
+      name="pkgFoo">
+    <ownedTypeDefinition
+        xsi:type="org_kermeta_language_structure:ClassDefinition"
         name="A"/>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-        name="B" superType="#//@packages.0/B/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.0/A"/>
-      <ownedOperation name="foo" type="#//@packages.0/B/foo/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.1/standard/Void"/>
-        <body xsi:type="org_kermeta_language_behavior:Block">
-          <statement xsi:type="org_kermeta_language_behavior:CallOperation" staticType="#//@packages.1/io/StdIO/writeln/@containedType.0"
-              name="writeln" staticOperation="#//@packages.1/io/StdIO/writeln">
-            <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="B.foo!"/>
-            <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral" staticType="#//@packages.0/B/foo/@body/@statement.0/@target/@typeref/@containedType.0">
-              <typeref name="StdIO" type="#//@packages.0/B/foo/@body/@statement.0/@target/@typeref/@containedType.0">
-                <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.1/io/StdIO"/>
+    <ownedTypeDefinition
+        xsi:type="org_kermeta_language_structure:ClassDefinition"
+        name="B"
+        superType="//@packages.0/B/@containedType.0">
+      <containedType
+          xsi:type="org_kermeta_language_structure:Class"
+          typeDefinition="//@packages.0/A"/>
+      <ownedOperation
+          name="foo"
+          type="//@packages.0/B/foo/@containedType.0">
+        <containedType
+            xsi:type="org_kermeta_language_structure:Class"
+            typeDefinition="//@packages.1/standard/Void"/>
+        <body
+            xsi:type="org_kermeta_language_behavior:Block">
+          <statement
+              xsi:type="org_kermeta_language_behavior:CallOperation"
+              staticType="//@packages.1/io/StdIO/writeln/@containedType.0"
+              name="writeln"
+              staticOperation="//@packages.1/io/StdIO/writeln">
+            <parameters
+                xsi:type="org_kermeta_language_behavior:StringLiteral"
+                value="B.foo!"/>
+            <target
+                xsi:type="org_kermeta_language_behavior:CallTypeLiteral"
+                staticType="//@packages.0/B/foo/@body/@statement.0/@target/@typeref/@containedType.0">
+              <typeref
+                  name="StdIO"
+                  type="//@packages.0/B/foo/@body/@statement.0/@target/@typeref/@containedType.0">
+                <containedType
+                    xsi:type="org_kermeta_language_structure:Class"
+                    typeDefinition="//@packages.1/io/StdIO"/>
               </typeref>
             </target>
           </statement>
         </body>
       </ownedOperation>
     </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-        name="C" superType="#//@packages.0/C/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.0/B"/>
-      <ownedOperation name="foo" type="#//@packages.0/C/foo/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.1/standard/Void"/>
-        <body xsi:type="org_kermeta_language_behavior:Block">
-          <statement xsi:type="org_kermeta_language_behavior:CallOperation" staticType="#//@packages.0/C/foo/@containedType.0"
-              name="writeln" staticOperation="#//@packages.1/io/StdIO/writeln">
-            <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="C.foo!"/>
-            <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
-              <typeref name="StdIO" type="#//@packages.0/B/foo/@body/@statement.0/@target/@typeref/@containedType.0">
-                <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.1/io/StdIO"/>
+    <ownedTypeDefinition
+        xsi:type="org_kermeta_language_structure:ClassDefinition"
+        name="C"
+        superType="//@packages.0/C/@containedType.0">
+      <containedType
+          xsi:type="org_kermeta_language_structure:Class"
+          typeDefinition="//@packages.0/B"/>
+      <ownedOperation
+          name="foo"
+          type="//@packages.0/C/foo/@containedType.0">
+        <containedType
+            xsi:type="org_kermeta_language_structure:Class"
+            typeDefinition="//@packages.1/standard/Void"/>
+        <body
+            xsi:type="org_kermeta_language_behavior:Block">
+          <statement
+              xsi:type="org_kermeta_language_behavior:CallOperation"
+              staticType="//@packages.0/C/foo/@containedType.0"
+              name="writeln"
+              staticOperation="//@packages.1/io/StdIO/writeln">
+            <parameters
+                xsi:type="org_kermeta_language_behavior:StringLiteral"
+                value="C.foo!"/>
+            <target
+                xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
+              <typeref
+                  name="StdIO"
+                  type="//@packages.0/B/foo/@body/@statement.0/@target/@typeref/@containedType.0">
+                <containedType
+                    xsi:type="org_kermeta_language_structure:Class"
+                    typeDefinition="//@packages.1/io/StdIO"/>
               </typeref>
             </target>
           </statement>
         </body>
       </ownedOperation>
     </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-        name="D" superType="#//@packages.0/D/@containedType.0">
-      <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.0/C"/>
-      <ownedOperation name="foo" type="#//@packages.0/D/foo/@containedType.0">
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.1/standard/Void"/>
-        <body xsi:type="org_kermeta_language_behavior:Block">
-          <statement xsi:type="org_kermeta_language_behavior:CallSuperOperation" staticType="#//@packages.0/Main/main/@body/@statement.1/@initialization/@containedType.0"
-              name="super" staticOperation="#//@packages.0/D/foo" superType="#//@packages.0/D/@containedType.0"/>
-          <statement xsi:type="org_kermeta_language_behavior:CallOperation" staticType="#//@packages.0/D/foo/@containedType.0"
-              name="writeln" staticOperation="#//@packages.1/io/StdIO/writeln">
-            <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="D.foo!"/>
-            <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
-              <typeref name="StdIO" type="#//@packages.0/B/foo/@body/@statement.0/@target/@typeref/@containedType.0">
-                <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.1/io/StdIO"/>
+    <ownedTypeDefinition
+        xsi:type="org_kermeta_language_structure:ClassDefinition"
+        name="D"
+        superType="//@packages.0/D/@containedType.0">
+      <containedType
+          xsi:type="org_kermeta_language_structure:Class"
+          typeDefinition="//@packages.0/C"/>
+      <ownedOperation
+          name="foo"
+          type="//@packages.0/D/foo/@containedType.0">
+        <containedType
+            xsi:type="org_kermeta_language_structure:Class"
+            typeDefinition="//@packages.1/standard/Void"/>
+        <body
+            xsi:type="org_kermeta_language_behavior:Block">
+          <statement
+              xsi:type="org_kermeta_language_behavior:CallSuperOperation"
+              staticType="//@packages.0/Main/main/@body/@statement.1/@initialization/@containedType.0"
+              name="super"
+              staticOperation="//@packages.0/D/foo"
+              superType="//@packages.0/D/@containedType.0"/>
+          <statement
+              xsi:type="org_kermeta_language_behavior:CallOperation"
+              staticType="//@packages.0/D/foo/@containedType.0"
+              name="writeln"
+              staticOperation="//@packages.1/io/StdIO/writeln">
+            <parameters
+                xsi:type="org_kermeta_language_behavior:StringLiteral"
+                value="D.foo!"/>
+            <target
+                xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
+              <typeref
+                  name="StdIO"
+                  type="//@packages.0/B/foo/@body/@statement.0/@target/@typeref/@containedType.0">
+                <containedType
+                    xsi:type="org_kermeta_language_structure:Class"
+                    typeDefinition="//@packages.1/io/StdIO"/>
               </typeref>
             </target>
           </statement>
         </body>
       </ownedOperation>
     </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
+    <ownedTypeDefinition
+        xsi:type="org_kermeta_language_structure:ClassDefinition"
         name="Main">
-      <ownedOperation kTag="#//@packages.0/Main/main/@kOwnedTags.0" name="main" type="#//@packages.0/Main/main/@containedType.0">
-        <kOwnedTags name="main" object="#//@packages.0/Main/main"/>
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.1/standard/Void"/>
-        <body xsi:type="org_kermeta_language_behavior:Block">
-          <statement xsi:type="org_kermeta_language_behavior:CallOperation" staticType="#//@packages.1/io/StdIO/writeln/@containedType.0"
-              name="writeln" staticOperation="#//@packages.1/io/StdIO/writeln">
-            <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="Hello World!"/>
-            <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
-              <typeref name="StdIO" type="#//@packages.0/B/foo/@body/@statement.0/@target/@typeref/@containedType.0">
-                <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.1/io/StdIO"/>
+      <ownedOperation
+          kTag="//@packages.0/Main/main/@kOwnedTags.0"
+          name="main"
+          type="//@packages.0/Main/main/@containedType.0">
+        <kOwnedTags
+            name="main"
+            object="//@packages.0/Main/main"/>
+        <containedType
+            xsi:type="org_kermeta_language_structure:Class"
+            typeDefinition="//@packages.1/standard/Void"/>
+        <body
+            xsi:type="org_kermeta_language_behavior:Block">
+          <statement
+              xsi:type="org_kermeta_language_behavior:CallOperation"
+              staticType="//@packages.1/io/StdIO/writeln/@containedType.0"
+              name="writeln"
+              staticOperation="//@packages.1/io/StdIO/writeln">
+            <parameters
+                xsi:type="org_kermeta_language_behavior:StringLiteral"
+                value="Hello World!"/>
+            <target
+                xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
+              <typeref
+                  name="StdIO"
+                  type="//@packages.0/B/foo/@body/@statement.0/@target/@typeref/@containedType.0">
+                <containedType
+                    xsi:type="org_kermeta_language_structure:Class"
+                    typeDefinition="//@packages.1/io/StdIO"/>
               </typeref>
             </target>
           </statement>
-          <statement xsi:type="org_kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/B/foo/@containedType.0"
+          <statement
+              xsi:type="org_kermeta_language_behavior:VariableDecl"
+              staticType="//@packages.0/B/foo/@containedType.0"
               identifier="d">
-            <initialization xsi:type="org_kermeta_language_behavior:CallOperation"
-                staticType="#//@packages.0/Main/main/@body/@statement.1/@initialization/@containedType.0"
+            <initialization
+                xsi:type="org_kermeta_language_behavior:CallOperation"
+                staticType="//@packages.0/Main/main/@body/@statement.1/@initialization/@containedType.0"
                 name="new">
-              <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.0/D"/>
+              <containedType
+                  xsi:type="org_kermeta_language_structure:Class"
+                  typeDefinition="//@packages.0/D"/>
             </initialization>
-            <type name="D" type="#//@packages.0/Main/main/@body/@statement.1/@initialization/@containedType.0">
-              <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.0/D"/>
+            <type
+                name="D"
+                type="//@packages.0/Main/main/@body/@statement.1/@initialization/@containedType.0">
+              <containedType
+                  xsi:type="org_kermeta_language_structure:Class"
+                  typeDefinition="//@packages.0/D"/>
             </type>
           </statement>
-          <statement xsi:type="org_kermeta_language_behavior:CallOperation" staticType="#//@packages.0/B/foo/@containedType.0"
-              name="foo" staticOperation="#//@packages.0/D/foo">
-            <target xsi:type="org_kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.1/@initialization/@containedType.0"
+          <statement
+              xsi:type="org_kermeta_language_behavior:CallOperation"
+              staticType="//@packages.0/B/foo/@containedType.0"
+              name="foo"
+              staticOperation="//@packages.0/D/foo">
+            <target
+                xsi:type="org_kermeta_language_behavior:CallVariable"
+                staticType="//@packages.0/Main/main/@body/@statement.1/@initialization/@containedType.0"
                 name="d"/>
           </statement>
-          <statement xsi:type="org_kermeta_language_behavior:Conditional">
-            <thenBody xsi:type="org_kermeta_language_behavior:Block">
-              <statement xsi:type="org_kermeta_language_behavior:CallOperation" staticType="#//@packages.1/io/StdIO/writeln/@containedType.0"
-                  name="writeln" staticOperation="#//@packages.1/io/StdIO/writeln">
-                <parameters xsi:type="org_kermeta_language_behavior:StringLiteral"
+          <statement
+              xsi:type="org_kermeta_language_behavior:Conditional">
+            <thenBody
+                xsi:type="org_kermeta_language_behavior:Block">
+              <statement
+                  xsi:type="org_kermeta_language_behavior:CallOperation"
+                  staticType="//@packages.1/io/StdIO/writeln/@containedType.0"
+                  name="writeln"
+                  staticOperation="//@packages.1/io/StdIO/writeln">
+                <parameters
+                    xsi:type="org_kermeta_language_behavior:StringLiteral"
                     value="ifthen!"/>
-                <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
-                  <typeref name="StdIO" type="#//@packages.0/Main/main/@body/@statement.3/@thenBody/@statement.0/@target/@typeref/@containedType.0">
-                    <containedType xsi:type="org_kermeta_language_structure:Class"
-                        typeDefinition="#//@packages.1/io/StdIO"/>
+                <target
+                    xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
+                  <typeref
+                      name="StdIO"
+                      type="//@packages.0/Main/main/@body/@statement.3/@thenBody/@statement.0/@target/@typeref/@containedType.0">
+                    <containedType
+                        xsi:type="org_kermeta_language_structure:Class"
+                        typeDefinition="//@packages.1/io/StdIO"/>
                   </typeref>
                 </target>
               </statement>
             </thenBody>
-            <elseBody xsi:type="org_kermeta_language_behavior:Block">
-              <statement xsi:type="org_kermeta_language_behavior:CallOperation" staticType="#//@packages.1/io/StdIO/writeln/@containedType.0"
-                  name="writeln" staticOperation="#//@packages.1/io/StdIO/writeln">
-                <parameters xsi:type="org_kermeta_language_behavior:StringLiteral"
+            <elseBody
+                xsi:type="org_kermeta_language_behavior:Block">
+              <statement
+                  xsi:type="org_kermeta_language_behavior:CallOperation"
+                  staticType="//@packages.1/io/StdIO/writeln/@containedType.0"
+                  name="writeln"
+                  staticOperation="//@packages.1/io/StdIO/writeln">
+                <parameters
+                    xsi:type="org_kermeta_language_behavior:StringLiteral"
                     value="ifElse!"/>
-                <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
-                  <typeref name="StdIO" type="#//@packages.0/Main/main/@body/@statement.3/@elseBody/@statement.0/@target/@typeref/@containedType.0">
-                    <containedType xsi:type="org_kermeta_language_structure:Class"
-                        typeDefinition="#//@packages.1/io/StdIO"/>
+                <target
+                    xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
+                  <typeref
+                      name="StdIO"
+                      type="//@packages.0/Main/main/@body/@statement.3/@elseBody/@statement.0/@target/@typeref/@containedType.0">
+                    <containedType
+                        xsi:type="org_kermeta_language_structure:Class"
+                        typeDefinition="//@packages.1/io/StdIO"/>
                   </typeref>
                 </target>
               </statement>
             </elseBody>
-            <condition xsi:type="org_kermeta_language_behavior:BooleanLiteral" value="true"/>
+            <condition
+                xsi:type="org_kermeta_language_behavior:BooleanLiteral"
+                value="false"/>
+          </statement>
+          <statement
+              xsi:type="org_kermeta_language_behavior:Loop">
+            <initialization
+                xsi:type="org_kermeta_language_behavior:VariableDecl"
+                identifier="i">
+              <initialization
+                  xsi:type="org_kermeta_language_behavior:IntegerLiteral"
+                  staticType="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0">
+                <containedType
+                    xsi:type="org_kermeta_language_structure:Class"
+                    typeDefinition="//@packages.1/standard/Integer"/>
+              </initialization>
+              <type
+                  name="Integer"
+                  type="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0"/>
+            </initialization>
+            <body
+                xsi:type="org_kermeta_language_behavior:Block">
+              <statement
+                  xsi:type="org_kermeta_language_behavior:CallOperation"
+                  staticType="//@packages.0/B/foo/@containedType.0"
+                  name="writeln"
+                  staticOperation="//@packages.1/io/StdIO/writeln">
+                <parameters
+                    xsi:type="org_kermeta_language_behavior:CallOperation"
+                    staticType="//@packages.1/io/StdIO/writeln/@ownedParameter.0/@containedType.0"
+                    name="toString"
+                    staticOperation="//@packages.1/standard/Integer/toString">
+                  <target
+                      xsi:type="org_kermeta_language_behavior:CallVariable"
+                      staticType="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0"
+                      name="i"/>
+                </parameters>
+                <target
+                    xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
+                  <typeref
+                      name="StdIO"
+                      type="//@packages.0/Main/main/@body/@statement.4/@body/@statement.0/@target/@typeref/@containedType.0">
+                    <containedType
+                        xsi:type="org_kermeta_language_structure:Class"
+                        typeDefinition="//@packages.1/io/StdIO"/>
+                  </typeref>
+                </target>
+              </statement>
+              <statement
+                  xsi:type="org_kermeta_language_behavior:Assignment">
+                <target
+                    xsi:type="org_kermeta_language_behavior:CallVariable"
+                    staticType="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0"
+                    name="i"/>
+                <value
+                    xsi:type="org_kermeta_language_behavior:CallOperation"
+                    name="plus"
+                    staticOperation="//@packages.1/standard/Integer/plus">
+                  <parameters
+                      xsi:type="org_kermeta_language_behavior:IntegerLiteral"
+                      staticType="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0"
+                      value="1"/>
+                  <target
+                      xsi:type="org_kermeta_language_behavior:CallVariable"
+                      staticType="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0"
+                      name="i"/>
+                </value>
+              </statement>
+            </body>
+            <stopCondition
+                xsi:type="org_kermeta_language_behavior:CallOperation"
+                staticType="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0"
+                name="equals"
+                staticOperation="//@packages.1/standard/Integer/equals">
+              <containedType
+                  xsi:type="org_kermeta_language_structure:Class"
+                  typeDefinition="//@packages.1/standard/Boolean"/>
+              <parameters
+                  xsi:type="org_kermeta_language_behavior:IntegerLiteral"
+                  staticType="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0"
+                  value="10"/>
+              <target
+                  xsi:type="org_kermeta_language_behavior:CallVariable"
+                  staticType="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0"
+                  name="i"/>
+            </stopCondition>
           </statement>
         </body>
       </ownedOperation>
     </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
-        kTag="#//@packages.0/MustNotBeGenerated/@kOwnedTags.0" name="MustNotBeGenerated">
-      <kOwnedTags name="CompilerIgnore" object="#//@packages.0/MustNotBeGenerated"/>
+    <ownedTypeDefinition
+        xsi:type="org_kermeta_language_structure:ClassDefinition"
+        kTag="//@packages.0/MustNotBeGenerated/@kOwnedTags.0"
+        name="MustNotBeGenerated">
+      <kOwnedTags
+          name="CompilerIgnore"
+          object="//@packages.0/MustNotBeGenerated"/>
     </ownedTypeDefinition>
   </packages>
-  <packages name="kermeta">
-    <nestedPackage name="io">
-      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
+  <packages
+      name="kermeta">
+    <nestedPackage
+        name="io">
+      <ownedTypeDefinition
+          xsi:type="org_kermeta_language_structure:ClassDefinition"
           name="StdIO">
-        <kOwnedTags name="CompilerIgnore"/>
-        <ownedOperation name="writeln" type="#//@packages.1/io/StdIO/writeln/@containedType.0">
-          <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.1/standard/Void"/>
-          <ownedParameter name="object" type="#//@packages.1/io/StdIO/writeln/@ownedParameter.0/@containedType.0">
-            <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="#//@packages.1/standard/String"/>
+        <kOwnedTags
+            name="CompilerIgnore"/>
+        <ownedOperation
+            name="writeln"
+            type="//@packages.1/io/StdIO/writeln/@containedType.0">
+          <containedType
+              xsi:type="org_kermeta_language_structure:Class"
+              typeDefinition="//@packages.1/standard/Void"/>
+          <ownedParameter
+              name="object"
+              type="//@packages.1/io/StdIO/writeln/@ownedParameter.0/@containedType.0">
+            <containedType
+                xsi:type="org_kermeta_language_structure:Class"
+                typeDefinition="//@packages.1/standard/String"/>
           </ownedParameter>
-          <body xsi:type="org_kermeta_language_behavior:Block"/>
+          <body
+              xsi:type="org_kermeta_language_behavior:Block"/>
         </ownedOperation>
       </ownedTypeDefinition>
     </nestedPackage>
-    <nestedPackage name="standard">
-      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
+    <nestedPackage
+        name="standard">
+      <ownedTypeDefinition
+          xsi:type="org_kermeta_language_structure:ClassDefinition"
           name="String">
-        <kOwnedTags name="CompilerIgnore"/>
+        <kOwnedTags
+            name="CompilerIgnore"/>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition"
+      <ownedTypeDefinition
+          xsi:type="org_kermeta_language_structure:ClassDefinition"
           name="Void">
-        <kOwnedTags name="CompilerIgnore"/>
+        <kOwnedTags
+            name="CompilerIgnore"/>
+      </ownedTypeDefinition>
+      <ownedTypeDefinition
+          xsi:type="org_kermeta_language_structure:ClassDefinition"
+          name="Integer">
+        <kOwnedTags
+            name="CompilerIgnore"/>
+        <ownedOperation
+            name="toString"
+            type="//@packages.1/io/StdIO/writeln/@ownedParameter.0/@containedType.0"/>
+        <ownedOperation
+            name="plus"
+            type="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0">
+          <ownedParameter
+              name="v"
+              type="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0"/>
+        </ownedOperation>
+        <ownedOperation
+            name="equals"
+            type="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0">
+          <ownedParameter
+              name="obj"
+              type="//@packages.1/standard/Integer/equals/@ownedParameter.0/@containedType.0">
+            <containedType
+                xsi:type="org_kermeta_language_structure:Class"
+                typeDefinition="//@packages.1/standard/Object"/>
+          </ownedParameter>
+        </ownedOperation>
+      </ownedTypeDefinition>
+      <ownedTypeDefinition
+          xsi:type="org_kermeta_language_structure:ClassDefinition"
+          name="Object">
+        <kOwnedTags
+            name="CompilerIgnore"/>
+      </ownedTypeDefinition>
+      <ownedTypeDefinition
+          xsi:type="org_kermeta_language_structure:ClassDefinition"
+          name="Boolean">
+        <kOwnedTags
+            name="CompilerIgnore"/>
       </ownedTypeDefinition>
     </nestedPackage>
   </packages>

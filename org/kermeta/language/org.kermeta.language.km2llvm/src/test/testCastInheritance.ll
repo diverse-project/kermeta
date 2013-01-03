@@ -33,9 +33,7 @@ declare void @free(i8*) nounwind
 
 define %struct.kermeta_standard__Object* @kermeta_standard__String___container(i8* %self) nounwind uwtable {
   %1 = alloca i8*, align 8
-  %i = alloca i32, align 4
   store i8* %self, i8** %1, align 8
-  store i32 2, i32* %i, align 4
   ret %struct.kermeta_standard__Object* null
 }
 
@@ -312,21 +310,21 @@ define internal %"pkgFoo__B"* @"create_pkgFoo__B"(){
 %r = alloca %"pkgFoo__B"
 %"0" = call %"pkgFoo__A"* @"create_pkgFoo__A"()
 %"00" = getelementptr %"pkgFoo__B"* %r,i32 0,i32 0
-store %"pkgFoo__A"* %"0",%"pkgFoo__A"** %"00"
+store %"pkgFoo__A"* %"0", %"pkgFoo__A"** %"00"
 ret %"pkgFoo__B"* %r
 }
 define internal %"pkgFoo__C"* @"create_pkgFoo__C"(){
 %r = alloca %"pkgFoo__C"
 %"0" = call %"pkgFoo__B"* @"create_pkgFoo__B"()
 %"00" = getelementptr %"pkgFoo__C"* %r,i32 0,i32 0
-store %"pkgFoo__B"* %"0",%"pkgFoo__B"** %"00"
+store %"pkgFoo__B"* %"0", %"pkgFoo__B"** %"00"
 ret %"pkgFoo__C"* %r
 }
 define internal %"pkgFoo__D"* @"create_pkgFoo__D"(){
 %r = alloca %"pkgFoo__D"
 %"0" = call %"pkgFoo__C"* @"create_pkgFoo__C"()
 %"00" = getelementptr %"pkgFoo__D"* %r,i32 0,i32 0
-store %"pkgFoo__C"* %"0",%"pkgFoo__C"** %"00"
+store %"pkgFoo__C"* %"0", %"pkgFoo__C"** %"00"
 ret %"pkgFoo__D"* %r
 }
 define internal %"pkgFoo__Main"* @"create_pkgFoo__Main"(){
@@ -397,41 +395,60 @@ ret %"pkgFoo__A"* %"v2"
 }
 define internal void @"pkgFoo__B___foo1"(%"pkgFoo__B"* %"self"){
 %"1" = getelementptr [7 x i8]* @"s0",i32 0,i32 0
-call void @kermeta_io__StdIO___writeln(i8* %"1", %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
+call void @kermeta_io__StdIO___writeln(i8* %"1", %struct.kermeta_io__StdIO %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
 ret void
 }
 define internal void @"pkgFoo__C___foo2"(%"pkgFoo__C"* %"self"){
 %"1" = getelementptr [7 x i8]* @"s1",i32 0,i32 0
-call void @kermeta_io__StdIO___writeln(i8* %"1", %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
+call void @kermeta_io__StdIO___writeln(i8* %"1", %struct.kermeta_io__StdIO %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
 ret void
 }
 define internal void @"pkgFoo__D___foo3"(%"pkgFoo__D"* %"self"){
 %"1" = call %"pkgFoo__C"* @cast_pkgFoo__D_pkgFoo__C(%"pkgFoo__D"* %"self")
 call void @"pkgFoo__C___foo2"(%"pkgFoo__C"* %"1")
 %"2" = getelementptr [7 x i8]* @"s2",i32 0,i32 0
-call void @kermeta_io__StdIO___writeln(i8* %"2", %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
+call void @kermeta_io__StdIO___writeln(i8* %"2", %struct.kermeta_io__StdIO %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
 ret void
 }
 define i32 @main(){
 %1 = call %"pkgFoo__Main"* @"create_pkgFoo__Main"()
-call void @"pkgFoo__Main___main4"(%"pkgFoo__Main"* %1)
+call void @"pkgFoo__Main___main4"(%"pkgFoo__Main"*  %1)
 ret i32 0
 }
 define internal void @"pkgFoo__Main___main4"(%"pkgFoo__Main"* %"self"){
 %"1" = getelementptr [13 x i8]* @"s3",i32 0,i32 0
-call void @kermeta_io__StdIO___writeln(i8* %"1", %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
-%"d" = call %"pkgFoo__D"* @"create_pkgFoo__D"()
-call void @"pkgFoo__D___foo3"(%"pkgFoo__D"* %"d")
-%"2" = icmp eq i1 true, true
-br i1 %"2", label %llvmlabel3,label %llvmlabel5
-llvmlabel3:
-%"6" = getelementptr [8 x i8]* @"s4",i32 0,i32 0
-call void @kermeta_io__StdIO___writeln(i8* %"6", %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
-br label %llvmlabel4
-llvmlabel5:
-%"7" = getelementptr [8 x i8]* @"s5",i32 0,i32 0
-call void @kermeta_io__StdIO___writeln(i8* %"7", %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
-br label %llvmlabel4
+call void @kermeta_io__StdIO___writeln(i8* %"1", %struct.kermeta_io__StdIO %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
+%"d" = alloca %"pkgFoo__D"*
+store %"pkgFoo__D"* call %"pkgFoo__D"* @"create_pkgFoo__D"(), %"pkgFoo__D"** %"d"
+%"2" = load %"pkgFoo__D"** %"d"
+call void @"pkgFoo__D___foo3"(%"pkgFoo__D"* %"2")
+%"3" = icmp eq i1 false, true
+br i1 %"3", label %llvmlabel4,label %llvmlabel6
 llvmlabel4:
+%"7" = getelementptr [8 x i8]* @"s4",i32 0,i32 0
+call void @kermeta_io__StdIO___writeln(i8* %"7", %struct.kermeta_io__StdIO %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
+br label %llvmlabel5
+llvmlabel6:
+%"8" = getelementptr [8 x i8]* @"s5",i32 0,i32 0
+call void @kermeta_io__StdIO___writeln(i8* %"8", %struct.kermeta_io__StdIO %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
+br label %llvmlabel5
+llvmlabel5:
+%"i" = alloca i32
+store i32 , i32* %"i"
+br label %llvmlabel9
+llvmlabel9:
+%"12" = load i32* %"i"
+%"13" = call i1 @kermeta_standard__Integer___equals(%"kermeta_standard__Object"* 10, i32 %"12")
+%"13"
+llvmlabel10:
+%"14" = load i32* %"i"
+%"15" = call i8* @kermeta_standard__Integer___toString(i32 %"14")
+%"15"
+call void @kermeta_io__StdIO___writeln(i8* %"14", %struct.kermeta_io__StdIO %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
+%"16" = load i32* %"i"
+%"17" = add i32 1, %"16"
+store i32 %"17", i32* %"i"
+br label %llvmlabel10
+llvmlabel11:
 ret void
 }

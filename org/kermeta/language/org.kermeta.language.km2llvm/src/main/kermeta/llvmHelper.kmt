@@ -13,6 +13,10 @@ using kermeta::utils
 using kermeta::standard
 
 class LLVMHelper {
+	operation add(type:String, op1:String, op2:String) : String is do
+		result := "add " + type + " " + op1 + ", " + op2
+	end
+
 	operation label(name:String):String is do result := name+":" end
 
 	operation br_uncond(label:String):String is do result := "br label "+label end
@@ -37,7 +41,7 @@ class LLVMHelper {
 		result := getelementptr("["+(str.size+1).toString+" x i8]*", name, i32, 0, i32, 0, true)
 	end
 
-	operation constStruct(type:String, varName:String, attrs:Sequence<String>) : String is do
+	operation constStruct(type:String, varName:String, attrs:Sequence<LLVMVar>) : String is do
 		var buf : StringBuffer init StringBuffer.new
 		var size : Integer init attrs.size-1
 		buf.append(varName).append(" = constant ").append(type).append("{")
@@ -49,7 +53,7 @@ class LLVMHelper {
 	operation load(type:String, varName:String) : String is do result := "load " + type + " " + varName end
 
 	operation store(typeNew:String, varNew:String, varContainer:String) : String is do
-		result := "store " + typeNew + " " + varNew + "," +  pointer(typeNew) + " " + varContainer
+		result := "store " + typeNew + " " + varNew + ", " +  pointer(typeNew) + " " + varContainer
 	end
 
 	operation i1() : String is do result := "i1" end
@@ -74,7 +78,7 @@ class LLVMHelper {
 		result := "getelementptr" + sep1 + typeVal + " " + val + "," + type1 + " " + pos1.toString + "," + type2 + " " + pos2.toString+sep2
 	end
 
-	operation call(name:String, return:String, params:Sequence<String>) : String is do
+	operation call(name:String, return:String, params:Sequence<LLVMVar>) : String is do
 		var buf : StringBuffer init StringBuffer.new
 		buf.append("call ").append(return).append(" ").append(name).append("(")
 		if(not params.isVoid) then
@@ -95,7 +99,7 @@ class LLVMHelper {
 	
 	operation assign(left:String, right:String):String is do result := left+" = "+right end
 	
-	operation type(varName:String, attributes : Sequence<String>) : String is do
+	operation type(varName:String, attributes : Sequence<LLVMVar>) : String is do
 		var buf : StringBuffer init StringBuffer.new
 		var size : Integer init attributes.size-1
 		buf.append(varName).append(" = type {")
@@ -105,7 +109,7 @@ class LLVMHelper {
 	end
 	
 	
-	operation define(linkage:LinkageType, return:String, name:String, params:Sequence<String>, fctAttr:Sequence<FunctionAttr>) : String is do
+	operation define(linkage:LinkageType, return:String, name:String, params:Sequence<LLVMVar>, fctAttr:Sequence<FunctionAttr>) : String is do
 		var buf : StringBuffer init StringBuffer.new
 		buf.append("define ")
 
@@ -123,16 +127,16 @@ class LLVMHelper {
 	end
 	
 	
-	operation flatListString(buf:StringBuffer, list:OrderedCollection<String>, sep:String) is do
+	operation flatListString(buf:StringBuffer, list:OrderedCollection<LLVMVar>, sep:String) is do
 		if(not list.isVoid) then
 			var size : Integer init list.size-1
 			from var i : Integer init 0
 			until i>=size
 			loop
-				buf.append(list.elementAt(i)).append(sep)
+				buf.append(list.elementAt(i).typedName).append(sep)
 				i := i + 1
 			end
-			if(list.size>0) then buf.append(list.elementAt(list.size-1)) end
+			if(list.size>0) then buf.append(list.elementAt(list.size-1).typedName) end
 		end
 	end
 	
@@ -155,6 +159,25 @@ class LLVMHelper {
 		result := "\"" + name + "\""
 	end
 }
+
+
+class LLVMVar {
+	attribute name:String
+	attribute type:String
+	
+	operation initialise(llvmType:String, llvmName:String) : LLVMVar is do
+		result := self
+		if(llvmType.isVoid) then type := "" else type := llvmType end
+		if(llvmName.isVoid) then name := "" else name := llvmName end
+	end
+	
+	operation typedName() : String is do 
+		if type.size==0 then result := name
+		else if name.size==0 then result := type
+		else result := type + " " + name end end
+	end
+}
+
 
 
 enumeration IcmpCondition {

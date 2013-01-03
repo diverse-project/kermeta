@@ -9,6 +9,8 @@ package org::kermeta::language::km2llvm;
 
 require kermeta
 require "llvmHelper.kmt"
+require "./km2llvm_aspectGenerator.kmt"
+require "./behaviour/km2llvm_stdlib_calls.kmt"
 
 using kermeta::utils
 using kermeta::standard
@@ -39,15 +41,18 @@ class Context{
 	// The parameters of each call operations
 	// These parameters are stored into a variable before the call.
 	// The call uses these variables contained into this list.
-	attribute currentOpCallParams : Sequence<String>
+	attribute currentOpCallParams : Sequence<LLVMVar>
 	// a counter for generating variables in operations.
 	attribute currentVarCpt : Integer
 	// The real names of the std library types.
 	attribute stdLibName : Hashtable<String, String>
+	// The commands to generate simple calls for primitive types
+	attribute stdLibCmd : Hashtable<String, LLVMGenerator>
+
 
 	// To use for generating variables for operations.
-	operation nextOperationVar(ctx:Context) : String is do 
-		result := ctx.llvm.localVar(currentVarCpt.toString)
+	operation nextOperationVar() : String is do 
+		result := llvm.localVar(currentVarCpt.toString)
 		currentVarCpt := currentVarCpt + 1
 	end
 	
@@ -59,7 +64,7 @@ class Context{
 	
 	operation initialise() : Context is do
 		stdLibName :=  Hashtable<String, String>.new
-		currentOpCallParams := Sequence<String>.new
+		currentOpCallParams := Sequence<LLVMVar>.new
 		llvm := LLVMHelper.new
 		strings := StringBuffer.new
 		stringVars :=  Hashtable<String, String>.new
@@ -73,8 +78,13 @@ class Context{
 		result := self
 		
 		stdLibName.put("kermeta_standard__Void", llvm.~void)
-		stdLibName.put("kermeta_standard__String", llvm.i8)
+		stdLibName.put("kermeta_standard__String", llvm.i8+"*")
+		stdLibName.put("kermeta_standard__Boolean", llvm.i1)
+		stdLibName.put("kermeta_standard__Integer", llvm.i32)
 		stdLibName.put("kermeta_io__StdIO", "%struct.kermeta_io__StdIO")
+		
+		stdLibCmd := Hashtable<String, LLVMGenerator>.new
+		stdLibCmd.put("@kermeta_standard__Integer___plus", GenerateIntegerPlusCall.new)
 	end
 	
 	

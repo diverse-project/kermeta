@@ -1,0 +1,5 @@
+Compilation process (from the directory 'test'):
+llc testCastInheritance.ll
+opt testCastInheritance.ll -S -O3 -o opt.ll
+gcc opt.ll -o main
+./main

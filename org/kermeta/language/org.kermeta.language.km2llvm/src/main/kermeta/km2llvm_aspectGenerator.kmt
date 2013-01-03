@@ -10,6 +10,15 @@ package org::kermeta::language::km2llvm;
 require kermeta
 require "km2llvmContext.kmt"
 
+using kermeta::standard
+
 abstract class LLVMGenerator {
-	operation generateLLVM(ctx:Context) is abstract
+	operation generateLLVMNoBuffer(ctx:Context) : String is abstract
+	
+	operation generateLLVM(ctx:Context) is do
+		var str : String init generateLLVMNoBuffer(ctx)
+		if str.size>0 then
+			ctx.operations.append(str).append("\n")
+		end
+	end
 }

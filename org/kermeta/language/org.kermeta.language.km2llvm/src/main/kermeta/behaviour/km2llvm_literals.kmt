@@ -1,0 +1,58 @@
+/* $Id:$ 
+ * Creation : December 23, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+package org::kermeta::language::behavior;
+
+require kermeta
+require "../structure/km2llvm_structure.kmt"
+
+using org::kermeta::language::km2llvm
+using kermeta::standard
+using org::kermeta::language::llvm
+using org::kermeta::language::structure
+
+
+aspect class CallTypeLiteral {
+	method generateLLVMNoBuffer(ctx:Context) : String is do
+		// When an operation is called using a type literal, it means that it is a singleton operation call.
+		result := ctx.llvm.pointer(typeref.type.llvmType(ctx))+" @SINGLETON_"+typeref.type.qualifiedNameLLVM
+	end
+}
+
+
+
+aspect class IntegerLiteral {
+	method generateLLVMNoBuffer(ctx:Context) : String is do
+		ctx.currentOpCallParams.add(LLVMVar.new.initialise(void, ~value.toString))
+		result := ""
+	end
+}
+
+
+aspect class StringLiteral {
+	method generateLLVM(ctx:Context) is do
+		// A string in LLVM is a char*. No String structure.
+		var varStr : String init ctx.nextOperationVar
+		var strName : String init ctx.getStringVarName(~value)
+		var getEltPts : String init ctx.llvm.getelementptr(ctx.llvm.getStringType(~value), strName, ctx.llvm.i32, 0, ctx.llvm.i32, 0, false)
+		
+		// Setting the parameters of the call.
+		ctx.currentOpCallParams.add(LLVMVar.new.initialise(void, varStr))
+		// Creating a String using as parameter the char*.
+		ctx.operations.append(ctx.llvm.assign(varStr, getEltPts)).append("\n")
+	end
+}
+
+aspect class BooleanLiteral {
+	method generateLLVMNoBuffer(ctx:Context) : String is do
+		if(~value) then result := ctx.llvm.~true
+		else result := ctx.llvm.~false
+		end
+	end
+}
+
+

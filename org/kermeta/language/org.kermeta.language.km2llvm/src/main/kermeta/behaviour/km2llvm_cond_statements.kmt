@@ -8,7 +8,6 @@
 package org::kermeta::language::behavior;
 
 require kermeta
-require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "../structure/km2llvm_structure.kmt"
 
 using org::kermeta::language::km2llvm
@@ -18,10 +17,30 @@ using org::kermeta::language::llvm
 using org::kermeta::language::structure
 
 
+aspect class Loop {
+	method generateLLVM(ctx:Context) is do
+		// Loop initialisation
+		initialization.generateLLVM(ctx)
+		var labelCond : String init ctx.nextLabel
+		var labelBlock : String init ctx.nextLabel
+		var labelEndLoop : String init ctx.nextLabel
+		ctx.operations.append(ctx.llvm.br_uncond("%"+labelCond)).append("\n")
+		// Creating the condition block
+		ctx.operations.append(ctx.llvm.label(labelCond)).append("\n")
+		stopCondition.generateLLVM(ctx)
+		// Creating the loop block
+		ctx.operations.append(ctx.llvm.label(labelBlock)).append("\n")
+		body.generateLLVM(ctx)
+		ctx.operations.append(ctx.llvm.br_uncond("%"+labelBlock)).append("\n")
+		ctx.operations.append(ctx.llvm.label(labelEndLoop)).append("\n")
+	end
+}
+
+
 aspect class Conditional {
 	method generateLLVM(ctx:Context) is do
 		var condStr : String init condition.generateLLVMNoBuffer(ctx)
-		var varStr : String init ctx.nextOperationVar(ctx)
+		var varStr : String init ctx.nextOperationVar
 		var labelIf : String init ctx.nextLabel
 		var labelEndIf : String init ctx.nextLabel
 		var secondLabelBr : String

@@ -30,10 +30,10 @@ aspect class ClassDefinition {
 		// All the elements of 'types' are the types necessary to incrementally convert self into initType
 		var selfVarPtr : String init ctx.llvm.pointer(ctx.llvm.localVar(qualifiedNameLLVM))
 		var initVar : String init ctx.llvm.localVar("self")
-		var params : Sequence<String> init Sequence<String>.new
+		var params : Sequence<LLVMVar> init Sequence<LLVMVar>.new
 		var fctAttrs : Sequence<FunctionAttr> init Sequence<FunctionAttr>.new
 
-		params.add(ctx.llvm.pointer(ctx.llvm.localVar(initType.qualifiedNameLLVM))+" "+initVar)
+		params.add(LLVMVar.new.initialise(ctx.llvm.pointer(ctx.llvm.localVar(initType.qualifiedNameLLVM)), initVar))
 		fctAttrs.add(FunctionAttr.~readonly)
 		// e.g. define internal %"A"* @"cast_C_A"(%"C"* %"self") readonly
 		ctx.casts.append(ctx.llvm.define(LinkageType.internal, selfVarPtr, 
@@ -49,7 +49,7 @@ aspect class ClassDefinition {
 		types.each{t|
 			currVar := ctx.llvm.localVar("v"+i.toString)
 			params.clear
-			params.add(ctx.llvm.pointer(ctx.llvm.localVar(prevType.qualifiedNameLLVM))+" "+prevVar)
+			params.add(LLVMVar.new.initialise(ctx.llvm.pointer(ctx.llvm.localVar(prevType.qualifiedNameLLVM)), prevVar))
 			//e.g. %"v0" = call %"B"* @"cast_C_B"(%"C"* %"self")
 			ctx.casts.append(ctx.llvm.assign(currVar, 
 				ctx.llvm.call(ctx.llvm.globalVar("cast_"+prevType.qualifiedNameLLVM+"_"+t.qualifiedNameLLVM), 
@@ -72,7 +72,7 @@ aspect class ClassDefinition {
 	
 	
 	operation generateLLVMDirectCast(ctx:Context) is do
-		var params : Sequence<String> init Sequence<String>.new
+		var params : Sequence<LLVMVar> init Sequence<LLVMVar>.new
 		var typeCD : String init ctx.llvm.pointer(ctx.llvm.localVar(qualifiedNameLLVM))
 		var selfVar : String init ctx.llvm.localVar("self")
 		var v0 : String init ctx.llvm.localVar("0")
@@ -81,7 +81,7 @@ aspect class ClassDefinition {
 		var alreadyGen:Hashtable<String,String> init Hashtable<String,String>.new
 		var i : Integer init 0
 		var types : Sequence<ClassDefinition> init Sequence<ClassDefinition>.new
-		params.add(typeCD + " " + selfVar)
+		params.add(LLVMVar.new.initialise(typeCD, selfVar))
 		fctAttrs.add(FunctionAttr.~readonly)
 		fctAttrs.add(FunctionAttr.inlinehint)
 		
@@ -109,7 +109,7 @@ aspect class ClassDefinition {
 	
 	
 	// A private helper function. See generateLLVMDirectCast
-	operation createCastFunction(ctx:Context, td:TypeDefinition, v0:String, v1:String, params:Sequence<String>, fctAttrs:Sequence<FunctionAttr>, typeCD:String, selfVar:String, i:Integer):String is do
+	operation createCastFunction(ctx:Context, td:TypeDefinition, v0:String, v1:String, params:Sequence<LLVMVar>, fctAttrs:Sequence<FunctionAttr>, typeCD:String, selfVar:String, i:Integer):String is do
 		var buf : StringBuffer init StringBuffer.new
 		var tdType : String init ctx.llvm.pointer(ctx.llvm.localVar(td.qualifiedNameLLVM))
 		// Creating the function header
