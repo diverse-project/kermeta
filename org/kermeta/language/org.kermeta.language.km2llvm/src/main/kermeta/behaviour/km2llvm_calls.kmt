@@ -81,7 +81,11 @@ aspect class CallSuperOperation {
 aspect class CallOperation {
 	// Generates the LLVM code corresponding to a call to the operation 'new'.
 	operation _generateLLVM4New(ctx:Context) : String is do
-		result := ctx.llvm.call(ctx.llvm.globalVar("create_"+staticType.qualifiedNameLLVM), staticType.llvmType(ctx), void)
+		var varName : String init ctx.nextOperationVar
+		// The call of the constructor is stored into a temp variable.
+		ctx.operations.append(ctx.llvm.assign(varName, ctx.llvm.call(ctx.llvm.globalVar("create_"+staticType.qualifiedNameLLVM), staticType.llvmType(ctx), void))).append("\n")
+		// The temp variable is returned.
+		result := varName
 	end
 
 
