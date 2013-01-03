@@ -1,0 +1,5 @@
+resource library_standard ="platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.99-SNAPSHOT"
+importProject library_standard
+project Conditional_condition_must_be_boolean {
+	import "${project.baseUri}/002_ConditionalTest01.kmt"
+}
