@@ -27,7 +27,7 @@ aspect class Loop {
 		ctx.operations.append(ctx.llvm.br_uncond("%"+labelCond)).append("\n")
 		// Creating the condition block
 		ctx.operations.append(ctx.llvm.label(labelCond)).append("\n")
-		ctx.operations.append(ctx.llvm.br(stopCondition.generateLLVMNoBuffer(ctx), "%"+labelBlock, "%"+labelEndLoop)).append("\n")
+		ctx.operations.append(ctx.llvm.br(stopCondition.generateLLVMNoBuffer(ctx), "%"+labelEndLoop, "%"+labelBlock)).append("\n")
 		// Creating the loop block
 		ctx.operations.append(ctx.llvm.label(labelBlock)).append("\n")
 		body.generateLLVM(ctx)

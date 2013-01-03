@@ -497,7 +497,7 @@ br label %llvmlabel10
 llvmlabel10:
 %"13" = load i32* %"i"
 %"14" = icmp eq i32 %"13", 10
-br i1 %"14", label %llvmlabel11,label %llvmlabel12
+br i1 %"14", label %llvmlabel12,label %llvmlabel11
 llvmlabel11:
 %"15" = load i32* %"i"
 %"16" = call i8* @kermeta_standard__Integer___toString(i32 %"15")
