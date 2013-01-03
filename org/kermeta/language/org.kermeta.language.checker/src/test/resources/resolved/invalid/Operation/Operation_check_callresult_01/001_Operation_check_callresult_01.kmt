@@ -2,7 +2,7 @@
 
 package test;
 
-using kermeta::standard
+using kermeta::standard::*
 
 class A {}
 
