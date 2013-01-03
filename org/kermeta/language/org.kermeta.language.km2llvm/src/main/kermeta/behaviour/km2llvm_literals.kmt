@@ -19,7 +19,7 @@ using org::kermeta::language::structure
 aspect class CallTypeLiteral {
 	method generateLLVMNoBuffer(ctx:Context) : String is do
 		// When an operation is called using a type literal, it means that it is a singleton operation call.
-		result := ctx.llvm.pointer(typeref.type.llvmType(ctx))+" @SINGLETON_"+typeref.type.qualifiedNameLLVM
+		result := "@SINGLETON_"+typeref.type.qualifiedNameLLVM
 	end
 }
 

@@ -76,7 +76,7 @@ class Context{
 		stdLibName.put("kermeta_standard__String", llvm.i8+"*")
 		stdLibName.put("kermeta_standard__Boolean", llvm.i1)
 		stdLibName.put("kermeta_standard__Integer", llvm.i32)
-		stdLibName.put("kermeta_io__StdIO", "%struct.kermeta_io__StdIO")
+		stdLibName.put("kermeta_io__StdIO", "%struct.kermeta_io__StdIO*")
 		
 		stdLibCmd := Hashtable<String, CallGeneratorCmd>.new
 		stdLibCmd.put("@kermeta_standard__Integer___plus", GenerateIntegerPlusCall.new)
