@@ -27,21 +27,20 @@ aspect class CallTypeLiteral {
 
 aspect class IntegerLiteral {
 	method generateLLVMNoBuffer(ctx:Context) : String is do
-		ctx.currentOpCallParams.add(LLVMVar.new.initialise(void, ~value.toString))
-		result := ""
+		result := ~value.toString
 	end
 }
 
 
 aspect class StringLiteral {
-	method generateLLVM(ctx:Context) is do
+	method generateLLVMNoBuffer(ctx:Context):String is do
 		// A string in LLVM is a char*. No String structure.
 		var varStr : String init ctx.nextOperationVar
 		var strName : String init ctx.getStringVarName(~value)
 		var getEltPts : String init ctx.llvm.getelementptr(ctx.llvm.getStringType(~value), strName, ctx.llvm.i32, 0, ctx.llvm.i32, 0, false)
 		
 		// Setting the parameters of the call.
-		ctx.currentOpCallParams.add(LLVMVar.new.initialise(void, varStr))
+		result := varStr
 		// Creating a String using as parameter the char*.
 		ctx.operations.append(ctx.llvm.assign(varStr, getEltPts)).append("\n")
 	end

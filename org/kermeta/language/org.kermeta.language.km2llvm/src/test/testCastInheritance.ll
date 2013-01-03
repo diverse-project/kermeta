@@ -434,7 +434,7 @@ call void @kermeta_io__StdIO___writeln(i8* %"8", %struct.kermeta_io__StdIO %stru
 br label %llvmlabel5
 llvmlabel5:
 %"i" = alloca i32
-store i32 , i32* %"i"
+store i32 0, i32* %"i"
 br label %llvmlabel9
 llvmlabel9:
 %"12" = load i32* %"i"
@@ -443,8 +443,7 @@ br i1 %"13", label llvmlabel10,label llvmlabel11
 llvmlabel10:
 %"14" = load i32* %"i"
 %"15" = call i8* @kermeta_standard__Integer___toString(i32 %"14")
-%"15"
-call void @kermeta_io__StdIO___writeln(i8* %"14", %struct.kermeta_io__StdIO %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
+call void @kermeta_io__StdIO___writeln(i8* %"15", %struct.kermeta_io__StdIO %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
 %"16" = load i32* %"i"
 %"17" = add i32 %"16", 1
 store i32 %"17", i32* %"i"

@@ -16,23 +16,23 @@ using org::kermeta::language::km2llvm
 using org::kermeta::language::llvm
 
 
-class GenerateIntegerEqualsCall inherits LLVMGenerator {
-	method generateLLVMNoBuffer(ctx:Context) : String is do
-		if ctx.currentOpCallParams.size!=2 then
+class GenerateIntegerEqualsCall inherits CallGeneratorCmd {
+	method generateCall(ctx:Context, params:Sequence<LLVMVar>) : String is do
+		if params.size!=2 then
 			result := "FIXME GenerateIntegerEqualsCall: 2 operands required."
 		else
-			result := ctx.llvm.icmp(IcmpCondition.eq, ctx.llvm.i32, ctx.currentOpCallParams.at(1).name, ctx.currentOpCallParams.at(0).name)
+			result := ctx.llvm.icmp(IcmpCondition.eq, ctx.llvm.i32, params.at(1).name, params.at(0).name)
 		end
 	end
 } 
 
 
-class GenerateIntegerPlusCall inherits LLVMGenerator {
-	method generateLLVMNoBuffer(ctx:Context) : String is do
-		if ctx.currentOpCallParams.size!=2 then
+class GenerateIntegerPlusCall inherits CallGeneratorCmd {
+	method generateCall(ctx:Context, params:Sequence<LLVMVar>) : String is do
+		if params.size!=2 then
 			result := "FIXME GenerateIntegerPlusCall: 2 operands required."
 		else
-			result := ctx.llvm.add(ctx.llvm.i32, ctx.currentOpCallParams.at(1).name, ctx.currentOpCallParams.at(0).name)
+			result := ctx.llvm.add(ctx.llvm.i32, params.at(1).name, params.at(0).name)
 		end
 	end
 } 

@@ -38,16 +38,12 @@ class Context{
 	attribute cptStrings : Integer
 	// Used to have unique ID.
 	attribute id : Integer
-	// The parameters of each call operations
-	// These parameters are stored into a variable before the call.
-	// The call uses these variables contained into this list.
-	attribute currentOpCallParams : Sequence<LLVMVar>
 	// a counter for generating variables in operations.
 	attribute currentVarCpt : Integer
 	// The real names of the std library types.
 	attribute stdLibName : Hashtable<String, String>
 	// The commands to generate simple calls for primitive types
-	attribute stdLibCmd : Hashtable<String, LLVMGenerator>
+	attribute stdLibCmd : Hashtable<String, CallGeneratorCmd>
 
 
 	// To use for generating variables for operations.
@@ -64,7 +60,6 @@ class Context{
 	
 	operation initialise() : Context is do
 		stdLibName :=  Hashtable<String, String>.new
-		currentOpCallParams := Sequence<LLVMVar>.new
 		llvm := LLVMHelper.new
 		strings := StringBuffer.new
 		stringVars :=  Hashtable<String, String>.new
@@ -83,7 +78,7 @@ class Context{
 		stdLibName.put("kermeta_standard__Integer", llvm.i32)
 		stdLibName.put("kermeta_io__StdIO", "%struct.kermeta_io__StdIO")
 		
-		stdLibCmd := Hashtable<String, LLVMGenerator>.new
+		stdLibCmd := Hashtable<String, CallGeneratorCmd>.new
 		stdLibCmd.put("@kermeta_standard__Integer___plus", GenerateIntegerPlusCall.new)
 		stdLibCmd.put("@kermeta_standard__Integer___equals", GenerateIntegerEqualsCall.new)
 	end
@@ -123,3 +118,8 @@ class Context{
 		end
 	end
 }
+
+
+abstract class CallGeneratorCmd {
+	operation generateCall(ctx:Context, params:Sequence<LLVMVar>) : String is abstract
+} 

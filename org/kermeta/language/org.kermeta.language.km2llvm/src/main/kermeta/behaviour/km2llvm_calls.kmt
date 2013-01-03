@@ -55,7 +55,7 @@ aspect class CallVariable {
 		result := varName
 	end
 }
-
+	
 
 
 aspect class CallSuperOperation {
@@ -63,7 +63,6 @@ aspect class CallSuperOperation {
 		// Looking for the super operation.
 		var op : Operation init superType.getOperation(staticOperation)
 		var attrs : Sequence<LLVMVar> init  Sequence<LLVMVar>.new
-		ctx.currentOpCallParams.clear
 		// Getting the variable corresponding to the super type (will be the parameter of the super call).
 		var varStr : String init ctx.nextOperationVar // Declaring a local variable.
 		attrs.add(LLVMVar.new.initialise(staticType.llvmType(ctx), ctx.llvm.localVar("self"))) // The parameters of the call.
@@ -90,33 +89,29 @@ aspect class CallOperation {
 	operation _generateLLVM4StdCall(ctx:Context) : String is do
 		// Each parameter expression is stored into a variable before the call.
 		// The ordered list of these variables are temporary stored into ctx.currentOpCallParams.
-		// FIXME: does not work with multiple call operations: foo(0, bar(1))
-		parameters.each{p| p.generateLLVM(ctx)}
-		
-		var paramsSize : Integer init ctx.currentOpCallParams.size
-		// For each variables (see the previous comment), the type must be defined using the parameters
-		// of the operation.
-		from var i : Integer init 0
-		until i>=paramsSize
-		loop
-			// Adding the type to the parameter.
-			ctx.currentOpCallParams.at(i).type := staticOperation.ownedParameter.at(i).type.llvmType(ctx)
-			i := i + 1
-		end
+		var params : Sequence<LLVMVar> init Sequence<LLVMVar>.new
+		var i : Integer init 0
+		var llvmVar : LLVMVar
 
+		parameters.each{p|
+			llvmVar := LLVMVar.new.initialise(staticOperation.ownedParameter.at(i).type.llvmType(ctx), p.generateLLVMNoBuffer(ctx))
+			params.add(llvmVar)
+			i := i + 1
+		}
+		
 		// The last parameter is self.
 		var clazz : Class init Class.new // Uses a class to get the llvm type name of the class definition owning the operation.
 		clazz.typeDefinition := staticOperation.owningClass
-		ctx.currentOpCallParams.add(LLVMVar.new.initialise(clazz.llvmType(ctx), target.generateLLVMNoBuffer(ctx)))
+		params.add(LLVMVar.new.initialise(clazz.llvmType(ctx), target.generateLLVMNoBuffer(ctx)))
 		clazz.typeDefinition := void
 		
 		// Optimisation: some calls handling simple primitive type operations are shortened to their classical llvm use (e.g. operation plus in class Integer)
-		var cmd : LLVMGenerator init ctx.stdLibCmd.getValue(staticOperation.llvmName(ctx)) // Getting the command from the list.
+		var cmd : CallGeneratorCmd init ctx.stdLibCmd.getValue(staticOperation.llvmName(ctx)) // Getting the command from the list.
 		if(cmd.isVoid) then // If no command
 			// Generating the call.
-			result := ctx.llvm.call(staticOperation.llvmName(ctx), staticOperation.type.llvmType(ctx), ctx.currentOpCallParams)
+			result := ctx.llvm.call(staticOperation.llvmName(ctx), staticOperation.type.llvmType(ctx), params)
 		else // If one command
-			result := cmd.generateLLVMNoBuffer(ctx)
+			result := cmd.generateCall(ctx, params)
 		end
 		
 		// The call is appended to the buffer. If a value is returned, it is stored into a variable which is returned by the operation.
@@ -132,8 +127,6 @@ aspect class CallOperation {
 
 
 	method generateLLVMNoBuffer(ctx:Context) : String is do
-		ctx.currentOpCallParams.clear
-
 		if(name=="new") then
 			result := _generateLLVM4New(ctx)
 		else
