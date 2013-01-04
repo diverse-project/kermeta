@@ -4,7 +4,7 @@ importProject library_standard
 
 project hello_world {
 
-	mainClass "hello_world#helloworld::Helloworld"
+	mainClass "hello_world^helloworld::Helloworld"
 	mainOperation "main"
 	
 	import "${project.baseUri}/src/main/kmt/helloworld/HelloWorld.kmt"

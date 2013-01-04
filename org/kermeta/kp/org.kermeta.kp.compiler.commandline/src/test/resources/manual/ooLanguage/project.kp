@@ -3,7 +3,7 @@ resource kermeta_standard = "platform:/plugin/org.kermeta.language.library.stand
 importProject kermeta_standard
 
 project OOLanguage {
-	mainClass "#pkg::Main"
+	mainClass "^pkg::Main"
 	mainOperation "main"
 	import "${project.baseUri}/main.kmt"
 }

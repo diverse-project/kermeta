@@ -3,7 +3,7 @@ resource kermeta_standard = "platform:/plugin/org.kermeta.language.library.stand
 importProject kermeta_standard
 
 project Test_003_opCall_003 {
-	mainClass "#testOpOpCall::Test_opopcall"
+	mainClass "^testOpOpCall::Test_opopcall"
 	mainOperation "operation1"
 	import "${project.baseUri}/004_testOpOpCall.main.kmt"
 }

@@ -3,7 +3,7 @@ resource kermeta_standard = "platform:/plugin/org.kermeta.language.library.stand
 importProject kermeta_standard
 
 project Test_009_pruning {
-	mainClass "#kermeta.ki.kompren::Test"
+	mainClass "^kermeta.ki.kompren::Test"
 	mainOperation "main"
 	import "${project.baseUri}/metamodelPruner.kmt"
 	import "${project.baseUri}/VisualMetamodelPruner.kmt"

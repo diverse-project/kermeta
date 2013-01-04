@@ -5,7 +5,7 @@ importProject kermeta_standard
 importProject library_utils
 
 project Test_037_lambda {
-	mainClass "#root_package_lambda::LambdaTester"
+	mainClass "^root_package_lambda::LambdaTester"
 	mainOperation "mainTest"
 	import "${project.baseUri}/037_lambda.kmt"
 }

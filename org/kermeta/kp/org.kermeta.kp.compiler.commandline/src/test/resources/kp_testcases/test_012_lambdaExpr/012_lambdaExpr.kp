@@ -3,7 +3,7 @@ resource kermeta_standard = "platform:/plugin/org.kermeta.language.library.stand
 importProject kermeta_standard
 
 project Test_012_lambdaExpr {
-	mainClass "#root_package::Foo"
+	mainClass "^root_package::Foo"
 	mainOperation "bar"
 	import "${project.baseUri}/012_lambdaExpr.kmt" 
 }

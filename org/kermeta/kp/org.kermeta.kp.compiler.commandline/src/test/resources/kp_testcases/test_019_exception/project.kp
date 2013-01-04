@@ -5,7 +5,7 @@ importProject kermeta_standard
 importProject library_utils
 
 project Test_019_exception {
-	mainClass "#testExceptionsPackage::TestExceptions"
+	mainClass "^testExceptionsPackage::TestExceptions"
 	mainOperation "main"
 	import "${project.baseUri}/019_exception.kmt"
 }

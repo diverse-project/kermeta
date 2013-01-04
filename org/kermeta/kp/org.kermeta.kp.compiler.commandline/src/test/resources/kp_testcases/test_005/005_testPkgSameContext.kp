@@ -3,7 +3,7 @@ resource kermeta_standard = "platform:/plugin/org.kermeta.language.library.stand
 importProject kermeta_standard
 
 project Test_005 {
-	mainClass "#pkg::A"
+	mainClass "^pkg::A"
 	mainOperation "main"
 	import "${project.baseUri}/005_testPkgSameContext.kmt"
 }

@@ -4,7 +4,7 @@ resource language_model = "platform:/plugin/org.kermeta.language.model" alternat
 importProject kermeta_core
 
 project Test_003 {
-	mainClass "#helloworld::HelloWorld"
+	mainClass "^helloworld::HelloWorld"
 	mainOperation "main"
 	import "${project.baseUri}/003_mini_framework.kmt"
 	import "${project.baseUri}/003_hello_on_mini_framework.kmt"

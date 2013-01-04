@@ -3,7 +3,7 @@ resource kermeta_standard = "platform:/plugin/org.kermeta.language.library.stand
 importProject kermeta_standard
 
 project Test_004 {
-	mainClass "#helloworld::HelloWorld"
+	mainClass "^helloworld::HelloWorld"
 	mainOperation "main"
 	import "${project.baseUri}/004_HelloWorld.kmt"
 }

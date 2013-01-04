@@ -5,7 +5,7 @@ importProject kermeta_standard
 importProject library_utils
 
 project EcoreOperationOverload {
-	mainClass "#testAssignment::Main"
+	mainClass "^testAssignment::Main"
 	mainOperation "main"
 	import "${project.baseUri}/001_testAssignment.main.kmt"
 }

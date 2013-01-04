@@ -5,7 +5,7 @@ importProject kermeta_standard
 importProject library_utils
 
 project Test_002_Arithm_001 {
-	mainClass "#testArithm::Test_arithm"
+	mainClass "^testArithm::Test_arithm"
 	mainOperation "main"
 	import "${project.baseUri}/002_testArithm.main.kmt"
 }

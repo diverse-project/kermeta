@@ -4,7 +4,7 @@ importProject library_standard
 
 project arabic2roman {
 
-	mainClass "arabic2roman#root_package::Main"
+	mainClass "arabic2roman^root_package::Main"
 	mainOperation "main"
 	
 	import "${project.baseUri}/src/main/kmt/arab2roman.kmt"

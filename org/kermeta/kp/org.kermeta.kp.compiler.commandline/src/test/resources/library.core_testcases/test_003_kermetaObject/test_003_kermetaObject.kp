@@ -5,7 +5,7 @@ importProject kermeta_standard
 importProject library_utils
 
 project Test_003_KermetaObject {
-	mainClass "#mainPackage::MainClass"
+	mainClass "^mainPackage::MainClass"
 	mainOperation "mainOperation"
 	import "${project.baseUri}/src/main/kmt/MainClass.kmt"
 	import "${project.baseUri}/src/main/kmt/Util.kmt"

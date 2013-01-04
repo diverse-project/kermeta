@@ -3,7 +3,7 @@ resource kermeta_standard ="platform:/plugin/org.kermeta.language.library.standa
 importProject kermeta_standard
 
 project MultiInherit {
-	mainClass "#pkg::MultiInheritt"
+	mainClass "^pkg::MultiInheritt"
 	mainOperation "main"
 	import "${project.baseUri}/main.kmt"
 }

@@ -4,7 +4,7 @@ importProject kermeta_standard
 
 project class2rdbms {
 
-	mainClass "class2rdbms#class2RDBMS::Main"
+	mainClass "class2rdbms^class2RDBMS::Main"
 	mainOperation "main"
 	
 	import  "${project.baseUri}/src/main/kmt/Class2RDBMS.kmt"  

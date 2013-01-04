@@ -3,7 +3,7 @@ resource kermeta_standard = "platform:/plugin/org.kermeta.language.library.stand
 importProject kermeta_standard
 
 project Test_021_primitivetypesandlambda {
-	mainClass "#test::MainClass"
+	mainClass "^test::MainClass"
 	mainOperation "mainOperation"
 	import "${project.baseUri}/src/main/kmt/MainClass.kmt"
 	import "${project.baseUri}/model/My.ecore"

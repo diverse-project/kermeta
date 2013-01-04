@@ -3,7 +3,7 @@ resource kermeta_standard = "platform:/plugin/org.kermeta.language.library.stand
 importProject kermeta_standard
 
 project Test_indexedEach {
-	mainClass "#mainPackage::MainClass"
+	mainClass "^mainPackage::MainClass"
 	mainOperation "mainOperation"
 	import "${project.baseUri}/src/main/kmt/MainClass.kmt"
 }

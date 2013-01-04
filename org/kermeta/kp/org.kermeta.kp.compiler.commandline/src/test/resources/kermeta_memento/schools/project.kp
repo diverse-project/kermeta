@@ -3,7 +3,7 @@ resource kermeta_standard ="platform:/plugin/org.kermeta.language.library.standa
 importProject kermeta_standard
 
 project Schools {
-	mainClass "#CollegeMM::Test"
+	mainClass "^CollegeMM::Test"
 	mainOperation "main"
 	import "${project.baseUri}/main.kmt"
 	import "${project.baseUri}/CollegeMM.ecore"

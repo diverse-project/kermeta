@@ -5,7 +5,7 @@ importProject kermeta_standard
 importProject library_utils
 
 project Associations5 {
-	mainClass "#pkg::Test"
+	mainClass "^pkg::Test"
 	mainOperation "main"
 	import "${project.baseUri}/main.kmt"
 }
