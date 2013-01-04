@@ -1,6 +1,6 @@
 package root_package;
 
-using kermeta_standard#kermeta::standard::*
+using kermeta_standard^kermeta::standard::*
 
 class Test {
 	operation main() is do

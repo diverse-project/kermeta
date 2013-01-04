@@ -1,5 +1,5 @@
-using kermeta_standard#kermeta::standard::*
-using kermeta_standard#kermeta::io::StdIO => stdio
+using kermeta_standard^kermeta::standard::*
+using kermeta_standard^kermeta::io::StdIO => stdio
 package root_package{
 
 	class Foo inherits kermeta::kunit::TestCase

@@ -1,7 +1,7 @@
-using kermeta_standard#kermeta::standard::*
-using kermeta_standard#kermeta::io::StdIO => stdio
+using kermeta_standard^kermeta::standard::*
+using kermeta_standard^kermeta::io::StdIO => stdio
 using kermeta_standard#org::kermeta::language::structure::*
-using library_utils#kermeta::kunit::*
+using library_utils^kermeta::kunit::*
 using #testPackage::*
 
 package mainPackage{

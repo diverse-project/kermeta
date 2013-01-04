@@ -1,6 +1,6 @@
-using kermeta_standard#kermeta::standard::*
-using kermeta_standard#kermeta::emfpersistence::*
-using kermeta_standard#kermeta::io::StdIO => stdio
+using kermeta_standard^kermeta::standard::*
+using kermeta_standard^kermeta::emfpersistence::*
+using kermeta_standard^kermeta::io::StdIO => stdio
 
 package mainPackage{
 	class MainClass 

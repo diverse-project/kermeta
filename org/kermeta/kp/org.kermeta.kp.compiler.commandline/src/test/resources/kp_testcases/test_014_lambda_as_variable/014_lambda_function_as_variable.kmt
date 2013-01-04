@@ -10,8 +10,8 @@ package root_package;
 
 
 
-using kermeta_standard#kermeta::standard::*
-using kermeta_standard#kermeta::exceptions::*
+using kermeta_standard^kermeta::standard::*
+using kermeta_standard^kermeta::exceptions::*
 class Main
 {
 

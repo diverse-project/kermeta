@@ -15,8 +15,8 @@
  */
 package kermeta::pruning;
 
-using kermeta_standard#kermeta::standard::*
-using kermeta_standard#kermeta::utils::*
+using kermeta_standard^kermeta::standard::*
+using kermeta_standard^kermeta::utils::*
 using kermeta_standard#org::kermeta::language::structure::*
 
 class RequiredProperty {

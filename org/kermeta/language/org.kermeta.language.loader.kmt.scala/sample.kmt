@@ -1,33 +1,55 @@
-package Math;
 
 
-using kermeta_standard#kermeta::standard::*
-using kermeta_standard#kermeta::io::StdIO => stdio
-using kermeta_standard#kermeta::standard::Boolean => Boolean
-using kermeta_standard#kermeta::standard::Float => Float
-using kermeta_standard#kermeta::standard::String
- 
-using kermeta_standard#kermeta::standard => ks
+using kermeta::standard::*                      // direct access to all definition of Package
+using kermeta::standard                         // retro compatibility supported, same as above   (should raise a deprecation warning)
+												// should be fobidden in the future and replaced by
+using kermeta::standard::Integer												
+
+using kermeta::standard::Integer => MyInteger   // Type declaration renaming
+using kermeta::standard::Integer => Integer     // with renaming for direct access
+using kermeta::standard::{Integer}              // shortcut : same as above
+using kermeta::standard::Integer => standard::Integer     // with renaming for direct access
+using kermeta::{standard::Integer}              // shortcut : same as above
+using kermeta::standard::Integer => ks::Integer // another renaming
 
 
-class Math
-{
-	attribute f : ks::String
+using kermeta::standard::* => ks::*             // global renaming of a package
 
-    operation sin(a : Real) : Real is do
-        result ?= extern org::kermeta::kmLogo::wrapper::Math.sin(a)
-    end
-    operation cos(a : Real) : Real is do
-        result ?= extern org::kermeta::kmLogo::wrapper::Math.cos(a)
-    end
-    operation pi() : Real is do
-        result ?= extern org::kermeta::kmLogo::wrapper::Math.pi(self)
-    end
-   
-    operation toDegrees(a : Real) : Real is do
-        result ?= extern org::kermeta::kmLogo::wrapper::Math.toDegrees(a)
-    end
-    operation toRadians(a : Real) : Real is do
-        result ?= extern org::kermeta::kmLogo::wrapper::Math.toRadians(a)
-    end
+
+// the same but specifying the metamodel
+
+using kermeta_standard^kermeta::standard::*                      // direct access to all definition of Package
+using kermeta_standard^kermeta::standard                         // retro compatibility supported, same as above   (should raise a deprecation warning)
+
+using kermeta_standard^kermeta::standard::Integer => MyInteger   // Type declaration renaming
+using kermeta_standard^kermeta::standard::Integer => Integer     // with renaming for direct access
+using kermeta_standard^kermeta::standard::{Integer}              // shortcut : same as above
+using kermeta_standard^kermeta::standard::Integer => standard::Integer     // with renaming for direct access
+using kermeta_standard^kermeta::{standard::Integer}              // shortcut : same as above
+using kermeta_standard^kermeta::standard::Integer => ks::Integer // another renaming
+
+
+using kermeta_standard^kermeta::standard::* => ks::*             // global renaming of a package
+
+
+// the same but specifying the current metamodel
+
+using ^kermeta::standard::*                      // direct access to all definition of Package
+using ^kermeta::standard                         // retro compatibility supported, same as above   (should raise a deprecation warning)
+
+using ^kermeta::standard::Integer => MyInteger   // Type declaration renaming
+using ^kermeta::standard::Integer => Integer     // with renaming for direct access
+using ^kermeta::standard::{Integer}              // shortcut : same as above
+using ^kermeta::standard::Integer => standard::Integer     // with renaming for direct access
+using ^kermeta::{standard::Integer}              // shortcut : same as above
+using ^kermeta::standard::Integer => ks::Integer // another renaming
+
+
+using ^kermeta::standard::* => ks::*             // global renaming of a package
+
+
+package f{
+	class toto {
+		attribute foo : Integer
+	}
 }

@@ -1,8 +1,8 @@
 package rootPackage;
-using kermeta_standard#kermeta::standard::*
-using kermeta_standard#kermeta::io::StdIO => stdio
-using kermeta_standard#kermeta::exceptions::*
-using library_utils#kermeta::kunit::*
+using kermeta_standard^kermeta::standard::*
+using kermeta_standard^kermeta::io::StdIO => stdio
+using kermeta_standard^kermeta::exceptions::*
+using library_utils^kermeta::kunit::*
 
 class TestException inherits TestCase{
 		

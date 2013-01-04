@@ -17,9 +17,9 @@ trait KQualifiedNameParser extends KAbstractParser {
 
   def packageName : Parser[String] = ident ~ metamodelQualifiedName ^^ { case id ~ q => id+q  }
   
-  def metamodelQualifiedName : Parser[String] = opt("#" ~> ident) ~ packageQualifiedName ^^ { case id ~ q =>
+  def metamodelQualifiedName : Parser[String] = opt("^" ~> ident) ~ packageQualifiedName ^^ { case id ~ q =>
     id match {
-      case Some(ident) => "#"+ident+q
+      case Some(ident) => "^"+ident+q
       case None => q
     }
   }

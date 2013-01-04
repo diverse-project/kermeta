@@ -37,7 +37,7 @@ trait KUsingParser extends KAbstractParser {
           resTuple = (resTuple._1+"::*",resTuple._2+"::*")
           fromMM match {
             case None =>  
-            case Some(mmName)=> resTuple = (mmName+"#"+resTuple._1,resTuple._2)
+            case Some(mmName)=> resTuple = (mmName+"^"+resTuple._1,resTuple._2)
           }
           resTuple
       }
@@ -54,7 +54,7 @@ trait KUsingParser extends KAbstractParser {
           }
           fromMM match {
             case None =>  
-            case Some(mmName)=> resTuple = (mmName+"#"+resTuple._1,resTuple._2)
+            case Some(mmName)=> resTuple = (mmName+"^"+resTuple._1,resTuple._2)
           }
           resTuple
       }
@@ -72,7 +72,7 @@ trait KUsingParser extends KAbstractParser {
           }
           fromMM match {
             case None =>  
-            case Some(mmName)=> resTuple = (mmName+"#"+resTuple._1,resTuple._2)
+            case Some(mmName)=> resTuple = (mmName+"^"+resTuple._1,resTuple._2)
           }
           resTuple
       }
@@ -89,14 +89,14 @@ trait KUsingParser extends KAbstractParser {
           }
           fromMM match {
             case None =>  
-            case Some(mmName)=> resTuple = (mmName+"#"+resTuple._1,resTuple._2)
+            case Some(mmName)=> resTuple = (mmName+"^"+resTuple._1,resTuple._2)
           }
           resTuple
       }
 
   def usingIdent : Parser[String] = "::" ~> ident
   def usingWildcard : Parser[String] = "::" ~> "*"
-  def mmIdent  : Parser[String] = opt(ident) ~ "#" ^^ { case mmName ~ _ =>
+  def mmIdent  : Parser[String] = opt(ident) ~ "^" ^^ { case mmName ~ _ =>
      mmName match {
        case None => ""
        case Some(name) => name

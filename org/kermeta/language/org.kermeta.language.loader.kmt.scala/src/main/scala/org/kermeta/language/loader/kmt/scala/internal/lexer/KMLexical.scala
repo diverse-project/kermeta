@@ -31,7 +31,7 @@ class KMLexical extends Lexical with KTokens {
   override def whitespace: Parser[Any] = rep(whitespaceChar)
 
   val reserved : HashSet[String] = HashSet("abstract", "alias", "and", "aspect", "attribute","bag", "class" , "do", "end", "enum", "enumeration", "else", "extern", "false", "from", "getter", "init", "inherits","if","inv","is","loop","metamodel","method","not", "operation", "or","oset", "package", "post", "pre", "property", "until","then","true", "raise", "readonly", "reference", "result","require", "self", "seq", "set", "setter", "singleton", "subtypeof", "super", "using","value","var", "void","rescue")
-  val delimiters : HashSet[String] = HashSet("#","=",";","::","@","{","}","(",")",":",":=",".",",","|","==","!=", "?=","-","+","!","*","/","<","<=",">",">=","[","]","..","->","=>")
+  val delimiters : HashSet[String] = HashSet("^","#","=",";","::","@","{","}","(",")",":",":=",".",",","|","==","!=", "?=","-","+","!","*","/","<","<=",">",">=","[","]","..","->","=>")
 
 
   def docComment : Parser[KToken] =  docML ~ commentBody ^^ { case _ ~ body =>

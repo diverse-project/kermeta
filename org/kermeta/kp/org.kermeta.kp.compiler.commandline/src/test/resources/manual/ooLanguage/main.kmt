@@ -1,4 +1,4 @@
-using kermeta_standard#kermeta::standard::*
+using kermeta_standard^kermeta::standard::*
 
 package pkg{
 	// persons who write documents
