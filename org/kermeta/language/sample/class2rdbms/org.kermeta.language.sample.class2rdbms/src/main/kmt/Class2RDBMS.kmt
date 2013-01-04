@@ -3,9 +3,9 @@ package class2RDBMS;
 using kermeta_standard^kermeta::standard::*
 using kermeta_standard^kermeta::utils::*
 using kermeta_standard^kermeta::emfpersistence::*
-using #trace::*
-using #ClassMM::*
-using #RDBMSMM::*
+using ^trace::*
+using ^ClassMM::*
+using ^RDBMSMM::*
 
 using kermeta::io::StdIO => stdio
 
