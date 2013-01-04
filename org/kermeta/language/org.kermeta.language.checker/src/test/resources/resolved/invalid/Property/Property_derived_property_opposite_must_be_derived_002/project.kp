@@ -1,0 +1,5 @@
+resource library_standard ="platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.99-SNAPSHOT"
+importProject library_standard
+project Property_derived_property_opposite_must_be_derived_002 { 
+	import "${project.baseUri}/002_Property_derived_prop_opposite.kmt"
+}
