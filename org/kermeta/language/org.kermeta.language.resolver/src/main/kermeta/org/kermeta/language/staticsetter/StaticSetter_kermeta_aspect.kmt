@@ -779,7 +779,7 @@ package behavior {
 		operation inferStaticTypeOfCallOperation(callOperation : CallOperation, op : Operation, context : StaticSetterContext) : Void is do
 			//  The call of operation new that must not return type Object but the corresponding type associated to the new.
 			//TODO Method clone must be supported there as well.
-			if(op.name=="new" and op.owningClass.getQualifiedName().endsWith("#org::kermeta::language::structure::Class") and 
+			if(op.name=="new" and op.owningClass.getQualifiedName().endsWith("^org::kermeta::language::structure::Class") and 
 				(not callOperation.target.isVoid).andThen{b | callOperation.target.isInstanceOf(CallTypeLiteral) }) then
 				callOperation.setInferedStaticType(context,callOperation.target.asType(CallTypeLiteral).typeref.type)
 			else

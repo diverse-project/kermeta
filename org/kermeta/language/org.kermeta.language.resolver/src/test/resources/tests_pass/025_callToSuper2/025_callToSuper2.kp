@@ -7,7 +7,7 @@ importProject kermeta_standard
 
 project a025_callToSuper2 {
 
-	mainClass "a025_callToSuper2#mainPackage::MainClass"
+	mainClass "a025_callToSuper2^mainPackage::MainClass"
 	mainOperation "mainOperation"
 	
 	

@@ -7666,7 +7666,7 @@
         <ownedOperation kTag="/1/@packages.0/Main/main/@kOwnedTags.0" name="main" type="/1/@packages.0/Main/main/@containedType.0" isOrdered="true">
           <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/003_typeLiteral_in_lambda/src/main/kmt/003_typeLiteral_in_lambda.kmt;198;401" object="/1/@packages.0/Main/main"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Void">
-            <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+            <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="/1/@packages.0/Main/main/@body/@kOwnedTags.0">
             <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/003_typeLiteral_in_lambda/src/main/kmt/003_typeLiteral_in_lambda.kmt;225;401" object="/1/@packages.0/Main/main/@body"/>
@@ -7675,9 +7675,9 @@
               <type name="Sequence&lt;A>" type="/1/@packages.0/Main/main/@body/@statement.0/@type/@containedType.0" isOrdered="true">
                 <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="/1/@packages.0/Main/main/@body/@statement.0/@type/@containedType.0/@containedType.0" typeIdentifier="Sequence">
                   <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="A">
-                    <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                    <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                   </containedType>
-                  <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                  <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 </containedType>
               </type>
             </statement>
@@ -7696,15 +7696,15 @@
                     <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Main/main/@body/@statement.1/@parameters.0/@body/@statement.0/@initialization/@kOwnedTags.0 /1/@packages.0/Main/main/@body/@statement.1/@parameters.0/@body/@statement.0/@initialization/@kOwnedTags.1" name="new">
                       <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/003_typeLiteral_in_lambda/src/main/kmt/003_typeLiteral_in_lambda.kmt;293;342" object="/1/@packages.0/Main/main/@body/@statement.1/@parameters.0/@body/@statement.0/@initialization"/>
                       <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/003_typeLiteral_in_lambda/src/main/kmt/003_typeLiteral_in_lambda.kmt;292;342" object="/1/@packages.0/Main/main/@body/@statement.1/@parameters.0/@body/@statement.0/@initialization"/>
-                      <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                      <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                       <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Main/main/@body/@statement.1/@parameters.0/@body/@statement.0/@initialization/@target/@kOwnedTags.0" name="A">
                         <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/003_typeLiteral_in_lambda/src/main/kmt/003_typeLiteral_in_lambda.kmt;292;293" object="/1/@packages.0/Main/main/@body/@statement.1/@parameters.0/@body/@statement.0/@initialization/@target"/>
-                        <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                        <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                       </target>
                     </initialization>
                     <type name="A" type="/1/@packages.0/Main/main/@body/@statement.1/@parameters.0/@body/@statement.0/@type/@containedType.0" isOrdered="true">
                       <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="A">
-                        <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                        <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                       </containedType>
                     </type>
                   </statement>
@@ -7712,23 +7712,23 @@
                     <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/003_typeLiteral_in_lambda/src/main/kmt/003_typeLiteral_in_lambda.kmt;342;356" object="/1/@packages.0/Main/main/@body/@statement.1/@parameters.0/@body/@statement.1"/>
                     <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Main/main/@body/@statement.1/@parameters.0/@body/@statement.1/@target/@kOwnedTags.0" name="rs">
                       <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/003_typeLiteral_in_lambda/src/main/kmt/003_typeLiteral_in_lambda.kmt;342;345" object="/1/@packages.0/Main/main/@body/@statement.1/@parameters.0/@body/@statement.1/@target"/>
-                      <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                      <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                     </target>
                     <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Main/main/@body/@statement.1/@parameters.0/@body/@statement.1/@value/@kOwnedTags.0" name="new">
                       <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/003_typeLiteral_in_lambda/src/main/kmt/003_typeLiteral_in_lambda.kmt;349;356" object="/1/@packages.0/Main/main/@body/@statement.1/@parameters.0/@body/@statement.1/@value"/>
-                      <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                      <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                       <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Main/main/@body/@statement.1/@parameters.0/@body/@statement.1/@value/@target/@kOwnedTags.0" name="A">
                         <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/003_typeLiteral_in_lambda/src/main/kmt/003_typeLiteral_in_lambda.kmt;348;349" object="/1/@packages.0/Main/main/@body/@statement.1/@parameters.0/@body/@statement.1/@value/@target"/>
-                        <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                        <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                       </target>
                     </value>
                   </statement>
                 </body>
               </parameters>
-              <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+              <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Main/main/@body/@statement.1/@target/@kOwnedTags.0" name="col">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/003_typeLiteral_in_lambda/src/main/kmt/003_typeLiteral_in_lambda.kmt;260;263" object="/1/@packages.0/Main/main/@body/@statement.1/@target"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               </target>
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:VariableDecl" kTag="/1/@packages.0/Main/main/@body/@statement.2/@kOwnedTags.0" identifier="rs">
@@ -7736,15 +7736,15 @@
               <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Main/main/@body/@statement.2/@initialization/@kOwnedTags.0 /1/@packages.0/Main/main/@body/@statement.2/@initialization/@kOwnedTags.1" name="new">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/003_typeLiteral_in_lambda/src/main/kmt/003_typeLiteral_in_lambda.kmt;377;384" object="/1/@packages.0/Main/main/@body/@statement.2/@initialization"/>
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/003_typeLiteral_in_lambda/src/main/kmt/003_typeLiteral_in_lambda.kmt;376;384" object="/1/@packages.0/Main/main/@body/@statement.2/@initialization"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Main/main/@body/@statement.2/@initialization/@target/@kOwnedTags.0" name="A">
                   <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/003_typeLiteral_in_lambda/src/main/kmt/003_typeLiteral_in_lambda.kmt;376;377" object="/1/@packages.0/Main/main/@body/@statement.2/@initialization/@target"/>
-                  <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                  <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 </target>
               </initialization>
               <type name="A" type="/1/@packages.0/Main/main/@body/@statement.2/@type/@containedType.0" isOrdered="true">
                 <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="A">
-                  <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                  <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 </containedType>
               </type>
             </statement>
@@ -7752,14 +7752,14 @@
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/003_typeLiteral_in_lambda/src/main/kmt/003_typeLiteral_in_lambda.kmt;384;397" object="/1/@packages.0/Main/main/@body/@statement.3"/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Main/main/@body/@statement.3/@target/@kOwnedTags.0" name="rs">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/003_typeLiteral_in_lambda/src/main/kmt/003_typeLiteral_in_lambda.kmt;384;387" object="/1/@packages.0/Main/main/@body/@statement.3/@target"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               </target>
               <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Main/main/@body/@statement.3/@value/@kOwnedTags.0" name="new">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/003_typeLiteral_in_lambda/src/main/kmt/003_typeLiteral_in_lambda.kmt;391;397" object="/1/@packages.0/Main/main/@body/@statement.3/@value"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Main/main/@body/@statement.3/@value/@target/@kOwnedTags.0" name="A">
                   <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/003_typeLiteral_in_lambda/src/main/kmt/003_typeLiteral_in_lambda.kmt;390;391" object="/1/@packages.0/Main/main/@body/@statement.3/@value/@target"/>
-                  <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                  <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 </target>
               </value>
             </statement>

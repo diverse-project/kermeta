@@ -104,9 +104,9 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Void"/>
           <ownedParameter name="constraint" type="//@packages.0/standard/Object/checkInvariant/@ownedParameter.0/@containedType.0" isOrdered="true">
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Constraint">
-              <usings fromQName="#kermeta::standard::*" toName=""/>
-              <usings fromQName="#org::kermeta::language::structure::*" toName=""/>
-              <usings fromQName="#kermeta::exceptions::*" toName=""/>
+              <usings fromQName="^kermeta::standard::*" toName=""/>
+              <usings fromQName="^org::kermeta::language::structure::*" toName=""/>
+              <usings fromQName="^kermeta::exceptions::*" toName=""/>
             </containedType>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="//@packages.0/standard/Object/checkInvariant/@body/@kOwnedTags.0">
@@ -143,9 +143,9 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
           <ownedParameter name="type" type="//@packages.0/standard/Object/isDirectInstanceOf/@ownedParameter.0/@containedType.0" isOrdered="true">
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Type">
-              <usings fromQName="#kermeta::standard::*" toName=""/>
-              <usings fromQName="#org::kermeta::language::structure::*" toName=""/>
-              <usings fromQName="#kermeta::exceptions::*" toName=""/>
+              <usings fromQName="^kermeta::standard::*" toName=""/>
+              <usings fromQName="^org::kermeta::language::structure::*" toName=""/>
+              <usings fromQName="^kermeta::exceptions::*" toName=""/>
             </containedType>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="//@packages.0/standard/Object/isDirectInstanceOf/@body/@kOwnedTags.0">
@@ -159,9 +159,9 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
           <ownedParameter name="type" type="//@packages.0/standard/Object/isKindOf/@ownedParameter.0/@containedType.0" isOrdered="true">
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Type">
-              <usings fromQName="#kermeta::standard::*" toName=""/>
-              <usings fromQName="#org::kermeta::language::structure::*" toName=""/>
-              <usings fromQName="#kermeta::exceptions::*" toName=""/>
+              <usings fromQName="^kermeta::standard::*" toName=""/>
+              <usings fromQName="^org::kermeta::language::structure::*" toName=""/>
+              <usings fromQName="^kermeta::exceptions::*" toName=""/>
             </containedType>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="//@packages.0/standard/Object/isKindOf/@body/@kOwnedTags.0">
@@ -175,9 +175,9 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Object"/>
           <ownedParameter name="property" type="//@packages.0/standard/Object/get/@ownedParameter.0/@containedType.0" isOrdered="true">
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Property">
-              <usings fromQName="#kermeta::standard::*" toName=""/>
-              <usings fromQName="#org::kermeta::language::structure::*" toName=""/>
-              <usings fromQName="#kermeta::exceptions::*" toName=""/>
+              <usings fromQName="^kermeta::standard::*" toName=""/>
+              <usings fromQName="^org::kermeta::language::structure::*" toName=""/>
+              <usings fromQName="^kermeta::exceptions::*" toName=""/>
             </containedType>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="//@packages.0/standard/Object/get/@body/@kOwnedTags.0">
@@ -191,9 +191,9 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Void"/>
           <ownedParameter name="property" type="//@packages.0/standard/Object/set/@ownedParameter.0/@containedType.0" isOrdered="true">
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Property">
-              <usings fromQName="#kermeta::standard::*" toName=""/>
-              <usings fromQName="#org::kermeta::language::structure::*" toName=""/>
-              <usings fromQName="#kermeta::exceptions::*" toName=""/>
+              <usings fromQName="^kermeta::standard::*" toName=""/>
+              <usings fromQName="^org::kermeta::language::structure::*" toName=""/>
+              <usings fromQName="^kermeta::exceptions::*" toName=""/>
             </containedType>
           </ownedParameter>
           <ownedParameter name="element" type="//@packages.0/standard/Object/set/@ownedParameter.1/@containedType.0" isOrdered="true">
@@ -210,9 +210,9 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
           <ownedParameter name="property" type="//@packages.0/standard/Object/isSet/@ownedParameter.0/@containedType.0" isOrdered="true">
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Property">
-              <usings fromQName="#kermeta::standard::*" toName=""/>
-              <usings fromQName="#org::kermeta::language::structure::*" toName=""/>
-              <usings fromQName="#kermeta::exceptions::*" toName=""/>
+              <usings fromQName="^kermeta::standard::*" toName=""/>
+              <usings fromQName="^org::kermeta::language::structure::*" toName=""/>
+              <usings fromQName="^kermeta::exceptions::*" toName=""/>
             </containedType>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="//@packages.0/standard/Object/isSet/@body/@kOwnedTags.0">
@@ -226,9 +226,9 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Void"/>
           <ownedParameter name="property" type="//@packages.0/standard/Object/unset/@ownedParameter.0/@containedType.0" isOrdered="true">
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Property">
-              <usings fromQName="#kermeta::standard::*" toName=""/>
-              <usings fromQName="#org::kermeta::language::structure::*" toName=""/>
-              <usings fromQName="#kermeta::exceptions::*" toName=""/>
+              <usings fromQName="^kermeta::standard::*" toName=""/>
+              <usings fromQName="^org::kermeta::language::structure::*" toName=""/>
+              <usings fromQName="^kermeta::exceptions::*" toName=""/>
             </containedType>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="//@packages.0/standard/Object/unset/@body/@kOwnedTags.0">
@@ -278,9 +278,9 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Object"/>
           <ownedParameter name="type" type="//@packages.0/standard/Object/asType/@ownedParameter.0/@containedType.0" isOrdered="true">
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Type">
-              <usings fromQName="#kermeta::standard::*" toName=""/>
-              <usings fromQName="#org::kermeta::language::structure::*" toName=""/>
-              <usings fromQName="#kermeta::exceptions::*" toName=""/>
+              <usings fromQName="^kermeta::standard::*" toName=""/>
+              <usings fromQName="^org::kermeta::language::structure::*" toName=""/>
+              <usings fromQName="^kermeta::exceptions::*" toName=""/>
             </containedType>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="//@packages.0/standard/Object/asType/@body/@kOwnedTags.0">
@@ -294,9 +294,9 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Boolean"/>
           <ownedParameter name="type" type="//@packages.0/standard/Object/isInstanceOf/@ownedParameter.0/@containedType.0" isOrdered="true">
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Type">
-              <usings fromQName="#kermeta::standard::*" toName=""/>
-              <usings fromQName="#org::kermeta::language::structure::*" toName=""/>
-              <usings fromQName="#kermeta::exceptions::*" toName=""/>
+              <usings fromQName="^kermeta::standard::*" toName=""/>
+              <usings fromQName="^org::kermeta::language::structure::*" toName=""/>
+              <usings fromQName="^kermeta::exceptions::*" toName=""/>
             </containedType>
           </ownedParameter>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="//@packages.0/standard/Object/isInstanceOf/@body/@kOwnedTags.0">
@@ -318,9 +318,9 @@
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//@packages.0/standard/Object"/>
           <ownedParameter name="op" type="//@packages.0/standard/Object/invoke/@ownedParameter.0/@containedType.0" isOrdered="true">
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Operation">
-              <usings fromQName="#kermeta::standard::*" toName=""/>
-              <usings fromQName="#org::kermeta::language::structure::*" toName=""/>
-              <usings fromQName="#kermeta::exceptions::*" toName=""/>
+              <usings fromQName="^kermeta::standard::*" toName=""/>
+              <usings fromQName="^org::kermeta::language::structure::*" toName=""/>
+              <usings fromQName="^kermeta::exceptions::*" toName=""/>
             </containedType>
           </ownedParameter>
           <ownedParameter name="args" type="//@packages.0/standard/Object/invoke/@ownedParameter.1/@containedType.0" isOrdered="true">
@@ -5546,10 +5546,10 @@
         <ownedAttribute kTag="//@packages.0/exceptions/RuntimeError/expression/@kOwnedTags.0" name="expression" type="//@packages.0/exceptions/RuntimeError/expression/@containedType.0" isOrdered="true" isComposite="true">
           <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/org.kermeta.language.library.standard/src/main/kmt/kermeta/exceptions/exceptions.kmt;2405;2439" object="//@packages.0/exceptions/RuntimeError/expression"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Expression">
-            <usings fromQName="#kermeta::standard::*" toName=""/>
-            <usings fromQName="#org::kermeta::language::structure::*" toName=""/>
-            <usings fromQName="#org::kermeta::language::behavior::*" toName=""/>
-            <usings fromQName="#kermeta::exceptions::*" toName=""/>
+            <usings fromQName="^kermeta::standard::*" toName=""/>
+            <usings fromQName="^org::kermeta::language::structure::*" toName=""/>
+            <usings fromQName="^org::kermeta::language::behavior::*" toName=""/>
+            <usings fromQName="^kermeta::exceptions::*" toName=""/>
           </containedType>
         </ownedAttribute>
       </ownedTypeDefinition>

@@ -7668,7 +7668,7 @@
         <ownedOperation kTag="/1/@packages.0/C/c/@kOwnedTags.0" name="c" type="/1/@packages.0/C/c/@containedType.0">
           <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/main/kmt/genericInheritance.kmt;81;108" object="/1/@packages.0/C/c"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void">
-            <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+            <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="/1/@packages.0/C/c/@body/@kOwnedTags.0">
             <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/main/kmt/genericInheritance.kmt;98;108" object="/1/@packages.0/C/c/@body"/>
@@ -7680,14 +7680,14 @@
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="Y1"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="/1/@packages.0/B1/@containedType.1/@containedType.0" typeIdentifier="C">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Y1">
-            <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+            <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
           </containedType>
-          <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+          <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
         </containedType>
         <ownedOperation kTag="/1/@packages.0/B1/b1/@kOwnedTags.0" name="b1" type="/1/@packages.0/B1/b1/@containedType.0">
           <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/main/kmt/genericInheritance.kmt;143;171" object="/1/@packages.0/B1/b1"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void">
-            <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+            <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="/1/@packages.0/B1/b1/@body/@kOwnedTags.0">
             <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/main/kmt/genericInheritance.kmt;161;171" object="/1/@packages.0/B1/b1/@body"/>
@@ -7699,14 +7699,14 @@
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="Y2"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="/1/@packages.0/B2/@containedType.1/@containedType.0" typeIdentifier="C">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Y2">
-            <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+            <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
           </containedType>
-          <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+          <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
         </containedType>
         <ownedOperation kTag="/1/@packages.0/B2/b2/@kOwnedTags.0" name="b2" type="/1/@packages.0/B2/b2/@containedType.0">
           <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/main/kmt/genericInheritance.kmt;205;233" object="/1/@packages.0/B2/b2"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void">
-            <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+            <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="/1/@packages.0/B2/b2/@body/@kOwnedTags.0">
             <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/main/kmt/genericInheritance.kmt;223;233" object="/1/@packages.0/B2/b2/@body"/>
@@ -7718,20 +7718,20 @@
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="X"/>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="/1/@packages.0/A/@containedType.1/@containedType.0" typeIdentifier="B1">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="X">
-            <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+            <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
           </containedType>
-          <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+          <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
         </containedType>
         <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="/1/@packages.0/A/@containedType.2/@containedType.0" typeIdentifier="B2">
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="X">
-            <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+            <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
           </containedType>
-          <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+          <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
         </containedType>
         <ownedOperation kTag="/1/@packages.0/A/a/@kOwnedTags.0" name="a" type="/1/@packages.0/A/a/@containedType.0">
           <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/main/kmt/genericInheritance.kmt;274;301" object="/1/@packages.0/A/a"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void">
-            <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+            <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="/1/@packages.0/A/a/@body/@kOwnedTags.0">
             <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/main/kmt/genericInheritance.kmt;291;301" object="/1/@packages.0/A/a/@body"/>
@@ -7743,7 +7743,7 @@
         <ownedOperation kTag="/1/@packages.0/Main/main/@kOwnedTags.0" name="main" type="/1/@packages.0/Main/main/@containedType.0">
           <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/main/kmt/genericInheritance.kmt;320;421" object="/1/@packages.0/Main/main"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void">
-            <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+            <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="/1/@packages.0/Main/main/@body/@kOwnedTags.0">
             <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/main/kmt/genericInheritance.kmt;340;421" object="/1/@packages.0/Main/main/@body"/>
@@ -7752,46 +7752,46 @@
               <type name="A&lt;Integer>" type="/1/@packages.0/Main/main/@body/@statement.0/@type/@containedType.0" isOrdered="true">
                 <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="/1/@packages.0/Main/main/@body/@statement.0/@type/@containedType.0/@containedType.0" typeIdentifier="A">
                   <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Integer">
-                    <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                    <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                   </containedType>
-                  <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                  <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 </containedType>
               </type>
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Main/main/@body/@statement.1/@kOwnedTags.0 /1/@packages.0/Main/main/@body/@statement.1/@kOwnedTags.1" name="a" isCalledWithParenthesis="true">
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/main/kmt/genericInheritance.kmt;373;381" object="/1/@packages.0/Main/main/@body/@statement.1"/>
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/main/kmt/genericInheritance.kmt;370;381" object="/1/@packages.0/Main/main/@body/@statement.1"/>
-              <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+              <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Main/main/@body/@statement.1/@target/@kOwnedTags.0" name="foo">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/main/kmt/genericInheritance.kmt;370;373" object="/1/@packages.0/Main/main/@body/@statement.1/@target"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               </target>
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Main/main/@body/@statement.2/@kOwnedTags.0 /1/@packages.0/Main/main/@body/@statement.2/@kOwnedTags.1" name="b1" isCalledWithParenthesis="true">
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/main/kmt/genericInheritance.kmt;384;393" object="/1/@packages.0/Main/main/@body/@statement.2"/>
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/main/kmt/genericInheritance.kmt;381;393" object="/1/@packages.0/Main/main/@body/@statement.2"/>
-              <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+              <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Main/main/@body/@statement.2/@target/@kOwnedTags.0" name="foo">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/main/kmt/genericInheritance.kmt;381;384" object="/1/@packages.0/Main/main/@body/@statement.2/@target"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               </target>
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Main/main/@body/@statement.3/@kOwnedTags.0 /1/@packages.0/Main/main/@body/@statement.3/@kOwnedTags.1" name="b2" isCalledWithParenthesis="true">
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/main/kmt/genericInheritance.kmt;396;405" object="/1/@packages.0/Main/main/@body/@statement.3"/>
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/main/kmt/genericInheritance.kmt;393;405" object="/1/@packages.0/Main/main/@body/@statement.3"/>
-              <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+              <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Main/main/@body/@statement.3/@target/@kOwnedTags.0" name="foo">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/main/kmt/genericInheritance.kmt;393;396" object="/1/@packages.0/Main/main/@body/@statement.3/@target"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               </target>
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Main/main/@body/@statement.4/@kOwnedTags.0 /1/@packages.0/Main/main/@body/@statement.4/@kOwnedTags.1" name="c" isCalledWithParenthesis="true">
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/main/kmt/genericInheritance.kmt;408;415" object="/1/@packages.0/Main/main/@body/@statement.4"/>
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/main/kmt/genericInheritance.kmt;405;415" object="/1/@packages.0/Main/main/@body/@statement.4"/>
-              <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+              <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Main/main/@body/@statement.4/@target/@kOwnedTags.0" name="foo">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericInheritance/src/main/kmt/genericInheritance.kmt;405;408" object="/1/@packages.0/Main/main/@body/@statement.4/@target"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               </target>
             </statement>
           </body>

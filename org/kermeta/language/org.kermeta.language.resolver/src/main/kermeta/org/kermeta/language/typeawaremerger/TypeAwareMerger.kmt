@@ -82,13 +82,13 @@ aspect class ClassDefinition {
 	 */
 	operation addObjectInheritance(context : TypeAwareMergerContext) is do
 		if superType.size == 0 then
-			if not getQualifiedName.endsWith("#kermeta::standard::Object") then
+			if not getQualifiedName.endsWith("^kermeta::standard::Object") then
 				var objectClass : Class init Class.new
 				var typeDefFinder : TypeDefinitionFinder init TypeDefinitionFinder.new
 				var cd : ClassDefinition init typeDefFinder.getFirstTypeDefinitionByName(
 						"kermeta::standard::Object", context.currentMetamodels).asType(ClassDefinition)
 				if(cd.isVoid) then
-					stdio.errorln("failed to find classDefinition kermeta_standard#kermeta::standard::Object")
+					stdio.errorln("failed to find classDefinition kermeta_standard^kermeta::standard::Object")
 				end
 				objectClass.initializeFromAClassDefinition(cd)
 				self.containedType.add(objectClass)

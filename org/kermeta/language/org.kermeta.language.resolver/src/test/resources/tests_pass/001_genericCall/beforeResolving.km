@@ -7671,18 +7671,18 @@
           <kOwnedTags name="documentation" value="&#xA; Mapping between source and target objects" object="/1/@packages.0/Trace/src2tgt"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="/1/@packages.0/Trace/src2tgt/@containedType.0/@containedType.0 /1/@packages.0/Trace/src2tgt/@containedType.0/@containedType.1" typeIdentifier="Hashtable">
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="SRC">
-              <usings fromQName="kermeta_standard#kermeta::utils::*" toName=""/>
+              <usings fromQName="kermeta_standard^kermeta::utils::*" toName=""/>
             </containedType>
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="TGT">
-              <usings fromQName="kermeta_standard#kermeta::utils::*" toName=""/>
+              <usings fromQName="kermeta_standard^kermeta::utils::*" toName=""/>
             </containedType>
-            <usings fromQName="kermeta_standard#kermeta::utils::*" toName=""/>
+            <usings fromQName="kermeta_standard^kermeta::utils::*" toName=""/>
           </containedType>
         </ownedAttribute>
         <ownedOperation kTag="/1/@packages.0/Trace/create/@kOwnedTags.0" name="create" type="/1/@packages.0/Trace/create/@containedType.0">
           <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericCall/src/main/kmt/001_genericCall.kmt;238;311" object="/1/@packages.0/Trace/create"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void">
-            <usings fromQName="kermeta_standard#kermeta::utils::*" toName=""/>
+            <usings fromQName="kermeta_standard^kermeta::utils::*" toName=""/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="/1/@packages.0/Trace/create/@body/@kOwnedTags.0">
             <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericCall/src/main/kmt/001_genericCall.kmt;260;311" object="/1/@packages.0/Trace/create/@body"/>
@@ -7690,20 +7690,20 @@
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericCall/src/main/kmt/001_genericCall.kmt;265;304" object="/1/@packages.0/Trace/create/@body/@statement.0"/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Trace/create/@body/@statement.0/@target/@kOwnedTags.0" name="src2tgt">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericCall/src/main/kmt/001_genericCall.kmt;265;273" object="/1/@packages.0/Trace/create/@body/@statement.0/@target"/>
-                <usings fromQName="kermeta_standard#kermeta::utils::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::utils::*" toName=""/>
               </target>
               <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Trace/create/@body/@statement.0/@value/@kOwnedTags.0" name="new">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericCall/src/main/kmt/001_genericCall.kmt;295;304" object="/1/@packages.0/Trace/create/@body/@statement.0/@value"/>
-                <usings fromQName="kermeta_standard#kermeta::utils::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::utils::*" toName=""/>
                 <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Trace/create/@body/@statement.0/@value/@target/@kOwnedTags.0" name="Hashtable" generics="/1/@packages.0/Trace/create/@body/@statement.0/@value/@target/@containedType.0 /1/@packages.0/Trace/create/@body/@statement.0/@value/@target/@containedType.1">
                   <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericCall/src/main/kmt/001_genericCall.kmt;276;295" object="/1/@packages.0/Trace/create/@body/@statement.0/@value/@target"/>
                   <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="SRC">
-                    <usings fromQName="kermeta_standard#kermeta::utils::*" toName=""/>
+                    <usings fromQName="kermeta_standard^kermeta::utils::*" toName=""/>
                   </containedType>
                   <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="TGT">
-                    <usings fromQName="kermeta_standard#kermeta::utils::*" toName=""/>
+                    <usings fromQName="kermeta_standard^kermeta::utils::*" toName=""/>
                   </containedType>
-                  <usings fromQName="kermeta_standard#kermeta::utils::*" toName=""/>
+                  <usings fromQName="kermeta_standard^kermeta::utils::*" toName=""/>
                 </target>
               </value>
             </statement>
@@ -7712,7 +7712,7 @@
         <ownedOperation kTag="/1/@packages.0/Trace/createSRC/@kOwnedTags.0" name="createSRC" type="/1/@packages.0/Trace/createSRC/@containedType.0" isOrdered="true">
           <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericCall/src/main/kmt/001_genericCall.kmt;311;373" object="/1/@packages.0/Trace/createSRC"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="SRC">
-            <usings fromQName="kermeta_standard#kermeta::utils::*" toName=""/>
+            <usings fromQName="kermeta_standard^kermeta::utils::*" toName=""/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="/1/@packages.0/Trace/createSRC/@body/@kOwnedTags.0">
             <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericCall/src/main/kmt/001_genericCall.kmt;342;373" object="/1/@packages.0/Trace/createSRC/@body"/>
@@ -7723,10 +7723,10 @@
               </target>
               <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Trace/createSRC/@body/@statement.0/@value/@kOwnedTags.0" name="new">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericCall/src/main/kmt/001_genericCall.kmt;362;368" object="/1/@packages.0/Trace/createSRC/@body/@statement.0/@value"/>
-                <usings fromQName="kermeta_standard#kermeta::utils::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::utils::*" toName=""/>
                 <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Trace/createSRC/@body/@statement.0/@value/@target/@kOwnedTags.0" name="SRC">
                   <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/001_genericCall/src/main/kmt/001_genericCall.kmt;359;362" object="/1/@packages.0/Trace/createSRC/@body/@statement.0/@value/@target"/>
-                  <usings fromQName="kermeta_standard#kermeta::utils::*" toName=""/>
+                  <usings fromQName="kermeta_standard^kermeta::utils::*" toName=""/>
                 </target>
               </value>
             </statement>

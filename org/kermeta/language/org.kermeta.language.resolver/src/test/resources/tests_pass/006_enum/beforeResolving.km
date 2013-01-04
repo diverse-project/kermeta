@@ -7680,19 +7680,19 @@
         <ownedAttribute kTag="/1/@packages.0/Test/color/@kOwnedTags.0" name="color" type="/1/@packages.0/Test/color/@containedType.0" isOrdered="true" isComposite="true">
           <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;193;222" object="/1/@packages.0/Test/color"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Couleur">
-            <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+            <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
           </containedType>
         </ownedAttribute>
         <ownedAttribute kTag="/1/@packages.0/Test/colors/@kOwnedTags.0" name="colors" type="/1/@packages.0/Test/colors/@containedType.0" isOrdered="true" upper="-1" isComposite="true">
           <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;222;257" object="/1/@packages.0/Test/colors"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Couleur">
-            <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+            <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
           </containedType>
         </ownedAttribute>
         <ownedOperation kTag="/1/@packages.0/Test/test1/@kOwnedTags.0" name="test1" type="/1/@packages.0/Test/test1/@containedType.0" isOrdered="true">
           <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;257;326" object="/1/@packages.0/Test/test1"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Couleur">
-            <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+            <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="/1/@packages.0/Test/test1/@body/@kOwnedTags.0">
             <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;289;326" object="/1/@packages.0/Test/test1/@body"/>
@@ -7703,10 +7703,10 @@
               </target>
               <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/test1/@body/@statement.0/@value/@kOwnedTags.0" name="jaune">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;311;319" object="/1/@packages.0/Test/test1/@body/@statement.0/@value"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/test1/@body/@statement.0/@value/@target/@kOwnedTags.0" name="Couleur">
                   <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;304;311" object="/1/@packages.0/Test/test1/@body/@statement.0/@value/@target"/>
-                  <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                  <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 </target>
               </value>
             </statement>
@@ -7715,7 +7715,7 @@
         <ownedOperation kTag="/1/@packages.0/Test/test2/@kOwnedTags.0" name="test2" type="/1/@packages.0/Test/test2/@containedType.0">
           <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;326;393" object="/1/@packages.0/Test/test2"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void">
-            <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+            <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="/1/@packages.0/Test/test2/@body/@kOwnedTags.0">
             <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;347;393" object="/1/@packages.0/Test/test2/@body"/>
@@ -7723,7 +7723,7 @@
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;352;369" object="/1/@packages.0/Test/test2/@body/@statement.0"/>
               <type name="Object" type="/1/@packages.0/Test/test2/@body/@statement.0/@type/@containedType.0" isOrdered="true">
                 <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Object">
-                  <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                  <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 </containedType>
               </type>
             </statement>
@@ -7731,14 +7731,14 @@
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;369;386" object="/1/@packages.0/Test/test2/@body/@statement.1"/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/test2/@body/@statement.1/@target/@kOwnedTags.0" name="o">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;369;371" object="/1/@packages.0/Test/test2/@body/@statement.1/@target"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               </target>
               <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/test2/@body/@statement.1/@value/@kOwnedTags.0" name="lundi">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;378;386" object="/1/@packages.0/Test/test2/@body/@statement.1/@value"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/test2/@body/@statement.1/@value/@target/@kOwnedTags.0" name="Jour">
                   <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;374;378" object="/1/@packages.0/Test/test2/@body/@statement.1/@value/@target"/>
-                  <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                  <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 </target>
               </value>
             </statement>
@@ -7747,7 +7747,7 @@
         <ownedOperation kTag="/1/@packages.0/Test/test3/@kOwnedTags.0" name="test3" type="/1/@packages.0/Test/test3/@containedType.0">
           <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;393;473" object="/1/@packages.0/Test/test3"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void">
-            <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+            <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="/1/@packages.0/Test/test3/@body/@kOwnedTags.0">
             <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;414;473" object="/1/@packages.0/Test/test3/@body"/>
@@ -7755,7 +7755,7 @@
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;419;437" object="/1/@packages.0/Test/test3/@body/@statement.0"/>
               <type name="Couleur" type="/1/@packages.0/Test/test3/@body/@statement.0/@type/@containedType.0" isOrdered="true">
                 <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Couleur">
-                  <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                  <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 </containedType>
               </type>
             </statement>
@@ -7763,14 +7763,14 @@
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;437;458" object="/1/@packages.0/Test/test3/@body/@statement.1"/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/test3/@body/@statement.1/@target/@kOwnedTags.0" name="c">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;437;439" object="/1/@packages.0/Test/test3/@body/@statement.1/@target"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               </target>
               <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/test3/@body/@statement.1/@value/@kOwnedTags.0" name="jaune">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;449;458" object="/1/@packages.0/Test/test3/@body/@statement.1/@value"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/test3/@body/@statement.1/@value/@target/@kOwnedTags.0" name="Couleur">
                   <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;442;449" object="/1/@packages.0/Test/test3/@body/@statement.1/@value/@target"/>
-                  <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                  <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 </target>
               </value>
             </statement>
@@ -7778,11 +7778,11 @@
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;458;466" object="/1/@packages.0/Test/test3/@body/@statement.2"/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/test3/@body/@statement.2/@target/@kOwnedTags.0" name="c">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;458;460" object="/1/@packages.0/Test/test3/@body/@statement.2/@target"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               </target>
               <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/test3/@body/@statement.2/@value/@kOwnedTags.0" name="c">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;463;466" object="/1/@packages.0/Test/test3/@body/@statement.2/@value"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               </value>
             </statement>
           </body>
@@ -7791,9 +7791,9 @@
           <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;473;633" object="/1/@packages.0/Test/test4"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="/1/@packages.0/Test/test4/@containedType.0/@containedType.0" typeIdentifier="Set">
             <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Couleur">
-              <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+              <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
             </containedType>
-            <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+            <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="/1/@packages.0/Test/test4/@body/@kOwnedTags.0">
             <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;509;633" object="/1/@packages.0/Test/test4/@body"/>
@@ -7804,13 +7804,13 @@
               </target>
               <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/test4/@body/@statement.0/@value/@kOwnedTags.0" name="new">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;536;549" object="/1/@packages.0/Test/test4/@body/@statement.0/@value"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/test4/@body/@statement.0/@value/@target/@kOwnedTags.0" name="Set" generics="/1/@packages.0/Test/test4/@body/@statement.0/@value/@target/@containedType.0">
                   <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;524;536" object="/1/@packages.0/Test/test4/@body/@statement.0/@value/@target"/>
                   <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Couleur">
-                    <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                    <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                   </containedType>
-                  <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                  <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 </target>
               </value>
             </statement>
@@ -7830,9 +7830,9 @@
                     <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/test4/@body/@statement.1/@parameters.0/@body/@statement.0/@parameters.0/@kOwnedTags.0 /1/@packages.0/Test/test4/@body/@statement.1/@parameters.0/@body/@statement.0/@parameters.0/@kOwnedTags.1" name="col">
                       <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;589;592" object="/1/@packages.0/Test/test4/@body/@statement.1/@parameters.0/@body/@statement.0/@parameters.0"/>
                       <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;589;592" object="/1/@packages.0/Test/test4/@body/@statement.1/@parameters.0/@body/@statement.0/@parameters.0"/>
-                      <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                      <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                     </parameters>
-                    <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                    <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                     <target xsi:type="org_kermeta_language_behavior:CallResult" kTag="/1/@packages.0/Test/test4/@body/@statement.1/@parameters.0/@body/@statement.0/@target/@kOwnedTags.0">
                       <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;578;584" object="/1/@packages.0/Test/test4/@body/@statement.1/@parameters.0/@body/@statement.0/@target"/>
                     </target>
@@ -7841,19 +7841,19 @@
                     <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;603;624" object="/1/@packages.0/Test/test4/@body/@statement.1/@parameters.0/@body/@statement.1"/>
                     <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/test4/@body/@statement.1/@parameters.0/@body/@statement.1/@target/@kOwnedTags.0" name="color">
                       <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;603;609" object="/1/@packages.0/Test/test4/@body/@statement.1/@parameters.0/@body/@statement.1/@target"/>
-                      <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                      <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                     </target>
                     <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/test4/@body/@statement.1/@parameters.0/@body/@statement.1/@value/@kOwnedTags.0" name="col">
                       <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;612;624" object="/1/@packages.0/Test/test4/@body/@statement.1/@parameters.0/@body/@statement.1/@value"/>
-                      <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                      <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                     </value>
                   </statement>
                 </body>
               </parameters>
-              <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+              <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/test4/@body/@statement.1/@target/@kOwnedTags.0" name="colors">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;549;555" object="/1/@packages.0/Test/test4/@body/@statement.1/@target"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               </target>
             </statement>
           </body>
@@ -7861,7 +7861,7 @@
         <ownedOperation kTag="/1/@packages.0/Test/test5/@kOwnedTags.0" name="test5" type="/1/@packages.0/Test/test5/@containedType.0">
           <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;633;716" object="/1/@packages.0/Test/test5"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void">
-            <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+            <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="/1/@packages.0/Test/test5/@body/@kOwnedTags.0">
             <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;654;716" object="/1/@packages.0/Test/test5/@body"/>
@@ -7869,7 +7869,7 @@
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;659;676" object="/1/@packages.0/Test/test5/@body/@statement.0"/>
               <type name="Object" type="/1/@packages.0/Test/test5/@body/@statement.0/@type/@containedType.0" isOrdered="true">
                 <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Object">
-                  <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                  <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 </containedType>
               </type>
             </statement>
@@ -7877,14 +7877,14 @@
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;676;697" object="/1/@packages.0/Test/test5/@body/@statement.1"/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/test5/@body/@statement.1/@target/@kOwnedTags.0" name="o">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;676;678" object="/1/@packages.0/Test/test5/@body/@statement.1/@target"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               </target>
               <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/test5/@body/@statement.1/@value/@kOwnedTags.0" name="jaune">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;688;697" object="/1/@packages.0/Test/test5/@body/@statement.1/@value"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/test5/@body/@statement.1/@value/@target/@kOwnedTags.0" name="Couleur">
                   <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;681;688" object="/1/@packages.0/Test/test5/@body/@statement.1/@value/@target"/>
-                  <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                  <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 </target>
               </value>
             </statement>
@@ -7892,11 +7892,11 @@
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;697;709" object="/1/@packages.0/Test/test5/@body/@statement.2"/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/test5/@body/@statement.2/@target/@kOwnedTags.0" name="color">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;697;703" object="/1/@packages.0/Test/test5/@body/@statement.2/@target"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               </target>
               <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/test5/@body/@statement.2/@value/@kOwnedTags.0" name="o">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;706;709" object="/1/@packages.0/Test/test5/@body/@statement.2/@value"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               </value>
             </statement>
           </body>
@@ -7904,7 +7904,7 @@
         <ownedOperation kTag="/1/@packages.0/Test/testReflect/@kOwnedTags.0" name="testReflect" type="/1/@packages.0/Test/testReflect/@containedType.0">
           <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;716;1330" object="/1/@packages.0/Test/testReflect"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void">
-            <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+            <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="/1/@packages.0/Test/testReflect/@body/@kOwnedTags.0">
             <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;743;1330" object="/1/@packages.0/Test/testReflect/@body"/>
@@ -7912,7 +7912,7 @@
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;748;804" object="/1/@packages.0/Test/testReflect/@body/@statement.0"/>
               <type name="org::kermeta::language::structure::Package" type="/1/@packages.0/Test/testReflect/@body/@statement.0/@type/@containedType.0" isOrdered="true">
                 <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::language::structure::Package">
-                  <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                  <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 </containedType>
               </type>
             </statement>
@@ -7920,7 +7920,7 @@
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;804;861" object="/1/@packages.0/Test/testReflect/@body/@statement.1"/>
               <type name="org::kermeta::language::structure::Enumeration" type="/1/@packages.0/Test/testReflect/@body/@statement.1/@type/@containedType.0" isOrdered="true">
                 <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::language::structure::Enumeration">
-                  <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                  <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 </containedType>
               </type>
             </statement>
@@ -7928,7 +7928,7 @@
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;861;932" object="/1/@packages.0/Test/testReflect/@body/@statement.2"/>
               <type name="org::kermeta::language::structure::EnumerationLiteral" type="/1/@packages.0/Test/testReflect/@body/@statement.2/@type/@containedType.0" isOrdered="true">
                 <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org::kermeta::language::structure::EnumerationLiteral">
-                  <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                  <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 </containedType>
               </type>
             </statement>
@@ -7936,17 +7936,17 @@
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;932;982" object="/1/@packages.0/Test/testReflect/@body/@statement.3"/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.3/@target/@kOwnedTags.0" name="p">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;932;934" object="/1/@packages.0/Test/testReflect/@body/@statement.3/@target"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               </target>
               <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.3/@value/@kOwnedTags.0" name="container">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;969;982" object="/1/@packages.0/Test/testReflect/@body/@statement.3/@value"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.3/@value/@target/@kOwnedTags.0" name="typeDefinition">
                   <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;954;969" object="/1/@packages.0/Test/testReflect/@body/@statement.3/@value/@target"/>
-                  <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                  <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                   <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.3/@value/@target/@target/@kOwnedTags.0" name="getMetaClass">
                     <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;941;954" object="/1/@packages.0/Test/testReflect/@body/@statement.3/@value/@target/@target"/>
-                    <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                    <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                     <target xsi:type="org_kermeta_language_behavior:SelfExpression" kTag="/1/@packages.0/Test/testReflect/@body/@statement.3/@value/@target/@target/@target/@kOwnedTags.0">
                       <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;937;941" object="/1/@packages.0/Test/testReflect/@body/@statement.3/@value/@target/@target/@target"/>
                     </target>
@@ -7958,11 +7958,11 @@
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;982;1049" object="/1/@packages.0/Test/testReflect/@body/@statement.4"/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.4/@target/@kOwnedTags.0" name="e">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;982;984" object="/1/@packages.0/Test/testReflect/@body/@statement.4/@target"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               </target>
               <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.4/@value/@kOwnedTags.0" name="one">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1042;1049" object="/1/@packages.0/Test/testReflect/@body/@statement.4/@value"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.4/@value/@target/@kOwnedTags.0" name="select" isCalledWithParenthesis="true">
                   <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1008;1042" object="/1/@packages.0/Test/testReflect/@body/@statement.4/@value/@target"/>
                   <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
@@ -7977,25 +7977,25 @@
                         <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" kTag="/1/@packages.0/Test/testReflect/@body/@statement.4/@value/@target/@parameters.0/@body/@statement.0/@parameters.0/@kOwnedTags.0" value="Couleur">
                           <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1031;1041" object="/1/@packages.0/Test/testReflect/@body/@statement.4/@value/@target/@parameters.0/@body/@statement.0/@parameters.0"/>
                         </parameters>
-                        <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                        <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                         <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.4/@value/@target/@parameters.0/@body/@statement.0/@target/@kOwnedTags.0" name="name">
                           <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1022;1028" object="/1/@packages.0/Test/testReflect/@body/@statement.4/@value/@target/@parameters.0/@body/@statement.0/@target"/>
-                          <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                          <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                           <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.4/@value/@target/@parameters.0/@body/@statement.0/@target/@target/@kOwnedTags.0" name="t">
                             <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1021;1022" object="/1/@packages.0/Test/testReflect/@body/@statement.4/@value/@target/@parameters.0/@body/@statement.0/@target/@target"/>
-                            <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                            <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                           </target>
                         </target>
                       </statement>
                     </body>
                   </parameters>
-                  <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                  <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                   <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.4/@value/@target/@target/@kOwnedTags.0" name="ownedTypeDefinition">
                     <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;988;1008" object="/1/@packages.0/Test/testReflect/@body/@statement.4/@value/@target/@target"/>
-                    <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                    <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                     <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.4/@value/@target/@target/@target/@kOwnedTags.0" name="p">
                       <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;987;988" object="/1/@packages.0/Test/testReflect/@body/@statement.4/@value/@target/@target/@target"/>
-                      <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                      <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                     </target>
                   </target>
                 </target>
@@ -8005,11 +8005,11 @@
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1049;1153" object="/1/@packages.0/Test/testReflect/@body/@statement.5"/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.5/@target/@kOwnedTags.0" name="jaune">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1049;1055" object="/1/@packages.0/Test/testReflect/@body/@statement.5/@target"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               </target>
               <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.5/@value/@kOwnedTags.0" name="one">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1104;1153" object="/1/@packages.0/Test/testReflect/@body/@statement.5/@value"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.5/@value/@target/@kOwnedTags.0" name="select" isCalledWithParenthesis="true">
                   <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1072;1104" object="/1/@packages.0/Test/testReflect/@body/@statement.5/@value/@target"/>
                   <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
@@ -8024,25 +8024,25 @@
                         <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" kTag="/1/@packages.0/Test/testReflect/@body/@statement.5/@value/@target/@parameters.0/@body/@statement.0/@parameters.0/@kOwnedTags.0" value="jaune">
                           <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1095;1103" object="/1/@packages.0/Test/testReflect/@body/@statement.5/@value/@target/@parameters.0/@body/@statement.0/@parameters.0"/>
                         </parameters>
-                        <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                        <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                         <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.5/@value/@target/@parameters.0/@body/@statement.0/@target/@kOwnedTags.0" name="name">
                           <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1086;1092" object="/1/@packages.0/Test/testReflect/@body/@statement.5/@value/@target/@parameters.0/@body/@statement.0/@target"/>
-                          <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                          <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                           <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.5/@value/@target/@parameters.0/@body/@statement.0/@target/@target/@kOwnedTags.0" name="l">
                             <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1085;1086" object="/1/@packages.0/Test/testReflect/@body/@statement.5/@value/@target/@parameters.0/@body/@statement.0/@target/@target"/>
-                            <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                            <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                           </target>
                         </target>
                       </statement>
                     </body>
                   </parameters>
-                  <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                  <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                   <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.5/@value/@target/@target/@kOwnedTags.0" name="ownedLiteral">
                     <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1059;1072" object="/1/@packages.0/Test/testReflect/@body/@statement.5/@value/@target/@target"/>
-                    <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                    <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                     <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.5/@value/@target/@target/@target/@kOwnedTags.0" name="e">
                       <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1058;1059" object="/1/@packages.0/Test/testReflect/@body/@statement.5/@value/@target/@target/@target"/>
-                      <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                      <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                     </target>
                   </target>
                 </target>
@@ -8052,23 +8052,23 @@
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1153;1182" object="/1/@packages.0/Test/testReflect/@body/@statement.6"/>
               <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.6/@parameters.0/@kOwnedTags.0" name="jaune">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1169;1182" object="/1/@packages.0/Test/testReflect/@body/@statement.6/@parameters.0"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.6/@parameters.0/@target/@kOwnedTags.0" name="Couleur">
                   <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1162;1169" object="/1/@packages.0/Test/testReflect/@body/@statement.6/@parameters.0/@target"/>
-                  <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                  <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 </target>
               </parameters>
-              <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+              <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.6/@target/@kOwnedTags.0" name="jaune">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1153;1159" object="/1/@packages.0/Test/testReflect/@body/@statement.6/@target"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               </target>
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:VariableDecl" kTag="/1/@packages.0/Test/testReflect/@body/@statement.7/@kOwnedTags.0" identifier="c">
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1182;1203" object="/1/@packages.0/Test/testReflect/@body/@statement.7"/>
               <type name="Couleur" type="/1/@packages.0/Test/testReflect/@body/@statement.7/@type/@containedType.0" isOrdered="true">
                 <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Couleur">
-                  <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                  <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 </containedType>
               </type>
             </statement>
@@ -8076,18 +8076,18 @@
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1203;1253" object="/1/@packages.0/Test/testReflect/@body/@statement.8"/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.8/@target/@kOwnedTags.0" name="c">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1203;1205" object="/1/@packages.0/Test/testReflect/@body/@statement.8/@target"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               </target>
               <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.8/@value/@kOwnedTags.0" name="jaune">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1208;1253" object="/1/@packages.0/Test/testReflect/@body/@statement.8/@value"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               </value>
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:VariableDecl" kTag="/1/@packages.0/Test/testReflect/@body/@statement.9/@kOwnedTags.0" identifier="j">
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1253;1268" object="/1/@packages.0/Test/testReflect/@body/@statement.9"/>
               <type name="Jour" type="/1/@packages.0/Test/testReflect/@body/@statement.9/@type/@containedType.0" isOrdered="true">
                 <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Jour">
-                  <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                  <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 </containedType>
               </type>
             </statement>
@@ -8095,11 +8095,11 @@
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1268;1309" object="/1/@packages.0/Test/testReflect/@body/@statement.10"/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.10/@target/@kOwnedTags.0" name="j">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1268;1270" object="/1/@packages.0/Test/testReflect/@body/@statement.10/@target"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               </target>
               <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.10/@value/@kOwnedTags.0" name="jaune">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1273;1309" object="/1/@packages.0/Test/testReflect/@body/@statement.10/@value"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               </value>
             </statement>
             <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.11/@kOwnedTags.0" name="equals">
@@ -8107,10 +8107,10 @@
               <parameters xsi:type="org_kermeta_language_behavior:VoidLiteral" kTag="/1/@packages.0/Test/testReflect/@body/@statement.11/@parameters.0/@kOwnedTags.0">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1314;1323" object="/1/@packages.0/Test/testReflect/@body/@statement.11/@parameters.0"/>
               </parameters>
-              <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+              <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect/@body/@statement.11/@target/@kOwnedTags.0" name="j">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1309;1311" object="/1/@packages.0/Test/testReflect/@body/@statement.11/@target"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               </target>
             </statement>
           </body>
@@ -8118,20 +8118,20 @@
         <ownedOperation kTag="/1/@packages.0/Test/testReflect2/@kOwnedTags.0" name="testReflect2" type="/1/@packages.0/Test/testReflect2/@containedType.0">
           <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1330;1404" object="/1/@packages.0/Test/testReflect2"/>
           <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void">
-            <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+            <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
           </containedType>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="/1/@packages.0/Test/testReflect2/@body/@kOwnedTags.0">
             <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1358;1404" object="/1/@packages.0/Test/testReflect2/@body"/>
             <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect2/@body/@statement.0/@kOwnedTags.0 /1/@packages.0/Test/testReflect2/@body/@statement.0/@kOwnedTags.1" name="size">
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1386;1396" object="/1/@packages.0/Test/testReflect2/@body/@statement.0"/>
               <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1366;1396" object="/1/@packages.0/Test/testReflect2/@body/@statement.0"/>
-              <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+              <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
               <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect2/@body/@statement.0/@target/@kOwnedTags.0" name="ownedLiteral">
                 <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1373;1386" object="/1/@packages.0/Test/testReflect2/@body/@statement.0/@target"/>
-                <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/Test/testReflect2/@body/@statement.0/@target/@target/@kOwnedTags.0" name="Couleur">
                   <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/006_enum/src/main/kmt/006_enum.kmt;1366;1373" object="/1/@packages.0/Test/testReflect2/@body/@statement.0/@target/@target"/>
-                  <usings fromQName="kermeta_standard#kermeta::standard::*" toName=""/>
+                  <usings fromQName="kermeta_standard^kermeta::standard::*" toName=""/>
                 </target>
               </target>
             </statement>

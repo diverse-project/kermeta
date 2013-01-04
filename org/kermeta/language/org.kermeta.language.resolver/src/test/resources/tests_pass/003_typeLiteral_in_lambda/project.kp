@@ -4,7 +4,7 @@ resource library_standard = "platform:/plugin/org.kermeta.language.library.stand
 importProject library_standard
 
 project p003_typeliteral_in_lambda {
-	mainClass "#root_package::Main"
+	mainClass "^root_package::Main"
 	mainOperation "main"
 	import "${project.baseUri}/src/main/kmt/003_typeLiteral_in_lambda.kmt"
 }

@@ -4,7 +4,7 @@ resource library_standard = "platform:/plugin/org.kermeta.language.library.stand
 importProject library_standard
 
 project p008_using {
-	mainClass "#root_package::Main"
+	mainClass "^root_package::Main"
 	mainOperation "main"
 	import "${project.baseUri}/src/main/kmt/008_using_1.kmt"
 	import "${project.baseUri}/src/main/kmt/008_using_2.kmt"
