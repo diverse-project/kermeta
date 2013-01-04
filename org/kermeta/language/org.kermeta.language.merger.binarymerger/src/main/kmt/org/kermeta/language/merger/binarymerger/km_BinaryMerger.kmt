@@ -51,7 +51,7 @@ class BinaryMerger
 		var mergedMetamodels : Collection<Metamodel> init OrderedSet<Metamodel>.new
 		mergedMetamodels.addAll(primaryMetamodels)
 		var metamodelsToMerge : Collection<Metamodel> init OrderedSet<Metamodel>.new
-		// everything shoould be merged in case several metamodel with the same name already exist in the primary collection
+		// everything should be merged in case several metamodel with the same name already exist in the primary collection
 		metamodelsToMerge.addAll(aspectMetamodels)
 		
 		
