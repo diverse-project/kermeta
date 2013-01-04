@@ -21,7 +21,7 @@ package root_package_lambda;
 
 using kermeta_standard^kermeta::io::*
 using kermeta_standard^kermeta::standard::*
-using library_utils#org::kermeta::kunit::*
+using library_utils^org::kermeta::kunit::*
 
 
 //alias FunctionType : kermeta::language::structure::FunctionType;

@@ -9,7 +9,7 @@
 package kermeta::ki::kompren;
 
 using ^kermeta::pruning::*
-using kermeta_standard#org::kermeta::language::structure::*
+using kermeta_standard^org::kermeta::language::structure::*
 using kermeta_standard^kermeta::standard::*
 
 
