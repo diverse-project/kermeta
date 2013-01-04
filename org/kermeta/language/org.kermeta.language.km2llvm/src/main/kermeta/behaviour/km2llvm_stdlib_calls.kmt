@@ -16,10 +16,65 @@ using org::kermeta::language::km2llvm
 using org::kermeta::language::llvm
 
 
+class GenerateIntegerIsNotEqualCall inherits CallGeneratorCmd {
+	method generateCall(ctx:Context, params:Sequence<LLVMVar>) : String is do
+		if params.size!=2 then
+			result := "FIXME GenerateIntegerIsNotEqualCall: 2 operands required."
+		else
+			result := ctx.llvm.icmp(IcmpCondition.ne, ctx.llvm.i32, params.at(1).name, params.at(0).name)
+		end
+	end
+}
+
+
+class GenerateIntegerIsLowerOrEqualCall inherits CallGeneratorCmd {
+	method generateCall(ctx:Context, params:Sequence<LLVMVar>) : String is do
+		if params.size!=2 then
+			result := "FIXME GenerateIntegerIsLowerOrEqualCall: 2 operands required."
+		else
+			result := ctx.llvm.icmp(IcmpCondition.sle, ctx.llvm.i32, params.at(1).name, params.at(0).name)
+		end
+	end
+}
+
+
+class GenerateIntegerIsLowerCall inherits CallGeneratorCmd {
+	method generateCall(ctx:Context, params:Sequence<LLVMVar>) : String is do
+		if params.size!=2 then
+			result := "FIXME GenerateIntegerIsLowerCall: 2 operands required."
+		else
+			result := ctx.llvm.icmp(IcmpCondition.slt, ctx.llvm.i32, params.at(1).name, params.at(0).name)
+		end
+	end
+}
+
+
+class GenerateIntegerMinusCall inherits CallGeneratorCmd {
+	method generateCall(ctx:Context, params:Sequence<LLVMVar>) : String is do
+		if params.size!=2 then
+			result := "FIXME GenerateIntegerMinusCall: 2 operands required."
+		else
+			result := ctx.llvm.sub(ctx.llvm.i32, params.at(1).name, params.at(0).name)
+		end
+	end
+}
+
+
+class GenerateIntegerIsGreaterOrEqualCall inherits CallGeneratorCmd {
+	method generateCall(ctx:Context, params:Sequence<LLVMVar>) : String is do
+		if params.size!=2 then
+			result := "FIXME GenerateIntegerIsGreaterOrEqualCall: 2 operands required."
+		else
+			result := ctx.llvm.icmp(IcmpCondition.sge, ctx.llvm.i32, params.at(1).name, params.at(0).name)
+		end
+	end
+}
+
+
 class GenerateIntegerIsGreaterCall inherits CallGeneratorCmd {
 	method generateCall(ctx:Context, params:Sequence<LLVMVar>) : String is do
 		if params.size!=2 then
-			result := "FIXME GenerateIntegerEqualsCall: 2 operands required."
+			result := "FIXME GenerateIntegerIsGreaterCall: 2 operands required."
 		else
 			result := ctx.llvm.icmp(IcmpCondition.sgt, ctx.llvm.i32, params.at(1).name, params.at(0).name)
 		end

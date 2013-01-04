@@ -251,7 +251,8 @@
                 identifier="i">
               <initialization
                   xsi:type="org_kermeta_language_behavior:IntegerLiteral"
-                  staticType="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0">
+                  staticType="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0"
+                  value="10">
                 <containedType
                     xsi:type="org_kermeta_language_structure:Class"
                     typeDefinition="//@packages.1/standard/Integer"/>
@@ -296,8 +297,8 @@
                     name="i"/>
                 <value
                     xsi:type="org_kermeta_language_behavior:CallOperation"
-                    name="plus"
-                    staticOperation="//@packages.1/standard/Integer/plus">
+                    name="minus"
+                    staticOperation="//@packages.1/standard/Integer/minus">
                   <parameters
                       xsi:type="org_kermeta_language_behavior:IntegerLiteral"
                       staticType="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0"
@@ -312,8 +313,8 @@
             <stopCondition
                 xsi:type="org_kermeta_language_behavior:CallOperation"
                 staticType="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0"
-                name="equals"
-                staticOperation="//@packages.1/standard/Integer/equals">
+                name="isNotEqual"
+                staticOperation="//@packages.1/standard/Integer/isNotEqual">
               <containedType
                   xsi:type="org_kermeta_language_structure:Class"
                   typeDefinition="//@packages.1/standard/Boolean"/>
@@ -401,6 +402,68 @@
           <ownedParameter
               name="obj"
               type="//@packages.1/standard/Integer/equals/@ownedParameter.0/@containedType.0">
+            <containedType
+                xsi:type="org_kermeta_language_structure:Class"
+                typeDefinition="//@packages.1/standard/Object"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation
+            name="isGreater"
+            type="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0">
+          <ownedParameter
+              name="obj"
+              type="//@packages.1/standard/Integer/isGreater/@ownedParameter.0/@containedType.0">
+            <containedType
+                xsi:type="org_kermeta_language_structure:Class"
+                typeDefinition="//@packages.1/standard/Object"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation
+            name="isGreaterOrEqual"
+            type="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0">
+          <ownedParameter
+              name="obj"
+              type="//@packages.1/standard/Integer/isGreaterOrEqual/@ownedParameter.0/@containedType.0">
+            <containedType
+                xsi:type="org_kermeta_language_structure:Class"
+                typeDefinition="//@packages.1/standard/Object"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation
+            name="isLower"
+            type="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0">
+          <ownedParameter
+              name="obj"
+              type="//@packages.1/standard/Integer/isLower/@ownedParameter.0/@containedType.0">
+            <containedType
+                xsi:type="org_kermeta_language_structure:Class"
+                typeDefinition="//@packages.1/standard/Object"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation
+            name="minus"
+            type="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0">
+          <ownedParameter
+              name="v"
+              type="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0"/>
+        </ownedOperation>
+        <ownedOperation
+            name="isLowerOrEqual"
+            type="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0">
+          <ownedParameter
+              name="obj"
+              type="//@packages.1/standard/Integer/isLowerOrEqual/@ownedParameter.0/@containedType.0">
+            <containedType
+                xsi:type="org_kermeta_language_structure:Class"
+                typeDefinition="//@packages.1/standard/Object"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation
+            name="isNotEqual"
+            type="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0">
+          <ownedParameter
+              name="obj"
+              type="//@packages.1/standard/Integer/isNotEqual/@ownedParameter.0/@containedType.0">
             <containedType
                 xsi:type="org_kermeta_language_structure:Class"
                 typeDefinition="//@packages.1/standard/Object"/>

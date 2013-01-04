@@ -1,0 +1,6 @@
+#! /bin/sh
+
+opt testCastInheritance.ll -S -O3 -o opt.ll
+llc opt.ll
+gcc opt.s -lm -o main
+./main

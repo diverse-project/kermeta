@@ -492,18 +492,18 @@ call void @kermeta_io__StdIO___writeln(i8* %"9", %struct.kermeta_io__StdIO* @SIN
 br label %llvmlabel6
 llvmlabel6:
 %"i" = alloca i32
-store i32 0, i32* %"i"
+store i32 10, i32* %"i"
 br label %llvmlabel10
 llvmlabel10:
 %"13" = load i32* %"i"
-%"14" = icmp eq i32 %"13", 10
+%"14" = icmp ne i32 %"13", 10
 br i1 %"14", label %llvmlabel12,label %llvmlabel11
 llvmlabel11:
 %"15" = load i32* %"i"
 %"16" = call i8* @kermeta_standard__Integer___toString(i32 %"15")
 call void @kermeta_io__StdIO___writeln(i8* %"16", %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
 %"17" = load i32* %"i"
-%"18" = add i32 %"17", 1
+%"18" = sub i32 %"17", 1
 store i32 %"18", i32* %"i"
 br label %llvmlabel10
 llvmlabel12:

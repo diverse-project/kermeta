@@ -78,10 +78,20 @@ class Context{
 		stdLibName.put("kermeta_standard__Integer", llvm.i32)
 		stdLibName.put("kermeta_io__StdIO", "%struct.kermeta_io__StdIO*")
 		
+		initialiseStdLibHashMap()
+	end
+	
+	
+	operation initialiseStdLibHashMap() is do
 		stdLibCmd := Hashtable<String, CallGeneratorCmd>.new
 		stdLibCmd.put("@kermeta_standard__Integer___plus", GenerateIntegerPlusCall.new)
 		stdLibCmd.put("@kermeta_standard__Integer___equals", GenerateIntegerEqualsCall.new)
 		stdLibCmd.put("@kermeta_standard__Integer___isGreater", GenerateIntegerIsGreaterCall.new)
+		stdLibCmd.put("@kermeta_standard__Integer___isGreaterOrEqual", GenerateIntegerIsGreaterOrEqualCall.new)
+		stdLibCmd.put("@kermeta_standard__Integer___isLower", GenerateIntegerIsLowerCall.new)
+		stdLibCmd.put("@kermeta_standard__Integer___minus", GenerateIntegerMinusCall.new)
+		stdLibCmd.put("@kermeta_standard__Integer___isLowerOrEqual", GenerateIntegerIsLowerOrEqualCall.new)
+		stdLibCmd.put("@kermeta_standard__Integer___isNotEqual", GenerateIntegerIsNotEqualCall.new)
 	end
 	
 	

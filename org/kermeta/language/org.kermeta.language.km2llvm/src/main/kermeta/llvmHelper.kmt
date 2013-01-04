@@ -13,6 +13,10 @@ using kermeta::utils
 using kermeta::standard
 
 class LLVMHelper {
+	operation sub(type:String, op1:String, op2:String) : String is do
+		result := "sub " + type + " " + op1 + ", " + op2
+	end
+	
 	operation add(type:String, op1:String, op2:String) : String is do
 		result := "add " + type + " " + op1 + ", " + op2
 	end
