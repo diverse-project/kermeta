@@ -20,7 +20,7 @@ package test {
    			var c : C init C.new
    			
    			
-   			a.foo[B](b, c, Ee.c, c)
+   			a.foo[B](b, c, Ee.c, c) // test disabled because this is the resolver that report it, not the checker
    		
    		
    		end
