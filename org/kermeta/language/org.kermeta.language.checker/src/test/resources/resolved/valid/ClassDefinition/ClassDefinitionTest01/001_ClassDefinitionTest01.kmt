@@ -5,8 +5,8 @@
  * Authors  : 
  *            jfalcou
  */
-using kermeta::standard
-using org::kermeta::language::structure
+using kermeta::standard::*
+using org::kermeta::language::structure::*
 
 package helloworld {
 	 

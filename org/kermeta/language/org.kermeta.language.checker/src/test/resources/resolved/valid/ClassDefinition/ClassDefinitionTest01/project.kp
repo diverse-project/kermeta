@@ -1,0 +1,5 @@
+resource library_standard ="platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.99-SNAPSHOT"
+importProject library_standard
+project ClassDefinitionTest01 {
+	import "${project.baseUri}/001_ClassDefinitionTest01.kmt"
+}
