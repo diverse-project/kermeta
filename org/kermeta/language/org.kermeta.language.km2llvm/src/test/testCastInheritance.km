@@ -248,18 +248,15 @@
               xsi:type="org_kermeta_language_behavior:Loop">
             <initialization
                 xsi:type="org_kermeta_language_behavior:VariableDecl"
+                staticType="//@packages.0/B/foo/@containedType.0"
                 identifier="i">
               <initialization
-                  xsi:type="org_kermeta_language_behavior:IntegerLiteral"
-                  staticType="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0"
-                  value="10">
-                <containedType
-                    xsi:type="org_kermeta_language_structure:Class"
-                    typeDefinition="//@packages.1/standard/Integer"/>
-              </initialization>
+                  xsi:type="org_kermeta_language_behavior:BooleanLiteral"
+                  staticType="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0"
+                  value="true"/>
               <type
-                  name="Integer"
-                  type="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0"/>
+                  name="Boolean"
+                  type="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0"/>
             </initialization>
             <body
                 xsi:type="org_kermeta_language_behavior:Block">
@@ -272,10 +269,10 @@
                     xsi:type="org_kermeta_language_behavior:CallOperation"
                     staticType="//@packages.1/io/StdIO/writeln/@ownedParameter.0/@containedType.0"
                     name="toString"
-                    staticOperation="//@packages.1/standard/Integer/toString">
+                    staticOperation="//@packages.1/standard/Boolean/toString">
                   <target
                       xsi:type="org_kermeta_language_behavior:CallVariable"
-                      staticType="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0"
+                      staticType="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0"
                       name="i"/>
                 </parameters>
                 <target
@@ -290,22 +287,20 @@
                 </target>
               </statement>
               <statement
-                  xsi:type="org_kermeta_language_behavior:Assignment">
+                  xsi:type="org_kermeta_language_behavior:Assignment"
+                  staticType="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0">
                 <target
                     xsi:type="org_kermeta_language_behavior:CallVariable"
-                    staticType="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0"
+                    staticType="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0"
                     name="i"/>
                 <value
                     xsi:type="org_kermeta_language_behavior:CallOperation"
-                    name="minus"
-                    staticOperation="//@packages.1/standard/Integer/minus">
-                  <parameters
-                      xsi:type="org_kermeta_language_behavior:IntegerLiteral"
-                      staticType="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0"
-                      value="1"/>
+                    staticType="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0"
+                    name="not"
+                    staticOperation="//@packages.1/standard/Boolean/not">
                   <target
                       xsi:type="org_kermeta_language_behavior:CallVariable"
-                      staticType="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0"
+                      staticType="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0"
                       name="i"/>
                 </value>
               </statement>
@@ -313,18 +308,18 @@
             <stopCondition
                 xsi:type="org_kermeta_language_behavior:CallOperation"
                 staticType="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0"
-                name="isNotEqual"
-                staticOperation="//@packages.1/standard/Integer/isNotEqual">
+                name="equals"
+                staticOperation="//@packages.1/standard/Boolean/equals">
               <containedType
                   xsi:type="org_kermeta_language_structure:Class"
                   typeDefinition="//@packages.1/standard/Boolean"/>
               <parameters
-                  xsi:type="org_kermeta_language_behavior:IntegerLiteral"
-                  staticType="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0"
-                  value="10"/>
+                  xsi:type="org_kermeta_language_behavior:BooleanLiteral"
+                  staticType="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0"
+                  value="false"/>
               <target
                   xsi:type="org_kermeta_language_behavior:CallVariable"
-                  staticType="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0"
+                  staticType="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0"
                   name="i"/>
             </stopCondition>
           </statement>
@@ -390,11 +385,9 @@
             name="toString"
             type="//@packages.1/io/StdIO/writeln/@ownedParameter.0/@containedType.0"/>
         <ownedOperation
-            name="plus"
-            type="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0">
+            name="plus">
           <ownedParameter
-              name="v"
-              type="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0"/>
+              name="v"/>
         </ownedOperation>
         <ownedOperation
             name="equals"
@@ -441,11 +434,9 @@
           </ownedParameter>
         </ownedOperation>
         <ownedOperation
-            name="minus"
-            type="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0">
+            name="minus">
           <ownedParameter
-              name="v"
-              type="//@packages.0/Main/main/@body/@statement.4/@initialization/@initialization/@containedType.0"/>
+              name="v"/>
         </ownedOperation>
         <ownedOperation
             name="isLowerOrEqual"
@@ -481,6 +472,23 @@
           name="Boolean">
         <kOwnedTags
             name="CompilerIgnore"/>
+        <ownedOperation
+            name="equals"
+            type="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0">
+          <ownedParameter
+              name="obj"
+              type="//@packages.1/standard/Boolean/equals/@ownedParameter.0/@containedType.0">
+            <containedType
+                xsi:type="org_kermeta_language_structure:Class"
+                typeDefinition="//@packages.1/standard/Object"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation
+            name="not"
+            type="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0"/>
+        <ownedOperation
+            name="toString"
+            type="//@packages.1/io/StdIO/writeln/@ownedParameter.0/@containedType.0"/>
       </ownedTypeDefinition>
     </nestedPackage>
   </packages>

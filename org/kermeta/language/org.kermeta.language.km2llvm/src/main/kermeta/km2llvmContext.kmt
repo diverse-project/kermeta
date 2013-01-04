@@ -92,6 +92,9 @@ class Context{
 		stdLibCmd.put("@kermeta_standard__Integer___minus", GenerateIntegerMinusCall.new)
 		stdLibCmd.put("@kermeta_standard__Integer___isLowerOrEqual", GenerateIntegerIsLowerOrEqualCall.new)
 		stdLibCmd.put("@kermeta_standard__Integer___isNotEqual", GenerateIntegerIsNotEqualCall.new)
+		
+		stdLibCmd.put("@kermeta_standard__Boolean___not", GenerateBooleanNotCall.new)
+		stdLibCmd.put("@kermeta_standard__Boolean___equals", GenerateBooleanEqualsCall.new)
 	end
 	
 	

@@ -51,6 +51,7 @@ aspect class CallVariable {
 		// The content of the variable (a pointer) is store into a temp var.
 		var varName : String init ctx.nextOperationVar
 		// The load operation is appended to the string buf while the name of the temp var is returned.
+		stdio.writeln(staticType.toString + " " + name)
 		ctx.operations.append(ctx.llvm.assign(varName, ctx.llvm.load(ctx.llvm.pointer(staticType.llvmType(ctx)), ctx.llvm.localVar(name)))).append("\n")
 		result := varName
 	end

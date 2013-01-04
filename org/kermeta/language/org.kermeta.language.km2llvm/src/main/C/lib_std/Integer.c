@@ -15,15 +15,10 @@ char* kermeta_standard__Integer___toString(int self) {
 	else
 		lgth += floor(log10(abs(self))) + 1;
 
-	str = malloc(sizeof(char*)*lgth);
+	str = malloc(sizeof(char)*lgth);
 	snprintf(str, sizeof(str), "%d", self);
 
 	return str;	
-}
-
-
-int minus(int i, int self) {
-	return self+i;
 }
 
 

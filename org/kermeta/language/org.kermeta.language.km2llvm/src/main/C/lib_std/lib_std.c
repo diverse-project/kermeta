@@ -7,5 +7,6 @@
 #include "Void.c"
 #include "String.c"
 #include "Integer.c"
+#include "Boolean.c"
 #include "StdIO.c"
 

@@ -13,6 +13,10 @@ using kermeta::utils
 using kermeta::standard
 
 class LLVMHelper {
+	operation xor(type:String, op1:String, op2:String) : String is do
+		result := "xor " + type + " " + op1 + ", " + op2
+	end
+	
 	operation sub(type:String, op1:String, op2:String) : String is do
 		result := "sub " + type + " " + op1 + ", " + op2
 	end
@@ -26,7 +30,7 @@ class LLVMHelper {
 	operation br_uncond(label:String):String is do result := "br label "+label end
 
 	operation br(cond:String, labelTrue:String, labelFalse:String) : String is do
-		result := "br "+i1+" "+cond+", label "+labelTrue+",label "+labelFalse
+		result := "br "+i1+" "+cond+", label "+labelTrue+", label "+labelFalse
 	end
 
 	operation icmp(cond:IcmpCondition, type:String, v1:String, v2:String) : String is do
@@ -79,7 +83,7 @@ class LLVMHelper {
 			sep1 := " "
 			sep2 := ""
 		end
-		result := "getelementptr" + sep1 + typeVal + " " + val + "," + type1 + " " + pos1.toString + "," + type2 + " " + pos2.toString+sep2
+		result := "getelementptr" + sep1 + typeVal + " " + val + "," + type1 + " " + pos1.toString + ", " + type2 + " " + pos2.toString+sep2
 	end
 
 	operation call(name:String, return:String, params:Sequence<LLVMVar>) : String is do

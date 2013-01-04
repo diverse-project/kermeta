@@ -8,9 +8,11 @@ target triple = "x86_64-pc-linux-gnu"
 %struct.kermeta_standard__Object = type { %struct.kermeta_standard__Object* }
 
 @.str = private unnamed_addr constant [3 x i8] c"%d\00", align 1
-@.str1 = private unnamed_addr constant [3 x i8] c"%s\00", align 1
+@.str1 = private unnamed_addr constant [5 x i8] c"true\00", align 1
+@.str2 = private unnamed_addr constant [6 x i8] c"false\00", align 1
+@.str3 = private unnamed_addr constant [3 x i8] c"%s\00", align 1
 @stderr = external global %struct._IO_FILE*
-@.str2 = private unnamed_addr constant [4 x i8] c"%s\0A\00", align 1
+@.str4 = private unnamed_addr constant [4 x i8] c"%s\0A\00", align 1
 @SINGLETON_kermeta_io__StdIO = common global %struct.kermeta_io__StdIO zeroinitializer, align 1
 
 define %struct.kermeta_standard__Object* @kermeta_standard__Object___container(%struct.kermeta_standard__Object* %self) nounwind uwtable {
@@ -235,17 +237,6 @@ declare noalias i8* @malloc(i64) nounwind
 
 declare i32 @snprintf(i8*, i64, i8*, ...) nounwind
 
-define i32 @minus(i32 %i, i32 %self) nounwind uwtable {
-  %1 = alloca i32, align 4
-  %2 = alloca i32, align 4
-  store i32 %i, i32* %1, align 4
-  store i32 %self, i32* %2, align 4
-  %3 = load i32* %2, align 4
-  %4 = load i32* %1, align 4
-  %5 = add nsw i32 %3, %4
-  ret i32 %5
-}
-
 define i32 @mult(i32 %i, i32 %self) nounwind uwtable {
   %1 = alloca i32, align 4
   %2 = alloca i32, align 4
@@ -287,6 +278,43 @@ define i32 @uminus(i32 %self) nounwind uwtable {
   ret i32 %3
 }
 
+define %struct.kermeta_standard__Object* @kermeta_standard__Boolean___container(i1 zeroext %self) nounwind uwtable {
+  %1 = alloca i8, align 1
+  %2 = zext i1 %self to i8
+  store i8 %2, i8* %1, align 1
+  ret %struct.kermeta_standard__Object* null
+}
+
+define i8* @kermeta_standard__Boolean___toString(i1 zeroext %self) nounwind uwtable {
+  %1 = alloca i8, align 1
+  %str = alloca i8*, align 8
+  %2 = zext i1 %self to i8
+  store i8 %2, i8* %1, align 1
+  %3 = load i8* %1, align 1
+  %4 = trunc i8 %3 to i1
+  br i1 %4, label %5, label %9
+
+; <label>:5                                       ; preds = %0
+  %6 = call noalias i8* @malloc(i64 40) nounwind
+  store i8* %6, i8** %str, align 8
+  %7 = load i8** %str, align 8
+  %8 = call i8* @strcpy(i8* %7, i8* getelementptr inbounds ([5 x i8]* @.str1, i32 0, i32 0)) nounwind
+  br label %13
+
+; <label>:9                                       ; preds = %0
+  %10 = call noalias i8* @malloc(i64 48) nounwind
+  store i8* %10, i8** %str, align 8
+  %11 = load i8** %str, align 8
+  %12 = call i8* @strcpy(i8* %11, i8* getelementptr inbounds ([6 x i8]* @.str2, i32 0, i32 0)) nounwind
+  br label %13
+
+; <label>:13                                      ; preds = %9, %5
+  %14 = load i8** %str, align 8
+  ret i8* %14
+}
+
+declare i8* @strcpy(i8*, i8*) nounwind
+
 define void @kermeta_io__StdIO___writeln(i8* %o, %struct.kermeta_io__StdIO* %self) nounwind uwtable {
   %1 = alloca i8*, align 8
   %2 = alloca %struct.kermeta_io__StdIO*, align 8
@@ -305,7 +333,7 @@ define void @kermeta_io__StdIO___write(i8* %o, %struct.kermeta_io__StdIO* %self)
   store i8* %o, i8** %1, align 8
   store %struct.kermeta_io__StdIO* %self, %struct.kermeta_io__StdIO** %2, align 8
   %3 = load i8** %1, align 8
-  %4 = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([3 x i8]* @.str1, i32 0, i32 0), i8* %3)
+  %4 = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([3 x i8]* @.str3, i32 0, i32 0), i8* %3)
   ret void
 }
 
@@ -318,7 +346,7 @@ define void @kermeta_io__StdIO___errorln(i8* %o, %struct.kermeta_io__StdIO* %sel
   store %struct.kermeta_io__StdIO* %self, %struct.kermeta_io__StdIO** %2, align 8
   %3 = load %struct._IO_FILE** @stderr, align 8
   %4 = load i8** %1, align 8
-  %5 = call i32 (%struct._IO_FILE*, i8*, ...)* @fprintf(%struct._IO_FILE* %3, i8* getelementptr inbounds ([4 x i8]* @.str2, i32 0, i32 0), i8* %4)
+  %5 = call i32 (%struct._IO_FILE*, i8*, ...)* @fprintf(%struct._IO_FILE* %3, i8* getelementptr inbounds ([4 x i8]* @.str4, i32 0, i32 0), i8* %4)
   ret void
 }
 
@@ -331,7 +359,7 @@ define void @kermeta__o__StdIO___error(i8* %o, %struct.kermeta_io__StdIO* %self)
   store %struct.kermeta_io__StdIO* %self, %struct.kermeta_io__StdIO** %2, align 8
   %3 = load %struct._IO_FILE** @stderr, align 8
   %4 = load i8** %1, align 8
-  %5 = call i32 (%struct._IO_FILE*, i8*, ...)* @fprintf(%struct._IO_FILE* %3, i8* getelementptr inbounds ([3 x i8]* @.str1, i32 0, i32 0), i8* %4)
+  %5 = call i32 (%struct._IO_FILE*, i8*, ...)* @fprintf(%struct._IO_FILE* %3, i8* getelementptr inbounds ([3 x i8]* @.str3, i32 0, i32 0), i8* %4)
   ret void
 }
 
