@@ -11,8 +11,8 @@
 package root_package;
 
 
-using kermeta::io
-using kermeta::standard
+using kermeta::io::*
+using kermeta::standard::*
 
 //alias MyString : kermeta::standard::String;
 class Main

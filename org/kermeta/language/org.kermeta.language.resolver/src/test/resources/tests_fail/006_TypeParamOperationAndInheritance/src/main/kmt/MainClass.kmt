@@ -1,5 +1,5 @@
-using kermeta::standard
-using kermeta::io
+using kermeta::standard::*
+using kermeta::io::*
 
 package mainPackage{
 	class MainClass
