@@ -22,7 +22,7 @@ aspect class NamedElement
 			if self.container().isInstanceOf(NamedElement) then
 				buffer.append(self.container().asType(NamedElement).getQualifiedName())
 				if  self.container().isInstanceOf(Metamodel) then
-					buffer.append("#")
+					buffer.append("^")
 				else
 					buffer.append("::")
 				end

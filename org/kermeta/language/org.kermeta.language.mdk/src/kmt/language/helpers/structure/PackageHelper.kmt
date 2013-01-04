@@ -25,7 +25,7 @@ aspect class Package {
 	
 	/**
 	 * search in this Package a partial Qualified name representing a TypeDefinition
-	 * ie. a name that might contains ::, but not # in order to search in sub packages 
+	 * ie. a name that might contains ::, but not ^ in order to search in sub packages 
 	 */ 
 	operation getTypeDefinitionByPartialName(pname : String) : TypeDefinition is do
 		

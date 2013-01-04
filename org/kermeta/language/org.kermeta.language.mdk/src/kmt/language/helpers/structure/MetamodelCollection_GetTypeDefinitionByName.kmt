@@ -26,22 +26,23 @@ class TypeDefinitionFinder {
 	 */	
 	operation getTypeDefinitionByQualifiedName(qname : String, metamodels : Collection<Metamodel>, currentMetamodel : Metamodel) : TypeDefinition is do
 		result := void
-		if qname.contains("#") then
-			var mmName : String init qname.split("#").at(0)
+		if qname.contains("^") then
+			var mmName : String init qname.split("\\^").at(0)
 			if(mmName.size == 0) then
 				result := currentMetamodel.getTypeDefinitionByQualifiedName(currentMetamodel.name+qname) 
 			else
-				var partialName : String init qname.split("#").at(1)
+				stdio.writeln("getTypeDefinitionByQualifiedName "+qname)
+				var partialName : String init qname.split("\\^").at(1)
 				var metamodel : Metamodel init metamodels.detect{mm|mm.name.equals(mmName)}
 				if(not metamodel.isVoid) then
 					result := metamodel.getTypeDefinitionByQualifiedName(qname)
 				end
 			end
 		else
-			stdio.writeln("TypeDefinitionFinder.getTypeDefinitionByQualifiedName expects a qualified name (i.e., qualified name including metamodel name, followed by \"#\"), but was called on: " + qname)
+			stdio.writeln("TypeDefinitionFinder.getTypeDefinitionByQualifiedName expects a qualified name (i.e., qualified name including metamodel name, followed by \"^\"), but was called on: " + qname)
 			/*stdio.writeln("Creating an exception")
 			var e : Exception init Exception.new
-			e.message := "getTypeDefinitionByQualifiedName expects a qualified name (i.e., qualified name including metamodel name, followed by \"#\"), but was called on: " + qname
+			e.message := "getTypeDefinitionByQualifiedName expects a qualified name (i.e., qualified name including metamodel name, followed by \"^\"), but was called on: " + qname
 			stdio.writeln("Raising the exception")
 			raise e*/
 		end
@@ -49,20 +50,20 @@ class TypeDefinitionFinder {
 	
 	/**
 	 * retrieves the TypeDefinition with the given qualified name, the name can be partial or full
-	 * (partial in the sense that it doesn't use the #)
+	 * (partial in the sense that it doesn't use the ^)
 	 */
 	operation getFirstTypeDefinitionByName(name : String,  metamodels : Collection<Metamodel>) : TypeDefinition is do
 		result := void
-		//If the name is a qualified name (including metamodel name followed by #)
-		if name.contains("#") then
-			var mmName : String init name.split("#").at(0)
+		//If the name is a qualified name (including metamodel name followed by ^)
+		if name.contains("^") then
+			var mmName : String init name.split("\\^").at(0)
 			var metamodel : Metamodel init metamodels.detect{mm|mm.name.equals(mmName)}
 			if(not metamodel.isVoid) then
 				result := metamodel.getTypeDefinitionByQualifiedName(name)
 			else
 				stdio.errorln("FAILED to find " + name + " in metamodel \"" + mmName + "\"")
 			end
-		//If the name is a partial name (without metamodel name nor #)
+		//If the name is a partial name (without metamodel name nor ^)
 		else
 			//We look for the first metamodel containing a type definition corresponding to the partial name
 			var metamodel : Metamodel init metamodels.detect{mm|not mm.getTypeDefinitionByPartialName(name).isVoid}
@@ -77,7 +78,7 @@ class TypeDefinitionFinder {
 	
 	/**
 	 * retrieves the first metamodel in the collection that contains a TypeDefinition with the given partial qualified name
-	 * (partial in the sense that it doesn't use the #)
+	 * (partial in the sense that it doesn't use the ^)
 	 */
 	operation getFirstMetamodelWithTypeDefinition(partialQName : String,  metamodels : Collection<Metamodel>) : Metamodel is do
 		result := metamodels.detect{mm| not mm.getTypeDefinitionByPartialName(partialQName).isVoid}
@@ -93,8 +94,8 @@ class TypeDefinitionFinder {
 		
 		var metamodels : Collection<Metamodel> init currentMetamodel.getNeighbours()
 		result := void
-		if lookingForName.contains("#") then
-			var set_name : Sequence<String> init lookingForName.split("#")
+		if lookingForName.contains("^") then
+			var set_name : Sequence<String> init lookingForName.split("\\^")
 	 		if not set_name.at(0).equals("") then
 		 		// search the exact qualified name
 				result := getTypeDefinitionByQualifiedName(lookingForName, metamodels, currentMetamodel)	
@@ -119,7 +120,7 @@ class TypeDefinitionFinder {
 					if (currentUsing.toName.isVoid() or currentUsing.toName == "") then
 						//We now look for a type which the same name and which qualifiedPath is the fromQName
 						var newName : String init currentUsing.fromQName.replace("*", lookingForName)
-						if newName.contains("#") then
+						if newName.contains("^") then
 							result := getTypeDefinitionByQualifiedName(newName, metamodels, currentMetamodel)
 						else
 							result := getFirstTypeDefinitionByName(newName, metamodels)
@@ -127,7 +128,7 @@ class TypeDefinitionFinder {
 					else
 						if lookingForName.startsWith(currentUsing.toName) then
 							var newName : String init lookingForName.replace(currentUsing.toName, currentUsing.fromQName)
-							if newName.contains("#") then
+							if newName.contains("^") then
 								result := getTypeDefinitionByQualifiedName(newName, metamodels, currentMetamodel)
 							else
 								result := getFirstTypeDefinitionByName(newName, metamodels)
