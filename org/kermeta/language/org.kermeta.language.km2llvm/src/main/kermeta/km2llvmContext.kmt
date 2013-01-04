@@ -81,6 +81,7 @@ class Context{
 		stdLibCmd := Hashtable<String, CallGeneratorCmd>.new
 		stdLibCmd.put("@kermeta_standard__Integer___plus", GenerateIntegerPlusCall.new)
 		stdLibCmd.put("@kermeta_standard__Integer___equals", GenerateIntegerEqualsCall.new)
+		stdLibCmd.put("@kermeta_standard__Integer___isGreater", GenerateIntegerIsGreaterCall.new)
 	end
 	
 	

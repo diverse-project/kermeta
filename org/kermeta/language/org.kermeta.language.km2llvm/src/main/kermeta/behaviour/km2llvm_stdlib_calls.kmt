@@ -16,6 +16,17 @@ using org::kermeta::language::km2llvm
 using org::kermeta::language::llvm
 
 
+class GenerateIntegerIsGreaterCall inherits CallGeneratorCmd {
+	method generateCall(ctx:Context, params:Sequence<LLVMVar>) : String is do
+		if params.size!=2 then
+			result := "FIXME GenerateIntegerEqualsCall: 2 operands required."
+		else
+			result := ctx.llvm.icmp(IcmpCondition.sgt, ctx.llvm.i32, params.at(1).name, params.at(0).name)
+		end
+	end
+} 
+
+
 class GenerateIntegerEqualsCall inherits CallGeneratorCmd {
 	method generateCall(ctx:Context, params:Sequence<LLVMVar>) : String is do
 		if params.size!=2 then
