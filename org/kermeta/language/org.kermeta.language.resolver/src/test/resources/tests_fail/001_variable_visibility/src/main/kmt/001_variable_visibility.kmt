@@ -1,4 +1,4 @@
-using kermeta::standard
+using kermeta::standard::*
 package root_package{
 
 	class Foo
