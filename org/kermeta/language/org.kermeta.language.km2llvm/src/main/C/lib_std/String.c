@@ -13,7 +13,7 @@ struct kermeta_standard__Object* kermeta_standard__String___container(const char
 
 
 char* kermeta_standard__String___plus(const char* const s, const char* const self) {
-	char* res = calloc(strlen(s)+strlen(self)+1, sizeof(char*));
+	char* res = calloc(strlen(s)+strlen(self)+1, sizeof(char));
 	strcat(res, self);
 	strcat(res, s);
 	return res;
