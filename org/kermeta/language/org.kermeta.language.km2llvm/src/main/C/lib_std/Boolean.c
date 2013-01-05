@@ -1,7 +1,7 @@
 
 //#######################
 // Boolean
-// unsigned char is used as a boolean to get an i1 in llvm. Bool, from stdbool.h, represents a bool as a char (i8).
+// Issue: no way to produce a i1 using clang. i8 are generated (unsigned char).
 
 struct kermeta_standard__Object* kermeta_standard__Boolean___container(unsigned char self) {
 	return NULL;

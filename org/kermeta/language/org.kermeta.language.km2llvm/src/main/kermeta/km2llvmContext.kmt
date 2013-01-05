@@ -15,6 +15,7 @@ require "./behaviour/km2llvm_stdlib_calls.kmt"
 using kermeta::utils
 using kermeta::standard
 using org::kermeta::language::llvm
+using org::kermeta::language::behavior
 using kermeta::io
 
 class Context{
@@ -95,6 +96,11 @@ class Context{
 		
 		stdLibCmd.put("@kermeta_standard__Boolean___not", GenerateBooleanNotCall.new)
 		stdLibCmd.put("@kermeta_standard__Boolean___equals", GenerateBooleanEqualsCall.new)
+		stdLibCmd.put("@kermeta_standard__Boolean___and", GenerateBooleanAndCall.new)
+		stdLibCmd.put("@kermeta_standard__Boolean___or", GenerateBooleanOrCall.new)
+		stdLibCmd.put("@kermeta_standard__Boolean___toString", GenerateBooleanToStringCall.new)
+		
+		stdLibCmd.put("@kermeta_standard__Object___isVoid", GenerateObjectIsVoidCall.new)
 	end
 	
 	
@@ -134,6 +140,24 @@ class Context{
 }
 
 
+// This class is a command to execute the LLVM code generation of calls.
 abstract class CallGeneratorCmd {
-	operation generateCall(ctx:Context, params:Sequence<LLVMVar>) : String is abstract
-} 
+	operation generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is abstract
+}
+
+
+// This class is a 2-tuple used by CallGeneratorCmd as result of the operation generateCall
+class GeneratorCmdResult inherits Tuple2<String, Boolean> {
+	operation initialise(val:String, callInlined:Boolean) : GeneratorCmdResult is do
+		result := self
+		v1 := val
+		v2 := callInlined
+	end
+}
+
+
+// Definition of a 2-tuple
+abstract class Tuple2<S, T> {
+	reference v1:S
+	reference v2:T
+}

@@ -253,7 +253,7 @@
               <initialization
                   xsi:type="org_kermeta_language_behavior:BooleanLiteral"
                   staticType="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0"
-                  value="true"/>
+                  value="false"/>
               <type
                   name="Boolean"
                   type="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0"/>
@@ -296,8 +296,8 @@
                 <value
                     xsi:type="org_kermeta_language_behavior:CallOperation"
                     staticType="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0"
-                    name="not"
-                    staticOperation="//@packages.1/standard/Boolean/not">
+                    name="isVoid"
+                    staticOperation="//@packages.1/standard/Object/isVoid">
                   <target
                       xsi:type="org_kermeta_language_behavior:CallVariable"
                       staticType="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0"
@@ -466,6 +466,9 @@
           name="Object">
         <kOwnedTags
             name="CompilerIgnore"/>
+        <ownedOperation
+            name="isVoid"
+            type="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0"/>
       </ownedTypeDefinition>
       <ownedTypeDefinition
           xsi:type="org_kermeta_language_structure:ClassDefinition"
@@ -489,6 +492,20 @@
         <ownedOperation
             name="toString"
             type="//@packages.1/io/StdIO/writeln/@ownedParameter.0/@containedType.0"/>
+        <ownedOperation
+            name="and"
+            type="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0">
+          <ownedParameter
+              name="v"
+              type="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0"/>
+        </ownedOperation>
+        <ownedOperation
+            name="or"
+            type="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0">
+          <ownedParameter
+              name="v"
+              type="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0"/>
+        </ownedOperation>
       </ownedTypeDefinition>
     </nestedPackage>
   </packages>

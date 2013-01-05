@@ -13,6 +13,18 @@ using kermeta::utils
 using kermeta::standard
 
 class LLVMHelper {
+	operation zext(typeFrom:String, typeTo:String, val:String) : String is do
+		result := "zext " + typeFrom + " " + val + " to " + typeTo
+	end
+
+	operation ~or(type:String, op1:String, op2:String) : String is do
+		result := "or " + type + " " + op1 + ", " + op2
+	end
+	
+	operation ~and(type:String, op1:String, op2:String) : String is do
+		result := "and " + type + " " + op1 + ", " + op2
+	end
+	
 	operation xor(type:String, op1:String, op2:String) : String is do
 		result := "xor " + type + " " + op1 + ", " + op2
 	end
@@ -69,6 +81,7 @@ class LLVMHelper {
 	operation i32() : String is do result := "i32" end
 	operation i64() : String is do result := "i64" end
 	operation ~void() : String is do result := "void" end
+	operation null() : String is do result := "null" end
 	operation ~true() : String is do result := "true" end
 	operation ~false() : String is do result := "false" end
 

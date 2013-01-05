@@ -104,6 +104,8 @@ aspect class CallOperation {
 			i := i + 1
 		}
 		
+		// Sometimes a call operation is inlined.
+		var isCallInlined : Boolean init false
 		// The last parameter is self.
 		var clazz : Class init Class.new // Uses a class to get the llvm type name of the class definition owning the operation.
 		clazz.typeDefinition := staticOperation.owningClass
@@ -116,7 +118,9 @@ aspect class CallOperation {
 			// Generating the call.
 			result := ctx.llvm.call(staticOperation.llvmName(ctx), staticOperation.type.llvmType(ctx), params)
 		else // If one command
-			result := cmd.generateCall(ctx, params)
+			var res : GeneratorCmdResult init cmd.generateCall(ctx, params, self) // A 2-tuple is returned
+			isCallInlined := res.v2 // To know if the call has been inlined.
+			result := res.v1 // The generated cide
 		end
 		
 		// The call is appended to the buffer. If a value is returned, it is stored into a variable which is returned by the operation.
@@ -124,9 +128,12 @@ aspect class CallOperation {
 			ctx.operations.append(result).append("\n")
 			result := ""
 		else
-			var varTmp : String init ctx.nextOperationVar
-			ctx.operations.append(ctx.llvm.assign(varTmp, result)).append("\n")
-			result := varTmp
+			//FIXME: if the call is inlined and its container is a block, the llvm code will not compile, e.g. operation foo() is do 1.isVoid end
+			if not isCallInlined then // If the call has not been inlined, it is stored into a variable. This variable is returned.
+				var varTmp : String init ctx.nextOperationVar
+				ctx.operations.append(ctx.llvm.assign(varTmp, result)).append("\n")
+				result := varTmp
+			end
 		end
 	end
 

@@ -33,6 +33,8 @@ aspect class Metamodel {
 
 
 aspect class Type {
+	operation isPointer(ctx:Context) : Boolean is do result := llvmType(ctx).contains("*") end
+
 	operation isVoidType(ctx:Context) : Boolean is do result := false end
 
 	operation llvmType(ctx:Context) : String is abstract

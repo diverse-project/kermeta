@@ -52,7 +52,7 @@ define i8* @kermeta_standard__String___plus(i8* %s, i8* %self) nounwind uwtable 
   %6 = call i64 @strlen(i8* %5) nounwind readonly
   %7 = add i64 %4, %6
   %8 = add i64 %7, 1
-  %9 = call noalias i8* @calloc(i64 %8, i64 8) nounwind
+  %9 = call noalias i8* @calloc(i64 %8, i64 1) nounwind
   store i8* %9, i8** %res, align 8
   %10 = load i8** %res, align 8
   %11 = load i8** %2, align 8
@@ -217,7 +217,7 @@ define i8* @kermeta_standard__Integer___toString(i32 %self) nounwind uwtable {
 ; <label>:21                                      ; preds = %10, %7
   %22 = load i32* %lgth, align 4
   %23 = sext i32 %22 to i64
-  %24 = mul i64 8, %23
+  %24 = mul i64 1, %23
   %25 = call noalias i8* @malloc(i64 %24) nounwind
   store i8* %25, i8** %str, align 8
   %26 = load i8** %str, align 8
@@ -237,83 +237,40 @@ declare noalias i8* @malloc(i64) nounwind
 
 declare i32 @snprintf(i8*, i64, i8*, ...) nounwind
 
-define i32 @mult(i32 %i, i32 %self) nounwind uwtable {
-  %1 = alloca i32, align 4
-  %2 = alloca i32, align 4
-  store i32 %i, i32* %1, align 4
-  store i32 %self, i32* %2, align 4
-  %3 = load i32* %2, align 4
-  %4 = load i32* %1, align 4
-  %5 = mul nsw i32 %3, %4
-  ret i32 %5
-}
-
-define i32 @div2(i32 %i, i32 %self) nounwind uwtable {
-  %1 = alloca i32, align 4
-  %2 = alloca i32, align 4
-  store i32 %i, i32* %1, align 4
-  store i32 %self, i32* %2, align 4
-  %3 = load i32* %2, align 4
-  %4 = load i32* %1, align 4
-  %5 = sdiv i32 %3, %4
-  ret i32 %5
-}
-
-define i32 @mod(i32 %i, i32 %self) nounwind uwtable {
-  %1 = alloca i32, align 4
-  %2 = alloca i32, align 4
-  store i32 %i, i32* %1, align 4
-  store i32 %self, i32* %2, align 4
-  %3 = load i32* %2, align 4
-  %4 = load i32* %1, align 4
-  %5 = srem i32 %3, %4
-  ret i32 %5
-}
-
-define i32 @uminus(i32 %self) nounwind uwtable {
-  %1 = alloca i32, align 4
-  store i32 %self, i32* %1, align 4
-  %2 = load i32* %1, align 4
-  %3 = mul nsw i32 %2, -1
-  ret i32 %3
-}
-
-define %struct.kermeta_standard__Object* @kermeta_standard__Boolean___container(i1 zeroext %self) nounwind uwtable {
+define %struct.kermeta_standard__Object* @kermeta_standard__Boolean___container(i8 zeroext %self) nounwind uwtable {
   %1 = alloca i8, align 1
-  %2 = zext i1 %self to i8
-  store i8 %2, i8* %1, align 1
+  store i8 %self, i8* %1, align 1
   ret %struct.kermeta_standard__Object* null
 }
 
-define i8* @kermeta_standard__Boolean___toString(i1 zeroext %self) nounwind uwtable {
+define i8* @kermeta_standard__Boolean___toString(i8 zeroext %self) nounwind uwtable {
   %1 = alloca i8, align 1
   %str = alloca i8*, align 8
-  %2 = zext i1 %self to i8
-  store i8 %2, i8* %1, align 1
-  %3 = load i8* %1, align 1
-  %4 = trunc i8 %3 to i1
-  br i1 %4, label %5, label %9
+  store i8 %self, i8* %1, align 1
+  %2 = load i8* %1, align 1
+  %3 = icmp ne i8 %2, 0
+  br i1 %3, label %4, label %8
 
-; <label>:5                                       ; preds = %0
-  %6 = call noalias i8* @malloc(i64 40) nounwind
-  store i8* %6, i8** %str, align 8
-  %7 = load i8** %str, align 8
-  %8 = call i8* @strcpy(i8* %7, i8* getelementptr inbounds ([5 x i8]* @.str1, i32 0, i32 0)) nounwind
-  br label %13
+; <label>:4                                       ; preds = %0
+  %5 = call noalias i8* @malloc(i64 4) nounwind
+  store i8* %5, i8** %str, align 8
+  %6 = load i8** %str, align 8
+  %7 = call i8* @strncpy(i8* %6, i8* getelementptr inbounds ([5 x i8]* @.str1, i32 0, i32 0), i64 4) nounwind
+  br label %12
 
-; <label>:9                                       ; preds = %0
-  %10 = call noalias i8* @malloc(i64 48) nounwind
-  store i8* %10, i8** %str, align 8
-  %11 = load i8** %str, align 8
-  %12 = call i8* @strcpy(i8* %11, i8* getelementptr inbounds ([6 x i8]* @.str2, i32 0, i32 0)) nounwind
-  br label %13
+; <label>:8                                       ; preds = %0
+  %9 = call noalias i8* @malloc(i64 5) nounwind
+  store i8* %9, i8** %str, align 8
+  %10 = load i8** %str, align 8
+  %11 = call i8* @strncpy(i8* %10, i8* getelementptr inbounds ([6 x i8]* @.str2, i32 0, i32 0), i64 5) nounwind
+  br label %12
 
-; <label>:13                                      ; preds = %9, %5
-  %14 = load i8** %str, align 8
-  ret i8* %14
+; <label>:12                                      ; preds = %8, %4
+  %13 = load i8** %str, align 8
+  ret i8* %13
 }
 
-declare i8* @strcpy(i8*, i8*) nounwind
+declare i8* @strncpy(i8*, i8*, i64) nounwind
 
 define void @kermeta_io__StdIO___writeln(i8* %o, %struct.kermeta_io__StdIO* %self) nounwind uwtable {
   %1 = alloca i8*, align 8
@@ -520,7 +477,7 @@ call void @kermeta_io__StdIO___writeln(i8* %"9", %struct.kermeta_io__StdIO* @SIN
 br label %llvmlabel6
 llvmlabel6:
 %"i" = alloca i1
-store i1 true, i1* %"i"
+store i1 false, i1* %"i"
 br label %llvmlabel10
 llvmlabel10:
 %"13" = load i1* %"i"
@@ -528,11 +485,11 @@ llvmlabel10:
 br i1 %"14", label %llvmlabel12, label %llvmlabel11
 llvmlabel11:
 %"15" = load i1* %"i"
-%"16" = call i8* @kermeta_standard__Boolean___toString(i1 %"15")
-call void @kermeta_io__StdIO___writeln(i8* %"16", %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
-%"17" = load i1* %"i"
-%"18" = xor i1 %"17", true
-store i1 %"18", i1* %"i"
+%"16" = zext i1 %"15" to i8
+%"17" = call i8* @kermeta_standard__Boolean___toString(i8 %"16")
+call void @kermeta_io__StdIO___writeln(i8* %"17", %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
+%"18" = load i1* %"i"
+store i1 false, i1* %"i"
 br label %llvmlabel10
 llvmlabel12:
 ret void
