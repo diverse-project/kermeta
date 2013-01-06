@@ -98,6 +98,51 @@ class GenerateBooleanNotCall inherits CallGeneratorCmd {
 
 
 // Integer
+class GenerateIntegerUminCall inherits CallGeneratorCmd {
+	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
+		if params.size!=1 then
+			result := GeneratorCmdResult.new.initialise("FIXME GenerateIntegerUminCall: 1 operand required: " + params.size.toString, false)
+		else
+			result := GeneratorCmdResult.new.initialise(ctx.llvm.sub(ctx.llvm.i32, "0", params.at(0).name), false)
+		end
+	end
+}
+
+
+class GenerateIntegerModCall inherits CallGeneratorCmd {
+	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
+		if params.size!=2 then
+			result := GeneratorCmdResult.new.initialise("FIXME GenerateIntegerModCall: 2 operands required: " + params.size.toString, false)
+		else
+			// The 'modulo' operator is in fact the 'reminder' operator.
+			result := GeneratorCmdResult.new.initialise(ctx.llvm.srem(ctx.llvm.i32, params.at(1).name, params.at(0).name), false)
+		end
+	end
+}
+
+
+class GenerateIntegerDivCall inherits CallGeneratorCmd {
+	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
+		if params.size!=2 then
+			result := GeneratorCmdResult.new.initialise("FIXME GenerateIntegerDivCall: 2 operands required: " + params.size.toString, false)
+		else
+			result := GeneratorCmdResult.new.initialise(ctx.llvm.sdiv(ctx.llvm.i32, params.at(1).name, params.at(0).name), false)
+		end
+	end
+}
+
+
+class GenerateIntegerMultCall inherits CallGeneratorCmd {
+	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
+		if params.size!=2 then
+			result := GeneratorCmdResult.new.initialise("FIXME GenerateIntegerMultCall: 2 operands required: " + params.size.toString, false)
+		else
+			result := GeneratorCmdResult.new.initialise(ctx.llvm.mul(ctx.llvm.i32, params.at(1).name, params.at(0).name), false)
+		end
+	end
+}
+
+
 class GenerateIntegerIsNotEqualCall inherits CallGeneratorCmd {
 	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
 		if params.size!=2 then

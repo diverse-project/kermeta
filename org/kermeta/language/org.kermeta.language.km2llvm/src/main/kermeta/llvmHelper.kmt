@@ -28,6 +28,18 @@ class LLVMHelper {
 	operation xor(type:String, op1:String, op2:String) : String is do
 		result := "xor " + type + " " + op1 + ", " + op2
 	end
+
+	operation srem(type:String, op1:String, op2:String) : String is do
+		result := "srem " + type + " " + op1 + ", " + op2
+	end
+	
+	operation sdiv(type:String, op1:String, op2:String) : String is do
+		result := "sdiv " + type + " " + op1 + ", " + op2
+	end
+
+	operation mul(type:String, op1:String, op2:String) : String is do
+		result := "mul " + type + " " + op1 + ", " + op2
+	end
 	
 	operation sub(type:String, op1:String, op2:String) : String is do
 		result := "sub " + type + " " + op1 + ", " + op2

@@ -492,5 +492,8 @@ call void @kermeta_io__StdIO___writeln(i8* %"17", %struct.kermeta_io__StdIO* @SI
 store i1 false, i1* %"i"
 br label %llvmlabel10
 llvmlabel12:
+%"19" = sub i32 0, 2002
+%"20" = call i8* @kermeta_standard__Integer___toString(i32 %"19")
+call void @kermeta_io__StdIO___writeln(i8* %"20", %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
 ret void
 }

@@ -323,6 +323,41 @@
                   name="i"/>
             </stopCondition>
           </statement>
+          <statement
+              xsi:type="org_kermeta_language_behavior:CallOperation"
+              staticType="//@packages.1/io/StdIO/writeln/@containedType.0"
+              name="writeln"
+              staticOperation="//@packages.1/io/StdIO/writeln">
+            <parameters
+                xsi:type="org_kermeta_language_behavior:CallOperation"
+                staticType="//@packages.1/io/StdIO/writeln/@ownedParameter.0/@containedType.0"
+                name="toString"
+                staticOperation="//@packages.1/standard/Integer/toString">
+              <target
+                  xsi:type="org_kermeta_language_behavior:CallOperation"
+                  staticType="//@packages.0/Main/main/@body/@statement.5/@parameters.0/@target/@containedType.0"
+                  name="umin"
+                  staticOperation="//@packages.1/standard/Integer/umin">
+                <containedType
+                    xsi:type="org_kermeta_language_structure:Class"
+                    typeDefinition="//@packages.1/standard/Integer"/>
+                <target
+                    xsi:type="org_kermeta_language_behavior:IntegerLiteral"
+                    staticType="//@packages.0/Main/main/@body/@statement.5/@parameters.0/@target/@containedType.0"
+                    value="2002"/>
+              </target>
+            </parameters>
+            <target
+                xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
+              <typeref
+                  name="StdIO"
+                  type="//@packages.0/Main/main/@body/@statement.5/@target/@typeref/@containedType.0">
+                <containedType
+                    xsi:type="org_kermeta_language_structure:Class"
+                    typeDefinition="//@packages.1/io/StdIO"/>
+              </typeref>
+            </target>
+          </statement>
         </body>
       </ownedOperation>
     </ownedTypeDefinition>
@@ -460,6 +495,30 @@
                 typeDefinition="//@packages.1/standard/Object"/>
           </ownedParameter>
         </ownedOperation>
+        <ownedOperation
+            name="mult"
+            type="//@packages.0/Main/main/@body/@statement.5/@parameters.0/@target/@containedType.0">
+          <ownedParameter
+              name="v"
+              type="//@packages.0/Main/main/@body/@statement.5/@parameters.0/@target/@containedType.0"/>
+        </ownedOperation>
+        <ownedOperation
+            name="div"
+            type="//@packages.0/Main/main/@body/@statement.5/@parameters.0/@target/@containedType.0">
+          <ownedParameter
+              name="v"
+              type="//@packages.0/Main/main/@body/@statement.5/@parameters.0/@target/@containedType.0"/>
+        </ownedOperation>
+        <ownedOperation
+            name="mod"
+            type="//@packages.0/Main/main/@body/@statement.5/@parameters.0/@target/@containedType.0">
+          <ownedParameter
+              name="v"
+              type="//@packages.0/Main/main/@body/@statement.5/@parameters.0/@target/@containedType.0"/>
+        </ownedOperation>
+        <ownedOperation
+            name="umin"
+            type="//@packages.0/Main/main/@body/@statement.5/@parameters.0/@target/@containedType.0"/>
       </ownedTypeDefinition>
       <ownedTypeDefinition
           xsi:type="org_kermeta_language_structure:ClassDefinition"
