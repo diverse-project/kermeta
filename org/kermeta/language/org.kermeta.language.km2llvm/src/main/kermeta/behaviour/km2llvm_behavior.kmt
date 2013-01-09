@@ -27,6 +27,13 @@ aspect class Expression {
 }
 
 
+aspect class LambdaExpression {
+	method generateLLVMNoBuffer(ctx:Context) : String is do
+		result := "FIXME LambdaExpression"
+	end
+}
+
+
 
 aspect class VariableDecl {
 	method generateLLVM(ctx:Context) is do
