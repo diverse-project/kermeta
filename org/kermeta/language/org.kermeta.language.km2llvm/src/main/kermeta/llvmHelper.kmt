@@ -108,7 +108,7 @@ class LLVMHelper {
 			sep1 := " "
 			sep2 := ""
 		end
-		result := "getelementptr" + sep1 + typeVal + " " + val + "," + type1 + " " + pos1.toString + ", " + type2 + " " + pos2.toString+sep2
+		result := "getelementptr" + sep1 + typeVal + " " + val + ", " + type1 + " " + pos1.toString + ", " + type2 + " " + pos2.toString+sep2
 	end
 
 	operation call(name:String, return:String, params:Sequence<LLVMVar>) : String is do

@@ -335,10 +335,11 @@ define %struct.kermeta_standard__Object* @kermeta_io__StdIO___container(%struct.
 }
 @"s0" = private unnamed_addr constant [7 x i8] c"B.foo!\00"
 @"s1" = private unnamed_addr constant [7 x i8] c"C.foo!\00"
-@"s2" = private unnamed_addr constant [7 x i8] c"D.foo!\00"
-@"s3" = private unnamed_addr constant [13 x i8] c"Hello World!\00"
-@"s4" = private unnamed_addr constant [8 x i8] c"ifthen!\00"
-@"s5" = private unnamed_addr constant [8 x i8] c"ifElse!\00"
+@"s2" = private unnamed_addr constant [6 x i8] c"C.bar\00"
+@"s3" = private unnamed_addr constant [7 x i8] c"D.foo!\00"
+@"s4" = private unnamed_addr constant [13 x i8] c"Hello World!\00"
+@"s5" = private unnamed_addr constant [8 x i8] c"ifthen!\00"
+@"s6" = private unnamed_addr constant [8 x i8] c"ifElse!\00"
 %"pkgFoo__A" = type {%"pkgFoo__B"*}
 %"pkgFoo__B" = type {%"pkgFoo__A"*, %"pkgFoo__C"*}
 %"pkgFoo__C" = type {%"pkgFoo__B"*, %"pkgFoo__D"*}
@@ -351,21 +352,21 @@ ret %"pkgFoo__A"* %r
 define internal %"pkgFoo__B"* @"create_pkgFoo__B"(){
 %r = alloca %"pkgFoo__B"
 %"0" = call %"pkgFoo__A"* @"create_pkgFoo__A"()
-%"00" = getelementptr %"pkgFoo__B"* %r,i32 0, i32 0
+%"00" = getelementptr %"pkgFoo__B"* %r, i32 0, i32 0
 store %"pkgFoo__A"* %"0", %"pkgFoo__A"** %"00"
 ret %"pkgFoo__B"* %r
 }
 define internal %"pkgFoo__C"* @"create_pkgFoo__C"(){
 %r = alloca %"pkgFoo__C"
 %"0" = call %"pkgFoo__B"* @"create_pkgFoo__B"()
-%"00" = getelementptr %"pkgFoo__C"* %r,i32 0, i32 0
+%"00" = getelementptr %"pkgFoo__C"* %r, i32 0, i32 0
 store %"pkgFoo__B"* %"0", %"pkgFoo__B"** %"00"
 ret %"pkgFoo__C"* %r
 }
 define internal %"pkgFoo__D"* @"create_pkgFoo__D"(){
 %r = alloca %"pkgFoo__D"
 %"0" = call %"pkgFoo__C"* @"create_pkgFoo__C"()
-%"00" = getelementptr %"pkgFoo__D"* %r,i32 0, i32 0
+%"00" = getelementptr %"pkgFoo__D"* %r, i32 0, i32 0
 store %"pkgFoo__C"* %"0", %"pkgFoo__C"** %"00"
 ret %"pkgFoo__D"* %r
 }
@@ -374,7 +375,7 @@ define internal %"pkgFoo__Main"* @"create_pkgFoo__Main"(){
 ret %"pkgFoo__Main"* %r
 }
 define internal %"pkgFoo__B"* @"cast_pkgFoo__A_pkgFoo__B"(%"pkgFoo__A"* %"self") readonly inlinehint{
-%"0" = getelementptr %"pkgFoo__A"* %"self",i32 0, i32 0
+%"0" = getelementptr %"pkgFoo__A"* %"self", i32 0, i32 0
 %"1" = load %"pkgFoo__B"** %"0"
 ret %"pkgFoo__B"* %"1"
 }
@@ -390,12 +391,12 @@ define internal %"pkgFoo__D"* @"cast_pkgFoo__A_pkgFoo__D"(%"pkgFoo__A"* %"self")
 ret %"pkgFoo__D"* %"v2"
 }
 define internal %"pkgFoo__A"* @"cast_pkgFoo__B_pkgFoo__A"(%"pkgFoo__B"* %"self") readonly inlinehint{
-%"0" = getelementptr %"pkgFoo__B"* %"self",i32 0, i32 0
+%"0" = getelementptr %"pkgFoo__B"* %"self", i32 0, i32 0
 %"1" = load %"pkgFoo__A"** %"0"
 ret %"pkgFoo__A"* %"1"
 }
 define internal %"pkgFoo__C"* @"cast_pkgFoo__B_pkgFoo__C"(%"pkgFoo__B"* %"self") readonly inlinehint{
-%"0" = getelementptr %"pkgFoo__B"* %"self",i32 0, i32 1
+%"0" = getelementptr %"pkgFoo__B"* %"self", i32 0, i32 1
 %"1" = load %"pkgFoo__C"** %"0"
 ret %"pkgFoo__C"* %"1"
 }
@@ -405,7 +406,7 @@ define internal %"pkgFoo__D"* @"cast_pkgFoo__B_pkgFoo__D"(%"pkgFoo__B"* %"self")
 ret %"pkgFoo__D"* %"v1"
 }
 define internal %"pkgFoo__B"* @"cast_pkgFoo__C_pkgFoo__B"(%"pkgFoo__C"* %"self") readonly inlinehint{
-%"0" = getelementptr %"pkgFoo__C"* %"self",i32 0, i32 0
+%"0" = getelementptr %"pkgFoo__C"* %"self", i32 0, i32 0
 %"1" = load %"pkgFoo__B"** %"0"
 ret %"pkgFoo__B"* %"1"
 }
@@ -415,12 +416,12 @@ define internal %"pkgFoo__A"* @"cast_pkgFoo__C_pkgFoo__A"(%"pkgFoo__C"* %"self")
 ret %"pkgFoo__A"* %"v1"
 }
 define internal %"pkgFoo__D"* @"cast_pkgFoo__C_pkgFoo__D"(%"pkgFoo__C"* %"self") readonly inlinehint{
-%"0" = getelementptr %"pkgFoo__C"* %"self",i32 0, i32 1
+%"0" = getelementptr %"pkgFoo__C"* %"self", i32 0, i32 1
 %"1" = load %"pkgFoo__D"** %"0"
 ret %"pkgFoo__D"* %"1"
 }
 define internal %"pkgFoo__C"* @"cast_pkgFoo__D_pkgFoo__C"(%"pkgFoo__D"* %"self") readonly inlinehint{
-%"0" = getelementptr %"pkgFoo__D"* %"self",i32 0, i32 0
+%"0" = getelementptr %"pkgFoo__D"* %"self", i32 0, i32 0
 %"1" = load %"pkgFoo__C"** %"0"
 ret %"pkgFoo__C"* %"1"
 }
@@ -436,43 +437,48 @@ define internal %"pkgFoo__A"* @"cast_pkgFoo__D_pkgFoo__A"(%"pkgFoo__D"* %"self")
 ret %"pkgFoo__A"* %"v2"
 }
 define internal void @"pkgFoo__B___foo1"(%"pkgFoo__B"* %"self"){
-%"1" = getelementptr [7 x i8]* @"s0",i32 0, i32 0
+%"1" = getelementptr [7 x i8]* @"s0", i32 0, i32 0
 call void @kermeta_io__StdIO___writeln(i8* %"1", %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
 ret void
 }
 define internal void @"pkgFoo__C___foo2"(%"pkgFoo__C"* %"self"){
-%"1" = getelementptr [7 x i8]* @"s1",i32 0, i32 0
+%"1" = getelementptr [7 x i8]* @"s1", i32 0, i32 0
 call void @kermeta_io__StdIO___writeln(i8* %"1", %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
 ret void
 }
-define internal void @"pkgFoo__D___foo3"(%"pkgFoo__D"* %"self"){
+define internal void @"pkgFoo__C___bar3"(%"pkgFoo__C"* %"self"){
+%"1" = getelementptr [6 x i8]* @"s2", i32 0, i32 0
+call void @kermeta_io__StdIO___writeln(i8* %"1", %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
+ret void
+}
+define internal void @"pkgFoo__D___foo4"(%"pkgFoo__D"* %"self"){
 %"1" = call %"pkgFoo__C"* @cast_pkgFoo__D_pkgFoo__C(%"pkgFoo__D"* %"self")
 call void @"pkgFoo__C___foo2"(%"pkgFoo__C"* %"1")
-%"2" = getelementptr [7 x i8]* @"s2",i32 0, i32 0
+%"2" = getelementptr [7 x i8]* @"s3", i32 0, i32 0
 call void @kermeta_io__StdIO___writeln(i8* %"2", %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
 ret void
 }
 define i32 @main(){
 %1 = call %"pkgFoo__Main"* @"create_pkgFoo__Main"()
-call void @"pkgFoo__Main___main4"(%"pkgFoo__Main"*  %1)
+call void @"pkgFoo__Main___main5"(%"pkgFoo__Main"*  %1)
 ret i32 0
 }
-define internal void @"pkgFoo__Main___main4"(%"pkgFoo__Main"* %"self"){
-%"1" = getelementptr [13 x i8]* @"s3",i32 0, i32 0
+define internal void @"pkgFoo__Main___main5"(%"pkgFoo__Main"* %"self"){
+%"1" = getelementptr [13 x i8]* @"s4", i32 0, i32 0
 call void @kermeta_io__StdIO___writeln(i8* %"1", %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
 %"d" = alloca %"pkgFoo__D"*
 %"2" = call %"pkgFoo__D"* @"create_pkgFoo__D"()
 store %"pkgFoo__D"* %"2", %"pkgFoo__D"** %"d"
 %"3" = load %"pkgFoo__D"** %"d"
-call void @"pkgFoo__D___foo3"(%"pkgFoo__D"* %"3")
+call void @"pkgFoo__D___foo4"(%"pkgFoo__D"* %"3")
 %"4" = icmp eq i1 false, true
 br i1 %"4", label %llvmlabel5, label %llvmlabel7
 llvmlabel5:
-%"8" = getelementptr [8 x i8]* @"s4",i32 0, i32 0
+%"8" = getelementptr [8 x i8]* @"s5", i32 0, i32 0
 call void @kermeta_io__StdIO___writeln(i8* %"8", %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
 br label %llvmlabel6
 llvmlabel7:
-%"9" = getelementptr [8 x i8]* @"s5",i32 0, i32 0
+%"9" = getelementptr [8 x i8]* @"s6", i32 0, i32 0
 call void @kermeta_io__StdIO___writeln(i8* %"9", %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
 br label %llvmlabel6
 llvmlabel6:
@@ -492,8 +498,8 @@ call void @kermeta_io__StdIO___writeln(i8* %"17", %struct.kermeta_io__StdIO* @SI
 store i1 false, i1* %"i"
 br label %llvmlabel10
 llvmlabel12:
-%"19" = sub i32 0, 2002
-%"20" = call i8* @kermeta_standard__Integer___toString(i32 %"19")
-call void @kermeta_io__StdIO___writeln(i8* %"20", %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
+%"22" = load %"pkgFoo__D"** %"d"
+%"23" = call %"pkgFoo__C"* @"cast_pkgFoo__D_pkgFoo__C"(%"pkgFoo__D"* %"22")
+call void @"pkgFoo__C___bar3"(%"pkgFoo__C"* %"23")
 ret void
 }

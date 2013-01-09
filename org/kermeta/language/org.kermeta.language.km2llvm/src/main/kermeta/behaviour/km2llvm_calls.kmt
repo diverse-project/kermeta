@@ -34,6 +34,24 @@ aspect class CallExpression {
 	operation llvmType(ctx:Context) : String is do
 		result := "FIXME llvmType: " + self.toString
 	end
+
+
+	/**
+		Generates a cast call from the first given type to the second one. The name of the var to
+		cast is varNameToCast.
+		It returns the name of the variable containing the casted object.
+	*/
+	operation _generateCastCall(ctx:Context, varNameToCast:String, fromType:String, toType:String) : String is do
+		// The result is the new variable containing the cast.
+		result := ctx.nextOperationVar
+		var params:Sequence<LLVMVar> init Sequence<LLVMVar>.new
+		
+		// The parameter is the object to cast.
+		params.add(LLVMVar.new.initialise(ctx.llvm.pointer(ctx.llvm.localVar(fromType)), varNameToCast))
+		// creating a new variable containing the cast
+		ctx.operations.append(ctx.llvm.assign(result, ctx.llvm.call(ctx.llvm.globalVar("cast_"+fromType+"_"+toType), ctx.llvm.pointer(ctx.llvm.localVar(toType)), params))).append("\n")
+		params.clear // cleaning
+	end
 }
 
 
@@ -104,16 +122,27 @@ aspect class CallOperation {
 			i := i + 1
 		}
 		
+		var cmd : CallGeneratorCmd init ctx.stdLibCmd.getValue(staticOperation.llvmName(ctx)) // Getting the command from the list.
 		// Sometimes a call operation is inlined.
 		var isCallInlined : Boolean init false
 		// The last parameter is self.
 		var clazz : Class init Class.new // Uses a class to get the llvm type name of the class definition owning the operation.
 		clazz.typeDefinition := staticOperation.owningClass
-		params.add(LLVMVar.new.initialise(clazz.llvmType(ctx), target.generateLLVMNoBuffer(ctx)))
+
+		// Generating the llvm code of the target. An identifier and its type are returned as a string to be included in the call as a parameter.
+		var strTarget : String init target.generateLLVMNoBuffer(ctx)
+		
+		// Dynamic linking (ascending): if the target type differs from the operation type, it means that the call is a call to a operation in one
+		// of the super classes. So, the target expression has to be casted into the expected super type.
+		if (not target.staticType.isVoid and cmd.isVoid).andThen{b|target.staticType.qualifiedNameLLVM!=clazz.qualifiedNameLLVM} then
+			// The name of the variable containing the cast is returned.
+			strTarget := _generateCastCall(ctx, strTarget, target.staticType.qualifiedNameLLVM, clazz.qualifiedNameLLVM)
+		end
+		
+		params.add(LLVMVar.new.initialise(clazz.llvmType(ctx), strTarget))
 		clazz.typeDefinition := void
 		
 		// Optimisation: some calls handling simple primitive type operations are shortened to their classical llvm use (e.g. operation plus in class Integer)
-		var cmd : CallGeneratorCmd init ctx.stdLibCmd.getValue(staticOperation.llvmName(ctx)) // Getting the command from the list.
 		if(cmd.isVoid) then // If no command
 			// Generating the call.
 			result := ctx.llvm.call(staticOperation.llvmName(ctx), staticOperation.type.llvmType(ctx), params)
