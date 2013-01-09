@@ -26,7 +26,7 @@ class Model
 
 @CompilerIgnore "true"
 @ScalaCompilerName "k2.standard.Object"
-class Object
+abstract class Object
 {	
 
 	/**
@@ -1929,7 +1929,7 @@ abstract class Comparable<G> {
 @CompilerIgnore "true"
 @ScalaCompilerName "k2.standard.Numeric"
 //We propose to put a concrete Numeric in order to allow Numeric.new to create an implicit Float.new
-class Numeric<G> inherits Summable<G>,Comparable<G> {
+abstract class Numeric<G> inherits Summable<G>,Comparable<G> {
 	operation minus(other : G) : G is abstract
 	operation mult(other : G) : G is abstract
 	operation div(other : G) : G is abstract
