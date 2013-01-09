@@ -34,24 +34,6 @@ aspect class CallExpression {
 	operation llvmType(ctx:Context) : String is do
 		result := "FIXME llvmType: " + self.toString
 	end
-
-
-	/**
-		Generates a cast call from the first given type to the second one. The name of the var to
-		cast is varNameToCast.
-		It returns the name of the variable containing the casted object.
-	*/
-	operation _generateCastCall(ctx:Context, varNameToCast:String, fromType:String, toType:String) : String is do
-		// The result is the new variable containing the cast.
-		result := ctx.nextOperationVar
-		var params:Sequence<LLVMVar> init Sequence<LLVMVar>.new
-		
-		// The parameter is the object to cast.
-		params.add(LLVMVar.new.initialise(ctx.llvm.pointer(ctx.llvm.localVar(fromType)), varNameToCast))
-		// creating a new variable containing the cast
-		ctx.operations.append(ctx.llvm.assign(result, ctx.llvm.call(ctx.llvm.globalVar("cast_"+fromType+"_"+toType), ctx.llvm.pointer(ctx.llvm.localVar(toType)), params))).append("\n")
-		params.clear // cleaning
-	end
 }
 
 

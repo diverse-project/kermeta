@@ -501,5 +501,9 @@ llvmlabel12:
 %"22" = load %"pkgFoo__D"** %"d"
 %"23" = call %"pkgFoo__C"* @"cast_pkgFoo__D_pkgFoo__C"(%"pkgFoo__D"* %"22")
 call void @"pkgFoo__C___bar3"(%"pkgFoo__C"* %"23")
+%"b" = alloca %"pkgFoo__B"*
+%"24" = call %"pkgFoo__D"* @"create_pkgFoo__D"()
+%"25" = call %"pkgFoo__B"* @"cast_pkgFoo__D_pkgFoo__B"(%"pkgFoo__D"* %"24")
+store %"pkgFoo__B"* %"25", %"pkgFoo__B"** %"b"
 ret void
 }

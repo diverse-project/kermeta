@@ -14,6 +14,8 @@ require "km2llvm_literals.kmt"
 
 using org::kermeta::language::km2llvm
 using kermeta::standard
+using org::kermeta::language::structure
+using org::kermeta::language::llvm
 
 
 aspect class Expression {
@@ -23,6 +25,24 @@ aspect class Expression {
 	*/
 	operation generateLLVMNoBuffer(ctx:Context) : String is do
 		result := "FIXME generateLLVMNoBuffer: "+self.toString
+	end
+
+
+	/**
+		Generates a cast call from the first given type to the second one. The name of the var to
+		cast is varNameToCast.
+		It returns the name of the variable containing the casted object.
+	*/
+	operation _generateCastCall(ctx:Context, varNameToCast:String, fromType:String, toType:String) : String is do
+		// The result is the new variable containing the cast.
+		result := ctx.nextOperationVar
+		var params:Sequence<LLVMVar> init Sequence<LLVMVar>.new
+		
+		// The parameter is the object to cast.
+		params.add(LLVMVar.new.initialise(ctx.llvm.pointer(ctx.llvm.localVar(fromType)), varNameToCast))
+		// creating a new variable containing the cast
+		ctx.operations.append(ctx.llvm.assign(result, ctx.llvm.call(ctx.llvm.globalVar("cast_"+fromType+"_"+toType), ctx.llvm.pointer(ctx.llvm.localVar(toType)), params))).append("\n")
+		params.clear // cleaning
 	end
 }
 
@@ -60,6 +80,16 @@ aspect class VariableDecl {
 
 aspect class Assignment {
 	method generateLLVM(ctx:Context) is do
-		ctx.operations.append(ctx.llvm.store(target.llvmType(ctx), ~value.generateLLVMNoBuffer(ctx), target.llvmIdentifier(ctx))).append("\n")
+		// Generating the code of the right part of the assignment. The string returned is the variable containing this right part.
+		var identifierInit : String init ~value.generateLLVMNoBuffer(ctx)
+	
+		// Dynamic linking (ascending): if the target type differs from the operation type, it means that the call is a call to a operation in one
+		// of the super classes. So, the target expression has to be casted into the expected super type.
+		if (not target.staticType.isVoid).andThen{b|target.staticType.qualifiedNameLLVM!=~value.staticType.qualifiedNameLLVM} then
+			identifierInit := _generateCastCall(ctx, identifierInit, ~value.staticType.qualifiedNameLLVM, target.staticType.qualifiedNameLLVM)
+		end
+
+		// The name of the variable containing the cast is returned.
+		ctx.operations.append(ctx.llvm.store(target.llvmType(ctx), identifierInit, target.llvmIdentifier(ctx))).append("\n")
 	end
 }
