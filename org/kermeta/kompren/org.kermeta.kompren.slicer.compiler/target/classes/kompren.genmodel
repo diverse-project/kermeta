@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="INRIA/IRISA&#xA;Triskell Team"
+    modelDirectory="/org.kermeta.kompren.slicer.model/src" editDirectory="/org.kermeta.kompren.slicer.edit/src"
+    editorDirectory="/org.kermeta.kompren.slicer.editor/src" modelPluginID="kompren.slicer.model"
+    modelName="kompren" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    editPluginID="kompren.slicer.edit" editorPluginID="kompren.slicer.editor">
+  <foreignModel>kompren.ecore</foreignModel>
+  <genPackages prefix="Org2" disposableProviderFactory="true" ecorePackage="kompren.ecore#/">
+    <nestedGenPackages prefix="Kermeta" basePackage="org2" disposableProviderFactory="true"
+        ecorePackage="kompren.ecore#//kermeta">
+      <nestedGenPackages prefix="Kompren" basePackage="org2.kermeta" disposableProviderFactory="true"
+          ecorePackage="kompren.ecore#//kermeta/kompren">
+        <nestedGenPackages prefix="Slicer" basePackage="org2.kermeta.kompren" disposableProviderFactory="true"
+            ecorePackage="kompren.ecore#//kermeta/kompren/slicer">
+          <genClasses ecoreClass="kompren.ecore#//kermeta/kompren/slicer/Slicer">
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompren.ecore#//kermeta/kompren/slicer/Slicer/name"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompren.ecore#//kermeta/kompren/slicer/Slicer/uriMetamodel"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompren.ecore#//kermeta/kompren/slicer/Slicer/active"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompren.ecore#//kermeta/kompren/slicer/Slicer/strict"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompren.ecore#//kermeta/kompren/slicer/Slicer/helper"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompren.ecore#//kermeta/kompren/slicer/Slicer/onStart"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompren.ecore#//kermeta/kompren/slicer/Slicer/onEnd"/>
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kompren.ecore#//kermeta/kompren/slicer/Slicer/constraints"/>
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kompren.ecore#//kermeta/kompren/slicer/Slicer/radius"/>
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kompren.ecore#//kermeta/kompren/slicer/Slicer/slicedElements"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference kompren.ecore#//kermeta/kompren/slicer/Slicer/inputClasses"/>
+          </genClasses>
+          <genClasses ecoreClass="kompren.ecore#//kermeta/kompren/slicer/Constraint">
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompren.ecore#//kermeta/kompren/slicer/Constraint/expression"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompren.ecore#//kermeta/kompren/slicer/Constraint/name"/>
+          </genClasses>
+          <genClasses ecoreClass="kompren.ecore#//kermeta/kompren/slicer/Radius">
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference kompren.ecore#//kermeta/kompren/slicer/Radius/focusedClasses"/>
+          </genClasses>
+          <genClasses ecoreClass="kompren.ecore#//kermeta/kompren/slicer/SlicedClass">
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kompren.ecore#//kermeta/kompren/slicer/SlicedClass/ctx"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference kompren.ecore#//kermeta/kompren/slicer/SlicedClass/domain"/>
+          </genClasses>
+          <genClasses ecoreClass="kompren.ecore#//kermeta/kompren/slicer/SlicedProperty">
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kompren.ecore#//kermeta/kompren/slicer/SlicedProperty/opposite"/>
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kompren.ecore#//kermeta/kompren/slicer/SlicedProperty/src"/>
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kompren.ecore#//kermeta/kompren/slicer/SlicedProperty/tgt"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference kompren.ecore#//kermeta/kompren/slicer/SlicedProperty/domain"/>
+          </genClasses>
+          <genClasses ecoreClass="kompren.ecore#//kermeta/kompren/slicer/OppositeCreation">
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompren.ecore#//kermeta/kompren/slicer/OppositeCreation/name"/>
+          </genClasses>
+          <genClasses image="false" ecoreClass="kompren.ecore#//kermeta/kompren/slicer/SlicedElement">
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompren.ecore#//kermeta/kompren/slicer/SlicedElement/isOption"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompren.ecore#//kermeta/kompren/slicer/SlicedElement/expression"/>
+          </genClasses>
+          <genClasses ecoreClass="kompren.ecore#//kermeta/kompren/slicer/VarDecl">
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompren.ecore#//kermeta/kompren/slicer/VarDecl/varName"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference kompren.ecore#//kermeta/kompren/slicer/VarDecl/type"/>
+          </genClasses>
+        </nestedGenPackages>
+      </nestedGenPackages>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

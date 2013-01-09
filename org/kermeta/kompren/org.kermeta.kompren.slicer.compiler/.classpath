@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+  <classpathentry kind="src" path="target/scala" including="**/*.java"/>
+  <classpathentry kind="src" path="metamodel" excluding="**/*.java"/>
+  <classpathentry kind="src" path="target/resources" excluding="**/*.java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+  <classpathentry kind="src" path="/kompren.slicer.model"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/emf/emf.lib/2.7.0/emf.lib-2.7.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/scala-lang/scala-library/2.9.0-1/scala-library-2.9.0-1.jar"/>
+  <classpathentry kind="src" path="/org.kermeta.language.library.core"/>
+  <classpathentry kind="src" path="/org.kermeta.language.model"/>
+  <classpathentry kind="src" path="/org.kermeta.utils.systemservices.api"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.helpers/2.0.1-SNAPSHOT/utils.helpers-2.0.1-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/osgi/org.osgi.core/4.2.0/org.osgi.core-4.2.0.jar"/>
+</classpath>

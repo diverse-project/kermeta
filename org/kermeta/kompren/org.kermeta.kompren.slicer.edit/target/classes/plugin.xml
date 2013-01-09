@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ INRIA/IRISA
+ Triskell Team
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+      <factory
+            uri="http://www.org.kermeta.kompren/org/kermeta/kompren/slicer"
+            class="org2.kermeta.kompren.slicer.provider.SlicerItemProviderAdapterFactory"
+            supportedTypes=
+              "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
+               org.eclipse.emf.edit.provider.IStructuredItemContentProvider
+               org.eclipse.emf.edit.provider.ITreeItemContentProvider
+               org.eclipse.emf.edit.provider.IItemLabelProvider
+               org.eclipse.emf.edit.provider.IItemPropertySource"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="kompren.slicer.edit.contribution1"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               id="kompren.slicer.edit.menu1"
+               label="Kompren"
+               path="additions">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               class="kompren.slicer.edit.popup.actions.CreateKomprentFilesAction"
+               enablesFor="+"
+               id="kompren.slicer.edit.convertAsTextAction"
+               label="Create komprent file"
+               menubarPath="kompren.slicer.edit.menu1/group1"
+               tooltip="Creates Kompren textual models from the selected kompren models.">
+         </action>
+         <action
+               class="kompren.slicer.edit.popup.actions.CreateKomprenModelsAction"
+               enablesFor="+"
+               id="kompren.slicer.edit.convertAsModelAction"
+               label="Create kompren model"
+               menubarPath="kompren.slicer.edit.menu1/group1"
+               tooltip="Creates Kompren models from the selected komprent files.">
+         </action>
+         <action
+               class="kompren.slicer.edit.popup.actions.CreateMSFAction"
+               enablesFor="+"
+               id="kompren.slicer.edit.createMSFAction"
+               label="Create model slicer function"
+               menubarPath="kompren.slicer.edit.menu1/group1"
+               tooltip="Compiles the selected Kompren models into model slicer functions.">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>

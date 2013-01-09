@@ -1,0 +1,10 @@
+file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt
+file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/ECoreSlicingAspect.kmt
+file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerAspectGenerator.kmt
+file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerClassGenerator.kmt
+file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerGenerator.kmt
+file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt
+file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/helpers/EClassHelper.kmt
+file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/helpers/EPackageHelper.kmt
+file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/metamodel/kompren.ecore
+jar:file:/home/ablouin/.m2/repository/org/kermeta/language/language.library.core/2.0.6/language.library.core-2.0.6.jar!/META-INF/kermeta/language.library.core.km

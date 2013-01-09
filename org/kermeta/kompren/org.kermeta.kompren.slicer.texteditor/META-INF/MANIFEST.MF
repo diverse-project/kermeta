@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Kompren Slicer Textual Editor
+Bundle-SymbolicName: org.kermeta.kompren.slicer.texteditor;singleton:=true
+Bundle-Version: 2.0.0
+Bundle-Activator: org.kermeta.kompren.texteditor.Activator
+Bundle-Vendor: INRIA/IRISA Triskell Team
+Require-Bundle: org.eclipse.emf.workspace,
+ org.kermeta.kompren.slicer.parser,
+ org.eclipse.ui,
+ org.eclipse.ui.ide,
+ org.eclipse.ui.editors;bundle-version="3.6.1",
+ org.eclipse.jface.text;bundle-version="3.6.1"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.kermeta.kompren.slicer.texteditor.wizards,
+ org.kermeta.kompren.texteditor,
+ org.kermeta.kompren.texteditor.editors

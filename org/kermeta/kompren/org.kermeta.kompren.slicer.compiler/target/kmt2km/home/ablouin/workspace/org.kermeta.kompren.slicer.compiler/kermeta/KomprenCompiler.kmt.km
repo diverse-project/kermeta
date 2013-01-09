@@ -1,0 +1,938 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
+  <packages name="org2">
+    <nestedPackage name="kermeta">
+      <nestedPackage name="kompren">
+        <nestedPackage name="slicer">
+          <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="KomprenCompiler" superType="//org2/kermeta/kompren/slicer/KomprenCompiler/@containedType.0">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;287;8026"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
+              <usings fromQName="kermeta::standard" toName=""/>
+              <usings fromQName="kermeta::emfpersistence" toName=""/>
+              <usings fromQName="kermeta::io" toName=""/>
+              <usings fromQName="ecore" toName=""/>
+              <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+            </containedType>
+            <ownedOperation name="compile" type="//org2/kermeta/kompren/slicer/KomprenCompiler/compile/@containedType.0">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;312;1048"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void">
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="kermeta::emfpersistence" toName=""/>
+                <usings fromQName="kermeta::io" toName=""/>
+                <usings fromQName="ecore" toName=""/>
+                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              </containedType>
+              <ownedParameter name="uriSlicer" type="//org2/kermeta/kompren/slicer/KomprenCompiler/compile/@ownedParameter.0/@containedType.0" isOrdered="true">
+                <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <usings fromQName="kermeta::emfpersistence" toName=""/>
+                  <usings fromQName="kermeta::io" toName=""/>
+                  <usings fromQName="ecore" toName=""/>
+                  <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                </containedType>
+              </ownedParameter>
+              <body xsi:type="org_kermeta_language_behavior:Block">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;353;1048"/>
+                <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="slicerModel">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;358;416"/>
+                  <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="getSlicerModel" isCalledWithParenthesis="true">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;388;416"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;388;416"/>
+                    <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="uriSlicer">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;403;412"/>
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;403;412"/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </parameters>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="kermeta::emfpersistence" toName=""/>
+                    <usings fromQName="kermeta::io" toName=""/>
+                    <usings fromQName="ecore" toName=""/>
+                    <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                  </initialization>
+                  <type name="Slicer" type="//org2/kermeta/kompren/slicer/KomprenCompiler/compile/@body/@statement.0/@type/@containedType.0" isOrdered="true">
+                    <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Slicer">
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </containedType>
+                  </type>
+                </statement>
+                <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="pkg">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;416;488"/>
+                  <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="one">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;481;488"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;442;488"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="kermeta::emfpersistence" toName=""/>
+                    <usings fromQName="kermeta::io" toName=""/>
+                    <usings fromQName="ecore" toName=""/>
+                    <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="getEcoreModel" isCalledWithParenthesis="true">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;442;481"/>
+                      <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="uriMetamodel">
+                        <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;467;480"/>
+                        <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;456;480"/>
+                        <usings fromQName="kermeta::standard" toName=""/>
+                        <usings fromQName="kermeta::emfpersistence" toName=""/>
+                        <usings fromQName="kermeta::io" toName=""/>
+                        <usings fromQName="ecore" toName=""/>
+                        <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                        <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="slicerModel">
+                          <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;456;467"/>
+                          <usings fromQName="kermeta::standard" toName=""/>
+                          <usings fromQName="kermeta::emfpersistence" toName=""/>
+                          <usings fromQName="kermeta::io" toName=""/>
+                          <usings fromQName="ecore" toName=""/>
+                          <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                        </target>
+                      </parameters>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </target>
+                  </initialization>
+                  <type name="EPackage" type="//org2/kermeta/kompren/slicer/KomprenCompiler/compile/@body/@statement.1/@type/@containedType.0" isOrdered="true">
+                    <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="EPackage">
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </containedType>
+                  </type>
+                </statement>
+                <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="slicer">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;488;602"/>
+                  <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="initialise" isCalledWithParenthesis="true">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;543;602"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;524;602"/>
+                    <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="slicerModel">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;555;566"/>
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;555;566"/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </parameters>
+                    <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="pkg">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;568;571"/>
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;568;571"/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </parameters>
+                    <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="uriMetamodel">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;584;597"/>
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;573;597"/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                      <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="slicerModel">
+                        <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;573;584"/>
+                        <usings fromQName="kermeta::standard" toName=""/>
+                        <usings fromQName="kermeta::emfpersistence" toName=""/>
+                        <usings fromQName="kermeta::io" toName=""/>
+                        <usings fromQName="ecore" toName=""/>
+                        <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                      </target>
+                    </parameters>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="kermeta::emfpersistence" toName=""/>
+                    <usings fromQName="kermeta::io" toName=""/>
+                    <usings fromQName="ecore" toName=""/>
+                    <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;539;543"/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                      <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="SlicerGenerator">
+                        <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;524;539"/>
+                        <usings fromQName="kermeta::standard" toName=""/>
+                        <usings fromQName="kermeta::emfpersistence" toName=""/>
+                        <usings fromQName="kermeta::io" toName=""/>
+                        <usings fromQName="ecore" toName=""/>
+                        <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                      </target>
+                    </target>
+                  </initialization>
+                  <type name="SlicerGenerator" type="//org2/kermeta/kompren/slicer/KomprenCompiler/compile/@body/@statement.2/@type/@containedType.0" isOrdered="true">
+                    <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="SlicerGenerator">
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </containedType>
+                  </type>
+                </statement>
+                <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="generateSlicer">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;608;626"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;602;626"/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <usings fromQName="kermeta::emfpersistence" toName=""/>
+                  <usings fromQName="kermeta::io" toName=""/>
+                  <usings fromQName="ecore" toName=""/>
+                  <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="slicer">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;602;608"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="kermeta::emfpersistence" toName=""/>
+                    <usings fromQName="kermeta::io" toName=""/>
+                    <usings fromQName="ecore" toName=""/>
+                    <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                  </target>
+                </statement>
+                <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="saveCode">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;632;1039"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;626;1039"/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <usings fromQName="kermeta::emfpersistence" toName=""/>
+                  <usings fromQName="kermeta::io" toName=""/>
+                  <usings fromQName="ecore" toName=""/>
+                  <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="slicer">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;626;632"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="kermeta::emfpersistence" toName=""/>
+                    <usings fromQName="kermeta::io" toName=""/>
+                    <usings fromQName="ecore" toName=""/>
+                    <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                  </target>
+                </statement>
+              </body>
+            </ownedOperation>
+            <ownedOperation name="getEcoreModel" type="//org2/kermeta/kompren/slicer/KomprenCompiler/getEcoreModel/@containedType.0" isOrdered="true">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1048;1492"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//org2/kermeta/kompren/slicer/KomprenCompiler/getEcoreModel/@containedType.0/@containedType.0" typeIdentifier="Bag">
+                <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="EPackage">
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <usings fromQName="kermeta::emfpersistence" toName=""/>
+                  <usings fromQName="kermeta::io" toName=""/>
+                  <usings fromQName="ecore" toName=""/>
+                  <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                </containedType>
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="kermeta::emfpersistence" toName=""/>
+                <usings fromQName="kermeta::io" toName=""/>
+                <usings fromQName="ecore" toName=""/>
+                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              </containedType>
+              <ownedParameter name="uriEcoreModel" type="//org2/kermeta/kompren/slicer/KomprenCompiler/getEcoreModel/@ownedParameter.0/@containedType.0" isOrdered="true">
+                <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <usings fromQName="kermeta::emfpersistence" toName=""/>
+                  <usings fromQName="kermeta::io" toName=""/>
+                  <usings fromQName="ecore" toName=""/>
+                  <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                </containedType>
+              </ownedParameter>
+              <body xsi:type="org_kermeta_language_behavior:Block">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1115;1492"/>
+                <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="repository">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1123;1178"/>
+                  <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1168;1178"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1157;1178"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="kermeta::emfpersistence" toName=""/>
+                    <usings fromQName="kermeta::io" toName=""/>
+                    <usings fromQName="ecore" toName=""/>
+                    <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="ResourceSet">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1157;1168"/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </target>
+                  </initialization>
+                  <type name="ResourceSet" type="//org2/kermeta/kompren/slicer/KomprenCompiler/getEcoreModel/@body/@statement.0/@type/@containedType.0" isOrdered="true">
+                    <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="ResourceSet">
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </containedType>
+                  </type>
+                </statement>
+                <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="resource">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1178;1297"/>
+                  <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="createResource" isCalledWithParenthesis="true">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1217;1297"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1207;1297"/>
+                    <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="uriEcoreModel">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1233;1246"/>
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1233;1246"/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </parameters>
+                    <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="http://www.eclipse.org/emf/2002/Ecore">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1248;1287"/>
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1248;1287"/>
+                    </parameters>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="kermeta::emfpersistence" toName=""/>
+                    <usings fromQName="kermeta::io" toName=""/>
+                    <usings fromQName="ecore" toName=""/>
+                    <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="repository">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1207;1217"/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </target>
+                  </initialization>
+                  <type name="Resource" type="//org2/kermeta/kompren/slicer/KomprenCompiler/getEcoreModel/@body/@statement.1/@type/@containedType.0" isOrdered="true">
+                    <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Resource">
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </containedType>
+                  </type>
+                </statement>
+                <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="load" isCalledWithParenthesis="true">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1305;1322"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1297;1322"/>
+                  <parameters xsi:type="org_kermeta_language_behavior:VoidLiteral">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1311;1315"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1311;1315"/>
+                  </parameters>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <usings fromQName="kermeta::emfpersistence" toName=""/>
+                  <usings fromQName="kermeta::io" toName=""/>
+                  <usings fromQName="ecore" toName=""/>
+                  <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="resource">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1297;1305"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="kermeta::emfpersistence" toName=""/>
+                    <usings fromQName="kermeta::io" toName=""/>
+                    <usings fromQName="ecore" toName=""/>
+                    <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                  </target>
+                </statement>
+                <statement xsi:type="org_kermeta_language_behavior:Assignment">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1322;1355"/>
+                  <target xsi:type="org_kermeta_language_behavior:CallResult">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1322;1329"/>
+                  </target>
+                  <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1345;1355"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="kermeta::emfpersistence" toName=""/>
+                    <usings fromQName="kermeta::io" toName=""/>
+                    <usings fromQName="ecore" toName=""/>
+                    <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="Bag" generics="//org2/kermeta/kompren/slicer/KomprenCompiler/getEcoreModel/@body/@statement.3/@value/@target/@containedType.0">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1332;1345"/>
+                      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="EPackage">
+                        <usings fromQName="kermeta::standard" toName=""/>
+                        <usings fromQName="kermeta::emfpersistence" toName=""/>
+                        <usings fromQName="kermeta::io" toName=""/>
+                        <usings fromQName="ecore" toName=""/>
+                        <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                      </containedType>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </target>
+                  </value>
+                </statement>
+                <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="each" isCalledWithParenthesis="true">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1377;1485"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1355;1485"/>
+                  <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
+                    <parameters name="obj">
+                      <type type="//org2/kermeta/kompren/slicer/KomprenCompiler/getEcoreModel/@body/@statement.4/@parameters.0/@parameters.0/@type/@containedType.0">
+                        <containedType xsi:type="org_kermeta_language_structure:UnresolvedInferredType"/>
+                      </type>
+                    </parameters>
+                    <body xsi:type="org_kermeta_language_behavior:Block">
+                      <statement xsi:type="org_kermeta_language_behavior:Conditional">
+                        <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1392;1482"/>
+                        <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1392;1482"/>
+                        <thenBody xsi:type="org_kermeta_language_behavior:Block">
+                          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="add" isCalledWithParenthesis="true">
+                            <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1438;1476"/>
+                            <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1432;1476"/>
+                            <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="asType" isCalledWithParenthesis="true">
+                              <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1446;1463"/>
+                              <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1443;1463"/>
+                              <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="EPackage">
+                                <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1454;1462"/>
+                                <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1454;1462"/>
+                                <usings fromQName="kermeta::standard" toName=""/>
+                                <usings fromQName="kermeta::emfpersistence" toName=""/>
+                                <usings fromQName="kermeta::io" toName=""/>
+                                <usings fromQName="ecore" toName=""/>
+                                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                              </parameters>
+                              <usings fromQName="kermeta::standard" toName=""/>
+                              <usings fromQName="kermeta::emfpersistence" toName=""/>
+                              <usings fromQName="kermeta::io" toName=""/>
+                              <usings fromQName="ecore" toName=""/>
+                              <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="obj">
+                                <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1443;1446"/>
+                                <usings fromQName="kermeta::standard" toName=""/>
+                                <usings fromQName="kermeta::emfpersistence" toName=""/>
+                                <usings fromQName="kermeta::io" toName=""/>
+                                <usings fromQName="ecore" toName=""/>
+                                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                              </target>
+                            </parameters>
+                            <usings fromQName="kermeta::standard" toName=""/>
+                            <usings fromQName="kermeta::emfpersistence" toName=""/>
+                            <usings fromQName="kermeta::io" toName=""/>
+                            <usings fromQName="ecore" toName=""/>
+                            <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                            <target xsi:type="org_kermeta_language_behavior:CallResult">
+                              <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1432;1438"/>
+                            </target>
+                          </statement>
+                        </thenBody>
+                        <condition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="isInstanceOf" isCalledWithParenthesis="true">
+                          <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1398;1421"/>
+                          <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1395;1421"/>
+                          <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1394;1423"/>
+                          <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1394;1423"/>
+                          <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="EPackage">
+                            <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1412;1420"/>
+                            <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1412;1420"/>
+                            <usings fromQName="kermeta::standard" toName=""/>
+                            <usings fromQName="kermeta::emfpersistence" toName=""/>
+                            <usings fromQName="kermeta::io" toName=""/>
+                            <usings fromQName="ecore" toName=""/>
+                            <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                          </parameters>
+                          <usings fromQName="kermeta::standard" toName=""/>
+                          <usings fromQName="kermeta::emfpersistence" toName=""/>
+                          <usings fromQName="kermeta::io" toName=""/>
+                          <usings fromQName="ecore" toName=""/>
+                          <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                          <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="obj">
+                            <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1395;1398"/>
+                            <usings fromQName="kermeta::standard" toName=""/>
+                            <usings fromQName="kermeta::emfpersistence" toName=""/>
+                            <usings fromQName="kermeta::io" toName=""/>
+                            <usings fromQName="ecore" toName=""/>
+                            <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                          </target>
+                        </condition>
+                      </statement>
+                    </body>
+                  </parameters>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <usings fromQName="kermeta::emfpersistence" toName=""/>
+                  <usings fromQName="kermeta::io" toName=""/>
+                  <usings fromQName="ecore" toName=""/>
+                  <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="getContents" isCalledWithParenthesis="true">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1363;1377"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="kermeta::emfpersistence" toName=""/>
+                    <usings fromQName="kermeta::io" toName=""/>
+                    <usings fromQName="ecore" toName=""/>
+                    <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="resource">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1355;1363"/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </target>
+                  </target>
+                </statement>
+              </body>
+            </ownedOperation>
+            <ownedOperation name="getSlicerModel" type="//org2/kermeta/kompren/slicer/KomprenCompiler/getSlicerModel/@containedType.0" isOrdered="true">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1492;2051"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Slicer">
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="kermeta::emfpersistence" toName=""/>
+                <usings fromQName="kermeta::io" toName=""/>
+                <usings fromQName="ecore" toName=""/>
+                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              </containedType>
+              <ownedParameter name="uriSlicerModel" type="//org2/kermeta/kompren/slicer/KomprenCompiler/getSlicerModel/@ownedParameter.0/@containedType.0" isOrdered="true">
+                <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <usings fromQName="kermeta::emfpersistence" toName=""/>
+                  <usings fromQName="kermeta::io" toName=""/>
+                  <usings fromQName="ecore" toName=""/>
+                  <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                </containedType>
+              </ownedParameter>
+              <body xsi:type="org_kermeta_language_behavior:Block">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1554;2051"/>
+                <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="repository">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1562;1617"/>
+                  <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1607;1617"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1596;1617"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="kermeta::emfpersistence" toName=""/>
+                    <usings fromQName="kermeta::io" toName=""/>
+                    <usings fromQName="ecore" toName=""/>
+                    <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="ResourceSet">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1596;1607"/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </target>
+                  </initialization>
+                  <type name="ResourceSet" type="//org2/kermeta/kompren/slicer/KomprenCompiler/getSlicerModel/@body/@statement.0/@type/@containedType.0" isOrdered="true">
+                    <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="ResourceSet">
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </containedType>
+                  </type>
+                </statement>
+                <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="resource">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1617;1778"/>
+                  <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="createResource" isCalledWithParenthesis="true">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1656;1778"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1646;1778"/>
+                    <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="uriSlicerModel">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1672;1686"/>
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1672;1686"/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </parameters>
+                    <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="platform:/resource/org.kermeta.kompren.slicer.compiler/metamodel/kompren.ecore">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1688;1768"/>
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1688;1768"/>
+                    </parameters>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="kermeta::emfpersistence" toName=""/>
+                    <usings fromQName="kermeta::io" toName=""/>
+                    <usings fromQName="ecore" toName=""/>
+                    <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="repository">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1646;1656"/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </target>
+                  </initialization>
+                  <type name="Resource" type="//org2/kermeta/kompren/slicer/KomprenCompiler/getSlicerModel/@body/@statement.1/@type/@containedType.0" isOrdered="true">
+                    <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Resource">
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </containedType>
+                  </type>
+                </statement>
+                <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="load" isCalledWithParenthesis="true">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1786;1815"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1778;1815"/>
+                  <parameters xsi:type="org_kermeta_language_behavior:VoidLiteral">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1792;1796"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1792;1796"/>
+                  </parameters>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <usings fromQName="kermeta::emfpersistence" toName=""/>
+                  <usings fromQName="kermeta::io" toName=""/>
+                  <usings fromQName="ecore" toName=""/>
+                  <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="resource">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1778;1786"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="kermeta::emfpersistence" toName=""/>
+                    <usings fromQName="kermeta::io" toName=""/>
+                    <usings fromQName="ecore" toName=""/>
+                    <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                  </target>
+                </statement>
+                <statement xsi:type="org_kermeta_language_behavior:Assignment">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1815;1833"/>
+                  <target xsi:type="org_kermeta_language_behavior:CallResult">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1815;1822"/>
+                  </target>
+                  <value xsi:type="org_kermeta_language_behavior:VoidLiteral">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1825;1833"/>
+                  </value>
+                </statement>
+                <statement xsi:type="org_kermeta_language_behavior:Loop">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1833;2045"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1833;2045"/>
+                  <initialization xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="it">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1838;1901"/>
+                    <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="iterator">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1889;1901"/>
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1869;1901"/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                      <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="getContents">
+                        <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1877;1889"/>
+                        <usings fromQName="kermeta::standard" toName=""/>
+                        <usings fromQName="kermeta::emfpersistence" toName=""/>
+                        <usings fromQName="kermeta::io" toName=""/>
+                        <usings fromQName="ecore" toName=""/>
+                        <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                        <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="resource">
+                          <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1869;1877"/>
+                          <usings fromQName="kermeta::standard" toName=""/>
+                          <usings fromQName="kermeta::emfpersistence" toName=""/>
+                          <usings fromQName="kermeta::io" toName=""/>
+                          <usings fromQName="ecore" toName=""/>
+                          <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                        </target>
+                      </target>
+                    </initialization>
+                    <type name="Iterator&lt;Object>" type="//org2/kermeta/kompren/slicer/KomprenCompiler/getSlicerModel/@body/@statement.4/@initialization/@type/@containedType.0" isOrdered="true">
+                      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" generics="//org2/kermeta/kompren/slicer/KomprenCompiler/getSlicerModel/@body/@statement.4/@initialization/@type/@containedType.0/@containedType.0" typeIdentifier="Iterator">
+                        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Object">
+                          <usings fromQName="kermeta::standard" toName=""/>
+                          <usings fromQName="kermeta::emfpersistence" toName=""/>
+                          <usings fromQName="kermeta::io" toName=""/>
+                          <usings fromQName="ecore" toName=""/>
+                          <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                        </containedType>
+                        <usings fromQName="kermeta::standard" toName=""/>
+                        <usings fromQName="kermeta::emfpersistence" toName=""/>
+                        <usings fromQName="kermeta::io" toName=""/>
+                        <usings fromQName="ecore" toName=""/>
+                        <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                      </containedType>
+                    </type>
+                  </initialization>
+                  <body xsi:type="org_kermeta_language_behavior:Block">
+                    <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="next">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1926;1960"/>
+                      <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="next">
+                        <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1951;1960"/>
+                        <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1949;1960"/>
+                        <usings fromQName="kermeta::standard" toName=""/>
+                        <usings fromQName="kermeta::emfpersistence" toName=""/>
+                        <usings fromQName="kermeta::io" toName=""/>
+                        <usings fromQName="ecore" toName=""/>
+                        <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                        <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="it">
+                          <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1949;1951"/>
+                          <usings fromQName="kermeta::standard" toName=""/>
+                          <usings fromQName="kermeta::emfpersistence" toName=""/>
+                          <usings fromQName="kermeta::io" toName=""/>
+                          <usings fromQName="ecore" toName=""/>
+                          <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                        </target>
+                      </initialization>
+                      <type name="Object" type="//org2/kermeta/kompren/slicer/KomprenCompiler/getSlicerModel/@body/@statement.4/@body/@statement.0/@type/@containedType.0" isOrdered="true">
+                        <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Object">
+                          <usings fromQName="kermeta::standard" toName=""/>
+                          <usings fromQName="kermeta::emfpersistence" toName=""/>
+                          <usings fromQName="kermeta::io" toName=""/>
+                          <usings fromQName="ecore" toName=""/>
+                          <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                        </containedType>
+                      </type>
+                    </statement>
+                    <statement xsi:type="org_kermeta_language_behavior:Conditional">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1960;2040"/>
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1960;2040"/>
+                      <thenBody xsi:type="org_kermeta_language_behavior:Block">
+                        <statement xsi:type="org_kermeta_language_behavior:Assignment" isCast="true">
+                          <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2016;2034"/>
+                          <target xsi:type="org_kermeta_language_behavior:CallResult">
+                            <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2016;2023"/>
+                          </target>
+                          <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="next">
+                            <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2026;2034"/>
+                            <usings fromQName="kermeta::standard" toName=""/>
+                            <usings fromQName="kermeta::emfpersistence" toName=""/>
+                            <usings fromQName="kermeta::io" toName=""/>
+                            <usings fromQName="ecore" toName=""/>
+                            <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                          </value>
+                        </statement>
+                      </thenBody>
+                      <condition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="isInstanceOf" isCalledWithParenthesis="true">
+                        <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1967;1988"/>
+                        <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1963;1988"/>
+                        <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1962;1990"/>
+                        <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1962;1990"/>
+                        <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="Slicer">
+                          <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1981;1987"/>
+                          <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1981;1987"/>
+                          <usings fromQName="kermeta::standard" toName=""/>
+                          <usings fromQName="kermeta::emfpersistence" toName=""/>
+                          <usings fromQName="kermeta::io" toName=""/>
+                          <usings fromQName="ecore" toName=""/>
+                          <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                        </parameters>
+                        <usings fromQName="kermeta::standard" toName=""/>
+                        <usings fromQName="kermeta::emfpersistence" toName=""/>
+                        <usings fromQName="kermeta::io" toName=""/>
+                        <usings fromQName="ecore" toName=""/>
+                        <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                        <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="next">
+                          <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1963;1967"/>
+                          <usings fromQName="kermeta::standard" toName=""/>
+                          <usings fromQName="kermeta::emfpersistence" toName=""/>
+                          <usings fromQName="kermeta::io" toName=""/>
+                          <usings fromQName="ecore" toName=""/>
+                          <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                        </target>
+                      </condition>
+                    </statement>
+                  </body>
+                  <stopCondition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="isOff">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1909;1918"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1907;1918"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="kermeta::emfpersistence" toName=""/>
+                    <usings fromQName="kermeta::io" toName=""/>
+                    <usings fromQName="ecore" toName=""/>
+                    <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="it">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;1907;1909"/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </target>
+                  </stopCondition>
+                </statement>
+              </body>
+            </ownedOperation>
+            <ownedOperation name="generateKermetaPruningSlicer" type="//org2/kermeta/kompren/slicer/KomprenCompiler/generateKermetaPruningSlicer/@containedType.0">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2051;8024"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Void">
+                <usings fromQName="kermeta::standard" toName=""/>
+                <usings fromQName="kermeta::emfpersistence" toName=""/>
+                <usings fromQName="kermeta::io" toName=""/>
+                <usings fromQName="ecore" toName=""/>
+                <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              </containedType>
+              <body xsi:type="org_kermeta_language_behavior:Block">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2095;8024"/>
+                <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="modelURI">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2100;2224"/>
+                  <initialization xsi:type="org_kermeta_language_behavior:StringLiteral" value="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/kermetaPruning/kermeta.ecore">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2127;2224"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2127;2224"/>
+                  </initialization>
+                  <type name="String" type="//org2/kermeta/kompren/slicer/KomprenCompiler/generateKermetaPruningSlicer/@body/@statement.0/@type/@containedType.0" isOrdered="true">
+                    <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="String">
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </containedType>
+                  </type>
+                </statement>
+                <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="slicerModel">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2224;2374"/>
+                  <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="getSlicerModel" isCalledWithParenthesis="true">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2254;2374"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2254;2374"/>
+                    <parameters xsi:type="org_kermeta_language_behavior:StringLiteral" value="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/kermetaPruning/modelTransfo.kompren">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2269;2370"/>
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2269;2370"/>
+                    </parameters>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="kermeta::emfpersistence" toName=""/>
+                    <usings fromQName="kermeta::io" toName=""/>
+                    <usings fromQName="ecore" toName=""/>
+                    <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                  </initialization>
+                  <type name="Slicer" type="//org2/kermeta/kompren/slicer/KomprenCompiler/generateKermetaPruningSlicer/@body/@statement.1/@type/@containedType.0" isOrdered="true">
+                    <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="Slicer">
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </containedType>
+                  </type>
+                </statement>
+                <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="pkg">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2374;2432"/>
+                  <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="one" isCalledWithParenthesis="true">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2423;2432"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2400;2432"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="kermeta::emfpersistence" toName=""/>
+                    <usings fromQName="kermeta::io" toName=""/>
+                    <usings fromQName="ecore" toName=""/>
+                    <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="getEcoreModel" isCalledWithParenthesis="true">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2400;2423"/>
+                      <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="modelURI">
+                        <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2414;2422"/>
+                        <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2414;2422"/>
+                        <usings fromQName="kermeta::standard" toName=""/>
+                        <usings fromQName="kermeta::emfpersistence" toName=""/>
+                        <usings fromQName="kermeta::io" toName=""/>
+                        <usings fromQName="ecore" toName=""/>
+                        <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                      </parameters>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </target>
+                  </initialization>
+                  <type name="EPackage" type="//org2/kermeta/kompren/slicer/KomprenCompiler/generateKermetaPruningSlicer/@body/@statement.2/@type/@containedType.0" isOrdered="true">
+                    <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="EPackage">
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </containedType>
+                  </type>
+                </statement>
+                <statement xsi:type="org_kermeta_language_behavior:VariableDecl" identifier="slicer">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2432;2530"/>
+                  <initialization xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="initialise" isCalledWithParenthesis="true">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2487;2530"/>
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2468;2530"/>
+                    <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="slicerModel">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2499;2510"/>
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2499;2510"/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </parameters>
+                    <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="pkg">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2512;2515"/>
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2512;2515"/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </parameters>
+                    <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="modelURI">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2517;2525"/>
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2517;2525"/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </parameters>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="kermeta::emfpersistence" toName=""/>
+                    <usings fromQName="kermeta::io" toName=""/>
+                    <usings fromQName="ecore" toName=""/>
+                    <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2483;2487"/>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                      <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="SlicerGenerator">
+                        <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2468;2483"/>
+                        <usings fromQName="kermeta::standard" toName=""/>
+                        <usings fromQName="kermeta::emfpersistence" toName=""/>
+                        <usings fromQName="kermeta::io" toName=""/>
+                        <usings fromQName="ecore" toName=""/>
+                        <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                      </target>
+                    </target>
+                  </initialization>
+                  <type name="SlicerGenerator" type="//org2/kermeta/kompren/slicer/KomprenCompiler/generateKermetaPruningSlicer/@body/@statement.3/@type/@containedType.0" isOrdered="true">
+                    <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="SlicerGenerator">
+                      <usings fromQName="kermeta::standard" toName=""/>
+                      <usings fromQName="kermeta::emfpersistence" toName=""/>
+                      <usings fromQName="kermeta::io" toName=""/>
+                      <usings fromQName="ecore" toName=""/>
+                      <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                    </containedType>
+                  </type>
+                </statement>
+                <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="generateSlicer">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2536;2554"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2530;2554"/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <usings fromQName="kermeta::emfpersistence" toName=""/>
+                  <usings fromQName="kermeta::io" toName=""/>
+                  <usings fromQName="ecore" toName=""/>
+                  <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="slicer">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2530;2536"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="kermeta::emfpersistence" toName=""/>
+                    <usings fromQName="kermeta::io" toName=""/>
+                    <usings fromQName="ecore" toName=""/>
+                    <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                  </target>
+                </statement>
+                <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="saveCode">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2560;2571"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2554;2571"/>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <usings fromQName="kermeta::emfpersistence" toName=""/>
+                  <usings fromQName="kermeta::io" toName=""/>
+                  <usings fromQName="ecore" toName=""/>
+                  <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="slicer">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/KomprenCompiler.kmt;2554;2560"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <usings fromQName="kermeta::emfpersistence" toName=""/>
+                    <usings fromQName="kermeta::io" toName=""/>
+                    <usings fromQName="ecore" toName=""/>
+                    <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+                  </target>
+                </statement>
+              </body>
+            </ownedOperation>
+          </ownedTypeDefinition>
+        </nestedPackage>
+      </nestedPackage>
+    </nestedPackage>
+  </packages>
+</org_kermeta_language_structure:ModelingUnit>

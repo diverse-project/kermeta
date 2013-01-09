@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.kermeta.kompren.wizard"
+            name="Kompren"/>
+	 <wizard category="org.kermeta.kompren.wizard" icon="icons/full/obj16/SlicerModelFile.gif" 
+	 	class="org2.kermeta.kompren.slicer.presentation.SlicerModelWizard" 
+	 	id="org.kermeta.kompren.KomprenModelWizard" name="Kompren Slicer Model">
+	 	<description>Create a new Kompren Slicer model</description>
+	 </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="org2.kermeta.kompren.slicer.presentation.SlicerEditorID"
+            name="Kompren Slicer Model Editor"
+            icon="icons/full/obj16/SlicerModelFile.gif"
+            extensions="kompren"
+            class="org2.kermeta.kompren.slicer.presentation.SlicerEditor"
+            contributorClass="org2.kermeta.kompren.slicer.presentation.SlicerActionBarContributor">
+      </editor>
+   </extension>
+</plugin>

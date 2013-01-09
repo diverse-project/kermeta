@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<org.kermeta.kompren.slicer:Slicer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:org.kermeta.kompren.slicer="http://www.org.kermeta.kompren/org/kermeta/kompren/slicer" name="UMLCMSlicer" uriMetamodel="./UML.ecore" strict="true">
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
+    <domain href="UML.ecore#//Class"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
+    <domain href="UML.ecore#//Package"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
+    <domain href="UML.ecore#//Classifier"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
+    <domain href="UML.ecore#//Parameter"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
+    <domain href="UML.ecore#//Association"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
+    <domain href="UML.ecore#//AssociationClass"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
+    <domain href="UML.ecore#//Type"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
+    <domain href="UML.ecore#//PrimitiveType"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
+    <domain href="UML.ecore#//Interface"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
+    <domain href="UML.ecore#//Namespace"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
+    <domain href="UML.ecore#//Generalization"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
+    <domain href="UML.ecore#//Realization"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
+    <domain href="UML.ecore#//Operation"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
+    <domain href="UML.ecore#//Property"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
+    <domain href="UML.ecore#//DataType"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
+    <domain href="UML.ecore#//Constraint"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="UML.ecore#//Class/nestedClassifier"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="UML.ecore#//Class/ownedOperation"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="UML.ecore#//Class/superClass"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="UML.ecore#//Operation/precondition"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="UML.ecore#//Operation/postcondition"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="UML.ecore#//Operation/datatype"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="UML.ecore#//Operation/bodyCondition"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="UML.ecore#//Operation/type"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="UML.ecore#//Property/datatype"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="UML.ecore#//Property/opposite"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="UML.ecore#//Property/associationEnd"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="UML.ecore#//DataType/ownedAttribute"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="UML.ecore#//DataType/ownedOperation"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="UML.ecore#//Package/ownedType"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="UML.ecore#//Package/packagedElement"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="UML.ecore#//Package/nestedPackage"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="UML.ecore#//Classifier/generalization"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="UML.ecore#//Classifier/attribute"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="UML.ecore#//Interface/ownedAttribute"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="UML.ecore#//Interface/ownedOperation"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="UML.ecore#//Interface/nestedClassifier"/>
+  </slicedElements>
+  <inputClasses href="UML.ecore#//Package"/>
+</org.kermeta.kompren.slicer:Slicer>

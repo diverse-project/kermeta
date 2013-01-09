@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+
+<plugin>
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.kermeta.kompren.slicer.texteditor"
+            name="Kompren"
+            parentCategory="org.kermeta.kompren.wizard">
+      </category>
+      <wizard
+            category="org.kermeta.kompren.wizard"
+            class="org.kermeta.kompren.slicer.texteditor.wizards.SampleNewWizard"
+            icon="icons/sample.gif"
+            id="org.kermeta.kompren.slicer.texteditor.wizards.SampleNewWizard"
+            name="Kompren Textual Model">
+      </wizard> 
+   </extension>
+   
+   <extension point="org.eclipse.ui.editors">
+      <editor
+      		id="org.kermeta.kompren.texteditor.editors.KomprenEditorID"
+            name="Kompren Textual Editor"
+            icon="icons/sample.gif"
+            extensions="komprent"
+            class="org.kermeta.kompren.texteditor.editors.KomprenEditor"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor">
+      </editor>
+   </extension>
+</plugin>

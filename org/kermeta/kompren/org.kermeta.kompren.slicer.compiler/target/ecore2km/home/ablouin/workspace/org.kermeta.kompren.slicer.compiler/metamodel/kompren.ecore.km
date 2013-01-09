@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure" namespacePrefix="">
+  <packages kTag="//org2/@kOwnedTags.0" name="org2" uri="http://www.org.kermeta.kompren/org">
+    <kOwnedTags name="ecore" value="true" object="//org2"/>
+    <nestedPackage kTag="//org2/kermeta/@kOwnedTags.0" name="kermeta" uri="http://www.org.kermeta.kompren/org/kermeta">
+      <kOwnedTags name="ecore" value="true" object="//org2/kermeta"/>
+      <nestedPackage kTag="//org2/kermeta/kompren/@kOwnedTags.0" name="kompren" uri="http://www.org.kermeta.kompren/org/kermeta/kompren">
+        <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren"/>
+        <nestedPackage kTag="//org2/kermeta/kompren/slicer/@kOwnedTags.0" name="slicer" uri="http://www.org.kermeta.kompren/org/kermeta/kompren/slicer">
+          <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer"/>
+          <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org2/kermeta/kompren/slicer/Slicer/@kOwnedTags.0" name="Slicer">
+            <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/Slicer"/>
+            <ownedAttribute kTag="//org2/kermeta/kompren/slicer/Slicer/name/@kOwnedTags.0" name="name" type="//org2/kermeta/kompren/slicer/Slicer/name/@containedType.0" isOrdered="true" lower="1" isComposite="true">
+              <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/Slicer/name"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
+            </ownedAttribute>
+            <ownedAttribute kTag="//org2/kermeta/kompren/slicer/Slicer/uriMetamodel/@kOwnedTags.0" name="uriMetamodel" type="//org2/kermeta/kompren/slicer/Slicer/uriMetamodel/@containedType.0" isOrdered="true" lower="1" isComposite="true">
+              <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/Slicer/uriMetamodel"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
+            </ownedAttribute>
+            <ownedAttribute kTag="//org2/kermeta/kompren/slicer/Slicer/active/@kOwnedTags.0" name="active" type="//org2/kermeta/kompren/slicer/Slicer/active/@containedType.0" isOrdered="true" isComposite="true">
+              <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/Slicer/active"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
+            </ownedAttribute>
+            <ownedAttribute kTag="//org2/kermeta/kompren/slicer/Slicer/strict/@kOwnedTags.0" name="strict" type="//org2/kermeta/kompren/slicer/Slicer/strict/@containedType.0" isOrdered="true" isComposite="true">
+              <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/Slicer/strict"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
+            </ownedAttribute>
+            <ownedAttribute kTag="//org2/kermeta/kompren/slicer/Slicer/helper/@kOwnedTags.0" name="helper" type="//org2/kermeta/kompren/slicer/Slicer/helper/@containedType.0" isOrdered="true" isComposite="true">
+              <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/Slicer/helper"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
+            </ownedAttribute>
+            <ownedAttribute kTag="//org2/kermeta/kompren/slicer/Slicer/onStart/@kOwnedTags.0" name="onStart" type="//org2/kermeta/kompren/slicer/Slicer/onStart/@containedType.0" isOrdered="true" isComposite="true">
+              <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/Slicer/onStart"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
+            </ownedAttribute>
+            <ownedAttribute kTag="//org2/kermeta/kompren/slicer/Slicer/onEnd/@kOwnedTags.0" name="onEnd" type="//org2/kermeta/kompren/slicer/Slicer/onEnd/@containedType.0" isOrdered="true" isComposite="true">
+              <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/Slicer/onEnd"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
+            </ownedAttribute>
+            <ownedAttribute kTag="//org2/kermeta/kompren/slicer/Slicer/constraints/@kOwnedTags.0" name="constraints" type="//org2/kermeta/kompren/slicer/Slicer/constraints/@containedType.0" isOrdered="true" upper="-1" isComposite="true">
+              <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/Slicer/constraints"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org2::kermeta::kompren::slicer::Constraint"/>
+            </ownedAttribute>
+            <ownedAttribute kTag="//org2/kermeta/kompren/slicer/Slicer/radius/@kOwnedTags.0" name="radius" type="//org2/kermeta/kompren/slicer/Slicer/radius/@containedType.0" isOrdered="true" isComposite="true">
+              <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/Slicer/radius"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org2::kermeta::kompren::slicer::Radius"/>
+            </ownedAttribute>
+            <ownedAttribute kTag="//org2/kermeta/kompren/slicer/Slicer/slicedElements/@kOwnedTags.0" name="slicedElements" type="//org2/kermeta/kompren/slicer/Slicer/slicedElements/@containedType.0" isOrdered="true" upper="-1" isComposite="true">
+              <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/Slicer/slicedElements"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org2::kermeta::kompren::slicer::SlicedElement"/>
+            </ownedAttribute>
+            <ownedAttribute kTag="//org2/kermeta/kompren/slicer/Slicer/inputClasses/@kOwnedTags.0" name="inputClasses" type="//org2/kermeta/kompren/slicer/Slicer/inputClasses/@containedType.0" isOrdered="true" lower="1" upper="-1">
+              <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/Slicer/inputClasses"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="ecore::EClass"/>
+            </ownedAttribute>
+          </ownedTypeDefinition>
+          <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org2/kermeta/kompren/slicer/Constraint/@kOwnedTags.0" name="Constraint">
+            <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/Constraint"/>
+            <ownedAttribute kTag="//org2/kermeta/kompren/slicer/Constraint/expression/@kOwnedTags.0" name="expression" type="//org2/kermeta/kompren/slicer/Constraint/expression/@containedType.0" isOrdered="true" lower="1" isComposite="true">
+              <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/Constraint/expression"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
+            </ownedAttribute>
+            <ownedAttribute kTag="//org2/kermeta/kompren/slicer/Constraint/name/@kOwnedTags.0" name="name" type="//org2/kermeta/kompren/slicer/Constraint/name/@containedType.0" isOrdered="true" lower="1" isComposite="true">
+              <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/Constraint/name"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
+            </ownedAttribute>
+          </ownedTypeDefinition>
+          <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org2/kermeta/kompren/slicer/Radius/@kOwnedTags.0" name="Radius">
+            <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/Radius"/>
+            <ownedAttribute kTag="//org2/kermeta/kompren/slicer/Radius/focusedClasses/@kOwnedTags.0" name="focusedClasses" type="//org2/kermeta/kompren/slicer/Radius/focusedClasses/@containedType.0" isOrdered="true" upper="-1">
+              <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/Radius/focusedClasses"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org2::kermeta::kompren::slicer::SlicedClass"/>
+            </ownedAttribute>
+          </ownedTypeDefinition>
+          <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org2/kermeta/kompren/slicer/SlicedClass/@kOwnedTags.0" name="SlicedClass" superType="//org2/kermeta/kompren/slicer/SlicedClass/@containedType.0">
+            <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/SlicedClass"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org2::kermeta::kompren::slicer::SlicedElement"/>
+            <ownedAttribute kTag="//org2/kermeta/kompren/slicer/SlicedClass/ctx/@kOwnedTags.0" name="ctx" type="//org2/kermeta/kompren/slicer/SlicedClass/ctx/@containedType.0" isOrdered="true" isComposite="true">
+              <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/SlicedClass/ctx"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org2::kermeta::kompren::slicer::VarDecl"/>
+            </ownedAttribute>
+            <ownedAttribute kTag="//org2/kermeta/kompren/slicer/SlicedClass/domain/@kOwnedTags.0" name="domain" type="//org2/kermeta/kompren/slicer/SlicedClass/domain/@containedType.0" isOrdered="true" lower="1">
+              <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/SlicedClass/domain"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="ecore::EClass"/>
+            </ownedAttribute>
+          </ownedTypeDefinition>
+          <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org2/kermeta/kompren/slicer/SlicedProperty/@kOwnedTags.0" name="SlicedProperty" superType="//org2/kermeta/kompren/slicer/SlicedProperty/@containedType.0">
+            <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/SlicedProperty"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org2::kermeta::kompren::slicer::SlicedElement"/>
+            <ownedAttribute kTag="//org2/kermeta/kompren/slicer/SlicedProperty/opposite/@kOwnedTags.0" name="opposite" type="//org2/kermeta/kompren/slicer/SlicedProperty/opposite/@containedType.0" isOrdered="true" isComposite="true">
+              <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/SlicedProperty/opposite"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org2::kermeta::kompren::slicer::OppositeCreation"/>
+            </ownedAttribute>
+            <ownedAttribute kTag="//org2/kermeta/kompren/slicer/SlicedProperty/src/@kOwnedTags.0" name="src" type="//org2/kermeta/kompren/slicer/SlicedProperty/src/@containedType.0" isOrdered="true" isComposite="true">
+              <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/SlicedProperty/src"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org2::kermeta::kompren::slicer::VarDecl"/>
+            </ownedAttribute>
+            <ownedAttribute kTag="//org2/kermeta/kompren/slicer/SlicedProperty/tgt/@kOwnedTags.0" name="tgt" type="//org2/kermeta/kompren/slicer/SlicedProperty/tgt/@containedType.0" isOrdered="true" isComposite="true">
+              <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/SlicedProperty/tgt"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="org2::kermeta::kompren::slicer::VarDecl"/>
+            </ownedAttribute>
+            <ownedAttribute kTag="//org2/kermeta/kompren/slicer/SlicedProperty/domain/@kOwnedTags.0" name="domain" type="//org2/kermeta/kompren/slicer/SlicedProperty/domain/@containedType.0" isOrdered="true" lower="1">
+              <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/SlicedProperty/domain"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="ecore::EStructuralFeature"/>
+            </ownedAttribute>
+          </ownedTypeDefinition>
+          <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org2/kermeta/kompren/slicer/OppositeCreation/@kOwnedTags.0" name="OppositeCreation">
+            <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/OppositeCreation"/>
+            <ownedAttribute kTag="//org2/kermeta/kompren/slicer/OppositeCreation/name/@kOwnedTags.0" name="name" type="//org2/kermeta/kompren/slicer/OppositeCreation/name/@containedType.0" isOrdered="true" lower="1" isComposite="true">
+              <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/OppositeCreation/name"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
+            </ownedAttribute>
+          </ownedTypeDefinition>
+          <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org2/kermeta/kompren/slicer/SlicedElement/@kOwnedTags.0" name="SlicedElement" isAbstract="true">
+            <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/SlicedElement"/>
+            <ownedAttribute kTag="//org2/kermeta/kompren/slicer/SlicedElement/isOption/@kOwnedTags.0" name="isOption" type="//org2/kermeta/kompren/slicer/SlicedElement/isOption/@containedType.0" isOrdered="true" isComposite="true">
+              <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/SlicedElement/isOption"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Boolean"/>
+            </ownedAttribute>
+            <ownedAttribute kTag="//org2/kermeta/kompren/slicer/SlicedElement/expression/@kOwnedTags.0" name="expression" type="//org2/kermeta/kompren/slicer/SlicedElement/expression/@containedType.0" isOrdered="true" isComposite="true">
+              <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/SlicedElement/expression"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
+            </ownedAttribute>
+          </ownedTypeDefinition>
+          <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//org2/kermeta/kompren/slicer/VarDecl/@kOwnedTags.0" name="VarDecl">
+            <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/VarDecl"/>
+            <ownedAttribute kTag="//org2/kermeta/kompren/slicer/VarDecl/varName/@kOwnedTags.0" name="varName" type="//org2/kermeta/kompren/slicer/VarDecl/varName/@containedType.0" isOrdered="true" lower="1" isComposite="true">
+              <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/VarDecl/varName"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::String"/>
+            </ownedAttribute>
+            <ownedAttribute kTag="//org2/kermeta/kompren/slicer/VarDecl/type/@kOwnedTags.0" name="type" type="//org2/kermeta/kompren/slicer/VarDecl/type/@containedType.0" isOrdered="true" lower="1">
+              <kOwnedTags name="ecore" value="true" object="//org2/kermeta/kompren/slicer/VarDecl/type"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="ecore::EClass"/>
+            </ownedAttribute>
+          </ownedTypeDefinition>
+        </nestedPackage>
+      </nestedPackage>
+    </nestedPackage>
+  </packages>
+</org_kermeta_language_structure:ModelingUnit>

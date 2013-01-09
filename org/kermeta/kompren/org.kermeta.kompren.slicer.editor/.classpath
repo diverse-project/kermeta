@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+  <classpathentry kind="src" path="src" including="**/*.java"/>
+  <classpathentry kind="src" path="." including="plugin.properties|plugin.xml" excluding="**/*.java"/>
+  <classpathentry kind="src" path="icons" excluding="**/*.java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/emf/emf.lib/2.7.0/emf.lib-2.7.0.jar"/>
+  <classpathentry kind="src" path="/kompren.slicer.edit"/>
+  <classpathentry kind="src" path="/org.kermeta.kompren.slicer.compiler"/>
+  <classpathentry kind="src" path="/org.kermeta.kompren.slicer.model"/>
+  <classpathentry kind="var" path="M2_REPO/org/scala-lang/scala-library/2.9.0-1/scala-library-2.9.0-1.jar"/>
+  <classpathentry kind="src" path="/org.kermeta.language.library.core"/>
+  <classpathentry kind="src" path="/org.kermeta.language.model"/>
+  <classpathentry kind="src" path="/org.kermeta.utils.systemservices.api"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.helpers/2.0.1-SNAPSHOT/utils.helpers-2.0.1-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/osgi/org.osgi.core/4.2.0/org.osgi.core-4.2.0.jar"/>
+  <classpathentry kind="src" path="/org.kermeta.kompren.slicer.parser"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.core.jobs/3.5.1.R36x_v20100824/org.eclipse.core.jobs-3.5.1.R36x_v20100824.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.emf.ecore.xmi/2.5.0.v20100521-1846/org.eclipse.emf.ecore.xmi-2.5.0.v20100521-1846.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.emf.edit/2.6.0.v20100914-1218/org.eclipse.emf.edit-2.6.0.v20100914-1218.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.emf.ecore.edit/2.6.0.v20100914-1218/org.eclipse.emf.ecore.edit-2.6.0.v20100914-1218.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.core.runtime/3.6.0.v20100505/org.eclipse.core.runtime-3.6.0.v20100505.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.ui/3.6.2.M20110203-1100/org.eclipse.ui-3.6.2.M20110203-1100.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.ui.workbench/3.6.2.M20110210-1200/org.eclipse.ui.workbench-3.6.2.M20110210-1200.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.core.resources/3.6.1.R36x_v20110131-1630/org.eclipse.core.resources-3.6.1.R36x_v20110131-1630.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.swt/3.6.2.v3659c/org.eclipse.swt-3.6.2.v3659c.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.swt.gtk.linux.x86_64/3.6.2.v3659b/org.eclipse.swt.gtk.linux.x86_64-3.6.2.v3659b.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.jface/3.6.2.M20110210-1200/org.eclipse.jface-3.6.2.M20110210-1200.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.equinox.common/3.6.0.v20100503/org.eclipse.equinox.common-3.6.0.v20100503.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.emf.edit.ui/2.6.0.v20100914-1218/org.eclipse.emf.edit.ui-2.6.0.v20100914-1218.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.ui.views/3.5.1.M20110202-0800/org.eclipse.ui.views-3.5.1.M20110202-0800.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.ui.ide/3.6.2.M20101201-0800/org.eclipse.ui.ide-3.6.2.M20101201-0800.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.emf.common.ui/2.6.0.v20100914-1218/org.eclipse.emf.common.ui-2.6.0.v20100914-1218.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.equinox.registry/3.5.0.v20100503/org.eclipse.equinox.registry-3.5.0.v20100503.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/kermeta/eclipse/org.eclipse.core.commands/3.6.0.I20100512-1500/org.eclipse.core.commands-3.6.0.I20100512-1500.jar"/>
+</classpath>

@@ -1,0 +1,18 @@
+slicer VisualiserKermetaModel {
+	domain:"platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore"
+	input: org.kermeta.language.structure.ClassDefinition, org.kermeta.language.structure.ModelingUnit
+	slicedClass: org.kermeta.language.structure.Package pkg [[
+		stdio.writeln("package: " + pkg.name)
+	]]
+	slicedClass: org.kermeta.language.structure.ClassDefinition cl [[
+		stdio.writeln("clazz: " + cl.name)
+	]]
+	slicedProperty: org.kermeta.language.structure.Package.nestedPackage
+	slicedProperty: org.kermeta.language.structure.ModelingUnit.packages
+	slicedProperty: org.kermeta.language.structure.TypeDefinitionContainer.ownedTypeDefinition
+	slicedProperty: org.kermeta.language.structure.TypeDefinition.superType option
+	// slicedProperty: org.kermeta.language.structure.TypeDefinition.superType option opposite(lowerTypes)
+	slicedProperty: org.kermeta.language.structure.ParameterizedType.typeDefinition
+	slicedProperty: org.kermeta.language.structure.ClassDefinition.ownedAttribute option
+	slicedProperty: org.kermeta.language.structure.TypedElement.type option
+}

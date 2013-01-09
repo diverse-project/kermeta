@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org.kermeta.kompren.slicer:Slicer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:org.kermeta.kompren.slicer="http://www.org.kermeta.kompren/org/kermeta/kompren/slicer" name="StrictEcore" uriMetamodel="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/strictEcore/Ecore.ecore" strict="true">
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
+    <domain href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/strictEcore/Ecore.ecore#//ENamedElement"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/strictEcore/Ecore.ecore#//EClass/eSuperTypes"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/strictEcore/Ecore.ecore#//EClass/eStructuralFeatures"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/strictEcore/Ecore.ecore#//ETypedElement/eType"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/strictEcore/Ecore.ecore#//EClass/eOperations"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/strictEcore/Ecore.ecore#//EOperation/eParameters"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/strictEcore/Ecore.ecore#//EEnum/eLiterals"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EAttribute" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/strictEcore/Ecore.ecore#//ENamedElement/name"/>
+  </slicedElements>
+  <inputClasses href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/strictEcore/Ecore.ecore#//EClass"/>
+</org.kermeta.kompren.slicer:Slicer>

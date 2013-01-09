@@ -1,0 +1,183 @@
+/*
+ * Creation : November 25, 2010
+ * Licence  : EPL
+ * Copyright: INRIA Rennes, Triskell Team
+ * Authors  : Arnaud Blouin
+ */
+package org2::kermeta::kompren::slicer;
+
+using kermeta::standard
+using kermeta::emfpersistence
+using kermeta::io
+using ecore
+using kermeta::io::StdIO => stdio
+
+class KomprenCompiler {
+	operation compile(uriSlicer : String) is do
+		var slicerModel : Slicer init getSlicerModel(uriSlicer)
+		var pkg 		: EPackage init getEcoreModel(slicerModel.uriMetamodel).one
+		var slicer 		: SlicerGenerator init SlicerGenerator.new.initialise(slicerModel, pkg, slicerModel.uriMetamodel)
+
+		slicer.generateSlicer
+		slicer.saveCode
+		// var start : Long init Date.new.getTime()
+		// generateKevoree
+		// generateInvertedClassModel
+		// generateClassSlicer
+		// generateUnusedVarDetector
+		// generateKermetaTransfoAnalyser
+		// generateStateMachineSlicer
+		// generateFeatureDiagramSlicer
+		// generateStrictEcoreSlicer
+		// generateSemZoomSlicer
+		// generateUMLCMSlicer
+		// stdio.writeln((Date.new.getTime()-start).toString)
+	end
+	
+	
+	operation getEcoreModel(uriEcoreModel : String) : Bag<EPackage> is do
+   		var repository : ResourceSet init ResourceSet.new
+   		var resource : Resource init repository.createResource(uriEcoreModel, "http://www.eclipse.org/emf/2002/Ecore")
+       	resource.load(void)
+		
+		result := Bag<EPackage>.new
+		
+		resource.getContents().each{obj |
+			if(obj.isInstanceOf(EPackage)) then
+				result.add(obj.asType(EPackage))        
+			end
+		}
+	end
+
+
+	operation getSlicerModel(uriSlicerModel : String) : Slicer is do
+   		var repository : ResourceSet init ResourceSet.new
+   		var resource : Resource init repository.createResource(uriSlicerModel, "platform:/resource/org.kermeta.kompren.slicer.compiler/metamodel/kompren.ecore")
+       	resource.load(void)
+       	
+       	result := void
+
+		from var it : Iterator<Object> init resource.getContents.iterator
+		until it.isOff
+		loop
+			var next : Object init it.next
+			if(next.isInstanceOf(Slicer)) then                 
+				result ?= next
+			end
+		end
+	end
+
+	operation generateKermetaPruningSlicer() is do
+		var modelURI	: String init "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/kermetaPruning/kermeta.ecore"
+		var slicerModel : Slicer init getSlicerModel("platform:/resource/org.kermeta.kompren.slicer.compiler/examples/kermetaPruning/modelTransfo.kompren")
+		var pkg 		: EPackage init getEcoreModel(modelURI).one()
+		var slicer 		: SlicerGenerator init SlicerGenerator.new.initialise(slicerModel, pkg, modelURI)
+
+		slicer.generateSlicer
+		slicer.saveCode
+	end
+	
+
+/*
+	operation generateUMLCMSlicer() is do
+		var modelURI	: String init "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/umlClassModel/UML.ecore"
+		var slicerModel : Slicer init getSlicerModel("platform:/resource/org.kermeta.kompren.slicer.compiler/examples/umlClassModel/umlCM.slicer")
+		var pkg 		: EPackage init getEcoreModel(modelURI).one()
+		var slicer 		: SlicerGenerator init SlicerGenerator.new.initialise(slicerModel, pkg, modelURI)
+
+		slicer.generateSlicer()
+		slicer.saveCode("/examples.umlCM/")
+	end
+
+
+	operation generateSemZoomSlicer() is do
+		var modelURI	: String init "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoom/Ecore.ecore"
+		var slicerModel : Slicer init getSlicerModel("platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoom/sem.slicer")
+		var pkg 		: EPackage init getEcoreModel(modelURI).one()
+		var slicer 		: SlicerGenerator init SlicerGenerator.new.initialise(slicerModel, pkg, modelURI)
+
+		slicer.generateSlicer()
+		slicer.saveCode("/examples.semZoom/")
+	end
+
+	operation generateStrictEcoreSlicer() is do
+		var modelURI	: String init "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/strictEcore/Ecore.ecore"
+		var slicerModel : Slicer init getSlicerModel("platform:/resource/org.kermeta.kompren.slicer.compiler/examples/strictEcore/strictEcore.slicer")
+		var pkg 		: EPackage init getEcoreModel(modelURI).one()
+		var slicer 		: SlicerGenerator init SlicerGenerator.new.initialise(slicerModel, pkg, modelURI)
+
+		slicer.generateSlicer()
+		slicer.saveCode("/examples.strictEcore/")
+	end
+
+	operation generateFeatureDiagramSlicer() is do
+		var modelURI	: String init "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/featureModel/featureDiagram.ecore"
+		var slicerModel : Slicer init getSlicerModel("platform:/resource/org.kermeta.kompren.slicer.compiler/examples/featureModel/featureModel.slicer")
+		var pkg 		: EPackage init getEcoreModel(modelURI).one()
+		var slicer 		: SlicerGenerator init SlicerGenerator.new.initialise(slicerModel, pkg, modelURI)
+
+		slicer.generateSlicer()
+		slicer.saveCode("platform:/resource/slicing/examples/featureModel/output/")
+	end
+
+	operation generateStateMachineSlicer() is do
+		var modelURI	: String init "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/stateMachine/StateMachine.ecore"
+		var slicerModel : Slicer init getSlicerModel("platform:/resource/org.kermeta.kompren.slicer.compiler/examples/stateMachine/sm.slicer")
+		var pkg 		: EPackage init getEcoreModel(modelURI).one()
+		var slicer 		: SlicerGenerator init SlicerGenerator.new.initialise(slicerModel, pkg, modelURI)
+
+		slicer.generateSlicer()
+		slicer.saveCode("/examples.stateMachine/")
+	end
+
+	operation generateKermetaTransfoAnalyser() is do
+		var modelURI	: String init "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelTransfoAnalysis/kermeta.ecore"
+		var slicerModel : Slicer init getSlicerModel("platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelTransfoAnalysis/modelTransfo.slicer")
+		var pkg 		: EPackage init getEcoreModel(modelURI).one()
+		var slicer 		: SlicerGenerator init SlicerGenerator.new.initialise(slicerModel, pkg, modelURI)
+
+		slicer.generateSlicer()
+		slicer.saveCode("/examples.modelTransfoAnalysis/")
+	end
+
+	operation generateUnusedVarDetector() is do
+		var modelURI	: String init "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/unusedVar/kermeta.ecore"
+		var slicerModel : Slicer init getSlicerModel("platform:/resource/org.kermeta.kompren.slicer.compiler/examples/unusedVar/unusedVar.slicer")
+		var pkg 		: EPackage init getEcoreModel(modelURI).one()
+		var slicer 		: SlicerGenerator init SlicerGenerator.new.initialise(slicerModel, pkg, modelURI)
+
+		slicer.generateSlicer()
+		slicer.saveCode("/examples.unusedVar/")
+	end
+
+	operation generateKevoree() is do
+		var modelURI	: String init "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/kevoree/kevoree.ecore"
+		var slicerModel : Slicer init getSlicerModel("platform:/resource/org.kermeta.kompren.slicer.compiler/examples/kevoree/kevoree.slicer")
+		var pkg 		: EPackage init getEcoreModel(modelURI).one()
+		var slicer 		: SlicerGenerator init SlicerGenerator.new.initialise(slicerModel, pkg, modelURI)
+
+		slicer.generateSlicer()
+		slicer.saveCode("platform:/resource/slicing/examples/kevoree/output/")
+	end
+
+	operation generateInvertedClassModel() is do
+		var modelURI	: String init "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/class/ClassModel.ecore"
+		var slicerModel	: Slicer init getSlicerModel("platform:/resource/org.kermeta.kompren.slicer.compiler/examples/classInverted/classInverted.slicer")
+		var pkg 		: EPackage init getEcoreModel(modelURI).one()
+		var slicer 		: SlicerGenerator init SlicerGenerator.new.initialise(slicerModel, pkg, modelURI)
+
+		slicer.generateSlicer()
+		slicer.saveCode("/examples.clazzInverted/")
+	end
+
+	operation generateClassSlicer() is do
+		var modelURI	: String init "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/class/ClassModel.ecore"
+		var slicerModel	: Slicer init getSlicerModel("platform:/resource/org.kermeta.kompren.slicer.compiler/examples/class/class.slicer")
+		var pkg 		: EPackage init getEcoreModel(modelURI).one()
+		var slicer 		: SlicerGenerator init SlicerGenerator.new.initialise(slicerModel, pkg, modelURI)
+
+		slicer.generateSlicer()
+		slicer.saveCode("/examples.clazz/")
+	end
+*/
+}

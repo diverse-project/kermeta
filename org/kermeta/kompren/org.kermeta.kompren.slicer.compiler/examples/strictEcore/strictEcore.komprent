@@ -1,0 +1,12 @@
+slicer strict StrictEcore{
+	domain: "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/strictEcore/Ecore.ecore"
+	input: ecore.EClass
+	slicedClass: ecore.ENamedElement
+	slicedProperty: ecore.EClass.eSuperTypes
+	slicedProperty: ecore.EClass.eStructuralFeatures
+	slicedProperty: ecore.ETypedElement.eType
+	slicedProperty: ecore.EClass.eOperations
+	slicedProperty: ecore.EOperation.eParameters
+	slicedProperty: ecore.EEnum.eLiterals
+	slicedProperty: ecore.ENamedElement.name
+}

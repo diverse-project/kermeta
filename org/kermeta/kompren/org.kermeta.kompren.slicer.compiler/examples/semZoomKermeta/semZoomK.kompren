@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org.kermeta.kompren.slicer:Slicer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:org.kermeta.kompren.slicer="http://www.org.kermeta.kompren/org/kermeta/kompren/slicer" name="VisualiserKermetaModel" uriMetamodel="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore">
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass" expression="&#xA;&#x9;&#x9;stdio.writeln(&quot;package: &quot; + pkg.name)&#xA;&#x9;">
+    <ctx varName="pkg">
+      <type href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/Package"/>
+    </ctx>
+    <domain href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/Package"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass" expression="&#xA;&#x9;&#x9;stdio.writeln(&quot;clazz: &quot; + cl.name)&#xA;&#x9;">
+    <ctx varName="cl">
+      <type href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/ClassDefinition"/>
+    </ctx>
+    <domain href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/ClassDefinition"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/Package/nestedPackage"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/ModelingUnit/packages"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/TypeDefinitionContainer/ownedTypeDefinition"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty" isOption="true">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/TypeDefinition/superType"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/ParameterizedType/typeDefinition"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty" isOption="true">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/ClassDefinition/ownedAttribute"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty" isOption="true">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/TypedElement/type"/>
+  </slicedElements>
+  <inputClasses href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/ClassDefinition"/>
+  <inputClasses href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/ModelingUnit"/>
+</org.kermeta.kompren.slicer:Slicer>

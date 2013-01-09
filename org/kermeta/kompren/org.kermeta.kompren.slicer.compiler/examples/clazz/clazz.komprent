@@ -1,0 +1,8 @@
+slicer InheritanceSlicer{
+	domain: "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/clazz/ClassModel.ecore"
+	input: ex.classModel.Clazz
+	slicedClass: ex.classModel.Clazz clazz [[stdio.writeln("Clazz: " + clazz.name)]]
+	slicedProperty: ex.classModel.Clazz.superClasses srcClass tgtClass [[stdio.writeln("Inheritance: " + srcClass.name + " " + tgtClass.name)]]
+	onStart [[stdio.writeln("Slicing starting")]]
+	onEnd [[stdio.writeln("Slicing ended")]]
+}

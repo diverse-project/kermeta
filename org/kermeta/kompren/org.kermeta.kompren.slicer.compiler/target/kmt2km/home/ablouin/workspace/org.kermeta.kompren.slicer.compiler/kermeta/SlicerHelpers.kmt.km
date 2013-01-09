@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org_kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_0_0//org/kermeta/language/structure">
+  <packages name="org2">
+    <nestedPackage name="kermeta">
+      <nestedPackage name="kompren">
+        <nestedPackage name="slicer">
+          <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Slicer" superType="//org2/kermeta/kompren/slicer/Slicer/@containedType.0" isAspect="true">
+            <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;66;527"/>
+            <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="kermeta::standard::Object">
+              <usings fromQName="kermeta::standard" toName=""/>
+            </containedType>
+            <ownedAttribute name="slicedClasses" type="//org2/kermeta/kompren/slicer/Slicer/slicedClasses/@containedType.0" isOrdered="true" upper="-1" isDerived="true">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;89;302"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="SlicedClass">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+              <getterBody xsi:type="org_kermeta_language_behavior:Block">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;143;302"/>
+                <statement xsi:type="org_kermeta_language_behavior:Assignment">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;148;188"/>
+                  <target xsi:type="org_kermeta_language_behavior:CallResult">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;148;155"/>
+                  </target>
+                  <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;181;188"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="OrderedSet" generics="//org2/kermeta/kompren/slicer/Slicer/slicedClasses/@getterBody/@statement.0/@value/@target/@containedType.0">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;158;181"/>
+                      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="SlicedClass">
+                        <usings fromQName="kermeta::standard" toName=""/>
+                      </containedType>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                    </target>
+                  </value>
+                </statement>
+                <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="each" isCalledWithParenthesis="true">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;202;293"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;188;293"/>
+                  <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
+                    <parameters name="se">
+                      <type type="//org2/kermeta/kompren/slicer/Slicer/slicedClasses/@getterBody/@statement.1/@parameters.0/@parameters.0/@type/@containedType.0">
+                        <containedType xsi:type="org_kermeta_language_structure:UnresolvedInferredType"/>
+                      </type>
+                    </parameters>
+                    <body xsi:type="org_kermeta_language_behavior:Block">
+                      <statement xsi:type="org_kermeta_language_behavior:Conditional">
+                        <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;213;290"/>
+                        <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;213;290"/>
+                        <thenBody xsi:type="org_kermeta_language_behavior:Block">
+                          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="add" isCalledWithParenthesis="true">
+                            <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;257;286"/>
+                            <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;251;286"/>
+                            <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="asType" isCalledWithParenthesis="true">
+                              <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;264;284"/>
+                              <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;262;284"/>
+                              <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="SlicedClass">
+                                <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;272;283"/>
+                                <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;272;283"/>
+                                <usings fromQName="kermeta::standard" toName=""/>
+                              </parameters>
+                              <usings fromQName="kermeta::standard" toName=""/>
+                              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="se">
+                                <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;262;264"/>
+                                <usings fromQName="kermeta::standard" toName=""/>
+                              </target>
+                            </parameters>
+                            <usings fromQName="kermeta::standard" toName=""/>
+                            <target xsi:type="org_kermeta_language_behavior:CallResult">
+                              <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;251;257"/>
+                            </target>
+                          </statement>
+                        </thenBody>
+                        <condition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="isInstanceOf" isCalledWithParenthesis="true">
+                          <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;218;244"/>
+                          <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;216;244"/>
+                          <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;215;246"/>
+                          <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;215;246"/>
+                          <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="SlicedClass">
+                            <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;232;243"/>
+                            <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;232;243"/>
+                            <usings fromQName="kermeta::standard" toName=""/>
+                          </parameters>
+                          <usings fromQName="kermeta::standard" toName=""/>
+                          <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="se">
+                            <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;216;218"/>
+                            <usings fromQName="kermeta::standard" toName=""/>
+                          </target>
+                        </condition>
+                      </statement>
+                    </body>
+                  </parameters>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="slicedElements">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;188;202"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </target>
+                </statement>
+              </getterBody>
+            </ownedAttribute>
+            <ownedAttribute name="slicedProperties" type="//org2/kermeta/kompren/slicer/Slicer/slicedProperties/@containedType.0" isOrdered="true" upper="-1" isDerived="true">
+              <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;302;525"/>
+              <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="SlicedProperty">
+                <usings fromQName="kermeta::standard" toName=""/>
+              </containedType>
+              <getterBody xsi:type="org_kermeta_language_behavior:Block">
+                <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;362;525"/>
+                <statement xsi:type="org_kermeta_language_behavior:Assignment">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;367;410"/>
+                  <target xsi:type="org_kermeta_language_behavior:CallResult">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;367;374"/>
+                  </target>
+                  <value xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="new">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;403;410"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                    <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="OrderedSet" generics="//org2/kermeta/kompren/slicer/Slicer/slicedProperties/@getterBody/@statement.0/@value/@target/@containedType.0">
+                      <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;377;403"/>
+                      <containedType xsi:type="org_kermeta_language_structure:UnresolvedType" typeIdentifier="SlicedProperty">
+                        <usings fromQName="kermeta::standard" toName=""/>
+                      </containedType>
+                      <usings fromQName="kermeta::standard" toName=""/>
+                    </target>
+                  </value>
+                </statement>
+                <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="each" isCalledWithParenthesis="true">
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;424;521"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;410;521"/>
+                  <parameters xsi:type="org_kermeta_language_behavior:LambdaExpression">
+                    <parameters name="se">
+                      <type type="//org2/kermeta/kompren/slicer/Slicer/slicedProperties/@getterBody/@statement.1/@parameters.0/@parameters.0/@type/@containedType.0">
+                        <containedType xsi:type="org_kermeta_language_structure:UnresolvedInferredType"/>
+                      </type>
+                    </parameters>
+                    <body xsi:type="org_kermeta_language_behavior:Block">
+                      <statement xsi:type="org_kermeta_language_behavior:Conditional">
+                        <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;435;518"/>
+                        <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;435;518"/>
+                        <thenBody xsi:type="org_kermeta_language_behavior:Block">
+                          <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="add" isCalledWithParenthesis="true">
+                            <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;482;514"/>
+                            <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;476;514"/>
+                            <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="asType" isCalledWithParenthesis="true">
+                              <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;489;512"/>
+                              <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;487;512"/>
+                              <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="SlicedProperty">
+                                <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;497;511"/>
+                                <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;497;511"/>
+                                <usings fromQName="kermeta::standard" toName=""/>
+                              </parameters>
+                              <usings fromQName="kermeta::standard" toName=""/>
+                              <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="se">
+                                <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;487;489"/>
+                                <usings fromQName="kermeta::standard" toName=""/>
+                              </target>
+                            </parameters>
+                            <usings fromQName="kermeta::standard" toName=""/>
+                            <target xsi:type="org_kermeta_language_behavior:CallResult">
+                              <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;476;482"/>
+                            </target>
+                          </statement>
+                        </thenBody>
+                        <condition xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="isInstanceOf" isCalledWithParenthesis="true">
+                          <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;440;469"/>
+                          <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;438;469"/>
+                          <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;437;471"/>
+                          <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;437;471"/>
+                          <parameters xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="SlicedProperty">
+                            <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;454;468"/>
+                            <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;454;468"/>
+                            <usings fromQName="kermeta::standard" toName=""/>
+                          </parameters>
+                          <usings fromQName="kermeta::standard" toName=""/>
+                          <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="se">
+                            <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;438;440"/>
+                            <usings fromQName="kermeta::standard" toName=""/>
+                          </target>
+                        </condition>
+                      </statement>
+                    </body>
+                  </parameters>
+                  <usings fromQName="kermeta::standard" toName=""/>
+                  <target xsi:type="org_kermeta_language_behavior:UnresolvedCall" name="slicedElements">
+                    <kOwnedTags name="traceability_text_reference" value="file:/home/ablouin/workspace/org.kermeta.kompren.slicer.compiler/kermeta/SlicerHelpers.kmt;410;424"/>
+                    <usings fromQName="kermeta::standard" toName=""/>
+                  </target>
+                </statement>
+              </getterBody>
+            </ownedAttribute>
+          </ownedTypeDefinition>
+        </nestedPackage>
+      </nestedPackage>
+    </nestedPackage>
+  </packages>
+</org_kermeta_language_structure:ModelingUnit>

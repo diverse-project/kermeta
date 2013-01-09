@@ -1,0 +1,36 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1346922550875
+Build-Jdk: 1.6.0_24
+Built-By: ablouin
+Bundle-ClassPath: .
+Bundle-ManifestVersion: 2
+Bundle-Name: kompren.slicer.edit :: Kompren edit
+Bundle-SymbolicName: org.kermeta.kompren.slicer.edit; singleton=true
+Bundle-Vendor: IRISA/INRIA
+Bundle-Version: 2.0.7.SNAPSHOT_20120906_1109
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org2.kermeta.kompren.slicer.provider;version="2.0.7.SNAP
+ SHOT_20120906_1109",kompren.slicer.edit.popup.actions;version="2.0.7.SN
+ APSHOT_20120906_1109"
+Ignore-Package: org.eclipse.emf.ecore.resource,org.eclipse.emf.ecore.xmi
+ .impl,org2.kermeta.kompren.slicer.util,org.eclipse.emf.edit.command,org
+ .eclipse.core.runtime,org.eclipse.emf.common.util,org.eclipse.ui,org.ec
+ lipse.emf.common.notify,org.eclipse.emf.ecore.resource.impl,org.kermeta
+ .kompren.org.kermeta.kompren.slicer.compiler.org2.kermeta.kompren.slice
+ r,org.eclipse.jface.action,org.eclipse.emf.ecore,org.eclipse.emf.ecore.
+ provider,org.kermeta.kompren.org.kermeta.kompren.slicer.compilerrunner,
+ org.eclipse.core.resources,org2.kermeta.kompren.slicer,org.eclipse.jfac
+ e.viewers,org.eclipse.emf.common,org.eclipse.emf.edit.provider,org.kerm
+ eta.kompren
+Import-Package: org.osgi.framework;version="[1.5,2)"
+Require-Bundle: org.eclipse.core.runtime;visibility:=reexport,org.eclips
+ e.core.jobs;visibility:=reexport,org.eclipse.emf.ecore.xmi;visibility:=
+ reexport,org.eclipse.emf.ecore.edit;visibility:=reexport,org.eclipse.ui
+ ;visibility:=reexport,org.eclipse.ui.workbench;visibility:=reexport,org
+ .eclipse.core.resources;visibility:=reexport,org.eclipse.jface;visibili
+ ty:=reexport,org.eclipse.swt;visibility:=reexport,org.eclipse.emf.edit;
+ visibility:=reexport,org.eclipse.ui.ide;visibility:=reexport,org.kermet
+ a.kompren.slicer.compiler;visibility:=reexport,org.kermeta.kompren.slic
+ er.model;visibility:=reexport,org.kermeta.kompren.slicer.parser;visibil
+ ity:=reexport
+Tool: Bnd-1.50.0

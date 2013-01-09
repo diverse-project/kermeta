@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.kermeta.kompren.feature"
+      label="Kompren"
+      version="${bundle.version}"
+      provider-name="IRISA/INRIA">
+
+   <description url="http://people.irisa.fr/Arnaud.Blouin/software_kompren.html">
+      Kompren is a DSML to model model slicers for a particular domain (captured in a metamodel).
+   </description>
+
+   <copyright>
+      Copyright (c) 2005-2012 Triskell project, INRIA/IRISA, France
+   </copyright>
+
+   <license url="">
+      EPL V1.0, Copyright (c) 2005-2012 Triskell project, INRIA/IRISA 
+ 
+ All rights reserved. This program and the accompanying materials
+ are made available under the terms of the Eclipse Public License v1.0 
+ which accompanies this distribution, and is available at
+ http://www.eclipse.org/legal/epl-v10.html
+ 
+ Contributors:
+   INRIA/IRISA
+   </license>
+
+   <url>
+      <discovery label="Kermeta 2 update site" url="http://www.kermeta.org/k2/update/"/>
+   </url>
+   
+   <requires>
+      <import plugin="org.kermeta.language.model"/>
+      <import plugin="org.scala-ide.scala.library"/>
+      <import plugin="org.kermeta.language.library.core"/>
+   </requires>
+
+   <plugin
+         id="org.kermeta.kompren.slicer.parser"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.kermeta.kompren.slicer.texteditor"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.kermeta.kompren.slicer.model"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.kermeta.kompren.slicer.edit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.kermeta.kompren.slicer.editor"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.kermeta.kompren.slicer.compiler"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

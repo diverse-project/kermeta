@@ -1,0 +1,6 @@
+slicer strict StateMachineSlicer{
+	domain: "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/stateMachine/StateMachine.ecore"
+	input: ex.stateMachine.State
+	slicedClass: ex.stateMachine.Transition
+	slicedProperty: ex.stateMachine.OutputState.outgoingTransitions
+}

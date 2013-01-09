@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<org.kermeta.kompren.slicer:Slicer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:org.kermeta.kompren.slicer="http://www.org.kermeta.kompren/org/kermeta/kompren/slicer" name="StateMachineSlicer" uriMetamodel="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/stateMachine/StateMachine.ecore" strict="true">
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
+    <domain href="StateMachine.ecore#//stateMachine/Transition"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="StateMachine.ecore#//stateMachine/OutputState/outgoingTransitions"/>
+  </slicedElements>
+  <inputClasses href="StateMachine.ecore#//stateMachine/State"/>
+</org.kermeta.kompren.slicer:Slicer>

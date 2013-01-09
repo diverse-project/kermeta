@@ -1,0 +1,104 @@
+/* $Id:$ 
+ * Creation : December 8, 2010
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+@mainClass "test::Test"
+@mainOperation "main"
+
+package test;
+require kermeta
+require "./CreationHelper.kmt"
+require "output/UnusedVarDetector.kmt"
+
+using kermeta::standard
+using kermeta::utils
+using org::kermeta::language::structure
+using org::kermeta::language::behavior
+
+class Test {
+	operation main() : Void is do
+		var op : Operation init Operation.new
+		var block : Block init Block.new
+		var var1def : VariableDecl init VariableDecl.new
+		var var2def : VariableDecl init VariableDecl.new
+		var ifStat : Conditional init Conditional.new
+		var assign : Assignment init Assignment.new
+		var callF : CallVariable init CallVariable.new
+		var param : Parameter init Parameter.new
+		ifStat.condition := EmptyExpression.new
+		assign.target := CallResult.new
+		
+		var typeParam : Class init Class.new
+		var typeCDParam : ClassDefinition init ClassDefinition.new
+		typeCDParam.name := "Boolean"
+		typeParam.typeDefinition := typeCDParam
+		param.name := "param"
+		param.~operation := op
+		param.type := typeParam
+		op.ownedParameter.add(param)
+		 
+		var1def.identifier := "v1"
+		var2def.identifier := "v2"
+		var type : Class init Class.new
+		var typeCD : ClassDefinition init ClassDefinition.new
+		typeCD.name := "String"
+		type.typeDefinition := typeCD
+		var1def.containedType.add(type)
+		callF.name := var1def.identifier
+		callF.staticType := type
+		assign.~value := callF
+		ifStat.thenBody := assign 
+		block.statement.add(var1def)
+		block.statement.add(ifStat)
+		block.statement.add(var2def)
+		op.body := block
+		var requiredOps : Bag<Operation> init Bag<Operation>.new
+		requiredOps.add(op)
+		var pruning : UnusedVarDetector init UnusedVarDetector.new.initialise(requiredOps)
+		pruning.launch()
+	end
+}
+
+/* 
+class PrintUnusedVarDetector inherits UnusedVarDetector {
+	reference varDecls : VariableDecl[0..*]
+	
+	reference params : Parameter[0..*]
+
+	method onVariableDeclAdded(theVariableDecl : VariableDecl) : Void is do
+		super(theVariableDecl)
+		varDecls.add(theVariableDecl)
+	end
+
+	method onCallVariableAdded(theCallVariable : CallVariable) : Void is do
+		if(not theCallVariable.staticType.isVoid) then
+			var varDecl : VariableDecl init varDecls.detect{varD |
+				varD.containedType.contains(theCallVariable.staticType)
+			}
+			
+			if(varDecl.isVoid) then
+				var varParam : Parameter init params.detect{param | param.type==theCallVariable.staticType }
+				if(not varParam.isVoid) then
+					params.remove(varParam)
+				end
+			else
+				varDecls.remove(varDecl)
+			end
+		end
+	end
+	
+	method onParameterAdded(theParameter : Parameter) : Void is do
+		if(theParameter.~operation.superOperation.isVoid) then
+			params.add(theParameter)
+		end
+	end
+
+	method ended() : Void is do
+		varDecls.each{varD | stdio.writeln("Variable unused: " + varD.identifier) }
+		params.each{param | stdio.writeln("Parameter unused: " + param.name) }
+	end
+}
+*/
