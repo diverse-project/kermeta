@@ -6,8 +6,8 @@
  */
 package org2::kermeta::kompren::slicer;
 
-using kermeta::standard
-using ecore
+using kermeta::standard::*
+using ecore::*
 
 class SlicerClassGenerator inherits Generator {
 	operation initialise(slicer : SlicerGenerator) : SlicerClassGenerator is do

@@ -1,0 +1,13 @@
+slicer strict MMFootprintExtraction {
+	domain: "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis2/kermeta.ecore"
+	input: org.kermeta.language.structure.ClassDefinition
+	slicedClass: org.kermeta.language.structure.ClassDefinition
+	slicedClass: org.kermeta.language.structure.Property
+	slicedClass: org.kermeta.language.structure.Operation
+	slicedProperty: org.kermeta.language.structure.ClassDefinition.ownedOperation
+	slicedProperty: org.kermeta.language.structure.ClassDefinition.ownedAttribute
+	slicedProperty: org.kermeta.language.structure.Operation.ownedParameter
+	slicedProperty: org.kermeta.language.structure.TypedElement.type
+	slicedProperty: org.kermeta.language.structure.TypeDefinition.superType
+	slicedProperty: org.kermeta.language.structure.ParameterizedType.typeDefinition
+}

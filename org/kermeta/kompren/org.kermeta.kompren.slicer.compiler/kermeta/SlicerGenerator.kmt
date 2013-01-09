@@ -6,15 +6,15 @@
  */
 package org2::kermeta::kompren::slicer;
 
-using ecore
-using kermeta::utils
-using kermeta::standard
-using kermeta::io
+using ecore::*
+using kermeta::utils::*
+using kermeta::standard::*
+using kermeta::io::*
 using kermeta::io::StdIO => stdio
 
 
 class SlicerGenerator {
-	reference metamodel : EPackage
+	reference ~metamodel : EPackage
 
 	attribute modelURI : String
 
@@ -36,12 +36,12 @@ class SlicerGenerator {
 	
 	
 	
-	operation initialise(slicerModel : Slicer, metamodel : EPackage, modelURI : String) : SlicerGenerator is do
+	operation initialise(slicerModel : Slicer, ~metamodel : EPackage, modelURI : String) : SlicerGenerator is do
 		result := self
 		self.hasOpposite := false
 		self.requiredAspectFiles := Hashtable<String, String>.new
 		self.slicerModel := slicerModel
-		self.metamodel   := metamodel
+		self.~metamodel   := ~metamodel
 		self.modelURI 	 := modelURI
 		checkClassesToSlice()
 		updateModelForStrictSlicing()
@@ -78,7 +78,7 @@ class SlicerGenerator {
 		defineClassesToAspectise()
 		
 		if(hasOpposite) then
-			if(self.allClasses.isVoid) then	self.allClasses := metamodel.getAllClasses() end
+			if(self.allClasses.isVoid) then	self.allClasses := ~metamodel.getAllClasses() end
 			self.rootClass := computeRootClass()
 		end
 	end
@@ -143,7 +143,7 @@ class SlicerGenerator {
 		coll.clear
 		
 		slicerModel.slicedClasses.each{sc |
-			if(self.allClasses.isVoid) then	self.allClasses := metamodel.getAllClasses() end
+			if(self.allClasses.isVoid) then	self.allClasses := ~metamodel.getAllClasses() end
 
 			if(sc.domain.~abstract) then slicedClassesToRemove.add(sc) end
 			

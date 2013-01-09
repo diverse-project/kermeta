@@ -1,6 +1,7 @@
 slicer VisualiserKermetaModel {
 	domain:"platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore"
 	input: org.kermeta.language.structure.ClassDefinition, org.kermeta.language.structure.ModelingUnit
+	radius: org.kermeta.language.structure.ClassDefinition
 	slicedClass: org.kermeta.language.structure.Package pkg [[
 		stdio.writeln("package: " + pkg.name)
 	]]

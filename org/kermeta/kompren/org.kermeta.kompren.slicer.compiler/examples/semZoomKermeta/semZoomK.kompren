@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <org.kermeta.kompren.slicer:Slicer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:org.kermeta.kompren.slicer="http://www.org.kermeta.kompren/org/kermeta/kompren/slicer" name="VisualiserKermetaModel" uriMetamodel="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore">
+  <radius focusedClasses="//@slicedElements.1"/>
   <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass" expression="&#xA;&#x9;&#x9;stdio.writeln(&quot;package: &quot; + pkg.name)&#xA;&#x9;">
     <ctx varName="pkg">
       <type href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/semZoomKermeta/kermeta.ecore#//kermeta/language/structure/Package"/>

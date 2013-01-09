@@ -6,7 +6,7 @@
  */
 package ecore;
 
-using kermeta::standard
+using kermeta::standard::*
 using kermeta::io::StdIO => stdio
 
 

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org.kermeta.kompren.slicer:Slicer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:org.kermeta.kompren.slicer="http://www.org.kermeta.kompren/org/kermeta/kompren/slicer" name="MMFootprintExtraction" uriMetamodel="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis2/kermeta.ecore" strict="true">
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
+    <domain href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis2/kermeta.ecore#//kermeta/language/structure/ClassDefinition"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
+    <domain href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis2/kermeta.ecore#//kermeta/language/structure/Property"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass">
+    <domain href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis2/kermeta.ecore#//kermeta/language/structure/Operation"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis2/kermeta.ecore#//kermeta/language/structure/ClassDefinition/ownedOperation"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis2/kermeta.ecore#//kermeta/language/structure/ClassDefinition/ownedAttribute"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis2/kermeta.ecore#//kermeta/language/structure/Operation/ownedParameter"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis2/kermeta.ecore#//kermeta/language/structure/TypedElement/type"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis2/kermeta.ecore#//kermeta/language/structure/TypeDefinition/superType"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis2/kermeta.ecore#//kermeta/language/structure/ParameterizedType/typeDefinition"/>
+  </slicedElements>
+  <inputClasses href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis2/kermeta.ecore#//kermeta/language/structure/ClassDefinition"/>
+</org.kermeta.kompren.slicer:Slicer>

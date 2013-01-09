@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org.kermeta.kompren.slicer:Slicer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:org.kermeta.kompren.slicer="http://www.org.kermeta.kompren/org/kermeta/kompren/slicer" name="OperationStaticAnalysis" uriMetamodel="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore" helper="&#xA;&#x9;&#x9;reference metamodelClassesUsed : ClassDefinition[0..*]&#xA;&#x9;&#x9;reference inputMetamodel : ModelingUnit&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;operation addClassDef(cd: ClassDefinition) is do&#xA;&#x9;&#x9;&#x9;if(inputMetamodel.contains(cd)) then&#xA;&#x9;&#x9;&#x9;&#x9;metamodelClassesUsed.add(cd)&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end&#xA;&#x9;">
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedClass" expression=" addClassDef(cd) ">
+    <ctx varName="cd">
+      <type href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/structure/ClassDefinition"/>
+    </ctx>
+    <domain href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/structure/ClassDefinition"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/structure/ModelingUnit/packages"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/structure/TypeDefinitionContainer/ownedTypeDefinition"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/structure/ClassDefinition/ownedOperation"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/structure/Operation/ownedParameter"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/structure/TypedElement/type"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/structure/TypeContainer/containedType"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/structure/Type/typeContainer"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/structure/ParameterizedType/typeDefinition"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/structure/ClassDefinition/ownedAttribute"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/structure/TypeDefinition/superType"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/structure/Operation/body"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/structure/Operation/pre"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/structure/Operation/post"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/structure/Operation/ownedParameter"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/structure/Operation/owningClass"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/structure/Operation/raisedException"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/structure/Operation/superOperation"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/structure/Operation/typeParameter"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/behavior/VariableDecl/type"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/behavior/CallTypeLiteral/typeref"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/behavior/LambdaExpression/parameters"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/behavior/LambdaExpression/body"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/behavior/LambdaParameter/type"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/behavior/Conditional/condition"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/behavior/Conditional/elseBody"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/behavior/Conditional/thenBody"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/behavior/Raise/expression"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/behavior/Loop/initialization"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/behavior/Loop/body"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/behavior/Loop/stopCondition"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/behavior/Block/statement"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/behavior/CallExpression/parameters"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/behavior/Assignment/target"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/behavior/Assignment/value"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/behavior/CallFeature/target"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/behavior/Block/rescueBlock"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/behavior/Rescue/body"/>
+  </slicedElements>
+  <slicedElements xsi:type="org.kermeta.kompren.slicer:SlicedProperty">
+    <domain xsi:type="ecore:EReference" href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/structure/Package/nestedPackage"/>
+  </slicedElements>
+  <inputClasses href="platform:/resource/org.kermeta.kompren.slicer.compiler/examples/modelOpAnalysis1/kermeta.ecore#//kermeta/language/structure/ModelingUnit"/>
+</org.kermeta.kompren.slicer:Slicer>
