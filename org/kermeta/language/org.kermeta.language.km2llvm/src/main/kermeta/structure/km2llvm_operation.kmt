@@ -1,0 +1,80 @@
+/* $Id:$ 
+ * Creation : January 10, 2013
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            ablouin
+ */
+package org::kermeta::language::structure;
+
+require kermeta
+require "km2llvm_structure.kmt"
+
+using org::kermeta::language::km2llvm
+using kermeta::standard
+using kermeta::utils
+using org::kermeta::language::llvm
+
+
+aspect class Operation {
+	// The ID that permits to differenciate operation having the same name.
+	// Each llvm function will be postfixed with this ID.
+	attribute id : Integer
+
+	// The llvm name of the operation.
+	attribute _llvmName : String
+	
+	
+	operation llvmName(ctx:Context) : String is do
+		if(_llvmName.isVoid) then
+			if(owningClass.toIgnore) then// Class not compiled must not be renamed.
+				_llvmName := "@"+getLLVMQualifiedName // no quote since clang does not generate quote.
+			else
+				// An ID must be added to the class to avoid several classes to have the same name
+				// in the same class.
+				id := ctx.nextId
+				_llvmName := ctx.llvm.globalVar(getLLVMQualifiedName+id.toString)
+			end
+		end
+		result :=  _llvmName
+	end
+	
+
+	method generateLLVM(ctx:Context) is do
+		var attrs : Sequence<LLVMVar> init  Sequence<LLVMVar>.new
+		
+		ctx.currentVarCpt := 1
+		
+		// If this operation is the main operation, an operation "main" must be created to create an instance
+		// of the main Kermeta class and then call the main Kermeta operation.
+		if(isMain) then
+			var mainClassType : String init ctx.llvm.pointer(ctx.llvm.localVar(owningClass.qualifiedNameLLVM))
+			ctx.operations.append(ctx.llvm.define(void, ctx.llvm.i32, "@main", attrs, void)).append("{\n")
+			// Creating the instance of the main Kermeta class.
+			ctx.operations.append(ctx.llvm.assign("%1", 
+				ctx.llvm.call(ctx.llvm.globalVar("create_"+owningClass.qualifiedNameLLVM), mainClassType, void))).append("\n")
+			attrs.add(LLVMVar.new.initialise(mainClassType, " %1"))
+			// Calling the main Kermeta operation
+			ctx.operations.append(ctx.llvm.call(llvmName(ctx), type.llvmType(ctx), attrs)).append("\n")
+			// C operation must return an int (0 for ok)
+			ctx.operations.append(ctx.llvm.ret(ctx.llvm.i32, "0")).append("\n")
+			ctx.operations.append("}\n")
+		end
+
+		attrs.clear
+		// Creation of the parameters
+		ownedParameter.each{param | attrs.add(LLVMVar.new.initialise(param.type.llvmType(ctx), ctx.llvm.localVar(param.name))) }
+		// The last parameter is the calling object
+		attrs.add(LLVMVar.new.initialise(ctx.llvm.pointer(ctx.llvm.localVar(owningClass.qualifiedNameLLVM)), ctx.llvm.localVar("self")))
+		ctx.operations.append(ctx.llvm.define(LinkageType.internal, type.llvmType(ctx), llvmName(ctx), attrs, void)).append("{\n")
+		body.generateLLVM(ctx)
+		ctx.operations.append(ctx.llvm.ret(ctx.llvm.~void, void)).append("\n")
+		ctx.operations.append("}\n")
+	end
+
+
+	operation isMain() : Boolean is do
+		result := kOwnedTags.exists{t | t.name=="main"}
+	end
+}
+

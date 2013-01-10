@@ -113,7 +113,7 @@ aspect class CallOperation {
 		// Generating the llvm code of the target. An identifier and its type are returned as a string to be included in the call as a parameter.
 		var strTarget : String init target.generateLLVMNoBuffer(ctx)
 		
-		// Dynamic linking (ascending): if the target type differs from the operation type, it means that the call is a call to a operation in one
+		// Dynamic binding (ascending): if the target type differs from the operation type, it means that the call is a call to a operation in one
 		// of the super classes. So, the target expression has to be casted into the expected super type.
 		if (not target.staticType.isVoid and cmd.isVoid).andThen{b|target.staticType.qualifiedNameLLVM!=clazz.qualifiedNameLLVM} then
 			// The name of the variable containing the cast is returned.

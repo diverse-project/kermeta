@@ -83,7 +83,7 @@ aspect class Assignment {
 		// Generating the code of the right part of the assignment. The string returned is the variable containing this right part.
 		var identifierInit : String init ~value.generateLLVMNoBuffer(ctx)
 	
-		// Dynamic linking (ascending): if the target type differs from the operation type, it means that the call is a call to a operation in one
+		// If the target type differs from the operation type, it means that the call is a call to a operation in one
 		// of the super classes. So, the target expression has to be casted into the expected super type.
 		if (not target.staticType.isVoid).andThen{b|target.staticType.qualifiedNameLLVM!=~value.staticType.qualifiedNameLLVM} then
 			identifierInit := _generateCastCall(ctx, identifierInit, ~value.staticType.qualifiedNameLLVM, target.staticType.qualifiedNameLLVM)
