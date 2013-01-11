@@ -160,6 +160,9 @@
             <initialization xsi:type="org_kermeta_language_behavior:CallOperation" staticType="//@packages.0/Main/main/@body/@statement.1/@initialization/@containedType.0" name="new"/>
             <type name="B" type="//@packages.0/C/@containedType.0"/>
           </statement>
+          <statement xsi:type="org_kermeta_language_behavior:CallOperation" staticType="//@packages.0/B/foo/@containedType.0" name="foo" staticOperation="//@packages.0/B/foo">
+            <target xsi:type="org_kermeta_language_behavior:CallVariable" staticType="//@packages.0/C/@containedType.0" name="b"/>
+          </statement>
         </body>
       </ownedOperation>
     </ownedTypeDefinition>

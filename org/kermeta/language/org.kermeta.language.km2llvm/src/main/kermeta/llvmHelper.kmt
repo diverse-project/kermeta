@@ -13,6 +13,31 @@ using kermeta::utils
 using kermeta::standard
 
 class LLVMHelper {
+	operation bitcast(typedValueFrom:String, typeTo:String, asFct:Boolean) : String is do
+		var sep1 : String
+		var sep2 : String
+		var prefix : String
+		
+		if(asFct) then 
+			sep1 := "("
+			sep2 := ")"
+			prefix := typeTo + " "
+		else
+			sep1 := ""
+			sep2 := ""
+			prefix := ""
+		end
+		result := prefix + "bitcast " + sep1 + typedValueFrom + " to " + typeTo + sep2
+	end
+
+	operation arrayType(nbElt:Integer, type:String) : String is do
+		result := "["+nbElt.toString+" x "+type+"]"
+	end
+
+	operation global(type:String, val:String) : String is do
+		result := "global " + type + " " + val
+	end
+
 	operation zext(typeFrom:String, typeTo:String, val:String) : String is do
 		result := "zext " + typeFrom + " " + val + " to " + typeTo
 	end

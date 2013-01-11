@@ -19,6 +19,12 @@ using org::kermeta::language::llvm
 aspect class ClassDefinition {
 	attribute _toIgnore : Boolean
 	
+	/** Direct super classes of the class. Derived from superTypes. */
+	reference superClasses : oset ClassDefinition[*]
+	/** Direct lower classes of the class. Derived from lowerTypes. */
+	reference lowerClasses : oset ClassDefinition[*]
+	
+
 	operation toIgnore() : Boolean is do
 		if(_toIgnore.isVoid) then
 			_toIgnore := kOwnedTags.exists{t | t.name=="CompilerIgnore" }
@@ -41,8 +47,59 @@ aspect class ClassDefinition {
 			generateLLVMConstructor(ctx)
 			generateLLVMGetters(ctx)
 			generateLLVMCast(ctx)
+			generateLLVMOperationsTable(ctx)
 		end
 	end
+	
+	
+	/**
+		Generates the table of the operations of the class.
+		This table will be used by call operations to support the dynamic binding.
+	*/
+	operation generateLLVMOperationsTable(ctx:Context) is do
+		var table : Hashtable<String, Operation> init Hashtable<String, Operation>.new
+		// Computing the table.
+		_computeOperationsTable(table, ctx)
+		
+		// Generating the llvm code of the table.
+		var ops : Collection<Operation> init table.values
+		
+		if ops.size>0 then
+			var i : Integer init 0
+			var typeTo : String init ctx.llvm.pointer(ctx.llvm.i8)
+			// Generating the llvm type of the operations of the class.
+			var params : OrderedCollection<LLVMVar> init ops.collect{op |
+				LLVMVar.new.initialise(ctx.llvm.bitcast(op.getLLVMPrototype(ctx), typeTo, true), void)
+			}
+			
+			// Generating a global array containing pointers to the operations of the class.
+			ctx.tablesDynBinding.append(ctx.llvm.assign(getTableDynBindingName(ctx), 
+				ctx.llvm.global(ctx.llvm.arrayType(ops.size, typeTo), "[")))
+			ctx.llvm.flatListString(ctx.tablesDynBinding, params, ", ")
+			ctx.tablesDynBinding.append("]\n")
+
+			params.clear // Cleaning
+			table.clear
+			ops.clear
+		end
+	end
+	
+	/**
+		Returns the name of the LLVM variable corresponding to the table dedicated to dynamic binding.
+	*/
+	operation getTableDynBindingName(ctx:Context) : String is do
+		result := ctx.llvm.globalVar(qualifiedNameLLVM+"##dynBind")
+	end
+	
+	
+	/**
+		Helpers for the operation generateLLVMOperationsTable
+	*/
+	operation _computeOperationsTable(table:Hashtable<String, Operation>, ctx:Context) is do
+		superClasses.each{sc | sc._computeOperationsTable(table, ctx) }
+		ownedOperation.each{op | table.put(op.getPrototype(ctx), op) }
+	end
+	
 	
 	
 	operation generateLLVMGetters(ctx:Context) is do
@@ -99,7 +156,7 @@ aspect class ClassDefinition {
 		var i : Integer init 0
 		var istr : String
 		var ptrSuperType : String
-		superTypes.each{st |
+		superClasses.each{st |
 			istr := i.toString
 			ptrSuperType := ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM))
 			ctx.constructors.append(ctx.llvm.assign("%\""+istr+"\"", ctx.llvm.call("@\"create_"+st.qualifiedNameLLVM+"\"", ptrSuperType, void))).append("\n")
@@ -110,5 +167,20 @@ aspect class ClassDefinition {
 
 		// Returning the created object.
 		ctx.constructors.append(ctx.llvm.ret(typeName, resultVar)).append("\n}\n")
+	end
+	
+	
+	method defineLowerSuperTypes() is do
+		super
+		superTypes.each{st |
+			if st.isInstanceOf(ClassDefinition) then
+				superClasses.add(st.asType(ClassDefinition))
+			end
+		}
+		lowerTypes.each{st |
+			if st.isInstanceOf(ClassDefinition) then
+				lowerClasses.add(st.asType(ClassDefinition))
+			end
+		}
 	end
 }

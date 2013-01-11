@@ -64,9 +64,9 @@ aspect class ClassDefinition {
 		
 		// Generation for the super/lower types.
 		if(superType) then
-			superTypes.each{st | st.asType(ClassDefinition).generateLLVMIndirectCast(ctx, types, initType, superType) }
+			superClasses.each{st | st.generateLLVMIndirectCast(ctx, types, initType, superType) }
 		else
-			lowerTypes.each{st | st.asType(ClassDefinition).generateLLVMIndirectCast(ctx, types, initType, superType) }
+			lowerClasses.each{st | st.generateLLVMIndirectCast(ctx, types, initType, superType) }
 		end
 	end
 	
@@ -86,22 +86,22 @@ aspect class ClassDefinition {
 		fctAttrs.add(FunctionAttr.inlinehint)
 		
 		// Creating a cast function for each direct super type.
-		superTypes.each{st |
+		superClasses.each{st |
 			ctx.casts.append(createCastFunction(ctx, st, v0, v1, params, fctAttrs, typeCD, selfVar, i))
-			st.superTypes.each{t |
+			st.superClasses.each{t |
 				types.clear
-				types.add(st.asType(ClassDefinition))
-				t.asType(ClassDefinition).generateLLVMIndirectCast(ctx, types, self, true)
+				types.add(st)
+				t.generateLLVMIndirectCast(ctx, types, self, true)
 			}
 			i := i + 1
 		}
 		// Creating a cast function for each direct lower type.
-		lowerTypes.each{st |
+		lowerClasses.each{st |
 			ctx.casts.append(createCastFunction(ctx, st, v0, v1, params, fctAttrs, typeCD, selfVar, i))
-			st.lowerTypes.each{t |
+			st.lowerClasses.each{t |
 				types.clear
-				types.add(st.asType(ClassDefinition))
-				t.asType(ClassDefinition).generateLLVMIndirectCast(ctx, types, self, false)
+				types.add(st)
+				t.generateLLVMIndirectCast(ctx, types, self, false)
 			}
 			i := i + 1
 		}

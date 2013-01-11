@@ -35,6 +35,8 @@ class Context{
 	attribute casts : StringBuffer
 	// The operations
 	attribute operations : StringBuffer
+	// The tables of operations used to do the dynamic binding.
+	attribute tablesDynBinding : StringBuffer
 	// Used to count the string constants (to name it).
 	attribute cptStrings : Integer
 	// Used to have unique ID.
@@ -69,6 +71,7 @@ class Context{
 		getters := StringBuffer.new
 		operations := StringBuffer.new
 		casts := StringBuffer.new
+		tablesDynBinding := StringBuffer.new
 		cptStrings := 0
 		id := 0
 		result := self
@@ -122,6 +125,7 @@ class Context{
 		result.append(f.readTextFile("file:///home/ablouin/workspace/org.kermeta.language.km2llvm/src/main/C/lib_std/lib_std.s"))
 		result.append(strings.toString)
 		result.append(types.toString)
+		result.append(tablesDynBinding.toString)
 		result.append(constructors.toString)
 		result.append(getters.toString)
 		result.append(casts.toString)

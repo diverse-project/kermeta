@@ -76,5 +76,43 @@ aspect class Operation {
 	operation isMain() : Boolean is do
 		result := kOwnedTags.exists{t | t.name=="main"}
 	end
+
+
+	/**
+		Returns the LLVM prototype code of the operation.
+		For exemple, given the operation "foo" having no parameter and returning nothing, the prototype is "void ()* @foo"
+		Given the operation "foo" having one parameter of type "Bar" and returning an integer, the prototype is "i32 (%Bar*)* @foo"
+		This operation is required to compute the table used for the dynamic binding of operation calls.
+	*/
+	operation getLLVMPrototype(ctx:Context) : String is do
+		var buf : StringBuffer init StringBuffer.new
+		var params : OrderedCollection<LLVMVar> init ownedParameter.collect{p | LLVMVar.new.initialise(p.type.llvmType(ctx), void) }
+		// The last parameter is the calling object.
+		params.add(LLVMVar.new.initialise(ctx.llvm.pointer(ctx.llvm.localVar(owningClass.qualifiedNameLLVM)), void))
+	
+		buf.append(type.llvmType(ctx)).append(" (")
+		ctx.llvm.flatListString(buf, params, ", ")
+		buf.append(")* ").append(llvmName(ctx))
+		result := buf.toString
+		params.clear
+	end
+	
+
+	/**
+		Returns a string identifying the prototype of the operation.
+		For exemple, given the operation "foo" having no parameter and returning nothing, the prototype is "void foo()"
+		Given the operation "foo" having one parameter of type "Bar" and returning an integer, the prototype is "i32 foo(%Bar*)"
+		This operation is required to compute the table used for the dynamic binding of operation calls.
+	*/
+	operation getPrototype(ctx:Context) : String is do
+		var buf : StringBuffer init StringBuffer.new
+		var params : OrderedCollection<LLVMVar> init ownedParameter.collect{p | LLVMVar.new.initialise(p.type.llvmType(ctx), void) }
+
+		buf.append(type.llvmType(ctx)).append(" ").append(name).append("(")
+		ctx.llvm.flatListString(buf, params, ",")
+		buf.append(")")
+		result := buf.toString
+		params.clear
+	end
 }
 

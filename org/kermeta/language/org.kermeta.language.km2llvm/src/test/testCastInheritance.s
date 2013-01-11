@@ -65,7 +65,7 @@ kermeta_standard__String___plus:        # @kermeta_standard__String___plus
 	movq	16(%rsp), %rdi
 	callq	strlen
 	leaq	1(%rbx,%rax), %rdi
-	movl	$8, %esi
+	movl	$1, %esi
 	callq	calloc
 	movq	%rax, 8(%rsp)
 	movq	16(%rsp), %rsi
@@ -262,7 +262,6 @@ kermeta_standard__Integer___toString:   # @kermeta_standard__Integer___toString
 	incl	16(%rsp)
 .LBB11_3:
 	movslq	16(%rsp), %rdi
-	shlq	$3, %rdi
 	callq	malloc
 	movq	%rax, 8(%rsp)
 	movl	20(%rsp), %ecx
@@ -278,81 +277,53 @@ kermeta_standard__Integer___toString:   # @kermeta_standard__Integer___toString
 	.size	kermeta_standard__Integer___toString, .Ltmp29-kermeta_standard__Integer___toString
 	.cfi_endproc
 
-	.globl	minus
+	.globl	kermeta_standard__Boolean___container
 	.align	16, 0x90
-	.type	minus,@function
-minus:                                  # @minus
+	.type	kermeta_standard__Boolean___container,@function
+kermeta_standard__Boolean___container:  # @kermeta_standard__Boolean___container
 	.cfi_startproc
 # BB#0:
-	movl	%edi, -4(%rsp)
-	movl	%esi, -8(%rsp)
-	addl	-4(%rsp), %esi
-	movl	%esi, %eax
+	movb	%dil, -1(%rsp)
+	xorl	%eax, %eax
 	ret
 .Ltmp30:
-	.size	minus, .Ltmp30-minus
+	.size	kermeta_standard__Boolean___container, .Ltmp30-kermeta_standard__Boolean___container
 	.cfi_endproc
 
-	.globl	mult
+	.globl	kermeta_standard__Boolean___toString
 	.align	16, 0x90
-	.type	mult,@function
-mult:                                   # @mult
+	.type	kermeta_standard__Boolean___toString,@function
+kermeta_standard__Boolean___toString:   # @kermeta_standard__Boolean___toString
 	.cfi_startproc
 # BB#0:
-	movl	%edi, -4(%rsp)
-	movl	%esi, -8(%rsp)
-	imull	-4(%rsp), %esi
-	movl	%esi, %eax
-	ret
-.Ltmp31:
-	.size	mult, .Ltmp31-mult
-	.cfi_endproc
-
-	.globl	div2
-	.align	16, 0x90
-	.type	div2,@function
-div2:                                   # @div2
-	.cfi_startproc
-# BB#0:
-	movl	%edi, -4(%rsp)
-	movl	%esi, -8(%rsp)
-	movl	%esi, %eax
-	cltd
-	idivl	-4(%rsp)
-	ret
+	subq	$24, %rsp
 .Ltmp32:
-	.size	div2, .Ltmp32-div2
-	.cfi_endproc
-
-	.globl	mod
-	.align	16, 0x90
-	.type	mod,@function
-mod:                                    # @mod
-	.cfi_startproc
-# BB#0:
-	movl	%edi, -4(%rsp)
-	movl	%esi, -8(%rsp)
-	movl	%esi, %eax
-	cltd
-	idivl	-4(%rsp)
-	movl	%edx, %eax
+	.cfi_def_cfa_offset 32
+	movb	%dil, 23(%rsp)
+	testb	%dil, %dil
+	je	.LBB13_2
+# BB#1:
+	movl	$4, %edi
+	callq	malloc
+	movq	%rax, 8(%rsp)
+	movq	%rax, %rdi
+	movl	$.L.str1, %esi
+	movl	$4, %edx
+	jmp	.LBB13_3
+.LBB13_2:
+	movl	$5, %edi
+	callq	malloc
+	movq	%rax, 8(%rsp)
+	movq	%rax, %rdi
+	movl	$.L.str2, %esi
+	movl	$5, %edx
+.LBB13_3:
+	callq	strncpy
+	movq	8(%rsp), %rax
+	addq	$24, %rsp
 	ret
 .Ltmp33:
-	.size	mod, .Ltmp33-mod
-	.cfi_endproc
-
-	.globl	uminus
-	.align	16, 0x90
-	.type	uminus,@function
-uminus:                                 # @uminus
-	.cfi_startproc
-# BB#0:
-	movl	%edi, -4(%rsp)
-	negl	%edi
-	movl	%edi, %eax
-	ret
-.Ltmp34:
-	.size	uminus, .Ltmp34-uminus
+	.size	kermeta_standard__Boolean___toString, .Ltmp33-kermeta_standard__Boolean___toString
 	.cfi_endproc
 
 	.globl	kermeta_io__StdIO___writeln
@@ -362,7 +333,7 @@ kermeta_io__StdIO___writeln:            # @kermeta_io__StdIO___writeln
 	.cfi_startproc
 # BB#0:
 	subq	$24, %rsp
-.Ltmp36:
+.Ltmp35:
 	.cfi_def_cfa_offset 32
 	movq	%rdi, 16(%rsp)
 	movq	%rsi, 8(%rsp)
@@ -370,8 +341,8 @@ kermeta_io__StdIO___writeln:            # @kermeta_io__StdIO___writeln
 	callq	puts
 	addq	$24, %rsp
 	ret
-.Ltmp37:
-	.size	kermeta_io__StdIO___writeln, .Ltmp37-kermeta_io__StdIO___writeln
+.Ltmp36:
+	.size	kermeta_io__StdIO___writeln, .Ltmp36-kermeta_io__StdIO___writeln
 	.cfi_endproc
 
 	.globl	kermeta_io__StdIO___write
@@ -381,18 +352,18 @@ kermeta_io__StdIO___write:              # @kermeta_io__StdIO___write
 	.cfi_startproc
 # BB#0:
 	subq	$24, %rsp
-.Ltmp39:
+.Ltmp38:
 	.cfi_def_cfa_offset 32
 	movq	%rdi, 16(%rsp)
 	movq	%rsi, 8(%rsp)
 	movq	16(%rsp), %rsi
-	movl	$.L.str1, %edi
+	movl	$.L.str3, %edi
 	xorb	%al, %al
 	callq	printf
 	addq	$24, %rsp
 	ret
-.Ltmp40:
-	.size	kermeta_io__StdIO___write, .Ltmp40-kermeta_io__StdIO___write
+.Ltmp39:
+	.size	kermeta_io__StdIO___write, .Ltmp39-kermeta_io__StdIO___write
 	.cfi_endproc
 
 	.globl	kermeta_io__StdIO___errorln
@@ -402,19 +373,19 @@ kermeta_io__StdIO___errorln:            # @kermeta_io__StdIO___errorln
 	.cfi_startproc
 # BB#0:
 	subq	$24, %rsp
-.Ltmp42:
+.Ltmp41:
 	.cfi_def_cfa_offset 32
 	movq	%rdi, 16(%rsp)
 	movq	%rsi, 8(%rsp)
 	movq	16(%rsp), %rdx
 	movq	stderr(%rip), %rdi
-	movl	$.L.str2, %esi
+	movl	$.L.str4, %esi
 	xorb	%al, %al
 	callq	fprintf
 	addq	$24, %rsp
 	ret
-.Ltmp43:
-	.size	kermeta_io__StdIO___errorln, .Ltmp43-kermeta_io__StdIO___errorln
+.Ltmp42:
+	.size	kermeta_io__StdIO___errorln, .Ltmp42-kermeta_io__StdIO___errorln
 	.cfi_endproc
 
 	.globl	kermeta__o__StdIO___error
@@ -424,19 +395,19 @@ kermeta__o__StdIO___error:              # @kermeta__o__StdIO___error
 	.cfi_startproc
 # BB#0:
 	subq	$24, %rsp
-.Ltmp45:
+.Ltmp44:
 	.cfi_def_cfa_offset 32
 	movq	%rdi, 16(%rsp)
 	movq	%rsi, 8(%rsp)
 	movq	16(%rsp), %rdx
 	movq	stderr(%rip), %rdi
-	movl	$.L.str1, %esi
+	movl	$.L.str3, %esi
 	xorb	%al, %al
 	callq	fprintf
 	addq	$24, %rsp
 	ret
-.Ltmp46:
-	.size	kermeta__o__StdIO___error, .Ltmp46-kermeta__o__StdIO___error
+.Ltmp45:
+	.size	kermeta__o__StdIO___error, .Ltmp45-kermeta__o__StdIO___error
 	.cfi_endproc
 
 	.globl	kermeta___io__StdIO_read
@@ -449,8 +420,8 @@ kermeta___io__StdIO_read:               # @kermeta___io__StdIO_read
 	movq	%rsi, -16(%rsp)
 	xorl	%eax, %eax
 	ret
-.Ltmp47:
-	.size	kermeta___io__StdIO_read, .Ltmp47-kermeta___io__StdIO_read
+.Ltmp46:
+	.size	kermeta___io__StdIO_read, .Ltmp46-kermeta___io__StdIO_read
 	.cfi_endproc
 
 	.globl	kermeta_io__StdIO___container
@@ -462,8 +433,8 @@ kermeta_io__StdIO___container:          # @kermeta_io__StdIO___container
 	movq	%rdi, -8(%rsp)
 	xorl	%eax, %eax
 	ret
-.Ltmp48:
-	.size	kermeta_io__StdIO___container, .Ltmp48-kermeta_io__StdIO___container
+.Ltmp47:
+	.size	kermeta_io__StdIO___container, .Ltmp47-kermeta_io__StdIO___container
 	.cfi_endproc
 
 	.align	16, 0x90
@@ -473,8 +444,8 @@ create_pkgFoo__A:                       # @create_pkgFoo__A
 # BB#0:
 	leaq	-8(%rsp), %rax
 	ret
-.Ltmp49:
-	.size	create_pkgFoo__A, .Ltmp49-create_pkgFoo__A
+.Ltmp48:
+	.size	create_pkgFoo__A, .Ltmp48-create_pkgFoo__A
 	.cfi_endproc
 
 	.align	16, 0x90
@@ -483,15 +454,15 @@ create_pkgFoo__B:                       # @create_pkgFoo__B
 	.cfi_startproc
 # BB#0:
 	subq	$24, %rsp
-.Ltmp51:
+.Ltmp50:
 	.cfi_def_cfa_offset 32
 	callq	create_pkgFoo__A
 	movq	%rax, 8(%rsp)
 	leaq	8(%rsp), %rax
 	addq	$24, %rsp
 	ret
-.Ltmp52:
-	.size	create_pkgFoo__B, .Ltmp52-create_pkgFoo__B
+.Ltmp51:
+	.size	create_pkgFoo__B, .Ltmp51-create_pkgFoo__B
 	.cfi_endproc
 
 	.align	16, 0x90
@@ -500,15 +471,15 @@ create_pkgFoo__C:                       # @create_pkgFoo__C
 	.cfi_startproc
 # BB#0:
 	subq	$24, %rsp
-.Ltmp54:
+.Ltmp53:
 	.cfi_def_cfa_offset 32
 	callq	create_pkgFoo__B
 	movq	%rax, 8(%rsp)
 	leaq	8(%rsp), %rax
 	addq	$24, %rsp
 	ret
-.Ltmp55:
-	.size	create_pkgFoo__C, .Ltmp55-create_pkgFoo__C
+.Ltmp54:
+	.size	create_pkgFoo__C, .Ltmp54-create_pkgFoo__C
 	.cfi_endproc
 
 	.align	16, 0x90
@@ -517,15 +488,15 @@ create_pkgFoo__D:                       # @create_pkgFoo__D
 	.cfi_startproc
 # BB#0:
 	pushq	%rax
-.Ltmp57:
+.Ltmp56:
 	.cfi_def_cfa_offset 16
 	callq	create_pkgFoo__C
 	movq	%rax, (%rsp)
 	leaq	(%rsp), %rax
 	popq	%rdx
 	ret
-.Ltmp58:
-	.size	create_pkgFoo__D, .Ltmp58-create_pkgFoo__D
+.Ltmp57:
+	.size	create_pkgFoo__D, .Ltmp57-create_pkgFoo__D
 	.cfi_endproc
 
 	.align	16, 0x90
@@ -535,55 +506,8 @@ create_pkgFoo__Main:                    # @create_pkgFoo__Main
 # BB#0:
 	leaq	-8(%rsp), %rax
 	ret
-.Ltmp59:
-	.size	create_pkgFoo__Main, .Ltmp59-create_pkgFoo__Main
-	.cfi_endproc
-
-	.align	16, 0x90
-	.type	cast_pkgFoo__A_pkgFoo__B,@function
-cast_pkgFoo__A_pkgFoo__B:               # @cast_pkgFoo__A_pkgFoo__B
-	.cfi_startproc
-# BB#0:
-	movq	(%rdi), %rax
-	ret
-.Ltmp60:
-	.size	cast_pkgFoo__A_pkgFoo__B, .Ltmp60-cast_pkgFoo__A_pkgFoo__B
-	.cfi_endproc
-
-	.align	16, 0x90
-	.type	cast_pkgFoo__A_pkgFoo__C,@function
-cast_pkgFoo__A_pkgFoo__C:               # @cast_pkgFoo__A_pkgFoo__C
-	.cfi_startproc
-# BB#0:
-	pushq	%rax
-.Ltmp62:
-	.cfi_def_cfa_offset 16
-	callq	cast_pkgFoo__A_pkgFoo__B
-	movq	%rax, %rdi
-	callq	cast_pkgFoo__B_pkgFoo__C
-	popq	%rdx
-	ret
-.Ltmp63:
-	.size	cast_pkgFoo__A_pkgFoo__C, .Ltmp63-cast_pkgFoo__A_pkgFoo__C
-	.cfi_endproc
-
-	.align	16, 0x90
-	.type	cast_pkgFoo__A_pkgFoo__D,@function
-cast_pkgFoo__A_pkgFoo__D:               # @cast_pkgFoo__A_pkgFoo__D
-	.cfi_startproc
-# BB#0:
-	pushq	%rax
-.Ltmp65:
-	.cfi_def_cfa_offset 16
-	callq	cast_pkgFoo__A_pkgFoo__B
-	movq	%rax, %rdi
-	callq	cast_pkgFoo__B_pkgFoo__C
-	movq	%rax, %rdi
-	callq	cast_pkgFoo__C_pkgFoo__D
-	popq	%rdx
-	ret
-.Ltmp66:
-	.size	cast_pkgFoo__A_pkgFoo__D, .Ltmp66-cast_pkgFoo__A_pkgFoo__D
+.Ltmp58:
+	.size	create_pkgFoo__Main, .Ltmp58-create_pkgFoo__Main
 	.cfi_endproc
 
 	.align	16, 0x90
@@ -593,36 +517,8 @@ cast_pkgFoo__B_pkgFoo__A:               # @cast_pkgFoo__B_pkgFoo__A
 # BB#0:
 	movq	(%rdi), %rax
 	ret
-.Ltmp67:
-	.size	cast_pkgFoo__B_pkgFoo__A, .Ltmp67-cast_pkgFoo__B_pkgFoo__A
-	.cfi_endproc
-
-	.align	16, 0x90
-	.type	cast_pkgFoo__B_pkgFoo__C,@function
-cast_pkgFoo__B_pkgFoo__C:               # @cast_pkgFoo__B_pkgFoo__C
-	.cfi_startproc
-# BB#0:
-	movq	8(%rdi), %rax
-	ret
-.Ltmp68:
-	.size	cast_pkgFoo__B_pkgFoo__C, .Ltmp68-cast_pkgFoo__B_pkgFoo__C
-	.cfi_endproc
-
-	.align	16, 0x90
-	.type	cast_pkgFoo__B_pkgFoo__D,@function
-cast_pkgFoo__B_pkgFoo__D:               # @cast_pkgFoo__B_pkgFoo__D
-	.cfi_startproc
-# BB#0:
-	pushq	%rax
-.Ltmp70:
-	.cfi_def_cfa_offset 16
-	callq	cast_pkgFoo__B_pkgFoo__C
-	movq	%rax, %rdi
-	callq	cast_pkgFoo__C_pkgFoo__D
-	popq	%rdx
-	ret
-.Ltmp71:
-	.size	cast_pkgFoo__B_pkgFoo__D, .Ltmp71-cast_pkgFoo__B_pkgFoo__D
+.Ltmp59:
+	.size	cast_pkgFoo__B_pkgFoo__A, .Ltmp59-cast_pkgFoo__B_pkgFoo__A
 	.cfi_endproc
 
 	.align	16, 0x90
@@ -632,8 +528,8 @@ cast_pkgFoo__C_pkgFoo__B:               # @cast_pkgFoo__C_pkgFoo__B
 # BB#0:
 	movq	(%rdi), %rax
 	ret
-.Ltmp72:
-	.size	cast_pkgFoo__C_pkgFoo__B, .Ltmp72-cast_pkgFoo__C_pkgFoo__B
+.Ltmp60:
+	.size	cast_pkgFoo__C_pkgFoo__B, .Ltmp60-cast_pkgFoo__C_pkgFoo__B
 	.cfi_endproc
 
 	.align	16, 0x90
@@ -642,26 +538,15 @@ cast_pkgFoo__C_pkgFoo__A:               # @cast_pkgFoo__C_pkgFoo__A
 	.cfi_startproc
 # BB#0:
 	pushq	%rax
-.Ltmp74:
+.Ltmp62:
 	.cfi_def_cfa_offset 16
 	callq	cast_pkgFoo__C_pkgFoo__B
 	movq	%rax, %rdi
 	callq	cast_pkgFoo__B_pkgFoo__A
 	popq	%rdx
 	ret
-.Ltmp75:
-	.size	cast_pkgFoo__C_pkgFoo__A, .Ltmp75-cast_pkgFoo__C_pkgFoo__A
-	.cfi_endproc
-
-	.align	16, 0x90
-	.type	cast_pkgFoo__C_pkgFoo__D,@function
-cast_pkgFoo__C_pkgFoo__D:               # @cast_pkgFoo__C_pkgFoo__D
-	.cfi_startproc
-# BB#0:
-	movq	8(%rdi), %rax
-	ret
-.Ltmp76:
-	.size	cast_pkgFoo__C_pkgFoo__D, .Ltmp76-cast_pkgFoo__C_pkgFoo__D
+.Ltmp63:
+	.size	cast_pkgFoo__C_pkgFoo__A, .Ltmp63-cast_pkgFoo__C_pkgFoo__A
 	.cfi_endproc
 
 	.align	16, 0x90
@@ -671,8 +556,8 @@ cast_pkgFoo__D_pkgFoo__C:               # @cast_pkgFoo__D_pkgFoo__C
 # BB#0:
 	movq	(%rdi), %rax
 	ret
-.Ltmp77:
-	.size	cast_pkgFoo__D_pkgFoo__C, .Ltmp77-cast_pkgFoo__D_pkgFoo__C
+.Ltmp64:
+	.size	cast_pkgFoo__D_pkgFoo__C, .Ltmp64-cast_pkgFoo__D_pkgFoo__C
 	.cfi_endproc
 
 	.align	16, 0x90
@@ -681,15 +566,15 @@ cast_pkgFoo__D_pkgFoo__B:               # @cast_pkgFoo__D_pkgFoo__B
 	.cfi_startproc
 # BB#0:
 	pushq	%rax
-.Ltmp79:
+.Ltmp66:
 	.cfi_def_cfa_offset 16
 	callq	cast_pkgFoo__D_pkgFoo__C
 	movq	%rax, %rdi
 	callq	cast_pkgFoo__C_pkgFoo__B
 	popq	%rdx
 	ret
-.Ltmp80:
-	.size	cast_pkgFoo__D_pkgFoo__B, .Ltmp80-cast_pkgFoo__D_pkgFoo__B
+.Ltmp67:
+	.size	cast_pkgFoo__D_pkgFoo__B, .Ltmp67-cast_pkgFoo__D_pkgFoo__B
 	.cfi_endproc
 
 	.align	16, 0x90
@@ -698,7 +583,7 @@ cast_pkgFoo__D_pkgFoo__A:               # @cast_pkgFoo__D_pkgFoo__A
 	.cfi_startproc
 # BB#0:
 	pushq	%rax
-.Ltmp82:
+.Ltmp69:
 	.cfi_def_cfa_offset 16
 	callq	cast_pkgFoo__D_pkgFoo__C
 	movq	%rax, %rdi
@@ -707,8 +592,8 @@ cast_pkgFoo__D_pkgFoo__A:               # @cast_pkgFoo__D_pkgFoo__A
 	callq	cast_pkgFoo__B_pkgFoo__A
 	popq	%rdx
 	ret
-.Ltmp83:
-	.size	cast_pkgFoo__D_pkgFoo__A, .Ltmp83-cast_pkgFoo__D_pkgFoo__A
+.Ltmp70:
+	.size	cast_pkgFoo__D_pkgFoo__A, .Ltmp70-cast_pkgFoo__D_pkgFoo__A
 	.cfi_endproc
 
 	.align	16, 0x90
@@ -717,15 +602,15 @@ pkgFoo__B___foo1:                       # @pkgFoo__B___foo1
 	.cfi_startproc
 # BB#0:
 	pushq	%rax
-.Ltmp85:
+.Ltmp72:
 	.cfi_def_cfa_offset 16
 	movl	$.Ls0, %edi
 	movl	$SINGLETON_kermeta_io__StdIO, %esi
 	callq	kermeta_io__StdIO___writeln
 	popq	%rax
 	ret
-.Ltmp86:
-	.size	pkgFoo__B___foo1, .Ltmp86-pkgFoo__B___foo1
+.Ltmp73:
+	.size	pkgFoo__B___foo1, .Ltmp73-pkgFoo__B___foo1
 	.cfi_endproc
 
 	.align	16, 0x90
@@ -734,35 +619,52 @@ pkgFoo__C___foo2:                       # @pkgFoo__C___foo2
 	.cfi_startproc
 # BB#0:
 	pushq	%rax
-.Ltmp88:
+.Ltmp75:
 	.cfi_def_cfa_offset 16
 	movl	$.Ls1, %edi
 	movl	$SINGLETON_kermeta_io__StdIO, %esi
 	callq	kermeta_io__StdIO___writeln
 	popq	%rax
 	ret
-.Ltmp89:
-	.size	pkgFoo__C___foo2, .Ltmp89-pkgFoo__C___foo2
+.Ltmp76:
+	.size	pkgFoo__C___foo2, .Ltmp76-pkgFoo__C___foo2
 	.cfi_endproc
 
 	.align	16, 0x90
-	.type	pkgFoo__D___foo3,@function
-pkgFoo__D___foo3:                       # @pkgFoo__D___foo3
+	.type	pkgFoo__C___bar3,@function
+pkgFoo__C___bar3:                       # @pkgFoo__C___bar3
 	.cfi_startproc
 # BB#0:
 	pushq	%rax
-.Ltmp91:
+.Ltmp78:
 	.cfi_def_cfa_offset 16
-	callq	cast_pkgFoo__D_pkgFoo__C
-	movq	%rax, %rdi
-	callq	pkgFoo__C___foo2
 	movl	$.Ls2, %edi
 	movl	$SINGLETON_kermeta_io__StdIO, %esi
 	callq	kermeta_io__StdIO___writeln
 	popq	%rax
 	ret
-.Ltmp92:
-	.size	pkgFoo__D___foo3, .Ltmp92-pkgFoo__D___foo3
+.Ltmp79:
+	.size	pkgFoo__C___bar3, .Ltmp79-pkgFoo__C___bar3
+	.cfi_endproc
+
+	.align	16, 0x90
+	.type	pkgFoo__D___foo4,@function
+pkgFoo__D___foo4:                       # @pkgFoo__D___foo4
+	.cfi_startproc
+# BB#0:
+	pushq	%rax
+.Ltmp81:
+	.cfi_def_cfa_offset 16
+	callq	cast_pkgFoo__D_pkgFoo__C
+	movq	%rax, %rdi
+	callq	pkgFoo__C___foo2
+	movl	$.Ls3, %edi
+	movl	$SINGLETON_kermeta_io__StdIO, %esi
+	callq	kermeta_io__StdIO___writeln
+	popq	%rax
+	ret
+.Ltmp82:
+	.size	pkgFoo__D___foo4, .Ltmp82-pkgFoo__D___foo4
 	.cfi_endproc
 
 	.globl	main
@@ -772,78 +674,92 @@ main:                                   # @main
 	.cfi_startproc
 # BB#0:
 	pushq	%rax
-.Ltmp94:
+.Ltmp84:
 	.cfi_def_cfa_offset 16
 	callq	create_pkgFoo__Main
 	movq	%rax, %rdi
-	callq	pkgFoo__Main___main4
+	callq	pkgFoo__Main___main5
 	xorl	%eax, %eax
 	popq	%rdx
 	ret
-.Ltmp95:
-	.size	main, .Ltmp95-main
+.Ltmp85:
+	.size	main, .Ltmp85-main
 	.cfi_endproc
 
 	.align	16, 0x90
-	.type	pkgFoo__Main___main4,@function
-pkgFoo__Main___main4:                   # @pkgFoo__Main___main4
+	.type	pkgFoo__Main___main5,@function
+pkgFoo__Main___main5:                   # @pkgFoo__Main___main5
 	.cfi_startproc
 # BB#0:
 	pushq	%rbp
-.Ltmp99:
+.Ltmp89:
 	.cfi_def_cfa_offset 16
-.Ltmp100:
+.Ltmp90:
 	.cfi_offset %rbp, -16
 	movq	%rsp, %rbp
-.Ltmp101:
+.Ltmp91:
 	.cfi_def_cfa_register %rbp
 	pushq	%rbx
 	pushq	%rax
-.Ltmp102:
+.Ltmp92:
 	.cfi_offset %rbx, -24
-	movl	$.Ls3, %edi
+	movl	$.Ls4, %edi
 	movl	$SINGLETON_kermeta_io__StdIO, %esi
 	callq	kermeta_io__StdIO___writeln
 	callq	create_pkgFoo__D
 	movq	%rax, -16(%rbp)
 	movq	%rax, %rdi
-	callq	pkgFoo__D___foo3
+	callq	pkgFoo__D___foo4
 	movb	$1, %al
 	testb	%al, %al
-	jne	.LBB44_2
+	jne	.LBB36_2
 # BB#1:                                 # %llvmlabel5
-	movl	$.Ls4, %edi
-	jmp	.LBB44_3
-.LBB44_2:                               # %llvmlabel7
 	movl	$.Ls5, %edi
-.LBB44_3:                               # %llvmlabel7
+	jmp	.LBB36_3
+.LBB36_2:                               # %llvmlabel7
+	movl	$.Ls6, %edi
+.LBB36_3:                               # %llvmlabel7
 	movl	$SINGLETON_kermeta_io__StdIO, %esi
 	callq	kermeta_io__StdIO___writeln
 	movq	%rsp, %rax
 	leaq	-16(%rax), %rbx
 	movq	%rbx, %rsp
-	movl	$0, -16(%rax)
-	jmp	.LBB44_4
+	movb	$0, -16(%rax)
+	jmp	.LBB36_4
 	.align	16, 0x90
-.LBB44_5:                               # %llvmlabel11
-                                        #   in Loop: Header=BB44_4 Depth=1
-	movl	(%rbx), %edi
-	callq	kermeta_standard__Integer___toString
+.LBB36_5:                               # %llvmlabel11
+                                        #   in Loop: Header=BB36_4 Depth=1
+	movzbl	(%rbx), %edi
+	callq	kermeta_standard__Boolean___toString
 	movq	%rax, %rdi
 	movl	$SINGLETON_kermeta_io__StdIO, %esi
 	callq	kermeta_io__StdIO___writeln
-	incl	(%rbx)
-.LBB44_4:                               # %llvmlabel10
+	movb	$0, (%rbx)
+.LBB36_4:                               # %llvmlabel10
                                         # =>This Inner Loop Header: Depth=1
-	cmpl	$10, (%rbx)
-	je	.LBB44_5
+	movb	(%rbx), %al
+	cmpb	$1, %al
+	je	.LBB36_5
 # BB#6:                                 # %llvmlabel12
+	movq	-16(%rbp), %rdi
+	callq	cast_pkgFoo__D_pkgFoo__C
+	movq	%rax, %rdi
+	callq	pkgFoo__C___bar3
+	movq	%rsp, %rbx
+	leaq	-16(%rbx), %rax
+	movq	%rax, %rsp
+	callq	create_pkgFoo__D
+	movq	%rax, %rdi
+	callq	cast_pkgFoo__D_pkgFoo__B
+	movq	%rax, -16(%rbx)
+	movq	%rax, %rdi
+	callq	pkgFoo__B___foo1
 	leaq	-8(%rbp), %rsp
 	popq	%rbx
 	popq	%rbp
 	ret
-.Ltmp103:
-	.size	pkgFoo__Main___main4, .Ltmp103-pkgFoo__Main___main4
+.Ltmp93:
+	.size	pkgFoo__Main___main5, .Ltmp93-pkgFoo__Main___main5
 	.cfi_endproc
 
 	.type	.L.str,@object          # @.str
@@ -854,13 +770,23 @@ pkgFoo__Main___main4:                   # @pkgFoo__Main___main4
 
 	.type	.L.str1,@object         # @.str1
 .L.str1:
-	.asciz	 "%s"
-	.size	.L.str1, 3
+	.asciz	 "true"
+	.size	.L.str1, 5
 
 	.type	.L.str2,@object         # @.str2
 .L.str2:
+	.asciz	 "false"
+	.size	.L.str2, 6
+
+	.type	.L.str3,@object         # @.str3
+.L.str3:
+	.asciz	 "%s"
+	.size	.L.str3, 3
+
+	.type	.L.str4,@object         # @.str4
+.L.str4:
 	.asciz	 "%s\n"
-	.size	.L.str2, 4
+	.size	.L.str4, 4
 
 	.type	SINGLETON_kermeta_io__StdIO,@object # @SINGLETON_kermeta_io__StdIO
 	.comm	SINGLETON_kermeta_io__StdIO,1,1
@@ -876,23 +802,59 @@ pkgFoo__Main___main4:                   # @pkgFoo__Main___main4
 
 	.type	.Ls2,@object            # @s2
 .Ls2:
-	.asciz	 "D.foo!"
-	.size	.Ls2, 7
+	.asciz	 "C.bar"
+	.size	.Ls2, 6
 
 	.type	.Ls3,@object            # @s3
 .Ls3:
-	.asciz	 "Hello World!"
-	.size	.Ls3, 13
+	.asciz	 "D.foo!"
+	.size	.Ls3, 7
 
 	.type	.Ls4,@object            # @s4
 .Ls4:
-	.asciz	 "ifthen!"
-	.size	.Ls4, 8
+	.asciz	 "Hello World!"
+	.size	.Ls4, 13
 
 	.type	.Ls5,@object            # @s5
 .Ls5:
-	.asciz	 "ifElse!"
+	.asciz	 "ifthen!"
 	.size	.Ls5, 8
+
+	.type	.Ls6,@object            # @s6
+.Ls6:
+	.asciz	 "ifElse!"
+	.size	.Ls6, 8
+
+	.type	pkgFoo__B_23__23_dynBind,@object # @"pkgFoo__B##dynBind"
+	.data
+	.globl	pkgFoo__B_23__23_dynBind
+	.align	8
+pkgFoo__B_23__23_dynBind:
+	.quad	pkgFoo__B___foo1
+	.size	pkgFoo__B_23__23_dynBind, 8
+
+	.type	pkgFoo__C_23__23_dynBind,@object # @"pkgFoo__C##dynBind"
+	.globl	pkgFoo__C_23__23_dynBind
+	.align	8
+pkgFoo__C_23__23_dynBind:
+	.quad	pkgFoo__C___bar3
+	.quad	pkgFoo__C___foo2
+	.size	pkgFoo__C_23__23_dynBind, 16
+
+	.type	pkgFoo__D_23__23_dynBind,@object # @"pkgFoo__D##dynBind"
+	.globl	pkgFoo__D_23__23_dynBind
+	.align	8
+pkgFoo__D_23__23_dynBind:
+	.quad	pkgFoo__C___bar3
+	.quad	pkgFoo__D___foo4
+	.size	pkgFoo__D_23__23_dynBind, 16
+
+	.type	pkgFoo__Main_23__23_dynBind,@object # @"pkgFoo__Main##dynBind"
+	.globl	pkgFoo__Main_23__23_dynBind
+	.align	8
+pkgFoo__Main_23__23_dynBind:
+	.quad	pkgFoo__Main___main5
+	.size	pkgFoo__Main_23__23_dynBind, 8
 
 
 	.section	".note.GNU-stack","",@progbits
