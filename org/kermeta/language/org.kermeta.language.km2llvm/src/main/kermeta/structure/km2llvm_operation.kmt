@@ -85,14 +85,22 @@ aspect class Operation {
 		This operation is required to compute the table used for the dynamic binding of operation calls.
 	*/
 	operation getLLVMPrototype(ctx:Context) : String is do
+		result := getLLVMPrototypeType(ctx)+ " " + llvmName(ctx)
+	end
+	
+	
+	operation getLLVMPrototypeType(ctx:Context) : String is do
 		var buf : StringBuffer init StringBuffer.new
 		var params : OrderedCollection<LLVMVar> init ownedParameter.collect{p | LLVMVar.new.initialise(p.type.llvmType(ctx), void) }
+		// checking if the type must be renamed (e.g. a type from the std lib generated from C code).
+		var nameType : String init ctx.stdLibName.getValue(owningClass.qualifiedNameLLVM)
+		if nameType.isVoid then nameType := ctx.llvm.pointer(ctx.llvm.localVar(owningClass.qualifiedNameLLVM)) end
 		// The last parameter is the calling object.
-		params.add(LLVMVar.new.initialise(ctx.llvm.pointer(ctx.llvm.localVar(owningClass.qualifiedNameLLVM)), void))
+		params.add(LLVMVar.new.initialise(nameType, void))
 	
 		buf.append(type.llvmType(ctx)).append(" (")
 		ctx.llvm.flatListString(buf, params, ", ")
-		buf.append(")* ").append(llvmName(ctx))
+		buf.append(")*")
 		result := buf.toString
 		params.clear
 	end

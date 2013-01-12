@@ -126,8 +126,9 @@ aspect class CallOperation {
 		// Optimisation: some calls handling simple primitive type operations are shortened to their classical llvm use (e.g. operation plus in class Integer)
 		if(cmd.isVoid) then // If no command
 			// Generating the call.
-			result := ctx.llvm.call(staticOperation.llvmName(ctx), staticOperation.type.llvmType(ctx), params)
+			result := _generateLLVMDynamicBindingCall(ctx, params)
 		else // If one command
+			//FIXME: dynamic binding for classes of the std lib.
 			var res : GeneratorCmdResult init cmd.generateCall(ctx, params, self) // A 2-tuple is returned
 			isCallInlined := res.v2 // To know if the call has been inlined.
 			result := res.v1 // The generated cide
@@ -145,6 +146,38 @@ aspect class CallOperation {
 				result := varTmp
 			end
 		end
+	end
+
+	
+	/**
+		Generates the llvm code performing the call operation by supporting the dynamic binding.
+	*/
+	operation _generateLLVMDynamicBindingCall(ctx:Context, params:Sequence<LLVMVar>) : String is do
+		var typeRet : String init staticOperation.type.llvmType(ctx)
+		var typeProtoOp : String init staticOperation.getLLVMPrototypeType(ctx)
+		var position : Integer init staticOperation.owningClass.getPositionOperationDynBindTable(staticOperation, ctx)
+		var tableName : String init staticOperation.owningClass.getTableDynBindingName(ctx)
+		var tableType : String init ctx.llvm.pointer(staticOperation.owningClass.getTableDynBindingType(ctx))
+		var localVar1 : String init ctx.nextOperationVar
+		
+		// Getting the pointer of the element of the tab.
+		ctx.operations.append(ctx.llvm.assign(localVar1, 
+			ctx.llvm.load(ctx.llvm.pointer(ctx.llvm.pointer(ctx.llvm.i8)), 
+			ctx.llvm.getelementptr(tableType, tableName, ctx.llvm.i32, 0, ctx.llvm.i64, position, true)))
+		).append("\n")
+		// Casting the pointer of the tab into the type corresponding to the operation.
+		var localVarPtrOp : String init ctx.nextOperationVar
+		ctx.operations.append(ctx.llvm.assign(localVarPtrOp, ctx.llvm.bitcast(ctx.llvm.pointer(ctx.llvm.i8)+" "+localVar1, typeProtoOp, false))).append("\n")
+		// Creating a local that will contain the pointer of the operation from the table.
+		var localVarOp : String init ctx.nextOperationVar
+		ctx.operations.append(ctx.llvm.assign(localVarOp, ctx.llvm.alloca(typeProtoOp))).append("\n")
+		// Storing the content of the tab[i] into the local var.
+		ctx.operations.append(ctx.llvm.store(typeProtoOp, localVarPtrOp, localVarOp)).append("\n")
+		// Loading the operation from its pointer.
+		var ptrOpVar : String init ctx.nextOperationVar
+		ctx.operations.append(ctx.llvm.assign(ptrOpVar, ctx.llvm.load(ctx.llvm.pointer(typeProtoOp), localVarOp))).append("\n")
+		// Calling the operation
+		result := ctx.llvm.call(ptrOpVar, typeRet, params)
 	end
 
 
