@@ -124,7 +124,7 @@ aspect class ClassDefinition {
 		var returnVar : String init ctx.llvm.localVar("r")
 		var tmpVar : String init ctx.llvm.localVar("t")
 		var getterName : String
-		var cpt : Integer init superTypes.size + lowerTypes.size
+		var cpt : Integer init superTypes.size + lowerTypes.size + 1
 		var returnType : String
 		
 		params.add(LLVMVar.new.initialise(typeCD, selfVar))
@@ -148,8 +148,11 @@ aspect class ClassDefinition {
 	
 	// Generates the llvm type corresponding to the class.
 	operation generateLLVMType(ctx:Context) is do
+		var list : Sequence<LLVMVar> init Sequence<LLVMVar>.new
+		// The first element of the type is the dynamic binding table.
+		list.add(LLVMVar.new.initialise(ctx.llvm.pointer(ctx.llvm.pointer(ctx.llvm.i8)), void))
 		// Creating the supertype parameters
-		var list : Sequence<LLVMVar> init superTypes.collect{st | LLVMVar.new.initialise(ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM)), void) }
+		list.addAll(superTypes.collect{st | LLVMVar.new.initialise(ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM)), void)})
 		// Creating the lowertype parameters
 		list.addAll(lowerTypes.collect{st | LLVMVar.new.initialise(ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM)), void)})
 		ownedAttribute.each{attr | list.add(LLVMVar.new.initialise(ctx.llvm.pointer(attr.type.llvmType(ctx)), void)) }
@@ -167,7 +170,7 @@ aspect class ClassDefinition {
 		ctx.constructors.append(ctx.llvm.assign(resultVar, ctx.llvm.alloca(ctx.llvm.localVar(qualifiedNameLLVM)))).append("\n")
 		
 		// Creation of the super types.
-		var i : Integer init 0
+		var i : Integer init 1
 		var istr : String
 		var ptrSuperType : String
 		superClasses.each{st |

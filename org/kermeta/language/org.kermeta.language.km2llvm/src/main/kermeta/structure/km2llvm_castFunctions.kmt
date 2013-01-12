@@ -42,7 +42,7 @@ aspect class ClassDefinition {
 		var prevType : ClassDefinition init initType
 		var prevVar : String init initVar
 		var currVar : String
-		var i : Integer init 0
+		var i : Integer init 1
 		
 		types.add(self)
 		
@@ -79,7 +79,7 @@ aspect class ClassDefinition {
 		var v1 : String init ctx.llvm.localVar("1")
 		var fctAttrs : Sequence<FunctionAttr> init Sequence<FunctionAttr>.new
 		var alreadyGen:Hashtable<String,String> init Hashtable<String,String>.new
-		var i : Integer init 0
+		var i : Integer init 1
 		var types : Sequence<ClassDefinition> init Sequence<ClassDefinition>.new
 		params.add(LLVMVar.new.initialise(typeCD, selfVar))
 		fctAttrs.add(FunctionAttr.~readonly)
