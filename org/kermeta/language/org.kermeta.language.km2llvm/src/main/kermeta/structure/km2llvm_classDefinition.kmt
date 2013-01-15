@@ -46,11 +46,11 @@ aspect class ClassDefinition {
 	// Generates the LLVM code
 	method generateLLVM(ctx:Context) is do
 		if(not toIgnore) then
+			generateLLVMOperationsTable(ctx)
 			generateLLVMType(ctx)
+			generateLLVMCast(ctx)
 			generateLLVMConstructor(ctx)
 			generateLLVMGetters(ctx)
-			generateLLVMCast(ctx)
-			generateLLVMOperationsTable(ctx)
 		end
 	end
 	
@@ -173,17 +173,45 @@ aspect class ClassDefinition {
 		var i : Integer init 1
 		var istr : String
 		var ptrSuperType : String
+		var varStr1 : String
+		var varStr2 : String
+		
 		superClasses.each{st |
+			varStr1 := ctx.nextOperationVar
+			varStr2 := ctx.nextOperationVar
 			istr := i.toString
 			ptrSuperType := ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM))
-			ctx.constructors.append(ctx.llvm.assign("%\""+istr+"\"", ctx.llvm.call("@\"create_"+st.qualifiedNameLLVM+"\"", ptrSuperType, void))).append("\n")
-			ctx.constructors.append(ctx.llvm.assign("%\""+istr+istr+"\"",  ctx.llvm.getelementptr(typeName, resultVar, ctx.llvm.i32, 0, ctx.llvm.i32, i, false))).append("\n")
-			ctx.constructors.append(ctx.llvm.store(ptrSuperType, "%\""+istr+"\"", "%\""+istr+istr+"\"")).append("\n")
+			ctx.constructors.append(ctx.llvm.assign(varStr1, ctx.llvm.call("@\"create_"+st.qualifiedNameLLVM+"\"", ptrSuperType, void))).append("\n")
+			ctx.constructors.append(ctx.llvm.assign(varStr2,  ctx.llvm.getelementptr(typeName, resultVar, ctx.llvm.i32, 0, ctx.llvm.i32, i, false))).append("\n")
+			ctx.constructors.append(ctx.llvm.store(ptrSuperType, varStr1, varStr2)).append("\n")
 			i := i + 1
 		}
 
+		if _tableList.size>0 and not isAbstract then
+			var varStr3 : String init ctx.nextOperationVar
+			var tableName : String init getTableDynBindingName(ctx)
+			var tableType : String init ctx.llvm.pointer(getTableDynBindingType(ctx))
+	
+			// Setting the dynamic binding table to the class.
+			_generateDynamicBindingTableSetting(ctx, tableType, tableName, varStr3, typeName, resultVar)
+			// For all the super types, overriding the table.
+			var varStrST : String
+			allSuperClasses.each{st |
+				varStr3 := ctx.nextOperationVar
+				varStrST := ctx.generateCastCall(ctx.constructors, resultVar, qualifiedNameLLVM, st.qualifiedNameLLVM)
+				_generateDynamicBindingTableSetting(ctx, tableType, tableName, varStr3, ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM)), varStrST)
+			}
+		end
+
 		// Returning the created object.
 		ctx.constructors.append(ctx.llvm.ret(typeName, resultVar)).append("\n}\n")
+	end
+	
+	
+	operation _generateDynamicBindingTableSetting(ctx:Context, tableType:String, tableName:String, varObjet:String, objectType:String, varContainer:String) is do
+		ctx.constructors.append(ctx.llvm.assign(varObjet, ctx.llvm.getelementptr(objectType, varContainer, ctx.llvm.i32, 0, ctx.llvm.i32, 0, false))).append("\n")
+		ctx.constructors.append(ctx.llvm.store(ctx.llvm.pointer(ctx.llvm.pointer(ctx.llvm.i8)), 
+				ctx.llvm.getelementptr(tableType, tableName, ctx.llvm.i32, 0, ctx.llvm.i32, 0, true), varObjet)).append("\n")
 	end
 	
 	

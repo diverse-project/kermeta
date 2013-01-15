@@ -117,7 +117,7 @@ aspect class CallOperation {
 		// of the super classes. So, the target expression has to be casted into the expected super type.
 		if (not target.staticType.isVoid and cmd.isVoid).andThen{b|target.staticType.qualifiedNameLLVM!=clazz.qualifiedNameLLVM} then
 			// The name of the variable containing the cast is returned.
-			strTarget := _generateCastCall(ctx, strTarget, target.staticType.qualifiedNameLLVM, clazz.qualifiedNameLLVM)
+			strTarget := ctx.generateCastCall(ctx.operations, strTarget, target.staticType.qualifiedNameLLVM, clazz.qualifiedNameLLVM)
 		end
 		
 		params.add(LLVMVar.new.initialise(clazz.llvmType(ctx), strTarget))

@@ -47,6 +47,8 @@ class Context{
 	attribute stdLibName : Hashtable<String, String>
 	// The commands to generate simple calls for primitive types
 	attribute stdLibCmd : Hashtable<String, CallGeneratorCmd>
+	// The object defining the size of the basic elements.
+	attribute size : Size
 
 
 	// To use for generating variables for operations.
@@ -74,6 +76,8 @@ class Context{
 		tablesDynBinding := StringBuffer.new
 		cptStrings := 0
 		id := 0
+		currentVarCpt := 0
+		size := Size64.new
 		result := self
 		
 		stdLibName.put("kermeta_standard__Void", llvm.~void)
@@ -145,7 +149,43 @@ class Context{
 			cptStrings := cptStrings + 1
 		end
 	end
+
+
+	/**
+		Generates a cast call from the first given type to the second one. The name of the var to
+		cast is varNameToCast.
+		It returns the name of the variable containing the casted object.
+	*/
+	operation generateCastCall(buf:StringBuffer, varNameToCast:String, fromType:String, toType:String) : String is do
+		// The result is the new variable containing the cast.
+		result := nextOperationVar
+		var params:Sequence<LLVMVar> init Sequence<LLVMVar>.new
+		
+		// The parameter is the object to cast.
+		params.add(LLVMVar.new.initialise(llvm.pointer(llvm.localVar(fromType)), varNameToCast))
+		// creating a new variable containing the cast
+		buf.append(llvm.assign(result, llvm.call(llvm.globalVar("cast_"+fromType+"_"+toType), llvm.pointer(llvm.localVar(toType)), params))).append("\n")
+		params.clear // cleaning
+	end
 }
+
+
+
+abstract class Size {
+	operation pointer() : Integer is abstract
+	operation int() : Integer is abstract
+	operation double() : Integer is abstract
+	operation bool() : Integer is do result := 1 end
+}
+
+
+class Size64 inherits Size {
+	method pointer() : Integer is do result := 8 end
+	method int() : Integer is do result := 4 end
+	method double() : Integer is do result := 8 end
+}
+
+
 
 
 // This class is a command to execute the LLVM code generation of calls.
