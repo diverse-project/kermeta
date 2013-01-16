@@ -140,13 +140,18 @@ class LLVMHelper {
 		end
 	end
 
-	operation call(name:String, return:String, params:Sequence<LLVMVar>) : String is do
+	operation call(name:String, return:String, params:Sequence<LLVMVar>, fctAttrs:Sequence<FunctionAttr>) : String is do
 		var buf : StringBuffer init StringBuffer.new
 		buf.append("call ").append(return).append(" ").append(name).append("(")
 		if(not params.isVoid) then
 			flatListString(buf, params, ", ")
 		end
 		buf.append(")")
+		
+		if not fctAttrs.isVoid then
+			fctAttrs.each{fct | buf.append(" ").append(fct.name)}
+		end
+		
 		result := buf.toString
 	end
 

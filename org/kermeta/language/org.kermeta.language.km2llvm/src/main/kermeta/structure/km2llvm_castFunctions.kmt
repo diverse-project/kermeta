@@ -59,7 +59,7 @@ aspect class ClassDefinition {
 			//e.g. %"v0" = call %"B"* @"cast_C_B"(%"C"* %"self")
 			ctx.casts.append(ctx.llvm.assign(currVar, 
 				ctx.llvm.call(ctx.llvm.globalVar("cast_"+prevType.qualifiedNameLLVM+"_"+t.qualifiedNameLLVM), 
-				ctx.llvm.pointer(ctx.llvm.localVar(t.qualifiedNameLLVM)), params))).append("\n")
+				ctx.llvm.pointer(ctx.llvm.localVar(t.qualifiedNameLLVM)), params, void))).append("\n")
 			prevType := t
 			prevVar := currVar
 			i := i + 1

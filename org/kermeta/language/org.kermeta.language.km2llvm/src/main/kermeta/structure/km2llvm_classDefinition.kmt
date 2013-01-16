@@ -54,8 +54,41 @@ aspect class ClassDefinition {
 	end
 
 
+	/**
+		Computes the size of the type.
+	*/
 	method sizeOf(ctx:Context) : Integer is do
-		result := 0
+		result := _sizeOf(ctx, 0, ctx.size.pointer) // Computing for the dynamic binding table
+		var lastBlock : Integer init result.mod(ctx.size.maxBlock)
+
+		superClasses.each{sc| // Computing for the super types
+			result := result +_sizeOf(ctx, lastBlock, ctx.size.pointer)
+			lastBlock :=  result.mod(ctx.size.maxBlock)
+		}
+
+		var name : String
+		var size : Integer
+		ownedAttribute.each{attr |//FIXME: add the other types
+			if attr.type.qualifiedNameLLVM=="kermeta_standard__Integer" then size := ctx.size.int
+			else if attr.type.qualifiedNameLLVM=="kermeta_standard__Boolean" then size := ctx.size.bool
+			else if attr.type.qualifiedNameLLVM=="kermeta_standard__String" then size := ctx.size.pointer
+			else if attr.type.isPointer(ctx) then size := ctx.size.pointer
+			else 
+				stdio.errorln("UNKNOWN ATTRIBUTE TYPE: " + attr.name + " " + attr.type.toString)
+				size := -1000000
+			end end end end
+			result := result +_sizeOf(ctx, lastBlock, size)
+			lastBlock :=  result.mod(ctx.size.maxBlock)
+		}
+	end
+	
+	operation _sizeOf(ctx:Context, lastBlock : Integer, sizeElt : Integer) : Integer is do
+		result := sizeElt
+		var diffWithPrev : Integer init ctx.size.maxBlock-lastBlock
+
+		if sizeElt > diffWithPrev then
+			result := result + diffWithPrev
+		end
 	end
 	
 	
@@ -167,12 +200,28 @@ aspect class ClassDefinition {
 	operation generateLLVMConstructor(ctx:Context) is do
 		ctx.reinitOperationVar
 	 	var typeName : String init ctx.llvm.pointer(ctx.llvm.localVar(qualifiedNameLLVM))
-	 	var resultVar : String init ctx.nextOperationVar
 	 	ctx.constructors.append(ctx.llvm.define(LinkageType.internal, typeName, ctx.llvm.globalVar("create_" + qualifiedNameLLVM), void, void)).append("{\n")
 		
-		// Creation of the object.
-		//FIXME: use malloc
-		ctx.constructors.append(ctx.llvm.assign(resultVar, ctx.llvm.alloca(ctx.llvm.localVar(qualifiedNameLLVM)))).append("\n")
+		// Creation of the local object.
+	 	var var1 : String init ctx.nextOperationVar
+		ctx.constructors.append(ctx.llvm.assign(var1, ctx.llvm.alloca(ctx.llvm.pointer(ctx.llvm.localVar(qualifiedNameLLVM))))).append("\n")
+		// malloc of the object
+		var params : Sequence<LLVMVar> init Sequence<LLVMVar>.new
+		var fctAttrs : Sequence<FunctionAttr> init Sequence<FunctionAttr>.new
+		var var2 : String init ctx.nextOperationVar
+		params.add(LLVMVar.new.initialise(ctx.llvm.i64, sizeOf(ctx).toString))
+		fctAttrs.add(FunctionAttr.nounwind)
+		ctx.constructors.append(ctx.llvm.assign(var2, ctx.llvm.call("@malloc", "noalias " + ctx.llvm.pointer(ctx.llvm.i8), params, fctAttrs))).append("\n")
+		params.clear
+		fctAttrs.clear
+		// bitcasting the created pointer into the expected type.
+	 	var var3 : String init ctx.nextOperationVar
+		ctx.constructors.append(ctx.llvm.assign(var3, ctx.llvm.bitcast(ctx.llvm.pointer(ctx.llvm.i8) + " " + var2, typeName, false))).append("\n")
+		// Storing the allocated pointer into the local variable.
+		ctx.constructors.append(ctx.llvm.store(typeName, var3, var1)).append("\n")
+		// Loading the pointer
+		var var4 : String init ctx.nextOperationVar
+		ctx.constructors.append(ctx.llvm.assign(var4, ctx.llvm.load(ctx.llvm.pointer(typeName), var1))).append("\n")
 		
 		// Creation of the super types.
 		var i : Integer init 1
@@ -186,8 +235,8 @@ aspect class ClassDefinition {
 			varStr2 := ctx.nextOperationVar
 			istr := i.toString
 			ptrSuperType := ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM))
-			ctx.constructors.append(ctx.llvm.assign(varStr1, ctx.llvm.call("@\"create_"+st.qualifiedNameLLVM+"\"", ptrSuperType, void))).append("\n")
-			ctx.constructors.append(ctx.llvm.assign(varStr2,  ctx.llvm.getelementptr(typeName, resultVar, ctx.llvm.i32, 0, ctx.llvm.i32, i, false))).append("\n")
+			ctx.constructors.append(ctx.llvm.assign(varStr1, ctx.llvm.call("@\"create_"+st.qualifiedNameLLVM+"\"", ptrSuperType, void, void))).append("\n")
+			ctx.constructors.append(ctx.llvm.assign(varStr2,  ctx.llvm.getelementptr(typeName, var4, ctx.llvm.i32, 0, ctx.llvm.i32, i, false))).append("\n")
 			ctx.constructors.append(ctx.llvm.store(ptrSuperType, varStr1, varStr2)).append("\n")
 			i := i + 1
 		}
@@ -198,18 +247,18 @@ aspect class ClassDefinition {
 			var tableType : String init ctx.llvm.pointer(getTableDynBindingType(ctx))
 	
 			// Setting the dynamic binding table to the class.
-			_generateDynamicBindingTableSetting(ctx, tableType, tableName, varStr3, typeName, resultVar)
+			_generateDynamicBindingTableSetting(ctx, tableType, tableName, varStr3, typeName, var4)
 			// For all the super types, overriding the table.
 			var varStrST : String
 			allSuperClasses.each{st |
 				varStr3 := ctx.nextOperationVar
-				varStrST := ctx.generateCastCall(ctx.constructors, resultVar, qualifiedNameLLVM, st.qualifiedNameLLVM)
+				varStrST := ctx.generateCastCall(ctx.constructors, var4, qualifiedNameLLVM, st.qualifiedNameLLVM)
 				_generateDynamicBindingTableSetting(ctx, tableType, tableName, varStr3, ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM)), varStrST)
 			}
 		end
 
 		// Returning the created object.
-		ctx.constructors.append(ctx.llvm.ret(typeName, resultVar)).append("\n}\n")
+		ctx.constructors.append(ctx.llvm.ret(typeName, var4)).append("\n}\n")
 	end
 	
 	

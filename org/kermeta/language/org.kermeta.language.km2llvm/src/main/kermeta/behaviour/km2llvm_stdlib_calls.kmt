@@ -45,7 +45,7 @@ class GenerateBooleanToStringCall inherits CallGeneratorCmd {
 			ctx.operations.append(ctx.llvm.assign(varName, ctx.llvm.zext(ctx.llvm.i1, ctx.llvm.i8, params.at(0).name))).append("\n")
 			params.at(0).name := varName
 			params.at(0).type := ctx.llvm.i8
-			result := GeneratorCmdResult.new.initialise(ctx.llvm.call("@kermeta_standard__Boolean___toString", ctx.llvm.pointer(ctx.llvm.i8), params), false)
+			result := GeneratorCmdResult.new.initialise(ctx.llvm.call("@kermeta_standard__Boolean___toString", ctx.llvm.pointer(ctx.llvm.i8), params, void), false)
 		end
 	end
 }

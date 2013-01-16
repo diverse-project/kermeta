@@ -52,10 +52,10 @@ aspect class Operation {
 			ctx.operations.append(ctx.llvm.define(void, ctx.llvm.i32, "@main", attrs, void)).append("{\n")
 			// Creating the instance of the main Kermeta class.
 			ctx.operations.append(ctx.llvm.assign("%1", 
-				ctx.llvm.call(ctx.llvm.globalVar("create_"+owningClass.qualifiedNameLLVM), mainClassType, void))).append("\n")
+				ctx.llvm.call(ctx.llvm.globalVar("create_"+owningClass.qualifiedNameLLVM), mainClassType, void, void))).append("\n")
 			attrs.add(LLVMVar.new.initialise(mainClassType, " %1"))
 			// Calling the main Kermeta operation
-			ctx.operations.append(ctx.llvm.call(llvmName(ctx), type.llvmType(ctx), attrs)).append("\n")
+			ctx.operations.append(ctx.llvm.call(llvmName(ctx), type.llvmType(ctx), attrs, void)).append("\n")
 			// C operation must return an int (0 for ok)
 			ctx.operations.append(ctx.llvm.ret(ctx.llvm.i32, "0")).append("\n")
 			ctx.operations.append("}\n")

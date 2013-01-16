@@ -351,41 +351,61 @@ define %struct.kermeta_standard__Object* @kermeta_io__StdIO___container(%struct.
 @"pkgFoo__D##dynBind" = global [2 x i8*] [i8* bitcast (void (%"pkgFoo__C"*)* @"pkgFoo__C___bar2" to i8*), i8* bitcast (void (%"pkgFoo__D"*)* @"pkgFoo__D___foo4" to i8*)]
 @"pkgFoo__Main##dynBind" = global [1 x i8*] [i8* bitcast (void (%"pkgFoo__Main"*)* @"pkgFoo__Main___main5" to i8*)]
 define internal %"pkgFoo__A"* @"create_pkgFoo__A"(){
-%"1" = alloca %"pkgFoo__A"
-ret %"pkgFoo__A"* %"1"
+%"1" = alloca %"pkgFoo__A"*
+%"2" = call noalias i8* @malloc(i64 8) nounwind
+%"3" = bitcast i8* %"2" to %"pkgFoo__A"*
+store %"pkgFoo__A"* %"3", %"pkgFoo__A"** %"1"
+%"4" = load %"pkgFoo__A"** %"1"
+ret %"pkgFoo__A"* %"4"
 }
 define internal %"pkgFoo__B"* @"create_pkgFoo__B"(){
-%"1" = alloca %"pkgFoo__B"
-%"2" = call %"pkgFoo__A"* @"create_pkgFoo__A"()
-%"3" = getelementptr %"pkgFoo__B"* %"1", i32 0, i32 1
-store %"pkgFoo__A"* %"2", %"pkgFoo__A"** %"3"
-%"4" = getelementptr %"pkgFoo__B"* %"1", i32 0, i32 0
-store i8** getelementptr([1 x i8*]* @"pkgFoo__B##dynBind", i32 0, i32 0), i8*** %"4"
-ret %"pkgFoo__B"* %"1"
+%"1" = alloca %"pkgFoo__B"*
+%"2" = call noalias i8* @malloc(i64 16) nounwind
+%"3" = bitcast i8* %"2" to %"pkgFoo__B"*
+store %"pkgFoo__B"* %"3", %"pkgFoo__B"** %"1"
+%"4" = load %"pkgFoo__B"** %"1"
+%"5" = call %"pkgFoo__A"* @"create_pkgFoo__A"()
+%"6" = getelementptr %"pkgFoo__B"* %"4", i32 0, i32 1
+store %"pkgFoo__A"* %"5", %"pkgFoo__A"** %"6"
+%"7" = getelementptr %"pkgFoo__B"* %"4", i32 0, i32 0
+store i8** getelementptr([1 x i8*]* @"pkgFoo__B##dynBind", i32 0, i32 0), i8*** %"7"
+ret %"pkgFoo__B"* %"4"
 }
 define internal %"pkgFoo__C"* @"create_pkgFoo__C"(){
-%"1" = alloca %"pkgFoo__C"
-%"2" = call %"pkgFoo__B"* @"create_pkgFoo__B"()
-%"3" = getelementptr %"pkgFoo__C"* %"1", i32 0, i32 1
-store %"pkgFoo__B"* %"2", %"pkgFoo__B"** %"3"
-%"4" = getelementptr %"pkgFoo__C"* %"1", i32 0, i32 0
-store i8** getelementptr([2 x i8*]* @"pkgFoo__C##dynBind", i32 0, i32 0), i8*** %"4"
-ret %"pkgFoo__C"* %"1"
+%"1" = alloca %"pkgFoo__C"*
+%"2" = call noalias i8* @malloc(i64 16) nounwind
+%"3" = bitcast i8* %"2" to %"pkgFoo__C"*
+store %"pkgFoo__C"* %"3", %"pkgFoo__C"** %"1"
+%"4" = load %"pkgFoo__C"** %"1"
+%"5" = call %"pkgFoo__B"* @"create_pkgFoo__B"()
+%"6" = getelementptr %"pkgFoo__C"* %"4", i32 0, i32 1
+store %"pkgFoo__B"* %"5", %"pkgFoo__B"** %"6"
+%"7" = getelementptr %"pkgFoo__C"* %"4", i32 0, i32 0
+store i8** getelementptr([2 x i8*]* @"pkgFoo__C##dynBind", i32 0, i32 0), i8*** %"7"
+ret %"pkgFoo__C"* %"4"
 }
 define internal %"pkgFoo__D"* @"create_pkgFoo__D"(){
-%"1" = alloca %"pkgFoo__D"
-%"2" = call %"pkgFoo__C"* @"create_pkgFoo__C"()
-%"3" = getelementptr %"pkgFoo__D"* %"1", i32 0, i32 1
-store %"pkgFoo__C"* %"2", %"pkgFoo__C"** %"3"
-%"4" = getelementptr %"pkgFoo__D"* %"1", i32 0, i32 0
-store i8** getelementptr([2 x i8*]* @"pkgFoo__D##dynBind", i32 0, i32 0), i8*** %"4"
-ret %"pkgFoo__D"* %"1"
+%"1" = alloca %"pkgFoo__D"*
+%"2" = call noalias i8* @malloc(i64 16) nounwind
+%"3" = bitcast i8* %"2" to %"pkgFoo__D"*
+store %"pkgFoo__D"* %"3", %"pkgFoo__D"** %"1"
+%"4" = load %"pkgFoo__D"** %"1"
+%"5" = call %"pkgFoo__C"* @"create_pkgFoo__C"()
+%"6" = getelementptr %"pkgFoo__D"* %"4", i32 0, i32 1
+store %"pkgFoo__C"* %"5", %"pkgFoo__C"** %"6"
+%"7" = getelementptr %"pkgFoo__D"* %"4", i32 0, i32 0
+store i8** getelementptr([2 x i8*]* @"pkgFoo__D##dynBind", i32 0, i32 0), i8*** %"7"
+ret %"pkgFoo__D"* %"4"
 }
 define internal %"pkgFoo__Main"* @"create_pkgFoo__Main"(){
-%"1" = alloca %"pkgFoo__Main"
-%"2" = getelementptr %"pkgFoo__Main"* %"1", i32 0, i32 0
-store i8** getelementptr([1 x i8*]* @"pkgFoo__Main##dynBind", i32 0, i32 0), i8*** %"2"
-ret %"pkgFoo__Main"* %"1"
+%"1" = alloca %"pkgFoo__Main"*
+%"2" = call noalias i8* @malloc(i64 8) nounwind
+%"3" = bitcast i8* %"2" to %"pkgFoo__Main"*
+store %"pkgFoo__Main"* %"3", %"pkgFoo__Main"** %"1"
+%"4" = load %"pkgFoo__Main"** %"1"
+%"5" = getelementptr %"pkgFoo__Main"* %"4", i32 0, i32 0
+store i8** getelementptr([1 x i8*]* @"pkgFoo__Main##dynBind", i32 0, i32 0), i8*** %"5"
+ret %"pkgFoo__Main"* %"4"
 }
 define internal %"pkgFoo__B"* @"cast_pkgFoo__A_pkgFoo__B"(%"pkgFoo__A"* %"self") readonly inlinehint{
 %"1" = bitcast %"pkgFoo__A"* %"self" to i8*

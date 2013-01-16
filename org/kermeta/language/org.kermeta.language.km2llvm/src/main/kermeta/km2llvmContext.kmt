@@ -171,7 +171,7 @@ class Context{
 		// The parameter is the object to cast.
 		params.add(LLVMVar.new.initialise(llvm.pointer(llvm.localVar(fromType)), varNameToCast))
 		// creating a new variable containing the cast
-		buf.append(llvm.assign(result, llvm.call(llvm.globalVar("cast_"+fromType+"_"+toType), llvm.pointer(llvm.localVar(toType)), params))).append("\n")
+		buf.append(llvm.assign(result, llvm.call(llvm.globalVar("cast_"+fromType+"_"+toType), llvm.pointer(llvm.localVar(toType)), params, void))).append("\n")
 		params.clear // cleaning
 	end
 }
@@ -183,6 +183,7 @@ abstract class Size {
 	operation int() : Integer is abstract
 	operation double() : Integer is abstract
 	operation bool() : Integer is do result := 1 end
+	operation maxBlock() : Integer is abstract
 }
 
 
@@ -190,6 +191,7 @@ class Size64 inherits Size {
 	method pointer() : Integer is do result := 8 end
 	method int() : Integer is do result := 4 end
 	method double() : Integer is do result := 8 end
+	method maxBlock() : Integer is do result := 8 end
 }
 
 
