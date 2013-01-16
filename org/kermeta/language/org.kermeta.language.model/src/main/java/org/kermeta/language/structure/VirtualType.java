@@ -20,8 +20,8 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.kermeta.language.structure.VirtualType#getClassDefinition <em>Class Definition</em>}</li>
- *   <li>{@link org.kermeta.language.structure.VirtualType#getMetamodelVariable <em>Metamodel Variable</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.VirtualType#getTypeDefinition <em>Type Definition</em>}</li>
+ *   <li>{@link org.kermeta.language.structure.VirtualType#getModelTypeVariable <em>Model Type Variable</em>}</li>
  *   <li>{@link org.kermeta.language.structure.VirtualType#getTypeParamBinding <em>Type Param Binding</em>}</li>
  * </ul>
  * </p>
@@ -32,56 +32,56 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface VirtualType extends ObjectTypeVariable {
 	/**
-	 * Returns the value of the '<em><b>Class Definition</b></em>' reference.
+	 * Returns the value of the '<em><b>Type Definition</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * To be written
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Class Definition</em>' reference.
-	 * @see #setClassDefinition(ClassDefinition)
-	 * @see org.kermeta.language.structure.StructurePackage#getVirtualType_ClassDefinition()
+	 * @return the value of the '<em>Type Definition</em>' reference.
+	 * @see #setTypeDefinition(ModelElementTypeDefinition)
+	 * @see org.kermeta.language.structure.StructurePackage#getVirtualType_TypeDefinition()
 	 * @model required="true"
 	 * @generated
 	 */
-	ClassDefinition getClassDefinition();
+	ModelElementTypeDefinition getTypeDefinition();
 
 	/**
-	 * Sets the value of the '{@link org.kermeta.language.structure.VirtualType#getClassDefinition <em>Class Definition</em>}' reference.
+	 * Sets the value of the '{@link org.kermeta.language.structure.VirtualType#getTypeDefinition <em>Type Definition</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Class Definition</em>' reference.
-	 * @see #getClassDefinition()
+	 * @param value the new value of the '<em>Type Definition</em>' reference.
+	 * @see #getTypeDefinition()
 	 * @generated
 	 */
-	void setClassDefinition(ClassDefinition value);
+	void setTypeDefinition(ModelElementTypeDefinition value);
 
 	/**
-	 * Returns the value of the '<em><b>Metamodel Variable</b></em>' reference.
+	 * Returns the value of the '<em><b>Model Type Variable</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link org.kermeta.language.structure.ModelTypeVariable#getVirtualType <em>Virtual Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * To be written
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Metamodel Variable</em>' reference.
-	 * @see #setMetamodelVariable(ModelTypeVariable)
-	 * @see org.kermeta.language.structure.StructurePackage#getVirtualType_MetamodelVariable()
+	 * @return the value of the '<em>Model Type Variable</em>' reference.
+	 * @see #setModelTypeVariable(ModelTypeVariable)
+	 * @see org.kermeta.language.structure.StructurePackage#getVirtualType_ModelTypeVariable()
 	 * @see org.kermeta.language.structure.ModelTypeVariable#getVirtualType
 	 * @model opposite="virtualType" required="true"
 	 * @generated
 	 */
-	ModelTypeVariable getMetamodelVariable();
+	ModelTypeVariable getModelTypeVariable();
 
 	/**
-	 * Sets the value of the '{@link org.kermeta.language.structure.VirtualType#getMetamodelVariable <em>Metamodel Variable</em>}' reference.
+	 * Sets the value of the '{@link org.kermeta.language.structure.VirtualType#getModelTypeVariable <em>Model Type Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Metamodel Variable</em>' reference.
-	 * @see #getMetamodelVariable()
+	 * @param value the new value of the '<em>Model Type Variable</em>' reference.
+	 * @see #getModelTypeVariable()
 	 * @generated
 	 */
-	void setMetamodelVariable(ModelTypeVariable value);
+	void setModelTypeVariable(ModelTypeVariable value);
 
 	/**
 	 * Returns the value of the '<em><b>Type Param Binding</b></em>' containment reference list.

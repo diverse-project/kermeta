@@ -23,6 +23,15 @@ aspect class Package {
 		}
 	end
 	
+	operation getAllOwnedModelElementTypeDefinitions() : Set<ModelElementTypeDefinition> is do
+		result := Set<ModelElementTypeDefinition>.new
+		
+		result.addAll(self.ownedTypeDefinition)
+		self.getAllSubPackages().each{p|
+			result.addAll(p.ownedTypeDefinition)
+		}
+	end
+	
 	/**
 	 * search in this Package a partial Qualified name representing a TypeDefinition
 	 * ie. a name that might contains ::, but not ^ in order to search in sub packages 

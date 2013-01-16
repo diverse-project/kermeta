@@ -32,7 +32,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Metamodel extends KermetaModelElement, NamedElement, TypeDefinition {
+public interface Metamodel extends KermetaModelElement, NamedElement, ModelTypeDefinitionContainer {
 	/**
 	 * Returns the value of the '<em><b>Packages</b></em>' containment reference list.
 	 * The list contents are of type {@link org.kermeta.language.structure.Package}.

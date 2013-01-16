@@ -29,11 +29,24 @@ require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/k
 require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/resolveStructureProperty.kmt"
 require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/resolveStructureType.kmt"
 require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/structureResolver.kmt"
-require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/unresolvedType_Aspect.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/resolveStructureTypeVariable.kmt"
 
 require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/typeawaremerger/TypeAwareMerger.kmt"
 require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/typeawaremerger/TypeAwareMergerContext.kmt"
 require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/typeawaremerger/TypeRebind.kmt"
+
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/utils/AddDefaultInheritance_aspect.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/utils/AddModelTypeVariable.kmt"
+
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/modelTypeDefinition/creator/ModelTypeDefinitionCreation_aspect.kmt"
+
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/utils/ModelTypeDefinitionFill_aspect.kmt"
+
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/modelTypeDefinition/resolver/resolveModelTypeDefinition_aspect.kmt"
+
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/modelTypeDefinition/matching/Matching_Helpers.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/modelTypeDefinition/matching/Matching_Aspect.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/modelTypeDefinition/matching/ModelTypeDefinitionBindingChecker.kmt"
 
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/OperationSignatureEquivalence_aspect.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetCallableFeatures_structure_aspect.kmt"
@@ -46,6 +59,7 @@ require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/stru
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/CreationHelper.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/prettyprinters/PrettyPrinter_kermeta_aspect.kmt"
 
+using org::kermeta::language::resolver::matching
 using org::kermeta::language::staticsetter
 using org::kermeta::language::resolver
 using kermeta::persistence
@@ -64,8 +78,13 @@ class FullStaticResolver
 	*/
 	operation testMain() : Void is do 
 		var repository : EMFRepository init EMFRepository.new
+		//Folder containing the .km to resolve
 		var folder : String init "platform:/resource/org.kermeta.language.resolver/src/interpreterTests/"
+		//Name of the .km to resolve
 		var baseFileName : String init "beforeResolving"
+		//Name of the metamodel from the .km considered as the "project", i.e., metamodel currently built
+		var currentMetamodelName : String init ""
+		
 		repository.registerEcoreFile("platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore")
 		var unresolvedModelResource : Resource init repository.getResource(folder+baseFileName+".km")
        	stdio.writeln("	********************* " + folder+baseFileName+".km" + " loaded ************************")
@@ -84,7 +103,7 @@ class FullStaticResolver
        	
        	
        	
-       	resolvedMetamodels := resolve(unresolvedMetamodels)
+       	resolvedMetamodels := resolve(unresolvedMetamodels, unresolvedMetamodels.detect{mm|mm.name == currentMetamodelName})
        	resolvedMetamodels.each{mm|
 			checkUnresolved(mm)
 	    }
@@ -98,7 +117,9 @@ class FullStaticResolver
        	stdio.writeln("	********************* " + folder+"results/"+baseFileName+"StaticSetted.km" + " saved ************************")
        	if not getErrors.isEmpty then
        		stdio.writeln("	********************* Errors detected")
-       		getErrors.each{e | stdio.writeln(e.message)}
+       		getErrors.each{e |
+       			stdio.writeln(e.message)
+       		}
        	end
 	end
 	
@@ -112,25 +133,80 @@ class FullStaticResolver
 	/* * 
 		launch the entire resolving process
 	*/
-	operation resolve(unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>) : Collection<org::kermeta::language::structure::Metamodel> is do
-		result := doStaticSetting(
-			doStructureResolving(
-				doTypeAwareMerging(
-					doPrimitiveTypeResolving(
-						doTypeResolving(unresolvedMetamodels)
+	operation resolve(unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>, currentMetamodel : org::kermeta::language::structure::Metamodel) : Collection<org::kermeta::language::structure::Metamodel> is do
+		
+		
+		//init of context
+		ctxt:= LanguageVisitorContext.new.initialize(unresolvedMetamodels, currentMetamodel, false)
+		
+		result := createModelTypeDefinitions(
+			doStaticSetting(
+				checkModelTypeDefinitionBindings(
+					doModelTypeDefinitionResolving(
+						doStructureResolving(
+							doTypeAwareMerging(
+								doPrimitiveTypeResolving(
+									doTypeResolving(
+										//doTypeVariableResolving(
+											preprocess(unresolvedMetamodels, currentMetamodel)
+										//)
+									)
+								)
+							)
+						)
 					)
 				)
-			)
+			, currentMetamodel)
 		)
 	end
+	
+	/* *
+		Do all sort of preprocessing for the resolving step
+	*/
+	operation preprocess(unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>, currentMetamodel : org::kermeta::language::structure::Metamodel) : Collection<org::kermeta::language::structure::Metamodel> is do
+		stdio.writeln("	********************* Preprocessing... *********************")
+		
+		ctxt:= LanguageVisitorContext.new.initialize(unresolvedMetamodels, currentMetamodel, false)
+		
+		
+		unresolvedMetamodels.each{mm|
+			//Fill model type definitions with model element type definitions
+			mm.fillModelTypeDefinitions(ctxt)
+		}
+		unresolvedMetamodels.each{mm|
+			//Add default inheritance to Object to all type definitions
+			mm.addDefaultInheritance()
+		}
+		unresolvedMetamodels.each{mm|
+			//Make a link between each model element type definition and the model type definitions that reference it
+			mm.fillReferencingModelTypeDefinitions()
+		}
+		
+		result := unresolvedMetamodels
+		stdio.writeln("	********************* Preprocessing done *********************")
+	end
+	
+	/* *
+		//MODELTYPE ADDITION
+		Resolve bounded UnresolvedTypeVariable (TypeVariables from ClassDefinitions and Operations) to ModelTypeVariables or ObjectTypeVariables
+	*/
+	/*operation doTypeVariableResolving(unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>) : Collection<org::kermeta::language::structure::Metamodel> is do
+		stdio.writeln("	********************* TypeVariable Resolving... *********************")
+		unresolvedMetamodels.each{mm|
+			mm.resolveStructureTypeVariable(ctxt)
+		}
+		stdio.writeln("	********************* TypeVariable Resolving done *********************")
+		result:=unresolvedMetamodels
+	end*/
+	
 	/* * 
 		launch only the unresolved types resolution after this step all unresolved types should be resolved 
 	*/
 	operation doTypeResolving(unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>) : Collection<org::kermeta::language::structure::Metamodel> is do
-		//init of context
+		//init of context now in preprocess
 		stdio.writeln("	********************* Type Resolving... *********************")
-		ctxt:= LanguageVisitorContext.new.initialize(unresolvedMetamodels)
-		ctxt.verbose := true
+		//ctxt:= LanguageVisitorContext.new.initialize(unresolvedMetamodels)
+		//ctxt.verbose := false
 		unresolvedMetamodels.each{mm|
 			mm.resolveStructureInheritance(ctxt)
 		}
@@ -188,15 +264,22 @@ class FullStaticResolver
 	/* *
 	*	chain all the resolving passes for the structural part of the program
 	*/
-	operation doResolving(unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>) : Collection<org::kermeta::language::structure::Metamodel> is do
+	operation doResolving(unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>, currentMetamodel : org::kermeta::language::structure::Metamodel) : Collection<org::kermeta::language::structure::Metamodel> is do
 		stdio.writeln("	********************* Resolving... *********************")
        	/*var unresolvedFinder : ResolverUnresolvedFinderVisitor init ResolverUnresolvedFinderVisitor.new
 
 		ctxt := LanguageVisitorContext.new.initialise()
 	
-   		unresolvedMetamodels.accept(unresolvedFinder, ctxt)*/
+   		unresolvedMetamodels.accept(unresolvedFinder, ctxt)
    		
-   		doStructureResolving(doTypeAwareMerging(doPrimitiveTypeResolving(doTypeResolving(unresolvedMetamodels))))
+   		ctxt.currentlyBuiltMetamodel := currentMetamodel*/
+   		
+   		//doStructureResolving(doTypeAwareMerging(doPrimitiveTypeResolving(doTypeResolving(unresolvedMetamodels))))
+   		
+   		stdio.writeln("	+++++++++++++++++++++++++++++++++++++++++")
+   		stdio.writeln("	doResolving, currentlyBuiltMetamodel: " + currentMetamodel.toString)
+   		
+   		resolve(unresolvedMetamodels, currentMetamodel)
        	stdio.writeln("	********************* Resolving done *********************")
        	
        	//checkDangling(unresolvedMetamodels.containingResource())       	
@@ -208,19 +291,64 @@ class FullStaticResolver
 	/* *
 		resolve all the behavioral part and add static types
 	*/
-	operation doStaticSetting(unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>) : Collection<org::kermeta::language::structure::Metamodel> is do      	
+	operation doStaticSetting(unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>, currentMetamodel : org::kermeta::language::structure::Metamodel) : Collection<org::kermeta::language::structure::Metamodel> is do      	
 		stdio.writeln("	********************* Static setting...  *********************")
 		var staticSetterContext : StaticSetterContext init StaticSetterContext.new.initialize(unresolvedMetamodels)
 		
 		staticSetterContext.verbose := false
 		staticSetterContext.errors  := ctxt.errors
 		
+		staticSetterContext.currentlyBuiltMetamodel := currentMetamodel
+		
 		unresolvedMetamodels.each{mm|
 			mm.inferContainedExpressionStatic(staticSetterContext)
 		}
 		
+		ctxt.unresolvedCallToTransformationStack := staticSetterContext.unresolvedCallToTransformationStack
+		
        	stdio.writeln("	********************* Static setting done *********************")
        	result := unresolvedMetamodels
+	end
+	
+	/* *
+		//MODELTYPE ADDITION
+		Resolve unresolved model type definitions created during binding parse
+	*/
+	operation doModelTypeDefinitionResolving(unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>) : Collection<org::kermeta::language::structure::Metamodel> is do
+		stdio.writeln("	********************* ModelTypeDefinition Resolving... *********************")
+		unresolvedMetamodels.each{mm|
+			mm.resolveModelTypeDefinitions()
+		}
+		result := unresolvedMetamodels
+		stdio.writeln("	********************* ModelTypeDefinition Resolving done *********************")
+	end
+	
+	/* *
+		//MODELTYPE ADDITION
+		Check subtyping relation between model type definitions
+	*/
+	operation checkModelTypeDefinitionBindings(unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>) : Collection<org::kermeta::language::structure::Metamodel> is do
+		stdio.writeln("	********************* ModelTypeDefinitionBindings Checking... *********************")	
+		var matchingContext : MatchingContext init MatchingContext.new
+		unresolvedMetamodels.each{mm|
+			mm.checkModelTypeDefinitionBindings(matchingContext)
+		}
+		result := unresolvedMetamodels
+		stdio.writeln("	********************* ModelTypeDefinitionBindings Checking done *********************")	
+	end
+	
+	/* *
+		//MODELTYPE ADDITION
+		Create pruned model type definitions
+	*/
+	operation createModelTypeDefinitions(unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>) : Collection<org::kermeta::language::structure::Metamodel> is do
+		stdio.writeln("	********************* ModelTypeDefinition Creation... *********************")	
+		var currentMM : org::kermeta::language::structure::Metamodel init unresolvedMetamodels.detect{mm|mm.equals(ctxt.currentlyBuiltMetamodel)}
+		if not currentMM.isVoid() then
+			currentMM.createModelTypeDefinitions()
+		end
+		result := unresolvedMetamodels
+		stdio.writeln("	********************* ModelTypeDefinition Creation done *********************")	
 	end
 	
 	/* * 
@@ -259,6 +387,7 @@ class FullStaticResolver
 			if p.isInstanceOf(org::kermeta::language::structure::KermetaModelElement) then
 				checkUnresolved(p.asType(org::kermeta::language::structure::KermetaModelElement))
 			end
+			//K1ToScalaCompiler workaround
 			p
 		}
 	end

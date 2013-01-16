@@ -12,6 +12,7 @@ require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecor
 require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverException.kmt"
 
 using org::kermeta::language::structure
+using org::kermeta::language::behavior
 using org::kermeta::language::resolver
 using kermeta::standard
 using kermeta::utils
@@ -31,10 +32,12 @@ class MapEntryTypeDef {
 
 aspect class LanguageVisitorContext {
 	attribute errors : Sequence<ResolverException>
-	//Modeling unit the UnresolvedFinder is currently visiting
+	//Metamodels the UnresolvedFinder is currently visiting
 	reference currentMetamodels : Collection<Metamodel>
 	//Package the UnresolvedFinder is currently visiting
 	reference currentPackage : Package
+	//Metamodel currently built
+	reference currentlyBuiltMetamodel : Metamodel
 	
 	reference currentClassDef : ClassDefinition
 	
@@ -51,18 +54,21 @@ aspect class LanguageVisitorContext {
 	reference foundOperation : Operation
 	reference foundProperty : Property
 	
-	
 	attribute typedefTable : Hashtable<String, Sequence<MapEntryTypeDef>>
 	
 	attribute primitiveTypesTable : Hashtable<PrimitiveType, Type>
 	
 	attribute verbose : Boolean
 	
-	operation initialize(mms : Collection<Metamodel>) : LanguageVisitorContext is do
+	//Stack of UnresolvedCall that have not been resolved and which target.staticType is a ModelType
+	attribute unresolvedCallToTransformationStack : Collection<UnresolvedCall>
+	
+	operation initialize(mms : Collection<Metamodel>, currentMM : Metamodel, isVerbose : Boolean) : LanguageVisitorContext is do
 		errors := Sequence<ResolverException>.new
 		currentMetamodels:=mms
+		currentlyBuiltMetamodel := currentMM
 		//TODO initialize the table of Type definitions 
-	 	verbose := false
+	 	verbose := isVerbose
 		result := self
 	end
 	

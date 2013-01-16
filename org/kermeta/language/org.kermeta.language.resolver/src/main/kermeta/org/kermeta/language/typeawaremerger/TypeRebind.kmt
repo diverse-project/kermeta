@@ -14,7 +14,9 @@ package structure{
 		
 			eachOwnedElement{containedElt |
 				containedElt.asType(KermetaModelElement).rebind(newTypeParam, oldTypeParam)
-				void }
+				//K1ToScalaCompiler workaround
+				containedElt
+			}
 		
 		end
 	}

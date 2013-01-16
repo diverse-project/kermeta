@@ -47,7 +47,7 @@ aspect class Metamodel {
 						from var i : Integer init 1
 						until i>=(set_qname.size()-1) or pack.isVoid
 						loop
-							var oldpack : ModelElementTypeDefinitionContainer init pack
+							//var oldpack : ModelElementTypeDefinitionContainer init pack
 							if pack.isInstanceOf(Package) then
 								pack := pack.asType(Package).nestedPackage.detect{ p |
 									p.name == set_qname.at(i)
@@ -61,9 +61,11 @@ aspect class Metamodel {
 							// using goes to an unknown package (checker should raise something about that before entering here, anyway I  don't want to crash)
 							result := void
 						else
+							
 							result := pack.ownedTypeDefinition.detect{ c |
 								c.name == set_qname.at(set_qname.size()-1)
 							}
+
 						end
 					end
 				else
@@ -268,6 +270,14 @@ aspect class Metamodel {
 		else 
 			stdio.errorln("Cannot find neighbours of Metamodel " + self.name + " because it isn't contained in a resource")
 		end
+	end
+	
+	operation getAllOwnedModelElementTypeDefinitions() : Set<ModelElementTypeDefinition> is do
+		result := Set<ModelElementTypeDefinition>.new
+		
+		self.packages.each{p|
+			result.addAll(p.getAllOwnedModelElementTypeDefinitions())
+		}
 	end
 }
 

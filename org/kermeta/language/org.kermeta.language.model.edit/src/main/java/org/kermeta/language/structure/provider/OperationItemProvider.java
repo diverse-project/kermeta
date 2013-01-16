@@ -396,6 +396,11 @@ public class OperationItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(StructurePackage.Literals.OPERATION__BODY,
+				 BehaviorFactory.eINSTANCE.createCallModelTransformation()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(StructurePackage.Literals.OPERATION__OWNED_UNRESOLVED_OPERATIONS,
 				 StructureFactory.eINSTANCE.createUnresolvedOperation()));
 	}

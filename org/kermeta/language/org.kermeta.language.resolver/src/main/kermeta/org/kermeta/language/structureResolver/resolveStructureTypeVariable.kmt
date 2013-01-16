@@ -1,0 +1,84 @@
+package org::kermeta::language::structure;
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/eachOwnedElement_kermeta_aspect.kmt"
+require "ResolverContext_Aspect.kmt"
+require "unresolvedType_Aspect.kmt"
+require "unresolvedTypeVariable_Aspect.kmt"
+using kermeta::standard
+using org::kermeta::language::resolver
+
+aspect class KermetaModelElement{
+	/**
+	* resolve UnresolvedTypeVariables and their supertype when possible
+	* resolved UnresolvedTypeVariable are either ModelTypeVariable or ObjectTypeVariable
+	*/
+	operation resolveStructureTypeVariable(context : LanguageVisitorContext) is do
+		self.eachOwnedElement{ e|
+				if e.isInstanceOf(KermetaModelElement) then
+					e.asType(KermetaModelElement).resolveStructureTypeVariable(context)
+				end
+			e}// must return something for scala compiler to work		
+	end
+}
+
+aspect class ClassDefinition {
+	method resolveStructureTypeVariable(context : LanguageVisitorContext) is do
+		//If there is one Unresolved TypeVariable, they are all Unresolved (we resolve them all at once)
+		if not (self.typeParameter.detect{tp|tp.isInstanceOf(UnresolvedTypeVariable)}.isVoid()) then
+			var initialTPSet : OrderedSet<TypeVariable> init OrderedSet<TypeVariable>.new
+			var resolvedTPSet : OrderedSet<TypeVariable> init OrderedSet<TypeVariable>.new
+			initialTPSet.addAll(self.typeParameter)
+			
+			//Foreach UnresolvedTypeVariable we search for the resolved corresponding TypeVariable
+			initialTPSet.each{tp|
+				var newTP : TypeVariable init tp.asType(UnresolvedTypeVariable).findCorrespondingTypeVariable(context)
+				resolvedTPSet.add(newTP)
+			}
+			
+			initialTPSet.each{tp|
+				self.typeParameter.remove(tp)
+				self.containedType.remove(tp)
+			}
+			
+			resolvedTPSet.each{newTP|
+				self.typeParameter.add(newTP)
+				self.containedType.add(newTP)
+			}
+			
+		end
+		
+		super(context)
+	end
+}
+
+aspect class Operation {
+	method resolveStructureTypeVariable(context : LanguageVisitorContext) is do		
+		//If there is one Unresolved TypeVariable, they are all Unresolved (we resolve them all at once)
+		if not (self.typeParameter.detect{tp|tp.isInstanceOf(UnresolvedTypeVariable)}.isVoid()) then
+			var initialTPSet : OrderedSet<TypeVariable> init OrderedSet<TypeVariable>.new
+			var resolvedTPSet : OrderedSet<TypeVariable> init OrderedSet<TypeVariable>.new
+			initialTPSet.addAll(self.typeParameter)
+			
+			//Foreach UnresolvedTypeVariable we search for the resolved corresponding TypeVariable
+			initialTPSet.each{tp|
+				var newTP : TypeVariable init tp.asType(UnresolvedTypeVariable).findCorrespondingTypeVariable(context)
+				resolvedTPSet.add(newTP)
+			}
+			
+			initialTPSet.each{tp|
+				self.typeParameter.remove(tp)
+				self.containedType.remove(tp)
+			}
+			
+			resolvedTPSet.each{newTP|
+				self.typeParameter.add(newTP)
+				self.containedType.add(newTP)
+			}
+			
+		end
+		
+		super(context)
+	end
+}

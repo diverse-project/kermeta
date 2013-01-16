@@ -2442,6 +2442,115 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_ENUM_LITERAL_FEATURE_COUNT = CALL_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.kermeta.language.behavior.impl.CallModelTransformationImpl <em>Call Model Transformation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.behavior.impl.CallModelTransformationImpl
+	 * @see org.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallModelTransformation()
+	 * @generated
+	 */
+	int CALL_MODEL_TRANSFORMATION = 30;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_MODEL_TRANSFORMATION__KTAG = CALL_FEATURE__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_MODEL_TRANSFORMATION__KOWNED_TAGS = CALL_FEATURE__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_MODEL_TRANSFORMATION__CONTAINED_TYPE = CALL_FEATURE__CONTAINED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Static Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_MODEL_TRANSFORMATION__STATIC_TYPE = CALL_FEATURE__STATIC_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_MODEL_TRANSFORMATION__PARAMETERS = CALL_FEATURE__PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_MODEL_TRANSFORMATION__NAME = CALL_FEATURE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Static Type Variable Bindings</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_MODEL_TRANSFORMATION__STATIC_TYPE_VARIABLE_BINDINGS = CALL_FEATURE__STATIC_TYPE_VARIABLE_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_MODEL_TRANSFORMATION__TARGET = CALL_FEATURE__TARGET;
+
+	/**
+	 * The feature id for the '<em><b>Is Atpre</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_MODEL_TRANSFORMATION__IS_ATPRE = CALL_FEATURE__IS_ATPRE;
+
+	/**
+	 * The feature id for the '<em><b>Static Transformation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_MODEL_TRANSFORMATION__STATIC_TRANSFORMATION = CALL_FEATURE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Call Model Transformation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_MODEL_TRANSFORMATION_FEATURE_COUNT = CALL_FEATURE_FEATURE_COUNT + 1;
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.language.behavior.Assignment <em>Assignment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3248,6 +3357,27 @@ public interface BehaviorPackage extends EPackage {
 	EReference getCallEnumLiteral_StaticEnumLiteral();
 
 	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.behavior.CallModelTransformation <em>Call Model Transformation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Call Model Transformation</em>'.
+	 * @see org.kermeta.language.behavior.CallModelTransformation
+	 * @generated
+	 */
+	EClass getCallModelTransformation();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.language.behavior.CallModelTransformation#getStaticTransformation <em>Static Transformation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Static Transformation</em>'.
+	 * @see org.kermeta.language.behavior.CallModelTransformation#getStaticTransformation()
+	 * @see #getCallModelTransformation()
+	 * @generated
+	 */
+	EReference getCallModelTransformation_StaticTransformation();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3936,6 +4066,24 @@ public interface BehaviorPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CALL_ENUM_LITERAL__STATIC_ENUM_LITERAL = eINSTANCE.getCallEnumLiteral_StaticEnumLiteral();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.behavior.impl.CallModelTransformationImpl <em>Call Model Transformation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.behavior.impl.CallModelTransformationImpl
+		 * @see org.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallModelTransformation()
+		 * @generated
+		 */
+		EClass CALL_MODEL_TRANSFORMATION = eINSTANCE.getCallModelTransformation();
+
+		/**
+		 * The meta object literal for the '<em><b>Static Transformation</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CALL_MODEL_TRANSFORMATION__STATIC_TRANSFORMATION = eINSTANCE.getCallModelTransformation_StaticTransformation();
 
 	}
 

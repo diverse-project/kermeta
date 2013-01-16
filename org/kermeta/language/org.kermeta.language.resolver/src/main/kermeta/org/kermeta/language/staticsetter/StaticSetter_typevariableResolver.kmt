@@ -42,7 +42,7 @@ aspect class Class {
 		var localBindings : Hashtable<TypeVariable,Type> init Hashtable<TypeVariable,Type>.new
 		
 		result.each{ b|
-			localBindings.put(b.variable, b.type)	
+			localBindings.put(b.variable, b.type)
 		}
 		
 		//get All the inherited bindings
@@ -83,7 +83,9 @@ aspect class Class {
 		
 		var newClass : Class init Class.new
 		newClass.typeDefinition:=typeDefinition
-		typeParamBinding.each{b|newClass.typeParamBinding.add(b.cloner(context, bindings))}
+		typeParamBinding.each{b|
+			newClass.typeParamBinding.add(b.cloner(context, bindings))
+		}
 		if not virtualTypeBinding.isEmpty then
 			context.errors.add(ResolverException.new.initialize("VirtualTypeBinding not implemented.", self))
 		end 
@@ -156,15 +158,64 @@ aspect class VoidType{
 		result := self
 	end
 }
-aspect class VirtualType{
-		method resolveTypeVariables (context : StaticSetterContext, bindings : Sequence<TypeVariableBinding>) : Type is do
-		// TODO not sure must see with model type use case
-		result := self
+
+
+aspect class ModelTypeVariable{
+
+	method resolveTypeVariables (context : StaticSetterContext, bindings : Sequence<TypeVariableBinding>) : Type is do	
+		var binding : TypeVariableBinding
+		binding := bindings.detect{ b|
+			b.variable==self
+		}
+		if binding != void then
+			result:=binding.type
+			if context.verbose then stdio.writeln("Binding for ModelTypeVariable found : "+name) end
+		else
+			result:=self
+			if context.verbose then stdio.writeln("WARNING : binding not found : "+name) end
+		end
 	end
 }
-aspect class ModelTypeVariable{
-		method resolveTypeVariables (context : StaticSetterContext, bindings : Sequence<TypeVariableBinding>) : Type is do
-	// TODO not sure must see with model type use case
+
+aspect class VirtualType{
+	method resolveTypeVariables (context : StaticSetterContext, bindings : Sequence<TypeVariableBinding>) : Type is do	
+		var mt : ModelType 
+		mt ?= self.modelTypeVariable.resolveTypeVariables(context, bindings)
+		
+		if not mt.isVoid() then
+			var typeDef : TypeDefinition init mt.typeDefinition.typeDefinitions.detect{td|
+				td.name == self.name.split("::").last()
+			}
+			
+			result := typeDef.getTypeFromDefinitionAndVirtualType(self, context)
+			if context.verbose then stdio.writeln("Binding for VirtualType found : "+name) end
+		else
+			result:=self
+			if context.verbose then stdio.writeln("WARNING : binding not found : "+name) end
+		end
+	end
+}
+
+aspect class TypeDefinition {
+	operation getTypeFromDefinitionAndVirtualType(virtualType : VirtualType, context : StaticSetterContext) : Type is abstract
+}
+
+aspect class ClassDefinition {
+	method getTypeFromDefinitionAndVirtualType(virtualType : VirtualType, context : StaticSetterContext) : Type is do
+		var newClass : Class init Class.new
+		newClass.typeDefinition := self
+		
+		newClass.typeParamBinding.addAll(virtualType.typeParamBinding)	
+		newClass.typeContainer := virtualType.typeContainer
+		virtualType.typeContainer.containedType.add(newClass)
+		virtualType.typeContainer.containedType.remove(virtualType)
+		
+		result := newClass
+	end
+}
+
+aspect class DataType {
+	method getTypeFromDefinitionAndVirtualType(virtualType : VirtualType, context : StaticSetterContext) : Type is do
 		result := self
 	end
 }

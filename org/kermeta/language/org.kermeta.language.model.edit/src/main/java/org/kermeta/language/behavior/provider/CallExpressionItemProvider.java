@@ -307,6 +307,11 @@ public class CallExpressionItemProvider
 			(createChildParameter
 				(BehaviorPackage.Literals.CALL_EXPRESSION__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createCallEnumLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.CALL_EXPRESSION__PARAMETERS,
+				 BehaviorFactory.eINSTANCE.createCallModelTransformation()));
 	}
 
 }

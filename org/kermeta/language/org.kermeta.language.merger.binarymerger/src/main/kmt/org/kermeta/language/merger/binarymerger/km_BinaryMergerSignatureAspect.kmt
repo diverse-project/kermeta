@@ -22,7 +22,6 @@ package kermeta {
 						if (not self.target.isVoid) and (not aspectElement.target.isVoid) then
 							result := result and self.target == aspectElement.target
 						end
-
 						if (not self.~value.isVoid) and (not aspectElement.~value.isVoid) then
 							result := result and self.~value == aspectElement.~value
 						end
@@ -47,7 +46,6 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 					else
 						result := false
 					end
@@ -85,9 +83,6 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
-
-
 					else
 						result := false
 					end
@@ -145,7 +140,6 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 					else
 						result := false
 					end
@@ -161,7 +155,6 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 					else
 						result := false
 					end
@@ -177,7 +170,6 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 					else
 						result := false
 					end
@@ -196,16 +188,12 @@ package kermeta {
 						if (not self.thenBody.isVoid) and (not aspectElement.thenBody.isVoid) then
 							result := result and self.thenBody == aspectElement.thenBody
 						end
-
 						if (not self.elseBody.isVoid) and (not aspectElement.elseBody.isVoid) then
 							result := result and self.elseBody == aspectElement.elseBody
 						end
-
 						if (not self.condition.isVoid) and (not aspectElement.condition.isVoid) then
 							result := result and self.condition == aspectElement.condition
 						end
-
-
 					else
 						result := false
 					end
@@ -224,8 +212,6 @@ package kermeta {
 						if (not self.expression.isVoid) and (not aspectElement.expression.isVoid) then
 							result := result and self.expression == aspectElement.expression
 						end
-
-
 					else
 						result := false
 					end
@@ -241,7 +227,6 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 						if (not self.exceptionType.isVoid) and (not aspectElement.exceptionType.isVoid) then
 							result := result and self.exceptionType == aspectElement.exceptionType
 						end
@@ -284,7 +269,6 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 					else
 						result := false
 					end
@@ -300,7 +284,6 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 					else
 						result := false
 					end
@@ -340,12 +323,9 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 						if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
 							result := result and self.body == aspectElement.body
 						end
-
-
 					else
 						result := false
 					end
@@ -444,8 +424,6 @@ package kermeta {
 						if (not self.typeref.isVoid) and (not aspectElement.typeref.isVoid) then
 							result := result and self.typeref == aspectElement.typeref
 						end
-
-
 					else
 						result := false
 					end
@@ -461,7 +439,6 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 					else
 						result := false
 					end
@@ -480,16 +457,12 @@ package kermeta {
 						if (not self.initialization.isVoid) and (not aspectElement.initialization.isVoid) then
 							result := result and self.initialization == aspectElement.initialization
 						end
-
 						if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
 							result := result and self.body == aspectElement.body
 						end
-
 						if (not self.stopCondition.isVoid) and (not aspectElement.stopCondition.isVoid) then
 							result := result and self.stopCondition == aspectElement.stopCondition
 						end
-
-
 					else
 						result := false
 					end
@@ -505,7 +478,6 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 					else
 						result := false
 					end
@@ -524,7 +496,6 @@ package kermeta {
 						if (not self.initialization.isVoid) and (not aspectElement.initialization.isVoid) then
 							result := result and self.initialization == aspectElement.initialization
 						end
-
 						if (not self.type.isVoid) and (not aspectElement.type.isVoid) then
 							result := result and self.type == aspectElement.type
 						end
@@ -548,7 +519,6 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 						if (not self.target.isVoid) and (not aspectElement.target.isVoid) then
 							result := result and self.target == aspectElement.target
 						end
@@ -586,7 +556,6 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 					else
 						result := false
 					end
@@ -602,7 +571,6 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 					else
 						result := false
 					end
@@ -618,7 +586,21 @@ package kermeta {
 
 						
 						result := super( aspectElement)
+					else
+						result := false
+					end
+				end
+			}
 
+			aspect class CallModelTransformation {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallFeature is do
+					// TODO deal with aspectElementObj not a strict instance of CallModelTransformation
+					var aspectElement : org::kermeta::language::behavior::CallModelTransformation
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
 					else
 						result := false
 					end
@@ -640,7 +622,6 @@ package kermeta {
 
 						
 						result := true
-
 					else
 						result := false
 					end
@@ -698,7 +679,6 @@ package kermeta {
 						if (not self.getterBody.isVoid) and (not aspectElement.getterBody.isVoid) then
 							result := result and self.getterBody == aspectElement.getterBody
 						end
-
 						if (not self.setterBody.isVoid) and (not aspectElement.setterBody.isVoid) then
 							result := result and self.setterBody == aspectElement.setterBody
 						end
@@ -766,7 +746,6 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 					else
 						result := false
 					end
@@ -1169,7 +1148,6 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 					else
 						result := false
 					end
@@ -1185,7 +1163,6 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 					else
 						result := false
 					end
@@ -1201,8 +1178,6 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
-
 					else
 						result := false
 					end
@@ -1500,18 +1475,15 @@ package kermeta {
 				end
 			}
 
-			aspect class MetamodelBinding {
+			aspect class ModelTypeDefinitionBinding {
 				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
-					// TODO deal with aspectElementObj not a strict instance of MetamodelBinding
-					var aspectElement : org::kermeta::language::structure::MetamodelBinding
+					// TODO deal with aspectElementObj not a strict instance of ModelTypeDefinitionBinding
+					var aspectElement : org::kermeta::language::structure::ModelTypeDefinitionBinding
 					aspectElement ?= aspectElementObj
 					if not aspectElement.isVoid then
 
 						
 						result := super( aspectElement)
-
-
-
 					else
 						result := false
 					end
@@ -1527,8 +1499,6 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
-
 					else
 						result := false
 					end
@@ -1604,7 +1574,6 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 					else
 						result := false
 					end
@@ -1698,7 +1667,6 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 					else
 						result := false
 					end
@@ -1734,9 +1702,90 @@ package kermeta {
 					end
 				end
 			}
+
+			aspect class ModelTypeDefinition {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeDefinition is do
+					// TODO deal with aspectElementObj not a strict instance of ModelTypeDefinition
+					var aspectElement : org::kermeta::language::structure::ModelTypeDefinition
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class ModelTransformation {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
+					// TODO deal with aspectElementObj not a strict instance of ModelTransformation
+					var aspectElement : org::kermeta::language::structure::ModelTransformation
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+						if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
+							result := result and self.body == aspectElement.body
+						end
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class UnresolvedModelTypeDefinition {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ModelTypeDefinition is do
+					// TODO deal with aspectElementObj not a strict instance of UnresolvedModelTypeDefinition
+					var aspectElement : org::kermeta::language::structure::UnresolvedModelTypeDefinition
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class UnresolvedModelTransformation {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ModelTransformation is do
+					// TODO deal with aspectElementObj not a strict instance of UnresolvedModelTransformation
+					var aspectElement : org::kermeta::language::structure::UnresolvedModelTransformation
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
+				end
+			}
+
+			aspect class ModelTypeDefinitionContainer {
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+					// TODO deal with aspectElementObj not a strict instance of ModelTypeDefinitionContainer
+					var aspectElement : org::kermeta::language::structure::ModelTypeDefinitionContainer
+					aspectElement ?= aspectElementObj
+					if not aspectElement.isVoid then
+
+						
+						result := super( aspectElement)
+					else
+						result := false
+					end
+				end
+			}
+
 		}
+
+
 	}
+
+
 }
-
-
 

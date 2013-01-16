@@ -1,0 +1,312 @@
+/* $Id:$ 
+ * Creation : December 7, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+
+package org::kermeta::language::structure;
+
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/modelTypeDefinition/matching/Matching_Helpers.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetAllSuperTypes_TypeDefinition_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/IsSubtypeOf.kmt"
+
+using kermeta::standard
+using org::kermeta::language::resolver::matching
+
+
+aspect class ModelTypeDefinition {
+	//Set of unmatched ModelTypeDefinitions
+	attribute notSuperTypes : Set<ModelTypeDefinition>
+	attribute failedBindings : Set<FailedBinding>
+
+	/**
+	 * Check if self is a total isomorphic subtype of binding.boundModelTypeDefinition
+	 */
+	operation isTotalIsomorphicSubtypeOf(binding : ModelTypeDefinitionBinding, ctxt : MatchingContext) : Boolean is do
+		var mtd : ModelTypeDefinition init binding.boundModelTypeDefinition
+		result := self.equals(mtd)
+		
+		if not result then
+			if self.ownedBindings.detect{b|b.boundModelTypeDefinition.equals(mtd)}.isVoid() then
+				if not self.notSuperTypes.contains(mtd) then
+				/*
+				 *If mtd is neither in known bindings, nor in unmatched ModelTypeDefinitions, then we must check the subtyping relation
+				 */
+					 /*
+					 * In the beginning, we don't know if the check will be positive or not
+					 * We need to have a successful/failed binding to keep track of model element bindings/errors
+					 */
+					ctxt.initialize(self, binding)
+				
+					result := true
+					
+					//Each ModelElementTypeDefinition in mtd must matched by a ModelElementTypeDefinition in self
+					var matchingTd : ModelElementTypeDefinition
+					mtd.typeDefinitions.each{tdToMatch|
+						matchingTd := self.typeDefinitions.detect{selfTd|
+							selfTd.matches(tdToMatch, ctxt)
+						}						
+						if matchingTd.isVoid then
+							//If we did not find any matching ModelElementTypeDefinition, there is no subtyping relation between self and mtd
+							result := false								
+						else
+							//Otherwise empty matchingTd and continue
+							matchingTd := void
+						end
+					}
+			
+					self.endSubtypingCheck(result, ctxt)
+				end
+			else
+				//If mtd is already in the known bindings, no need to go further
+				result := true
+			end
+		end
+	end
+	
+	/*
+	 * End of the check in itself
+	 * If the target is a supertype of self, we keep it in ownedBindings
+	 * otherwise, we remove it from ownedBindingswe but keep track of it to prevent from retrying the check
+	 */
+	operation endSubtypingCheck(isSubtypeOf : Boolean, ctxt : MatchingContext) is do
+		if not isSubtypeOf then
+			self.ownedBindings.remove(ctxt.currentSuccessfulBinding)
+			if self.notSuperTypes == void then
+				self.notSuperTypes := Set<ModelTypeDefinition>.new
+			end
+			if self.failedBindings == void then
+				self.failedBindings := Set<FailedBinding>.new
+			end
+			self.notSuperTypes.add(ctxt.currentTgt)
+			self.failedBindings.add(ctxt.currentFailedBinding)
+		end
+	end
+}
+
+aspect class ModelElementTypeDefinition {
+	operation matches(td : ModelElementTypeDefinition, ctxt : MatchingContext) : Boolean is abstract
+}
+
+aspect class ClassDefinition {
+	/**
+	 * Check if self matches td
+	 */
+	method matches(td : ModelElementTypeDefinition, ctxt : MatchingContext) : Boolean is do
+		result := td.isInstanceOf(ClassDefinition)
+		if result then
+			//For self to match td, td must be a ClassDefinition
+			var cd : ClassDefinition init td.asType(ClassDefinition)
+			if self.name == cd.name then
+
+				ctxt.pushCDMatch(self, cd)
+				
+				if self.isAbstract then
+					result := cd.isAbstract
+				end
+				
+				if result then
+					//Each property in cd must have a corresponding property in self
+					var matchingAtt : Property
+					cd.ownedAttribute.each{attToMatch|
+						matchingAtt := ownedAttribute.detect{selfAtt|
+							selfAtt.matches(attToMatch, ctxt)
+						}
+						if matchingAtt.isVoid then
+							result := false
+						else
+							matchingAtt := void
+						end
+					}
+					
+					//Each mandatory property in self must correspond to a property property in cd
+					ctxt.isMandatoryMatch := true
+					var matchedAtt : Property
+					self.ownedAttribute.each{mandatoryAtt|
+						if not mandatoryAtt.lower.isVoid() then
+							if mandatoryAtt.lower > 0 then
+								matchedAtt := cd.ownedAttribute.detect{cdAtt|
+									mandatoryAtt.matches(cdAtt, ctxt)
+								}
+								if matchedAtt.isVoid() then
+									result := false
+								else
+									matchedAtt := void
+								end
+							end
+						end
+					}
+					ctxt.isMandatoryMatch := false
+					
+					//Each type parameter in cd must have a matching type paramter in self
+					from var i : Integer init 0
+					until i == cd.typeParameter.size
+					loop
+						if not self.typeParameter.at(i).matches(cd.typeParameter.at(i), ctxt) then
+							result := false
+						end
+						i := i+1
+					end
+				end
+				
+				ctxt.popCDMatch(result)
+			else
+				result := false
+			end
+		end
+	end
+}
+
+aspect class Property {
+	operation matches(p : Property, ctxt : MatchingContext) : Boolean is do
+		if self.name == p.name then
+			ctxt.pushPropMatch(self, p)
+			
+			if (self.isReadOnly) then
+				result := result and p.isReadOnly
+			end
+			
+			self.initializeDefaultMultiplicities()
+			p.initializeDefaultMultiplicities()
+		
+			//Multiplicities must be the sames
+			result := self.lower == p.lower and self.upper == p.upper 
+			//As isUnique, isOrdered and isComposite attributes
+			result := result and self.isUnique == p.isUnique and self.isComposite == p.isComposite and self.isOrdered == p.isOrdered
+			
+			if result then
+				result := self.type.matchesType(p.type, ctxt)
+				
+				if (p.opposite != void) then
+					if (self.opposite != void) then
+						result := result and self.opposite.asType(Property).name == p.opposite.asType(Property).name
+					else
+						result := false
+					end
+				end
+			end
+			
+			
+			ctxt.popPropMatch(result)
+		else
+			result := false
+		end
+	end
+	
+	operation initializeDefaultMultiplicities() is do
+		if self.lower.isVoid() then
+			self.lower := 0
+		end
+		if self.upper.isVoid() then
+			self.upper := 1
+		end
+	end
+}
+
+aspect class ObjectTypeVariable {
+	method matches(tv : TypeVariable, ctxt : MatchingContext) : Boolean is do
+		result := tv.isInstanceOf(ObjectTypeVariable)
+		if result then
+			var otv : ObjectTypeVariable init tv.asType(ObjectTypeVariable)
+			if not otv.supertype.isVoid() then
+				//If otv.supertype is void, the bound is Object, everyone matches Object
+				result := self.supertype.matchesType(otv.supertype, ctxt)
+			end
+		end
+	end
+}
+
+aspect class ModelTypeVariable {
+	method matches(tv : TypeVariable, ctxt : MatchingContext) : Boolean is do
+		//TODO Does it make sense to have a class parameterized by a ModelType inside a ModelTypeDefinition?
+		//Should we totally prevent classes to be parameterized by ModelTypes? And keep such parameterization only for ModelTransformations and Operations?
+		result := false
+	end
+}
+
+aspect class Enumeration {
+	/**
+	 * Check if self matches td
+	 */
+	method matches(td : ModelElementTypeDefinition, ctxt : MatchingContext) : Boolean from ModelElementTypeDefinition is do
+		result := td.isInstanceOf(Enumeration)
+		if result then
+			var enum : Enumeration init td.asType(Enumeration)
+			if self.name == enum.name then
+				if self.ownedLiteral.size == enum.ownedLiteral.size then
+					var matchingL : EnumerationLiteral
+					enum.ownedLiteral.each{lToMatch|
+						matchingL := self.ownedLiteral.detect{selfL|
+							selfL.matches(lToMatch, ctxt)
+						}
+						if matchingL.isVoid() then
+							result := false
+						else
+							matchingL := void
+						end
+					}
+				end
+			else
+				result := false
+			end
+		end
+	end
+}
+
+aspect class EnumerationLiteral {
+	operation matches(e : EnumerationLiteral, ctxt : MatchingContext) : Boolean is do
+		result := self.name == e.name
+	end
+}
+
+aspect class Type {
+	operation matchesType(t : Type, ctxt : MatchingContext) : Boolean is do
+		result := false
+	end
+}
+
+aspect class Class {
+	method matchesType(t : Type, ctxt : MatchingContext) : Boolean is do
+		if t.isInstanceOf(Class) then
+			var c : Class init t.asType(Class)
+			if ctxt.currentTgt.typeDefinitions.contains(c.typeDefinition) then
+				result := ctxt.currentSrc.typeDefinitions.contains(self.typeDefinition) and self.typeDefinition.matches(c.typeDefinition, ctxt)
+			else
+				result := self.isSubTypeOf(c)
+			end
+		else
+			result := false
+		end
+	end
+}
+
+aspect class TypeVariable {
+	method matchesType(t : Type, ctxt : MatchingContext) : Boolean is do
+		if t.isInstanceOf(TypeVariable) then
+			result := self.matches(t.asType(TypeVariable), ctxt)
+		else
+			result := false
+		end
+	end
+	
+	operation matches(tv : TypeVariable, ctxt : MatchingContext) : Boolean is abstract
+}
+
+aspect class DataType {
+	method matchesType(t : Type, ctxt : MatchingContext) : Boolean is do
+		result := self == t
+	end
+}
+
+aspect class FunctionType {
+	//TODO implement matchesType
+}
+
+aspect class ProductType {
+	//TODO implement matchesType
+}

@@ -31,6 +31,18 @@ aspect class NamedElement
 		buffer.append(name)
 		result := buffer.toString
 	end
+	
+	operation getQualifiedNameWithoutMetamodel() : String is do
+		var buffer : kermeta::utils::StringBuffer init kermeta::utils::StringBuffer.new
+		if (not self.container().isVoid()) then
+			if self.container().isInstanceOf(NamedElement) and not self.container().isInstanceOf(Metamodel) then
+				buffer.append(self.container().asType(NamedElement).getQualifiedName())
+				buffer.append("::")
+			end
+		end
+		buffer.append(name)
+		result := buffer.toString
+	end
 }
 
 aspect class Type
@@ -89,9 +101,8 @@ aspect class Class
 
 aspect class Metamodel
 {
-	method getQualifiedName() : String from TypeDefinition is do
-		
-		result := super()
+	method getQualifiedName() : String is do
+		result := self.name
 	end
 }
 

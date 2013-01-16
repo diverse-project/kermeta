@@ -319,6 +319,11 @@ public class ConstraintItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createCallEnumLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.CONSTRAINT__BODY,
+				 BehaviorFactory.eINSTANCE.createCallModelTransformation()));
 	}
 
 }

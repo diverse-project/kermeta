@@ -1,0 +1,60 @@
+/* $Id:$ 
+ * Creation : December 13, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+package org::kermeta::language::structure;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelCollection_GetTypeDefinitionByName.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetMetamodel_KermetaModelElement_Aspect.kmt"
+
+using kmt::language::helpers::structure
+using kermeta::standard
+
+aspect class Metamodel inherits ModelTypeDefinitionContainer
+{
+	operation resolveModelTypeDefinitions() : Void is do 
+		self.ownedModelTypeDefinitions.each{mtd|
+			mtd.resolveModelTypeDefinitions()
+		}
+	end
+}
+
+aspect class ModelTypeDefinition
+{
+	operation resolveModelTypeDefinitions() : Void is do 
+		var newMTD : ModelTypeDefinition
+		self.ownedBindings.each{b|
+			if b.boundModelTypeDefinition.isInstanceOf(UnresolvedModelTypeDefinition) then
+				newMTD := b.boundModelTypeDefinition.asType(UnresolvedModelTypeDefinition)
+				if not newMTD.isVoid() then
+					b.ownedModelTypeDefinitions.remove(b.boundModelTypeDefinition)
+					b.boundModelTypeDefinition := newMTD
+				end
+			end
+		}
+	end
+}
+
+aspect class UnresolvedModelTypeDefinition
+{
+	attribute correspondingModelTypeDefinition : ModelTypeDefinition
+
+	operation findCorrespondingModelTypeDefinition() : ModelTypeDefinition is do
+		if correspondingModelTypeDefinition.isVoid() then
+			var typeDef : TypeDefinition
+			var typeDefFinder : TypeDefinitionFinder init TypeDefinitionFinder.new
+			typeDef := typeDefFinder.getTypeDefinitionByNameAndUsings(self.name, Set<Using>.new, self.getRootMetamodel(), void)
+			if not typeDef.isVoid() then
+				if typeDef.isInstanceOf(ModelTypeDefinition) then
+					correspondingModelTypeDefinition := typeDef.asType(ModelTypeDefinition)
+				end
+			end
+		end
+		result := correspondingModelTypeDefinition
+	end
+}

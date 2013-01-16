@@ -206,6 +206,51 @@ public interface StructureFactory extends EFactory {
 	FilteredMetamodelReference createFilteredMetamodelReference();
 
 	/**
+	 * Returns a new object of class '<em>Model Type Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Model Type Definition</em>'.
+	 * @generated
+	 */
+	ModelTypeDefinition createModelTypeDefinition();
+
+	/**
+	 * Returns a new object of class '<em>Model Transformation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Model Transformation</em>'.
+	 * @generated
+	 */
+	ModelTransformation createModelTransformation();
+
+	/**
+	 * Returns a new object of class '<em>Unresolved Model Type Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unresolved Model Type Definition</em>'.
+	 * @generated
+	 */
+	UnresolvedModelTypeDefinition createUnresolvedModelTypeDefinition();
+
+	/**
+	 * Returns a new object of class '<em>Unresolved Model Transformation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unresolved Model Transformation</em>'.
+	 * @generated
+	 */
+	UnresolvedModelTransformation createUnresolvedModelTransformation();
+
+	/**
+	 * Returns a new object of class '<em>Model Type Definition Container</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Model Type Definition Container</em>'.
+	 * @generated
+	 */
+	ModelTypeDefinitionContainer createModelTypeDefinitionContainer();
+
+	/**
 	 * Returns a new object of class '<em>Virtual Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -305,13 +350,13 @@ public interface StructureFactory extends EFactory {
 	UnresolvedTypeVariable createUnresolvedTypeVariable();
 
 	/**
-	 * Returns a new object of class '<em>Metamodel Binding</em>'.
+	 * Returns a new object of class '<em>Model Type Definition Binding</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Metamodel Binding</em>'.
+	 * @return a new object of class '<em>Model Type Definition Binding</em>'.
 	 * @generated
 	 */
-	MetamodelBinding createMetamodelBinding();
+	ModelTypeDefinitionBinding createModelTypeDefinitionBinding();
 
 	/**
 	 * Returns a new object of class '<em>Class Definition Binding</em>'.

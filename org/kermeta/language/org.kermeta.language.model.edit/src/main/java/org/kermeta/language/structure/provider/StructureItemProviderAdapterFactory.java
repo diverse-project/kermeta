@@ -741,26 +741,26 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.MetamodelBinding} instances.
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.ModelTypeDefinitionBinding} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected MetamodelBindingItemProvider metamodelBindingItemProvider;
+	protected ModelTypeDefinitionBindingItemProvider modelTypeDefinitionBindingItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.kermeta.language.structure.MetamodelBinding}.
+	 * This creates an adapter for a {@link org.kermeta.language.structure.ModelTypeDefinitionBinding}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createMetamodelBindingAdapter() {
-		if (metamodelBindingItemProvider == null) {
-			metamodelBindingItemProvider = new MetamodelBindingItemProvider(this);
+	public Adapter createModelTypeDefinitionBindingAdapter() {
+		if (modelTypeDefinitionBindingItemProvider == null) {
+			modelTypeDefinitionBindingItemProvider = new ModelTypeDefinitionBindingItemProvider(this);
 		}
 
-		return metamodelBindingItemProvider;
+		return modelTypeDefinitionBindingItemProvider;
 	}
 
 	/**
@@ -1040,6 +1040,121 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.ModelTypeDefinition} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ModelTypeDefinitionItemProvider modelTypeDefinitionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.language.structure.ModelTypeDefinition}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createModelTypeDefinitionAdapter() {
+		if (modelTypeDefinitionItemProvider == null) {
+			modelTypeDefinitionItemProvider = new ModelTypeDefinitionItemProvider(this);
+		}
+
+		return modelTypeDefinitionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.ModelTransformation} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ModelTransformationItemProvider modelTransformationItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.language.structure.ModelTransformation}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createModelTransformationAdapter() {
+		if (modelTransformationItemProvider == null) {
+			modelTransformationItemProvider = new ModelTransformationItemProvider(this);
+		}
+
+		return modelTransformationItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.UnresolvedModelTypeDefinition} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UnresolvedModelTypeDefinitionItemProvider unresolvedModelTypeDefinitionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.language.structure.UnresolvedModelTypeDefinition}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createUnresolvedModelTypeDefinitionAdapter() {
+		if (unresolvedModelTypeDefinitionItemProvider == null) {
+			unresolvedModelTypeDefinitionItemProvider = new UnresolvedModelTypeDefinitionItemProvider(this);
+		}
+
+		return unresolvedModelTypeDefinitionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.UnresolvedModelTransformation} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UnresolvedModelTransformationItemProvider unresolvedModelTransformationItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.language.structure.UnresolvedModelTransformation}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createUnresolvedModelTransformationAdapter() {
+		if (unresolvedModelTransformationItemProvider == null) {
+			unresolvedModelTransformationItemProvider = new UnresolvedModelTransformationItemProvider(this);
+		}
+
+		return unresolvedModelTransformationItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.ModelTypeDefinitionContainer} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ModelTypeDefinitionContainerItemProvider modelTypeDefinitionContainerItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.language.structure.ModelTypeDefinitionContainer}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createModelTypeDefinitionContainerAdapter() {
+		if (modelTypeDefinitionContainerItemProvider == null) {
+			modelTypeDefinitionContainerItemProvider = new ModelTypeDefinitionContainerItemProvider(this);
+		}
+
+		return modelTypeDefinitionContainerItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1167,7 +1282,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 		if (voidTypeItemProvider != null) voidTypeItemProvider.dispose();
 		if (unresolvedInferredTypeItemProvider != null) unresolvedInferredTypeItemProvider.dispose();
 		if (unresolvedTypeVariableItemProvider != null) unresolvedTypeVariableItemProvider.dispose();
-		if (metamodelBindingItemProvider != null) metamodelBindingItemProvider.dispose();
+		if (modelTypeDefinitionBindingItemProvider != null) modelTypeDefinitionBindingItemProvider.dispose();
 		if (classDefinitionBindingItemProvider != null) classDefinitionBindingItemProvider.dispose();
 		if (enumerationBindingItemProvider != null) enumerationBindingItemProvider.dispose();
 		if (propertyBindingItemProvider != null) propertyBindingItemProvider.dispose();
@@ -1180,6 +1295,11 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 		if (operationAdaptationOperatorItemProvider != null) operationAdaptationOperatorItemProvider.dispose();
 		if (modelTypeItemProvider != null) modelTypeItemProvider.dispose();
 		if (filteredMetamodelReferenceItemProvider != null) filteredMetamodelReferenceItemProvider.dispose();
+		if (modelTypeDefinitionItemProvider != null) modelTypeDefinitionItemProvider.dispose();
+		if (modelTransformationItemProvider != null) modelTransformationItemProvider.dispose();
+		if (unresolvedModelTypeDefinitionItemProvider != null) unresolvedModelTypeDefinitionItemProvider.dispose();
+		if (unresolvedModelTransformationItemProvider != null) unresolvedModelTransformationItemProvider.dispose();
+		if (modelTypeDefinitionContainerItemProvider != null) modelTypeDefinitionContainerItemProvider.dispose();
 	}
 
 }

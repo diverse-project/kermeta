@@ -1,0 +1,38 @@
+/* $Id:$ 
+ * Creation : December 19, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+package org::kermeta::language::structure;
+
+require kermeta
+require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetTypeDefinition_Type_Aspect.kmt"
+
+aspect class Metamodel
+{
+	operation addModelTypeVariableToModelTransformations() is do
+		self.ownedModelTypeDefinitions.each{mtd|
+			mtd.ownedTransformations.each{t|
+				t.addModelTypeVariable()
+			}
+		}
+	end
+}
+
+aspect class ModelTransformation
+{
+	//Add a ModelTypeVariable corresponding to the owningModelTypeDefinition
+	operation addModelTypeVariable() : Void is do
+		//If the transformation is not already parameterized by its owningModelTypeDefinition
+		if self.typeParameters.detect{mtv|mtv.supertype.getTypeDefinitionHelper().equals(self.owningModelTypeDefinition)}.isVoid() then
+			var newMTV : ModelTypeVariable init ModelTypeVariable.new
+			var newMT : ModelType init ModelType.new
+			newMT.typeDefinition := self.owningModelTypeDefinition
+			newMTV.supertype := newMTV
+			self.typeParameters.add(newMTV)
+		end
+	end
+}

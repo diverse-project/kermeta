@@ -492,6 +492,11 @@ public class UnresolvedCallItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(BehaviorPackage.Literals.CALL_EXPRESSION__PARAMETERS,
+				 BehaviorFactory.eINSTANCE.createCallModelTransformation()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(BehaviorPackage.Literals.UNRESOLVED_CALL__USINGS,
 				 StructureFactory.eINSTANCE.createUsing()));
 
@@ -614,6 +619,11 @@ public class UnresolvedCallItemProvider
 			(createChildParameter
 				(BehaviorPackage.Literals.UNRESOLVED_CALL__TARGET,
 				 BehaviorFactory.eINSTANCE.createCallEnumLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.UNRESOLVED_CALL__TARGET,
+				 BehaviorFactory.eINSTANCE.createCallModelTransformation()));
 
 		newChildDescriptors.add
 			(createChildParameter

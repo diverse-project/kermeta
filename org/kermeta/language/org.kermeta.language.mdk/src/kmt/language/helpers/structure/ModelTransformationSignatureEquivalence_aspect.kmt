@@ -1,0 +1,22 @@
+/* $Id:$ 
+ * Creation : December 17, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+
+package org::kermeta::language::structure;
+
+require kermeta
+require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+using kermeta::standard
+
+aspect class ModelTransformation
+{
+	//TODO: See if we keep this limited version of signature of if we use one which check the type of parameters
+	operation hasSameSignature(anotherTransformation : ModelTransformation) : Boolean is do 
+		result:= self.name==anotherTransformation.name and self.ownedParameter.size==anotherTransformation.ownedParameter.size
+	end
+}

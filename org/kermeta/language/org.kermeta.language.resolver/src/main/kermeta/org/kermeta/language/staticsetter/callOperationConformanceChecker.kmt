@@ -6,6 +6,10 @@
  *            xdolques
  */
 
+/*
+ * Operations of org::kermeta::language::structure (with statissetter_ prefix) in this file seem to be duplicate of operations in mdk/isSubtypeOf.kmt, adding a new context parameter
+ * TODO: We need to clean up and refactor this in order to prevent from duplicated code
+ */
 
 package org::kermeta::language;
 
@@ -34,7 +38,9 @@ package behavior{
 			//todo : check if type parameters are passed to the calloperation and if so bind them with typeParameters from the staticOperation
 			//if there are typeParamaters and they are not filled by the call then put them in the variables to set
 			if not staticOperation.typeParameter.isEmpty and self.staticTypeVariableBindings.isEmpty then 
-				staticOperation.typeParameter.each{tv|typeVariableToSet.put(tv, tv)}
+				staticOperation.typeParameter.each{tv|
+					typeVariableToSet.put(tv, tv)
+				}
 				
 			end
 			
@@ -42,16 +48,16 @@ package behavior{
 			until i==self.parameters.size() loop
 				
 				if not self.parameters.elementAt(i).staticType.isVoid and not self.parameters.elementAt(i).isInstanceOf(VoidLiteral) then
-						self.parameters.elementAt(i).staticType.realInstanceType.compareToExpectedType(context.createTypeFromMultiplicityElement(staticOperation.ownedParameter.elementAt(i)),typeVariableToSet, context)
+						self.parameters.elementAt(i).staticType.realInstanceType.statissetter_compareToExpectedType(context.createTypeFromMultiplicityElement(staticOperation.ownedParameter.elementAt(i)),typeVariableToSet, context)
 				end
 				i:=i+1
 			end
 			if not staticOperation.typeParameter.isEmpty and self.staticTypeVariableBindings.isEmpty then 
 				staticOperation.typeParameter.each{tv|
-						self.staticTypeVariableBindings.add(typeVariableToSet.getValue(tv))
-						if context.verbose then stdio.writeln("binding found : "+tv.name+" - "+typeVariableToSet.getValue(tv).toString) end
-						//type should already be contained
-						}
+					self.staticTypeVariableBindings.add(typeVariableToSet.getValue(tv))
+					if context.verbose then stdio.writeln("binding found : "+tv.name+" - "+typeVariableToSet.getValue(tv).toString) end
+					//type should already be contained
+				}
 			end
 			
 		end
@@ -68,7 +74,7 @@ package structure{
 	{
 		//if the current type from expectedType is a type variable, then add the binding
 		//if not, it's only important if self is a class or a function type
-		operation compareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> , context : StaticSetterContext) is do
+		operation statissetter_compareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> , context : StaticSetterContext) is do
 			if context.verbose then stdio.writeln("compare a type with something") end
 			
 			if expectedType.isInstanceOf(TypeVariable).andThen{x|typeVariableToSet.containsKey(expectedType.asType(TypeVariable))} then
@@ -80,7 +86,7 @@ package structure{
 		
 		//structural comparison is used when types are supposed to be equals
 		
-		operation structurallyCompareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> , context : StaticSetterContext) is do
+		operation statissetter_structurallyCompareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> , context : StaticSetterContext) is do
 			if context.verbose then stdio.writeln("compare a type with something") end
 			
 			if expectedType.isInstanceOf(TypeVariable).andThen{x|typeVariableToSet.containsKey(expectedType.asType(TypeVariable))} then
@@ -95,7 +101,7 @@ package structure{
 	
 	aspect class Class
 	{
-		method compareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> , context : StaticSetterContext) is do
+		method statissetter_compareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> , context : StaticSetterContext) is do
 			if context.verbose then
 				stdio.writeln("compare a class with something")
 				stdio.writeln("is it a typeVariable ? "+expectedType.isInstanceOf(TypeVariable).toString)
@@ -109,7 +115,7 @@ package structure{
 			else
 				if expectedType.realInstanceType.isInstanceOf(Class) then
 					
-					var comparableClass : Class init self.getComparableClass(expectedType.realInstanceType.asType(Class), context)
+					var comparableClass : Class init self.statissetter_getComparableClass(expectedType.realInstanceType.asType(Class), context)
 					
 					if not comparableClass.isVoid then
 						// they are both of type class with the same number of type parameters, then all type parameters should be checked
@@ -119,7 +125,7 @@ package structure{
 							from var i : Integer init 0
 							until i==comparableClass.typeParamBinding.size
 							loop
-								 comparableClass.typeParamBinding.elementAt(i).type.realInstanceType.structurallyCompareToExpectedType(expectedType.realInstanceType.asType(Class).typeParamBinding.elementAt(i).type
+								 comparableClass.typeParamBinding.elementAt(i).type.realInstanceType.statissetter_structurallyCompareToExpectedType(expectedType.realInstanceType.asType(Class).typeParamBinding.elementAt(i).type
 																								,typeVariableToSet
 																								,context)
 								i:=i+1
@@ -131,7 +137,7 @@ package structure{
 			
 		end
 		
-		method structurallyCompareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> , context : StaticSetterContext) is do
+		method statissetter_structurallyCompareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> , context : StaticSetterContext) is do
 			
 			if context.verbose then 
 				stdio.writeln("compare a class with something")
@@ -152,7 +158,7 @@ package structure{
 						from var i : Integer init 0
 						until i==self.typeParamBinding.size
 						loop
-							 self.typeParamBinding.elementAt(i).type.realInstanceType.structurallyCompareToExpectedType(expectedType.realInstanceType.asType(Class).typeParamBinding.elementAt(i).type
+							 self.typeParamBinding.elementAt(i).type.realInstanceType.statissetter_structurallyCompareToExpectedType(expectedType.realInstanceType.asType(Class).typeParamBinding.elementAt(i).type
 																							,typeVariableToSet
 																							,context)
 							i:=i+1
@@ -169,7 +175,7 @@ package structure{
 		/**
 			returns the sequence of typedefinition separing self to typeToSearch in the Type hierarchy
 		*/
-		operation findPathToType(typeToSearch : ClassDefinition, typeDefAlreadyVisited : Sequence<ClassDefinition>) : Sequence<Class> is do
+		operation statissetter_findPathToType(typeToSearch : ClassDefinition, typeDefAlreadyVisited : Sequence<ClassDefinition>) : Sequence<Class> is do
 			typeDefAlreadyVisited.add(self.typeDefinition.asType(ClassDefinition))
 			result:=void
 			if typeToSearch==self.typeDefinition then
@@ -178,7 +184,7 @@ package structure{
 			else
 				self.typeDefinition.superType.detect{t|
 					if not typeDefAlreadyVisited.contains(t.realInstanceType.asType(Class).typeDefinition.asType(ClassDefinition)) then
-						result:= t.realInstanceType.asType(Class).findPathToType(typeToSearch,typeDefAlreadyVisited)
+						result:= t.realInstanceType.asType(Class).statissetter_findPathToType(typeToSearch,typeDefAlreadyVisited)
 						if not result.isVoid then
 							result.addAt(0, self)
 						end
@@ -193,7 +199,7 @@ package structure{
 			returns a clone of the current class but with the type of the different bindings replaced according to the parameter bindings
 		*/
 		
-		operation cloneWithBindings ( bindings : OrderedSet<TypeVariableBinding>) : Class is do
+		operation statissetter_cloneWithBindings ( bindings : OrderedSet<TypeVariableBinding>) : Class is do
 	
 			result:= Class.new
 			result.typeDefinition:=self.typeDefinition
@@ -207,11 +213,11 @@ package structure{
 					end
 				else 
 					if tvb.type.isInstanceOf(Class) then
-						newTVB.type:=tvb.type.asType(Class).cloneWithBindings(bindings)
+						newTVB.type:=tvb.type.asType(Class).statissetter_cloneWithBindings(bindings)
 					end
 				end
 				result.typeParamBinding.add(newTVB)
-				}
+			}
 
 		end
 		
@@ -221,9 +227,9 @@ package structure{
 		/**
 			return a class that is structurally comparable to typeExpected
 		*/
-		operation getComparableClass(typeExpected : Class, context : StaticSetterContext ) : Class is do 
+		operation statissetter_getComparableClass(typeExpected : Class, context : StaticSetterContext ) : Class is do 
 			var inheritancePath : Sequence<Class>
-			inheritancePath:=findPathToType(typeExpected.typeDefinition.asType(ClassDefinition), Sequence<ClassDefinition>.new)
+			inheritancePath:=statissetter_findPathToType(typeExpected.typeDefinition.asType(ClassDefinition), Sequence<ClassDefinition>.new)
 			result:=void
 			if inheritancePath.isVoid then
 				
@@ -236,7 +242,7 @@ package structure{
 				until i == inheritancePath.size - 1
 				loop
 					var superSuperType : Class 
-					superSuperType:=inheritancePath.elementAt(i+1).cloneWithBindings(selfSuperType.typeParamBinding)
+					superSuperType:=inheritancePath.elementAt(i+1).statissetter_cloneWithBindings(selfSuperType.typeParamBinding)
 					
 					selfSuperType:=superSuperType
 					i:=i+1
@@ -249,26 +255,26 @@ package structure{
 	
 	aspect class FunctionType
 	{
-		method compareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> , context : StaticSetterContext) is do
+		method statissetter_compareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> , context : StaticSetterContext) is do
 			if context.verbose then stdio.writeln("compare a FunctionType with something") end
 			if expectedType.isInstanceOf(TypeVariable).andThen{x|typeVariableToSet.containsKey(expectedType.asType(TypeVariable))} then
 				typeVariableToSet.put(expectedType.asType(TypeVariable), self)
 			else
 				//only the right part may be used to infer a typeParameter
 				if expectedType.realInstanceType.isInstanceOf(FunctionType) and not self.right.isVoid and not expectedType.realInstanceType.asType(FunctionType).right.isVoid then
-					self.right.realInstanceType.compareToExpectedType(expectedType.realInstanceType.asType(FunctionType).right, typeVariableToSet, context)
+					self.right.realInstanceType.statissetter_compareToExpectedType(expectedType.realInstanceType.asType(FunctionType).right, typeVariableToSet, context)
 				end
 			end	
 		end
 		
-		method structurallyCompareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> , context : StaticSetterContext) is do
+		method statissetter_structurallyCompareToExpectedType(expectedType : Type,  typeVariableToSet : Hashtable<TypeVariable, Type> , context : StaticSetterContext) is do
 			if context.verbose then stdio.writeln("compare a FunctionType with something") end
 			if expectedType.isInstanceOf(TypeVariable).andThen{x|typeVariableToSet.containsKey(expectedType.asType(TypeVariable))} then
 				typeVariableToSet.put(expectedType.asType(TypeVariable), self)
 			else
 				//only the right part may be used to infer a typeParameter
 				if expectedType.realInstanceType.isInstanceOf(FunctionType) and not self.right.isVoid and not expectedType.realInstanceType.asType(FunctionType).right.isVoid then
-					self.right.realInstanceType.structurallyCompareToExpectedType(expectedType.realInstanceType.asType(FunctionType).right, typeVariableToSet, context)
+					self.right.realInstanceType.statissetter_structurallyCompareToExpectedType(expectedType.realInstanceType.asType(FunctionType).right, typeVariableToSet, context)
 				end
 			end	
 		end

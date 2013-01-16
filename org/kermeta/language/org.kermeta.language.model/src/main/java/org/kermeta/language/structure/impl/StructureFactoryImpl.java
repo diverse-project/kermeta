@@ -26,10 +26,13 @@ import org.kermeta.language.structure.EnumerationLiteral;
 import org.kermeta.language.structure.FilteredMetamodelReference;
 import org.kermeta.language.structure.FunctionType;
 import org.kermeta.language.structure.Metamodel;
-import org.kermeta.language.structure.MetamodelBinding;
 import org.kermeta.language.structure.Model;
 import org.kermeta.language.structure.ModelElementTypeDefinitionContainer;
+import org.kermeta.language.structure.ModelTransformation;
 import org.kermeta.language.structure.ModelType;
+import org.kermeta.language.structure.ModelTypeDefinition;
+import org.kermeta.language.structure.ModelTypeDefinitionBinding;
+import org.kermeta.language.structure.ModelTypeDefinitionContainer;
 import org.kermeta.language.structure.ModelTypeVariable;
 import org.kermeta.language.structure.MultiplicityElement;
 import org.kermeta.language.structure.ObjectTypeVariable;
@@ -49,6 +52,8 @@ import org.kermeta.language.structure.TypeDefinition;
 import org.kermeta.language.structure.TypeVariableBinding;
 import org.kermeta.language.structure.UnresolvedAdaptationOperator;
 import org.kermeta.language.structure.UnresolvedInferredType;
+import org.kermeta.language.structure.UnresolvedModelTransformation;
+import org.kermeta.language.structure.UnresolvedModelTypeDefinition;
 import org.kermeta.language.structure.UnresolvedOperation;
 import org.kermeta.language.structure.UnresolvedProperty;
 import org.kermeta.language.structure.UnresolvedType;
@@ -131,7 +136,7 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 			case StructurePackage.VOID_TYPE: return createVoidType();
 			case StructurePackage.UNRESOLVED_INFERRED_TYPE: return createUnresolvedInferredType();
 			case StructurePackage.UNRESOLVED_TYPE_VARIABLE: return createUnresolvedTypeVariable();
-			case StructurePackage.METAMODEL_BINDING: return createMetamodelBinding();
+			case StructurePackage.MODEL_TYPE_DEFINITION_BINDING: return createModelTypeDefinitionBinding();
 			case StructurePackage.CLASS_DEFINITION_BINDING: return createClassDefinitionBinding();
 			case StructurePackage.ENUMERATION_BINDING: return createEnumerationBinding();
 			case StructurePackage.PROPERTY_BINDING: return createPropertyBinding();
@@ -144,6 +149,11 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 			case StructurePackage.OPERATION_ADAPTATION_OPERATOR: return createOperationAdaptationOperator();
 			case StructurePackage.MODEL_TYPE: return createModelType();
 			case StructurePackage.FILTERED_METAMODEL_REFERENCE: return createFilteredMetamodelReference();
+			case StructurePackage.MODEL_TYPE_DEFINITION: return createModelTypeDefinition();
+			case StructurePackage.MODEL_TRANSFORMATION: return createModelTransformation();
+			case StructurePackage.UNRESOLVED_MODEL_TYPE_DEFINITION: return createUnresolvedModelTypeDefinition();
+			case StructurePackage.UNRESOLVED_MODEL_TRANSFORMATION: return createUnresolvedModelTransformation();
+			case StructurePackage.MODEL_TYPE_DEFINITION_CONTAINER: return createModelTypeDefinitionContainer();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -404,6 +414,56 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ModelTypeDefinition createModelTypeDefinition() {
+		ModelTypeDefinitionImpl modelTypeDefinition = new ModelTypeDefinitionImpl();
+		return modelTypeDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ModelTransformation createModelTransformation() {
+		ModelTransformationImpl modelTransformation = new ModelTransformationImpl();
+		return modelTransformation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UnresolvedModelTypeDefinition createUnresolvedModelTypeDefinition() {
+		UnresolvedModelTypeDefinitionImpl unresolvedModelTypeDefinition = new UnresolvedModelTypeDefinitionImpl();
+		return unresolvedModelTypeDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UnresolvedModelTransformation createUnresolvedModelTransformation() {
+		UnresolvedModelTransformationImpl unresolvedModelTransformation = new UnresolvedModelTransformationImpl();
+		return unresolvedModelTransformation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ModelTypeDefinitionContainer createModelTypeDefinitionContainer() {
+		ModelTypeDefinitionContainerImpl modelTypeDefinitionContainer = new ModelTypeDefinitionContainerImpl();
+		return modelTypeDefinitionContainer;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public VirtualType createVirtualType() {
 		VirtualTypeImpl virtualType = new VirtualTypeImpl();
 		return virtualType;
@@ -514,9 +574,9 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MetamodelBinding createMetamodelBinding() {
-		MetamodelBindingImpl metamodelBinding = new MetamodelBindingImpl();
-		return metamodelBinding;
+	public ModelTypeDefinitionBinding createModelTypeDefinitionBinding() {
+		ModelTypeDefinitionBindingImpl modelTypeDefinitionBinding = new ModelTypeDefinitionBindingImpl();
+		return modelTypeDefinitionBinding;
 	}
 
 	/**

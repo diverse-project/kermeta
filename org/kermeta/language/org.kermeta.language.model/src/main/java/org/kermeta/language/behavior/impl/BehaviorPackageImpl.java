@@ -20,6 +20,7 @@ import org.kermeta.language.behavior.BooleanLiteral;
 import org.kermeta.language.behavior.CallEnumLiteral;
 import org.kermeta.language.behavior.CallExpression;
 import org.kermeta.language.behavior.CallFeature;
+import org.kermeta.language.behavior.CallModelTransformation;
 import org.kermeta.language.behavior.CallOperation;
 import org.kermeta.language.behavior.CallProperty;
 import org.kermeta.language.behavior.CallResult;
@@ -264,6 +265,13 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 	 * @generated
 	 */
 	private EClass callEnumLiteralEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass callModelTransformationEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1020,6 +1028,24 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getCallModelTransformation() {
+		return callModelTransformationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCallModelTransformation_StaticTransformation() {
+		return (EReference)callModelTransformationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public BehaviorFactory getBehaviorFactory() {
 		return (BehaviorFactory)getEFactoryInstance();
 	}
@@ -1148,6 +1174,9 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 
 		callEnumLiteralEClass = createEClass(CALL_ENUM_LITERAL);
 		createEReference(callEnumLiteralEClass, CALL_ENUM_LITERAL__STATIC_ENUM_LITERAL);
+
+		callModelTransformationEClass = createEClass(CALL_MODEL_TRANSFORMATION);
+		createEReference(callModelTransformationEClass, CALL_MODEL_TRANSFORMATION__STATIC_TRANSFORMATION);
 	}
 
 	/**
@@ -1214,6 +1243,7 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		callOperationEClass.getESuperTypes().add(this.getCallFeature());
 		callPropertyEClass.getESuperTypes().add(this.getCallFeature());
 		callEnumLiteralEClass.getESuperTypes().add(this.getCallExpression());
+		callModelTransformationEClass.getESuperTypes().add(this.getCallFeature());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(assignmentEClass, Assignment.class, "Assignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1321,6 +1351,9 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 
 		initEClass(callEnumLiteralEClass, CallEnumLiteral.class, "CallEnumLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCallEnumLiteral_StaticEnumLiteral(), theStructurePackage.getEnumerationLiteral(), null, "staticEnumLiteral", null, 0, 1, CallEnumLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(callModelTransformationEClass, CallModelTransformation.class, "CallModelTransformation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCallModelTransformation_StaticTransformation(), theStructurePackage.getModelTransformation(), null, "staticTransformation", null, 0, 1, CallModelTransformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

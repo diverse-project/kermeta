@@ -226,6 +226,16 @@ public class UseAdaptationOperatorItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.USE_ADAPTATION_OPERATOR__OWNED_UNRESOLVED,
+				 StructureFactory.eINSTANCE.createUnresolvedModelTypeDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.USE_ADAPTATION_OPERATOR__OWNED_UNRESOLVED,
+				 StructureFactory.eINSTANCE.createUnresolvedModelTransformation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.USE_ADAPTATION_OPERATOR__OWNED_UNRESOLVED,
 				 BehaviorFactory.eINSTANCE.createUnresolvedCall()));
 	}
 

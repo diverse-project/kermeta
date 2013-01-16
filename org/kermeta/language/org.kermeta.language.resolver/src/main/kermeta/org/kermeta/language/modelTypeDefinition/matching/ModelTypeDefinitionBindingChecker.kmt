@@ -1,0 +1,49 @@
+/* $Id:$ 
+ * Creation : December 13, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+package org::kermeta::language::structure;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/modelTypeDefinition/matching/Matching_Helpers.kmt"
+require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/modelTypeDefinition/matching/Matching_Aspect.kmt"
+
+using org::kermeta::language::resolver::matching
+
+aspect class Metamodel
+{
+	operation checkModelTypeDefinitionBindings(ctxt : MatchingContext) : Void is do 
+		self.ownedModelTypeDefinitions.each{mtd|
+			mtd.checkModelTypeDefinitionBindings(ctxt)
+		}
+	end
+}
+
+aspect class ModelTypeDefinition
+{
+	operation checkModelTypeDefinitionBindings(ctxt : MatchingContext) : Void is do 
+		self.ownedBindings.each{b|
+			if b.needToBeCheck then
+				self.isTotalIsomorphicSubtypeOf(b, ctxt)
+				b.toCheck := false
+			end
+		}
+	end
+}
+
+aspect class ModelTypeDefinitionBinding
+{
+	attribute toCheck : Boolean
+	
+	operation needToBeCheck() : Boolean is do
+		//If there is no lower level bindings contained by self, it have not been checked yet
+		if toCheck.isVoid() then
+			toCheck := (self.ownedClassDefinitionBindings.isVoid() or self.ownedClassDefinitionBindings.isEmpty()) and
+				(self.ownedEnumerationBindings.isVoid() or self.ownedEnumerationBindings.isEmpty())
+		end
+		result := toCheck
+	end
+}

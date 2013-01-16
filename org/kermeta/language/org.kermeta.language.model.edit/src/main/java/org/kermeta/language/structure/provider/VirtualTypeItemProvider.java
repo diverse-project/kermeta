@@ -60,26 +60,26 @@ public class VirtualTypeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addClassDefinitionPropertyDescriptor(object);
-			addMetamodelVariablePropertyDescriptor(object);
+			addTypeDefinitionPropertyDescriptor(object);
+			addModelTypeVariablePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Class Definition feature.
+	 * This adds a property descriptor for the Type Definition feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addClassDefinitionPropertyDescriptor(Object object) {
+	protected void addTypeDefinitionPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_VirtualType_classDefinition_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_VirtualType_classDefinition_feature", "_UI_VirtualType_type"),
-				 StructurePackage.Literals.VIRTUAL_TYPE__CLASS_DEFINITION,
+				 getString("_UI_VirtualType_typeDefinition_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_VirtualType_typeDefinition_feature", "_UI_VirtualType_type"),
+				 StructurePackage.Literals.VIRTUAL_TYPE__TYPE_DEFINITION,
 				 true,
 				 false,
 				 true,
@@ -89,19 +89,19 @@ public class VirtualTypeItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Metamodel Variable feature.
+	 * This adds a property descriptor for the Model Type Variable feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addMetamodelVariablePropertyDescriptor(Object object) {
+	protected void addModelTypeVariablePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_VirtualType_metamodelVariable_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_VirtualType_metamodelVariable_feature", "_UI_VirtualType_type"),
-				 StructurePackage.Literals.VIRTUAL_TYPE__METAMODEL_VARIABLE,
+				 getString("_UI_VirtualType_modelTypeVariable_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_VirtualType_modelTypeVariable_feature", "_UI_VirtualType_type"),
+				 StructurePackage.Literals.VIRTUAL_TYPE__MODEL_TYPE_VARIABLE,
 				 true,
 				 false,
 				 true,

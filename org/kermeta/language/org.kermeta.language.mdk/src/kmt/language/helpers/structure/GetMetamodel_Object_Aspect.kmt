@@ -13,7 +13,6 @@ require "ModelingUnitHelperV1_structure_aspect.kmt"
 require "GetRootContainer_object_aspect.kmt"
 
 using kermeta::standard
-using kermeta::language::structure
 
 aspect class Object
 {

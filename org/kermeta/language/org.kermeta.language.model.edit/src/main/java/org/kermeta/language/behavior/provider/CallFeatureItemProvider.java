@@ -295,6 +295,11 @@ public class CallFeatureItemProvider
 			(createChildParameter
 				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createCallEnumLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
+				 BehaviorFactory.eINSTANCE.createCallModelTransformation()));
 	}
 
 	/**

@@ -31,6 +31,8 @@ public class ModelingUnit {
 	
 	protected List<Metamodel> metamodels = null;
 	
+	protected Metamodel currentMetamodel = null;
+	
 	protected String name = "";
 	
 	public ModelingUnit(){
@@ -108,6 +110,17 @@ public class ModelingUnit {
 		}
 	}
 	
+	public void setCurrentMetamodelByName(String name) {
+		for (Metamodel mm : metamodels) {
+			if (mm.getName().equals(name)) {
+				currentMetamodel = mm;
+			}
+		}
+	}
+	
+	public Metamodel getCurrentMetamodel() {
+		return currentMetamodel;
+	}
 
 	/*
 	 * Returns all the direct and indirect contents of all the modeling unit's metamodels

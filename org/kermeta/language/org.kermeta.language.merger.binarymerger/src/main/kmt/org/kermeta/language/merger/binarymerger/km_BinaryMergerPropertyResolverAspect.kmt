@@ -221,6 +221,13 @@ package kermeta {
 				end
 			}
 
+			aspect class CallModelTransformation inherits org::kermeta::language::behavior::CallFeature {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::behavior::CallFeature is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
 		}
 
 
@@ -463,7 +470,7 @@ package kermeta {
 			}
 
 
-			aspect class Metamodel inherits org::kermeta::language::structure::KermetaModelElement, org::kermeta::language::structure::NamedElement, org::kermeta::language::structure::TypeDefinition {
+			aspect class Metamodel inherits org::kermeta::language::structure::KermetaModelElement, org::kermeta::language::structure::NamedElement, org::kermeta::language::structure::ModelTypeDefinitionContainer {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
@@ -603,7 +610,7 @@ package kermeta {
 				end
 			}
 
-			aspect class MetamodelBinding inherits org::kermeta::language::structure::KermetaModelElement {
+			aspect class ModelTypeDefinitionBinding inherits org::kermeta::language::structure::KermetaModelElement, org::kermeta::language::structure::ModelTypeDefinitionContainer {
 				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
 					
 					result := super( propertyName, primaryValue, aspectValue)
@@ -701,6 +708,46 @@ package kermeta {
 				end
 			}
 
+			aspect class ModelTypeDefinition inherits org::kermeta::language::structure::TypeDefinition {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::TypeDefinition is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class ModelTransformation inherits org::kermeta::language::structure::MultiplicityElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::MultiplicityElement is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class UnresolvedModelTypeDefinition inherits org::kermeta::language::structure::ModelTypeDefinition, org::kermeta::language::structure::UnresolvedReference {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::ModelTypeDefinition is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class UnresolvedModelTransformation inherits org::kermeta::language::structure::ModelTransformation, org::kermeta::language::structure::UnresolvedReference {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::ModelTransformation is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
+			aspect class ModelTypeDefinitionContainer inherits org::kermeta::language::structure::KermetaModelElement {
+				method selectUnaryProperty( propertyName: String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object from org::kermeta::language::structure::KermetaModelElement is do
+					
+					result := super( propertyName, primaryValue, aspectValue)
+				end
+			}
+
 		}
+
+
 	}
+
+
 }
+

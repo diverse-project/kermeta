@@ -54,20 +54,32 @@ package behavior {
 		/**in a CallFeature the list of bindings is obtained by getting all the bindings from the target*/
 		operation findBindings(context : StaticSetterContext,type : Type, bindings : kermeta::standard::Sequence<TypeVariableBinding>) is do
 			if not target.isVoid then
+			
+				if target.isInstanceOf(CallTypeLiteral) then					
+					if target.asType(CallTypeLiteral).typeref.type.isInstanceOf(Class) then
+						bindings.addAll(target.asType(CallTypeLiteral).typeref.type.asType(Class).getAllTypeVariableBindings())
+					end
+					if target.asType(CallTypeLiteral).typeref.type.isInstanceOf(VirtualType) then
+						bindings.addAll(target.asType(CallTypeLiteral).typeref.type.asType(VirtualType).getAllTypeVariableBindings())
+					end
+				end
 				if target.staticType.realInstanceType.isInstanceOf(Class) then
 					bindings.addAll(target.staticType.realInstanceType.asType(Class).getAllTypeVariableBindings())
+				end
+				if target.staticType.realInstanceType.isInstanceOf(VirtualType) then
+					bindings.addAll(target.staticType.realInstanceType.asType(VirtualType).getAllTypeVariableBindings())
 				end
 			end
 			if (context.verbose) then 
 				stdio.write("bindings.size : "+bindings.size.toString+" content = (")
 				bindings.each{b | 
-					stdio.write("["+b.type.toString+","+b.variable.prettyPrint+"], "
-				)}
+					stdio.write("["+b.type.toString+","+b.variable.prettyPrint+"], ")
+				}
 				stdio.writeln(") on type " +type.toString)
 			end
 		end
 	
-	/**
+		/**
 		 * add this type to the Expression as staticType, also add to its containedType if it is not already contained
 		 */
 		method setInferedStaticType(context : StaticSetterContext,type : Type) : Type from Expression is do
@@ -102,7 +114,7 @@ package behavior {
 			from var i : Integer init 0
 			until i==self.staticTypeVariableBindings.size loop
 				
-				if context.verbose then stdio.writeln("add one binding for variable : "+self.staticOperation.typeParameter.elementAt(i).name) end
+				if context.verbose then stdio.writeln("add one binding for variable: "+self.staticOperation.typeParameter.elementAt(i).name) end
 				var tvb : TypeVariableBinding init TypeVariableBinding.new
 				tvb.variable:=self.staticOperation.typeParameter.elementAt(i)
 				tvb.type:=self.staticTypeVariableBindings.elementAt(i)
@@ -134,5 +146,52 @@ package behavior {
 			}
 		end
 		
+	}
+}
+
+package structure {
+
+	aspect class VirtualType
+	{
+	
+		operation getAllTypeVariableBindings() : Sequence<TypeVariableBinding> is do
+			result := Sequence<TypeVariableBinding>.new
+			
+			result.addAll(typeParamBinding)
+			
+			var localBindings : Hashtable<TypeVariable,Type> init Hashtable<TypeVariable,Type>.new
+			
+			result.each{ b|
+				localBindings.put(b.variable, b.type)
+			}
+			
+			//get All the inherited bindings
+			var inheritedBindings : Sequence<TypeVariableBinding> init Sequence<TypeVariableBinding>.new
+			typeDefinition.superType.each{ c|
+				if c.isInstanceOf(Class) then
+					if c.asType(Class).typeDefinition !=typeDefinition then
+						inheritedBindings.addAll(c.asType(Class).getAllTypeVariableBindings())	
+					end
+				end
+			}
+			
+			//replace the variables in inherited Bindings according to local bindings
+			inheritedBindings.each{ b |
+				if b.type.isInstanceOf(TypeVariable) then
+					if localBindings.containsKey(b.type.asType(TypeVariable)) then
+						var tvb : TypeVariableBinding init TypeVariableBinding.new
+						tvb.variable:=b.variable
+						tvb.type:=localBindings.getValue(b.type.asType(TypeVariable))
+						result.add(tvb)
+					end
+				else
+					//if the variable is binded with a formal type, then add it directly to the bindings
+					var tvb : TypeVariableBinding init TypeVariableBinding.new
+					tvb.variable:=b.variable
+					tvb.type:=b.type
+					result.add(tvb)
+				end
+			}
+		end
 	}
 }

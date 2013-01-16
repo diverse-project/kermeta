@@ -1,0 +1,52 @@
+/* $Id:$ 
+ * Creation : April 26, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+package org::kermeta::language::structure;
+
+require kermeta
+require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/resource/org.kermeta.language.mdk/src/kmt/language/helpers/eachOwnedElement_kermeta_aspect.kmt"
+require "platform:/resource/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
+
+aspect class KermetaModelElement
+{
+	operation addDefaultInheritance() : Void is do 
+		self.eachOwnedElement{e|
+			if (e.isInstanceOf(KermetaModelElement)) then
+				e.asType(KermetaModelElement).addDefaultInheritance()
+			end
+			//K1ToScalaCompiler workaround
+			e
+		}
+	end
+}
+
+aspect class ModelTypeDefinition
+{
+	method addDefaultInheritance() : Void is do
+		super()
+		if self.superType.isEmpty() and not (self.getQualifiedName() == "kermeta_standard^kermeta::standard::Object") then
+			var parent : UnresolvedType init UnresolvedType.new
+			parent.typeIdentifier := "kermeta_standard^kermeta::standard::Object"
+			self.superType.add(parent)
+			self.containedType.add(parent)
+		end
+	end
+}
+
+aspect class ClassDefinition
+{
+	method addDefaultInheritance() : Void is do
+		super()
+		if self.superType.isEmpty() and not (self.getQualifiedName() == "kermeta_standard^kermeta::standard::Object") then
+			var parent : UnresolvedType init UnresolvedType.new
+			parent.typeIdentifier := "kermeta_standard^kermeta::standard::Object"
+			self.superType.add(parent)
+			self.containedType.add(parent)
+		end
+	end
+}

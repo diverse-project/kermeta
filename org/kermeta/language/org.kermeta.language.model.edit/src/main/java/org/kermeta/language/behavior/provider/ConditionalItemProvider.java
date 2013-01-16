@@ -271,6 +271,11 @@ public class ConditionalItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(BehaviorPackage.Literals.CONDITIONAL__THEN_BODY,
+				 BehaviorFactory.eINSTANCE.createCallModelTransformation()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(BehaviorPackage.Literals.CONDITIONAL__ELSE_BODY,
 				 BehaviorFactory.eINSTANCE.createAssignment()));
 
@@ -391,6 +396,11 @@ public class ConditionalItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(BehaviorPackage.Literals.CONDITIONAL__ELSE_BODY,
+				 BehaviorFactory.eINSTANCE.createCallModelTransformation()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(BehaviorPackage.Literals.CONDITIONAL__CONDITION,
 				 BehaviorFactory.eINSTANCE.createAssignment()));
 
@@ -508,6 +518,11 @@ public class ConditionalItemProvider
 			(createChildParameter
 				(BehaviorPackage.Literals.CONDITIONAL__CONDITION,
 				 BehaviorFactory.eINSTANCE.createCallEnumLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.CONDITIONAL__CONDITION,
+				 BehaviorFactory.eINSTANCE.createCallModelTransformation()));
 	}
 
 	/**

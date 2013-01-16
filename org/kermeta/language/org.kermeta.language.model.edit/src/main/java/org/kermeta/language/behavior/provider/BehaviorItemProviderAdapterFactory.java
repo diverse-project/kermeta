@@ -695,6 +695,29 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.kermeta.language.behavior.CallModelTransformation} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CallModelTransformationItemProvider callModelTransformationItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.kermeta.language.behavior.CallModelTransformation}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createCallModelTransformationAdapter() {
+		if (callModelTransformationItemProvider == null) {
+			callModelTransformationItemProvider = new CallModelTransformationItemProvider(this);
+		}
+
+		return callModelTransformationItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -820,6 +843,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 		if (callOperationItemProvider != null) callOperationItemProvider.dispose();
 		if (callPropertyItemProvider != null) callPropertyItemProvider.dispose();
 		if (callEnumLiteralItemProvider != null) callEnumLiteralItemProvider.dispose();
+		if (callModelTransformationItemProvider != null) callModelTransformationItemProvider.dispose();
 	}
 
 }

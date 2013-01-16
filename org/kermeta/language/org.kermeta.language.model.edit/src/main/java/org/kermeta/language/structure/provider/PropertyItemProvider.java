@@ -475,6 +475,11 @@ public class PropertyItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createCallModelTransformation()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
 				 BehaviorFactory.eINSTANCE.createAssignment()));
 
@@ -592,6 +597,11 @@ public class PropertyItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
 				 BehaviorFactory.eINSTANCE.createCallEnumLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createCallModelTransformation()));
 
 		newChildDescriptors.add
 			(createChildParameter

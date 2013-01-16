@@ -2221,31 +2221,13 @@ public interface StructurePackage extends EPackage {
 	int METAMODEL__NAME = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Model Type Definitions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int METAMODEL__CONTAINED_TYPE = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Super Type</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int METAMODEL__SUPER_TYPE = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int METAMODEL__IS_ASPECT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 3;
+	int METAMODEL__OWNED_MODEL_TYPE_DEFINITIONS = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Packages</b></em>' containment reference list.
@@ -2254,7 +2236,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int METAMODEL__PACKAGES = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 4;
+	int METAMODEL__PACKAGES = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Uri</b></em>' attribute.
@@ -2263,7 +2245,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int METAMODEL__URI = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 5;
+	int METAMODEL__URI = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Referenced Metamodels</b></em>' containment reference list.
@@ -2272,7 +2254,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int METAMODEL__REFERENCED_METAMODELS = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 6;
+	int METAMODEL__REFERENCED_METAMODELS = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Is Resolved</b></em>' attribute.
@@ -2281,7 +2263,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int METAMODEL__IS_RESOLVED = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 7;
+	int METAMODEL__IS_RESOLVED = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Metamodel</em>' class.
@@ -2290,7 +2272,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int METAMODEL_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 8;
+	int METAMODEL_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>KTag</b></em>' reference list.
@@ -2610,22 +2592,22 @@ public interface StructurePackage extends EPackage {
 	int VIRTUAL_TYPE__SUPERTYPE = OBJECT_TYPE_VARIABLE__SUPERTYPE;
 
 	/**
-	 * The feature id for the '<em><b>Class Definition</b></em>' reference.
+	 * The feature id for the '<em><b>Type Definition</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VIRTUAL_TYPE__CLASS_DEFINITION = OBJECT_TYPE_VARIABLE_FEATURE_COUNT + 0;
+	int VIRTUAL_TYPE__TYPE_DEFINITION = OBJECT_TYPE_VARIABLE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Metamodel Variable</b></em>' reference.
+	 * The feature id for the '<em><b>Model Type Variable</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VIRTUAL_TYPE__METAMODEL_VARIABLE = OBJECT_TYPE_VARIABLE_FEATURE_COUNT + 1;
+	int VIRTUAL_TYPE__MODEL_TYPE_VARIABLE = OBJECT_TYPE_VARIABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Type Param Binding</b></em>' containment reference list.
@@ -3306,14 +3288,14 @@ public interface StructurePackage extends EPackage {
 	int UNRESOLVED_TYPE_VARIABLE_FEATURE_COUNT = UNRESOLVED_REFERENCE_FEATURE_COUNT + 4;
 
 	/**
-	 * The meta object id for the '{@link org.kermeta.language.structure.impl.MetamodelBindingImpl <em>Metamodel Binding</em>}' class.
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ModelTypeDefinitionBindingImpl <em>Model Type Definition Binding</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.kermeta.language.structure.impl.MetamodelBindingImpl
-	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getMetamodelBinding()
+	 * @see org.kermeta.language.structure.impl.ModelTypeDefinitionBindingImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getModelTypeDefinitionBinding()
 	 * @generated
 	 */
-	int METAMODEL_BINDING = 41;
+	int MODEL_TYPE_DEFINITION_BINDING = 41;
 
 	/**
 	 * The feature id for the '<em><b>KTag</b></em>' reference list.
@@ -3322,7 +3304,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int METAMODEL_BINDING__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
+	int MODEL_TYPE_DEFINITION_BINDING__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
 
 	/**
 	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
@@ -3331,16 +3313,16 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int METAMODEL_BINDING__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
+	int MODEL_TYPE_DEFINITION_BINDING__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
 
 	/**
-	 * The feature id for the '<em><b>Bound Metamodel</b></em>' reference.
+	 * The feature id for the '<em><b>Owned Model Type Definitions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int METAMODEL_BINDING__BOUND_METAMODEL = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
+	int MODEL_TYPE_DEFINITION_BINDING__OWNED_MODEL_TYPE_DEFINITIONS = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owned Class Definition Bindings</b></em>' containment reference list.
@@ -3349,7 +3331,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int METAMODEL_BINDING__OWNED_CLASS_DEFINITION_BINDINGS = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
+	int MODEL_TYPE_DEFINITION_BINDING__OWNED_CLASS_DEFINITION_BINDINGS = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Used Adaptation Operators</b></em>' containment reference list.
@@ -3358,7 +3340,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int METAMODEL_BINDING__USED_ADAPTATION_OPERATORS = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 2;
+	int MODEL_TYPE_DEFINITION_BINDING__USED_ADAPTATION_OPERATORS = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owned Enumeration Bindings</b></em>' containment reference list.
@@ -3367,16 +3349,34 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int METAMODEL_BINDING__OWNED_ENUMERATION_BINDINGS = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 3;
+	int MODEL_TYPE_DEFINITION_BINDING__OWNED_ENUMERATION_BINDINGS = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The number of structural features of the '<em>Metamodel Binding</em>' class.
+	 * The feature id for the '<em><b>Bound Model Type Definition</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int METAMODEL_BINDING_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 4;
+	int MODEL_TYPE_DEFINITION_BINDING__BOUND_MODEL_TYPE_DEFINITION = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Targeted Transformations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_DEFINITION_BINDING__TARGETED_TRANSFORMATIONS = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The number of structural features of the '<em>Model Type Definition Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_DEFINITION_BINDING_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ClassDefinitionBindingImpl <em>Class Definition Binding</em>}' class.
@@ -4119,6 +4119,578 @@ public interface StructurePackage extends EPackage {
 	int FILTERED_METAMODEL_REFERENCE_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ModelTypeDefinitionImpl <em>Model Type Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.structure.impl.ModelTypeDefinitionImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getModelTypeDefinition()
+	 * @generated
+	 */
+	int MODEL_TYPE_DEFINITION = 55;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_DEFINITION__KTAG = TYPE_DEFINITION__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_DEFINITION__KOWNED_TAGS = TYPE_DEFINITION__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_DEFINITION__NAME = TYPE_DEFINITION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_DEFINITION__CONTAINED_TYPE = TYPE_DEFINITION__CONTAINED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Super Type</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_DEFINITION__SUPER_TYPE = TYPE_DEFINITION__SUPER_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_DEFINITION__IS_ASPECT = TYPE_DEFINITION__IS_ASPECT;
+
+	/**
+	 * The feature id for the '<em><b>Metamodel</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_DEFINITION__METAMODEL = TYPE_DEFINITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owned Bindings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_DEFINITION__OWNED_BINDINGS = TYPE_DEFINITION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Owned Transformations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_DEFINITION__OWNED_TRANSFORMATIONS = TYPE_DEFINITION_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Type Definitions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_DEFINITION__TYPE_DEFINITIONS = TYPE_DEFINITION_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Model Type Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_DEFINITION_FEATURE_COUNT = TYPE_DEFINITION_FEATURE_COUNT + 4;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ModelTransformationImpl <em>Model Transformation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.structure.impl.ModelTransformationImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getModelTransformation()
+	 * @generated
+	 */
+	int MODEL_TRANSFORMATION = 56;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TRANSFORMATION__KTAG = MULTIPLICITY_ELEMENT__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TRANSFORMATION__KOWNED_TAGS = MULTIPLICITY_ELEMENT__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TRANSFORMATION__CONTAINED_TYPE = MULTIPLICITY_ELEMENT__CONTAINED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TRANSFORMATION__NAME = MULTIPLICITY_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TRANSFORMATION__TYPE = MULTIPLICITY_ELEMENT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Ordered</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TRANSFORMATION__IS_ORDERED = MULTIPLICITY_ELEMENT__IS_ORDERED;
+
+	/**
+	 * The feature id for the '<em><b>Is Unique</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TRANSFORMATION__IS_UNIQUE = MULTIPLICITY_ELEMENT__IS_UNIQUE;
+
+	/**
+	 * The feature id for the '<em><b>Lower</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TRANSFORMATION__LOWER = MULTIPLICITY_ELEMENT__LOWER;
+
+	/**
+	 * The feature id for the '<em><b>Upper</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TRANSFORMATION__UPPER = MULTIPLICITY_ELEMENT__UPPER;
+
+	/**
+	 * The feature id for the '<em><b>Type Parameters</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TRANSFORMATION__TYPE_PARAMETERS = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TRANSFORMATION__BODY = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Rules</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TRANSFORMATION__RULES = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Owning Model Type Definition</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TRANSFORMATION__OWNING_MODEL_TYPE_DEFINITION = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Owned Parameter</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TRANSFORMATION__OWNED_PARAMETER = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TRANSFORMATION__IS_ABSTRACT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The number of structural features of the '<em>Model Transformation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TRANSFORMATION_FEATURE_COUNT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.UnresolvedModelTypeDefinitionImpl <em>Unresolved Model Type Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.structure.impl.UnresolvedModelTypeDefinitionImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getUnresolvedModelTypeDefinition()
+	 * @generated
+	 */
+	int UNRESOLVED_MODEL_TYPE_DEFINITION = 57;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TYPE_DEFINITION__KTAG = MODEL_TYPE_DEFINITION__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TYPE_DEFINITION__KOWNED_TAGS = MODEL_TYPE_DEFINITION__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TYPE_DEFINITION__NAME = MODEL_TYPE_DEFINITION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TYPE_DEFINITION__CONTAINED_TYPE = MODEL_TYPE_DEFINITION__CONTAINED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Super Type</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TYPE_DEFINITION__SUPER_TYPE = MODEL_TYPE_DEFINITION__SUPER_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Aspect</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TYPE_DEFINITION__IS_ASPECT = MODEL_TYPE_DEFINITION__IS_ASPECT;
+
+	/**
+	 * The feature id for the '<em><b>Metamodel</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TYPE_DEFINITION__METAMODEL = MODEL_TYPE_DEFINITION__METAMODEL;
+
+	/**
+	 * The feature id for the '<em><b>Owned Bindings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TYPE_DEFINITION__OWNED_BINDINGS = MODEL_TYPE_DEFINITION__OWNED_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Transformations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TYPE_DEFINITION__OWNED_TRANSFORMATIONS = MODEL_TYPE_DEFINITION__OWNED_TRANSFORMATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Type Definitions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TYPE_DEFINITION__TYPE_DEFINITIONS = MODEL_TYPE_DEFINITION__TYPE_DEFINITIONS;
+
+	/**
+	 * The number of structural features of the '<em>Unresolved Model Type Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TYPE_DEFINITION_FEATURE_COUNT = MODEL_TYPE_DEFINITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.UnresolvedModelTransformationImpl <em>Unresolved Model Transformation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.structure.impl.UnresolvedModelTransformationImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getUnresolvedModelTransformation()
+	 * @generated
+	 */
+	int UNRESOLVED_MODEL_TRANSFORMATION = 58;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TRANSFORMATION__KTAG = MODEL_TRANSFORMATION__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TRANSFORMATION__KOWNED_TAGS = MODEL_TRANSFORMATION__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TRANSFORMATION__CONTAINED_TYPE = MODEL_TRANSFORMATION__CONTAINED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TRANSFORMATION__NAME = MODEL_TRANSFORMATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TRANSFORMATION__TYPE = MODEL_TRANSFORMATION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Ordered</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TRANSFORMATION__IS_ORDERED = MODEL_TRANSFORMATION__IS_ORDERED;
+
+	/**
+	 * The feature id for the '<em><b>Is Unique</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TRANSFORMATION__IS_UNIQUE = MODEL_TRANSFORMATION__IS_UNIQUE;
+
+	/**
+	 * The feature id for the '<em><b>Lower</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TRANSFORMATION__LOWER = MODEL_TRANSFORMATION__LOWER;
+
+	/**
+	 * The feature id for the '<em><b>Upper</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TRANSFORMATION__UPPER = MODEL_TRANSFORMATION__UPPER;
+
+	/**
+	 * The feature id for the '<em><b>Type Parameters</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TRANSFORMATION__TYPE_PARAMETERS = MODEL_TRANSFORMATION__TYPE_PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TRANSFORMATION__BODY = MODEL_TRANSFORMATION__BODY;
+
+	/**
+	 * The feature id for the '<em><b>Rules</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TRANSFORMATION__RULES = MODEL_TRANSFORMATION__RULES;
+
+	/**
+	 * The feature id for the '<em><b>Owning Model Type Definition</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TRANSFORMATION__OWNING_MODEL_TYPE_DEFINITION = MODEL_TRANSFORMATION__OWNING_MODEL_TYPE_DEFINITION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Parameter</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TRANSFORMATION__OWNED_PARAMETER = MODEL_TRANSFORMATION__OWNED_PARAMETER;
+
+	/**
+	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TRANSFORMATION__IS_ABSTRACT = MODEL_TRANSFORMATION__IS_ABSTRACT;
+
+	/**
+	 * The number of structural features of the '<em>Unresolved Model Transformation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNRESOLVED_MODEL_TRANSFORMATION_FEATURE_COUNT = MODEL_TRANSFORMATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.kermeta.language.structure.impl.ModelTypeDefinitionContainerImpl <em>Model Type Definition Container</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.kermeta.language.structure.impl.ModelTypeDefinitionContainerImpl
+	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getModelTypeDefinitionContainer()
+	 * @generated
+	 */
+	int MODEL_TYPE_DEFINITION_CONTAINER = 59;
+
+	/**
+	 * The feature id for the '<em><b>KTag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_DEFINITION_CONTAINER__KTAG = KERMETA_MODEL_ELEMENT__KTAG;
+
+	/**
+	 * The feature id for the '<em><b>KOwned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_DEFINITION_CONTAINER__KOWNED_TAGS = KERMETA_MODEL_ELEMENT__KOWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Model Type Definitions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_DEFINITION_CONTAINER__OWNED_MODEL_TYPE_DEFINITIONS = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Model Type Definition Container</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_DEFINITION_CONTAINER_FEATURE_COUNT = KERMETA_MODEL_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.ConstraintLanguage <em>Constraint Language</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4126,7 +4698,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getConstraintLanguage()
 	 * @generated
 	 */
-	int CONSTRAINT_LANGUAGE = 55;
+	int CONSTRAINT_LANGUAGE = 60;
 
 	/**
 	 * The meta object id for the '{@link org.kermeta.language.structure.ConstraintType <em>Constraint Type</em>}' enum.
@@ -4136,7 +4708,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getConstraintType()
 	 * @generated
 	 */
-	int CONSTRAINT_TYPE = 56;
+	int CONSTRAINT_TYPE = 61;
 
 	/**
 	 * The meta object id for the '<em>String</em>' data type.
@@ -4146,7 +4718,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getString()
 	 * @generated
 	 */
-	int STRING = 57;
+	int STRING = 62;
 
 	/**
 	 * The meta object id for the '<em>Boolean</em>' data type.
@@ -4156,7 +4728,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getBoolean()
 	 * @generated
 	 */
-	int BOOLEAN = 58;
+	int BOOLEAN = 63;
 
 	/**
 	 * The meta object id for the '<em>Integer</em>' data type.
@@ -4165,7 +4737,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getInteger()
 	 * @generated
 	 */
-	int INTEGER = 59;
+	int INTEGER = 64;
 
 	/**
 	 * The meta object id for the '<em>Unlimited Natural</em>' data type.
@@ -4174,7 +4746,7 @@ public interface StructurePackage extends EPackage {
 	 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getUnlimitedNatural()
 	 * @generated
 	 */
-	int UNLIMITED_NATURAL = 60;
+	int UNLIMITED_NATURAL = 65;
 
 
 	/**
@@ -5325,6 +5897,177 @@ public interface StructurePackage extends EPackage {
 	EReference getFilteredMetamodelReference_Metamodel();
 
 	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.ModelTypeDefinition <em>Model Type Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Model Type Definition</em>'.
+	 * @see org.kermeta.language.structure.ModelTypeDefinition
+	 * @generated
+	 */
+	EClass getModelTypeDefinition();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.ModelTypeDefinition#getMetamodel <em>Metamodel</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Metamodel</em>'.
+	 * @see org.kermeta.language.structure.ModelTypeDefinition#getMetamodel()
+	 * @see #getModelTypeDefinition()
+	 * @generated
+	 */
+	EReference getModelTypeDefinition_Metamodel();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.ModelTypeDefinition#getOwnedBindings <em>Owned Bindings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Bindings</em>'.
+	 * @see org.kermeta.language.structure.ModelTypeDefinition#getOwnedBindings()
+	 * @see #getModelTypeDefinition()
+	 * @generated
+	 */
+	EReference getModelTypeDefinition_OwnedBindings();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.ModelTypeDefinition#getOwnedTransformations <em>Owned Transformations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Transformations</em>'.
+	 * @see org.kermeta.language.structure.ModelTypeDefinition#getOwnedTransformations()
+	 * @see #getModelTypeDefinition()
+	 * @generated
+	 */
+	EReference getModelTypeDefinition_OwnedTransformations();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.language.structure.ModelTypeDefinition#getTypeDefinitions <em>Type Definitions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Type Definitions</em>'.
+	 * @see org.kermeta.language.structure.ModelTypeDefinition#getTypeDefinitions()
+	 * @see #getModelTypeDefinition()
+	 * @generated
+	 */
+	EReference getModelTypeDefinition_TypeDefinitions();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.ModelTransformation <em>Model Transformation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Model Transformation</em>'.
+	 * @see org.kermeta.language.structure.ModelTransformation
+	 * @generated
+	 */
+	EClass getModelTransformation();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.language.structure.ModelTransformation#getTypeParameters <em>Type Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Type Parameters</em>'.
+	 * @see org.kermeta.language.structure.ModelTransformation#getTypeParameters()
+	 * @see #getModelTransformation()
+	 * @generated
+	 */
+	EReference getModelTransformation_TypeParameters();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.kermeta.language.structure.ModelTransformation#getBody <em>Body</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Body</em>'.
+	 * @see org.kermeta.language.structure.ModelTransformation#getBody()
+	 * @see #getModelTransformation()
+	 * @generated
+	 */
+	EReference getModelTransformation_Body();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.language.structure.ModelTransformation#getRules <em>Rules</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Rules</em>'.
+	 * @see org.kermeta.language.structure.ModelTransformation#getRules()
+	 * @see #getModelTransformation()
+	 * @generated
+	 */
+	EReference getModelTransformation_Rules();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.kermeta.language.structure.ModelTransformation#getOwningModelTypeDefinition <em>Owning Model Type Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owning Model Type Definition</em>'.
+	 * @see org.kermeta.language.structure.ModelTransformation#getOwningModelTypeDefinition()
+	 * @see #getModelTransformation()
+	 * @generated
+	 */
+	EReference getModelTransformation_OwningModelTypeDefinition();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.ModelTransformation#getOwnedParameter <em>Owned Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Parameter</em>'.
+	 * @see org.kermeta.language.structure.ModelTransformation#getOwnedParameter()
+	 * @see #getModelTransformation()
+	 * @generated
+	 */
+	EReference getModelTransformation_OwnedParameter();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.language.structure.ModelTransformation#getIsAbstract <em>Is Abstract</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Abstract</em>'.
+	 * @see org.kermeta.language.structure.ModelTransformation#getIsAbstract()
+	 * @see #getModelTransformation()
+	 * @generated
+	 */
+	EAttribute getModelTransformation_IsAbstract();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.UnresolvedModelTypeDefinition <em>Unresolved Model Type Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Unresolved Model Type Definition</em>'.
+	 * @see org.kermeta.language.structure.UnresolvedModelTypeDefinition
+	 * @generated
+	 */
+	EClass getUnresolvedModelTypeDefinition();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.UnresolvedModelTransformation <em>Unresolved Model Transformation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Unresolved Model Transformation</em>'.
+	 * @see org.kermeta.language.structure.UnresolvedModelTransformation
+	 * @generated
+	 */
+	EClass getUnresolvedModelTransformation();
+
+	/**
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.ModelTypeDefinitionContainer <em>Model Type Definition Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Model Type Definition Container</em>'.
+	 * @see org.kermeta.language.structure.ModelTypeDefinitionContainer
+	 * @generated
+	 */
+	EClass getModelTypeDefinitionContainer();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.ModelTypeDefinitionContainer#getOwnedModelTypeDefinitions <em>Owned Model Type Definitions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Model Type Definitions</em>'.
+	 * @see org.kermeta.language.structure.ModelTypeDefinitionContainer#getOwnedModelTypeDefinitions()
+	 * @see #getModelTypeDefinitionContainer()
+	 * @generated
+	 */
+	EReference getModelTypeDefinitionContainer_OwnedModelTypeDefinitions();
+
+	/**
 	 * Returns the meta object for class '{@link org.kermeta.language.structure.VirtualType <em>Virtual Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5335,26 +6078,26 @@ public interface StructurePackage extends EPackage {
 	EClass getVirtualType();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.VirtualType#getClassDefinition <em>Class Definition</em>}'.
+	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.VirtualType#getTypeDefinition <em>Type Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Class Definition</em>'.
-	 * @see org.kermeta.language.structure.VirtualType#getClassDefinition()
+	 * @return the meta object for the reference '<em>Type Definition</em>'.
+	 * @see org.kermeta.language.structure.VirtualType#getTypeDefinition()
 	 * @see #getVirtualType()
 	 * @generated
 	 */
-	EReference getVirtualType_ClassDefinition();
+	EReference getVirtualType_TypeDefinition();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.VirtualType#getMetamodelVariable <em>Metamodel Variable</em>}'.
+	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.VirtualType#getModelTypeVariable <em>Model Type Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Metamodel Variable</em>'.
-	 * @see org.kermeta.language.structure.VirtualType#getMetamodelVariable()
+	 * @return the meta object for the reference '<em>Model Type Variable</em>'.
+	 * @see org.kermeta.language.structure.VirtualType#getModelTypeVariable()
 	 * @see #getVirtualType()
 	 * @generated
 	 */
-	EReference getVirtualType_MetamodelVariable();
+	EReference getVirtualType_ModelTypeVariable();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.VirtualType#getTypeParamBinding <em>Type Param Binding</em>}'.
@@ -5609,58 +6352,69 @@ public interface StructurePackage extends EPackage {
 	EClass getUnresolvedTypeVariable();
 
 	/**
-	 * Returns the meta object for class '{@link org.kermeta.language.structure.MetamodelBinding <em>Metamodel Binding</em>}'.
+	 * Returns the meta object for class '{@link org.kermeta.language.structure.ModelTypeDefinitionBinding <em>Model Type Definition Binding</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Metamodel Binding</em>'.
-	 * @see org.kermeta.language.structure.MetamodelBinding
+	 * @return the meta object for class '<em>Model Type Definition Binding</em>'.
+	 * @see org.kermeta.language.structure.ModelTypeDefinitionBinding
 	 * @generated
 	 */
-	EClass getMetamodelBinding();
+	EClass getModelTypeDefinitionBinding();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.MetamodelBinding#getBoundMetamodel <em>Bound Metamodel</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Bound Metamodel</em>'.
-	 * @see org.kermeta.language.structure.MetamodelBinding#getBoundMetamodel()
-	 * @see #getMetamodelBinding()
-	 * @generated
-	 */
-	EReference getMetamodelBinding_BoundMetamodel();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.MetamodelBinding#getOwnedClassDefinitionBindings <em>Owned Class Definition Bindings</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.ModelTypeDefinitionBinding#getOwnedClassDefinitionBindings <em>Owned Class Definition Bindings</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Owned Class Definition Bindings</em>'.
-	 * @see org.kermeta.language.structure.MetamodelBinding#getOwnedClassDefinitionBindings()
-	 * @see #getMetamodelBinding()
+	 * @see org.kermeta.language.structure.ModelTypeDefinitionBinding#getOwnedClassDefinitionBindings()
+	 * @see #getModelTypeDefinitionBinding()
 	 * @generated
 	 */
-	EReference getMetamodelBinding_OwnedClassDefinitionBindings();
+	EReference getModelTypeDefinitionBinding_OwnedClassDefinitionBindings();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.MetamodelBinding#getUsedAdaptationOperators <em>Used Adaptation Operators</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.ModelTypeDefinitionBinding#getUsedAdaptationOperators <em>Used Adaptation Operators</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Used Adaptation Operators</em>'.
-	 * @see org.kermeta.language.structure.MetamodelBinding#getUsedAdaptationOperators()
-	 * @see #getMetamodelBinding()
+	 * @see org.kermeta.language.structure.ModelTypeDefinitionBinding#getUsedAdaptationOperators()
+	 * @see #getModelTypeDefinitionBinding()
 	 * @generated
 	 */
-	EReference getMetamodelBinding_UsedAdaptationOperators();
+	EReference getModelTypeDefinitionBinding_UsedAdaptationOperators();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.MetamodelBinding#getOwnedEnumerationBindings <em>Owned Enumeration Bindings</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.kermeta.language.structure.ModelTypeDefinitionBinding#getOwnedEnumerationBindings <em>Owned Enumeration Bindings</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Owned Enumeration Bindings</em>'.
-	 * @see org.kermeta.language.structure.MetamodelBinding#getOwnedEnumerationBindings()
-	 * @see #getMetamodelBinding()
+	 * @see org.kermeta.language.structure.ModelTypeDefinitionBinding#getOwnedEnumerationBindings()
+	 * @see #getModelTypeDefinitionBinding()
 	 * @generated
 	 */
-	EReference getMetamodelBinding_OwnedEnumerationBindings();
+	EReference getModelTypeDefinitionBinding_OwnedEnumerationBindings();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.kermeta.language.structure.ModelTypeDefinitionBinding#getBoundModelTypeDefinition <em>Bound Model Type Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Bound Model Type Definition</em>'.
+	 * @see org.kermeta.language.structure.ModelTypeDefinitionBinding#getBoundModelTypeDefinition()
+	 * @see #getModelTypeDefinitionBinding()
+	 * @generated
+	 */
+	EReference getModelTypeDefinitionBinding_BoundModelTypeDefinition();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.kermeta.language.structure.ModelTypeDefinitionBinding#getTargetedTransformations <em>Targeted Transformations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Targeted Transformations</em>'.
+	 * @see org.kermeta.language.structure.ModelTypeDefinitionBinding#getTargetedTransformations()
+	 * @see #getModelTypeDefinitionBinding()
+	 * @generated
+	 */
+	EReference getModelTypeDefinitionBinding_TargetedTransformations();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.language.structure.ClassDefinitionBinding <em>Class Definition Binding</em>}'.
@@ -7004,6 +7758,144 @@ public interface StructurePackage extends EPackage {
 		EReference FILTERED_METAMODEL_REFERENCE__METAMODEL = eINSTANCE.getFilteredMetamodelReference_Metamodel();
 
 		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.ModelTypeDefinitionImpl <em>Model Type Definition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.ModelTypeDefinitionImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getModelTypeDefinition()
+		 * @generated
+		 */
+		EClass MODEL_TYPE_DEFINITION = eINSTANCE.getModelTypeDefinition();
+
+		/**
+		 * The meta object literal for the '<em><b>Metamodel</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODEL_TYPE_DEFINITION__METAMODEL = eINSTANCE.getModelTypeDefinition_Metamodel();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Bindings</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODEL_TYPE_DEFINITION__OWNED_BINDINGS = eINSTANCE.getModelTypeDefinition_OwnedBindings();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Transformations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODEL_TYPE_DEFINITION__OWNED_TRANSFORMATIONS = eINSTANCE.getModelTypeDefinition_OwnedTransformations();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Definitions</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODEL_TYPE_DEFINITION__TYPE_DEFINITIONS = eINSTANCE.getModelTypeDefinition_TypeDefinitions();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.ModelTransformationImpl <em>Model Transformation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.ModelTransformationImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getModelTransformation()
+		 * @generated
+		 */
+		EClass MODEL_TRANSFORMATION = eINSTANCE.getModelTransformation();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Parameters</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODEL_TRANSFORMATION__TYPE_PARAMETERS = eINSTANCE.getModelTransformation_TypeParameters();
+
+		/**
+		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODEL_TRANSFORMATION__BODY = eINSTANCE.getModelTransformation_Body();
+
+		/**
+		 * The meta object literal for the '<em><b>Rules</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODEL_TRANSFORMATION__RULES = eINSTANCE.getModelTransformation_Rules();
+
+		/**
+		 * The meta object literal for the '<em><b>Owning Model Type Definition</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODEL_TRANSFORMATION__OWNING_MODEL_TYPE_DEFINITION = eINSTANCE.getModelTransformation_OwningModelTypeDefinition();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Parameter</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODEL_TRANSFORMATION__OWNED_PARAMETER = eINSTANCE.getModelTransformation_OwnedParameter();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Abstract</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MODEL_TRANSFORMATION__IS_ABSTRACT = eINSTANCE.getModelTransformation_IsAbstract();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.UnresolvedModelTypeDefinitionImpl <em>Unresolved Model Type Definition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.UnresolvedModelTypeDefinitionImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getUnresolvedModelTypeDefinition()
+		 * @generated
+		 */
+		EClass UNRESOLVED_MODEL_TYPE_DEFINITION = eINSTANCE.getUnresolvedModelTypeDefinition();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.UnresolvedModelTransformationImpl <em>Unresolved Model Transformation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.UnresolvedModelTransformationImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getUnresolvedModelTransformation()
+		 * @generated
+		 */
+		EClass UNRESOLVED_MODEL_TRANSFORMATION = eINSTANCE.getUnresolvedModelTransformation();
+
+		/**
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.ModelTypeDefinitionContainerImpl <em>Model Type Definition Container</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.kermeta.language.structure.impl.ModelTypeDefinitionContainerImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getModelTypeDefinitionContainer()
+		 * @generated
+		 */
+		EClass MODEL_TYPE_DEFINITION_CONTAINER = eINSTANCE.getModelTypeDefinitionContainer();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Model Type Definitions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODEL_TYPE_DEFINITION_CONTAINER__OWNED_MODEL_TYPE_DEFINITIONS = eINSTANCE.getModelTypeDefinitionContainer_OwnedModelTypeDefinitions();
+
+		/**
 		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.VirtualTypeImpl <em>Virtual Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7014,20 +7906,20 @@ public interface StructurePackage extends EPackage {
 		EClass VIRTUAL_TYPE = eINSTANCE.getVirtualType();
 
 		/**
-		 * The meta object literal for the '<em><b>Class Definition</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Type Definition</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference VIRTUAL_TYPE__CLASS_DEFINITION = eINSTANCE.getVirtualType_ClassDefinition();
+		EReference VIRTUAL_TYPE__TYPE_DEFINITION = eINSTANCE.getVirtualType_TypeDefinition();
 
 		/**
-		 * The meta object literal for the '<em><b>Metamodel Variable</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Model Type Variable</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference VIRTUAL_TYPE__METAMODEL_VARIABLE = eINSTANCE.getVirtualType_MetamodelVariable();
+		EReference VIRTUAL_TYPE__MODEL_TYPE_VARIABLE = eINSTANCE.getVirtualType_ModelTypeVariable();
 
 		/**
 		 * The meta object literal for the '<em><b>Type Param Binding</b></em>' containment reference list feature.
@@ -7246,22 +8138,14 @@ public interface StructurePackage extends EPackage {
 		EClass UNRESOLVED_TYPE_VARIABLE = eINSTANCE.getUnresolvedTypeVariable();
 
 		/**
-		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.MetamodelBindingImpl <em>Metamodel Binding</em>}' class.
+		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.ModelTypeDefinitionBindingImpl <em>Model Type Definition Binding</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.kermeta.language.structure.impl.MetamodelBindingImpl
-		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getMetamodelBinding()
+		 * @see org.kermeta.language.structure.impl.ModelTypeDefinitionBindingImpl
+		 * @see org.kermeta.language.structure.impl.StructurePackageImpl#getModelTypeDefinitionBinding()
 		 * @generated
 		 */
-		EClass METAMODEL_BINDING = eINSTANCE.getMetamodelBinding();
-
-		/**
-		 * The meta object literal for the '<em><b>Bound Metamodel</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference METAMODEL_BINDING__BOUND_METAMODEL = eINSTANCE.getMetamodelBinding_BoundMetamodel();
+		EClass MODEL_TYPE_DEFINITION_BINDING = eINSTANCE.getModelTypeDefinitionBinding();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Class Definition Bindings</b></em>' containment reference list feature.
@@ -7269,7 +8153,7 @@ public interface StructurePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference METAMODEL_BINDING__OWNED_CLASS_DEFINITION_BINDINGS = eINSTANCE.getMetamodelBinding_OwnedClassDefinitionBindings();
+		EReference MODEL_TYPE_DEFINITION_BINDING__OWNED_CLASS_DEFINITION_BINDINGS = eINSTANCE.getModelTypeDefinitionBinding_OwnedClassDefinitionBindings();
 
 		/**
 		 * The meta object literal for the '<em><b>Used Adaptation Operators</b></em>' containment reference list feature.
@@ -7277,7 +8161,7 @@ public interface StructurePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference METAMODEL_BINDING__USED_ADAPTATION_OPERATORS = eINSTANCE.getMetamodelBinding_UsedAdaptationOperators();
+		EReference MODEL_TYPE_DEFINITION_BINDING__USED_ADAPTATION_OPERATORS = eINSTANCE.getModelTypeDefinitionBinding_UsedAdaptationOperators();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Enumeration Bindings</b></em>' containment reference list feature.
@@ -7285,7 +8169,23 @@ public interface StructurePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference METAMODEL_BINDING__OWNED_ENUMERATION_BINDINGS = eINSTANCE.getMetamodelBinding_OwnedEnumerationBindings();
+		EReference MODEL_TYPE_DEFINITION_BINDING__OWNED_ENUMERATION_BINDINGS = eINSTANCE.getModelTypeDefinitionBinding_OwnedEnumerationBindings();
+
+		/**
+		 * The meta object literal for the '<em><b>Bound Model Type Definition</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODEL_TYPE_DEFINITION_BINDING__BOUND_MODEL_TYPE_DEFINITION = eINSTANCE.getModelTypeDefinitionBinding_BoundModelTypeDefinition();
+
+		/**
+		 * The meta object literal for the '<em><b>Targeted Transformations</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODEL_TYPE_DEFINITION_BINDING__TARGETED_TRANSFORMATIONS = eINSTANCE.getModelTypeDefinitionBinding_TargetedTransformations();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.ClassDefinitionBindingImpl <em>Class Definition Binding</em>}' class.

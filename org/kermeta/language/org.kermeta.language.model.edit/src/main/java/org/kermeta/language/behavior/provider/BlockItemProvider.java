@@ -269,6 +269,11 @@ public class BlockItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
+				 BehaviorFactory.eINSTANCE.createCallModelTransformation()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(BehaviorPackage.Literals.BLOCK__RESCUE_BLOCK,
 				 BehaviorFactory.eINSTANCE.createRescue()));
 	}

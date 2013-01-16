@@ -319,6 +319,11 @@ public class JavaStaticCallItemProvider
 			(createChildParameter
 				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createCallEnumLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
+				 BehaviorFactory.eINSTANCE.createCallModelTransformation()));
 	}
 
 }

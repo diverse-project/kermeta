@@ -24,8 +24,6 @@ package kermeta {
 							//stdio.writeln("Merging content of a Assignment")
 							mergedModelElement.target ?= self.selectUnaryProperty("target", self.target, mergedModelElement.target)
 							mergedModelElement.~value ?= self.selectUnaryProperty("~value", self.~value, mergedModelElement.~value)
-							// select value for unary attribute
-							mergedModelElement.isCast ?= self.selectUnaryProperty("isCast", self.isCast, mergedModelElement.isCast)
 							self.containedType.each{aspect_containedType | 
 								var equivalent_containedType : org::kermeta::language::structure::Type
 								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -58,9 +56,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a Expression")
-							// if it has some reference (staticType) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
 							self.containedType.each{aspect_containedType | 
 								var equivalent_containedType : org::kermeta::language::structure::Type
 								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -108,11 +103,6 @@ package kermeta {
 									context.movedElementsNeedingReferenceFix.add(aspect_parameters.asType(Mergeable))
 								end
 							}
-							// if it has some reference (staticTypeVariableBindings) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
-							// select value for unary attribute
-							mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 							self.containedType.each{aspect_containedType | 
 								var equivalent_containedType : org::kermeta::language::structure::Type
 								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -207,8 +197,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a CallVariable")
-							// select value for unary attribute
-							mergedModelElement.isAtpre ?= self.selectUnaryProperty("isAtpre", self.isAtpre, mergedModelElement.isAtpre)
 							self.containedType.each{aspect_containedType | 
 								var equivalent_containedType : org::kermeta::language::structure::Type
 								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -242,8 +230,6 @@ package kermeta {
 						do
 							//stdio.writeln("Merging content of a CallFeature")
 							mergedModelElement.target ?= self.selectUnaryProperty("target", self.target, mergedModelElement.target)
-							// select value for unary attribute
-							mergedModelElement.isAtpre ?= self.selectUnaryProperty("isAtpre", self.isAtpre, mergedModelElement.isAtpre)
 							self.containedType.each{aspect_containedType | 
 								var equivalent_containedType : org::kermeta::language::structure::Type
 								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -276,9 +262,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a CallSuperOperation")
-							// if it has some reference (superType) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
 							self.containedType.each{aspect_containedType | 
 								var equivalent_containedType : org::kermeta::language::structure::Type
 								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -459,8 +442,6 @@ package kermeta {
 								end
 							}
 							mergedModelElement.exceptionType ?= self.selectUnaryProperty("exceptionType", self.exceptionType, mergedModelElement.exceptionType)
-							// select value for unary attribute
-							mergedModelElement.exceptionName ?= self.selectUnaryProperty("exceptionName", self.exceptionName, mergedModelElement.exceptionName)
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -478,8 +459,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a TypeReference")
-							// select value for unary attribute
-							mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -576,10 +555,6 @@ package kermeta {
 									context.movedElementsNeedingReferenceFix.add(aspect_parameters.asType(Mergeable))
 								end
 							}
-							// select value for unary attribute
-							mergedModelElement.jclass ?= self.selectUnaryProperty("jclass", self.jclass, mergedModelElement.jclass)
-							// select value for unary attribute
-							mergedModelElement.jmethod ?= self.selectUnaryProperty("jmethod", self.jmethod, mergedModelElement.jmethod)
 							self.containedType.each{aspect_containedType | 
 								var equivalent_containedType : org::kermeta::language::structure::Type
 								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -661,8 +636,6 @@ package kermeta {
 						do
 							//stdio.writeln("Merging content of a LambdaParameter")
 							mergedModelElement.type ?= self.selectUnaryProperty("type", self.type, mergedModelElement.type)
-							// select value for unary attribute
-							mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -680,8 +653,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a IntegerLiteral")
-							// select value for unary attribute
-							mergedModelElement.~value ?= self.selectUnaryProperty("~value", self.~value, mergedModelElement.~value)
 							self.containedType.each{aspect_containedType | 
 								var equivalent_containedType : org::kermeta::language::structure::Type
 								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -714,8 +685,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a StringLiteral")
-							// select value for unary attribute
-							mergedModelElement.~value ?= self.selectUnaryProperty("~value", self.~value, mergedModelElement.~value)
 							self.containedType.each{aspect_containedType | 
 								var equivalent_containedType : org::kermeta::language::structure::Type
 								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -748,8 +717,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a BooleanLiteral")
-							// select value for unary attribute
-							mergedModelElement.~value ?= self.selectUnaryProperty("~value", self.~value, mergedModelElement.~value)
 							self.containedType.each{aspect_containedType | 
 								var equivalent_containedType : org::kermeta::language::structure::Type
 								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -916,8 +883,6 @@ package kermeta {
 							//stdio.writeln("Merging content of a VariableDecl")
 							mergedModelElement.initialization ?= self.selectUnaryProperty("initialization", self.initialization, mergedModelElement.initialization)
 							mergedModelElement.type ?= self.selectUnaryProperty("type", self.type, mergedModelElement.type)
-							// select value for unary attribute
-							mergedModelElement.identifier ?= self.selectUnaryProperty("identifier", self.identifier, mergedModelElement.identifier)
 							self.containedType.each{aspect_containedType | 
 								var equivalent_containedType : org::kermeta::language::structure::Type
 								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -966,16 +931,6 @@ package kermeta {
 								end
 							}
 							mergedModelElement.target ?= self.selectUnaryProperty("target", self.target, mergedModelElement.target)
-							// if it has some reference (targetParent) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
-							// if it has some reference (generics) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
-							// select value for unary attribute
-							mergedModelElement.isAtpre ?= self.selectUnaryProperty("isAtpre", self.isAtpre, mergedModelElement.isAtpre)
-							// select value for unary attribute
-							mergedModelElement.isCalledWithParenthesis ?= self.selectUnaryProperty("isCalledWithParenthesis", self.isCalledWithParenthesis, mergedModelElement.isCalledWithParenthesis)
 							self.parameters.each{aspect_parameters | 
 								var equivalent_parameters : org::kermeta::language::behavior::Expression
 								equivalent_parameters := mergedModelElement.parameters.detect{ merged_parameters |
@@ -991,11 +946,6 @@ package kermeta {
 									context.movedElementsNeedingReferenceFix.add(aspect_parameters.asType(Mergeable))
 								end
 							}
-							// if it has some reference (staticTypeVariableBindings) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
-							// select value for unary attribute
-							mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 							self.containedType.each{aspect_containedType | 
 								var equivalent_containedType : org::kermeta::language::structure::Type
 								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -1011,9 +961,6 @@ package kermeta {
 									context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 								end
 							}
-							// if it has some reference (staticType) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -1031,9 +978,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a CallOperation")
-							// if it has some reference (staticOperation) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
 							self.containedType.each{aspect_containedType | 
 								var equivalent_containedType : org::kermeta::language::structure::Type
 								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -1066,9 +1010,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a CallProperty")
-							// if it has some reference (staticProperty) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
 							self.containedType.each{aspect_containedType | 
 								var equivalent_containedType : org::kermeta::language::structure::Type
 								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -1101,9 +1042,38 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a CallEnumLiteral")
-							// if it has some reference (staticEnumLiteral) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
+							self.containedType.each{aspect_containedType | 
+								var equivalent_containedType : org::kermeta::language::structure::Type
+								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+									aspect_containedType.localMatch(merged_containedType)
+								}
+								if (not equivalent_containedType.isVoid) then
+									// mark them as similar
+									aspect_containedType.similarElementInMergedModel := equivalent_containedType
+								else
+									// move it in merged model
+									mergedModelElement.containedType.add(aspect_containedType)
+									// mark moved element so its references could be fixed
+									context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
+								end
+							}
+						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
+						   context.errors.add(mergeException)
+						end
+					end
+					super(context)
+
+					result := self
+				end
+			}
+
+			aspect class CallModelTransformation inherits org::kermeta::language::behavior::CallFeature {
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::behavior::CallFeature is do
+					var mergedModelElement : org::kermeta::language::behavior::CallModelTransformation
+					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::behavior::CallModelTransformation)
+					if (not mergedModelElement.isVoid) then
+						do
+							//stdio.writeln("Merging content of a CallModelTransformation")
 							self.containedType.each{aspect_containedType | 
 								var equivalent_containedType : org::kermeta::language::structure::Type
 								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -1142,9 +1112,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a KermetaModelElement")
-							// if it has some reference (kTag) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
 							self.kOwnedTags.each{aspect_kOwnedTags | 
 								var equivalent_kOwnedTags : org::kermeta::language::structure::Tag
 								equivalent_kOwnedTags := mergedModelElement.kOwnedTags.detect{ merged_kOwnedTags |
@@ -1183,9 +1150,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a Operation")
-							// if it has some reference (raisedException) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
 							self.ownedParameter.each{aspect_ownedParameter | 
 								var equivalent_ownedParameter : org::kermeta::language::structure::Parameter
 								equivalent_ownedParameter := mergedModelElement.ownedParameter.detect{ merged_ownedParameter |
@@ -1232,9 +1196,6 @@ package kermeta {
 								end
 							}
 							mergedModelElement.body ?= self.selectUnaryProperty("body", self.body, mergedModelElement.body)
-							// if it has some reference (superOperation) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
 							self.ownedUnresolvedOperations.each{aspect_ownedUnresolvedOperations | 
 								var equivalent_ownedUnresolvedOperations : org::kermeta::language::structure::UnresolvedOperation
 								equivalent_ownedUnresolvedOperations := mergedModelElement.ownedUnresolvedOperations.detect{ merged_ownedUnresolvedOperations |
@@ -1250,13 +1211,6 @@ package kermeta {
 									context.movedElementsNeedingReferenceFix.add(aspect_ownedUnresolvedOperations.asType(Mergeable))
 								end
 							}
-							// if it has some reference (typeParameter) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
-							// select value for unary attribute
-							mergedModelElement.isAbstract ?= self.selectUnaryProperty("isAbstract", self.isAbstract, mergedModelElement.isAbstract)
-							// select value for unary attribute
-							mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -1274,9 +1228,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a Property")
-							// if it has some reference (opposite) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
 							mergedModelElement.getterBody ?= self.selectUnaryProperty("getterBody", self.getterBody, mergedModelElement.getterBody)
 							mergedModelElement.setterBody ?= self.selectUnaryProperty("setterBody", self.setterBody, mergedModelElement.setterBody)
 							self.ownedUnresolvedProperties.each{aspect_ownedUnresolvedProperties | 
@@ -1294,22 +1245,6 @@ package kermeta {
 									context.movedElementsNeedingReferenceFix.add(aspect_ownedUnresolvedProperties.asType(Mergeable))
 								end
 							}
-							// select value for unary attribute
-							mergedModelElement.isReadOnly ?= self.selectUnaryProperty("isReadOnly", self.isReadOnly, mergedModelElement.isReadOnly)
-							// select value for unary attribute
-							mergedModelElement.default ?= self.selectUnaryProperty("default", self.default, mergedModelElement.default)
-							// select value for unary attribute
-							mergedModelElement.isComposite ?= self.selectUnaryProperty("isComposite", self.isComposite, mergedModelElement.isComposite)
-							// select value for unary attribute
-							mergedModelElement.isDerived ?= self.selectUnaryProperty("isDerived", self.isDerived, mergedModelElement.isDerived)
-							// select value for unary attribute
-							mergedModelElement.isID ?= self.selectUnaryProperty("isID", self.isID, mergedModelElement.isID)
-							// select value for unary attribute
-							mergedModelElement.isGetterAbstract ?= self.selectUnaryProperty("isGetterAbstract", self.isGetterAbstract, mergedModelElement.isGetterAbstract)
-							// select value for unary attribute
-							mergedModelElement.isSetterAbstract ?= self.selectUnaryProperty("isSetterAbstract", self.isSetterAbstract, mergedModelElement.isSetterAbstract)
-							// select value for unary attribute
-							mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -1393,12 +1328,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a TypeVariableBinding")
-							// if it has some reference (variable) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
-							// if it has some reference (type) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -1416,16 +1345,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a MultiplicityElement")
-							// select value for unary attribute
-							mergedModelElement.isOrdered ?= self.selectUnaryProperty("isOrdered", self.isOrdered, mergedModelElement.isOrdered)
-							// select value for unary attribute
-							mergedModelElement.isUnique ?= self.selectUnaryProperty("isUnique", self.isUnique, mergedModelElement.isUnique)
-							// select value for unary attribute
-							mergedModelElement.lower ?= self.selectUnaryProperty("lower", self.lower, mergedModelElement.lower)
-							// select value for unary attribute
-							mergedModelElement.upper ?= self.selectUnaryProperty("upper", self.upper, mergedModelElement.upper)
-							// select value for unary attribute
-							mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -1443,11 +1362,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a TypeDefinition")
-							// if it has some reference (superType) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
-							// select value for unary attribute
-							mergedModelElement.isAspect ?= self.selectUnaryProperty("isAspect", self.isAspect, mergedModelElement.isAspect)
 							self.containedType.each{aspect_containedType | 
 								var equivalent_containedType : org::kermeta::language::structure::Type
 								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -1497,13 +1411,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a DataType")
-							// if it has some reference (superType) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
-							// select value for unary attribute
-							mergedModelElement.isAspect ?= self.selectUnaryProperty("isAspect", self.isAspect, mergedModelElement.isAspect)
-							// select value for unary attribute
-							mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 							self.containedType.each{aspect_containedType | 
 								var equivalent_containedType : org::kermeta::language::structure::Type
 								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -1551,13 +1458,6 @@ package kermeta {
 									context.movedElementsNeedingReferenceFix.add(aspect_ownedLiteral.asType(Mergeable))
 								end
 							}
-							// if it has some reference (superType) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
-							// select value for unary attribute
-							mergedModelElement.isAspect ?= self.selectUnaryProperty("isAspect", self.isAspect, mergedModelElement.isAspect)
-							// select value for unary attribute
-							mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 							self.containedType.each{aspect_containedType | 
 								var equivalent_containedType : org::kermeta::language::structure::Type
 								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -1590,8 +1490,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a NamedElement")
-							// select value for unary attribute
-							mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -1639,8 +1537,6 @@ package kermeta {
 									context.movedElementsNeedingReferenceFix.add(aspect_ownedAdaptationOperators.asType(Mergeable))
 								end
 							}
-							// select value for unary attribute
-							mergedModelElement.uri ?= self.selectUnaryProperty("uri", self.uri, mergedModelElement.uri)
 							self.ownedTypeDefinition.each{aspect_ownedTypeDefinition | 
 								var equivalent_ownedTypeDefinition : org::kermeta::language::structure::ModelElementTypeDefinition
 								equivalent_ownedTypeDefinition := mergedModelElement.ownedTypeDefinition.detect{ merged_ownedTypeDefinition |
@@ -1673,8 +1569,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a Parameter")
-							// select value for unary attribute
-							mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -1692,16 +1586,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a PrimitiveType")
-							// if it has some reference (instanceType) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
-							// if it has some reference (superType) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
-							// select value for unary attribute
-							mergedModelElement.isAspect ?= self.selectUnaryProperty("isAspect", self.isAspect, mergedModelElement.isAspect)
-							// select value for unary attribute
-							mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 							self.containedType.each{aspect_containedType | 
 								var equivalent_containedType : org::kermeta::language::structure::Type
 								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -1734,11 +1618,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a TypedElement")
-							// if it has some reference (type) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
-							// select value for unary attribute
-							mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -1757,13 +1636,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a Tag")
-							// if it has some reference (object) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
-							// select value for unary attribute
-							mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
-							// select value for unary attribute
-							mergedModelElement.~value ?= self.selectUnaryProperty("~value", self.~value, mergedModelElement.~value)
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -1799,16 +1671,6 @@ package kermeta {
 						do
 							//stdio.writeln("Merging content of a Constraint")
 							mergedModelElement.body ?= self.selectUnaryProperty("body", self.body, mergedModelElement.body)
-							// select value for unary attribute
-							// workaround compiler bug, cannot pass an enumeration as an object ! default selection is hardcoded and not user changeable
-							if (not self.stereotype.isVoid) and (mergedModelElement.stereotype.isVoid) then
-								mergedModelElement.stereotype := self.stereotype
-							end
-							// select value for unary attribute
-							// workaround compiler bug, cannot pass an enumeration as an object ! default selection is hardcoded and not user changeable
-							if (not self.language.isVoid) and (mergedModelElement.language.isVoid) then
-								mergedModelElement.language := self.language
-							end
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -1872,12 +1734,6 @@ package kermeta {
 									context.movedElementsNeedingReferenceFix.add(aspect_ownedOperation.asType(Mergeable))
 								end
 							}
-							// select value for unary attribute
-							mergedModelElement.isAbstract ?= self.selectUnaryProperty("isAbstract", self.isAbstract, mergedModelElement.isAbstract)
-							// select value for unary attribute
-							mergedModelElement.isSingleton ?= self.selectUnaryProperty("isSingleton", self.isSingleton, mergedModelElement.isSingleton)
-							// select value for unary attribute
-							mergedModelElement.isFinal ?= self.selectUnaryProperty("isFinal", self.isFinal, mergedModelElement.isFinal)
 							self.containedType.each{aspect_containedType | 
 								var equivalent_containedType : org::kermeta::language::structure::Type
 								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -1904,7 +1760,7 @@ package kermeta {
 			}
 
 
-			aspect class Metamodel inherits org::kermeta::language::structure::KermetaModelElement, org::kermeta::language::structure::NamedElement, org::kermeta::language::structure::TypeDefinition {
+			aspect class Metamodel inherits org::kermeta::language::structure::KermetaModelElement, org::kermeta::language::structure::NamedElement, org::kermeta::language::structure::ModelTypeDefinitionContainer {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::KermetaModelElement is do
 					var mergedModelElement : org::kermeta::language::structure::Metamodel
 					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::Metamodel)
@@ -1941,30 +1797,19 @@ package kermeta {
 									context.movedElementsNeedingReferenceFix.add(aspect_referencedMetamodels.asType(Mergeable))
 								end
 							}
-							// select value for unary attribute
-							mergedModelElement.uri ?= self.selectUnaryProperty("uri", self.uri, mergedModelElement.uri)
-							// select value for unary attribute
-							mergedModelElement.isResolved ?= self.selectUnaryProperty("isResolved", self.isResolved, mergedModelElement.isResolved)
-							// select value for unary attribute
-							mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
-							// if it has some reference (superType) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
-							// select value for unary attribute
-							mergedModelElement.isAspect ?= self.selectUnaryProperty("isAspect", self.isAspect, mergedModelElement.isAspect)
-							self.containedType.each{aspect_containedType | 
-								var equivalent_containedType : org::kermeta::language::structure::Type
-								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
-									aspect_containedType.localMatch(merged_containedType)
+							self.ownedModelTypeDefinitions.each{aspect_ownedModelTypeDefinitions | 
+								var equivalent_ownedModelTypeDefinitions : org::kermeta::language::structure::ModelTypeDefinition
+								equivalent_ownedModelTypeDefinitions := mergedModelElement.ownedModelTypeDefinitions.detect{ merged_ownedModelTypeDefinitions |
+									aspect_ownedModelTypeDefinitions.localMatch(merged_ownedModelTypeDefinitions)
 								}
-								if (not equivalent_containedType.isVoid) then
+								if (not equivalent_ownedModelTypeDefinitions.isVoid) then
 									// mark them as similar
-									aspect_containedType.similarElementInMergedModel := equivalent_containedType
+									aspect_ownedModelTypeDefinitions.similarElementInMergedModel := equivalent_ownedModelTypeDefinitions
 								else
 									// move it in merged model
-									mergedModelElement.containedType.add(aspect_containedType)
+									mergedModelElement.ownedModelTypeDefinitions.add(aspect_ownedModelTypeDefinitions)
 									// mark moved element so its references could be fixed
-									context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
+									context.movedElementsNeedingReferenceFix.add(aspect_ownedModelTypeDefinitions.asType(Mergeable))
 								end
 							}
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
@@ -2016,9 +1861,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a GenericTypeDefinition")
-							// if it has some reference (typeParameter) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
 							self.containedType.each{aspect_containedType | 
 								var equivalent_containedType : org::kermeta::language::structure::Type
 								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -2081,9 +1923,6 @@ package kermeta {
 									context.movedElementsNeedingReferenceFix.add(aspect_typeParamBinding.asType(Mergeable))
 								end
 							}
-							// if it has some reference (typeDefinition) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -2101,11 +1940,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a TypeVariable")
-							// if it has some reference (supertype) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
-							// select value for unary attribute
-							mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -2123,8 +1957,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a ObjectTypeVariable")
-							// select value for unary attribute
-							mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -2142,11 +1974,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a ModelTypeVariable")
-							// if it has some reference (virtualType) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
-							// select value for unary attribute
-							mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -2164,12 +1991,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a VirtualType")
-							// if it has some reference (classDefinition) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
-							// if it has some reference (metamodelVariable) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
 							self.typeParamBinding.each{aspect_typeParamBinding | 
 								var equivalent_typeParamBinding : org::kermeta::language::structure::TypeVariableBinding
 								equivalent_typeParamBinding := mergedModelElement.typeParamBinding.detect{ merged_typeParamBinding |
@@ -2185,8 +2006,6 @@ package kermeta {
 									context.movedElementsNeedingReferenceFix.add(aspect_typeParamBinding.asType(Mergeable))
 								end
 							}
-							// select value for unary attribute
-							mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -2204,9 +2023,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a Model")
-							// if it has some reference (contents) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -2256,11 +2072,6 @@ package kermeta {
 									context.movedElementsNeedingReferenceFix.add(aspect_usings.asType(Mergeable))
 								end
 							}
-							// if it has some reference (generics) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
-							// select value for unary attribute
-							mergedModelElement.typeIdentifier ?= self.selectUnaryProperty("typeIdentifier", self.typeIdentifier, mergedModelElement.typeIdentifier)
 							self.containedType.each{aspect_containedType | 
 								var equivalent_containedType : org::kermeta::language::structure::Type
 								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -2310,8 +2121,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a UnresolvedProperty")
-							// select value for unary attribute
-							mergedModelElement.propertyIdentifier ?= self.selectUnaryProperty("propertyIdentifier", self.propertyIdentifier, mergedModelElement.propertyIdentifier)
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -2329,11 +2138,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a UnresolvedOperation")
-							// if it has some reference (~from) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
-							// select value for unary attribute
-							mergedModelElement.operationIdentifier ?= self.selectUnaryProperty("operationIdentifier", self.operationIdentifier, mergedModelElement.operationIdentifier)
 							self.containedType.each{aspect_containedType | 
 								var equivalent_containedType : org::kermeta::language::structure::Type
 								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -2366,10 +2170,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a Using")
-							// select value for unary attribute
-							mergedModelElement.fromQName ?= self.selectUnaryProperty("fromQName", self.fromQName, mergedModelElement.fromQName)
-							// select value for unary attribute
-							mergedModelElement.toName ?= self.selectUnaryProperty("toName", self.toName, mergedModelElement.toName)
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -2387,9 +2187,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a ProductType")
-							// if it has some reference (type) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -2407,12 +2204,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a FunctionType")
-							// if it has some reference (left) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
-							// if it has some reference (right) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -2464,9 +2255,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a UnresolvedTypeVariable")
-							// if it has some reference (supertype) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
 							self.containedType.each{aspect_containedType | 
 								var equivalent_containedType : org::kermeta::language::structure::Type
 								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
@@ -2482,8 +2270,6 @@ package kermeta {
 									context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 								end
 							}
-							// select value for unary attribute
-							mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -2494,16 +2280,13 @@ package kermeta {
 				end
 			}
 
-			aspect class MetamodelBinding inherits org::kermeta::language::structure::KermetaModelElement {
+			aspect class ModelTypeDefinitionBinding inherits org::kermeta::language::structure::KermetaModelElement, org::kermeta::language::structure::ModelTypeDefinitionContainer {
 				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::KermetaModelElement is do
-					var mergedModelElement : org::kermeta::language::structure::MetamodelBinding
-					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::MetamodelBinding)
+					var mergedModelElement : org::kermeta::language::structure::ModelTypeDefinitionBinding
+					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::ModelTypeDefinitionBinding)
 					if (not mergedModelElement.isVoid) then
 						do
-							//stdio.writeln("Merging content of a MetamodelBinding")
-							// if it has some reference (boundMetamodel) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
+							//stdio.writeln("Merging content of a ModelTypeDefinitionBinding")
 							self.ownedClassDefinitionBindings.each{aspect_ownedClassDefinitionBindings | 
 								var equivalent_ownedClassDefinitionBindings : org::kermeta::language::structure::ClassDefinitionBinding
 								equivalent_ownedClassDefinitionBindings := mergedModelElement.ownedClassDefinitionBindings.detect{ merged_ownedClassDefinitionBindings |
@@ -2547,6 +2330,21 @@ package kermeta {
 									mergedModelElement.ownedEnumerationBindings.add(aspect_ownedEnumerationBindings)
 									// mark moved element so its references could be fixed
 									context.movedElementsNeedingReferenceFix.add(aspect_ownedEnumerationBindings.asType(Mergeable))
+								end
+							}
+							self.ownedModelTypeDefinitions.each{aspect_ownedModelTypeDefinitions | 
+								var equivalent_ownedModelTypeDefinitions : org::kermeta::language::structure::ModelTypeDefinition
+								equivalent_ownedModelTypeDefinitions := mergedModelElement.ownedModelTypeDefinitions.detect{ merged_ownedModelTypeDefinitions |
+									aspect_ownedModelTypeDefinitions.localMatch(merged_ownedModelTypeDefinitions)
+								}
+								if (not equivalent_ownedModelTypeDefinitions.isVoid) then
+									// mark them as similar
+									aspect_ownedModelTypeDefinitions.similarElementInMergedModel := equivalent_ownedModelTypeDefinitions
+								else
+									// move it in merged model
+									mergedModelElement.ownedModelTypeDefinitions.add(aspect_ownedModelTypeDefinitions)
+									// mark moved element so its references could be fixed
+									context.movedElementsNeedingReferenceFix.add(aspect_ownedModelTypeDefinitions.asType(Mergeable))
 								end
 							}
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
@@ -2596,12 +2394,6 @@ package kermeta {
 									context.movedElementsNeedingReferenceFix.add(aspect_ownedOperationBindings.asType(Mergeable))
 								end
 							}
-							// if it has some reference (source) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
-							// if it has some reference (target) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -2619,12 +2411,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a EnumerationBinding")
-							// if it has some reference (source) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
-							// if it has some reference (target) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -2642,12 +2428,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a PropertyBinding")
-							// if it has some reference (source) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
-							// if it has some reference (target) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -2665,12 +2445,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a OperationBinding")
-							// if it has some reference (source) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
-							// if it has some reference (target) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -2688,9 +2462,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a AdaptationOperator")
-							// if it has some reference (parameters) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -2708,9 +2479,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a UseAdaptationOperator")
-							// if it has some reference (parameters) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
 							self.ownedUnresolved.each{aspect_ownedUnresolved | 
 								var equivalent_ownedUnresolved : org::kermeta::language::structure::UnresolvedReference
 								equivalent_ownedUnresolved := mergedModelElement.ownedUnresolved.detect{ merged_ownedUnresolved |
@@ -2726,9 +2494,6 @@ package kermeta {
 									context.movedElementsNeedingReferenceFix.add(aspect_ownedUnresolved.asType(Mergeable))
 								end
 							}
-							// if it has some reference (usedOperator) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -2746,17 +2511,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a PropertyAdaptationOperator")
-							// if it has some reference (target) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
-							// select value for unary attribute
-							mergedModelElement.~getter ?= self.selectUnaryProperty("~getter", self.~getter, mergedModelElement.~getter)
-							// select value for unary attribute
-							mergedModelElement.~setter ?= self.selectUnaryProperty("~setter", self.~setter, mergedModelElement.~setter)
-							// select value for unary attribute
-							mergedModelElement.adder ?= self.selectUnaryProperty("adder", self.adder, mergedModelElement.adder)
-							// select value for unary attribute
-							mergedModelElement.remover ?= self.selectUnaryProperty("remover", self.remover, mergedModelElement.remover)
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -2791,8 +2545,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a AdaptationParameter")
-							// select value for unary attribute
-							mergedModelElement.name ?= self.selectUnaryProperty("name", self.name, mergedModelElement.name)
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -2810,11 +2562,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a OperationAdaptationOperator")
-							// if it has some reference (target) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
-							// select value for unary attribute
-							mergedModelElement.body ?= self.selectUnaryProperty("body", self.body, mergedModelElement.body)
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -2864,9 +2611,6 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a ModelType")
-							// if it has some reference (typeDefinition) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end
@@ -2884,9 +2628,182 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a FilteredMetamodelReference")
-							// if it has some reference (metamodel) not involved in composition, these aspects elements will need to be passed to mergeReferences function
-							context.elementsNeedingReferenceMerge.add(self)
-							
+						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
+						   context.errors.add(mergeException)
+						end
+					end
+					super(context)
+
+					result := self
+				end
+			}
+
+			aspect class ModelTypeDefinition inherits org::kermeta::language::structure::TypeDefinition {
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::TypeDefinition is do
+					var mergedModelElement : org::kermeta::language::structure::ModelTypeDefinition
+					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::ModelTypeDefinition)
+					if (not mergedModelElement.isVoid) then
+						do
+							//stdio.writeln("Merging content of a ModelTypeDefinition")
+							self.ownedBindings.each{aspect_ownedBindings | 
+								var equivalent_ownedBindings : org::kermeta::language::structure::ModelTypeDefinitionBinding
+								equivalent_ownedBindings := mergedModelElement.ownedBindings.detect{ merged_ownedBindings |
+									aspect_ownedBindings.localMatch(merged_ownedBindings)
+								}
+								if (not equivalent_ownedBindings.isVoid) then
+									// mark them as similar
+									aspect_ownedBindings.similarElementInMergedModel := equivalent_ownedBindings
+								else
+									// move it in merged model
+									mergedModelElement.ownedBindings.add(aspect_ownedBindings)
+									// mark moved element so its references could be fixed
+									context.movedElementsNeedingReferenceFix.add(aspect_ownedBindings.asType(Mergeable))
+								end
+							}
+							self.ownedTransformations.each{aspect_ownedTransformations | 
+								var equivalent_ownedTransformations : org::kermeta::language::structure::ModelTransformation
+								equivalent_ownedTransformations := mergedModelElement.ownedTransformations.detect{ merged_ownedTransformations |
+									aspect_ownedTransformations.localMatch(merged_ownedTransformations)
+								}
+								if (not equivalent_ownedTransformations.isVoid) then
+									// mark them as similar
+									aspect_ownedTransformations.similarElementInMergedModel := equivalent_ownedTransformations
+								else
+									// move it in merged model
+									mergedModelElement.ownedTransformations.add(aspect_ownedTransformations)
+									// mark moved element so its references could be fixed
+									context.movedElementsNeedingReferenceFix.add(aspect_ownedTransformations.asType(Mergeable))
+								end
+							}
+							self.containedType.each{aspect_containedType | 
+								var equivalent_containedType : org::kermeta::language::structure::Type
+								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+									aspect_containedType.localMatch(merged_containedType)
+								}
+								if (not equivalent_containedType.isVoid) then
+									// mark them as similar
+									aspect_containedType.similarElementInMergedModel := equivalent_containedType
+								else
+									// move it in merged model
+									mergedModelElement.containedType.add(aspect_containedType)
+									// mark moved element so its references could be fixed
+									context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
+								end
+							}
+						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
+						   context.errors.add(mergeException)
+						end
+					end
+					super(context)
+
+					result := self
+				end
+			}
+
+			aspect class ModelTransformation inherits org::kermeta::language::structure::MultiplicityElement {
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::MultiplicityElement is do
+					var mergedModelElement : org::kermeta::language::structure::ModelTransformation
+					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::ModelTransformation)
+					if (not mergedModelElement.isVoid) then
+						do
+							//stdio.writeln("Merging content of a ModelTransformation")
+							mergedModelElement.body ?= self.selectUnaryProperty("body", self.body, mergedModelElement.body)
+							self.ownedParameter.each{aspect_ownedParameter | 
+								var equivalent_ownedParameter : org::kermeta::language::structure::Parameter
+								equivalent_ownedParameter := mergedModelElement.ownedParameter.detect{ merged_ownedParameter |
+									aspect_ownedParameter.localMatch(merged_ownedParameter)
+								}
+								if (not equivalent_ownedParameter.isVoid) then
+									// mark them as similar
+									aspect_ownedParameter.similarElementInMergedModel := equivalent_ownedParameter
+								else
+									// move it in merged model
+									mergedModelElement.ownedParameter.add(aspect_ownedParameter)
+									// mark moved element so its references could be fixed
+									context.movedElementsNeedingReferenceFix.add(aspect_ownedParameter.asType(Mergeable))
+								end
+							}
+						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
+						   context.errors.add(mergeException)
+						end
+					end
+					super(context)
+
+					result := self
+				end
+			}
+
+			aspect class UnresolvedModelTypeDefinition inherits org::kermeta::language::structure::ModelTypeDefinition, org::kermeta::language::structure::UnresolvedReference {
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::ModelTypeDefinition is do
+					var mergedModelElement : org::kermeta::language::structure::UnresolvedModelTypeDefinition
+					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::UnresolvedModelTypeDefinition)
+					if (not mergedModelElement.isVoid) then
+						do
+							//stdio.writeln("Merging content of a UnresolvedModelTypeDefinition")
+							self.containedType.each{aspect_containedType | 
+								var equivalent_containedType : org::kermeta::language::structure::Type
+								equivalent_containedType := mergedModelElement.containedType.detect{ merged_containedType |
+									aspect_containedType.localMatch(merged_containedType)
+								}
+								if (not equivalent_containedType.isVoid) then
+									// mark them as similar
+									aspect_containedType.similarElementInMergedModel := equivalent_containedType
+								else
+									// move it in merged model
+									mergedModelElement.containedType.add(aspect_containedType)
+									// mark moved element so its references could be fixed
+									context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
+								end
+							}
+						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
+						   context.errors.add(mergeException)
+						end
+					end
+					super(context)
+
+					result := self
+				end
+			}
+
+			aspect class UnresolvedModelTransformation inherits org::kermeta::language::structure::ModelTransformation, org::kermeta::language::structure::UnresolvedReference {
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::ModelTransformation is do
+					var mergedModelElement : org::kermeta::language::structure::UnresolvedModelTransformation
+					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::UnresolvedModelTransformation)
+					if (not mergedModelElement.isVoid) then
+						do
+							//stdio.writeln("Merging content of a UnresolvedModelTransformation")
+						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
+						   context.errors.add(mergeException)
+						end
+					end
+					super(context)
+
+					result := self
+				end
+			}
+
+			aspect class ModelTypeDefinitionContainer inherits org::kermeta::language::structure::KermetaModelElement {
+				method binaryMerger_MoveToMergedModel(context : BinaryMergerContext) : Mergeable from org::kermeta::language::structure::KermetaModelElement is do
+					var mergedModelElement : org::kermeta::language::structure::ModelTypeDefinitionContainer
+					mergedModelElement := self.similarElementInMergedModel.asType(org::kermeta::language::structure::ModelTypeDefinitionContainer)
+					if (not mergedModelElement.isVoid) then
+						do
+							//stdio.writeln("Merging content of a ModelTypeDefinitionContainer")
+							self.ownedModelTypeDefinitions.each{aspect_ownedModelTypeDefinitions | 
+								var equivalent_ownedModelTypeDefinitions : org::kermeta::language::structure::ModelTypeDefinition
+								equivalent_ownedModelTypeDefinitions := mergedModelElement.ownedModelTypeDefinitions.detect{ merged_ownedModelTypeDefinitions |
+									aspect_ownedModelTypeDefinitions.localMatch(merged_ownedModelTypeDefinitions)
+								}
+								if (not equivalent_ownedModelTypeDefinitions.isVoid) then
+									// mark them as similar
+									aspect_ownedModelTypeDefinitions.similarElementInMergedModel := equivalent_ownedModelTypeDefinitions
+								else
+									// move it in merged model
+									mergedModelElement.ownedModelTypeDefinitions.add(aspect_ownedModelTypeDefinitions)
+									// mark moved element so its references could be fixed
+									context.movedElementsNeedingReferenceFix.add(aspect_ownedModelTypeDefinitions.asType(Mergeable))
+								end
+							}
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 						   context.errors.add(mergeException)
 						end

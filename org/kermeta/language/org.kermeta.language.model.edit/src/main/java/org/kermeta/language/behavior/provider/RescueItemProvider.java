@@ -302,6 +302,11 @@ public class RescueItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(BehaviorPackage.Literals.RESCUE__BODY,
+				 BehaviorFactory.eINSTANCE.createCallModelTransformation()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(BehaviorPackage.Literals.RESCUE__EXCEPTION_TYPE,
 				 BehaviorFactory.eINSTANCE.createTypeReference()));
 	}

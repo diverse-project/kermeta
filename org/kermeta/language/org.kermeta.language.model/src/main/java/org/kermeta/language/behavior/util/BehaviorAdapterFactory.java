@@ -226,6 +226,10 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 				return createCallEnumLiteralAdapter();
 			}
 			@Override
+			public Adapter caseCallModelTransformation(CallModelTransformation object) {
+				return createCallModelTransformationAdapter();
+			}
+			@Override
 			public Adapter caseKermetaModelElement(KermetaModelElement object) {
 				return createKermetaModelElementAdapter();
 			}
@@ -686,6 +690,20 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCallEnumLiteralAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.behavior.CallModelTransformation <em>Call Model Transformation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.behavior.CallModelTransformation
+	 * @generated
+	 */
+	public Adapter createCallModelTransformationAdapter() {
 		return null;
 	}
 

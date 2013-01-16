@@ -269,6 +269,15 @@ public interface BehaviorFactory extends EFactory {
 	CallEnumLiteral createCallEnumLiteral();
 
 	/**
+	 * Returns a new object of class '<em>Call Model Transformation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Call Model Transformation</em>'.
+	 * @generated
+	 */
+	CallModelTransformation createCallModelTransformation();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -1,0 +1,37 @@
+/* $Id:$ 
+ * Creation : December 11, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+package org::kermeta::language::structure;
+
+require kermeta
+require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/ResolverContext_Aspect.kmt"
+require "platform:/resource/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelHelper_structure_aspect.kmt"
+
+using org::kermeta::language::resolver
+using kermeta::standard
+
+/**
+ * At this point, there should be only one existing ModelTypeDefinition, which is an empty one
+ */
+aspect class Metamodel {
+	operation fillModelTypeDefinitions(ctxt : LanguageVisitorContext) is do
+		if (self.equals(ctxt.currentlyBuiltMetamodel)) then
+			if self.ownedModelTypeDefinitions.isEmpty() then			
+				var newMTD : ModelTypeDefinition init ModelTypeDefinition.new
+				newMTD.typeDefinitions.addAll(self.getAllOwnedModelElementTypeDefinitions())
+				newMTD.name := self.name
+				self.ownedModelTypeDefinitions.add(newMTD)
+			else
+				self.ownedModelTypeDefinitions.each{mtd|
+					mtd.typeDefinitions.addAll(self.getAllOwnedModelElementTypeDefinitions())
+					mtd.name := self.name
+				}
+			end
+		end
+	end
+}

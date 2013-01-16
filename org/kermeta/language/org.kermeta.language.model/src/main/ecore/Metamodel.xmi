@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org_kermeta_language_structure:Metamodel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/structure" xsi:schemaLocation="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/structure kermeta.ecore#//kermeta/language/structure" name="MMGraph">
+  <ownedModelTypeDefinitions name="MMGraph" metamodel="/" typeDefinitions="//@packages.0/@ownedTypeDefinition.0 //@packages.0/@ownedTypeDefinition.1 //@packages.0/@ownedTypeDefinition.2">
+    <ownedTransformations name="Sort" type="//@ownedModelTypeDefinitions.0/@ownedTransformations.0/@containedType.0">
+      <containedType xsi:type="org_kermeta_language_structure:ModelType" typeDefinition="//@ownedModelTypeDefinitions.0"/>
+    </ownedTransformations>
+  </ownedModelTypeDefinitions>
+  <packages name="graph">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Graph">
+      <ownedAttribute name="nodes" type="//@packages.0/@ownedTypeDefinition.0/@ownedAttribute.0/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//@packages.0/@ownedTypeDefinition.1"/>
+      </ownedAttribute>
+      <ownedAttribute name="edges" type="//@packages.0/@ownedTypeDefinition.0/@ownedAttribute.1/@containedType.0">
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//@packages.0/@ownedTypeDefinition.2"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Node"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Edge"/>
+  </packages>
+</org_kermeta_language_structure:Metamodel>

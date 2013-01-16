@@ -229,6 +229,11 @@ public class AssignmentItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(BehaviorPackage.Literals.ASSIGNMENT__TARGET,
+				 BehaviorFactory.eINSTANCE.createCallModelTransformation()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(BehaviorPackage.Literals.ASSIGNMENT__VALUE,
 				 BehaviorFactory.eINSTANCE.createAssignment()));
 
@@ -346,6 +351,11 @@ public class AssignmentItemProvider
 			(createChildParameter
 				(BehaviorPackage.Literals.ASSIGNMENT__VALUE,
 				 BehaviorFactory.eINSTANCE.createCallEnumLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.ASSIGNMENT__VALUE,
+				 BehaviorFactory.eINSTANCE.createCallModelTransformation()));
 	}
 
 	/**

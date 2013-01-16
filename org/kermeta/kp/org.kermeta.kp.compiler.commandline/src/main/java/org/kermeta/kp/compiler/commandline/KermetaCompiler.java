@@ -624,6 +624,9 @@ public class KermetaCompiler {
 			// workaround cache problem in compiler
 			kermeta.standard.JavaConversions.cleanCache();
 			
+			//MODELTYPE ADDITION
+			mergedUnit.getResult().setCurrentMetamodelByName(kp.getMetamodelName());
+			
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Resolving...", LOG_MESSAGE_GROUP, 1);
 			ModelingUnit resolvedUnit = resolveModelingUnit(mergedUnit.getResult(), kpFileURL, false);
 	
@@ -971,7 +974,7 @@ public class KermetaCompiler {
 
 		String nameAddition = isPreResolve ? "Preresolve" : "";
 		ModelingUnit convertedModelingUnit = new ModelingUnitConverter(saveIntermediateFiles, targetIntermediateFolder + "/before"+nameAddition+"Resolving.km", logger).convert(mu);
-
+		
 		// Resolving
 		ErrorProneResult<ModelingUnit> resolvedMU = theResolver.doResolving(convertedModelingUnit);
 

@@ -271,6 +271,11 @@ public class LoopItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(BehaviorPackage.Literals.LOOP__INITIALIZATION,
+				 BehaviorFactory.eINSTANCE.createCallModelTransformation()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(BehaviorPackage.Literals.LOOP__BODY,
 				 BehaviorFactory.eINSTANCE.createAssignment()));
 
@@ -391,6 +396,11 @@ public class LoopItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(BehaviorPackage.Literals.LOOP__BODY,
+				 BehaviorFactory.eINSTANCE.createCallModelTransformation()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(BehaviorPackage.Literals.LOOP__STOP_CONDITION,
 				 BehaviorFactory.eINSTANCE.createAssignment()));
 
@@ -508,6 +518,11 @@ public class LoopItemProvider
 			(createChildParameter
 				(BehaviorPackage.Literals.LOOP__STOP_CONDITION,
 				 BehaviorFactory.eINSTANCE.createCallEnumLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.LOOP__STOP_CONDITION,
+				 BehaviorFactory.eINSTANCE.createCallModelTransformation()));
 	}
 
 	/**

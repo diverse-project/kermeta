@@ -300,6 +300,11 @@ public class VariableDeclItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
+				 BehaviorFactory.eINSTANCE.createCallModelTransformation()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(BehaviorPackage.Literals.VARIABLE_DECL__TYPE,
 				 BehaviorFactory.eINSTANCE.createTypeReference()));
 	}

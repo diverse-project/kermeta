@@ -271,6 +271,11 @@ public class LambdaExpressionItemProvider
 			(createChildParameter
 				(BehaviorPackage.Literals.LAMBDA_EXPRESSION__BODY,
 				 BehaviorFactory.eINSTANCE.createCallEnumLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.LAMBDA_EXPRESSION__BODY,
+				 BehaviorFactory.eINSTANCE.createCallModelTransformation()));
 	}
 
 }

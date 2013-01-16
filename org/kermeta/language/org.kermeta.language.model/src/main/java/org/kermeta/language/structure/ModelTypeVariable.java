@@ -32,7 +32,7 @@ public interface ModelTypeVariable extends TypeVariable {
 	/**
 	 * Returns the value of the '<em><b>Virtual Type</b></em>' reference list.
 	 * The list contents are of type {@link org.kermeta.language.structure.VirtualType}.
-	 * It is bidirectional and its opposite is '{@link org.kermeta.language.structure.VirtualType#getMetamodelVariable <em>Metamodel Variable</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.kermeta.language.structure.VirtualType#getModelTypeVariable <em>Model Type Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -40,8 +40,8 @@ public interface ModelTypeVariable extends TypeVariable {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Virtual Type</em>' reference list.
 	 * @see org.kermeta.language.structure.StructurePackage#getModelTypeVariable_VirtualType()
-	 * @see org.kermeta.language.structure.VirtualType#getMetamodelVariable
-	 * @model opposite="metamodelVariable"
+	 * @see org.kermeta.language.structure.VirtualType#getModelTypeVariable
+	 * @model opposite="modelTypeVariable"
 	 * @generated
 	 */
 	EList<VirtualType> getVirtualType();

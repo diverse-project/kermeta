@@ -96,6 +96,11 @@ public class ModelingUnitConverter {
 		ByteArrayOutputStream stream= this.saveMu(mu, uri);
 		resultMU= this.LoadMu(stream, uri);
 
+		//MODELTYPE ADDITION
+		if (!(mu.getCurrentMetamodel() == null)) {
+			resultMU.setCurrentMetamodelByName(mu.getCurrentMetamodel().getName());
+		}
+		
 		logger.doneProgress(KermetaCompiler.LOG_MESSAGE_GROUP+".ModelingUnitConverter", "ModelingUnit converted "+resultMU, KermetaCompiler.LOG_MESSAGE_GROUP);
 		return resultMU;
 	}

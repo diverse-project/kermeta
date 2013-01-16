@@ -7,6 +7,8 @@
 package org.kermeta.language.structure.impl;
 
 
+import static org.kermeta.language.structure.StructurePackage.CLASS;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -34,11 +36,14 @@ import org.kermeta.language.structure.FunctionType;
 import org.kermeta.language.structure.GenericTypeDefinition;
 import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.Metamodel;
-import org.kermeta.language.structure.MetamodelBinding;
 import org.kermeta.language.structure.Model;
 import org.kermeta.language.structure.ModelElementTypeDefinition;
 import org.kermeta.language.structure.ModelElementTypeDefinitionContainer;
+import org.kermeta.language.structure.ModelTransformation;
 import org.kermeta.language.structure.ModelType;
+import org.kermeta.language.structure.ModelTypeDefinition;
+import org.kermeta.language.structure.ModelTypeDefinitionBinding;
+import org.kermeta.language.structure.ModelTypeDefinitionContainer;
 import org.kermeta.language.structure.ModelTypeVariable;
 import org.kermeta.language.structure.MultiplicityElement;
 import org.kermeta.language.structure.NamedElement;
@@ -64,6 +69,8 @@ import org.kermeta.language.structure.TypeVariableBinding;
 import org.kermeta.language.structure.TypedElement;
 import org.kermeta.language.structure.UnresolvedAdaptationOperator;
 import org.kermeta.language.structure.UnresolvedInferredType;
+import org.kermeta.language.structure.UnresolvedModelTransformation;
+import org.kermeta.language.structure.UnresolvedModelTypeDefinition;
 import org.kermeta.language.structure.UnresolvedOperation;
 import org.kermeta.language.structure.UnresolvedProperty;
 import org.kermeta.language.structure.UnresolvedReference;
@@ -297,6 +304,41 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass modelTypeDefinitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass modelTransformationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass unresolvedModelTypeDefinitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass unresolvedModelTransformationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass modelTypeDefinitionContainerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass virtualTypeEClass = null;
 
 	/**
@@ -388,7 +430,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass metamodelBindingEClass = null;
+	private EClass modelTypeDefinitionBindingEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1543,6 +1585,150 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getModelTypeDefinition() {
+		return modelTypeDefinitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModelTypeDefinition_Metamodel() {
+		return (EReference)modelTypeDefinitionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModelTypeDefinition_OwnedBindings() {
+		return (EReference)modelTypeDefinitionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModelTypeDefinition_OwnedTransformations() {
+		return (EReference)modelTypeDefinitionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModelTypeDefinition_TypeDefinitions() {
+		return (EReference)modelTypeDefinitionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getModelTransformation() {
+		return modelTransformationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModelTransformation_TypeParameters() {
+		return (EReference)modelTransformationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModelTransformation_Body() {
+		return (EReference)modelTransformationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModelTransformation_Rules() {
+		return (EReference)modelTransformationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModelTransformation_OwningModelTypeDefinition() {
+		return (EReference)modelTransformationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModelTransformation_OwnedParameter() {
+		return (EReference)modelTransformationEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getModelTransformation_IsAbstract() {
+		return (EAttribute)modelTransformationEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getUnresolvedModelTypeDefinition() {
+		return unresolvedModelTypeDefinitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getUnresolvedModelTransformation() {
+		return unresolvedModelTransformationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getModelTypeDefinitionContainer() {
+		return modelTypeDefinitionContainerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModelTypeDefinitionContainer_OwnedModelTypeDefinitions() {
+		return (EReference)modelTypeDefinitionContainerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getVirtualType() {
 		return virtualTypeEClass;
 	}
@@ -1552,7 +1738,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getVirtualType_ClassDefinition() {
+	public EReference getVirtualType_TypeDefinition() {
 		return (EReference)virtualTypeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1561,7 +1747,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getVirtualType_MetamodelVariable() {
+	public EReference getVirtualType_ModelTypeVariable() {
 		return (EReference)virtualTypeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1786,8 +1972,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getMetamodelBinding() {
-		return metamodelBindingEClass;
+	public EClass getModelTypeDefinitionBinding() {
+		return modelTypeDefinitionBindingEClass;
 	}
 
 	/**
@@ -1795,8 +1981,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMetamodelBinding_BoundMetamodel() {
-		return (EReference)metamodelBindingEClass.getEStructuralFeatures().get(0);
+	public EReference getModelTypeDefinitionBinding_OwnedClassDefinitionBindings() {
+		return (EReference)modelTypeDefinitionBindingEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1804,8 +1990,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMetamodelBinding_OwnedClassDefinitionBindings() {
-		return (EReference)metamodelBindingEClass.getEStructuralFeatures().get(1);
+	public EReference getModelTypeDefinitionBinding_UsedAdaptationOperators() {
+		return (EReference)modelTypeDefinitionBindingEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1813,8 +1999,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMetamodelBinding_UsedAdaptationOperators() {
-		return (EReference)metamodelBindingEClass.getEStructuralFeatures().get(2);
+	public EReference getModelTypeDefinitionBinding_OwnedEnumerationBindings() {
+		return (EReference)modelTypeDefinitionBindingEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1822,8 +2008,17 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMetamodelBinding_OwnedEnumerationBindings() {
-		return (EReference)metamodelBindingEClass.getEStructuralFeatures().get(3);
+	public EReference getModelTypeDefinitionBinding_BoundModelTypeDefinition() {
+		return (EReference)modelTypeDefinitionBindingEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModelTypeDefinitionBinding_TargetedTransformations() {
+		return (EReference)modelTypeDefinitionBindingEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -2328,8 +2523,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		createEReference(modelTypeVariableEClass, MODEL_TYPE_VARIABLE__VIRTUAL_TYPE);
 
 		virtualTypeEClass = createEClass(VIRTUAL_TYPE);
-		createEReference(virtualTypeEClass, VIRTUAL_TYPE__CLASS_DEFINITION);
-		createEReference(virtualTypeEClass, VIRTUAL_TYPE__METAMODEL_VARIABLE);
+		createEReference(virtualTypeEClass, VIRTUAL_TYPE__TYPE_DEFINITION);
+		createEReference(virtualTypeEClass, VIRTUAL_TYPE__MODEL_TYPE_VARIABLE);
 		createEReference(virtualTypeEClass, VIRTUAL_TYPE__TYPE_PARAM_BINDING);
 
 		modelEClass = createEClass(MODEL);
@@ -2367,11 +2562,12 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 
 		unresolvedTypeVariableEClass = createEClass(UNRESOLVED_TYPE_VARIABLE);
 
-		metamodelBindingEClass = createEClass(METAMODEL_BINDING);
-		createEReference(metamodelBindingEClass, METAMODEL_BINDING__BOUND_METAMODEL);
-		createEReference(metamodelBindingEClass, METAMODEL_BINDING__OWNED_CLASS_DEFINITION_BINDINGS);
-		createEReference(metamodelBindingEClass, METAMODEL_BINDING__USED_ADAPTATION_OPERATORS);
-		createEReference(metamodelBindingEClass, METAMODEL_BINDING__OWNED_ENUMERATION_BINDINGS);
+		modelTypeDefinitionBindingEClass = createEClass(MODEL_TYPE_DEFINITION_BINDING);
+		createEReference(modelTypeDefinitionBindingEClass, MODEL_TYPE_DEFINITION_BINDING__OWNED_CLASS_DEFINITION_BINDINGS);
+		createEReference(modelTypeDefinitionBindingEClass, MODEL_TYPE_DEFINITION_BINDING__USED_ADAPTATION_OPERATORS);
+		createEReference(modelTypeDefinitionBindingEClass, MODEL_TYPE_DEFINITION_BINDING__OWNED_ENUMERATION_BINDINGS);
+		createEReference(modelTypeDefinitionBindingEClass, MODEL_TYPE_DEFINITION_BINDING__BOUND_MODEL_TYPE_DEFINITION);
+		createEReference(modelTypeDefinitionBindingEClass, MODEL_TYPE_DEFINITION_BINDING__TARGETED_TRANSFORMATIONS);
 
 		classDefinitionBindingEClass = createEClass(CLASS_DEFINITION_BINDING);
 		createEReference(classDefinitionBindingEClass, CLASS_DEFINITION_BINDING__OWNED_PROPERTY_BINDINGS);
@@ -2421,6 +2617,27 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 
 		filteredMetamodelReferenceEClass = createEClass(FILTERED_METAMODEL_REFERENCE);
 		createEReference(filteredMetamodelReferenceEClass, FILTERED_METAMODEL_REFERENCE__METAMODEL);
+
+		modelTypeDefinitionEClass = createEClass(MODEL_TYPE_DEFINITION);
+		createEReference(modelTypeDefinitionEClass, MODEL_TYPE_DEFINITION__METAMODEL);
+		createEReference(modelTypeDefinitionEClass, MODEL_TYPE_DEFINITION__OWNED_BINDINGS);
+		createEReference(modelTypeDefinitionEClass, MODEL_TYPE_DEFINITION__OWNED_TRANSFORMATIONS);
+		createEReference(modelTypeDefinitionEClass, MODEL_TYPE_DEFINITION__TYPE_DEFINITIONS);
+
+		modelTransformationEClass = createEClass(MODEL_TRANSFORMATION);
+		createEReference(modelTransformationEClass, MODEL_TRANSFORMATION__TYPE_PARAMETERS);
+		createEReference(modelTransformationEClass, MODEL_TRANSFORMATION__BODY);
+		createEReference(modelTransformationEClass, MODEL_TRANSFORMATION__RULES);
+		createEReference(modelTransformationEClass, MODEL_TRANSFORMATION__OWNING_MODEL_TYPE_DEFINITION);
+		createEReference(modelTransformationEClass, MODEL_TRANSFORMATION__OWNED_PARAMETER);
+		createEAttribute(modelTransformationEClass, MODEL_TRANSFORMATION__IS_ABSTRACT);
+
+		unresolvedModelTypeDefinitionEClass = createEClass(UNRESOLVED_MODEL_TYPE_DEFINITION);
+
+		unresolvedModelTransformationEClass = createEClass(UNRESOLVED_MODEL_TRANSFORMATION);
+
+		modelTypeDefinitionContainerEClass = createEClass(MODEL_TYPE_DEFINITION_CONTAINER);
+		createEReference(modelTypeDefinitionContainerEClass, MODEL_TYPE_DEFINITION_CONTAINER__OWNED_MODEL_TYPE_DEFINITIONS);
 
 		// Create enums
 		constraintLanguageEEnum = createEEnum(CONSTRAINT_LANGUAGE);
@@ -2493,7 +2710,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		classDefinitionEClass.getESuperTypes().add(this.getGenericTypeDefinition());
 		metamodelEClass.getESuperTypes().add(this.getKermetaModelElement());
 		metamodelEClass.getESuperTypes().add(this.getNamedElement());
-		metamodelEClass.getESuperTypes().add(this.getTypeDefinition());
+		metamodelEClass.getESuperTypes().add(this.getModelTypeDefinitionContainer());
 		modelElementTypeDefinitionContainerEClass.getESuperTypes().add(this.getNamedElement());
 		genericTypeDefinitionEClass.getESuperTypes().add(this.getModelElementTypeDefinition());
 		parameterizedTypeEClass.getESuperTypes().add(this.getType());
@@ -2524,7 +2741,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		unresolvedInferredTypeEClass.getESuperTypes().add(this.getType());
 		unresolvedTypeVariableEClass.getESuperTypes().add(this.getUnresolvedReference());
 		unresolvedTypeVariableEClass.getESuperTypes().add(this.getTypeVariable());
-		metamodelBindingEClass.getESuperTypes().add(this.getKermetaModelElement());
+		modelTypeDefinitionBindingEClass.getESuperTypes().add(this.getKermetaModelElement());
+		modelTypeDefinitionBindingEClass.getESuperTypes().add(this.getModelTypeDefinitionContainer());
 		classDefinitionBindingEClass.getESuperTypes().add(this.getKermetaModelElement());
 		enumerationBindingEClass.getESuperTypes().add(this.getKermetaModelElement());
 		propertyBindingEClass.getESuperTypes().add(this.getKermetaModelElement());
@@ -2539,6 +2757,13 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		modelElementTypeDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
 		modelTypeEClass.getESuperTypes().add(this.getType());
 		filteredMetamodelReferenceEClass.getESuperTypes().add(this.getKermetaModelElement());
+		modelTypeDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
+		modelTransformationEClass.getESuperTypes().add(this.getMultiplicityElement());
+		unresolvedModelTypeDefinitionEClass.getESuperTypes().add(this.getModelTypeDefinition());
+		unresolvedModelTypeDefinitionEClass.getESuperTypes().add(this.getUnresolvedReference());
+		unresolvedModelTransformationEClass.getESuperTypes().add(this.getModelTransformation());
+		unresolvedModelTransformationEClass.getESuperTypes().add(this.getUnresolvedReference());
+		modelTypeDefinitionContainerEClass.getESuperTypes().add(this.getKermetaModelElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(kermetaModelElementEClass, KermetaModelElement.class, "KermetaModelElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2671,11 +2896,11 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEClass(objectTypeVariableEClass, ObjectTypeVariable.class, "ObjectTypeVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(modelTypeVariableEClass, ModelTypeVariable.class, "ModelTypeVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getModelTypeVariable_VirtualType(), this.getVirtualType(), this.getVirtualType_MetamodelVariable(), "virtualType", null, 0, -1, ModelTypeVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelTypeVariable_VirtualType(), this.getVirtualType(), this.getVirtualType_ModelTypeVariable(), "virtualType", null, 0, -1, ModelTypeVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(virtualTypeEClass, VirtualType.class, "VirtualType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getVirtualType_ClassDefinition(), this.getClassDefinition(), null, "classDefinition", null, 1, 1, VirtualType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getVirtualType_MetamodelVariable(), this.getModelTypeVariable(), this.getModelTypeVariable_VirtualType(), "metamodelVariable", null, 1, 1, VirtualType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVirtualType_TypeDefinition(), this.getModelElementTypeDefinition(), null, "typeDefinition", null, 1, 1, VirtualType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVirtualType_ModelTypeVariable(), this.getModelTypeVariable(), this.getModelTypeVariable_VirtualType(), "modelTypeVariable", null, 1, 1, VirtualType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVirtualType_TypeParamBinding(), this.getTypeVariableBinding(), null, "typeParamBinding", null, 0, -1, VirtualType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2713,11 +2938,12 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 
 		initEClass(unresolvedTypeVariableEClass, UnresolvedTypeVariable.class, "UnresolvedTypeVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(metamodelBindingEClass, MetamodelBinding.class, "MetamodelBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMetamodelBinding_BoundMetamodel(), this.getMetamodel(), null, "boundMetamodel", null, 1, 1, MetamodelBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMetamodelBinding_OwnedClassDefinitionBindings(), this.getClassDefinitionBinding(), null, "ownedClassDefinitionBindings", null, 0, -1, MetamodelBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMetamodelBinding_UsedAdaptationOperators(), this.getUseAdaptationOperator(), null, "usedAdaptationOperators", null, 0, -1, MetamodelBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMetamodelBinding_OwnedEnumerationBindings(), this.getEnumerationBinding(), null, "ownedEnumerationBindings", null, 0, -1, MetamodelBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(modelTypeDefinitionBindingEClass, ModelTypeDefinitionBinding.class, "ModelTypeDefinitionBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getModelTypeDefinitionBinding_OwnedClassDefinitionBindings(), this.getClassDefinitionBinding(), null, "ownedClassDefinitionBindings", null, 0, -1, ModelTypeDefinitionBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelTypeDefinitionBinding_UsedAdaptationOperators(), this.getUseAdaptationOperator(), null, "usedAdaptationOperators", null, 0, -1, ModelTypeDefinitionBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelTypeDefinitionBinding_OwnedEnumerationBindings(), this.getEnumerationBinding(), null, "ownedEnumerationBindings", null, 0, -1, ModelTypeDefinitionBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelTypeDefinitionBinding_BoundModelTypeDefinition(), this.getModelTypeDefinition(), null, "boundModelTypeDefinition", null, 1, 1, ModelTypeDefinitionBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelTypeDefinitionBinding_TargetedTransformations(), this.getModelTransformation(), null, "targetedTransformations", null, 0, -1, ModelTypeDefinitionBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(classDefinitionBindingEClass, ClassDefinitionBinding.class, "ClassDefinitionBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getClassDefinitionBinding_OwnedPropertyBindings(), this.getPropertyBinding(), null, "ownedPropertyBindings", null, 0, -1, ClassDefinitionBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2763,10 +2989,31 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEClass(modelElementTypeDefinitionEClass, ModelElementTypeDefinition.class, "ModelElementTypeDefinition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(modelTypeEClass, ModelType.class, "ModelType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getModelType_TypeDefinition(), this.getMetamodel(), null, "typeDefinition", null, 1, 1, ModelType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelType_TypeDefinition(), this.getModelTypeDefinition(), null, "typeDefinition", null, 1, 1, ModelType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(filteredMetamodelReferenceEClass, FilteredMetamodelReference.class, "FilteredMetamodelReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFilteredMetamodelReference_Metamodel(), this.getMetamodel(), null, "metamodel", null, 1, 1, FilteredMetamodelReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(modelTypeDefinitionEClass, ModelTypeDefinition.class, "ModelTypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getModelTypeDefinition_Metamodel(), this.getMetamodel(), null, "metamodel", null, 1, 1, ModelTypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelTypeDefinition_OwnedBindings(), this.getModelTypeDefinitionBinding(), null, "ownedBindings", null, 0, -1, ModelTypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelTypeDefinition_OwnedTransformations(), this.getModelTransformation(), this.getModelTransformation_OwningModelTypeDefinition(), "ownedTransformations", null, 0, -1, ModelTypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelTypeDefinition_TypeDefinitions(), this.getModelElementTypeDefinition(), null, "typeDefinitions", null, 0, -1, ModelTypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(modelTransformationEClass, ModelTransformation.class, "ModelTransformation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getModelTransformation_TypeParameters(), this.getModelTypeVariable(), null, "typeParameters", null, 0, -1, ModelTransformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelTransformation_Body(), theBehaviorPackage.getExpression(), null, "body", null, 1, 1, ModelTransformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelTransformation_Rules(), this.getOperation(), null, "rules", null, 0, -1, ModelTransformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getModelTransformation_OwningModelTypeDefinition(), this.getModelTypeDefinition(), this.getModelTypeDefinition_OwnedTransformations(), "owningModelTypeDefinition", null, 0, 1, ModelTransformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelTransformation_OwnedParameter(), this.getParameter(), null, "ownedParameter", null, 0, -1, ModelTransformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getModelTransformation_IsAbstract(), this.getBoolean(), "isAbstract", null, 0, 1, ModelTransformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(unresolvedModelTypeDefinitionEClass, UnresolvedModelTypeDefinition.class, "UnresolvedModelTypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(unresolvedModelTransformationEClass, UnresolvedModelTransformation.class, "UnresolvedModelTransformation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(modelTypeDefinitionContainerEClass, ModelTypeDefinitionContainer.class, "ModelTypeDefinitionContainer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getModelTypeDefinitionContainer_OwnedModelTypeDefinitions(), this.getModelTypeDefinition(), null, "ownedModelTypeDefinitions", null, 0, -1, ModelTypeDefinitionContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(constraintLanguageEEnum, ConstraintLanguage.class, "ConstraintLanguage");

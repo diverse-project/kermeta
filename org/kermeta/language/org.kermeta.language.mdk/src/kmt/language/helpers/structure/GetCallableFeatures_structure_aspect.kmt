@@ -11,6 +11,7 @@ require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "TypeHelpers_structure_aspect.kmt"
 require "OperationSignatureEquivalence_aspect.kmt"
+require "ModelTransformationSignatureEquivalence_aspect.kmt"
 
 using kermeta::standard
 
@@ -116,6 +117,10 @@ aspect class Type {
 		result := Set<Operation>.new
 	end
 	
+	operation getAllCallableTransformations() : Set<ModelTransformation> is do
+		result := void
+	end
+	
 }
 aspect class ParameterizedType inherits Type {}
 
@@ -181,7 +186,49 @@ aspect class TypeVariable inherits Type{
 		else
 			result := self.supertype.getCallablePropertyByName(attributeName)
 		end
-	end	
+	end
+	
+	method getAllCallableTransformations() : Set<ModelTransformation> is do
+		if supertype.isVoid then
+			result := Set<ModelTransformation>.new
+		else
+			result := self.supertype.getAllCallableTransformations()
+		end
+	end
+}
+
+aspect class ModelTypeDefinition
+{
+	reference allCallableTransformations : Set<ModelTransformation>
+	
+	/**
+	* Return all ModelTransformations that can be called from an instance of this ModelTypeDefinition
+	* 
+	*/
+	operation getAllCallableTransformations() : Set<ModelTransformation> is do
+		if not self.allCallableTransformations.isVoid then
+			result:=self.allCallableTransformations
+		else
+			result:=Set<ModelTransformation>.new
+			result.addAll(self.ownedTransformations)
+			self.ownedBindings.each{ b|
+				var superCallableOperations : Set<ModelTransformation> init b.boundModelTypeDefinition.getAllCallableTransformations()
+				superCallableOperations.each{ superCallable|
+					if not self.ownedTransformations.exists{ op| op.hasSameSignature(superCallable)} then
+						result.add(superCallable)
+					end
+				}
+			}
+			allCallableTransformations:=result
+		end
+	end
+}
+
+aspect class ModelType
+{
+	method getAllCallableTransformations() : Set<ModelTransformation> is do
+		result := self.typeDefinition.getAllCallableTransformations()
+	end
 }
 
 

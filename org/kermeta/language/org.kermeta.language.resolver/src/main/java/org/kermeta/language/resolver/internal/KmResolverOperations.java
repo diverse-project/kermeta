@@ -84,7 +84,7 @@ public class KmResolverOperations {
 		ModelingUnit muResolved = new ModelingUnit(mu.getName());
 		ErrorProneResult<ModelingUnit> result = new ErrorProneResult<ModelingUnit>();
     	try {
-    		muResolved.getMetamodels().addAll(resolver.doResolving(enforceAspect(mu.getMetamodels())));	
+    		muResolved.getMetamodels().addAll(resolver.doResolving(enforceAspect(mu.getMetamodels()), mu.getCurrentMetamodel()));	
     	}
     	catch (Exception e) {
     		logger.error(e.getMessage() != null ? e.getMessage() : e.toString(), KmResolver.LOG_MESSAGE_GROUP, e);
@@ -108,7 +108,7 @@ public class KmResolverOperations {
 		ModelingUnit muResolved = new ModelingUnit(mu.getName());
 		ErrorProneResult<ModelingUnit> result = new ErrorProneResult<ModelingUnit>();
     	try {
-    		muResolved.getMetamodels().addAll(resolver.doStaticSetting(enforceAspect(mu.getMetamodels())));
+    		muResolved.getMetamodels().addAll(resolver.doStaticSetting(enforceAspect(mu.getMetamodels()), mu.getCurrentMetamodel()));
 		}
     	catch (Exception e) {
     		logger.error(e.getMessage() != null ? e.getMessage() : e.toString(), KmResolver.LOG_MESSAGE_GROUP, e);
@@ -131,7 +131,7 @@ public class KmResolverOperations {
 		ModelingUnit muResolved = new ModelingUnit(mu.getName());
 		ErrorProneResult<ModelingUnit> result = new ErrorProneResult<ModelingUnit>();
     	try {
-    		muResolved.getMetamodels().addAll(resolver.resolve(enforceAspect(mu.getMetamodels())));
+    		muResolved.getMetamodels().addAll(resolver.resolve(enforceAspect(mu.getMetamodels()), mu.getCurrentMetamodel()));
 		} catch (Exception e) {
 			logger.error(e.getMessage() != null ? e.getMessage() : e.toString(), KmResolver.LOG_MESSAGE_GROUP, e);
 		}

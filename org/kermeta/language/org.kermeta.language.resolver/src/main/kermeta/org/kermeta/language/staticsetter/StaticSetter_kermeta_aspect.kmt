@@ -134,8 +134,12 @@ package structure {
 				//replacement of body is needed in the case of a body without block
 				body:=body.resolveCallAndInferStatic(context)
 			end
-			~post.each{c|c.inferContainedExpressionStatic(context)}
-			~pre.each{c|c.inferContainedExpressionStatic(context)}
+			~post.each{c|
+				c.inferContainedExpressionStatic(context)
+			}
+			~pre.each{c|
+				c.inferContainedExpressionStatic(context)
+			}
 
 			
 			context.popContext()
@@ -193,7 +197,9 @@ package behavior {
 			self.parameters.clear
 			
 			// self.parameters.addAll(newParameters)
-			newParameters.each{ p | self.parameters.add(p) }
+			newParameters.each{ p |
+				self.parameters.add(p)
+			}
 			setInferedStaticType(context, context.createTypeFromPartialName("kermeta::standard::Object"))
 			result := self
 		end
@@ -246,7 +252,9 @@ package behavior {
 			self.parameters.clear
 			
 			// self.parameters.addAll(newParameters)
-			newParameters.each{ p | self.parameters.add(p) }
+			newParameters.each{ p |
+				self.parameters.add(p)
+			}
 			
 			result := self
 		end
@@ -600,7 +608,7 @@ package behavior {
 		*/
 		operation resolveCallToTypeVariable(context : StaticSetterContext) : CallTypeLiteral is do
 			if target.isVoid then
-				var typeVar :TypeVariable 
+				var typeVar :TypeVariable init void
 				//first in operation if we are in an operation 
 				if not context.currentOperation.isVoid then
 					typeVar:=context.currentOperation.typeParameter.detect{ t| t.name==self.name}
@@ -609,6 +617,25 @@ package behavior {
 				if typeVar.isVoid then
 					typeVar:=context.currentClassDefinition.typeParameter.detect{ t|t.name==self.name}
 				end
+				
+				//MODELTYPE ADDITION
+				var set_name : Sequence<String> init self.name.split("::")
+				if typeVar.isVoid then
+					if not context.currentOperation.isVoid then
+						typeVar:=context.currentOperation.typeParameter.detect{ t| t.name==set_name.at(0)}
+					end
+					if typeVar.isVoid then
+						typeVar:=context.currentClassDefinition.typeParameter.detect{ t|t.name==set_name.at(0)}
+					end
+					if not typeVar.isVoid then
+						if typeVar.isInstanceOf(ModelTypeVariable) then
+							typeVar := typeVar.asType(ModelTypeVariable).virtualType.detect{v|
+								v.typeDefinition.name == set_name.last()
+							}
+						end
+					end
+				end
+				
 				if not typeVar.isVoid then
 					var callTL : CallTypeLiteral init CallTypeLiteral.new
 					callTL.typeref := TypeReference.new.initialize(typeVar)
@@ -689,6 +716,120 @@ package behavior {
 				end	
 			else
 				result := void
+			end
+		end
+		
+		//MODELTYPE ADDITION
+		operation resolveCallToModelTransformation(context : StaticSetterContext) : CallModelTransformation is do
+			if (context.verbose) then
+				stdio.writeln("resolveCallToOperation "+ self.name)
+			end
+			
+			if (target.isVoid).orElse{x|target.staticType.isVoid.orElse{y|target.staticType.realInstanceType.isVoid}} then 
+				stdio.writeln("Warning: targetType of "+ name +" is void. Cannot test if this is a model operation. Probably due to a previous element that hasn't been resolved" )
+				result:=void 
+			else
+				if context.verbose then
+					stdio.writeln((target.isVoid).orElse{x|target.staticType.isVoid}.toString())
+					stdio.writeln(target.toString)
+					stdio.writeln(target.staticType.realInstanceType.toString)
+					stdio.writeln(target.staticType.getAllCallableOperations.toString)
+				end
+				
+				if target.staticType.realInstanceType.isInstanceOf(UnresolvedType) then
+					stdio.writeln(target.staticType.realInstanceType.asType(UnresolvedType).typeIdentifier)
+				end
+				
+				var transfos : Sequence<ModelTransformation> init target.staticType.realInstanceType.getAllCallableTransformations.select{t|t.name==self.name}
+				
+				//TODO: Clarify with respect to AnyModel
+				//Here we must look into Object which is the implicit superclass of everything
+				/*if transfos.isEmpty then
+					if (context.verbose) then stdio.writeln("Implicit inheritance to Object to find operation : "+self.name) end
+					var objectAny : ClassDefinition
+					objectAny := context.getClassDefinitionFromPartialName("kermeta::standard::Object")
+					transfos := objectAny.getAllCallableTransformations.select{t|t.name==self.name}
+				end*/
+				
+				//if we finally found at least one operation
+				if not transfos.isEmpty then
+					if (context.verbose) then stdio.writeln("resolveCallAndInferStatic>Operation2 of UnresolvedCall") end
+										
+					
+					//check if there is only one
+					var transfo : ModelTransformation
+					transfo:=transfos.detect{o|o.ownedParameter.size()==self.parameters.size()}
+					if transfo.isVoid then
+						context.errors.add(ResolverException.new.initialize("Incorrect number of parameters: expected " + transfos.one.ownedParameter.size().toString() + " found "+ 
+						 self.parameters.size().toString , self))
+					else
+						//	this is the CallOperation that must replace this UnresolvedCall
+						var callModelTransformation :  CallModelTransformation init  CallModelTransformation.new
+						//it is stored temporarily to be used when resolving lambdas
+						self.resolvedCall:=callModelTransformation
+						callModelTransformation.staticTransformation:=transfo
+						// move content of UnresolvedCall into the new CallOperation
+						callModelTransformation.name := self.name
+						
+						// infer staticType of the content (except target which has been done previously)
+						// TODO check if necessary, probably already done
+						callModelTransformation.eachOwnedElement{ e | 
+							e.asType(KermetaModelElement).inferContainedExpressionStatic(context)
+							e // scala compiler needs somthing to return
+						}
+						
+						//retry to resolve lambda here, when staticTransformation is known
+						
+						
+						from var lambdaToBeResolved : ToBeResolvedLater
+						until context.waitingContext.isEmpty()
+						loop
+							if (context.verbose) then stdio.writeln("resolving a lambda") end
+							lambdaToBeResolved := context.waitingContext.first()
+							context.waitingContext.removeAt(0)
+							//if the container of the lambda is still unresolved then there is nothing to do
+							if lambdaToBeResolved.current.container.isInstanceOf(UnresolvedCall).andThen{x| lambdaToBeResolved.current.container.asType(UnresolvedCall).resolvedCall.isVoid} then
+								context.errors.add(ResolverException.new.initialize("The type of the lambda expression cannot be setted while its containing operation is not resolved", lambdaToBeResolved.current))
+							else							
+								lambdaToBeResolved.current.resolveCallAndInferStatic(lambdaToBeResolved.context)
+							end
+						end
+					end	
+					
+					
+					if not self.resolvedCall.isVoid then
+						
+						// reassign target and parameters
+						self.resolvedCall.parameters.addAll(self.parameters)
+						
+						// check if type parameters are explicitely passed
+						if not self.generics.isEmpty then
+							if self.generics.size == self.resolvedCall.asType(CallModelTransformation).staticTransformation.typeParameters.size then
+								self.resolvedCall.staticTypeVariableBindings.addAll(self.generics)
+								self.resolvedCall.containedType.addAll(self.containedType)
+							else
+								context.errors.add(ResolverException.new.initialize("Number of type parameters different from the operation definition", resolvedCall))
+							end
+						else
+						//if not, try to infer them
+							self.resolvedCall.asType(CallOperation).inferTypeVariableFromParameters(context)
+						end
+						self.resolvedCall.asType(CallOperation).target := self.target 
+						
+						// The static type of the call operation must be infered.
+						inferStaticTypeOfCallModelTransformation(self.resolvedCall.asType(CallModelTransformation), transfo, context)
+						
+						
+						if (context.verbose) then stdio.writeln("  CallOperation "+ name + " resolved with staticType="+ self.resolvedCall.staticType.toString) end
+					
+					
+						result := self.resolvedCall.asType(CallModelTransformation)
+					else
+						result:=void
+					end
+				else
+				 	result:=void
+				end
 			end
 		end
 	
@@ -793,7 +934,33 @@ package behavior {
 					end
 				else
 					//todo : should take into account the infered type parameters
-					callOperation.setInferedStaticType(context,context.createTypeFromMultiplicityElement(op))
+					callOperation.setInferedStaticType(context,context.createTypeFromMultiplicityElementAndTargetType(op, callOperation.target.staticType))
+				end
+			end
+		end
+		
+		//MODELTYPE ADDITION
+		/**
+		 * This method infers the static type of the given call model transformation.
+		 */
+		operation inferStaticTypeOfCallModelTransformation(callTransformation : CallModelTransformation, transfo : ModelTransformation, context : StaticSetterContext) : Void is do
+			//  The call of operation new that must not return type Object but the corresponding type associated to the new.
+			//TODO Method clone must be supported there as well.
+			if(transfo.name=="new" and transfo.owningModelTypeDefinition.getQualifiedName().endsWith("#org::kermeta::language::structure::ModelType") and 
+				(not callTransformation.target.isVoid).andThen{b | callTransformation.target.isInstanceOf(CallTypeLiteral) }) then
+				callTransformation.setInferedStaticType(context,callTransformation.target.asType(CallTypeLiteral).typeref.type)
+			else
+				//The call of operation asType must only take as parameter a type literal, for typing it statically, and must return
+				//the type represented by this literal
+				if transfo.name=="asType" and callTransformation.parameters.size==1 then
+					if callTransformation.parameters.one.isInstanceOf(CallTypeLiteral) then
+						callTransformation.setInferedStaticType(context,callTransformation.parameters.one.asType(CallTypeLiteral).typeref.type)
+					else						
+						context.errors.add(ResolverException.new.initialize("The special operation asType must have a type literal as a parameter.", self))
+					end
+				else
+					//todo : should take into account the infered type parameters
+					callTransformation.setInferedStaticType(context,context.createTypeFromMultiplicityElementAndTargetType(transfo, callTransformation.target.staticType))
 				end
 			end
 		end
@@ -1005,7 +1172,7 @@ package behavior {
 				context.pushContext()
 				self.parameters.each{x|
 					context.addSymbol(x.name,context.createTypeFromMultiplicityElement(x.type))
-					}
+				}
 				self.body := self.body.resolveCallAndInferStatic(context)
 			
 				//self.setInferedStaticType(context, self.body.staticType)

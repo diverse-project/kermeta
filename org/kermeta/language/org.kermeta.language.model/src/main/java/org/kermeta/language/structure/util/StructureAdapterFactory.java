@@ -26,11 +26,14 @@ import org.kermeta.language.structure.FunctionType;
 import org.kermeta.language.structure.GenericTypeDefinition;
 import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.Metamodel;
-import org.kermeta.language.structure.MetamodelBinding;
 import org.kermeta.language.structure.Model;
 import org.kermeta.language.structure.ModelElementTypeDefinition;
 import org.kermeta.language.structure.ModelElementTypeDefinitionContainer;
+import org.kermeta.language.structure.ModelTransformation;
 import org.kermeta.language.structure.ModelType;
+import org.kermeta.language.structure.ModelTypeDefinition;
+import org.kermeta.language.structure.ModelTypeDefinitionBinding;
+import org.kermeta.language.structure.ModelTypeDefinitionContainer;
 import org.kermeta.language.structure.ModelTypeVariable;
 import org.kermeta.language.structure.MultiplicityElement;
 import org.kermeta.language.structure.NamedElement;
@@ -55,6 +58,8 @@ import org.kermeta.language.structure.TypeVariableBinding;
 import org.kermeta.language.structure.TypedElement;
 import org.kermeta.language.structure.UnresolvedAdaptationOperator;
 import org.kermeta.language.structure.UnresolvedInferredType;
+import org.kermeta.language.structure.UnresolvedModelTransformation;
+import org.kermeta.language.structure.UnresolvedModelTypeDefinition;
 import org.kermeta.language.structure.UnresolvedOperation;
 import org.kermeta.language.structure.UnresolvedProperty;
 import org.kermeta.language.structure.UnresolvedReference;
@@ -286,8 +291,8 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 				return createUnresolvedTypeVariableAdapter();
 			}
 			@Override
-			public Adapter caseMetamodelBinding(MetamodelBinding object) {
-				return createMetamodelBindingAdapter();
+			public Adapter caseModelTypeDefinitionBinding(ModelTypeDefinitionBinding object) {
+				return createModelTypeDefinitionBindingAdapter();
 			}
 			@Override
 			public Adapter caseClassDefinitionBinding(ClassDefinitionBinding object) {
@@ -340,6 +345,26 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseFilteredMetamodelReference(FilteredMetamodelReference object) {
 				return createFilteredMetamodelReferenceAdapter();
+			}
+			@Override
+			public Adapter caseModelTypeDefinition(ModelTypeDefinition object) {
+				return createModelTypeDefinitionAdapter();
+			}
+			@Override
+			public Adapter caseModelTransformation(ModelTransformation object) {
+				return createModelTransformationAdapter();
+			}
+			@Override
+			public Adapter caseUnresolvedModelTypeDefinition(UnresolvedModelTypeDefinition object) {
+				return createUnresolvedModelTypeDefinitionAdapter();
+			}
+			@Override
+			public Adapter caseUnresolvedModelTransformation(UnresolvedModelTransformation object) {
+				return createUnresolvedModelTransformationAdapter();
+			}
+			@Override
+			public Adapter caseModelTypeDefinitionContainer(ModelTypeDefinitionContainer object) {
+				return createModelTypeDefinitionContainerAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -782,6 +807,76 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ModelTypeDefinition <em>Model Type Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.ModelTypeDefinition
+	 * @generated
+	 */
+	public Adapter createModelTypeDefinitionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ModelTransformation <em>Model Transformation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.ModelTransformation
+	 * @generated
+	 */
+	public Adapter createModelTransformationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.UnresolvedModelTypeDefinition <em>Unresolved Model Type Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.UnresolvedModelTypeDefinition
+	 * @generated
+	 */
+	public Adapter createUnresolvedModelTypeDefinitionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.UnresolvedModelTransformation <em>Unresolved Model Transformation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.UnresolvedModelTransformation
+	 * @generated
+	 */
+	public Adapter createUnresolvedModelTransformationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ModelTypeDefinitionContainer <em>Model Type Definition Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.kermeta.language.structure.ModelTypeDefinitionContainer
+	 * @generated
+	 */
+	public Adapter createModelTypeDefinitionContainerAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.VirtualType <em>Virtual Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -964,16 +1059,16 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.MetamodelBinding <em>Metamodel Binding</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.kermeta.language.structure.ModelTypeDefinitionBinding <em>Model Type Definition Binding</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.kermeta.language.structure.MetamodelBinding
+	 * @see org.kermeta.language.structure.ModelTypeDefinitionBinding
 	 * @generated
 	 */
-	public Adapter createMetamodelBindingAdapter() {
+	public Adapter createModelTypeDefinitionBindingAdapter() {
 		return null;
 	}
 

@@ -99,6 +99,9 @@ package kermeta {
 			aspect class CallEnumLiteral inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
+			aspect class CallModelTransformation inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
 		}
 
 
@@ -232,7 +235,7 @@ package kermeta {
 			aspect class UnresolvedTypeVariable inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
-			aspect class MetamodelBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
+			aspect class ModelTypeDefinitionBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
 			aspect class ClassDefinitionBinding inherits org::kermeta::ecore::binarymerger::Mergeable {
@@ -272,6 +275,21 @@ package kermeta {
 			}
 
 			aspect class FilteredMetamodelReference inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class ModelTypeDefinition inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class ModelTransformation inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class UnresolvedModelTypeDefinition inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class UnresolvedModelTransformation inherits org::kermeta::ecore::binarymerger::Mergeable {
+			}
+
+			aspect class ModelTypeDefinitionContainer inherits org::kermeta::ecore::binarymerger::Mergeable {
 			}
 
 		}

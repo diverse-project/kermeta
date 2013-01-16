@@ -87,6 +87,7 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements BehaviorFactory
 			case BehaviorPackage.CALL_OPERATION: return createCallOperation();
 			case BehaviorPackage.CALL_PROPERTY: return createCallProperty();
 			case BehaviorPackage.CALL_ENUM_LITERAL: return createCallEnumLiteral();
+			case BehaviorPackage.CALL_MODEL_TRANSFORMATION: return createCallModelTransformation();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -360,6 +361,16 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements BehaviorFactory
 	public CallEnumLiteral createCallEnumLiteral() {
 		CallEnumLiteralImpl callEnumLiteral = new CallEnumLiteralImpl();
 		return callEnumLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CallModelTransformation createCallModelTransformation() {
+		CallModelTransformationImpl callModelTransformation = new CallModelTransformationImpl();
+		return callModelTransformation;
 	}
 
 	/**

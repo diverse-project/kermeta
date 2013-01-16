@@ -14,9 +14,12 @@ require kermeta
 
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverException.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/staticsetter/StaticSetter_Helpers.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetTypeDefinition_Type_Aspect.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/CreationHelper.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelCollection_GetTypeDefinitionByName.kmt"
+require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/utils/ReferencingModelTypeDefinition_TypeDefinition_aspect.kmt"
 
 
 using kermeta::standard
@@ -32,14 +35,31 @@ class StaticSetterContext
 	
 	//used to store context for late resolving of lambdaexpressions
 	reference waitingContext : Sequence<ToBeResolvedLater>
-
+	
 	attribute verbose : Boolean
+		
+	//Stack of UnresolvedCall that have not been resolved and which target.staticType is a ModelType
+	reference unresolvedCallToTransformationStack : Set<UnresolvedCall>	
 
+	//Metamodel currently built
+	reference currentlyBuiltMetamodel : Metamodel
+	//Metamodels we are processing 
+	reference currentMetamodels : Collection<Metamodel>
+	
+	reference currentClassDefinition : org::kermeta::language::structure::ClassDefinition
+	reference currentOperation : org::kermeta::language::structure::Operation
+	reference currentProperty : org::kermeta::language::structure::Property
+	
+	//contextFrames are used to organize symbols using scopes.
+	attribute contextFrames : seq StaticSetterContextFrame[0..*]
+	
+	attribute typeDefFinder : TypeDefinitionFinder
+	
 	operation initialize(mms : Collection<Metamodel>) : StaticSetterContext is do
-	 	result := self
+		result := self
 	 	currentMetamodels := mms
 	 	waitingContext:=Sequence<ToBeResolvedLater>.new
-	 	verbose := false	 	
+	 	verbose := false
 	end
 	
 	operation saveWaitingContext(current : Expression) : Void is do
@@ -55,37 +75,12 @@ class StaticSetterContext
 		newContext.currentOperation:=currentOperation
 		newContext.currentProperty:=currentProperty
 		contextFrames.each{ f|
-			newContext.contextFrames.add(f.copy())}
+			newContext.contextFrames.add(f.copy())
+		}
 
 		tobeResolved.current:=current
-		
-		//var contextTmp : Sequence<StaticSetterContextFrame> init Sequence<StaticSetterContextFrame>.new
-		//contextTmp
-	
-	end 
-	
-	/**
-	 * Metamodels we are processing 
-	 */
-	reference currentMetamodels : Collection<Metamodel>
-	reference mainCurrentMetamodel : Metamodel // metamodel of the project being resolve, we suppose that imported MM are resolved before hand
-	reference currentClassDefinition : org::kermeta::language::structure::ClassDefinition
-	reference currentOperation : org::kermeta::language::structure::Operation
-	reference currentProperty : org::kermeta::language::structure::Property
-	
-	/**
-	 * contextFrames is used to organize symbols using scopes. 
-	 */
-	attribute contextFrames : seq StaticSetterContextFrame[0..*]
-	
-	attribute typeDefFinder : TypeDefinitionFinder
-	operation getTypeDefFinder() : TypeDefinitionFinder is do
-		if typeDefFinder.isVoid then 
-			typeDefFinder := TypeDefinitionFinder.new
-		end
-		result := typeDefFinder
-	end
-	
+	end 		
+
 	operation pushContext() is do
 		contextFrames.add(StaticSetterContextFrame.new.initialize())
 	end
@@ -109,9 +104,14 @@ class StaticSetterContext
 				result := res
 			end
 		}
-	end		
-	
-	// end of code about symbols
+	end
+		
+	operation getTypeDefFinder() : TypeDefinitionFinder is do
+		if typeDefFinder.isVoid then 
+			typeDefFinder := TypeDefinitionFinder.new
+		end
+		result := typeDefFinder
+	end
 	
 	operation createTypeFromQualifiedName(classDefinitionQualifiedName : String, currentMetamodel : Metamodel) : org::kermeta::language::structure::Type is do
 		var cd : org::kermeta::language::structure::ClassDefinition
@@ -142,6 +142,7 @@ class StaticSetterContext
 			errors.add(ResolverException.new.initialize("Not able to create type for "+ classDefinitionPartialName, self))
 		end
 	end
+	
 	operation getClassDefinitionFromPartialName(classDefinitionQualifiedName : String) : org::kermeta::language::structure::ClassDefinition is do
 		var cd : org::kermeta::language::structure::ClassDefinition
 		cd ?= getTypeDefFinder.getFirstTypeDefinitionByName(classDefinitionQualifiedName, currentMetamodels)
@@ -153,11 +154,9 @@ class StaticSetterContext
 			errors.add(ResolverException.new.initialize("Not able to get ClassDefinition for "+ classDefinitionQualifiedName, self))
 		end
 	end
-	/**
-	 * Return the type of self.
-	 * The Type parameters are bound with least derived admitable type
-	 */
-	 
+	
+	//Return the type of self.
+	//The Type parameters are bound with least derived admitable type
 	operation createSelfType() : org::kermeta::language::structure::Type is do
 		var selfType : org::kermeta::language::structure::Class  init org::kermeta::language::structure::Class.new
 		selfType.typeDefinition := currentClassDefinition
@@ -167,17 +166,38 @@ class StaticSetterContext
 			result := selfType
 		end
 		if selfType.typeDefinition.typeParameter.size!=selfType.typeParamBinding.size then
-		errors.add(ResolverException.new.initialize("Not implemented self with generics ", self))
+			errors.add(ResolverException.new.initialize("Not implemented self with generics ", self))
 		end
 	end
 	
-	operation createTypeFromMultiplicityElement(element : org::kermeta::language::structure::MultiplicityElement ) : org::kermeta::language::structure::Type is do
+	operation createTypeFromMultiplicityElementAndTargetType(element : org::kermeta::language::structure::MultiplicityElement, targetType : org::kermeta::language::structure::Type) : org::kermeta::language::structure::Type is do		
 		if (element.upper.isVoid) then
 			errors.add(ResolverException.new.initialize("Upperbound is null.", element))
-		else 
+		else
 			// clone the type of the multiplicity element
 			var typeCopy : org::kermeta::language::structure::Type
-			typeCopy := element.type
+			
+			//MODELTYPE ADDITION
+			//If the ClassDefinition of element is referenced by a model type definition
+			if not element.type.getTypeDefinitionHelper().isVoid() then
+				if not element.type.getTypeDefinitionHelper().referencingModelTypeDefinitions.isVoid() then
+					if not element.type.getTypeDefinitionHelper().referencingModelTypeDefinitions.isEmpty() then
+						//And if the type of the target from which element is called is a VirtualType
+						if not targetType.isVoid() then
+							if targetType.isInstanceOf(VirtualType) then
+								//Then, typeCopy should be a virtual type
+								typeCopy := targetType.asType(VirtualType).modelTypeVariable.virtualType.detect{vt|
+									vt.name == element.type.getTypeDefinitionHelper().name
+								}
+							end
+						end
+					end
+				end
+			end
+			if typeCopy.isVoid() then
+				typeCopy := element.type
+			end
+			
 			/*	// UGLY: need a real clone
 				if element.type.isInstanceOf(org::kermeta::language::structure::Class) then
 					result := org::kermeta::language::structure::Class.clone(element.type.asType(org::kermeta::language::structure::Class))
@@ -187,7 +207,6 @@ class StaticSetterContext
 				end
 				// TODO deal with other concrete Type
 			*/
-				 
 			if element.upper == 0 then
 				// the only type valid with upper bound == 0 is Void 
 				result := createTypeFromPartialName("kermeta::standard::Void")
@@ -244,31 +263,7 @@ class StaticSetterContext
 		end
 	end
 	
-	
-}
-
-class StaticSetterContextFrame
-{
-	reference symbolMap : kermeta::utils::Hashtable<String, org::kermeta::language::structure::Type>
-	
-	operation initialize() : StaticSetterContextFrame is do
-		symbolMap := kermeta::utils::Hashtable<String, org::kermeta::language::structure::Type>.new
-		result := self
+	operation createTypeFromMultiplicityElement(element : org::kermeta::language::structure::MultiplicityElement ) : org::kermeta::language::structure::Type is do
+		result := self.createTypeFromMultiplicityElementAndTargetType(element, void)
 	end
-	operation copy() : StaticSetterContextFrame is do
-		var newContext : StaticSetterContextFrame init StaticSetterContextFrame.new.initialize()
-		symbolMap.keys.each{ k |
-			 newContext.symbolMap.put(k, symbolMap.getValue(k)) 
-		}
-		result := newContext
-	end
-}
-
-class ToBeResolvedLater
-{
-	reference current : Expression
-	
-	reference context : StaticSetterContext
-
-
 }

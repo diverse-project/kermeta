@@ -72,7 +72,7 @@ public class ModelTypeVariableImpl extends TypeVariableImpl implements ModelType
 	 */
 	public EList<VirtualType> getVirtualType() {
 		if (virtualType == null) {
-			virtualType = new EObjectWithInverseResolvingEList<VirtualType>(VirtualType.class, this, StructurePackage.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE, StructurePackage.VIRTUAL_TYPE__METAMODEL_VARIABLE);
+			virtualType = new EObjectWithInverseResolvingEList<VirtualType>(VirtualType.class, this, StructurePackage.MODEL_TYPE_VARIABLE__VIRTUAL_TYPE, StructurePackage.VIRTUAL_TYPE__MODEL_TYPE_VARIABLE);
 		}
 		return virtualType;
 	}

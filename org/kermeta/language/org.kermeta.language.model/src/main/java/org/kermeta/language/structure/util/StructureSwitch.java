@@ -10,8 +10,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.util.Switch;
 import org.kermeta.language.structure.AbstractOperation;
 import org.kermeta.language.structure.AbstractProperty;
 import org.kermeta.language.structure.AdaptationOperator;
@@ -28,11 +26,14 @@ import org.kermeta.language.structure.FunctionType;
 import org.kermeta.language.structure.GenericTypeDefinition;
 import org.kermeta.language.structure.KermetaModelElement;
 import org.kermeta.language.structure.Metamodel;
-import org.kermeta.language.structure.MetamodelBinding;
 import org.kermeta.language.structure.Model;
 import org.kermeta.language.structure.ModelElementTypeDefinition;
 import org.kermeta.language.structure.ModelElementTypeDefinitionContainer;
+import org.kermeta.language.structure.ModelTransformation;
 import org.kermeta.language.structure.ModelType;
+import org.kermeta.language.structure.ModelTypeDefinition;
+import org.kermeta.language.structure.ModelTypeDefinitionBinding;
+import org.kermeta.language.structure.ModelTypeDefinitionContainer;
 import org.kermeta.language.structure.ModelTypeVariable;
 import org.kermeta.language.structure.MultiplicityElement;
 import org.kermeta.language.structure.NamedElement;
@@ -57,6 +58,8 @@ import org.kermeta.language.structure.TypeVariableBinding;
 import org.kermeta.language.structure.TypedElement;
 import org.kermeta.language.structure.UnresolvedAdaptationOperator;
 import org.kermeta.language.structure.UnresolvedInferredType;
+import org.kermeta.language.structure.UnresolvedModelTransformation;
+import org.kermeta.language.structure.UnresolvedModelTypeDefinition;
 import org.kermeta.language.structure.UnresolvedOperation;
 import org.kermeta.language.structure.UnresolvedProperty;
 import org.kermeta.language.structure.UnresolvedReference;
@@ -80,7 +83,7 @@ import org.kermeta.language.structure.VoidType;
  * @see org.kermeta.language.structure.StructurePackage
  * @generated
  */
-public class StructureSwitch<T> extends Switch<T> {
+public class StructureSwitch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -102,16 +105,34 @@ public class StructureSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Checks whether this is a switch for the given package.
+	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @parameter ePackage the package in question.
-	 * @return whether this is a switch for the given package.
+	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	@Override
-	protected boolean isSwitchFor(EPackage ePackage) {
-		return ePackage == modelPackage;
+	public T doSwitch(EObject theEObject) {
+		return doSwitch(theEObject.eClass(), theEObject);
+	}
+
+	/**
+	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the first non-null result returned by a <code>caseXXX</code> call.
+	 * @generated
+	 */
+	protected T doSwitch(EClass theEClass, EObject theEObject) {
+		if (theEClass.eContainer() == modelPackage) {
+			return doSwitch(theEClass.getClassifierID(), theEObject);
+		}
+		else {
+			List<EClass> eSuperTypes = theEClass.getESuperTypes();
+			return
+				eSuperTypes.isEmpty() ?
+					defaultCase(theEObject) :
+					doSwitch(eSuperTypes.get(0), theEObject);
+		}
 	}
 
 	/**
@@ -122,7 +143,6 @@ public class StructureSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	//@Override
-	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case StructurePackage.KERMETA_MODEL_ELEMENT: {
@@ -324,9 +344,8 @@ public class StructureSwitch<T> extends Switch<T> {
 			case StructurePackage.METAMODEL: {
 				Metamodel metamodel = (Metamodel)theEObject;
 				T result = caseMetamodel(metamodel);
-				if (result == null) result = caseTypeDefinition(metamodel);
 				if (result == null) result = caseNamedElement(metamodel);
-				if (result == null) result = caseTypeContainer(metamodel);
+				if (result == null) result = caseModelTypeDefinitionContainer(metamodel);
 				if (result == null) result = caseKermetaModelElement(metamodel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -506,10 +525,11 @@ public class StructureSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case StructurePackage.METAMODEL_BINDING: {
-				MetamodelBinding metamodelBinding = (MetamodelBinding)theEObject;
-				T result = caseMetamodelBinding(metamodelBinding);
-				if (result == null) result = caseKermetaModelElement(metamodelBinding);
+			case StructurePackage.MODEL_TYPE_DEFINITION_BINDING: {
+				ModelTypeDefinitionBinding modelTypeDefinitionBinding = (ModelTypeDefinitionBinding)theEObject;
+				T result = caseModelTypeDefinitionBinding(modelTypeDefinitionBinding);
+				if (result == null) result = caseModelTypeDefinitionContainer(modelTypeDefinitionBinding);
+				if (result == null) result = caseKermetaModelElement(modelTypeDefinitionBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -616,6 +636,59 @@ public class StructureSwitch<T> extends Switch<T> {
 				FilteredMetamodelReference filteredMetamodelReference = (FilteredMetamodelReference)theEObject;
 				T result = caseFilteredMetamodelReference(filteredMetamodelReference);
 				if (result == null) result = caseKermetaModelElement(filteredMetamodelReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.MODEL_TYPE_DEFINITION: {
+				ModelTypeDefinition modelTypeDefinition = (ModelTypeDefinition)theEObject;
+				T result = caseModelTypeDefinition(modelTypeDefinition);
+				if (result == null) result = caseTypeDefinition(modelTypeDefinition);
+				if (result == null) result = caseNamedElement(modelTypeDefinition);
+				if (result == null) result = caseTypeContainer(modelTypeDefinition);
+				if (result == null) result = caseKermetaModelElement(modelTypeDefinition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.MODEL_TRANSFORMATION: {
+				ModelTransformation modelTransformation = (ModelTransformation)theEObject;
+				T result = caseModelTransformation(modelTransformation);
+				if (result == null) result = caseMultiplicityElement(modelTransformation);
+				if (result == null) result = caseTypedElement(modelTransformation);
+				if (result == null) result = caseTypeContainer(modelTransformation);
+				if (result == null) result = caseNamedElement(modelTransformation);
+				if (result == null) result = caseKermetaModelElement(modelTransformation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.UNRESOLVED_MODEL_TYPE_DEFINITION: {
+				UnresolvedModelTypeDefinition unresolvedModelTypeDefinition = (UnresolvedModelTypeDefinition)theEObject;
+				T result = caseUnresolvedModelTypeDefinition(unresolvedModelTypeDefinition);
+				if (result == null) result = caseModelTypeDefinition(unresolvedModelTypeDefinition);
+				if (result == null) result = caseUnresolvedReference(unresolvedModelTypeDefinition);
+				if (result == null) result = caseTypeDefinition(unresolvedModelTypeDefinition);
+				if (result == null) result = caseNamedElement(unresolvedModelTypeDefinition);
+				if (result == null) result = caseTypeContainer(unresolvedModelTypeDefinition);
+				if (result == null) result = caseKermetaModelElement(unresolvedModelTypeDefinition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.UNRESOLVED_MODEL_TRANSFORMATION: {
+				UnresolvedModelTransformation unresolvedModelTransformation = (UnresolvedModelTransformation)theEObject;
+				T result = caseUnresolvedModelTransformation(unresolvedModelTransformation);
+				if (result == null) result = caseModelTransformation(unresolvedModelTransformation);
+				if (result == null) result = caseUnresolvedReference(unresolvedModelTransformation);
+				if (result == null) result = caseMultiplicityElement(unresolvedModelTransformation);
+				if (result == null) result = caseTypedElement(unresolvedModelTransformation);
+				if (result == null) result = caseTypeContainer(unresolvedModelTransformation);
+				if (result == null) result = caseNamedElement(unresolvedModelTransformation);
+				if (result == null) result = caseKermetaModelElement(unresolvedModelTransformation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.MODEL_TYPE_DEFINITION_CONTAINER: {
+				ModelTypeDefinitionContainer modelTypeDefinitionContainer = (ModelTypeDefinitionContainer)theEObject;
+				T result = caseModelTypeDefinitionContainer(modelTypeDefinitionContainer);
+				if (result == null) result = caseKermetaModelElement(modelTypeDefinitionContainer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1074,6 +1147,81 @@ public class StructureSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Model Type Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Model Type Definition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseModelTypeDefinition(ModelTypeDefinition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Model Transformation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Model Transformation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseModelTransformation(ModelTransformation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Unresolved Model Type Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Unresolved Model Type Definition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUnresolvedModelTypeDefinition(UnresolvedModelTypeDefinition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Unresolved Model Transformation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Unresolved Model Transformation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUnresolvedModelTransformation(UnresolvedModelTransformation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Model Type Definition Container</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Model Type Definition Container</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseModelTypeDefinitionContainer(ModelTypeDefinitionContainer object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Virtual Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1269,17 +1417,17 @@ public class StructureSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Metamodel Binding</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Model Type Definition Binding</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Metamodel Binding</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Model Type Definition Binding</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseMetamodelBinding(MetamodelBinding object) {
+	public T caseModelTypeDefinitionBinding(ModelTypeDefinitionBinding object) {
 		return null;
 	}
 
@@ -1460,7 +1608,6 @@ public class StructureSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	//@Override
-	@Override
 	public T defaultCase(EObject object) {
 		return null;
 	}

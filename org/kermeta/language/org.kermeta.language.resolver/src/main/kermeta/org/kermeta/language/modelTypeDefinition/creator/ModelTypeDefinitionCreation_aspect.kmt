@@ -1,0 +1,71 @@
+/* $Id:$ 
+ * Creation : December 11, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+package org::kermeta::language::structure;
+
+require kermeta
+require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/structureResolver/ResolverContext_Aspect.kmt"
+require "platform:/resource/org.kermeta.language.mdk/src/kmt/language/helpers/structure/MetamodelHelper_structure_aspect.kmt"
+
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/modelTypeDefinition/matching/Matching_Helpers.kmt"
+require "platform:/resource/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/modelTypeDefinition/matching/Matching_Aspect.kmt"
+
+using org::kermeta::language::resolver
+using kermeta::standard
+using org::kermeta::language::resolver::matching
+
+/**
+ * At this point, the only existing ModelTypeDefinition is an empty one, only created to contains ModelTransformations
+ */
+aspect class Metamodel {
+	operation createModelTypeDefinitions() is do
+		var createdMTDs : Set<ModelTypeDefinition> init Set<ModelTypeDefinition>.new
+		self.ownedModelTypeDefinitions.each{mtd|
+			createdMTDs.addAll(mtd.createModelTypeDefinitions())
+		}
+		self.ownedModelTypeDefinitions.empty()
+		self.ownedModelTypeDefinitions.addAll(createdMTDs)
+	end
+}
+
+aspect class ModelTypeDefinition {
+	operation createModelTypeDefinitions() : Set<ModelTypeDefinition> is do
+		result  := Set<ModelTypeDefinition>.new
+		result.add(self)
+				
+		//TODO
+		//Then, we create specific pruned ModelTypeDefinitions for each ModelTransformation, 
+		//and create and check a ModelTypeDefinitionBinding between self and this new ModelTypeDefinition
+		//var newMTD : ModelTypeDefinition
+		//var newBinding : ModelTypeDefinitionBinding
+		//var matchingCtxt : MatchingContext init MatchingContext.new
+		//self.ownedTransformations.each{t|
+		//	newMTD := t.createEffectiveModelTypeDefinition(self.metamodel)
+		//	newBinding := ModelTypeDefinitionBinding.new
+		//	newBinding.boundModelTypeDefinition := newMTD
+		//	self.ownedBindings.add(newBinding)
+		//	self.isTotalIsomorphicSubtypeOf(newBinding, matchingCtxt)
+		//	result.add(newMTD)
+		//}
+	end
+}
+
+aspect class ModelTransformation {
+	operation createEffectiveModelTypeDefinition(mm : Metamodel) : ModelTypeDefinition is do
+		//TODO
+		//We prune the existing ModelTypeDefinition in order to create the effective ModelTypeDefinition for self
+		var newMTD : ModelTypeDefinition
+		newMTD.name := self.owningModelTypeDefinition.name + "_" + self.name
+		
+		self.owningModelTypeDefinition := newMTD
+		newMTD.ownedTransformations.add(self)
+		
+				
+		result := newMTD
+	end
+}

@@ -1,0 +1,135 @@
+/* $Id:$ 
+ * Creation : December 7, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+package org::kermeta::language::resolver::matching;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+using org::kermeta::language::structure
+using kermeta::standard
+using kermeta::utils
+
+class MatchingContext
+{
+	//Current ModelTypeDefinition
+	attribute currentSrc : ModelTypeDefinition
+	attribute currentTgt : ModelTypeDefinition
+	//Current ModelTypeDefinition bindings
+	attribute currentSuccessfulBinding : ModelTypeDefinitionBinding
+	attribute currentFailedBinding : FailedBinding
+	//Current ClassDefinition matching try
+	attribute currentSuccessfulCDMatch : ClassDefinitionBinding
+	attribute currentFailedCDMatch : FailedClassDefinitionMatch
+	attribute successfulCDMatches : Stack<ClassDefinitionBinding>
+	attribute failedCDMatches : Stack<FailedClassDefinitionMatch>
+	//Current Property matching try
+	attribute currentSuccessfulPropMatch : PropertyBinding
+	attribute currentFailedPropMatch : FailedPropertyMatch
+	attribute successfulPropMatches : Stack<PropertyBinding>
+	attribute failedPropMatches : Stack<FailedPropertyMatch>
+	
+	//True if we are currently looking for matched properties in target ClassDefinition for mandatory properties in src ClassDefinition
+	attribute isMandatoryMatch : Boolean
+	
+	operation initialize(src : ModelTypeDefinition, binding : ModelTypeDefinitionBinding) is do
+		self.currentSrc := src
+		self.currentTgt := binding.boundModelTypeDefinition
+		self.currentSuccessfulBinding := binding
+		self.currentFailedBinding := FailedBinding.new
+		self.currentFailedBinding.notSuperType := binding.boundModelTypeDefinition
+		self.isMandatoryMatch := false
+	end
+	
+	operation pushCDMatch(src : ClassDefinition, tgt : ClassDefinition) is do
+		if self.successfulCDMatches == void then
+			self.successfulCDMatches := Stack<ClassDefinitionBinding>.new
+			self.failedCDMatches := Stack<FailedClassDefinitionMatch>.new
+		end
+		//Save current match try
+		self.successfulCDMatches.push(self.currentSuccessfulCDMatch)
+		self.failedCDMatches.push(self.currentFailedCDMatch)
+		
+		//Create a new one
+		self.currentSuccessfulCDMatch := ClassDefinitionBinding.new
+		self.currentSuccessfulCDMatch.source := src
+		self.currentSuccessfulCDMatch.target := tgt
+		
+		self.currentFailedCDMatch := FailedClassDefinitionMatch.new
+		self.currentFailedCDMatch.source := src
+		self.currentFailedCDMatch.target := tgt
+		
+	end
+	
+	operation popCDMatch(match : Boolean) is do
+		if match then
+			//If the current match try was successful, add it to the current ModelTypeDefinitionBinding
+			self.currentSuccessfulBinding.ownedClassDefinitionBindings.add(self.currentSuccessfulCDMatch)
+		else
+			//Otherwise, keep trak for errors
+			self.currentFailedBinding.failedCDMatches.add(self.currentFailedCDMatch)
+		end
+		//Restore the previous state
+		self.currentSuccessfulCDMatch := self.successfulCDMatches.pop()
+		self.currentFailedCDMatch := self.failedCDMatches.pop()
+	end
+	
+	operation pushPropMatch(src : Property, tgt : Property) is do
+		if self.successfulPropMatches == void then
+			self.successfulPropMatches := Stack<PropertyBinding>.new
+			self.failedPropMatches := Stack<FailedPropertyMatch>.new
+		end
+		//Save current match try
+		self.successfulPropMatches.push(self.currentSuccessfulPropMatch)
+		self.failedPropMatches.push(self.currentFailedPropMatch)
+		
+		//Create a new one
+		self.currentSuccessfulPropMatch := PropertyBinding.new
+		self.currentSuccessfulPropMatch.source := src
+		self.currentSuccessfulPropMatch.target := tgt
+		
+		self.currentFailedPropMatch := FailedPropertyMatch.new
+		self.currentFailedPropMatch.source := src
+		self.currentFailedPropMatch.target := tgt
+	end
+	
+	operation popPropMatch(match : Boolean) is do
+		if match then
+			//If the current match try was successful, add it to the current ClassDefinition match
+			self.currentSuccessfulCDMatch.ownedPropertyBindings.add(self.currentSuccessfulPropMatch)
+		else
+			//Otherwise, keep trak for errors
+			if self.isMandatoryMatch then
+				self.currentFailedCDMatch.failedPropertyMatches.add(self.currentFailedPropMatch)
+			else
+				self.currentFailedCDMatch.failedMandatoryPropertyMatches.add(self.currentFailedPropMatch)
+			end
+		end
+		//Restore the previous state
+		self.currentSuccessfulCDMatch := successfulCDMatches.pop()
+		self.currentFailedCDMatch := failedCDMatches.pop()
+	end
+}
+
+class FailedBinding {
+	attribute notSuperType : ModelTypeDefinition
+	
+	attribute failedCDMatches : Set<FailedClassDefinitionMatch>
+}
+
+class FailedClassDefinitionMatch {
+	attribute source : ClassDefinition
+	attribute target : ClassDefinition
+	
+	attribute failedPropertyMatches : Set<FailedPropertyMatch>
+	attribute failedMandatoryPropertyMatches : Set<FailedPropertyMatch>
+}
+
+class FailedPropertyMatch {
+	attribute source : Property
+	attribute target : Property
+}

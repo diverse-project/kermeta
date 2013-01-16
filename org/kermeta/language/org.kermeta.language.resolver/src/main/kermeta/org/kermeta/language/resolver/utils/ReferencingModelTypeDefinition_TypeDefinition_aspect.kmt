@@ -1,0 +1,31 @@
+/* $Id:$ 
+ * Creation : December 19, 2012
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cguy
+ */
+
+package org::kermeta::language::structure;
+
+require kermeta
+require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+
+using kermeta::standard
+
+aspect class TypeDefinition {
+	reference referencingModelTypeDefinitions : Set<ModelTypeDefinition>
+}
+
+aspect class Metamodel {
+	operation fillReferencingModelTypeDefinitions() : Void is do
+		self.ownedModelTypeDefinitions.each{mtd|
+			mtd.typeDefinitions.each{td|
+				if td.referencingModelTypeDefinitions.isVoid() then
+					td.referencingModelTypeDefinitions := Set<ModelTypeDefinition>.new
+				end
+				td.referencingModelTypeDefinitions.add(mtd)
+			}
+		}
+	end
+}

@@ -43,21 +43,21 @@ package structure{
 			//stdio.writeln("call resolveStructureContainedType from typecontainer "+self.toString)
 			var toResolve : Sequence<UnresolvedType> init Sequence<UnresolvedType>.new
 			containedType.each{ t|
-					if t.isInstanceOf(UnresolvedType) then
-						toResolve.add(t.asType(UnresolvedType))
-					end
-					}
+				if t.isInstanceOf(UnresolvedType) then
+					toResolve.add(t.asType(UnresolvedType))
+				end
+			}
 			toResolve.each{t |
-					var resolvedType : Type
-					resolvedType:=t.findCorrespondingType(context)
-					if not resolvedType.isVoid then
-						if resolvedType.container.isVoid then
-							containedType.add(resolvedType)
-						end
-						containedType.remove(t)
-					//else
-					//	context.errors.add(ResolverException.new.initialize("Type "+t.name+" cannot be resolved", self))
+				var resolvedType : Type
+				resolvedType:=t.findCorrespondingType(context)
+				if not resolvedType.isVoid then
+					if resolvedType.container.isVoid then
+						containedType.add(resolvedType)
 					end
+					containedType.remove(t)
+				//else
+				//	context.errors.add(ResolverException.new.initialize("Type "+t.name+" cannot be resolved", self))
+				end
 			}
 		
 		end
@@ -129,33 +129,33 @@ package structure{
 							unresolvedWithCorresponding.add(t.asType(UnresolvedType))
 						end
 				end
-				}
+			}
 			unresolvedWithCorresponding.each{t|
 				// make sure to not introduce a circular inheritance (many algorithm may crash otherwise)
 				var involdedTypeDefiniton : Collection<TypeDefinition> init Sequence<TypeDefinition>.new  
 				//stdio.writeln("   DVK searching cyclic inheritance for " + self.name)
 				t.correspondingType.getAllSuperTypes().each{typeInHierarchy |
-							var searchedElement : Object 
-							if typeInHierarchy.isInstanceOf(UnresolvedType) then
-								searchedElement := typeInHierarchy.asType(UnresolvedType).correspondingType
-							else
-								searchedElement := typeInHierarchy
-							end
-						 	if not searchedElement.isVoid then
-							 	var td : TypeDefinition init void
-							 	if searchedElement.isInstanceOf(TypeDefinition) then
-									td := searchedElement.asType(TypeDefinition) // maybe we are a DataType (ie. inherits from TypeDefintion directly
-								end
-								if td.isVoid and searchedElement.isInstanceOf(Class) then
-									td := searchedElement.asType(Class).typeDefinition
-								end
-								if not td.isVoid then
-									involdedTypeDefiniton.add(td)
-								else
-									//stdio.writeln("  cannot find TypeDefinition for Type "+typeInHierarchy.toString)
-								end
-							end
-						}
+					var searchedElement : Object 
+					if typeInHierarchy.isInstanceOf(UnresolvedType) then
+						searchedElement := typeInHierarchy.asType(UnresolvedType).correspondingType
+					else
+						searchedElement := typeInHierarchy
+					end
+					if not searchedElement.isVoid then
+					 	var td : TypeDefinition init void
+					 	if searchedElement.isInstanceOf(TypeDefinition) then
+							td := searchedElement.asType(TypeDefinition) // maybe we are a DataType (ie. inherits from TypeDefintion directly
+						end
+						if td.isVoid and searchedElement.isInstanceOf(Class) then
+							td := searchedElement.asType(Class).typeDefinition
+						end
+						if not td.isVoid then
+							involdedTypeDefiniton.add(td)
+						else
+							//stdio.writeln("  cannot find TypeDefinition for Type "+typeInHierarchy.toString)
+						end
+					end
+				}
 				//involdedTypeDefiniton.each{td | stdio.writeln("            DVK involved resolved inheritance "+ td.toString + " ")}
 				
 				superType.remove(t)
@@ -164,16 +164,18 @@ package structure{
 					// error on self and all supertype definition but don't report if this is kermeta::standard::Object pointing to self
 					if not (self.getQualifiedName.endsWith("^kermeta::standard::Object") and involdedTypeDefiniton.size() == 1) then
 						var involvedList : kermeta::utils::StringBuffer init kermeta::utils::StringBuffer.new
-						involdedTypeDefiniton.each{td | involvedList.append(td.getQualifiedName + " ")}
+						involdedTypeDefiniton.each{td |
+							involvedList.append(td.getQualifiedName + " ")
+						}
 						involdedTypeDefiniton.each{td |
 							context.errors.add(ResolverException.new.initialize("Cyclic inheritance not allowed. Involved TypeDefinitions are : " + involvedList.toString , td))
-							//stdio.writeln("  Cyclic inheritance not allowed. Involved TypeDefinitions are : " + involvedList.toString) 
+							//stdio.writeln("  Cyclic inheritance not allowed. Involved TypeDefinitions are : " + involvedList.toString)
 						}
 					end
 				else
 					superType.add(t.correspondingType)
 				end
-				}
+			}
 		end
 	
 	}
@@ -237,11 +239,11 @@ package structure{
 							unresolvedWithCorresponding.add(t.asType(UnresolvedType))
 						end
 				end
-				}
+			}
 			unresolvedWithCorresponding.each{t|
 				raisedException.remove(t)
 				raisedException.add(t.correspondingType)
-				}
+			}
 			
 		end
 	}
@@ -261,11 +263,11 @@ package structure{
 							unresolvedWithCorresponding.add(t.asType(UnresolvedType))
 						end
 				end
-				}
+			}
 			unresolvedWithCorresponding.each{t|
 				type.remove(t)
 				type.add(t.correspondingType)
-				}
+			}
 			
 		end
 	}

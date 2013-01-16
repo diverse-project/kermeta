@@ -264,6 +264,11 @@ public class RaiseItemProvider
 			(createChildParameter
 				(BehaviorPackage.Literals.RAISE__EXPRESSION,
 				 BehaviorFactory.eINSTANCE.createCallEnumLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.RAISE__EXPRESSION,
+				 BehaviorFactory.eINSTANCE.createCallModelTransformation()));
 	}
 
 }
