@@ -31,6 +31,7 @@ aspect class ClassDefinition {
 	
 	operation generateLLVMIndirectCast(ctx:Context, types:Sequence<ClassDefinition>, initType:ClassDefinition, superType : Boolean) is do
 		if superType then initType.allSuperClasses.add(self) end
+		ctx.reinitOperationVar
 		// self is the type to cast into the first type (i.e. initType)
 		// All the elements of 'types' are the types necessary to incrementally convert self into initType
 		var selfVarPtr : String init ctx.llvm.pointer(ctx.llvm.localVar(qualifiedNameLLVM))
@@ -52,7 +53,7 @@ aspect class ClassDefinition {
 		types.add(self)
 		
 		types.each{t|
-			currVar := ctx.llvm.localVar("v"+i.toString)
+			currVar := ctx.nextOperationVar
 			params.clear
 			params.add(LLVMVar.new.initialise(ctx.llvm.pointer(ctx.llvm.localVar(prevType.qualifiedNameLLVM)), prevVar))
 			//e.g. %"v0" = call %"B"* @"cast_C_B"(%"C"* %"self")
@@ -71,7 +72,7 @@ aspect class ClassDefinition {
 		if(superType) then
 			superClasses.each{st | st.generateLLVMIndirectCast(ctx, types, initType, superType) }
 		else
-			lowerClasses.each{st | st.generateLLVMIndirectCast(ctx, types, initType, superType) }
+			lowerTypes.each{st | st.asType(ClassDefinition).generateLLVMIndirectCast(ctx, types, initType, superType) }
 		end
 	end
 	
@@ -80,8 +81,6 @@ aspect class ClassDefinition {
 		var params : Sequence<LLVMVar> init Sequence<LLVMVar>.new
 		var typeCD : String init ctx.llvm.pointer(ctx.llvm.localVar(qualifiedNameLLVM))
 		var selfVar : String init ctx.llvm.localVar("self")
-		var v0 : String init ctx.llvm.localVar("0")
-		var v1 : String init ctx.llvm.localVar("1")
 		var fctAttrs : Sequence<FunctionAttr> init Sequence<FunctionAttr>.new
 		var alreadyGen:Hashtable<String,String> init Hashtable<String,String>.new
 		var i : Integer init 1
@@ -89,10 +88,9 @@ aspect class ClassDefinition {
 		params.add(LLVMVar.new.initialise(typeCD, selfVar))
 		fctAttrs.add(FunctionAttr.~readonly)
 		fctAttrs.add(FunctionAttr.inlinehint)
-		
 		// Creating a cast function for each direct super type.
 		superClasses.each{st |
-			ctx.casts.append(createCastFunction(ctx, st, v0, v1, params, fctAttrs, typeCD, selfVar, i))
+			ctx.casts.append(_createCastFunctionSuper(ctx, st, params, fctAttrs, typeCD, selfVar, i))
 			allSuperClasses.add(st)
 			st.superClasses.each{t |
 				types.clear
@@ -102,20 +100,49 @@ aspect class ClassDefinition {
 			i := i + 1
 		}
 		// Creating a cast function for each direct lower type.
-		lowerClasses.each{st |
-			ctx.casts.append(createCastFunction(ctx, st, v0, v1, params, fctAttrs, typeCD, selfVar, i))
-			st.lowerClasses.each{t |
+		var cd : ClassDefinition
+		lowerTypes.each{st |
+			cd := st.asType(ClassDefinition)
+			ctx.casts.append(_createCastFunctionLower(ctx, st, params, fctAttrs, typeCD, selfVar, i))
+			cd.lowerTypes.each{t |
 				types.clear
-				types.add(st)
-				t.generateLLVMIndirectCast(ctx, types, self, false)
+				types.add(cd)
+				t.asType(ClassDefinition).generateLLVMIndirectCast(ctx, types, self, false)
 			}
 			i := i + 1
 		}
 	end
-	
-	
+
+
 	// A private helper function. See generateLLVMDirectCast
-	operation createCastFunction(ctx:Context, td:TypeDefinition, v0:String, v1:String, params:Sequence<LLVMVar>, fctAttrs:Sequence<FunctionAttr>, typeCD:String, selfVar:String, i:Integer):String is do
+	operation _createCastFunctionLower(ctx:Context, td:TypeDefinition, params:Sequence<LLVMVar>, fctAttrs:Sequence<FunctionAttr>, typeCD:String, selfVar:String, i:Integer):String is do
+		ctx.reinitOperationVar
+		var v0 : String init ctx.nextOperationVar
+		var v1 : String init ctx.nextOperationVar
+		var v2 : String init ctx.nextOperationVar
+		var i8Ptr : String init ctx.llvm.pointer(ctx.llvm.i8)
+		var sizeGap : Integer init ctx.size.pointer*(1+td.superTypes.indexOf(self))
+		var buf : StringBuffer init StringBuffer.new
+		var tdType : String init ctx.llvm.pointer(ctx.llvm.localVar(td.qualifiedNameLLVM))
+		
+		// Creating the function header
+		buf.append(ctx.llvm.define(LinkageType.internal, tdType, 
+							ctx.llvm.globalVar("cast_"+qualifiedNameLLVM+"_"+td.qualifiedNameLLVM), params, fctAttrs)).append("{\n")
+		buf.append(ctx.llvm.assign(v0, ctx.llvm.bitcast(ctx.llvm.pointer(ctx.llvm.localVar(qualifiedNameLLVM)) + " " + selfVar, i8Ptr, false))).append("\n")
+		buf.append(ctx.llvm.assign(v1, ctx.llvm.getelementptr(i8Ptr, v0, ctx.llvm.i64, -sizeGap, void, 0, false))).append("\n")
+		buf.append(ctx.llvm.assign(v2,  ctx.llvm.bitcast(i8Ptr + " " + v1, tdType, false))).append("\n")
+		// Returing the value.
+		buf.append(ctx.llvm.ret(tdType, v2)).append("\n")
+		buf.append("}\n")
+		result := buf.toString
+	end
+
+
+	// A private helper function. See generateLLVMDirectCast
+	operation _createCastFunctionSuper(ctx:Context, td:TypeDefinition, params:Sequence<LLVMVar>, fctAttrs:Sequence<FunctionAttr>, typeCD:String, selfVar:String, i:Integer):String is do
+		ctx.reinitOperationVar
+		var v0 : String init ctx.nextOperationVar
+		var v1 : String init ctx.nextOperationVar
 		var buf : StringBuffer init StringBuffer.new
 		var tdType : String init ctx.llvm.pointer(ctx.llvm.localVar(td.qualifiedNameLLVM))
 		// Creating the function header

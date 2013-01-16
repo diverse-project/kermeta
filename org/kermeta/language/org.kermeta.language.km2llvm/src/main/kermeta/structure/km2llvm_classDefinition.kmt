@@ -21,12 +21,9 @@ aspect class ClassDefinition {
 	
 	/** Direct super classes of the class. Derived from superTypes. */
 	reference superClasses : oset ClassDefinition[*]
-	/** Direct lower classes of the class. Derived from lowerTypes. */
-	reference lowerClasses : oset ClassDefinition[*]
 	/** The hash map used for the dynamic binding. */
 	attribute table : Hashtable<String, Operation>
 	attribute _tableList : Sequence<Operation> // The sequence of values of the table.
-	
 
 	operation toIgnore() : Boolean is do
 		if(_toIgnore.isVoid) then
@@ -48,10 +45,17 @@ aspect class ClassDefinition {
 		if(not toIgnore) then
 			generateLLVMOperationsTable(ctx)
 			generateLLVMType(ctx)
-			generateLLVMCast(ctx)
 			generateLLVMConstructor(ctx)
 			generateLLVMGetters(ctx)
+			// The cast operations are not generated here but at the end of the process to be sure to have the collection lowerTypes filled.
+			// ctx.classes contains all the generated classes to, at the end, generate the cast operations.
+			ctx.classes.add(self)
 		end
+	end
+
+
+	method sizeOf(ctx:Context) : Integer is do
+		result := 0
 	end
 	
 	
@@ -124,7 +128,7 @@ aspect class ClassDefinition {
 		var returnVar : String init ctx.llvm.localVar("r")
 		var tmpVar : String init ctx.llvm.localVar("t")
 		var getterName : String
-		var cpt : Integer init superTypes.size + lowerTypes.size + 1
+		var cpt : Integer init superTypes.size + 1
 		var returnType : String
 		
 		params.add(LLVMVar.new.initialise(typeCD, selfVar))
@@ -132,6 +136,7 @@ aspect class ClassDefinition {
 		fctAttr.add(FunctionAttr.inlinehint)
 		
 		ownedAttribute.each{attr |
+			ctx.reinitOperationVar
 			returnType := ctx.llvm.pointer(attr.type.llvmType(ctx))
 			getterName := ctx.llvm.globalVar(qualifiedNameLLVM + ".#" + attr.name)
 			ctx.getters.append(ctx.llvm.define(LinkageType.internal, returnType, getterName, params, fctAttr)).append("{\n")
@@ -153,8 +158,6 @@ aspect class ClassDefinition {
 		list.add(LLVMVar.new.initialise(ctx.llvm.pointer(ctx.llvm.pointer(ctx.llvm.i8)), void))
 		// Creating the supertype parameters
 		list.addAll(superTypes.collect{st | LLVMVar.new.initialise(ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM)), void)})
-		// Creating the lowertype parameters
-		list.addAll(lowerTypes.collect{st | LLVMVar.new.initialise(ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM)), void)})
 		ownedAttribute.each{attr | list.add(LLVMVar.new.initialise(ctx.llvm.pointer(attr.type.llvmType(ctx)), void)) }
 		ctx.types.append(ctx.llvm.type(ctx.llvm.localVar(qualifiedNameLLVM), list)).append("\n")
 	end
@@ -162,11 +165,13 @@ aspect class ClassDefinition {
 	
 	// Generates the contructor of the class.
 	operation generateLLVMConstructor(ctx:Context) is do
+		ctx.reinitOperationVar
 	 	var typeName : String init ctx.llvm.pointer(ctx.llvm.localVar(qualifiedNameLLVM))
-	 	var resultVar : String init "%r"
+	 	var resultVar : String init ctx.nextOperationVar
 	 	ctx.constructors.append(ctx.llvm.define(LinkageType.internal, typeName, ctx.llvm.globalVar("create_" + qualifiedNameLLVM), void, void)).append("{\n")
 		
 		// Creation of the object.
+		//FIXME: use malloc
 		ctx.constructors.append(ctx.llvm.assign(resultVar, ctx.llvm.alloca(ctx.llvm.localVar(qualifiedNameLLVM)))).append("\n")
 		
 		// Creation of the super types.
@@ -220,11 +225,6 @@ aspect class ClassDefinition {
 		superTypes.each{st |
 			if st.isInstanceOf(ClassDefinition) then
 				superClasses.add(st.asType(ClassDefinition))
-			end
-		}
-		lowerTypes.each{st |
-			if st.isInstanceOf(ClassDefinition) then
-				lowerClasses.add(st.asType(ClassDefinition))
 			end
 		}
 	end

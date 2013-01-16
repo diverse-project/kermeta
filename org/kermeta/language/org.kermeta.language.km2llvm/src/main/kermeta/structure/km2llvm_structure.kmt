@@ -153,6 +153,9 @@ aspect class TypeDefinition {
 	end
 	
 	
+	operation sizeOf(ctx:Context) : Integer is abstract
+	
+	
 	operation getOperation(prototype:Operation) : Operation is do
 		result := void
 	end

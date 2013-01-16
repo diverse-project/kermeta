@@ -16,6 +16,7 @@ using kermeta::utils
 using kermeta::standard
 using org::kermeta::language::llvm
 using org::kermeta::language::behavior
+using org::kermeta::language::structure
 using kermeta::io
 
 class Context{
@@ -49,7 +50,11 @@ class Context{
 	attribute stdLibCmd : Hashtable<String, CallGeneratorCmd>
 	// The object defining the size of the basic elements.
 	attribute size : Size
+	// The classes generated. Used to generate the cast at the end of the process.
+	reference classes : oset ClassDefinition[*]
 
+
+	operation reinitOperationVar() is do currentVarCpt := 1 end
 
 	// To use for generating variables for operations.
 	operation nextOperationVar() : String is do 
@@ -76,7 +81,7 @@ class Context{
 		tablesDynBinding := StringBuffer.new
 		cptStrings := 0
 		id := 0
-		currentVarCpt := 0
+		reinitOperationVar
 		size := Size64.new
 		result := self
 		
@@ -86,7 +91,7 @@ class Context{
 		stdLibName.put("kermeta_standard__Integer", llvm.i32)
 		stdLibName.put("kermeta_io__StdIO", "%struct.kermeta_io__StdIO*")
 		
-		initialiseStdLibHashMap()
+		initialiseStdLibHashMap
 	end
 	
 	
@@ -132,6 +137,8 @@ class Context{
 		result.append(tablesDynBinding.toString)
 		result.append(constructors.toString)
 		result.append(getters.toString)
+		// The cast operations must be generated at the end to be sure to have the collection lowerTypes filled.
+		classes.each{cl | cl.generateLLVMCast(self)}
 		result.append(casts.toString)
 		result.append(operations.toString)
 	end

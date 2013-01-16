@@ -43,7 +43,7 @@ aspect class Operation {
 	method generateLLVM(ctx:Context) is do
 		var attrs : Sequence<LLVMVar> init  Sequence<LLVMVar>.new
 		
-		ctx.currentVarCpt := 1
+		ctx.reinitOperationVar
 		
 		// If this operation is the main operation, an operation "main" must be created to create an instance
 		// of the main Kermeta class and then call the main Kermeta operation.
