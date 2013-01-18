@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.kermeta.kp.KermetaProject#getImportedProjects <em>Imported Projects</em>}</li>
  *   <li>{@link org.kermeta.kp.KermetaProject#getImportedProjectSources <em>Imported Project Sources</em>}</li>
  *   <li>{@link org.kermeta.kp.KermetaProject#getImportedFiles <em>Imported Files</em>}</li>
+ *   <li>{@link org.kermeta.kp.KermetaProject#getRequiredTypes <em>Required Types</em>}</li>
  * </ul>
  * </p>
  *
@@ -200,5 +201,21 @@ public interface KermetaProject extends EObject {
    * @generated
    */
 	EList<ImportFile> getImportedFiles();
+
+        /**
+   * Returns the value of the '<em><b>Required Types</b></em>' containment reference list.
+   * The list contents are of type {@link org.kermeta.kp.RequiredType}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Required Types</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Required Types</em>' containment reference list.
+   * @see org.kermeta.kp.KpPackage#getKermetaProject_RequiredTypes()
+   * @model containment="true"
+   * @generated
+   */
+  EList<RequiredType> getRequiredTypes();
 
 } // KermetaProject

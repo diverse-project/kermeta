@@ -142,13 +142,22 @@ public interface KpPackage extends EPackage {
 	int KERMETA_PROJECT__IMPORTED_FILES = 7;
 
 		/**
+   * The feature id for the '<em><b>Required Types</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int KERMETA_PROJECT__REQUIRED_TYPES = 8;
+
+    /**
    * The number of structural features of the '<em>Kermeta Project</em>' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int KERMETA_PROJECT_FEATURE_COUNT = 8;
+	int KERMETA_PROJECT_FEATURE_COUNT = 9;
 
 	/**
    * The meta object id for the '{@link org.kermeta.kp.impl.PackageEquivalenceImpl <em>Package Equivalence</em>}' class.
@@ -336,6 +345,34 @@ public interface KpPackage extends EPackage {
 	int IMPORT_PROJECT_FEATURE_COUNT = 1;
 
 		/**
+   * The meta object id for the '{@link org.kermeta.kp.impl.RequiredTypeImpl <em>Required Type</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.kermeta.kp.impl.RequiredTypeImpl
+   * @see org.kermeta.kp.impl.KpPackageImpl#getRequiredType()
+   * @generated
+   */
+  int REQUIRED_TYPE = 6;
+
+    /**
+   * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REQUIRED_TYPE__QUALIFIED_NAME = 0;
+
+    /**
+   * The number of structural features of the '<em>Required Type</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REQUIRED_TYPE_FEATURE_COUNT = 1;
+
+    /**
    * Returns the meta object for class '{@link org.kermeta.kp.KermetaProject <em>Kermeta Project</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -434,6 +471,17 @@ public interface KpPackage extends EPackage {
 	EReference getKermetaProject_ImportedFiles();
 
 		/**
+   * Returns the meta object for the containment reference list '{@link org.kermeta.kp.KermetaProject#getRequiredTypes <em>Required Types</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Required Types</em>'.
+   * @see org.kermeta.kp.KermetaProject#getRequiredTypes()
+   * @see #getKermetaProject()
+   * @generated
+   */
+  EReference getKermetaProject_RequiredTypes();
+
+    /**
    * Returns the meta object for class '{@link org.kermeta.kp.PackageEquivalence <em>Package Equivalence</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -551,6 +599,27 @@ public interface KpPackage extends EPackage {
 	EReference getImportProject_ProjectResource();
 
 	/**
+   * Returns the meta object for class '{@link org.kermeta.kp.RequiredType <em>Required Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Required Type</em>'.
+   * @see org.kermeta.kp.RequiredType
+   * @generated
+   */
+  EClass getRequiredType();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.kermeta.kp.RequiredType#getQualifiedName <em>Qualified Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Qualified Name</em>'.
+   * @see org.kermeta.kp.RequiredType#getQualifiedName()
+   * @see #getRequiredType()
+   * @generated
+   */
+  EAttribute getRequiredType_QualifiedName();
+
+  /**
    * Returns the meta object for class '{@link org.kermeta.kp.ImportFile <em>Import File</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -690,6 +759,14 @@ public interface KpPackage extends EPackage {
 		EReference KERMETA_PROJECT__IMPORTED_FILES = eINSTANCE.getKermetaProject_ImportedFiles();
 
 				/**
+     * The meta object literal for the '<em><b>Required Types</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference KERMETA_PROJECT__REQUIRED_TYPES = eINSTANCE.getKermetaProject_RequiredTypes();
+
+        /**
      * The meta object literal for the '{@link org.kermeta.kp.impl.PackageEquivalenceImpl <em>Package Equivalence</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -786,6 +863,24 @@ public interface KpPackage extends EPackage {
 		EReference IMPORT_PROJECT__PROJECT_RESOURCE = eINSTANCE.getImportProject_ProjectResource();
 
 				/**
+     * The meta object literal for the '{@link org.kermeta.kp.impl.RequiredTypeImpl <em>Required Type</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.kermeta.kp.impl.RequiredTypeImpl
+     * @see org.kermeta.kp.impl.KpPackageImpl#getRequiredType()
+     * @generated
+     */
+    EClass REQUIRED_TYPE = eINSTANCE.getRequiredType();
+
+        /**
+     * The meta object literal for the '<em><b>Qualified Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute REQUIRED_TYPE__QUALIFIED_NAME = eINSTANCE.getRequiredType_QualifiedName();
+
+        /**
      * The meta object literal for the '{@link org.kermeta.kp.impl.ImportFileImpl <em>Import File</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->

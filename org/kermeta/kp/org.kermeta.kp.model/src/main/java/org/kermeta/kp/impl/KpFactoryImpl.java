@@ -75,6 +75,7 @@ public class KpFactoryImpl extends EFactoryImpl implements KpFactory {
       case KpPackage.REUSABLE_RESOURCE: return createReusableResource();
       case KpPackage.IMPORT_PROJECT_SOURCES: return createImportProjectSources();
       case KpPackage.IMPORT_PROJECT: return createImportProject();
+      case KpPackage.REQUIRED_TYPE: return createRequiredType();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -131,6 +132,17 @@ public class KpFactoryImpl extends EFactoryImpl implements KpFactory {
   }
 
 	/**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RequiredType createRequiredType()
+  {
+    RequiredTypeImpl requiredType = new RequiredTypeImpl();
+    return requiredType;
+  }
+
+  /**
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated

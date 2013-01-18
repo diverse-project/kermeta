@@ -106,6 +106,11 @@ public class KpAdapterFactory extends AdapterFactoryImpl {
         return createImportProjectAdapter();
       }
       @Override
+      public Adapter caseRequiredType(RequiredType object)
+      {
+        return createRequiredTypeAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -197,6 +202,21 @@ public class KpAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
+   * Creates a new adapter for an object of class '{@link org.kermeta.kp.RequiredType <em>Required Type</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.kermeta.kp.RequiredType
+   * @generated
+   */
+  public Adapter createRequiredTypeAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.kermeta.kp.ImportFile <em>Import File</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;

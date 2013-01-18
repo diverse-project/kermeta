@@ -39,7 +39,8 @@ RULES{
     "project" #1  metamodelName[] ("extends" #1 importedProjectSources("," #1 importedProjectSources)*)? "{"
     	(!1"mainClass"  defaultMainClass['"','"']  )?
 	    (!1"mainOperation"  defaultMainOperation['"','"']  )?
-	    (!1"javaBasePackage"  javaBasePackage['"','"']  )? 
+	    (!1"javaBasePackage"  javaBasePackage['"','"']  )?
+	    (!1"requiredTypes"  requiredTypes ("," #1 requiredTypes)* )? 
 	    (  	importedFiles   )*
 	    "}"
 	   
@@ -53,7 +54,7 @@ RULES{
     
     // TODO deal with syntax for "using KMFBytecode()" and "using EMFBytecode()" (the later is equivalent to the default)
     ImportFile::=
-    	!1"import" #1 url['"','"'] ("using" "EMFBytecode" bytecodeFrom['(',')'] ("{" (packageEquivalences)* "}")? )?
+    	!1"import" #1 url['"','"'] ("using" "EMFBytecode" bytecodeFrom['(',')'] ("{" packageEquivalences (packageEquivalences)* "}")? )?
     ;
    	ImportProject ::=
    		!0"importProject" #1 projectResource[] 
@@ -64,5 +65,8 @@ RULES{
    	
     ReusableResource ::=
     	!0"resource" #1 reusableResourceName[] #1 "=" #1 url['"','"'] (!2"alternative" #1 alternateUrls['"','"']("," #1 alternateUrls['"','"'])* )?
+    ;
+    RequiredType ::=
+    	qualifiedName['"','"']
     ;
 }

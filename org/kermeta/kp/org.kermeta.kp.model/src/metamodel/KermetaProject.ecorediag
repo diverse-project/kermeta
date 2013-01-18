@@ -74,7 +74,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_HcFInQ0qEeKrAbLvxz0ieg" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="KermetaProject.ecore#//PackageEquivalence"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HcFIng0qEeKrAbLvxz0ieg" x="85" y="665"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HcFIng0qEeKrAbLvxz0ieg" x="245" y="625"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_Wp7y0A0qEeKrAbLvxz0ieg" type="1001">
     <children xmi:type="notation:Node" xmi:id="_Wp8Z4A0qEeKrAbLvxz0ieg" type="4001"/>
@@ -122,7 +122,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_IsX2UQ0rEeKrAbLvxz0ieg" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="KermetaProject.ecore#//ImportProjectSources"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_IsX2Ug0rEeKrAbLvxz0ieg" x="580" y="450"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_IsX2Ug0rEeKrAbLvxz0ieg" x="615" y="390"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_S5J98A0sEeKrAbLvxz0ieg" type="1001">
     <children xmi:type="notation:Node" xmi:id="_S5KlAA0sEeKrAbLvxz0ieg" type="4001"/>
@@ -138,7 +138,27 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_S5J98Q0sEeKrAbLvxz0ieg" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="KermetaProject.ecore#//ImportProject"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_S5J98g0sEeKrAbLvxz0ieg" x="820" y="460"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_S5J98g0sEeKrAbLvxz0ieg" x="785" y="460"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_zdf4wWF0EeK7Npgc1eS54g" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_zdl_YGF0EeK7Npgc1eS54g" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_zdl_YWF0EeK7Npgc1eS54g" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_9nzwoGF0EeK7Npgc1eS54g" type="2001">
+        <element xmi:type="ecore:EAttribute" href="KermetaProject.ecore#//RequiredType/qualifiedName"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_9nzwoWF0EeK7Npgc1eS54g"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_zdl_YmF0EeK7Npgc1eS54g"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_zdl_Y2F0EeK7Npgc1eS54g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_zdl_ZGF0EeK7Npgc1eS54g"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_zdl_ZWF0EeK7Npgc1eS54g" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_zdl_ZmF0EeK7Npgc1eS54g"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_zdl_Z2F0EeK7Npgc1eS54g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_zdl_aGF0EeK7Npgc1eS54g"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_zdf4wmF0EeK7Npgc1eS54g" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="KermetaProject.ecore#//RequiredType"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zdf4w2F0EeK7Npgc1eS54g" x="855" y="230"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_HHoikg0qEeKrAbLvxz0ieg"/>
   <element xmi:type="ecore:EPackage" href="KermetaProject.ecore#/"/>
@@ -152,7 +172,7 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_HcIL4w0qEeKrAbLvxz0ieg" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_HcIL5A0qEeKrAbLvxz0ieg" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="KermetaProject.ecore#//KermetaProject/importedFiles"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_HcIL5Q0qEeKrAbLvxz0ieg" points="[-6, 0, 371, -316]$[-391, 0, -14, -316]$[-377, 314, 0, -2]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_HcIL5Q0qEeKrAbLvxz0ieg" points="[-6, 0, 371, -316]$[-377, 0, 0, -316]$[-377, 314, 0, -2]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_HeSIAQ0qEeKrAbLvxz0ieg" id="(0.03317535545023697,0.3627450980392157)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_HeSIAg0qEeKrAbLvxz0ieg" id="(0.09803921568627451,0.058823529411764705)"/>
   </edges>
@@ -166,9 +186,9 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_HcJaAQ0qEeKrAbLvxz0ieg" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_HcJaAg0qEeKrAbLvxz0ieg" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="KermetaProject.ecore#//ImportFile/packageEquivalences"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_HcJaAw0qEeKrAbLvxz0ieg" points="[0, 0, -93, 111]$[93, -111, 0, 0]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_HcJaAw0qEeKrAbLvxz0ieg" points="[48, -9, -177, -100]$[178, -9, -47, -100]$[220, 81, -5, -10]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_HeSIAw0qEeKrAbLvxz0ieg" id="(0.5294117647058824,0.9019607843137255)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_HeSvEA0qEeKrAbLvxz0ieg" id="(0.5,1.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_HeSvEA0qEeKrAbLvxz0ieg" id="(0.3780487804878049,0.17647058823529413)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_s_UgcA0qEeKrAbLvxz0ieg" type="3002" source="_HbYlAA0qEeKrAbLvxz0ieg" target="_Wp7y0A0qEeKrAbLvxz0ieg">
     <children xmi:type="notation:Node" xmi:id="_s_UgdA0qEeKrAbLvxz0ieg" type="4011">
@@ -180,7 +200,7 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_s_UgcQ0qEeKrAbLvxz0ieg" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_s_Ugcg0qEeKrAbLvxz0ieg" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="KermetaProject.ecore#//KermetaProject/reusableResources"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_s_Ugcw0qEeKrAbLvxz0ieg" points="[-8, 6, 312, -212]$[-318, 212, 2, -6]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_s_Ugcw0qEeKrAbLvxz0ieg" points="[-8, 8, 54, -119]$[-53, 8, 9, -119]$[-53, 118, 9, -9]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_s_W8sA0qEeKrAbLvxz0ieg" id="(0.04265402843601896,0.6705882352941176)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_s_W8sQ0qEeKrAbLvxz0ieg" id="(0.9171974522292994,0.10294117647058823)"/>
   </edges>
@@ -207,9 +227,9 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_LhqBYQ0rEeKrAbLvxz0ieg" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_LhqBYg0rEeKrAbLvxz0ieg" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="KermetaProject.ecore#//KermetaProject/importedProjectSources"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_LhqBYw0rEeKrAbLvxz0ieg" points="[-23, -11, 105, 48]$[-126, -48, 2, 11]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_LhsdoA0rEeKrAbLvxz0ieg" id="(0.47393364928909953,0.8921568627450981)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_LhsdoQ0rEeKrAbLvxz0ieg" id="(0.910958904109589,0.7441860465116279)"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_LhqBYw0rEeKrAbLvxz0ieg" points="[5, 0, -18, -173]$[36, 0, 13, -173]$[24, 168, 1, -5]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_LhsdoA0rEeKrAbLvxz0ieg" id="(0.976303317535545,0.7254901960784313)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_LhsdoQ0rEeKrAbLvxz0ieg" id="(0.726027397260274,0.046511627906976744)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_gKX8YA0sEeKrAbLvxz0ieg" type="3002" source="_HbYlAA0qEeKrAbLvxz0ieg" target="_S5J98A0sEeKrAbLvxz0ieg">
     <children xmi:type="notation:Node" xmi:id="_gKYjcA0sEeKrAbLvxz0ieg" type="4011">
@@ -221,12 +241,12 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_gKX8YQ0sEeKrAbLvxz0ieg" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_gKX8Yg0sEeKrAbLvxz0ieg" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="KermetaProject.ecore#//KermetaProject/importedProjects"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_gKX8Yw0sEeKrAbLvxz0ieg" points="[8, 19, -70, -112]$[21, 124, -57, -7]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_gKa_sA0sEeKrAbLvxz0ieg" id="(0.9620853080568721,0.7745098039215687)"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_gKX8Yw0sEeKrAbLvxz0ieg" points="[8, -1, -141, -254]$[149, -17, 0, -270]$[149, 233, 0, -20]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_gKa_sA0sEeKrAbLvxz0ieg" id="(0.9715639810426541,0.5392156862745098)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="__791UR9tEeKLk8oLzj8uUg" type="3002" source="_IsX2UA0rEeKrAbLvxz0ieg" target="_Wp7y0A0qEeKrAbLvxz0ieg">
     <children xmi:type="notation:Node" xmi:id="__8D78B9tEeKLk8oLzj8uUg" type="4011">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="__8D78R9tEeKLk8oLzj8uUg" x="-10" y="-10"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="__8D78R9tEeKLk8oLzj8uUg" x="-33" y="-14"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="__8D78h9tEeKLk8oLzj8uUg" type="4012">
       <layoutConstraint xmi:type="notation:Location" xmi:id="__8D78x9tEeKLk8oLzj8uUg" x="10" y="10"/>
@@ -248,7 +268,21 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_G-Mh8R9uEeKLk8oLzj8uUg" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_G-Mh8h9uEeKLk8oLzj8uUg" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="KermetaProject.ecore#//ImportProject/projectResource"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_G-Mh8x9uEeKLk8oLzj8uUg" points="[-50, 17, 412, 111]$[-390, 136, 72, 230]$[-451, -58, 11, 36]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_G-Mh8x9uEeKLk8oLzj8uUg" points="[-50, 0, 377, 90]$[-360, 0, 67, 90]$[-401, -54, 26, 36]"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_G-SokB9uEeKLk8oLzj8uUg" id="(0.8108108108108109,0.6129032258064516)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_3CSOIGF0EeK7Npgc1eS54g" type="3002" source="_HbYlAA0qEeKrAbLvxz0ieg" target="_zdf4wWF0EeK7Npgc1eS54g">
+    <children xmi:type="notation:Node" xmi:id="_3CSOJGF0EeK7Npgc1eS54g" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_3CSOJWF0EeK7Npgc1eS54g" x="25" y="-6"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_3CSOJmF0EeK7Npgc1eS54g" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_3CSOJ2F0EeK7Npgc1eS54g" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_3CSOIWF0EeK7Npgc1eS54g" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_3CSOImF0EeK7Npgc1eS54g" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="KermetaProject.ecore#//KermetaProject/requiredTypes"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_3CSOI2F0EeK7Npgc1eS54g" points="[3, 6, -172, -67]$[204, 6, 29, -67]$[185, 51, 10, -22]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_3CYUwGF0EeK7Npgc1eS54g" id="(0.985781990521327,0.29411764705882354)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_3CYUwWF0EeK7Npgc1eS54g" id="(0.38095238095238093,0.23529411764705882)"/>
   </edges>
 </notation:Diagram>

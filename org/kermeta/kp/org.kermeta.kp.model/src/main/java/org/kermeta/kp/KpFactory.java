@@ -71,6 +71,15 @@ public interface KpFactory extends EFactory {
 	ImportProject createImportProject();
 
 	/**
+   * Returns a new object of class '<em>Required Type</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Required Type</em>'.
+   * @generated
+   */
+  RequiredType createRequiredType();
+
+  /**
    * Returns a new object of class '<em>Import File</em>'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

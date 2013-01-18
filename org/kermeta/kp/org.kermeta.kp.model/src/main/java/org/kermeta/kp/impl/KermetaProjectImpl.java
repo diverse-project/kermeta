@@ -22,6 +22,7 @@ import org.kermeta.kp.ImportProject;
 import org.kermeta.kp.ImportProjectSources;
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.KpPackage;
+import org.kermeta.kp.RequiredType;
 import org.kermeta.kp.ReusableResource;
 
 /**
@@ -39,6 +40,7 @@ import org.kermeta.kp.ReusableResource;
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getImportedProjects <em>Imported Projects</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getImportedProjectSources <em>Imported Project Sources</em>}</li>
  *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getImportedFiles <em>Imported Files</em>}</li>
+ *   <li>{@link org.kermeta.kp.impl.KermetaProjectImpl#getRequiredTypes <em>Required Types</em>}</li>
  * </ul>
  * </p>
  *
@@ -166,6 +168,16 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
 	protected EList<ImportFile> importedFiles;
 
 		/**
+   * The cached value of the '{@link #getRequiredTypes() <em>Required Types</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getRequiredTypes()
+   * @generated
+   * @ordered
+   */
+  protected EList<RequiredType> requiredTypes;
+
+    /**
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
@@ -326,6 +338,20 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
 
 		/**
    * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<RequiredType> getRequiredTypes()
+  {
+    if (requiredTypes == null)
+    {
+      requiredTypes = new EObjectContainmentEList<RequiredType>(RequiredType.class, this, KpPackage.KERMETA_PROJECT__REQUIRED_TYPES);
+    }
+    return requiredTypes;
+  }
+
+    /**
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    */
@@ -341,6 +367,8 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
         return ((InternalEList<?>)getImportedProjectSources()).basicRemove(otherEnd, msgs);
       case KpPackage.KERMETA_PROJECT__IMPORTED_FILES:
         return ((InternalEList<?>)getImportedFiles()).basicRemove(otherEnd, msgs);
+      case KpPackage.KERMETA_PROJECT__REQUIRED_TYPES:
+        return ((InternalEList<?>)getRequiredTypes()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -370,6 +398,8 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
         return getImportedProjectSources();
       case KpPackage.KERMETA_PROJECT__IMPORTED_FILES:
         return getImportedFiles();
+      case KpPackage.KERMETA_PROJECT__REQUIRED_TYPES:
+        return getRequiredTypes();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -412,6 +442,10 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
         getImportedFiles().clear();
         getImportedFiles().addAll((Collection<? extends ImportFile>)newValue);
         return;
+      case KpPackage.KERMETA_PROJECT__REQUIRED_TYPES:
+        getRequiredTypes().clear();
+        getRequiredTypes().addAll((Collection<? extends RequiredType>)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -449,6 +483,9 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
       case KpPackage.KERMETA_PROJECT__IMPORTED_FILES:
         getImportedFiles().clear();
         return;
+      case KpPackage.KERMETA_PROJECT__REQUIRED_TYPES:
+        getRequiredTypes().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -478,6 +515,8 @@ public class KermetaProjectImpl extends EObjectImpl implements KermetaProject {
         return importedProjectSources != null && !importedProjectSources.isEmpty();
       case KpPackage.KERMETA_PROJECT__IMPORTED_FILES:
         return importedFiles != null && !importedFiles.isEmpty();
+      case KpPackage.KERMETA_PROJECT__REQUIRED_TYPES:
+        return requiredTypes != null && !requiredTypes.isEmpty();
     }
     return super.eIsSet(featureID);
   }

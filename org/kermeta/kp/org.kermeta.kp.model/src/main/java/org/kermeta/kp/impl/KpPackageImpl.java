@@ -18,6 +18,7 @@ import org.kermeta.kp.KermetaProject;
 import org.kermeta.kp.KpFactory;
 import org.kermeta.kp.KpPackage;
 import org.kermeta.kp.PackageEquivalence;
+import org.kermeta.kp.RequiredType;
 import org.kermeta.kp.ReusableResource;
 
 /**
@@ -63,6 +64,13 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 	private EClass importProjectEClass = null;
 
 		/**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass requiredTypeEClass = null;
+
+    /**
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
@@ -215,6 +223,16 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 
 		/**
    * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getKermetaProject_RequiredTypes()
+  {
+    return (EReference)kermetaProjectEClass.getEStructuralFeatures().get(8);
+  }
+
+    /**
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    */
@@ -314,6 +332,26 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 
 	/**
    * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getRequiredType()
+  {
+    return requiredTypeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getRequiredType_QualifiedName()
+  {
+    return (EAttribute)requiredTypeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    */
@@ -385,6 +423,7 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
     createEReference(kermetaProjectEClass, KERMETA_PROJECT__IMPORTED_PROJECTS);
     createEReference(kermetaProjectEClass, KERMETA_PROJECT__IMPORTED_PROJECT_SOURCES);
     createEReference(kermetaProjectEClass, KERMETA_PROJECT__IMPORTED_FILES);
+    createEReference(kermetaProjectEClass, KERMETA_PROJECT__REQUIRED_TYPES);
 
     importFileEClass = createEClass(IMPORT_FILE);
     createEAttribute(importFileEClass, IMPORT_FILE__URL);
@@ -405,6 +444,9 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 
     importProjectEClass = createEClass(IMPORT_PROJECT);
     createEReference(importProjectEClass, IMPORT_PROJECT__PROJECT_RESOURCE);
+
+    requiredTypeEClass = createEClass(REQUIRED_TYPE);
+    createEAttribute(requiredTypeEClass, REQUIRED_TYPE__QUALIFIED_NAME);
   }
 
 	/**
@@ -446,6 +488,7 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
     initEReference(getKermetaProject_ImportedProjects(), this.getImportProject(), null, "importedProjects", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getKermetaProject_ImportedProjectSources(), this.getImportProjectSources(), null, "importedProjectSources", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getKermetaProject_ImportedFiles(), this.getImportFile(), null, "importedFiles", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getKermetaProject_RequiredTypes(), this.getRequiredType(), null, "requiredTypes", null, 0, -1, KermetaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(importFileEClass, ImportFile.class, "ImportFile", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getImportFile_Url(), ecorePackage.getEString(), "url", null, 1, 1, ImportFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -468,6 +511,9 @@ public class KpPackageImpl extends EPackageImpl implements KpPackage {
 
     initEClass(importProjectEClass, ImportProject.class, "ImportProject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getImportProject_ProjectResource(), this.getReusableResource(), null, "projectResource", null, 1, 1, ImportProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(requiredTypeEClass, RequiredType.class, "RequiredType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getRequiredType_QualifiedName(), ecorePackage.getEString(), "qualifiedName", null, 1, 1, RequiredType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

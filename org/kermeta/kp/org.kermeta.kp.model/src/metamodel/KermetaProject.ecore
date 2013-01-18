@@ -8,8 +8,7 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultMainClass" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultMainOperation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="javaBasePackage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="javaBasePackage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="reusableResources" upperBound="-1"
         eType="#//ReusableResource" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="importedProjects" upperBound="-1"
@@ -18,6 +17,8 @@
         upperBound="-1" eType="#//ImportProjectSources" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="importedFiles" upperBound="-1"
         eType="#//ImportFile" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiredTypes" upperBound="-1"
+        eType="#//RequiredType" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ImportFile">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -46,5 +47,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="ImportProject">
     <eStructuralFeatures xsi:type="ecore:EReference" name="projectResource" lowerBound="1"
         eType="#//ReusableResource"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RequiredType">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This represents types that are used by this project but that cannot be found neither in the current project, nor in one of its imports.&#xD;&#xA;Using this will lead to a partial build. (produced km not completly resolved, no bytecode)"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>
