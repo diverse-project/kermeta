@@ -621,7 +621,7 @@ public class KermetaCompiler {
 				
 				if(!kp.getRequiredTypes().isEmpty()){
 					// TODO must verify that only types in requiredTypes are unresolved, this implies to ensures that the resolver works even if standard::Object isn't available
-					logger.info("Building partial project only. full resolving and bytecode should be done by the projects that imports or extends this one", LOG_MESSAGE_GROUP);
+					logger.info("Building partial project only. Full resolving and bytecode should be done by the projects that import or extend this one", LOG_MESSAGE_GROUP);
 				}
 				URI uri = URI.createURI((mergedUnit.getResult().getName() + ".km_in_memory").replaceAll("::", "."));
 				File mergedFile = new File(targetGeneratedResourcesFolder + DEFAULT_KP_METAINF_LOCATION_IN_JAR + File.separatorChar+ kp.getMetamodelName() + ".km");
