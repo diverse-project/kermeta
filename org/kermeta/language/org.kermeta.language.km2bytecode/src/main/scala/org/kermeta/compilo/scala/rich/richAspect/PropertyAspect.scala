@@ -12,17 +12,20 @@ import scala.collection.mutable.StringBuilder
 trait PropertyAspect extends ObjectVisitor with LogAspect {
 
   def visitProperty(thi: Property, res: StringBuilder): Unit = {
-    if (Util.hasEcoreTag(thi.getOwningClass)) {
+    
+    var prefix: String = getPrefix(thi)
+      
+    if (isImplementingModelTypeInterface()) {      
+      prefix = getCompilerConfiguration().modelTypeOperationsPrefix
+      generateNonEcorePropertyAccessors(thi, res, prefix)
+    } else if (Util.hasEcoreTag(thi.getOwningClass)) {
       if (Util.hasEcoreTag(thi)) {
-        generateScalGet(thi, res, "")
-        generateScalSet(thi, res, "")
+        generateNonEcorePropertyScalaAccessors(thi, res, prefix)
       } else {
         if (!Util.hasCompilerIgnoreTag(thi)) {
           generateAttribute(thi, res)
-          generateGet(thi, res, "Ker")
-          generateSet(thi, res, "Ker")
-          generateScalGet(thi, res, "Ker")
-          generateScalSet(thi, res, "Ker")
+          generateNonEcorePropertyAccessors(thi, res, prefix)
+          generateNonEcorePropertyScalaAccessors(thi, res, prefix)
         }
 
         //TODO générer getter et setter si property ajoutée par un ecore
@@ -32,13 +35,74 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
     } else {
       if (!Util.hasCompilerIgnoreTag(thi)) {
         generateAttribute(thi, res)
-        generateGet(thi, res, "Ker")
-        generateSet(thi, res, "Ker")
-        generateScalGet(thi, res, "Ker")
-        generateScalSet(thi, res, "Ker")
+        generateNonEcorePropertyAccessors(thi, res, prefix)
+        generateNonEcorePropertyScalaAccessors(thi, res, prefix)
       }
 
     }
+  }
+  
+  def getPrefix(thi : Property) : String = {
+    var res : String = ""
+    if (!Util.hasEcoreTag(thi)) {
+      res = res + "Ker"
+    }
+    return res
+  }  
+
+  def generateNonEcorePropertyAccessors(thi: Property, res: StringBuilder, prefix: String) = {
+    generateGet(thi, res, prefix)
+    generateSet(thi, res, prefix)
+  }
+
+  def generateNonEcorePropertyScalaAccessors(thi: Property, res: StringBuilder, prefix: String) = {
+    generateScalGet(thi, res, prefix)
+    generateScalSet(thi, res, prefix)
+  }
+
+  def generatePropertySignatures(thi: Property, res: StringBuilder): Unit = {
+    generatePropertySignatures(thi, res, false)
+  }
+
+  def generatePropertySignatures(thi: Property, res: StringBuilder, modelTypeInterface: Boolean): Unit = {
+
+    if (modelTypeInterface) {
+      var prefix: String = ""
+      prefix = getCompilerConfiguration().modelTypeOperationsPrefix
+      generateNonEcorePropertySignature(thi, res, prefix)
+    } else if (Util.hasEcoreTag(thi.getOwningClass)) {
+      if (Util.hasEcoreTag(thi)) {
+        generateNonEcorePropertyScalaSignature(thi, res, "")
+      } else {
+        if (!Util.hasCompilerIgnoreTag(thi)) {
+          generateNonEcorePropertySignature(thi, res, "Ker")
+          generateNonEcorePropertyScalaSignature(thi, res, "Ker")
+        }
+
+        //TODO générer getter et setter si property ajoutée par un ecore
+      }
+      //		 		value.getGetterBody
+      //		 		value.getSetterBody
+    } else {
+      if (!Util.hasCompilerIgnoreTag(thi)) {
+        generateNonEcorePropertySignature(thi, res, "Ker")
+        generateNonEcorePropertyScalaSignature(thi, res, "Ker")
+      }
+    }
+  }
+
+  def generateNonEcorePropertySignature(thi: Property, res: StringBuilder, prefix: String) = {
+    generateGetSignature(thi, res, prefix)
+    res.append("\n")
+    generateSetSignature(thi, res, prefix)
+    res.append("\n")
+  }
+
+  def generateNonEcorePropertyScalaSignature(thi: Property, res: StringBuilder, prefix: String) = {
+    generateScalaGetSignature(thi, res, prefix)
+    res.append("\n")
+    generateScalaSetSignature(thi, res, prefix)
+    res.append("\n")
   }
 
   def generateAttribute(thi: Property, res: StringBuilder): Unit = {
@@ -66,6 +130,80 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
   }
 
   def generateGet(thi: Property, res: StringBuilder, prefix: String): Unit = {
+    generateGetSignature(thi, res, prefix)
+
+    var hasTypeEq: Boolean = false
+    var baseName: String = "_root_."
+    var aspectName: String = "_root_."
+    if (thi.getType().isInstanceOf[Class]) {
+      var cd: ClassDefinition = thi.getType().asInstanceOf[Class].getTypeDefinition().asInstanceOf[ClassDefinition]
+      hasTypeEq = hasTypeEquivalence(cd)
+      if (Util.hasEcoreTag(cd)) {
+        baseName = baseName + getPQualifiedNamedBase(cd)
+      } else {
+        baseName = baseName + getQualifiedNamedBase(cd)
+      }
+      aspectName = aspectName + getQualifiedNamedAspect(cd)
+    }
+
+    if (isImplementingModelTypeInterface()) {
+      var typeName: StringBuilder = new StringBuilder
+      visit(thi.getType(), typeName)
+      res.append("={")
+
+      if (thi.getType().isInstanceOf[Class] && !hasTypeEq) {
+        if (thi.getUpper > 1 || thi.getUpper == -1) {
+          res.append("\n\tvar res : ")
+          res.append("k2.standard.Kermeta")
+          getCollectionType(thi, res)
+          res.append("[")
+          res.append(baseName)
+          res.append("] = k2.standard.KerRichFactory.create")
+          getCollectionType(thi, res)
+          res.append("[")
+          res.append(baseName)
+          res.append("]\n")
+
+          res.append("\tthis.")
+
+          generateScalaGetName(thi, res, getPrefix(thi))
+          res.append(".each(e => {")
+
+          res.append("res.add(e.asInstanceOf[")
+          res.append(aspectName)
+          res.append("])})")
+
+          res.append("\n\treturn res")
+
+          res.append("\n  }")
+
+        } else {
+          res.append("\n\tif (!this.")
+          generateScalaGetName(thi, res, getPrefix(thi))
+          res.append(".isInstanceOf[")
+          res.append(typeName.toString())
+          res.append("]) {")
+          res.append("richAspect(this.")
+          generateScalaGetName(thi, res, getPrefix(thi))
+          res.append(")")
+          res.append("} else {")
+          res.append("this.")
+          generateScalaGetName(thi, res, getPrefix(thi))
+          res.append("}")
+          res.append("\n  }")
+        }
+      } else {
+        res.append("this.")
+        generateScalaGetName(thi, res, getPrefix(thi))
+        res.append("}")
+      }
+    } else {
+      res.append("={this." + Util.protectScalaKeyword(thi.getName()) + "}")
+    }
+    res.append("\n")
+  }
+
+  def generateGetSignature(thi: Property, res: StringBuilder, prefix: String) = {
     res.append("  def ")
     var s: StringBuilder = new StringBuilder
     visit(thi.getType(), s)
@@ -78,9 +216,6 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
     res.append(thi.getName.substring(0, 1).toUpperCase + thi.getName.substring(1, thi.getName.size) + "()")
     res.append(" : ")
     getListorType(thi, res)
-    res.append("={this." + Util.protectScalaKeyword(thi.getName()) + "}")
-
-    res.append("\n")
   }
 
   def getGetter(thi: Property, s: StringBuilder, res: StringBuilder, prefix: String) = {
@@ -138,25 +273,14 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
 
   def generateScalGet(thi: Property, res: StringBuilder, prefix: String): Unit = {
 
+    val ownerType = new StringBuilder // Contains the type of thi owner, i.e. the type of opposite if there is one
+    getOwnerType(thi, ownerType)
+
     val thiType: StringBuilder = new StringBuilder // Contains the type of thi
     visit(thi.getType(), thiType)
 
-    val ownerType = new StringBuilder; getOwnerType(thi, ownerType) // Contains the type of thi owner, i.e. the type of opposite if there is one
+    generateScalaGetSignature(thi, res, prefix)
 
-    res.append("  def " + GlobalConfiguration.scalaPrefix)
-    //        res.append(thi.getName+"")
-    res.append(thi.getName + "")
-    res.append(" : ")
-    if (Util.isAMapEntry(thi.getType()) || thi.getGetterBody != null) { // MapEntry and derived properties doesn't use ReflectiveCollection
-      getListorType(thi, res)
-    } else if (thi.getUpper() > 1 || thi.getUpper() == -1) {
-      res.append("k2.standard.Reflective")
-      getCollectionType(thi, res)
-      res.append("[" + ownerType.toString + ",")
-      visitTypeParam(thi.getType(), res)
-      res.append("]")
-    } else
-      res.append(thiType.toString)
     res.append("={")
     if (thi.getGetterBody == null) {
       // For reflexivity
@@ -264,13 +388,110 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
 
   }
 
+  def generateScalaGetSignature(thi: Property, res: StringBuilder, prefix: String) = {
+
+    val ownerType = new StringBuilder // Contains the type of thi owner, i.e. the type of opposite if there is one
+    getOwnerType(thi, ownerType)
+
+    val thiType: StringBuilder = new StringBuilder // Contains the type of thi
+
+    visit(thi.getType(), thiType)
+
+    res.append("  def ")
+
+    generateScalaGetName(thi, res, prefix)
+
+    res.append(" : ")
+    if (Util.isAMapEntry(thi.getType()) || thi.getGetterBody != null) { // MapEntry and derived properties doesn't use ReflectiveCollection
+      getListorType(thi, res)
+    } else if (thi.getUpper() > 1 || thi.getUpper() == -1) {
+      res.append("k2.standard.Reflective")
+      getCollectionType(thi, res)
+      res.append("[" + ownerType.toString + ",")
+      visitTypeParam(thi.getType(), res)
+      res.append("]")
+    } else
+      res.append(thiType.toString)
+  }
+
+  def generateScalaGetName(thi: Property, res: StringBuilder, prefix: String) = {
+    res.append(prefix + GlobalConfiguration.scalaPrefix)
+    res.append(thi.getName + "")
+  }
+
   def generateSet(thi: Property, res: StringBuilder, prefix: String): Unit = {
     if (!(thi.getIsReadOnly() != null && thi.getIsReadOnly())) {
-      res.append("def " + prefix + "set")
+      generateSetSignature(thi, res, prefix)
+
+      var hasTypeEq: Boolean = false
+      var baseName: String = null
+      var aspectName: String = null
+      if (thi.getType().isInstanceOf[Class]) {
+        var cd: ClassDefinition = thi.getType().asInstanceOf[Class].getTypeDefinition().asInstanceOf[ClassDefinition]
+        hasTypeEq = hasTypeEquivalence(cd)
+        if (Util.hasEcoreTag(cd)) {
+          baseName = "_root_." + getPQualifiedNamedBase(cd)
+        } else {
+          baseName = "_root_." + getQualifiedNamedBase(cd)
+        }
+        aspectName = "_root_." + getQualifiedNamedAspect(cd)
+      }
+
+      if (isImplementingModelTypeInterface()) {
+        var typeName: StringBuilder = new StringBuilder
+        visit(thi.getType(), typeName)
+        res.append("={")
+
+        if (thi.getUpper > 1 || thi.getUpper == -1) {
+          res.append("\n\tvar newArg : ")
+          res.append("k2.standard.Kermeta")
+          getCollectionType(thi, res)
+          res.append("[")
+          res.append(baseName)
+          res.append("] = k2.standard.KerRichFactory.create")
+          getCollectionType(thi, res)
+          res.append("[")
+          res.append(baseName)
+          res.append("]\n")
+
+          res.append("\targ")
+          res.append(".each(e => {newArg.add(e")
+          if (thi.getType().isInstanceOf[Class] && !hasTypeEq) {
+            res.append(".asInstanceOf[")
+            res.append(aspectName)
+            res.append("]")
+          }
+          res.append(")})")
+
+          res.append("\n\tthis.")
+          generateScalaSetName(thi, res, getPrefix(thi))
+          res.append("(newArg)")
+
+          res.append("\n  }")
+        } else {
+          res.append(" this.")
+          generateScalaSetName(thi, res, getPrefix(thi))
+          res.append("(arg")
+          if (thi.getType().isInstanceOf[Class] && !hasTypeEq) {
+            res.append(".asInstanceOf[")
+            res.append(aspectName)
+            res.append("]")
+          }
+          res.append(")}")
+        }
+      } else {
+        res.append("={ this." + Util.protectScalaKeyword(thi.getName()) + " = arg}")
+      }
+      res.append("\n")
+    }
+  }
+
+  def generateSetSignature(thi: Property, res: StringBuilder, prefix: String): Unit = {
+    if (!(thi.getIsReadOnly() != null && thi.getIsReadOnly())) {
+      res.append("  def " + prefix + "set")
       res.append(thi.getName.substring(0, 1).toUpperCase + thi.getName.substring(1, thi.getName.size) + "(arg:")
       getListorType(thi, res)
-      res.append(")={ this." + Util.protectScalaKeyword(thi.getName()) + " = arg}")
-      res.append("\n")
+      res.append(")")
     }
   }
 
@@ -296,22 +517,20 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
     if (!(thi.getIsReadOnly() != null && thi.getIsReadOnly())) {
       var currentname: String = thi.getName
 
+      var listType = new StringBuilder
+      getListorType(thi, listType)
+
+      generateScalaSetSignature(thi, res, prefix)
+
       if (("uml".equals(thi.eContainer.eContainer.asInstanceOf[NamedElement].getName)) && ("class".equals(currentname))) {
         currentname = currentname + "_"
-      } /*else if ("class_".equals(currentname)){
-              currentname = "class"
-              }*/
+      }
 
       def kersetName: String = prefix + "set" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size)
       def kergetName: String = prefix + "get" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size)
       var scalaName = GlobalConfiguration.scalaPrefix + thi.getName()
 
-      res.append("  def " + scalaName + "_=(")
-      res.append("`~value` : ")
-      var listType = new StringBuilder
-      getListorType(thi, listType)
-      res.append(listType.toString)
-      res.append("):Unit={")
+      res.append("={\n\t")
 
       if (thi.getGetterBody == null && thi.getSetterBody == null) {
         if (thi.getUpper > 1 || thi.getUpper == -1) {
@@ -319,9 +538,9 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
           if ("uml".equals(thi.eContainer.eContainer.asInstanceOf[NamedElement].getName)) {
             currentname = getUmlExtension(thi)
           }
-          res.append("this." + kergetName + "().clear\n")
+          res.append("this." + kergetName + "().clear\n\t")
           if (isCollectionOfObject(listType.toString) && Util.hasEcoreTag(thi))
-            res.append("`~value`.each(e=> this.get" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size) + "().add(e.asInstanceOf[org.kermeta.language.structure.Object]))\n")
+            res.append("`~value`.each(e=> this.get" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size) + "().add(e.asInstanceOf[org.kermeta.language.structure.Object]))\n\t")
           else if (Util.isAMapEntry(thi.getType())) {
             if (Util.isAMapEntry(thi.getType().asInstanceOf[Class].getTypeDefinition().asInstanceOf[ClassDefinition].getOwnedAttribute().filter(e => e.getName.equals("value")).get(0).getType) && (thi.getType().asInstanceOf[Class].getTypeDefinition().asInstanceOf[ClassDefinition].getOwnedAttribute().filter(e => e.getName.equals("value")).get(0).getUpper().equals(-1))) {
               res.append("`~value`.each(e=>  {")
@@ -336,12 +555,12 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
               res.append(res1.toString())
               res.append("] =  new org.eclipse.emf.common.util.BasicEMap[")
               res.append(res1.toString())
-              res.append("]\n v.putAll(e.wrappedvalue.getValue())\n")
+              res.append("]\n\t v.putAll(e.wrappedvalue.getValue())\n\t")
               res.append("this.get" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size) + "().put(e.wrappedvalue.getKey(),v)})")
             } else
               res.append("`~value`.each(e=>  this.get" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size) + "().put(e.wrappedvalue.getKey(),e.wrappedvalue.getValue()))")
           } else
-            res.append("this." + kergetName + "().addAll(`~value`)\n")
+            res.append("this." + kergetName + "().addAll(`~value`)\n\t")
         } else if (Util.isAMapEntry(thi.getOwningClass()) && thi.getName().equals("key")) {
           res.append("wrappedvalue = new _root_.java.util.AbstractMap.SimpleEntry[")
           var typekey = thi.getOwningClass().getOwnedAttribute().filter(e => e.getName.equals("key")).get(0).getType
@@ -376,22 +595,22 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
             var oppScalaName = GlobalConfiguration.scalaPrefix + thi.getOpposite().asInstanceOf[Property].getName()
             var oppType = new StringBuilder; getOwnerType(thi, oppType)
 
-            res.append("\n  if(this." + kergetName + "!=null)\n")
-            res.append("    this." + kergetName + "." + oppKersetName + "(null.asInstanceOf[" + oppType + "])\n")
+            res.append("\n\t  if(this." + kergetName + "!=null)\n\t")
+            res.append("    this." + kergetName + "." + oppKersetName + "(null.asInstanceOf[" + oppType + "])\n\t")
             res.append("  if(`~value`!=null){\n")
-            res.append("    `~value`." + oppScalaName + "=null.asInstanceOf[" + oppType + "]\n")
-            res.append("    `~value`." + oppKersetName + "(this.asInstanceOf[" + oppType + "])\n")
+            res.append("    `~value`." + oppScalaName + "=null.asInstanceOf[" + oppType + "]\n\t")
+            res.append("    `~value`." + oppKersetName + "(this.asInstanceOf[" + oppType + "])\n\t")
             res.append("  }\n")
             res.append("  ")
           } else if (thi.getOpposite() != null && !Util.hasEcoreTag(thi) && !Util.hasEcoreTag(thi.getOpposite())) {
             // Opposite Upper > 1 or opposite Upper == -1
             var oppScalaName = GlobalConfiguration.scalaPrefix + thi.getOpposite().asInstanceOf[Property].getName()
 
-            res.append("\n  if(this." + kergetName + "!=null)\n")
-            res.append("    this." + kergetName + "." + oppScalaName + ".remove(this)\n")
-            res.append("  if(`~value`!=null)\n")
-            res.append("    `~value`." + oppScalaName + ".add(this)\n")
-            res.append("  else\n")
+            res.append("\n\t  if(this." + kergetName + "!=null)\n\t")
+            res.append("    this." + kergetName + "." + oppScalaName + ".remove(this)\n\t")
+            res.append("  if(`~value`!=null)\n\t")
+            res.append("    `~value`." + oppScalaName + ".add(this)\n\t")
+            res.append("  else\n\t")
             res.append("    ")
           }
           if (Util.isAMapEntry(thi.getOwningClass()))
@@ -406,9 +625,35 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
         }
 
       }
-      res.append("}\n")
+      res.append("  }")
+      res.append("\n")
 
     }
+  }
+
+  def generateScalaSetSignature(thi: Property, res: StringBuilder, prefix: String) = {
+    var currentname: String = thi.getName
+    var listType = new StringBuilder
+    getListorType(thi, listType)
+
+    if (("uml".equals(thi.eContainer.eContainer.asInstanceOf[NamedElement].getName)) && ("class".equals(currentname))) {
+      currentname = currentname + "_"
+    }
+
+    def kersetName: String = prefix + "set" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size)
+    def kergetName: String = prefix + "get" + currentname.substring(0, 1).toUpperCase + currentname.substring(1, currentname.size)
+    //var scalaName = prefix + GlobalConfiguration.scalaPrefix + thi.getName()
+
+    res.append("  def ")
+    generateScalaSetName(thi, res, prefix)
+    res.append("(")
+    res.append("`~value` : ")
+    res.append(listType.toString)
+    res.append("):Unit")
+  }
+
+  def generateScalaSetName(thi: Property, res: StringBuilder, prefix: String) = {
+    res.append(prefix + GlobalConfiguration.scalaPrefix + thi.getName() + "_=")
   }
 
   def isCollectionOfObject(listType: String): Boolean = {
@@ -477,7 +722,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
 
       // Otherwise just put type variables for type parameters  
       if (Util.isAMapEntry(thi.getOwningClass)) {
-    	res.append(Util.protectScalaKeyword(getQualifiedNameCompilo(thi.getOwningClass)))
+        res.append(Util.protectScalaKeyword(getQualifiedNameCompilo(thi.getOwningClass)))
       } else {
         res.append(Util.protectScalaKeyword(getQualifiedNamedAspect(thi.getOwningClass)))
       }

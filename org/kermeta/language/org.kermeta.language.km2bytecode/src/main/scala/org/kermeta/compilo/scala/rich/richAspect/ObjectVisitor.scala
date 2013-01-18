@@ -3,6 +3,10 @@ import org.eclipse.emf.ecore.EObject
 import org.kermeta.language.structure.PrimitiveType
 import org.kermeta.language.behavior.CallTypeLiteral
 import org.kermeta.language.structure.GenericTypeDefinition
+import org.kermeta.language.structure.ModelTypeDefinition
+import org.kermeta.language.structure.ModelElementTypeDefinition
+import org.kermeta.language.structure.ClassDefinition
+import org.kermeta.compilo.scala.CompilerConfiguration
 
 trait ObjectVisitor {
   
@@ -34,4 +38,17 @@ trait ObjectVisitor {
 	 
   def generateParamerterClass(thi:org.kermeta.language.structure.ClassDefinition,res1:StringBuilder)
   
+  def getQualifiedPathWithMetamodel(thi: EObject): String  
+  def getQualifiedPathWithoutMetamodel(thi: EObject): String
+  
+  //MODELTYPE ADDITION
+  def getTypeMemberName(td : ModelElementTypeDefinition) : String 
+  def getModelTypeInterfaceQualifiedName(td : ModelElementTypeDefinition) : String
+  def getModelTypeInterfaceName(td : ModelElementTypeDefinition) : String
+  /*def isVisitingModelTypeDefinition() : Boolean
+  def setVisitingModelTypeDefinition(b : Boolean)*/
+  def getCompilerConfiguration() : CompilerConfiguration
+  def isImplementingModelTypeInterface() : Boolean
+  def setImplementingModelTypeInterface(b : Boolean)
+  def hasTypeEquivalence(c: ClassDefinition): Boolean
 }

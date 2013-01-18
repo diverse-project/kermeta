@@ -22,7 +22,7 @@ class VisitorAsync extends IVisitorAsync with LogAspect {
     } catch {
       case e: Throwable =>
         log.error("Problem in async visitor " + visitorValue + " : " + e.getMessage(), e)
-        println(e.getMessage())
+        println("Problem in async visitor " + visitorValue + " : " + e.getMessage() + ", " + e.toString())
       case _ =>
     }
   }

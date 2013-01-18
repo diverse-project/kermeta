@@ -11,7 +11,14 @@ import org.kermeta.compilo.scala.CompilerConfiguration
 
 import org.kermeta.compilo.scala.rich.RichUtil._
 
-class PackageVisitor(compilerConfiguration : CompilerConfiguration) extends ObjectVisitor with CallFeatureAspect with ClassDefinitionAspect with OperationAspect with PropertyAspect with LogAspect {
+class PackageVisitor(compilerConfiguration: CompilerConfiguration) extends ObjectVisitor
+  with CallFeatureAspect
+  with ClassDefinitionAspect
+  with OperationAspect
+  with PropertyAspect
+  with ModelTransformationAspect
+  with ModelTypeDefinitionAspect
+  with LogAspect {
 
   def visit(e: org.kermeta.language.structure.KermetaModelElement, res: StringBuilder) = {
     e match {
@@ -77,7 +84,7 @@ class PackageVisitor(compilerConfiguration : CompilerConfiguration) extends Obje
       case o: Loop => {
         visitLoop(o, res)
       }
-      
+
       case o: ProductType => {
         visitProductType(o, res)
       }
@@ -137,10 +144,26 @@ class PackageVisitor(compilerConfiguration : CompilerConfiguration) extends Obje
       case o: CallExpression => {
         visitCallExpression(o, res)
       }
+      //MODELTYPE ADDITION //Must be before case o: ObjectTypeVariable, since VirtualType is a subtype of ObjectTypeVariable
+      case o: VirtualType => {
+        visitVirtualType(o, res)
+      }
       case o: ObjectTypeVariable => {
         visitObjectTypeVariable(o, res)
       }
+      //TODO: MODELTYPE ADDITION
+      case o: ModelType => {
+        visitModelType(o, res)
+      }
+      case o: ModelTransformation => {
+        visit(o, res)
+      }
+      case o: ModelTypeVariable => {
 
+      }
+      case _ => {
+        Console.err.println("Match problem in PackageVisitor.scala with " + e.toString())
+      }
     }
   }
 
@@ -169,7 +192,7 @@ class PackageVisitor(compilerConfiguration : CompilerConfiguration) extends Obje
       //}
     } else {
       if (thi.getTarget.getStaticType.isInstanceOf[Class] || thi.getTarget.getStaticType.isInstanceOf[PrimitiveType] || thi.getTarget.getStaticType.isInstanceOf[Enumeration]) {
-    	  visit(thi.getTarget.getStaticType, targetClass)
+        visit(thi.getTarget.getStaticType, targetClass)
       } else {
         if (thi.getTarget.getStaticType.isInstanceOf[NamedElement]) {
           targetClass.append(thi.getTarget.getStaticType.asInstanceOf[NamedElement].getName)
@@ -385,7 +408,7 @@ class PackageVisitor(compilerConfiguration : CompilerConfiguration) extends Obje
   }
 
   def visitPrimitiveType(thi: PrimitiveType, res: StringBuilder): Unit = {
-
+    //TODO: ModelTypeInterface should pass here but do not
     if (Util.hasEcoreTag(thi)) {
       var t1 = thi.getKOwnedTags.filter(e => "ecore.EDataType_instanceClassName".equals(e.getName))
       var t =
@@ -462,16 +485,15 @@ class PackageVisitor(compilerConfiguration : CompilerConfiguration) extends Obje
         res.append(k2.utils.UTilScala.getQualifiedNameTypeKermeta(thi.getTyperef().getType, "."))
         res.append("\")")
       }
-    } else if(thi.getTyperef().getType.isInstanceOf[org.kermeta.language.structure.Enumeration]
-    		&& thi.eContainer() != null
-    		&& thi.eContainer().isInstanceOf[CallFeature]
-    		&& thi.eContainer().asInstanceOf[CallFeature].getTarget() == thi){
+    } else if (thi.getTyperef().getType.isInstanceOf[org.kermeta.language.structure.Enumeration]
+      && thi.eContainer() != null
+      && thi.eContainer().isInstanceOf[CallFeature]
+      && thi.eContainer().asInstanceOf[CallFeature].getTarget() == thi) {
       // enumeration is the target of a Call, We need to use the reflexivity to get access the features defined on the Enumeration
       res.append("_root_.k2.utils.ReflexivityLoader.getMetaEnumeration(\"")
       res.append(k2.utils.UTilScala.getQualifiedNameTypeJava(thi.getTyperef().getType, "."))
       res.append("\")")
-    }
-    else  {
+    } else {
       res.append("_root_." + k2.utils.UTilScala.getQualifiedNameTypeJava(thi.getTyperef().getType, "."))
     }
   }
@@ -559,8 +581,8 @@ class PackageVisitor(compilerConfiguration : CompilerConfiguration) extends Obje
   }
 
   def visitClass(thi: Class, res: StringBuilder): Unit = {
-
     var qualifiedName = getQualifiedNameCompilo(thi)
+
     //if (qualifiedName.contains("org.kermeta.language.structure.Object") && !qualifiedName.contains("ObjectTypeVariable")) {
     if (qualifiedName.equals("org.kermeta.language.structure.Object") || qualifiedName.equals("_root_.org.kermeta.language.structure.Object")) {
       res.append(qualifiedName.replace("org.kermeta.language.structure.Object", "java.lang.Object"))
@@ -694,15 +716,15 @@ class PackageVisitor(compilerConfiguration : CompilerConfiguration) extends Obje
     return res;
   }
 
-   def getQualifiedNameEMap(thi: EObject): String = {
-	  var res = getQualifiedNameCompilo(thi)
-	  if (getQualifiedNameCompilo(thi) == "_root_.k2.standard.KermetaObject"){
-	      res = "org.eclipse.emf.ecore.EObject"
-	  }
-	  return res
-   }
+  def getQualifiedNameEMap(thi: EObject): String = {
+    var res = getQualifiedNameCompilo(thi)
+    if (getQualifiedNameCompilo(thi) == "_root_.k2.standard.KermetaObject") {
+      res = "org.eclipse.emf.ecore.EObject"
+    }
+    return res
+  }
 
-   /*
+  /*
     * return the qualified name without the metamodel (ie.limited to Package)
     */
   def getPQualifiedNameCompilo(thi: EObject): String = {
@@ -753,23 +775,60 @@ class PackageVisitor(compilerConfiguration : CompilerConfiguration) extends Obje
         var res = new StringBuilder
         /*if (Util.isAMapEntry(c))
           res.append(GlobalConfiguration.scalaAspectPrefix + ".")*/
-        if(Util.hasEcoreTag(c)){
-        	res.append(k2.utils.TypeEquivalence.getTypeEquivalence(getPQualifiedNameCompilo(c.eContainer()) + "." + c.getName()))
-        }
-        else{
-        	 if(Util.hasCompilerIgnoreTag(c) && Util.hasScalaCompilerNameTag(c)){
-	        	res.append(k2.utils.TypeEquivalence.getTypeEquivalence(Util.getScalaCompilerNameTag(c)))
-	        }
-	        else{
-	        	res.append(k2.utils.TypeEquivalence.getTypeEquivalence(getQualifiedNameCompilo(c.eContainer()) + "." + c.getName()))
-	        }
+        if (Util.hasEcoreTag(c)) {
+          var nameBefore: String = getPQualifiedNameCompilo(c.eContainer()) + "." + c.getName()
+
+          //MODELTYPE ADDITION
+          if (isImplementingModelTypeInterface() && !hasTypeEquivalence(c)) {
+            res.append(Util.getTypeMemberName(c))
+          } else {
+            res.append(k2.utils.TypeEquivalence.getTypeEquivalence(nameBefore))
+          }
+
+        } else {
+          if (Util.hasCompilerIgnoreTag(c) && Util.hasScalaCompilerNameTag(c)) {
+            var nameBefore: String = Util.getScalaCompilerNameTag(c)
+
+            //MODELTYPE ADDITION
+            if (isImplementingModelTypeInterface() && !hasTypeEquivalence(c)) {
+              res.append(Util.getTypeMemberName(c))
+            } else {
+              res.append(k2.utils.TypeEquivalence.getTypeEquivalence(nameBefore))
+            }
+
+          } else {
+            var nameBefore: String = getQualifiedNameCompilo(c.eContainer()) + "." + c.getName()
+
+            //MODELTYPE ADDITION
+            if (isImplementingModelTypeInterface() && !hasTypeEquivalence(c)) {
+              res.append(Util.getTypeMemberName(c))
+            } else {
+              res.append(k2.utils.TypeEquivalence.getTypeEquivalence(nameBefore))
+            }
+
+          }
         }
         return res.toString()
 
       }
     }
   }
-   
+
+  def hasTypeEquivalence(c: ClassDefinition): Boolean = {
+    var nameBefore: String = null
+    if (Util.hasEcoreTag(c)) {
+      nameBefore = getPQualifiedNameCompilo(c.eContainer()) + "." + c.getName()
+
+    } else {
+      if (Util.hasCompilerIgnoreTag(c) && Util.hasScalaCompilerNameTag(c)) {
+        nameBefore = Util.getScalaCompilerNameTag(c)
+      } else {
+        nameBefore = getQualifiedNameCompilo(c.eContainer()) + "." + c.getName()
+      }
+    }
+    return k2.utils.TypeEquivalence.hasTypeEquivalence(nameBefore)
+  }
+
   def getQualifiedNameCompilo(thi: EObject): String = {
     thi match {
       case (mm: Metamodel) => {
@@ -782,21 +841,19 @@ class PackageVisitor(compilerConfiguration : CompilerConfiguration) extends Obje
         return p.getName()
       }
       case c: Class => {
-
         if (Util.hasEcoreEDataTypeInstanceClassNameTag(c.getTypeDefinition)) {
           // special case for types that are mapped to java types in Ecore
           return Util.getEcoreEDataTypeInstanceClassNameTag(c.getTypeDefinition)
         } else {
           var res = new StringBuilder
-          if(Util.hasEcoreTag(c.getTypeDefinition)){
-          	var typename = Util.protectScalaKeyword(getPQualifiedNamedBase(c.getTypeDefinition))
-          	if (typename.contains(".")) res.append("_root_.")
-          		res.append(typename)
-          }
-          else {
+          if (Util.hasEcoreTag(c.getTypeDefinition)) {
+            var typename = Util.protectScalaKeyword(getPQualifiedNamedBase(c.getTypeDefinition))
+            if (typename.contains(".")) res.append("_root_.")
+            res.append(typename)
+          } else {
             var typename = Util.protectScalaKeyword(getQualifiedNamedBase(c.getTypeDefinition))
-          	if (typename.contains(".")) res.append("_root_.")
-          		res.append(typename)
+            if (typename.contains(".")) res.append("_root_.")
+            res.append(typename)
           }
           return res.toString
         }
@@ -825,17 +882,46 @@ class PackageVisitor(compilerConfiguration : CompilerConfiguration) extends Obje
         var res = new StringBuilder
         /*if (Util.isAMapEntry(c))
           res.append(GlobalConfiguration.scalaAspectPrefix + ".")*/
-        if(Util.hasCompilerIgnoreTag(c) && Util.hasScalaCompilerNameTag(c)){
-        	res.append(k2.utils.TypeEquivalence.getTypeEquivalence(Util.getScalaCompilerNameTag(c)))
-        }
-        else{
-        	res.append(k2.utils.TypeEquivalence.getTypeEquivalence(getQualifiedNameCompilo(c.eContainer()) + "." + c.getName()))
+        if (Util.hasCompilerIgnoreTag(c) && Util.hasScalaCompilerNameTag(c)) {
+          var nameBefore: String = Util.getScalaCompilerNameTag(c)
+
+          //MODELTYPE ADDITION
+          if (isImplementingModelTypeInterface() && !hasTypeEquivalence(c)) {
+            res.append(Util.getTypeMemberName(c))
+          } else {
+            res.append(k2.utils.TypeEquivalence.getTypeEquivalence(nameBefore))
+          }
+
+        } else {
+          var nameBefore: String = getQualifiedNameCompilo(c.eContainer()) + "." + c.getName()
+
+          //MODELTYPE ADDITION
+          if (isImplementingModelTypeInterface() && !hasTypeEquivalence(c)) {
+            res.append(Util.getTypeMemberName(c))
+          } else {
+            res.append(k2.utils.TypeEquivalence.getTypeEquivalence(nameBefore))
+          }
         }
         
         return res.toString()
-
       }
     }
+  }
+
+  def getQualifiedPathWithMetamodel(thi: EObject): String = {
+    var res = new StringBuilder
+    if (thi.eContainer() != null && (thi.eContainer().isInstanceOf[Package] || thi.eContainer().isInstanceOf[Metamodel])) {
+      res.append(getQualifiedName(thi.eContainer()))
+    }
+    return res.toString()
+  }
+
+  def getQualifiedPathWithoutMetamodel(thi: EObject): String = {
+    var res = new StringBuilder
+    if (thi.eContainer() != null && (thi.eContainer().isInstanceOf[Package])) {
+      res.append(getPQualifiedName(thi.eContainer()))
+    }
+    return res.toString()
   }
 
   /**
@@ -866,6 +952,12 @@ class PackageVisitor(compilerConfiguration : CompilerConfiguration) extends Obje
       case (mm: Metamodel) => {
         res.append(mm.getName)
       }
+      case (mtd: ModelTypeDefinition) => {
+        if (mtd.eContainer() != null && mtd.eContainer().isInstanceOf[Metamodel]) {
+          res.append(getQualifiedName(mtd.eContainer()) + ".")
+        }
+        res.append(mtd.getName())
+      }
       case (p: Package) => {
 
         if (p.eContainer() != null && (p.eContainer().isInstanceOf[Package] || p.eContainer().isInstanceOf[Metamodel])) {
@@ -880,8 +972,8 @@ class PackageVisitor(compilerConfiguration : CompilerConfiguration) extends Obje
     return res.toString()
   }
 
-   def getQualifiedNameKermeta(thi: Metamodel): String = {
-    return  thi.getName
+  def getQualifiedNameKermeta(thi: Metamodel): String = {
+    return thi.getName
 
   }
   def getQualifiedNameKermeta(thi: Package): String = {
@@ -891,7 +983,7 @@ class PackageVisitor(compilerConfiguration : CompilerConfiguration) extends Obje
     }
     if (thi.getNestingPackage != null) {
       res = getQualifiedNameKermeta(thi.getNestingPackage) + "::"
-    }    
+    }
     res = res + thi.getName
     return res
 
@@ -902,6 +994,8 @@ class PackageVisitor(compilerConfiguration : CompilerConfiguration) extends Obje
   }
 
   def getQualifiedNamedAspect(typD: GenericTypeDefinition): String = {
+    var prevImplementingModelTypeInterface: Boolean = isImplementingModelTypeInterface()
+    setImplementingModelTypeInterface(false)
     var baseName = getQualifiedNameCompilo(typD)
 
     //if(baseName.equals("org.eclipse.emf.ecore.ENamedElementAspect")){
@@ -914,28 +1008,68 @@ class PackageVisitor(compilerConfiguration : CompilerConfiguration) extends Obje
       case _ if (!Util.hasEcoreTag(typD) && !Util.hasEcoreTag(typD.eContainer().asInstanceOf[KermetaModelElement])) => baseName
       case _ => { baseName }
     }
+    setImplementingModelTypeInterface(prevImplementingModelTypeInterface)
     return baseName + "Aspect"
   }
 
   def getQualifiedNamedBase(typD: GenericTypeDefinition): String = {
+    var prevImplementingModelTypeInterface: Boolean = isImplementingModelTypeInterface()
+    setImplementingModelTypeInterface(false)
     var baseName = getQualifiedNameCompilo(typD)
-    baseName = baseName match {
-      case _ if (!Util.hasEcoreTag(typD) && Util.hasEcoreTag(typD.eContainer().asInstanceOf[KermetaModelElement]) && !baseName.equals("java.util.List")) => { GlobalConfiguration.scalaAspectPrefix + "." + baseName }
+
+    // Add a the project name (scalaAspectPrefix) while we already put the metamodel name, this part is not usefull anymore
+    /*baseName = baseName match {
+      case _ if (!Util.hasEcoreTag(typD) && Util.hasEcoreTag(typD.eContainer().asInstanceOf[KermetaModelElement]) && !baseName.equals("java.util.List")) => {
+        GlobalConfiguration.scalaAspectPrefix + "." + baseName
+        
+      }
       case _ => { baseName }
-    }
+    }*/
+    
+    setImplementingModelTypeInterface(prevImplementingModelTypeInterface)
     return baseName
   }
-  
+
   /**
    * returns the qualified excluding the metamodel name part
    */
   def getPQualifiedNamedBase(typD: GenericTypeDefinition): String = {
+    var prevImplementingModelTypeInterface: Boolean = isImplementingModelTypeInterface()
+    setImplementingModelTypeInterface(false)
+
     var baseName = getPQualifiedNameCompilo(typD)
     baseName = baseName match {
-      case _ if (!Util.hasEcoreTag(typD) && Util.hasEcoreTag(typD.eContainer().asInstanceOf[KermetaModelElement]) && !baseName.equals("java.util.List")) => { GlobalConfiguration.scalaAspectPrefix + "." + baseName }
+      case _ if (!Util.hasEcoreTag(typD) && Util.hasEcoreTag(typD.eContainer().asInstanceOf[KermetaModelElement]) && !baseName.equals("java.util.List")) => {
+        GlobalConfiguration.scalaAspectPrefix + "." + baseName
+      }
       case _ => { baseName }
     }
+
+    setImplementingModelTypeInterface(prevImplementingModelTypeInterface)
     return baseName
+  }
+
+  //MODELTYPEADDITION
+  var visitingModelTypeDefinition: Boolean = false
+  def isVisitingModelTypeDefinition(): Boolean = {
+    visitingModelTypeDefinition
+  }
+  def setVisitingModelTypeDefinition(b: Boolean) = {
+    visitingModelTypeDefinition = b
+  }
+
+  var generateAttributeType: Boolean = false
+
+  def getCompilerConfiguration(): CompilerConfiguration = {
+    return compilerConfiguration
+  }
+
+  var implementingModelTypeInterface: Boolean = false
+  def isImplementingModelTypeInterface(): Boolean = {
+    implementingModelTypeInterface
+  }
+  def setImplementingModelTypeInterface(b: Boolean) = {
+    implementingModelTypeInterface = b
   }
 
 }

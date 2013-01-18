@@ -21,6 +21,7 @@ import java.util.concurrent.ExecutorService
 import org.kermeta.compilo.scala.rich._
 import org.kermeta.compilo.scala.rich.richAspect._
 import org.eclipse.emf.ecore.EObject
+import scala.collection.mutable.HashMap$
 
 object Util extends LogAspect {
   /**
@@ -31,7 +32,7 @@ object Util extends LogAspect {
   def hasEcoreTag(obj: KermetaModelElement): Boolean = {
     obj.getKOwnedTags().exists(e => "ecore".equals(e.asInstanceOf[Tag].getName()))
   }
-  
+
   /**
    * Check if a model element has a Main Tag
    * @param obj model element to test
@@ -40,7 +41,7 @@ object Util extends LogAspect {
   def hasMainTag(obj: KermetaModelElement): Boolean = {
     obj.getKOwnedTags().exists(e => "main".equals(e.asInstanceOf[Tag].getName()))
   }
-  
+
   /**
    * @return the value of the main tag
    */
@@ -64,8 +65,7 @@ object Util extends LogAspect {
   def getEcoreEDataTypeInstanceClassNameTag(obj: KermetaModelElement): String = {
     obj.getKOwnedTags().find(e => "ecore.EDataType_instanceClassName".equals(e.asInstanceOf[Tag].getName())).get.getValue()
   }
-  
-  
+
   /**
    * Check if a model element has an ecore.instanceClassName Tag
    * @param obj model element to test
@@ -82,15 +82,15 @@ object Util extends LogAspect {
   def getEcoreInstanceClassNameTag(obj: KermetaModelElement): String = {
     obj.getKOwnedTags().find(e => "ecore.instanceClassName".equals(e.asInstanceOf[Tag].getName())).get.getValue()
   }
-  
+
   def isAMapEntry(obj: ClassDefinition): Boolean = {
-    !obj.getName().equals("EStringToStringMapEntryAspect") && 
-    !obj.eContainer().asInstanceOf[Package].getName().equals("ecore") &&
-    //hasEcoreTag(obj) && 
-    hasEcoreInstanceClassNameTag(obj) && getEcoreInstanceClassNameTag(obj).equals("java.util.Map$Entry") && 
-    //obj.getOwnedAttribute().size() == 2 && 
-    obj.getOwnedAttribute().exists(e => e.getName() == "key") && 
-    obj.getOwnedAttribute().exists(e => e.getName() == "value")
+    !obj.getName().equals("EStringToStringMapEntryAspect") &&
+      !obj.eContainer().asInstanceOf[Package].getName().equals("ecore") &&
+      //hasEcoreTag(obj) && 
+      hasEcoreInstanceClassNameTag(obj) && getEcoreInstanceClassNameTag(obj).equals("java.util.Map$Entry") &&
+      //obj.getOwnedAttribute().size() == 2 && 
+      obj.getOwnedAttribute().exists(e => e.getName() == "key") &&
+      obj.getOwnedAttribute().exists(e => e.getName() == "value")
   }
 
   def getQualifiedNameForMapEntry(par: ClassDefinition, visitor: ObjectVisitor, firstpass: Boolean): String = {
@@ -363,19 +363,19 @@ object Util extends LogAspect {
     }
     return false
   }
-  
-  def isValueType(o:org.kermeta.language.structure.Class) : Boolean = {
-    val name = k2.utils.UTilScala.getQualifiedNameClassKermeta(o.getTypeDefinition,".")
-    return name == "kermeta.standard.Integer" || name == "kermeta.standard.String" || 
-    	name == "kermeta.standard.Boolean" || name == "kermeta.standard.Short" ||
-    	name == "kermeta.standard.Double" || name == "kermeta.standard.Long" ||
-    	name == "kermeta.standard.Float" || name == "kermeta.standard.Character"
+
+  def isValueType(o: org.kermeta.language.structure.Class): Boolean = {
+    val name = k2.utils.UTilScala.getQualifiedNameClassKermeta(o.getTypeDefinition, ".")
+    return name == "kermeta.standard.Integer" || name == "kermeta.standard.String" ||
+      name == "kermeta.standard.Boolean" || name == "kermeta.standard.Short" ||
+      name == "kermeta.standard.Double" || name == "kermeta.standard.Long" ||
+      name == "kermeta.standard.Float" || name == "kermeta.standard.Character"
   }
-  
-  def getMetamodel(k : EObject) : Metamodel = {
+
+  def getMetamodel(k: EObject): Metamodel = {
     var container = k.eContainer()
     container match {
-      case m : Metamodel => {
+      case m: Metamodel => {
         return m
       }
       case o => {
@@ -387,15 +387,162 @@ object Util extends LogAspect {
   /**
    * return the metamodel that defines the KermetaStandard reflexivity layer
    */
-  def getKermetaStandardMetamodelName(mu : ModelingUnit) : String = {
-    mu.getMetamodels().find(mm => mm.getKOwnedTags.exists(t =>  t.getName().equals("kermeta_standard"))) match {
-      case Some(m)  => {
-      	 m.getName()
+  def getKermetaStandardMetamodelName(mu: ModelingUnit): String = {
+    mu.getMetamodels().find(mm => mm.getKOwnedTags.exists(t => t.getName().equals("kermeta_standard"))) match {
+      case Some(m) => {
+        m.getName()
       }
       case _ => {
         "kermeta_standard"
       }
     }
+  }
+
+  /**
+   * Helper for getting qualified names, paths...
+   * TODO: Migrate and refactor code in order to clearly separate Utils and PackageVisitor
+   */
+  val compilerConfiguration: CompilerConfiguration = new CompilerConfiguration
+  val helper: PackageVisitor = new PackageVisitor(compilerConfiguration)
+
+  def whichBoolean(thi: PrimitiveType): String = {
+    return helper.whichBoolean(thi)
+  }
+  def getQualifiedNameEMap(thi: EObject): String = {
+    return helper.getQualifiedNameEMap(thi)
+  }
+  def getPQualifiedNameCompilo(thi: EObject): String = {
+    return helper.getPQualifiedNameCompilo(thi)
+  }
+  def getQualifiedNameCompilo(thi: EObject): String = {
+    return helper.getQualifiedNameCompilo(thi)
+  }
+
+  def getQualifiedName(thi: EObject): String = {
+    return helper.getQualifiedName(thi)
+  }
+
+  def getQualifiedNamedBase(typD: GenericTypeDefinition): String = {
+    return helper.getQualifiedNamedBase(typD)
+  }
+  /** returns the qualified named up to the package */
+  def getPQualifiedNamedBase(typD: GenericTypeDefinition): String = {
+    return helper.getPQualifiedNamedBase(typD)
+  }
+
+  def getQualifiedNamedAspect(typD: GenericTypeDefinition): String = {
+    return helper.getQualifiedNamedAspect(typD)
+  }
+
+  def getQualifiedPathWithMetamodel(thi: EObject): String = {
+    return helper.getQualifiedPathWithMetamodel(thi)
+  }
+  def getQualifiedPathWithoutMetamodel(thi: EObject): String = {
+    return helper.getQualifiedPathWithoutMetamodel(thi)
+  }
+
+  //MODELTYPE ADDITION
+  /*
+   * getNames for type members and model type interfaces
+   */
+  def getTypeMemberName(td: ModelElementTypeDefinition): String = {
+    return helper.getTypeMemberName(td)
+  }
+  def getModelTypeInterfaceName(td: ModelElementTypeDefinition): String = {
+    return helper.getModelTypeInterfaceName(td)
+  }
+  def getModelTypeInterfaceQualifiedName(td: ModelElementTypeDefinition): String = {
+    return helper.getModelTypeInterfaceQualifiedName(td)
+  }
+
+  /*
+   * get names for factories
+   */
+  //Name of the objects containing the implementation of creation methods
+  def getModelTypeFactoryTypeName(): String = {
+    var res: StringBuilder = new StringBuilder
+    res.append("ModelTypeFactory")
+    return res.toString()
+  }
+  def getModelTypeFactoryTypeQualifiedName(mtd: ModelTypeDefinition): String = {
+    var res: StringBuilder = new StringBuilder
+    res.append(getQualifiedName(mtd))
+    res.append(".")
+    res.append(getModelTypeFactoryTypeName())
+    return res.toString()
+  }
+
+  //Name of the variable referencing the factory
+  def getModelTypeFactoryMainVariableName(): String = {
+    var res: StringBuilder = new StringBuilder
+    res.append("mtFactory")
+    return res.toString()
+  }
+
+  //Name of the factory interfaces
+  def getModelTypeFactoryInterfaceName(): String = {
+    var res: StringBuilder = new StringBuilder
+    res.append("TFactory")
+    return res.toString()
+  }
+  def getModelTypeFactoryInterfaceQualifiedName(mtd: ModelTypeDefinition): String = {
+    var res: StringBuilder = new StringBuilder
+    res.append(getQualifiedName(mtd))
+    res.append(".")
+    res.append(getModelTypeFactoryInterfaceName())
+    return res.toString()
+  }
+
+  //Name of the variables for classes and operations parameterized by ModelTypeVariables
+  def getModelTypeFactoryParameterVariableName(mtv: ModelTypeVariable): String = {
+    var res: StringBuilder = new StringBuilder
+    res.append("f_")
+    res.append(mtv.getName())
+    return res.toString()
+  }
+
+  def needToAddFixedTypeMembers(cd: ClassDefinition, mm: Metamodel): Boolean = {
+    var res: Boolean = true
+    var mtd = mm.getOwnedModelTypeDefinitions().find(m => { m.getName() == mm.getName() })
+    mtd match {
+      case Some(m) => {
+        return needToAddFixedTypeMembers(cd, m)
+      }
+      case None =>
+    }
+    return res
+  }
+
+  def needToAddFixedTypeMembers(cd: ClassDefinition, mtd: ModelTypeDefinition): Boolean = {
+    var res: Boolean = true
+    cd.getSuperType().foreach(st => {
+      st match {
+        case c: Class => {
+          if (!Util.hasCompilerIgnoreTag(c.getTypeDefinition()) && (mtd.getTypeDefinitions().contains(c.getTypeDefinition()))) {
+            return false
+          }
+        }
+        case _ =>
+      }
+    })
+
+    return res
+  }
+
+  def getAllOwnedModelElementTypeDefinitions(mm: Metamodel): java.util.Set[ModelElementTypeDefinition] = {
+    var res = new java.util.HashSet[ModelElementTypeDefinition]
+    mm.getPackages().foreach(p => {
+      res.addAll(getAllOwnedModelElementTypeDefinitions(p))
+    })
+    return res
+  }
+  def getAllOwnedModelElementTypeDefinitions(p: Package): java.util.Set[ModelElementTypeDefinition] = {
+    var res = new java.util.HashSet[ModelElementTypeDefinition]
+    res.addAll(p.getOwnedTypeDefinition())
+    p.getNestedPackage().foreach(np => {
+      res.addAll(getAllOwnedModelElementTypeDefinitions(np))
+    })
+    return res
   }
 }
 

@@ -10,6 +10,8 @@ trait IVisitor {
 	def visit(par : ModelingUnit)
 	
 	def visit(par : Metamodel)
+	
+	def visit(par : ModelTypeDefinition)
 	 
 	def visit(par : Package) 
 	
@@ -34,11 +36,18 @@ class AcceptableClassDef(cl: ClassDefinition) extends IVisitable{
   }
 }
 
+class AcceptableModelTypeDefinition(mdt: ModelTypeDefinition) extends IVisitable{
+  def accept(visitor : IVisitor){
+    visitor.visit(mdt)
+  }
+}
+
 class AcceptableMetamodel(mm: Metamodel) extends IVisitable{
   def accept(visitor : IVisitor){
     visitor.visit(mm)
   }
 }
+
 
 class AcceptableModelingUnit(cl: ModelingUnit) extends IVisitable{
   def accept(visitor : IVisitor){

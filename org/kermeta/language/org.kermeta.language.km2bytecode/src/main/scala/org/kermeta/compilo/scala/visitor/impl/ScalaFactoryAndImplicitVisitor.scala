@@ -242,6 +242,27 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
   def visit(mm: Metamodel) {
 
     mm.getPackages().foreach(p => new AcceptablePackage(p).accept(this))
+
+    //MODELTYPE ADDITION
+    mm.getOwnedModelTypeDefinitions().foreach(mtd => new AcceptableModelTypeDefinition(mtd).accept(this))
+
+    //ViewType for ModelTypeDefinition generation
+    var viewtype: StringBuilder = new StringBuilder
+    viewtype.append("package ")
+    viewtype.append(Util.getQualifiedName(mm))
+    viewtype.append("\n")
+    mm.getOwnedModelTypeDefinitions().foreach(mtd => {
+      viewtype.append("class Rich")
+      viewtype.append(mtd.getName())
+      viewtype.append(" extends ")
+      viewtype.append(mtd.getName())
+      viewtype.append(" with ")
+      viewtype.append(mtd.getName())
+      viewtype.append("Aspect")
+      viewtype.append("\n")
+    })
+    Util.generateFile(Util.getQualifiedName(mm), GlobalConfiguration.viewDefTraitName, viewtype.toString())
+
   }
 
   def visit(par: Package) {
@@ -311,13 +332,8 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
       ecorepackageName.append(".")
       genpackageName.append(k2.utils.TypeEquivalence.getPackageEquivalence(visitor.getQualifiedName(par.eContainer)))
       packageName.append(genpackageName.toString)
-      /*if (Util.hasEcoreTag(par.eContainer().asInstanceOf[Package])) {
-        packageName.insert(0, GlobalConfiguration.scalaAspectPrefix + ".")
-      }*/
+      
       genpackageName.append(".")
-
-      //            if (par.isIsAbstract())
-      //                viewDef.append( " abstract")
 
       var param: StringBuilder = new StringBuilder
       visitor.generateParamerterClass(par, param);
@@ -340,6 +356,9 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
           viewDefTemp.append("\n")
         }
 
+        /*
+         * Implicit generation if Util.hasEcoreTag(par)
+         */
         if ("EObject".equals(par.getName)) {
           implicitDef append " implicit def richAspect" + param.toString + "(v : " + Util.protectScalaKeyword(k2.utils.TypeEquivalence.getTypeEquivalence(ecorepackageName.toString + par.getName())) + param.toString + ") = v.asInstanceOf[k2.standard.KermetaObject]\n"
         } else if ("EGenericType".equals(par.getName)) {
@@ -351,7 +370,6 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
           implicitDef.append("  }\n")
 
         } else if (Util.isAMapEntry(par)) {
-          // implicit def richAspect(v : ramweaver.p1.AEntry) = v.wrappedvalue
           implicitDef append " implicit def richAspect(v : "
           implicitDef append Util.protectScalaKeyword(visitor.getQualifiedNameCompilo(par))
           implicitDef append Util.protectScalaKeyword(") = v.wrappedvalue\n")
@@ -398,43 +416,36 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
         }
 
         viewDefTemp.append(" \n")
-
-        /*                if (cd == null)
-                  println("TOTO "+ par.getName() )
-                //cd.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo +".impl." + cd.getName +"Impl
-                viewDefTemp.append(" class Rich"+par.getName()+ param.toString +" extends ")
-                if (!IsAnExceptionChildren(par)){
-                    viewDefTemp.append(visitor.getQualifiedNameCompilo(cd.eContainer()) +".impl." + cd.getName +"Impl with ")
-                }
-                viewDefTemp.append( k2.utils.TypeEquivalence.getTypeEquivalence(packageName.toString +"."+ par.getName())+ param.toString +" with "+packageName.toString +"."+par.getName+"Aspect" + param.toString )
-                var superClassName = visitor.getQualifiedNameCompilo(cd.eContainer()) + "."+ cd.getName
-                if (!(classOf[Object].getCanonicalName.equals(superClassName)
-                      || classOf[org.kermeta.language.structure.Constraint].getCanonicalName.equals(superClassName)) ){
-                    viewDefTemp.append(" with " + "org.kermeta.language.structureScalaAspect.aspect.DefaultObjectImplementation")
-                }else{
-                    
-                    //println(cd.eContainer().asInstanceOf[ObjectAspect].getQualifiedNameCompilo + "."+ cd.getName)
-                }
-                viewDefTemp.append(" \n")
-*/
+     
+        /*
+         * Implicit generation if !Util.hasEcoreTag(par)
+         */
         implicitDef append " implicit def richAspect" + param.toString + "(v : " + k2.utils.TypeEquivalence.getTypeEquivalence(packageName.toString + "." + par.getName()) + param.toString + ") = v.asInstanceOf[" + packageName.toString + "." + par.getName + "Aspect" + param.toString + "]\n"
         implicitDef append " implicit def richAspect" + param.toString + "(v : " + packageName.toString + "." + par.getName() + "Aspect" + param.toString + ") = v.asInstanceOf[" + packageName.toString + "." + par.getName + param.toString + "]\n"
-
       }
 
       if (!par.getIsAbstract()) {
         viewDef.append(viewDefTemp.toString)
         if (Util.hasEcoreTag(par)) {
           if (!Util.isAMapEntry(par)) {
-            if (!Util.hasEcoreFromAPITag(par))
-              factoryDefClass append " override"
-            factoryDefClass append " def create" + par.getName() + param.toString + "() : " + Util.protectScalaKeyword(k2.utils.TypeEquivalence.getTypeEquivalence(ecorepackageName.toString + par.getName()) + param.toString) + " = { new " + Util.protectScalaKeyword(packageName.toString) + ".Rich" + par.getName + param.toString + " }\n"
+            if (!Util.hasEcoreFromAPITag(par)) {
+              factoryDefClass.append(" override")
+            }
+            factoryDefClass.append(" def create" + par.getName() + param.toString + "() : " + Util.protectScalaKeyword(k2.utils.TypeEquivalence.getTypeEquivalence(ecorepackageName.toString + par.getName()) + param.toString) + " = { ")
+            generateCreateBody(packageName.toString(), par.getName(), param.toString(), factoryDefClass)
+            factoryDefClass.append(" }\n")
           }
         } else {
-          factoryDefClass append " def create" + par.getName() + param.toString + "() : " + Util.protectScalaKeyword(k2.utils.TypeEquivalence.getTypeEquivalence(packageName.toString + "." + par.getName()) + param.toString) + " = { new " + Util.protectScalaKeyword(packageName.toString) + ".Rich" + par.getName + param.toString + " }\n"
+          factoryDefClass.append(" def create" + par.getName() + param.toString + "() : " + Util.protectScalaKeyword(k2.utils.TypeEquivalence.getTypeEquivalence(packageName.toString + "." + par.getName()) + param.toString) + " = { ")
+          generateCreateBody(packageName.toString(), par.getName(), param.toString(), factoryDefClass)
+          factoryDefClass.append(" }\n")
         }
       }
     }
+  }
+
+  def generateCreateBody(packageName: String, cdName: String, param: String, res: StringBuilder) = {
+    res.append("new " + "_root_." + Util.protectScalaKeyword(packageName.toString) + ".Rich" + cdName + param)
   }
 
   def getEcoreSuperClass(c: ClassDefinition): ClassDefinition = {
@@ -480,6 +491,98 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
   def close {
     implicitDef append "}\n"
     Util.generateFile(GlobalConfiguration.frameworkGeneratedPackageName, GlobalConfiguration.implicitConvTraitName, implicitDef.toString())
+  }
+
+  //MODELTYPE ADDITION
+  def visit(par: ModelTypeDefinition) = {
+    //TFactory generation
+    var tfactory: StringBuilder = new StringBuilder
+    tfactory.append("package ")
+    tfactory.append(Util.getQualifiedName(par))
+    tfactory.append("\n")
+    tfactory.append("trait ")
+    tfactory.append(Util.getModelTypeFactoryInterfaceName())
+    tfactory.append(" {\n")
+    tfactory.append(UtilModelTypeDefinition.getBoundedTypeMembers(par))
+
+    tfactory.append("\tdef create")
+    tfactory.append(par.getName())
+    tfactory.append("() : ")
+    tfactory.append("_root_.")
+    tfactory.append(Util.getQualifiedName(par))
+    tfactory.append("\n")
+
+    par.getTypeDefinitions().foreach(td => {
+      if (!Util.hasCompilerIgnoreTag(td)) {
+        if (td.isInstanceOf[ClassDefinition] && !td.asInstanceOf[ClassDefinition].getIsAbstract()) {
+          var param: StringBuilder = new StringBuilder
+          visitor.generateParamerterClass(td.asInstanceOf[ClassDefinition], param)
+
+          tfactory.append("\tdef create")
+          tfactory.append(td.getName())
+          tfactory.append(param)
+          tfactory.append("() : ")
+          tfactory.append(Util.getTypeMemberName(td))
+          tfactory.append(param)
+          tfactory.append("\n")
+        }
+      }
+    })
+    tfactory.append("\n}")
+    Util.generateFile(Util.getQualifiedName(par), Util.getModelTypeFactoryInterfaceName(), tfactory.toString())
+
+    //Factory generation
+    var factory: StringBuilder = new StringBuilder
+    factory.append("package ")
+    factory.append(Util.getQualifiedName(par))
+    factory.append("\n")
+    factory.append("object ")
+    factory.append(Util.getModelTypeFactoryTypeName())
+
+    factory.append(" extends ")
+    factory.append(Util.getModelTypeFactoryInterfaceName())
+    par.getOwnedBindings().foreach(b => {
+      factory.append(" with ")
+      factory.append(Util.getModelTypeFactoryInterfaceQualifiedName(b.getBoundModelTypeDefinition()))
+    })
+
+    factory.append(" {\n")
+    factory.append(UtilModelTypeDefinition.getFixedTypeMembers(par))
+
+    factory.append("\tdef create")
+    factory.append(par.getName())
+    factory.append("() : ")
+    factory.append("_root_.")
+    factory.append(Util.getQualifiedName(par))
+    factory.append(" = {\n")
+    factory.append("\t\t")
+    factory.append("return new ")
+    factory.append("_root_.")
+    factory.append(Util.getQualifiedPathWithMetamodel(par))
+    factory.append(".Rich")
+    factory.append(par.getName())
+    factory.append("\t}\n")
+
+    par.getTypeDefinitions().foreach(td => {
+      if (!Util.hasCompilerIgnoreTag(td)) {
+        if (td.isInstanceOf[ClassDefinition] && !td.asInstanceOf[ClassDefinition].getIsAbstract()) {
+          var param: StringBuilder = new StringBuilder
+          visitor.generateParamerterClass(td.asInstanceOf[ClassDefinition], param)
+
+          factory.append("\tdef create")
+          factory.append(td.getName())
+          factory.append("() : ")
+          factory.append(Util.getTypeMemberName(td))
+          factory.append(param)
+          factory.append(" = {\n\t\t")
+          generateCreateBody(Util.getQualifiedPathWithMetamodel(td), td.getName(), param.toString(), factory)
+          factory.append("\n\t}\n")
+        }
+      }
+    })
+    factory.append("\n}")
+    
+    Util.generateFile(Util.getQualifiedName(par), Util.getModelTypeFactoryTypeName(), factory.toString())
   }
 
 }

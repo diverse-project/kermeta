@@ -11,6 +11,7 @@ package org.kermeta.compilo.scala
 import java.util.Properties
 import java.util.ResourceBundle
 import scala.collection.JavaConversions._
+import org.kermeta.language.structure.ModelTypeDefinition
 
 /**
  * Class containing the current configuration of a given compiler
@@ -18,4 +19,5 @@ import scala.collection.JavaConversions._
  */
 class CompilerConfiguration extends LogAspect{
 	var kermetaStandardMMName : String = "kermeta_standard"
+	var modelTypeOperationsPrefix : String = "mt_"
 }

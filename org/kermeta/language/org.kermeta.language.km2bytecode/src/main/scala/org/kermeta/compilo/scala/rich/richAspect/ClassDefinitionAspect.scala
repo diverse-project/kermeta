@@ -10,6 +10,7 @@ import org.kermeta.language.structure._
 import org.kermeta.language.behavior._
 import org.kermeta.compilo.scala.visitor._
 import java.util.ArrayList
+import org.kermeta.compilo.scala.visitor.impl.UtilModelTypeDefinition
 
 trait ClassDefinitionAspect extends ObjectVisitor {
 
@@ -28,7 +29,7 @@ trait ClassDefinitionAspect extends ObjectVisitor {
 	} 
 }*/
 
-  def visitClassDefinition(thi: ClassDefinition, res: StringBuilder, compilerConfiguration : CompilerConfiguration): Unit = {
+  def visitClassDefinition(thi: ClassDefinition, res: StringBuilder, compilerConfiguration: CompilerConfiguration): Unit = {
     res.append("import " + "_root_." + GlobalConfiguration.frameworkGeneratedPackageName + "." + GlobalConfiguration.implicitConvTraitName + "._\n")
     if (Util.hasEcoreTag(thi) && !Util.isAMapEntry(thi)) {
       res.append("trait ")
@@ -60,6 +61,23 @@ trait ClassDefinitionAspect extends ObjectVisitor {
         // res append " with "+ /*org.kermeta.language.structureScalaAspect.aspect.FrameworkAspectUtil.getDefaultAspect(*/getQualifiedNameCompilo(thi)
       }
 
+      //MODELTYPEADDITION
+      //Add extends with Model Type interfaces
+      if (UtilModelTypeDefinition.isReferencedByModelTypeDefinition(thi)) {
+        res.append(" with ")
+        res.append(Util.getModelTypeInterfaceQualifiedName(thi))
+
+        UtilModelTypeDefinition.getTypeDefinitionDirectBindings(thi) match {
+          case Some(s) => {
+            s.foreach(cb => {
+              res.append(" with ")
+              res.append(Util.getModelTypeInterfaceQualifiedName(cb))
+            })
+          }
+          case None =>
+        }
+      }
+
       var param: StringBuilder = new StringBuilder
       generateParamerterClass(thi, param)
       if (!Util.hasEcoreFromAPITag(thi)) {
@@ -69,8 +87,25 @@ trait ClassDefinitionAspect extends ObjectVisitor {
 
       res.append("{\n")
 
+      //MODELTYPEADDITION
+      //Add fixed type members from Model Type interfaces
+      if (UtilModelTypeDefinition.isReferencedByModelTypeDefinition(thi)) {
+        var mm = Util.getMetamodel(thi)
+        if (Util.needToAddFixedTypeMembers(thi, mm)) {
+          res.append(UtilModelTypeDefinition.getFixedTypeMembers(mm))
+        }
+        res.append("\n")
+        setImplementingModelTypeInterface(true)
+        thi.getOwnedAttribute foreach (a => visit(a, res))
+        res.append("\n")
+        thi.getOwnedOperation filter (op => !Util.hasEcoreTag(op)) foreach (op => visit(op, res))
+        res.append("\n")
+        setImplementingModelTypeInterface(false)
+      }
+      
       thi.getOwnedAttribute foreach (a => visit(a, res))
       thi.getOwnedOperation filter (op => !Util.hasEcoreTag(op) || op.getBody != null) foreach (op => visit(op, res))
+
       this.generateInvariants(thi, res)
       this.generategetQualifiedName(thi, res, compilerConfiguration)
       res.append("}\n")
@@ -104,7 +139,40 @@ trait ClassDefinitionAspect extends ObjectVisitor {
       res append " with " + Util.protectScalaKeyword("_root_." + getQualifiedNamedBase(thi))
       generateParamerterClass(thi, res)
 
+      //MODELTYPEADDITION
+      //Add extends with Model Type interfaces
+      if (UtilModelTypeDefinition.isReferencedByModelTypeDefinition(thi)) {
+        res.append(" with ")
+        res.append(Util.getModelTypeInterfaceQualifiedName(thi))
+
+        UtilModelTypeDefinition.getTypeDefinitionDirectBindings(thi) match {
+          case Some(s) => {
+            s.foreach(cb => {
+              res.append(" with ")
+              res.append(Util.getModelTypeInterfaceQualifiedName(cb))
+            })
+          }
+          case None =>
+        }
+      }
+
       res.append("{\n")
+
+      //MODELTYPEADDITION
+      //Add fixed type members from Model Type interfaces
+      if (UtilModelTypeDefinition.isReferencedByModelTypeDefinition(thi)) {
+        var mm = Util.getMetamodel(thi)
+        if (Util.needToAddFixedTypeMembers(thi, mm)) {
+          res.append(UtilModelTypeDefinition.getFixedTypeMembers(mm))
+        }
+        res.append("\n")
+        setImplementingModelTypeInterface(true)        
+        thi.getOwnedAttribute foreach (a => visit(a, res))
+        res.append("\n")
+        thi.getOwnedOperation filter (op => !Util.hasEcoreTag(op)) foreach (op => visit(op, res))
+        res.append("\n")
+        setImplementingModelTypeInterface(false)
+      }
 
       thi.getOwnedAttribute foreach (a => visit(a, res))
       thi.getOwnedOperation filter (op => !Util.hasEcoreTag(op)) foreach (op => visit(op, res))
@@ -117,7 +185,51 @@ trait ClassDefinitionAspect extends ObjectVisitor {
     }
   }
 
-  def generategetQualifiedName(thi: ClassDefinition, res: StringBuilder, compilerConfiguration : CompilerConfiguration) = {
+  //MODELTYPE ADDITION
+  def generateInitializeOperation(thi: ClassDefinition, res: StringBuilder) = {
+    var first: Boolean = true
+    //Signature and body of the operation initializeFactories
+    var resSig: StringBuilder = new StringBuilder
+    var resBody: StringBuilder = new StringBuilder
+    //Variables to be assigned by the operation initializeFactories
+    var resVar: StringBuilder = new StringBuilder
+    resSig.append("def initializeFactories(")
+    thi.getTypeParameter().foreach(param => {
+      if (param.isInstanceOf[ModelTypeVariable]) {
+        if (first) {
+          first = false
+        } else {
+          resSig.append(", ")
+        }
+        //Variables declaration
+        resVar.append("\tvar ")
+        resVar.append(Util.getModelTypeFactoryParameterVariableName(param.asInstanceOf[ModelTypeVariable]))
+        resVar.append(" : ")
+        resVar.append(Util.getModelTypeFactoryTypeName())
+        resVar.append(" = null\n")
+        //Operation signature
+        resSig.append(Util.getModelTypeFactoryParameterVariableName(param.asInstanceOf[ModelTypeVariable]))
+        resSig.append(" : ")
+        resSig.append(Util.getModelTypeFactoryTypeName())
+        //Operation body (assignment of parameters to variables)
+        resBody.append("this.")
+        resBody.append(Util.getModelTypeFactoryParameterVariableName(param.asInstanceOf[ModelTypeVariable]))
+        resBody.append(" = ")
+        resBody.append(Util.getModelTypeFactoryParameterVariableName(param.asInstanceOf[ModelTypeVariable]))
+      }
+    })
+    resSig.append(") = {\n")
+    resSig.append()
+
+    if (!first) {
+      res.append(resVar)
+      res.append(resSig)
+      res.append(resBody)
+    }
+
+  }
+
+  def generategetQualifiedName(thi: ClassDefinition, res: StringBuilder, compilerConfiguration: CompilerConfiguration) = {
     var qualifiedName = ReflexivityLoader.qualifiedName(thi)
     res.append("  override def getMetaClass():_root_.org.kermeta.language.structure.Class={\n")
     res.append("    var cd : org.kermeta.language.structure.ClassDefinition =   _root_.k2.utils.ReflexivityLoader.getMetaClass(\"" + qualifiedName + "\"); \n")
@@ -254,14 +366,20 @@ trait ClassDefinitionAspect extends ObjectVisitor {
   def generateParamerterClass(thi: ClassDefinition, res1: StringBuilder) = {
     if (thi.getTypeParameter().size() > 0) {
       var i = 0
-      res1.append("[")
+      var res: StringBuilder = new StringBuilder
+      res.append("[")
       thi.getTypeParameter().foreach { param =>
-        if (i > 0)
-          res1.append(",")
-        res1.append(getQualifiedNameCompilo(param))
-        i = i + 1
+        if (!param.isInstanceOf[ModelTypeVariable]) {
+          if (i > 0)
+            res.append(",")
+          res.append(getQualifiedNameCompilo(param))
+          i = i + 1
+        }
       }
-      res1.append("]")
+      res.append("]")
+      if (i > 0) {
+        res1.append(res)
+      }
     }
   }
   def generateBindingParamerterClass(thi: ClassDefinition, superC: Class, res1: StringBuilder) = {
@@ -277,7 +395,7 @@ trait ClassDefinitionAspect extends ObjectVisitor {
     }
   }
 
-  def generateMapEntryWrapper(thi: ClassDefinition, res: StringBuilder, compilerConfiguration : CompilerConfiguration) = {
+  def generateMapEntryWrapper(thi: ClassDefinition, res: StringBuilder, compilerConfiguration: CompilerConfiguration) = {
     res.append("class ")
     res.append(thi.getName())
     res.append("( self : ")
