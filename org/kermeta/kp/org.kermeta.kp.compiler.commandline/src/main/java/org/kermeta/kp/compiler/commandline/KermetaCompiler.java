@@ -616,8 +616,22 @@ public class KermetaCompiler {
 			else{
 				logger.debug("Ignore checking of merged file ", LOG_MESSAGE_GROUP);
 			}
-			if(phaseRank(stopAfterPhase) <= phaseRank(PHASE_MERGE)){
+			if(phaseRank(stopAfterPhase) <= phaseRank(PHASE_MERGE) || !kp.getRequiredTypes().isEmpty()){
 				logger.debug("stopping after phase "+PHASE_MERGE, LOG_MESSAGE_GROUP);
+				
+				if(!kp.getRequiredTypes().isEmpty()){
+					// TODO must verify that only types in requiredTypes are unresolved, this implies to ensures that the resolver works even if standard::Object isn't available
+					logger.info("Building partial project only. full resolving and bytecode should be done by the projects that imports or extends this one", LOG_MESSAGE_GROUP);
+				}
+				URI uri = URI.createURI((mergedUnit.getResult().getName() + ".km_in_memory").replaceAll("::", "."));
+				File mergedFile = new File(targetGeneratedResourcesFolder + DEFAULT_KP_METAINF_LOCATION_IN_JAR + File.separatorChar+ kp.getMetamodelName() + ".km");
+				if (!mergedFile.getParentFile().exists()) {
+					mergedFile.getParentFile().mkdirs();
+				}
+				FileWriter writer = new FileWriter(mergedFile);
+		
+				writer.write(new ModelingUnitConverter(logger).saveMu(mergedUnit.getResult(), uri).toString());
+				writer.close();
 				return mergedUnit.getResult();
 			}
 	
@@ -669,13 +683,13 @@ public class KermetaCompiler {
 				logger.debug("Ignore checking of resolved file ", LOG_MESSAGE_GROUP);
 			}
 				
-			// save resolvedUnit to the META-INF/kermeta/merged.km
+			// save resolvedUnit to the META-INF/kermeta/<projectName>.km
 			URI uri = URI.createURI((resolvedUnit.getName() + ".km_in_memory").replaceAll("::", "."));
-			File mergedFile = new File(targetGeneratedResourcesFolder + DEFAULT_KP_METAINF_LOCATION_IN_JAR + File.separatorChar+ kp.getMetamodelName() + ".km");
-			if (!mergedFile.getParentFile().exists()) {
-				mergedFile.getParentFile().mkdirs();
+			File resolvedFile = new File(targetGeneratedResourcesFolder + DEFAULT_KP_METAINF_LOCATION_IN_JAR + File.separatorChar+ kp.getMetamodelName() + ".km");
+			if (!resolvedFile.getParentFile().exists()) {
+				resolvedFile.getParentFile().mkdirs();
 			}
-			FileWriter writer = new FileWriter(mergedFile);
+			FileWriter writer = new FileWriter(resolvedFile);
 	
 			writer.write(new ModelingUnitConverter(logger).saveMu(resolvedUnit, uri).toString());
 			writer.close();
@@ -732,7 +746,7 @@ public class KermetaCompiler {
 			fullBinaryDependencyClassPath.add(0,targetEMFBinaryFolder+"/"); // add the path to java code frome generated emf
 			
 			logger.debug("Generating scala for "+kpFileURL, LOG_MESSAGE_GROUP);
-			String fileLocation = mergedFile.toURI().toURL().getFile(); 
+			String fileLocation = resolvedFile.toURI().toURL().getFile(); 
 			StringBuilder fullBinaryDependencyClassPathSB = new StringBuilder(); 
 			for(String singlePath : fullBinaryDependencyClassPath){
 				fullBinaryDependencyClassPathSB.append(singlePath);
