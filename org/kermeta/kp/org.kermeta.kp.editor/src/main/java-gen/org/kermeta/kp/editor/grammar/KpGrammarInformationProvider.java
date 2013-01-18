@@ -59,12 +59,24 @@ public class KpGrammarInformationProvider {
 	public final static org.kermeta.kp.editor.grammar.KpSequence KP_0_0_0_9_0_0 = new org.kermeta.kp.editor.grammar.KpSequence(org.kermeta.kp.editor.grammar.KpCardinality.ONE, KP_0_0_0_9_0_0_0, KP_0_0_0_9_0_0_1, KP_0_0_0_9_0_0_2);
 	public final static org.kermeta.kp.editor.grammar.KpChoice KP_0_0_0_9_0 = new org.kermeta.kp.editor.grammar.KpChoice(org.kermeta.kp.editor.grammar.KpCardinality.ONE, KP_0_0_0_9_0_0);
 	public final static org.kermeta.kp.editor.grammar.KpCompound KP_0_0_0_9 = new org.kermeta.kp.editor.grammar.KpCompound(KP_0_0_0_9_0, org.kermeta.kp.editor.grammar.KpCardinality.QUESTIONMARK);
-	public final static org.kermeta.kp.editor.grammar.KpContainment KP_0_0_0_10_0_0_0 = new org.kermeta.kp.editor.grammar.KpContainment(org.kermeta.kp.KpPackage.eINSTANCE.getKermetaProject().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT__IMPORTED_FILES), org.kermeta.kp.editor.grammar.KpCardinality.ONE, 0);
-	public final static org.kermeta.kp.editor.grammar.KpSequence KP_0_0_0_10_0_0 = new org.kermeta.kp.editor.grammar.KpSequence(org.kermeta.kp.editor.grammar.KpCardinality.ONE, KP_0_0_0_10_0_0_0);
+	public final static org.kermeta.kp.editor.grammar.KpLineBreak KP_0_0_0_10_0_0_0 = new org.kermeta.kp.editor.grammar.KpLineBreak(org.kermeta.kp.editor.grammar.KpCardinality.ONE, 1);
+	public final static org.kermeta.kp.editor.grammar.KpKeyword KP_0_0_0_10_0_0_1 = new org.kermeta.kp.editor.grammar.KpKeyword("requiredTypes", org.kermeta.kp.editor.grammar.KpCardinality.ONE);
+	public final static org.kermeta.kp.editor.grammar.KpContainment KP_0_0_0_10_0_0_2 = new org.kermeta.kp.editor.grammar.KpContainment(org.kermeta.kp.KpPackage.eINSTANCE.getKermetaProject().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT__REQUIRED_TYPES), org.kermeta.kp.editor.grammar.KpCardinality.ONE, 0);
+	public final static org.kermeta.kp.editor.grammar.KpKeyword KP_0_0_0_10_0_0_3_0_0_0 = new org.kermeta.kp.editor.grammar.KpKeyword(",", org.kermeta.kp.editor.grammar.KpCardinality.ONE);
+	public final static org.kermeta.kp.editor.grammar.KpWhiteSpace KP_0_0_0_10_0_0_3_0_0_1 = new org.kermeta.kp.editor.grammar.KpWhiteSpace(1, org.kermeta.kp.editor.grammar.KpCardinality.ONE);
+	public final static org.kermeta.kp.editor.grammar.KpContainment KP_0_0_0_10_0_0_3_0_0_2 = new org.kermeta.kp.editor.grammar.KpContainment(org.kermeta.kp.KpPackage.eINSTANCE.getKermetaProject().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT__REQUIRED_TYPES), org.kermeta.kp.editor.grammar.KpCardinality.ONE, 0);
+	public final static org.kermeta.kp.editor.grammar.KpSequence KP_0_0_0_10_0_0_3_0_0 = new org.kermeta.kp.editor.grammar.KpSequence(org.kermeta.kp.editor.grammar.KpCardinality.ONE, KP_0_0_0_10_0_0_3_0_0_0, KP_0_0_0_10_0_0_3_0_0_1, KP_0_0_0_10_0_0_3_0_0_2);
+	public final static org.kermeta.kp.editor.grammar.KpChoice KP_0_0_0_10_0_0_3_0 = new org.kermeta.kp.editor.grammar.KpChoice(org.kermeta.kp.editor.grammar.KpCardinality.ONE, KP_0_0_0_10_0_0_3_0_0);
+	public final static org.kermeta.kp.editor.grammar.KpCompound KP_0_0_0_10_0_0_3 = new org.kermeta.kp.editor.grammar.KpCompound(KP_0_0_0_10_0_0_3_0, org.kermeta.kp.editor.grammar.KpCardinality.STAR);
+	public final static org.kermeta.kp.editor.grammar.KpSequence KP_0_0_0_10_0_0 = new org.kermeta.kp.editor.grammar.KpSequence(org.kermeta.kp.editor.grammar.KpCardinality.ONE, KP_0_0_0_10_0_0_0, KP_0_0_0_10_0_0_1, KP_0_0_0_10_0_0_2, KP_0_0_0_10_0_0_3);
 	public final static org.kermeta.kp.editor.grammar.KpChoice KP_0_0_0_10_0 = new org.kermeta.kp.editor.grammar.KpChoice(org.kermeta.kp.editor.grammar.KpCardinality.ONE, KP_0_0_0_10_0_0);
-	public final static org.kermeta.kp.editor.grammar.KpCompound KP_0_0_0_10 = new org.kermeta.kp.editor.grammar.KpCompound(KP_0_0_0_10_0, org.kermeta.kp.editor.grammar.KpCardinality.STAR);
-	public final static org.kermeta.kp.editor.grammar.KpKeyword KP_0_0_0_11 = new org.kermeta.kp.editor.grammar.KpKeyword("}", org.kermeta.kp.editor.grammar.KpCardinality.ONE);
-	public final static org.kermeta.kp.editor.grammar.KpSequence KP_0_0_0 = new org.kermeta.kp.editor.grammar.KpSequence(org.kermeta.kp.editor.grammar.KpCardinality.ONE, KP_0_0_0_0, KP_0_0_0_1, KP_0_0_0_2, KP_0_0_0_3, KP_0_0_0_4, KP_0_0_0_5, KP_0_0_0_6, KP_0_0_0_7, KP_0_0_0_8, KP_0_0_0_9, KP_0_0_0_10, KP_0_0_0_11);
+	public final static org.kermeta.kp.editor.grammar.KpCompound KP_0_0_0_10 = new org.kermeta.kp.editor.grammar.KpCompound(KP_0_0_0_10_0, org.kermeta.kp.editor.grammar.KpCardinality.QUESTIONMARK);
+	public final static org.kermeta.kp.editor.grammar.KpContainment KP_0_0_0_11_0_0_0 = new org.kermeta.kp.editor.grammar.KpContainment(org.kermeta.kp.KpPackage.eINSTANCE.getKermetaProject().getEStructuralFeature(org.kermeta.kp.KpPackage.KERMETA_PROJECT__IMPORTED_FILES), org.kermeta.kp.editor.grammar.KpCardinality.ONE, 0);
+	public final static org.kermeta.kp.editor.grammar.KpSequence KP_0_0_0_11_0_0 = new org.kermeta.kp.editor.grammar.KpSequence(org.kermeta.kp.editor.grammar.KpCardinality.ONE, KP_0_0_0_11_0_0_0);
+	public final static org.kermeta.kp.editor.grammar.KpChoice KP_0_0_0_11_0 = new org.kermeta.kp.editor.grammar.KpChoice(org.kermeta.kp.editor.grammar.KpCardinality.ONE, KP_0_0_0_11_0_0);
+	public final static org.kermeta.kp.editor.grammar.KpCompound KP_0_0_0_11 = new org.kermeta.kp.editor.grammar.KpCompound(KP_0_0_0_11_0, org.kermeta.kp.editor.grammar.KpCardinality.STAR);
+	public final static org.kermeta.kp.editor.grammar.KpKeyword KP_0_0_0_12 = new org.kermeta.kp.editor.grammar.KpKeyword("}", org.kermeta.kp.editor.grammar.KpCardinality.ONE);
+	public final static org.kermeta.kp.editor.grammar.KpSequence KP_0_0_0 = new org.kermeta.kp.editor.grammar.KpSequence(org.kermeta.kp.editor.grammar.KpCardinality.ONE, KP_0_0_0_0, KP_0_0_0_1, KP_0_0_0_2, KP_0_0_0_3, KP_0_0_0_4, KP_0_0_0_5, KP_0_0_0_6, KP_0_0_0_7, KP_0_0_0_8, KP_0_0_0_9, KP_0_0_0_10, KP_0_0_0_11, KP_0_0_0_12);
 	public final static org.kermeta.kp.editor.grammar.KpChoice KP_0_0 = new org.kermeta.kp.editor.grammar.KpChoice(org.kermeta.kp.editor.grammar.KpCardinality.ONE, KP_0_0_0);
 	public final static org.kermeta.kp.editor.grammar.KpRule KP_0 = new org.kermeta.kp.editor.grammar.KpRule(org.kermeta.kp.KpPackage.eINSTANCE.getKermetaProject(), KP_0_0, org.kermeta.kp.editor.grammar.KpCardinality.ONE);
 	public final static org.kermeta.kp.editor.grammar.KpLineBreak KP_1_0_0_0 = new org.kermeta.kp.editor.grammar.KpLineBreak(org.kermeta.kp.editor.grammar.KpCardinality.ONE, 3);
@@ -87,12 +99,13 @@ public class KpGrammarInformationProvider {
 	public final static org.kermeta.kp.editor.grammar.KpKeyword KP_2_0_0_4_0_0_1 = new org.kermeta.kp.editor.grammar.KpKeyword("EMFBytecode", org.kermeta.kp.editor.grammar.KpCardinality.ONE);
 	public final static org.kermeta.kp.editor.grammar.KpPlaceholder KP_2_0_0_4_0_0_2 = new org.kermeta.kp.editor.grammar.KpPlaceholder(org.kermeta.kp.KpPackage.eINSTANCE.getImportFile().getEStructuralFeature(org.kermeta.kp.KpPackage.IMPORT_FILE__BYTECODE_FROM), "QUOTED_40_41", org.kermeta.kp.editor.grammar.KpCardinality.ONE, 0);
 	public final static org.kermeta.kp.editor.grammar.KpKeyword KP_2_0_0_4_0_0_3_0_0_0 = new org.kermeta.kp.editor.grammar.KpKeyword("{", org.kermeta.kp.editor.grammar.KpCardinality.ONE);
-	public final static org.kermeta.kp.editor.grammar.KpContainment KP_2_0_0_4_0_0_3_0_0_1_0_0_0 = new org.kermeta.kp.editor.grammar.KpContainment(org.kermeta.kp.KpPackage.eINSTANCE.getImportFile().getEStructuralFeature(org.kermeta.kp.KpPackage.IMPORT_FILE__PACKAGE_EQUIVALENCES), org.kermeta.kp.editor.grammar.KpCardinality.ONE, 0);
-	public final static org.kermeta.kp.editor.grammar.KpSequence KP_2_0_0_4_0_0_3_0_0_1_0_0 = new org.kermeta.kp.editor.grammar.KpSequence(org.kermeta.kp.editor.grammar.KpCardinality.ONE, KP_2_0_0_4_0_0_3_0_0_1_0_0_0);
-	public final static org.kermeta.kp.editor.grammar.KpChoice KP_2_0_0_4_0_0_3_0_0_1_0 = new org.kermeta.kp.editor.grammar.KpChoice(org.kermeta.kp.editor.grammar.KpCardinality.ONE, KP_2_0_0_4_0_0_3_0_0_1_0_0);
-	public final static org.kermeta.kp.editor.grammar.KpCompound KP_2_0_0_4_0_0_3_0_0_1 = new org.kermeta.kp.editor.grammar.KpCompound(KP_2_0_0_4_0_0_3_0_0_1_0, org.kermeta.kp.editor.grammar.KpCardinality.STAR);
-	public final static org.kermeta.kp.editor.grammar.KpKeyword KP_2_0_0_4_0_0_3_0_0_2 = new org.kermeta.kp.editor.grammar.KpKeyword("}", org.kermeta.kp.editor.grammar.KpCardinality.ONE);
-	public final static org.kermeta.kp.editor.grammar.KpSequence KP_2_0_0_4_0_0_3_0_0 = new org.kermeta.kp.editor.grammar.KpSequence(org.kermeta.kp.editor.grammar.KpCardinality.ONE, KP_2_0_0_4_0_0_3_0_0_0, KP_2_0_0_4_0_0_3_0_0_1, KP_2_0_0_4_0_0_3_0_0_2);
+	public final static org.kermeta.kp.editor.grammar.KpContainment KP_2_0_0_4_0_0_3_0_0_1 = new org.kermeta.kp.editor.grammar.KpContainment(org.kermeta.kp.KpPackage.eINSTANCE.getImportFile().getEStructuralFeature(org.kermeta.kp.KpPackage.IMPORT_FILE__PACKAGE_EQUIVALENCES), org.kermeta.kp.editor.grammar.KpCardinality.ONE, 0);
+	public final static org.kermeta.kp.editor.grammar.KpContainment KP_2_0_0_4_0_0_3_0_0_2_0_0_0 = new org.kermeta.kp.editor.grammar.KpContainment(org.kermeta.kp.KpPackage.eINSTANCE.getImportFile().getEStructuralFeature(org.kermeta.kp.KpPackage.IMPORT_FILE__PACKAGE_EQUIVALENCES), org.kermeta.kp.editor.grammar.KpCardinality.ONE, 0);
+	public final static org.kermeta.kp.editor.grammar.KpSequence KP_2_0_0_4_0_0_3_0_0_2_0_0 = new org.kermeta.kp.editor.grammar.KpSequence(org.kermeta.kp.editor.grammar.KpCardinality.ONE, KP_2_0_0_4_0_0_3_0_0_2_0_0_0);
+	public final static org.kermeta.kp.editor.grammar.KpChoice KP_2_0_0_4_0_0_3_0_0_2_0 = new org.kermeta.kp.editor.grammar.KpChoice(org.kermeta.kp.editor.grammar.KpCardinality.ONE, KP_2_0_0_4_0_0_3_0_0_2_0_0);
+	public final static org.kermeta.kp.editor.grammar.KpCompound KP_2_0_0_4_0_0_3_0_0_2 = new org.kermeta.kp.editor.grammar.KpCompound(KP_2_0_0_4_0_0_3_0_0_2_0, org.kermeta.kp.editor.grammar.KpCardinality.STAR);
+	public final static org.kermeta.kp.editor.grammar.KpKeyword KP_2_0_0_4_0_0_3_0_0_3 = new org.kermeta.kp.editor.grammar.KpKeyword("}", org.kermeta.kp.editor.grammar.KpCardinality.ONE);
+	public final static org.kermeta.kp.editor.grammar.KpSequence KP_2_0_0_4_0_0_3_0_0 = new org.kermeta.kp.editor.grammar.KpSequence(org.kermeta.kp.editor.grammar.KpCardinality.ONE, KP_2_0_0_4_0_0_3_0_0_0, KP_2_0_0_4_0_0_3_0_0_1, KP_2_0_0_4_0_0_3_0_0_2, KP_2_0_0_4_0_0_3_0_0_3);
 	public final static org.kermeta.kp.editor.grammar.KpChoice KP_2_0_0_4_0_0_3_0 = new org.kermeta.kp.editor.grammar.KpChoice(org.kermeta.kp.editor.grammar.KpCardinality.ONE, KP_2_0_0_4_0_0_3_0_0);
 	public final static org.kermeta.kp.editor.grammar.KpCompound KP_2_0_0_4_0_0_3 = new org.kermeta.kp.editor.grammar.KpCompound(KP_2_0_0_4_0_0_3_0, org.kermeta.kp.editor.grammar.KpCardinality.QUESTIONMARK);
 	public final static org.kermeta.kp.editor.grammar.KpSequence KP_2_0_0_4_0_0 = new org.kermeta.kp.editor.grammar.KpSequence(org.kermeta.kp.editor.grammar.KpCardinality.ONE, KP_2_0_0_4_0_0_0, KP_2_0_0_4_0_0_1, KP_2_0_0_4_0_0_2, KP_2_0_0_4_0_0_3);
@@ -136,6 +149,10 @@ public class KpGrammarInformationProvider {
 	public final static org.kermeta.kp.editor.grammar.KpSequence KP_5_0_0 = new org.kermeta.kp.editor.grammar.KpSequence(org.kermeta.kp.editor.grammar.KpCardinality.ONE, KP_5_0_0_0, KP_5_0_0_1, KP_5_0_0_2, KP_5_0_0_3, KP_5_0_0_4, KP_5_0_0_5, KP_5_0_0_6, KP_5_0_0_7, KP_5_0_0_8);
 	public final static org.kermeta.kp.editor.grammar.KpChoice KP_5_0 = new org.kermeta.kp.editor.grammar.KpChoice(org.kermeta.kp.editor.grammar.KpCardinality.ONE, KP_5_0_0);
 	public final static org.kermeta.kp.editor.grammar.KpRule KP_5 = new org.kermeta.kp.editor.grammar.KpRule(org.kermeta.kp.KpPackage.eINSTANCE.getReusableResource(), KP_5_0, org.kermeta.kp.editor.grammar.KpCardinality.ONE);
+	public final static org.kermeta.kp.editor.grammar.KpPlaceholder KP_6_0_0_0 = new org.kermeta.kp.editor.grammar.KpPlaceholder(org.kermeta.kp.KpPackage.eINSTANCE.getRequiredType().getEStructuralFeature(org.kermeta.kp.KpPackage.REQUIRED_TYPE__QUALIFIED_NAME), "QUOTED_34_34", org.kermeta.kp.editor.grammar.KpCardinality.ONE, 0);
+	public final static org.kermeta.kp.editor.grammar.KpSequence KP_6_0_0 = new org.kermeta.kp.editor.grammar.KpSequence(org.kermeta.kp.editor.grammar.KpCardinality.ONE, KP_6_0_0_0);
+	public final static org.kermeta.kp.editor.grammar.KpChoice KP_6_0 = new org.kermeta.kp.editor.grammar.KpChoice(org.kermeta.kp.editor.grammar.KpCardinality.ONE, KP_6_0_0);
+	public final static org.kermeta.kp.editor.grammar.KpRule KP_6 = new org.kermeta.kp.editor.grammar.KpRule(org.kermeta.kp.KpPackage.eINSTANCE.getRequiredType(), KP_6_0, org.kermeta.kp.editor.grammar.KpCardinality.ONE);
 	
 	public final static org.kermeta.kp.editor.grammar.KpRule[] RULES = new org.kermeta.kp.editor.grammar.KpRule[] {
 		KP_0,
@@ -144,6 +161,7 @@ public class KpGrammarInformationProvider {
 		KP_3,
 		KP_4,
 		KP_5,
+		KP_6,
 	};
 	
 	/**

@@ -58,6 +58,12 @@ public class AbstractKpInterpreter<ResultType, ContextType> {
 	
 	public ResultType interprete(org.eclipse.emf.ecore.EObject object, ContextType context) {
 		ResultType result = null;
+		if (object instanceof org.kermeta.kp.RequiredType) {
+			result = interprete_org_kermeta_kp_RequiredType((org.kermeta.kp.RequiredType) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
 		if (object instanceof org.kermeta.kp.ImportProject) {
 			result = interprete_org_kermeta_kp_ImportProject((org.kermeta.kp.ImportProject) object, context);
 		}
@@ -118,6 +124,10 @@ public class AbstractKpInterpreter<ResultType, ContextType> {
 	}
 	
 	public ResultType interprete_org_kermeta_kp_ImportProject(org.kermeta.kp.ImportProject object, ContextType context) {
+		return null;
+	}
+	
+	public ResultType interprete_org_kermeta_kp_RequiredType(org.kermeta.kp.RequiredType object, ContextType context) {
 		return null;
 	}
 	

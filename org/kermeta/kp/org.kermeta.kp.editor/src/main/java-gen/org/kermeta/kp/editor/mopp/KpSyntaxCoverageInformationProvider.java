@@ -16,6 +16,7 @@ public class KpSyntaxCoverageInformationProvider {
 			org.kermeta.kp.KpPackage.eINSTANCE.getImportProject(),
 			org.kermeta.kp.KpPackage.eINSTANCE.getImportProjectSources(),
 			org.kermeta.kp.KpPackage.eINSTANCE.getReusableResource(),
+			org.kermeta.kp.KpPackage.eINSTANCE.getRequiredType(),
 		};
 	}
 	

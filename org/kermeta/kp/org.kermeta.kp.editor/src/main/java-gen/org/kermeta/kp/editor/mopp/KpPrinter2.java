@@ -133,6 +133,10 @@ public class KpPrinter2 implements org.kermeta.kp.editor.IKpTextPrinter {
 			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_5, foundFormattingElements);
 			return;
 		}
+		if (element instanceof org.kermeta.kp.RequiredType) {
+			printInternal(element, org.kermeta.kp.editor.grammar.KpGrammarInformationProvider.KP_6, foundFormattingElements);
+			return;
+		}
 		
 		addWarningToResource("The printer can not handle " + element.eClass().getName() + " elements", element);
 	}
