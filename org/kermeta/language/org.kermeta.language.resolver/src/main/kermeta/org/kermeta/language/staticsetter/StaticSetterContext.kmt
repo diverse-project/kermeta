@@ -47,8 +47,10 @@ class StaticSetterContext
 	reference currentMetamodels : Collection<Metamodel>
 	
 	reference currentClassDefinition : org::kermeta::language::structure::ClassDefinition
+	reference currentModelTypeDefinition : org::kermeta::language::structure::ModelTypeDefinition
 	reference currentOperation : org::kermeta::language::structure::Operation
 	reference currentProperty : org::kermeta::language::structure::Property
+	reference currentModelTransformation : org::kermeta::language::structure::ModelTransformation
 	
 	//contextFrames are used to organize symbols using scopes.
 	attribute contextFrames : seq StaticSetterContextFrame[0..*]

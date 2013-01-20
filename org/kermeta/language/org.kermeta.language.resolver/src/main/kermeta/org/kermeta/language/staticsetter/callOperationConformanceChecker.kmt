@@ -63,7 +63,45 @@ package behavior{
 		end
 	}
 	
-	
+	aspect class CallModelTransformation
+	{
+		
+		/**Infer the type of type variable from the staticTransformation using the type of parameters of the call
+		* e.g. if transformation foo[X](x: Collection[X]): X and a call foo(Sequence<String>.new) then X->String
+		*/
+		operation inferTypeVariableFromParameters(context : StaticSetterContext) is do 
+			if context.verbose then	stdio.writeln("inferTypeVariableFromParameters for "+self.name) end
+			
+			var typeVariableToSet : Hashtable<TypeVariable, Type> init Hashtable<TypeVariable, Type>.new
+			
+			
+			//todo : check if type parameters are passed to the CallModelTransformation and if so bind them with typeParameters from the staticTransformation
+			//if there are typeParamaters and they are not filled by the call then put them in the variables to set
+			if not staticTransformation.typeParameters.isEmpty and self.staticTypeVariableBindings.isEmpty then 
+				staticTransformation.typeParameters.each{tv|
+					typeVariableToSet.put(tv, tv)
+				}
+				
+			end
+			
+			from var i : Integer init 0
+			until i==self.parameters.size() loop
+				
+				if not self.parameters.elementAt(i).staticType.isVoid and not self.parameters.elementAt(i).isInstanceOf(VoidLiteral) then
+						self.parameters.elementAt(i).staticType.realInstanceType.statissetter_compareToExpectedType(context.createTypeFromMultiplicityElement(staticTransformation.ownedParameter.elementAt(i)),typeVariableToSet, context)
+				end
+				i:=i+1
+			end
+			if not staticTransformation.typeParameters.isEmpty and self.staticTypeVariableBindings.isEmpty then 
+				staticTransformation.typeParameters.each{tv|
+					self.staticTypeVariableBindings.add(typeVariableToSet.getValue(tv))
+					if context.verbose then stdio.writeln("binding found : "+tv.name+" - "+typeVariableToSet.getValue(tv).toString) end
+					//type should already be contained
+				}
+			end
+			
+		end
+	}
 }
 
 package structure{

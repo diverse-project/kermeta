@@ -137,8 +137,8 @@ class FullStaticResolver
 		
 		
 		//init of context
-		ctxt:= LanguageVisitorContext.new.initialize(unresolvedMetamodels, currentMetamodel, false)
-		
+		ctxt:= LanguageVisitorContext.new.initialize(unresolvedMetamodels, currentMetamodel, true)
+				
 		result := createModelTypeDefinitions(
 			doStaticSetting(
 				checkModelTypeDefinitionBindings(

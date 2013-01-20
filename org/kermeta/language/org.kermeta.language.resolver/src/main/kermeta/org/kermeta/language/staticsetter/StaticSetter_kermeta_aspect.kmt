@@ -105,6 +105,14 @@ package structure {
 		end
 	}
 	
+	aspect class ModelTypeDefinition {
+		method inferContainedExpressionStatic(context : StaticSetterContext) from NamedElement is do
+			context.currentModelTypeDefinition := self			
+			super(context)		
+			context.currentModelTypeDefinition := void
+		end
+	}
+	
 	aspect class Property {
 		method inferContainedExpressionStatic(context : StaticSetterContext) from NamedElement is do
 			context.currentProperty := self
@@ -144,6 +152,25 @@ package structure {
 			
 			context.popContext()
 			context.currentOperation := void
+		end		
+	}
+	
+	aspect class ModelTransformation {
+		 
+		method inferContainedExpressionStatic(context : StaticSetterContext) from NamedElement  is do
+			context.currentModelTransformation := self
+			context.pushContext()
+			self.ownedParameter.each{ param | 				
+				context.addSymbol( param.name, context.createTypeFromMultiplicityElement(param))
+			}			
+			
+			if not body.isVoid then
+				//replacement of body is needed in the case of a body without block
+				body:=body.resolveCallAndInferStatic(context)
+			end
+						
+			context.popContext()
+			context.currentModelTransformation := void
 		end		
 	}
 	
@@ -614,13 +641,14 @@ package behavior {
 					typeVar:=context.currentOperation.typeParameter.detect{ t| t.name==self.name}
 				end
 				//then in classdef
-				if typeVar.isVoid then
+				if typeVar.isVoid and not context.currentClassDefinition.isVoid then
 					typeVar:=context.currentClassDefinition.typeParameter.detect{ t|t.name==self.name}
 				end
 				
 				//MODELTYPE ADDITION
-				var set_name : Sequence<String> init self.name.split("::")
-				if typeVar.isVoid then
+				//Detection of Virtual Types (adressed through a path of the form "ModelTypeVariable"^"Package"::"VirtualType")
+				if (self.name.contains("^") and typeVar.isVoid()) then
+				var set_name : Sequence<String> init self.name.split("\\^")
 					if not context.currentOperation.isVoid then
 						typeVar:=context.currentOperation.typeParameter.detect{ t| t.name==set_name.at(0)}
 					end
@@ -812,9 +840,9 @@ package behavior {
 							end
 						else
 						//if not, try to infer them
-							self.resolvedCall.asType(CallOperation).inferTypeVariableFromParameters(context)
+							self.resolvedCall.asType(CallModelTransformation).inferTypeVariableFromParameters(context)
 						end
-						self.resolvedCall.asType(CallOperation).target := self.target 
+						self.resolvedCall.asType(CallModelTransformation).target := self.target 
 						
 						// The static type of the call operation must be infered.
 						inferStaticTypeOfCallModelTransformation(self.resolvedCall.asType(CallModelTransformation), transfo, context)
@@ -882,6 +910,10 @@ package behavior {
 			if result.isVoid then
 				if (context.verbose) then stdio.writeln("      still not found trying to find a property "+name) end
 				result:=resolveCallToProperty(context)
+			end
+			
+			if result.isVoid() and not context.currentModelTypeDefinition.isVoid() then
+				result:=resolveCallToModelTransformation(context)
 			end
 			
 			if result.isVoid and isTargetInitiallyVoid then
@@ -1132,19 +1164,29 @@ package behavior {
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of SelfExpression") end
 			// Creation of a type based on the current class definition corresponding to the self.
-			var type : Class init Class.new
-			type.typeDefinition := context.currentClassDefinition
-			type.typeDefinition.typeParameter.each{ tp |
-				var tvb : TypeVariableBinding init  TypeVariableBinding.new
-				tvb.variable := tp
-				/*if tp.supertype.isVoid then
-					tvb.type := context.createTypeFromQualifiedName("kermeta::standard::Object")
-				else
-					tvb.type := tp.supertype
-				end*/
-				tvb.type:=tp
-				type.typeParamBinding.add(tvb)
-			}
+			var type : Type
+			if (not context.currentClassDefinition.isVoid) then
+				var c : Class init Class.new
+				c.typeDefinition := context.currentClassDefinition
+				c.typeDefinition.typeParameter.each{ tp |
+					var tvb : TypeVariableBinding init  TypeVariableBinding.new
+					tvb.variable := tp
+					/*if tp.supertype.isVoid then
+						tvb.type := context.createTypeFromQualifiedName("kermeta::standard::Object")
+					else
+						tvb.type := tp.supertype
+					end*/
+					tvb.type:=tp
+					c.typeParamBinding.add(tvb)
+				}
+				type := c
+			end
+			if (not context.currentModelTypeDefinition.isVoid) then
+				var mt : ModelType init ModelType.new
+				mt.typeDefinition := context.currentModelTypeDefinition
+				type := mt
+			end
+			
 			self.setInferedStaticType(context, type)
 			result := self
 		end
@@ -1327,8 +1369,7 @@ package behavior {
 	}
 	
 	aspect class CallResult {
-		
-	
+			
 		method resolveCallAndInferStatic(context : StaticSetterContext) : Expression is do
 			if (context.verbose) then stdio.writeln("resolveCallAndInferStatic of CallResult") end  
 			var multiplicityElementContainer : MultiplicityElement
@@ -1339,15 +1380,17 @@ package behavior {
 				if not context.currentProperty.isVoid then
 					multiplicityElementContainer:=context.currentProperty
 				else
-					context.errors.add(ResolverException.new.initialize("Not able to find the containing operation.", self))
+					if not context.currentModelTransformation.isVoid then
+						multiplicityElementContainer := context.currentModelTransformation
+					else
+						context.errors.add(ResolverException.new.initialize("Not able to find the containing operation.", self))
+					end
 				end
 			end
 			
 			if not multiplicityElementContainer.isVoid then
 				self.setInferedStaticType(context, context.createTypeFromMultiplicityElement(multiplicityElementContainer) )
-			end
-			
-			
+			end			
 			result := self
 		end
 	}
