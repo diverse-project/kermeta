@@ -15,6 +15,7 @@ import scala.util.parsing.input.OffsetPosition
 import org.kermeta.language.loader.kmt.scala.internal.parser.sub.KClassDefinitionParser
 import org.kermeta.language.loader.kmt.scala.internal.parser.sub.KEnumerationParser
 import org.kermeta.language.loader.kmt.scala.internal.parser.sub.KModelingUnitParser
+import org.kermeta.language.loader.kmt.scala.internal.parser.sub.KMetamodelAspectParser
 import org.kermeta.language.util.ModelingUnit
 
 /**
@@ -24,7 +25,8 @@ import org.kermeta.language.util.ModelingUnit
 class KParser extends KExpressionParser
                  with KModelingUnitParser
                  with KClassDefinitionParser
-                 with KEnumerationParser {
+                 with KEnumerationParser
+                 with KMetamodelAspectParser {
 
   def parse(content : String) : Option[ModelingUnit] = {
     resetUnik

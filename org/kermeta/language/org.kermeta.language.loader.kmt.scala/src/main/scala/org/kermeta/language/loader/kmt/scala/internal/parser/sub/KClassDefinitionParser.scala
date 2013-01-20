@@ -18,23 +18,25 @@ import org.kermeta.language.structure.Property
 import org.kermeta.language.structure.StructureFactory
 import org.kermeta.language.structure.Tag
 import org.kermeta.language.structure.Type
+import org.kermeta.language.structure.TypeVariable
 
 /**
  * Sub parser dedicated to parse ClassDefinition in KMt textual syntax
  */
-trait KClassDefinitionParser extends KAbstractParser 
-                                with KInvParser
-                                with KAttributeParser
-                                with KOperationParser
-                                with KTagParser
-                                with KGenericTypeParser{
+trait KClassDefinitionParser extends KAbstractParser
+  with KInvParser
+  with KAttributeParser
+  with KOperationParser
+  with KTagParser
+  with KGenericTypeParser
+  with KTypeVariableParser {
 
   /* SUB PARSER MINIMAL CONTRACT */
-  def invariant : Parser[Constraint]
-  def annotation : Parser[Tag]
-  def attribute : Parser[Property]
-  def derivedProperty : Parser[Property]
-  def operation : Parser[Operation]
+  def invariant: Parser[Constraint]
+  def annotation: Parser[Tag]
+  def attribute: Parser[Property]
+  def derivedProperty: Parser[Property]
+  def operation: Parser[Operation]
 
   /* END CONTRACT */
 
@@ -42,14 +44,14 @@ trait KClassDefinitionParser extends KAbstractParser
   def aspectModifier = opt("aspect")
   def singletonModifier = opt("singleton")
 
-  
-  def classDeclKeyword = ( "class" | "singleton" )
+  def classDeclKeyword = ("class" | "singleton")
 
-  def classDecl : Parser[ClassDefinition] = aspectModifier ~ abstractModifier ~ classDeclKeyword ~ ident ~ opt(classGenericParems) ~ opt(classParentDecls) ~ "{" ~ rep(annotableClassMemberDecl) ~ "}" ^^ { case aspectM ~ abstractM ~ classKeyword ~ id1 ~params ~ parents ~ _ ~ members ~ _ =>
-      var newo =StructureFactory.eINSTANCE.createClassDefinition
+  def classDecl: Parser[ClassDefinition] = aspectModifier ~ abstractModifier ~ classDeclKeyword ~ ident ~ opt(typeVariables) ~ opt(classParentDecls) ~ "{" ~ rep(annotableClassMemberDecl) ~ "}" ^^ {
+    case aspectM ~ abstractM ~ classKeyword ~ id1 ~ params ~ parents ~ _ ~ members ~ _ =>
+      var newo = StructureFactory.eINSTANCE.createClassDefinition
       newo.setName(id1.toString)
       aspectM match {
-        case Some(_) =>  newo.setIsAspect(true)
+        case Some(_) => newo.setIsAspect(true)
         case None => newo.setIsAspect(false)
       }
       abstractM match {
@@ -61,103 +63,118 @@ trait KClassDefinitionParser extends KAbstractParser
         case "class" => newo.setIsSingleton(false)
         case "singleton" => newo.setIsSingleton(true)
       }
-/*
+      /*
       singletonM match {
         case Some(_) => newo.setIsSingleton(true)
         case None => newo.setIsSingleton(false)
       }*/
-      params match {
+      
+     /*params match {
         case None =>
         case Some(paramsI) => {
-            paramsI.foreach{params =>
-              var ovar =StructureFactory.eINSTANCE.createObjectTypeVariable
-              ovar.setName(params._1)
+            paramsI.foreach{param =>
+              var ovar =StructureFactory.eINSTANCE.createUnresolvedTypeVariable
+              ovar.setName(param._1)
               newo.getTypeParameter.add(ovar)
               newo.getContainedType.add(ovar)
-              if (params._2 != null) {
-                var newu = params._2
+              if (param._2 != null) {
+                var newu = param._2
                 ovar.setSupertype(newu)
                 ovar.getContainedType.add(newu)
               }
             }
           }
+      }*/
+      
+      params match {
+        case None =>
+        case Some(params : List[TypeVariable]) => {
+          params.foreach(tv => {
+            newo.getTypeParameter.add(tv)
+            newo.getContainedType.add(tv)
+          })
+        }
       }
 
       parents match {
         case None => {
-            // by default if there is no inherits, inherits from Object
-        	//This work is now done by the first pass of the resolver, to add inheritance to Object only on merged class definitions with no super type
-            //var newParent = KmBuildHelper.getOrCreateUnresolvedType(newo, "kermeta::standard::Object")
-            //newo.getSuperType.add(newParent)
+          // by default if there is no inherits, inherits from Object
+          //This work is now done by the first pass of the resolver, to add inheritance to Object only on merged class definitions with no super type
+          //var newParent = KmBuildHelper.getOrCreateUnresolvedType(newo, "kermeta::standard::Object")
+          //newo.getSuperType.add(newParent)
         }
-        case Some(parentI)=> {
-            parentI.foreach{parent=>
-              var newParent = KmBuildHelper.selectType(newo, parent)
-              newo.getContainedType.add(newParent)
-              newo.getSuperType.add(newParent)
-            }
+        case Some(parentI) => {
+          parentI.foreach { parent =>
+            var newParent = KmBuildHelper.selectType(newo, parent)
+            newo.getContainedType.add(newParent)
+            newo.getSuperType.add(newParent)
           }
+        }
       }
 
-      members.foreach{member => {
+      members.foreach { member =>
+        {
           member match {
-            case m : Constraint => newo.getInv.add(m)
-            case m : Operation => {
-                newo.getOwnedOperation.add(m);
-               // DVK operation can own its type directly, no need to put them in the class newo.getContainedType.add(m.getType) // TODO OPTIMISATION
-              }
-            case m : Property => {
-                newo.getOwnedAttribute.add(m)
+            case m: Constraint => newo.getInv.add(m)
+            case m: Operation => {
+              newo.getOwnedOperation.add(m);
+              // DVK operation can own its type directly, no need to put them in the class newo.getContainedType.add(m.getType) // TODO OPTIMISATION
+            }
+            case m: Property => {
+              newo.getOwnedAttribute.add(m)
             }
 
             case _ => println("class def add new member type")
           }
-        }}
+        }
+      }
       newo
   }
 
   //private def classGenericParems = "<" ~ rep1sep(packageName,",") ~ ">" ^^{case _ ~ params ~ _ => params }
-  private def classGenericParems = classGenericParemsWithChevrons | classGenericParemsWithBrackets
-  private def classGenericParemsWithChevrons = "<" ~ rep1sep(genericDef,",") ~ ">" ^^{case _ ~ params ~ _ => params }
-  private def classGenericParemsWithBrackets = "[" ~ rep1sep(genericDef,",") ~ "]" ^^{case _ ~ params ~ _ => params }
+  /*private def classGenericParems = classGenericParemsWithChevrons | classGenericParemsWithBrackets
+  private def classGenericParemsWithChevrons = "<" ~ rep1sep(genericDef, ",") ~ ">" ^^ { case _ ~ params ~ _ => params }
+  private def classGenericParemsWithBrackets = "[" ~ rep1sep(genericDef, ",") ~ "]" ^^ { case _ ~ params ~ _ => params }
 
-
-  private def genericDef : Parser[Tuple2[String, Type] ]= ident ~ opt(genericType) ^^ { case id ~ genType =>
-    var resTuple : Tuple2[String, Type] = (null,  null)
-    genType match {
-      case Some(typ) => resTuple = (id, typ)
-      case None => resTuple = (id, null)
-    }
-    resTuple
+  private def genericDef: Parser[Tuple2[String, Type]] = ident ~ opt(genericType) ^^ {
+    case id ~ genType =>
+      var resTuple: Tuple2[String, Type] = (null, null)
+      genType match {
+        case Some(typ) => resTuple = (id, typ)
+        case None => resTuple = (id, null)
+      }
+      resTuple
   }
 
-  private def genericType = ":" ~ genericQualifiedType ^^ { case k1 ~ ident => ident}
+  private def genericType = ":" ~ genericQualifiedType ^^ { case k1 ~ ident => ident }*/
 
-  private def classParentDecls = "inherits" ~ rep1sep(genericQualifiedType, ",") ^^ { case _ ~ parents => parents
+  private def classParentDecls = "inherits" ~ rep1sep(genericQualifiedType, ",") ^^ {
+    case _ ~ parents => parents
   }
   // private def classMemberDecls = annotableClassMemberDecl +
-  private def annotableClassMemberDecl = opt((annotation)+) ~ classMemberDecl ^^ { case tags ~ e1 =>
+  private def annotableClassMemberDecl = opt((annotation)+) ~ classMemberDecl ^^ {
+    case tags ~ e1 =>
       /*e match {
         case Some(_ @ annotation) => e1.getKOwnedTags.add(annotation)
         case None => //NOTHING TO DO
       } */
-      tags.foreach{elem => elem match {
-          case l : List[_] => l.asInstanceOf[List[_]].foreach{listElem => listElem match {
-              case t : Tag => 	e1.getKOwnedTags.add(t);
-              					e1.getKTag().add(t)
-              case _ @ elem => println("TODO unknow elem in tag:" + elem)
-          } }
-          case _ @ d => println("TODO modeling unit tag content: "+d)
-      } }
+      tags.foreach { elem =>
+        elem match {
+          case l: List[_] => l.asInstanceOf[List[_]].foreach { listElem =>
+            listElem match {
+              case t: Tag =>
+                e1.getKOwnedTags.add(t);
+                e1.getKTag().add(t)
+              case _@ elem => println("TODO unknow elem in tag:" + elem)
+            }
+          }
+          case _@ d => println("TODO modeling unit tag content: " + d)
+        }
+      }
 
       e1
   }
 
-  def classMemberDecl = kpositioned ( invariant | operation | property | attribute | derivedProperty) //attribute | reference | operation ;
-
-
-
-  
-
+  def classMemberDecl = kpositioned(invariant | operation | property | attribute | derivedProperty) //attribute | reference | operation ;
 
 }

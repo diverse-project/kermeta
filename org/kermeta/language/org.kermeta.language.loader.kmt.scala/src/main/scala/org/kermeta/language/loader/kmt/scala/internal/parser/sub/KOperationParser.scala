@@ -16,39 +16,39 @@ import org.kermeta.language.structure.Parameter
 import org.kermeta.language.structure.StructureFactory
 import org.kermeta.language.structure.Tag
 import org.kermeta.language.structure.Type
+import org.kermeta.language.structure.TypeVariable
 
-trait KOperationParser extends KAbstractParser with KMultiplicityParser {
+trait KOperationParser extends KAbstractParser with KMultiplicityParser with KTypeVariableParser {
   /* SUB PARSER CONTRACT */
-  def annotation : Parser[Tag]
+  def annotation: Parser[Tag]
   /* END SUB PARSER CONTRACT */
 
-  def operationParameters = repsep(operationParameter ,",")
+  def operationParameters = repsep(operationParameter, ",")
   def operationReturnType = opt(":" ~> multiplicityType)
-  def methodFromType = opt("from" ~> genericQualifiedType ~> failure("The keyword 'from' is decrepated. Instead, the targeted super class should be specified at the super call: 'super[MySuperClass]' instead of 'from MySuperClass'.") )
+  def methodFromType = opt("from" ~> genericQualifiedType ~> failure("The keyword 'from' is deprecated. The targeted super class should now be specified at the super call: 'super[MySuperClass]' instead of 'from MySuperClass'."))
 
   /* Pre and post conditions for operations */
-  def preconditionParser : Parser[Tuple3[String,String,Expression]] = "pre" ~ ident ~ "is" ~ fStatement ^^ {case key ~ id ~ _ ~ exp => (key,id,exp) }
-  def postconditionParser : Parser[Tuple3[String, String,Expression]] = "post" ~ ident ~ "is" ~ fStatement ^^ {case key ~ id ~ _ ~ exp => (key,id,exp) }
+  def preconditionParser: Parser[Tuple3[String, String, Expression]] = "pre" ~ ident ~ "is" ~ fStatement ^^ { case key ~ id ~ _ ~ exp => (key, id, exp) }
+  def postconditionParser: Parser[Tuple3[String, String, Expression]] = "post" ~ ident ~ "is" ~ fStatement ^^ { case key ~ id ~ _ ~ exp => (key, id, exp) }
 
-  def prePostConditionParser : Parser[Tuple3[String, String, Expression]] = (preconditionParser | postconditionParser)
+  def prePostConditionParser: Parser[Tuple3[String, String, Expression]] = (preconditionParser | postconditionParser)
 
-  def operation =  ( operationKind ~ ident ~ opt(operationGenericParems) ~ "(" ~ operationParameters ~ ")" ~
-		  			operationReturnType ~ methodFromType ~ rep(prePostConditionParser) ~ "is" ~ operationBody) ^^ {
-    case opkind ~ opName ~ opGParams ~ _ ~ params ~ _  ~ unresolveType ~ _ ~ prePosts ~ _ ~ body =>
-      var newo = StructureFactory.eINSTANCE.createOperation
-      newo.setName(opName)
-      if(body != null) {
-        newo.setIsAbstract(false)
-        newo.setBody(body)
-      }
-      else
-        newo.setIsAbstract(true)
+  def operation = (operationKind ~ ident ~ opt(typeVariables) ~ "(" ~ operationParameters ~ ")" ~
+    operationReturnType ~ methodFromType ~ rep(prePostConditionParser) ~ "is" ~ operationBody) ^^ {
+      case opkind ~ opName ~ opGParams ~ _ ~ params ~ _ ~ unresolveType ~ _ ~ prePosts ~ _ ~ body =>
+        var newo = StructureFactory.eINSTANCE.createOperation
+        newo.setName(opName)
+        if (body != null) {
+          newo.setIsAbstract(false)
+          newo.setBody(body)
+        } else
+          newo.setIsAbstract(true)
 
-      opGParams match {
+        /*opGParams match {
         case None =>
         case Some(params) => {
             params.foreach{param =>
-              var ovar =StructureFactory.eINSTANCE.createObjectTypeVariable
+              var ovar =StructureFactory.eINSTANCE.createUnresolvedTypeVariable
               ovar.setName(param._1)
               newo.getTypeParameter.add(ovar)
               newo.getContainedType.add(ovar)
@@ -59,47 +59,57 @@ trait KOperationParser extends KAbstractParser with KMultiplicityParser {
               }
             }
           }
-      }
+      }*/
 
-      /*
+        opGParams match {
+          case None =>
+          case Some(params: List[TypeVariable]) => {
+            params.foreach(tv => {
+              newo.getTypeParameter.add(tv)
+              newo.getContainedType.add(tv)
+            })
+          }
+        }
+
+        /*
        params match {
        case Some(_ @ lpara) => for(par <- lpara) newo.getOwnedParameter.add(par)
        case None => // DO NOTHING
        }*/
-      params.foreach{par=> newo.getOwnedParameter.add(par)}
+        params.foreach { par => newo.getOwnedParameter.add(par) }
 
-      unresolveType match {
-        case None => {
-            var newT = KmBuildHelper.getOrCreateUnresolvedType(newo,"kermeta::standard::Void") //StructureFactory.eINSTANCE.createUnresolvedType
+        unresolveType match {
+          case None => {
+            var newT = KmBuildHelper.getOrCreateUnresolvedType(newo, "kermeta::standard::Void") //StructureFactory.eINSTANCE.createUnresolvedType
             // newT.setTypeIdentifier("Void")
             newo.setType(newT)
             //newo.getContainedType.add(newT)
           }
-        case Some(urt)=> {
+          case Some(urt) => {
             // copy Type and multiplicity information in this Operation
             urt.copyToKElem(newo)
             //var selectedUnresolvedType = KmBuildHelper.selectType(newo, urt._1)
             //newo.setType(selectedUnresolvedType)
             //newo.getContainedType.add(selectedUnresolvedType)
           }
-      }
+        }
 
-      /* Process pre and post conditions */
-      prePosts.foreach{tuple=>
-        var constraint = StructureFactory.eINSTANCE.createConstraint()
-        constraint.setName(tuple._2)
-        constraint.setBody(tuple._3)
-        if (tuple._1=="pre")
-          // This is a pre condition
-          constraint.setPreOwner(newo)
-        else
-          // this is a post condition
-          constraint.setPostOwner(newo)
-      }
-      newo
-  }
+        /* Process pre and post conditions */
+        prePosts.foreach { tuple =>
+          var constraint = StructureFactory.eINSTANCE.createConstraint()
+          constraint.setName(tuple._2)
+          constraint.setBody(tuple._3)
+          if (tuple._1 == "pre")
+            // This is a pre condition
+            constraint.setPreOwner(newo)
+          else
+            // this is a post condition
+            constraint.setPostOwner(newo)
+        }
+        newo
+    }
 
-  private def operationGenericParems = operationGenericParemsWithChevrons | operationGenericParemsWithBrackets
+  /*private def operationGenericParems = operationGenericParemsWithChevrons | operationGenericParemsWithBrackets
   private def operationGenericParemsWithChevrons = "<" ~ rep1sep(genericDef,",") ~ ">" ^^{case _ ~ params ~ _ => params }
   private def operationGenericParemsWithBrackets = "[" ~ rep1sep(genericDef,",") ~ "]" ^^{case _ ~ params ~ _ => params }
 
@@ -112,10 +122,10 @@ trait KOperationParser extends KAbstractParser with KMultiplicityParser {
     resTuple
   }
 
-  private def genericType = ":" ~ genericQualifiedType ^^ { case k1 ~ ident => ident}
+  private def genericType = ":" ~ genericQualifiedType ^^ { case k1 ~ ident => ident}*/
 
-
-  def operationParameter : Parser[Parameter] = ident ~ ":" ~ multiplicityType ^^ { case id ~ _ ~ unresolveType =>
+  def operationParameter: Parser[Parameter] = ident ~ ":" ~ multiplicityType ^^ {
+    case id ~ _ ~ unresolveType =>
       var newo = StructureFactory.eINSTANCE.createParameter
       newo.setName(id)
       unresolveType.copyToKElem(newo)
@@ -128,12 +138,14 @@ trait KOperationParser extends KAbstractParser with KMultiplicityParser {
   private def operationKind = ("operation" | "method")
   def property = "prop" ^^^ StructureFactory.eINSTANCE.createProperty
 
-  private def operationBody = ("abstract" ^^^ {null} | operationExpressionBody)
+  private def operationBody = ("abstract" ^^^ { null } | operationExpressionBody)
 
-  def operationExpressionBody = ( (annotation?) ~ fStatement) ^^ { case a1 ~ exp =>
+  def operationExpressionBody = ((annotation?) ~ fStatement) ^^ {
+    case a1 ~ exp =>
       a1 match {
-        case Some(_ @ tag) => 	exp.getKTag.add(tag)
-        						exp.getKOwnedTags().add(tag)
+        case Some(_@ tag) =>
+          exp.getKTag.add(tag)
+          exp.getKOwnedTags().add(tag)
         case None =>
       }
       exp
