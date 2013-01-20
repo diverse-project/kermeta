@@ -24,12 +24,16 @@ aspect class CallFeature
 	@Scope "RESOLVED"
 	inv called_feature_should_not_be_deprecated is do
 		
-		if (self.isInstanceOf(CallProperty))
-		then
+		if (self.isInstanceOf(CallProperty)) then
 			not(self.asType(CallProperty).staticProperty.kOwnedTags.exists{ t | t.name.equals("deprecated")})
 		else
-			//It must be an operation
-			not(self.asType(CallOperation).staticOperation.kOwnedTags.exists{ t | t.name.equals("deprecated")})
+			if (self.isInstanceOf(CallOperation)) then
+				not(self.asType(CallOperation).staticOperation.kOwnedTags.exists{ t | t.name.equals("deprecated")})
+			else
+				//if (self.isInstanceOf(CallModelTransformation)) then
+					not(self.asType(CallModelTransformation).staticTransformation.kOwnedTags.exists{ t | t.name.equals("deprecated")})				
+				//end
+			end
 		end	
 	end
 	
