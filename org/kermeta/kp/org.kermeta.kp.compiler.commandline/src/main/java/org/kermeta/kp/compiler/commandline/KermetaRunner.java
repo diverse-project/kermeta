@@ -22,6 +22,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.kermeta.language.km2bytecode.embedded.scala.EmbeddedScalaRunner;
 import org.kermeta.utils.systemservices.api.messaging.MessagingSystem;
@@ -63,9 +64,9 @@ public class KermetaRunner {
 	public void runK2Program( String runnerClass, List<String> params, String uriMapFileLocation) {	
 		String runProjectName = scalaAspectPrefix;
 		String runClassName = runnerClass;
-		if(runnerClass.contains("#")){
-			runProjectName = runnerClass.split("#")[0];
-			runClassName = runnerClass.split("#")[1];
+		if(runnerClass.contains("^")){
+			runProjectName = runnerClass.split(Pattern.quote("^"))[0];
+			runClassName = runnerClass.split(Pattern.quote("^"))[1];
 		}
 		
 		this.logger.initProgress(scalaAspectPrefix, "Starting "+runProjectName + "runner."+runClassName, KermetaCompiler.LOG_MESSAGE_GROUP, 0);

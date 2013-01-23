@@ -2,6 +2,7 @@ package org.kermeta.kp.compiler.commandline;
 
 import java.net.MalformedURLException;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.kermeta.kp.KermetaProject;
 import org.kermeta.language.structure.Metamodel;
@@ -34,21 +35,21 @@ public class KpChecker {
 		if(kp.getDefaultMainClass()== null) return;
 		String metamodelName;
 		String defaultMainClassInMM;
-		if(!kp.getDefaultMainClass().contains("#")){
+		if(!kp.getDefaultMainClass().contains("^")){
 			metamodelName = kp.getMetamodelName();
 			defaultMainClassInMM = kp.getDefaultMainClass();
 		}
 		else{
-			metamodelName = (kp.getDefaultMainClass().split("#"))[0];
-			defaultMainClassInMM = (kp.getDefaultMainClass().split("#"))[1];
+			metamodelName = (kp.getDefaultMainClass().split(Pattern.quote("^")))[0];
+			defaultMainClassInMM = (kp.getDefaultMainClass().split(Pattern.quote("^")))[1];
 		}
 		Metamodel selectedMM= null;
 		for(Metamodel mm : resolvedMU.getMetamodels()){
 			if(mm.getName().equals(metamodelName)) selectedMM = mm;
 		}
-		if(!kp.getDefaultMainClass().contains("#")){
-			compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Default main Class not found. You need to specify in wich metamodel searching. Suggestions : "+metamodelName+"#"+kp.getDefaultMainClass() + " or #"+kp.getDefaultMainClass(), KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
-			compiler.errorMessage = "Default main Class not found. You need to specify in wich metamodel searching. Suggestions : "+metamodelName+"#"+kp.getDefaultMainClass() + " or #"+kp.getDefaultMainClass();
+		if(!kp.getDefaultMainClass().contains("^")){
+			compiler.logger.logProblem(MessagingSystem.Kind.UserERROR, "Default main Class not found. You need to specify in wich metamodel searching. Suggestions : "+metamodelName+"^"+kp.getDefaultMainClass() + " or ^"+kp.getDefaultMainClass(), KermetaCompiler.LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+			compiler.errorMessage = "Default main Class not found. You need to specify in wich metamodel searching. Suggestions : "+metamodelName+"^"+kp.getDefaultMainClass() + " or ^"+kp.getDefaultMainClass();
 			compiler.hasFailed = true;
 			return;
 		}
