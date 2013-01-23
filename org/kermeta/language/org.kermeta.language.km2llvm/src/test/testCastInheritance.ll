@@ -345,11 +345,11 @@ define %struct.kermeta_standard__Object* @kermeta_io__StdIO___container(%struct.
 %"pkgFoo__C" = type {i8**, %"pkgFoo__B"*}
 %"pkgFoo__D" = type {i8**, %"pkgFoo__C"*}
 %"pkgFoo__Main" = type {i8**}
-@"pkgFoo__B##dynBind" = global [1 x i8*] [i8* bitcast (void (%"pkgFoo__B"*)* @"pkgFoo__B___foo1" to i8*)]
-@"kermeta_io__StdIO##dynBind" = global [1 x i8*] [i8* bitcast (void (i8*, %struct.kermeta_io__StdIO*)* @kermeta_io__StdIO___writeln to i8*)]
-@"pkgFoo__C##dynBind" = global [2 x i8*] [i8* bitcast (void (%"pkgFoo__C"*)* @"pkgFoo__C___bar2" to i8*), i8* bitcast (void (%"pkgFoo__C"*)* @"pkgFoo__C___foo3" to i8*)]
-@"pkgFoo__D##dynBind" = global [2 x i8*] [i8* bitcast (void (%"pkgFoo__C"*)* @"pkgFoo__C___bar2" to i8*), i8* bitcast (void (%"pkgFoo__D"*)* @"pkgFoo__D___foo4" to i8*)]
-@"pkgFoo__Main##dynBind" = global [1 x i8*] [i8* bitcast (void (%"pkgFoo__Main"*)* @"pkgFoo__Main___main5" to i8*)]
+@"pkgFoo__B##vtable" = global [1 x i8*] [i8* bitcast (void (%"pkgFoo__B"*)* @"pkgFoo__B___foo1" to i8*)]
+@"kermeta_io__StdIO##vtable" = global [1 x i8*] [i8* bitcast (void (i8*, %struct.kermeta_io__StdIO*)* @kermeta_io__StdIO___writeln to i8*)]
+@"pkgFoo__C##vtable" = global [3 x i8*] [i8* bitcast (void (%"pkgFoo__C"*)* @"pkgFoo__C___foo2" to i8*), i8* bitcast (void (%"pkgFoo__C"*)* @"pkgFoo__C___bar3" to i8*), i8* bitcast (void (%"pkgFoo__C"*)* @"pkgFoo__C___foo#decorator2" to i8*)]
+@"pkgFoo__D##vtable" = global [4 x i8*] [i8* bitcast (void (%"pkgFoo__D"*)* @"pkgFoo__D___foo4" to i8*), i8* bitcast (void (%"pkgFoo__D"*)* @"pkgFoo__D___foo#decorator4" to i8*), i8* bitcast (void (%"pkgFoo__C"*)* @"pkgFoo__C___bar3" to i8*), i8* bitcast (void (%"pkgFoo__B"*)* @"pkgFoo__B___foo#decorator" to i8*)]
+@"pkgFoo__Main##vtable" = global [1 x i8*] [i8* bitcast (void (%"pkgFoo__Main"*)* @"pkgFoo__Main___main5" to i8*)]
 define internal %"pkgFoo__A"* @"create_pkgFoo__A"(){
 %"1" = alloca %"pkgFoo__A"*
 %"2" = call noalias i8* @malloc(i64 8) nounwind
@@ -368,7 +368,7 @@ store %"pkgFoo__B"* %"3", %"pkgFoo__B"** %"1"
 %"6" = getelementptr %"pkgFoo__B"* %"4", i32 0, i32 1
 store %"pkgFoo__A"* %"5", %"pkgFoo__A"** %"6"
 %"7" = getelementptr %"pkgFoo__B"* %"4", i32 0, i32 0
-store i8** getelementptr([1 x i8*]* @"pkgFoo__B##dynBind", i32 0, i32 0), i8*** %"7"
+store i8** getelementptr([1 x i8*]* @"pkgFoo__B##vtable", i64 0, i64 0), i8*** %"7"
 ret %"pkgFoo__B"* %"4"
 }
 define internal %"pkgFoo__C"* @"create_pkgFoo__C"(){
@@ -381,7 +381,10 @@ store %"pkgFoo__C"* %"3", %"pkgFoo__C"** %"1"
 %"6" = getelementptr %"pkgFoo__C"* %"4", i32 0, i32 1
 store %"pkgFoo__B"* %"5", %"pkgFoo__B"** %"6"
 %"7" = getelementptr %"pkgFoo__C"* %"4", i32 0, i32 0
-store i8** getelementptr([2 x i8*]* @"pkgFoo__C##dynBind", i32 0, i32 0), i8*** %"7"
+store i8** getelementptr([3 x i8*]* @"pkgFoo__C##vtable", i64 0, i64 0), i8*** %"7"
+%"9" = call %"pkgFoo__B"* @"cast_pkgFoo__C_pkgFoo__B"(%"pkgFoo__C"* %"4")
+%"8" = getelementptr %"pkgFoo__B"* %"9", i32 0, i32 0
+store i8** getelementptr([3 x i8*]* @"pkgFoo__C##vtable", i64 0, i64 2), i8*** %"8"
 ret %"pkgFoo__C"* %"4"
 }
 define internal %"pkgFoo__D"* @"create_pkgFoo__D"(){
@@ -394,7 +397,13 @@ store %"pkgFoo__D"* %"3", %"pkgFoo__D"** %"1"
 %"6" = getelementptr %"pkgFoo__D"* %"4", i32 0, i32 1
 store %"pkgFoo__C"* %"5", %"pkgFoo__C"** %"6"
 %"7" = getelementptr %"pkgFoo__D"* %"4", i32 0, i32 0
-store i8** getelementptr([2 x i8*]* @"pkgFoo__D##dynBind", i32 0, i32 0), i8*** %"7"
+store i8** getelementptr([4 x i8*]* @"pkgFoo__D##vtable", i64 0, i64 0), i8*** %"7"
+%"9" = call %"pkgFoo__C"* @"cast_pkgFoo__D_pkgFoo__C"(%"pkgFoo__D"* %"4")
+%"8" = getelementptr %"pkgFoo__C"* %"9", i32 0, i32 0
+store i8** getelementptr([4 x i8*]* @"pkgFoo__D##vtable", i64 0, i64 1), i8*** %"8"
+%"11" = call %"pkgFoo__B"* @"cast_pkgFoo__D_pkgFoo__B"(%"pkgFoo__D"* %"4")
+%"10" = getelementptr %"pkgFoo__B"* %"11", i32 0, i32 0
+store i8** getelementptr([4 x i8*]* @"pkgFoo__D##vtable", i64 0, i64 3), i8*** %"10"
 ret %"pkgFoo__D"* %"4"
 }
 define internal %"pkgFoo__Main"* @"create_pkgFoo__Main"(){
@@ -404,7 +413,7 @@ define internal %"pkgFoo__Main"* @"create_pkgFoo__Main"(){
 store %"pkgFoo__Main"* %"3", %"pkgFoo__Main"** %"1"
 %"4" = load %"pkgFoo__Main"** %"1"
 %"5" = getelementptr %"pkgFoo__Main"* %"4", i32 0, i32 0
-store i8** getelementptr([1 x i8*]* @"pkgFoo__Main##dynBind", i32 0, i32 0), i8*** %"5"
+store i8** getelementptr([1 x i8*]* @"pkgFoo__Main##vtable", i64 0, i64 0), i8*** %"5"
 ret %"pkgFoo__Main"* %"4"
 }
 define internal %"pkgFoo__B"* @"cast_pkgFoo__A_pkgFoo__B"(%"pkgFoo__A"* %"self") readonly inlinehint{
@@ -472,9 +481,24 @@ define internal %"pkgFoo__A"* @"cast_pkgFoo__D_pkgFoo__A"(%"pkgFoo__D"* %"self")
 %"3" = call %"pkgFoo__A"* @"cast_pkgFoo__B_pkgFoo__A"(%"pkgFoo__B"* %"2")
 ret %"pkgFoo__A"* %"3"
 }
+define internal void @"pkgFoo__C___foo#decorator2"(%"pkgFoo__C"* %"self") inlinehint{
+%"1" = call %"pkgFoo__B"* @"cast_pkgFoo__C_pkgFoo__B"(%"pkgFoo__C"* %"self")
+call void @"pkgFoo__B___foo1"(%"pkgFoo__B"* %"1")
+ret void
+}
+define internal void @"pkgFoo__D___foo#decorator4"(%"pkgFoo__D"* %"self") inlinehint{
+%"1" = call %"pkgFoo__C"* @"cast_pkgFoo__D_pkgFoo__C"(%"pkgFoo__D"* %"self")
+call void @"pkgFoo__C___foo2"(%"pkgFoo__C"* %"1")
+ret void
+}
+define internal void @"pkgFoo__B___foo#decorator"(%"pkgFoo__B"* %"self") inlinehint{
+%"1" = call %"pkgFoo__D"* @"cast_pkgFoo__B_pkgFoo__D"(%"pkgFoo__B"* %"self")
+call void @"pkgFoo__D___foo4"(%"pkgFoo__D"* %"1")
+ret void
+}
 define internal void @"pkgFoo__B___foo1"(%"pkgFoo__B"* %"self"){
 %"1" = getelementptr [7 x i8]* @"s0", i32 0, i32 0
-%"2" = load i8** getelementptr([1 x i8*]* @"kermeta_io__StdIO##dynBind", i32 0, i64 0)
+%"2" = load i8** getelementptr([1 x i8*]* @"kermeta_io__StdIO##vtable", i32 0, i64 0)
 %"3" = bitcast i8* %"2" to void (i8*, %struct.kermeta_io__StdIO*)*
 %"4" = alloca void (i8*, %struct.kermeta_io__StdIO*)*
 store void (i8*, %struct.kermeta_io__StdIO*)* %"3", void (i8*, %struct.kermeta_io__StdIO*)** %"4"
@@ -482,9 +506,9 @@ store void (i8*, %struct.kermeta_io__StdIO*)* %"3", void (i8*, %struct.kermeta_i
 call void %"5"(i8* %"1", %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
 ret void
 }
-define internal void @"pkgFoo__C___foo3"(%"pkgFoo__C"* %"self"){
+define internal void @"pkgFoo__C___foo2"(%"pkgFoo__C"* %"self"){
 %"1" = getelementptr [7 x i8]* @"s1", i32 0, i32 0
-%"2" = load i8** getelementptr([1 x i8*]* @"kermeta_io__StdIO##dynBind", i32 0, i64 0)
+%"2" = load i8** getelementptr([1 x i8*]* @"kermeta_io__StdIO##vtable", i32 0, i64 0)
 %"3" = bitcast i8* %"2" to void (i8*, %struct.kermeta_io__StdIO*)*
 %"4" = alloca void (i8*, %struct.kermeta_io__StdIO*)*
 store void (i8*, %struct.kermeta_io__StdIO*)* %"3", void (i8*, %struct.kermeta_io__StdIO*)** %"4"
@@ -492,9 +516,9 @@ store void (i8*, %struct.kermeta_io__StdIO*)* %"3", void (i8*, %struct.kermeta_i
 call void %"5"(i8* %"1", %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
 ret void
 }
-define internal void @"pkgFoo__C___bar2"(%"pkgFoo__C"* %"self"){
+define internal void @"pkgFoo__C___bar3"(%"pkgFoo__C"* %"self"){
 %"1" = getelementptr [6 x i8]* @"s2", i32 0, i32 0
-%"2" = load i8** getelementptr([1 x i8*]* @"kermeta_io__StdIO##dynBind", i32 0, i64 0)
+%"2" = load i8** getelementptr([1 x i8*]* @"kermeta_io__StdIO##vtable", i32 0, i64 0)
 %"3" = bitcast i8* %"2" to void (i8*, %struct.kermeta_io__StdIO*)*
 %"4" = alloca void (i8*, %struct.kermeta_io__StdIO*)*
 store void (i8*, %struct.kermeta_io__StdIO*)* %"3", void (i8*, %struct.kermeta_io__StdIO*)** %"4"
@@ -504,9 +528,9 @@ ret void
 }
 define internal void @"pkgFoo__D___foo4"(%"pkgFoo__D"* %"self"){
 %"1" = call %"pkgFoo__C"* @cast_pkgFoo__D_pkgFoo__C(%"pkgFoo__D"* %"self")
-call void @"pkgFoo__C___foo3"(%"pkgFoo__C"* %"1")
+call void @"pkgFoo__C___foo2"(%"pkgFoo__C"* %"1")
 %"2" = getelementptr [7 x i8]* @"s3", i32 0, i32 0
-%"3" = load i8** getelementptr([1 x i8*]* @"kermeta_io__StdIO##dynBind", i32 0, i64 0)
+%"3" = load i8** getelementptr([1 x i8*]* @"kermeta_io__StdIO##vtable", i32 0, i64 0)
 %"4" = bitcast i8* %"3" to void (i8*, %struct.kermeta_io__StdIO*)*
 %"5" = alloca void (i8*, %struct.kermeta_io__StdIO*)*
 store void (i8*, %struct.kermeta_io__StdIO*)* %"4", void (i8*, %struct.kermeta_io__StdIO*)** %"5"
@@ -521,7 +545,7 @@ ret i32 0
 }
 define internal void @"pkgFoo__Main___main5"(%"pkgFoo__Main"* %"self"){
 %"1" = getelementptr [13 x i8]* @"s4", i32 0, i32 0
-%"2" = load i8** getelementptr([1 x i8*]* @"kermeta_io__StdIO##dynBind", i32 0, i64 0)
+%"2" = load i8** getelementptr([1 x i8*]* @"kermeta_io__StdIO##vtable", i32 0, i64 0)
 %"3" = bitcast i8* %"2" to void (i8*, %struct.kermeta_io__StdIO*)*
 %"4" = alloca void (i8*, %struct.kermeta_io__StdIO*)*
 store void (i8*, %struct.kermeta_io__StdIO*)* %"3", void (i8*, %struct.kermeta_io__StdIO*)** %"4"
@@ -530,58 +554,9 @@ call void %"5"(i8* %"1", %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO
 %"d" = alloca %"pkgFoo__D"*
 %"6" = call %"pkgFoo__D"* @"create_pkgFoo__D"()
 store %"pkgFoo__D"* %"6", %"pkgFoo__D"** %"d"
-%"7" = load %"pkgFoo__D"** %"d"
-%"8" = load i8** getelementptr([2 x i8*]* @"pkgFoo__D##dynBind", i32 0, i64 1)
-%"9" = bitcast i8* %"8" to void (%"pkgFoo__D"*)*
-%"10" = alloca void (%"pkgFoo__D"*)*
-store void (%"pkgFoo__D"*)* %"9", void (%"pkgFoo__D"*)** %"10"
-%"11" = load void (%"pkgFoo__D"*)** %"10"
-call void %"11"(%"pkgFoo__D"* %"7")
-%"12" = icmp eq i1 false, true
-br i1 %"12", label %llvmlabel13, label %llvmlabel15
-llvmlabel13:
-%"16" = getelementptr [8 x i8]* @"s5", i32 0, i32 0
-%"17" = load i8** getelementptr([1 x i8*]* @"kermeta_io__StdIO##dynBind", i32 0, i64 0)
-%"18" = bitcast i8* %"17" to void (i8*, %struct.kermeta_io__StdIO*)*
-%"19" = alloca void (i8*, %struct.kermeta_io__StdIO*)*
-store void (i8*, %struct.kermeta_io__StdIO*)* %"18", void (i8*, %struct.kermeta_io__StdIO*)** %"19"
-%"20" = load void (i8*, %struct.kermeta_io__StdIO*)** %"19"
-call void %"20"(i8* %"16", %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
-br label %llvmlabel14
-llvmlabel15:
-%"21" = getelementptr [8 x i8]* @"s6", i32 0, i32 0
-%"22" = load i8** getelementptr([1 x i8*]* @"kermeta_io__StdIO##dynBind", i32 0, i64 0)
-%"23" = bitcast i8* %"22" to void (i8*, %struct.kermeta_io__StdIO*)*
-%"24" = alloca void (i8*, %struct.kermeta_io__StdIO*)*
-store void (i8*, %struct.kermeta_io__StdIO*)* %"23", void (i8*, %struct.kermeta_io__StdIO*)** %"24"
-%"25" = load void (i8*, %struct.kermeta_io__StdIO*)** %"24"
-call void %"25"(i8* %"21", %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
-br label %llvmlabel14
-llvmlabel14:
-%"i" = alloca i1
-store i1 false, i1* %"i"
-br label %llvmlabel26
-llvmlabel26:
-%"29" = load i1* %"i"
-%"30" = icmp eq i1 %"29", false
-br i1 %"30", label %llvmlabel28, label %llvmlabel27
-llvmlabel27:
-%"31" = load i1* %"i"
-%"32" = zext i1 %"31" to i8
-%"33" = call i8* @kermeta_standard__Boolean___toString(i8 %"32")
-%"34" = load i8** getelementptr([1 x i8*]* @"kermeta_io__StdIO##dynBind", i32 0, i64 0)
-%"35" = bitcast i8* %"34" to void (i8*, %struct.kermeta_io__StdIO*)*
-%"36" = alloca void (i8*, %struct.kermeta_io__StdIO*)*
-store void (i8*, %struct.kermeta_io__StdIO*)* %"35", void (i8*, %struct.kermeta_io__StdIO*)** %"36"
-%"37" = load void (i8*, %struct.kermeta_io__StdIO*)** %"36"
-call void %"37"(i8* %"33", %struct.kermeta_io__StdIO* @SINGLETON_kermeta_io__StdIO)
-%"38" = load i1* %"i"
-store i1 false, i1* %"i"
-br label %llvmlabel26
-llvmlabel28:
 %"54" = load %"pkgFoo__D"** %"d"
 %"55" = call %"pkgFoo__C"* @"cast_pkgFoo__D_pkgFoo__C"(%"pkgFoo__D"* %"54")
-%"56" = load i8** getelementptr([2 x i8*]* @"pkgFoo__C##dynBind", i32 0, i64 0)
+%"56" = load i8** getelementptr([3 x i8*]* @"pkgFoo__C##vtable", i32 0, i64 1)
 %"57" = bitcast i8* %"56" to void (%"pkgFoo__C"*)*
 %"58" = alloca void (%"pkgFoo__C"*)*
 store void (%"pkgFoo__C"*)* %"57", void (%"pkgFoo__C"*)** %"58"
@@ -592,11 +567,10 @@ call void %"59"(%"pkgFoo__C"* %"55")
 %"61" = call %"pkgFoo__B"* @"cast_pkgFoo__D_pkgFoo__B"(%"pkgFoo__D"* %"60")
 store %"pkgFoo__B"* %"61", %"pkgFoo__B"** %"b"
 %"62" = load %"pkgFoo__B"** %"b"
-%"63" = load i8** getelementptr([1 x i8*]* @"pkgFoo__B##dynBind", i32 0, i64 0)
-%"64" = bitcast i8* %"63" to void (%"pkgFoo__B"*)*
-%"65" = alloca void (%"pkgFoo__B"*)*
-store void (%"pkgFoo__B"*)* %"64", void (%"pkgFoo__B"*)** %"65"
-%"66" = load void (%"pkgFoo__B"*)** %"65"
-call void %"66"(%"pkgFoo__B"* %"62")
+%"72" = bitcast %"pkgFoo__B"* %"62" to void (%"pkgFoo__B"*)***
+%"73" = load void (%"pkgFoo__B"*)*** %"72"
+%"74" = getelementptr void (%"pkgFoo__B"*)** %"73", i64 0
+%"75" = load void (%"pkgFoo__B"*)** %"74"
+call void %"75"(%"pkgFoo__B"* %"62")
 ret void
 }
