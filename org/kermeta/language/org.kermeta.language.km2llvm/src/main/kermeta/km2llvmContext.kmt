@@ -184,12 +184,11 @@ class Context{
 		reinitOperationVar
 		var tmp1 : String init opFrom.name
 		var tmp2 : String init opFrom._llvmName
-		opFrom.name := opFrom.getLLVMPrototype(ctx)+"_to_"+opTo.getLLVMPrototype(ctx)+"#adapter"
-		opFrom.name := opFrom.name.replace("\"", "")
-		var proto : String init opFrom.getPrototype(self)
+		opFrom.name := "#adapter"+id.toString
 		opFrom._llvmName := void
 		result := Operation.new
 		result.duplicateHeaderUsing(opFrom, self)
+		result.adaptedOperation := opFrom
 
 	// Creating the header of the function.	
 		var fctAttr: Sequence<FunctionAttr> init  Sequence<FunctionAttr>.new

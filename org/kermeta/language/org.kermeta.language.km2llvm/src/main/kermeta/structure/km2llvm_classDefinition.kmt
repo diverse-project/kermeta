@@ -150,6 +150,7 @@ aspect class ClassDefinition {
 	operation _computeOperationsTable(ctx:Context) is do
 		var strOp  : String
 		var op2 : Operation
+		var op3 : Operation
 
 		// Adding the operations of the class
 		_tableList.addAll(ownedOperation)
@@ -157,16 +158,24 @@ aspect class ClassDefinition {
 		superClasses.each{sc |
 			// For each vtable of the super types
 			sc.getLLVMOperationsTable(ctx).each{op |
+				// The operation op can be an adapter (see the dynamic binding process).
+				// In this case the adapted operation must be used.
+				if op.adaptedOperation.isVoid then
+					op3 := op
+				else
+					op3 := op.adaptedOperation
+				end
+
+				strOp := op3.getPrototype(ctx)
 				// And for each operation of these vtables.
-				strOp := op.getPrototype(ctx)
-				// Looking for an operation having the same prototype. 
+				// looking for an operation having the same prototype. 
 				op2 := ownedOperation.detect{o | o.getPrototype(ctx)==strOp}
 				if not op2.isVoid then
 				// It means that an adapter must be generated
-					op2 := ctx.generateAdapter(op, op2, ctx)
+					op2 := ctx.generateAdapter(op3, op2, ctx)
 					_tableList.add(op2)
 				else
-					_tableList.add(op)
+					_tableList.add(op3)
 				end
 			}
 		} 

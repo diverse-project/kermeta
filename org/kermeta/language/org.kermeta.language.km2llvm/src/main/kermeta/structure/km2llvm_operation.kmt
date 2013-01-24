@@ -24,6 +24,10 @@ aspect class Operation {
 	// The llvm name of the operation.
 	attribute _llvmName : String
 	
+	// If this operation is an adapter (see the dynamic binding generation process), this reference refers to
+	// the adapted operation.
+	reference adaptedOperation : Operation
+	
 	
 	operation llvmName(ctx:Context) : String is do
 		if(_llvmName.isVoid) then
