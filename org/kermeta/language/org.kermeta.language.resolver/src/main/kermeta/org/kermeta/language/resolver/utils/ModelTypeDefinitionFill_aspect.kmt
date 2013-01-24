@@ -20,18 +20,37 @@ using kermeta::standard
  */
 aspect class Metamodel {
 	operation fillModelTypeDefinitions(ctxt : LanguageVisitorContext) is do
-		if (self.equals(ctxt.currentlyBuiltMetamodel)) then
-			if self.ownedModelTypeDefinitions.isEmpty() then			
-				var newMTD : ModelTypeDefinition init ModelTypeDefinition.new
-				newMTD.typeDefinitions.addAll(self.getAllOwnedModelElementTypeDefinitions())
-				newMTD.name := self.name
-				self.ownedModelTypeDefinitions.add(newMTD)
-			else
+		if ctxt.handlingModelTypes then
+			if self.equals(ctxt.currentlyBuiltMetamodel) then
+				if self.ownedModelTypeDefinitions.isEmpty() then			
+					var newMTD : ModelTypeDefinition init ModelTypeDefinition.new				
+					self.ownedModelTypeDefinitions.add(newMTD)
+				end
 				self.ownedModelTypeDefinitions.each{mtd|
 					mtd.typeDefinitions.addAll(self.getAllOwnedModelElementTypeDefinitions())
 					mtd.name := self.name
+					
+					//Weave the getContents transformation
+					var t : ModelTransformation init ModelTransformation.new
+					t.name := "getContents"
+					var type : UnresolvedType init UnresolvedType.new
+					type.typeIdentifier := "kermeta::standard::Collection"
+					var paramType : UnresolvedType init UnresolvedType.new
+					paramType.typeIdentifier := "kermeta::standard::Object"
+					type.generics.add(paramType)
+					type.containedType.add(paramType)
+					var tag : Tag init Tag.new
+									
+					t.type := type
+					t.containedType.add(type)
+					
+					mtd.ownedTransformations().add(t)
+					t.owningModelTypeDefinition := mtd
 				}
+				
 			end
+		else
+			self.ownedModelTypeDefinitions.clear
 		end
 	end
 }

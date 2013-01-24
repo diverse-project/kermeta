@@ -137,7 +137,7 @@ class FullStaticResolver
 		
 		
 		//init of context
-		ctxt:= LanguageVisitorContext.new.initialize(unresolvedMetamodels, currentMetamodel, true)
+		ctxt:= LanguageVisitorContext.new.initialize(unresolvedMetamodels, currentMetamodel, false, false)
 				
 		result := createModelTypeDefinitions(
 			doStaticSetting(
@@ -166,7 +166,7 @@ class FullStaticResolver
 	operation preprocess(unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>, currentMetamodel : org::kermeta::language::structure::Metamodel) : Collection<org::kermeta::language::structure::Metamodel> is do
 		stdio.writeln("	********************* Preprocessing... *********************")
 		
-		ctxt:= LanguageVisitorContext.new.initialize(unresolvedMetamodels, currentMetamodel, false)
+		ctxt:= LanguageVisitorContext.new.initialize(unresolvedMetamodels, currentMetamodel, false, false)
 		
 		
 		unresolvedMetamodels.each{mm|
@@ -303,9 +303,7 @@ class FullStaticResolver
 		unresolvedMetamodels.each{mm|
 			mm.inferContainedExpressionStatic(staticSetterContext)
 		}
-		
-		ctxt.unresolvedCallToTransformationStack := staticSetterContext.unresolvedCallToTransformationStack
-		
+				
        	stdio.writeln("	********************* Static setting done *********************")
        	result := unresolvedMetamodels
 	end

@@ -31,84 +31,37 @@ class MapEntryTypeDef {
 }
 
 aspect class LanguageVisitorContext {
-	attribute errors : Sequence<ResolverException>
-	//Metamodels the UnresolvedFinder is currently visiting
+
+	
 	reference currentMetamodels : Collection<Metamodel>
-	//Package the UnresolvedFinder is currently visiting
-	reference currentPackage : Package
-	//Metamodel currently built
 	reference currentlyBuiltMetamodel : Metamodel
-	
-	reference currentClassDef : ClassDefinition
-	
-	reference currentOperation : Operation
-	//KermetaModelElement the UnresolvedFinder is currently visiting (except Unresolved)
-	reference currentElement : KermetaModelElement
-	//Qualified path to resolved object
-	attribute qualifiedPath : Sequence<String>
-	//Counter pointing the object name currently visited by the ResolvedFinder
-	attribute identifierCounter : Integer
-	
-	//Resolved objects found by the ResolvedFinder
-	reference foundType : Type
-	reference foundOperation : Operation
-	reference foundProperty : Property
-	
-	attribute typedefTable : Hashtable<String, Sequence<MapEntryTypeDef>>
-	
-	attribute primitiveTypesTable : Hashtable<PrimitiveType, Type>
-	
 	attribute verbose : Boolean
+	attribute handlingModelTypes : Boolean
+
+	attribute errors : Sequence<ResolverException>
 	
-	//Stack of UnresolvedCall that have not been resolved and which target.staticType is a ModelType
-	attribute unresolvedCallToTransformationStack : Collection<UnresolvedCall>
 	
-	operation initialize(mms : Collection<Metamodel>, currentMM : Metamodel, isVerbose : Boolean) : LanguageVisitorContext is do
+	reference currentPackage : Package	
+	reference currentClassDef : ClassDefinition	
+	reference currentOperation : Operation
+	reference currentElement : KermetaModelElement
+	
+	//Qualified path to resolved object
+	//attribute qualifiedPath : Sequence<String>
+	
+	//attribute typedefTable : Hashtable<String, Sequence<MapEntryTypeDef>>
+	
+	//attribute primitiveTypesTable : Hashtable<PrimitiveType, Type>
+	
+	
+	operation initialize(mms : Collection<Metamodel>, currentMM : Metamodel, isVerbose : Boolean, isHandlingModelTypes : Boolean) : LanguageVisitorContext is do
 		errors := Sequence<ResolverException>.new
 		currentMetamodels:=mms
 		currentlyBuiltMetamodel := currentMM
 		//TODO initialize the table of Type definitions 
 	 	verbose := isVerbose
+	 	handlingModelTypes := isHandlingModelTypes
 		result := self
-	end
-	
-	//Return the name of the Object currently pointed by identifierCounter
-	operation getCurrentIdentifier() : String is do
-		result := qualifiedPath.at(identifierCounter)
-		identifierCounter := identifierCounter+1
-	end
-	
-	//Return true if the last returned identifier is the last of the qualified path
-	operation currentIdentifierIsLast() : Boolean is do
-		result := (identifierCounter == qualifiedPath.size())
-	end
-	
-	//Return true if the next returned identifier is the last of the qualified path
-	operation nextIdentifierIsLast() : Boolean is do
-		result := (identifierCounter == qualifiedPath.size()-1)
-	end
-	
-	//Return the last identifier of the qualified path
-	operation getLastIdentifier() : String is do
-		result := qualifiedPath.last()
-	end
-	
-	//Return the found type before resetting it
-	operation getFoundType() : Type is do
-		result := foundType
-		foundType := void
-	end
-	
-	//Return the found property before resetting it
-	operation getFoundProperty() : Property is do
-		result := foundProperty
-		foundProperty := void
-	end
-	
-	//Return the found operation before resetting it
-	operation getFoundOperation() : Operation is do
-		result := foundOperation
-		foundOperation := void
 	end
 	
 }
