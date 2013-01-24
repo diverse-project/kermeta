@@ -37,13 +37,14 @@ package behavior {
 		 */
 		operation setInferedStaticType(context : StaticSetterContext, type : Type) : Type is do
 			
-			if not type.isVoid then
-				self.staticType := type
-				if(type.container.isVoid) then
-					self.containedType.add(self.staticType)
+					
+				if not type.isVoid then
+					self.staticType := type
+					if(type.container.isVoid) then
+						self.containedType.add(self.staticType)
+					end
+					result := self.staticType
 				end
-				result := self.staticType
-			end
 		end
 		
 	}
@@ -83,24 +84,27 @@ package behavior {
 		 * add this type to the Expression as staticType, also add to its containedType if it is not already contained
 		 */
 		method setInferedStaticType(context : StaticSetterContext,type : Type) : Type from Expression is do
-			if not type.isVoid then
-				// make sure all parameter of this type are concrete
-				var bindings : kermeta::standard::Sequence<TypeVariableBinding> init kermeta::standard::Sequence<TypeVariableBinding>.new
-				findBindings(context ,type, bindings)
-				self.staticType := type.resolveTypeVariables(context,bindings)
-				if(self.staticType.isVoid) then
-					if context.verbose then stdio.writeln("Warning static type is Void on CallFeature "+self.name + " replaced by VoidType") end					
-					self.staticType := context.createTypeFromPartialName("kermeta::standard::Void")
-				end
-				if(self.staticType.container.isVoid) then
+		
+			
+				if not type.isVoid then
+					// make sure all parameter of this type are concrete
+					var bindings : kermeta::standard::Sequence<TypeVariableBinding> init kermeta::standard::Sequence<TypeVariableBinding>.new
+					findBindings(context ,type, bindings)
+					self.staticType := type.resolveTypeVariables(context,bindings)
+					if(self.staticType.isVoid) then
+						if context.verbose then stdio.writeln("Warning static type is Void on CallFeature "+self.name + " replaced by VoidType") end					
+						self.staticType := context.createTypeFromPartialName("kermeta::standard::Void")
+					end
+					if(self.staticType.container.isVoid) then
+						
+						self.containedType.add(self.staticType)
+					end
 					
-					self.containedType.add(self.staticType)
+					result := self.staticType
+				else
+					stdio.writeln("Warning setting void as statictype on "+ self.name)
 				end
-				
-				result := self.staticType
-			else
-				stdio.writeln("Warning setting void as statictype on "+ self.name)
-			end
+			
 		end
 	}
 	

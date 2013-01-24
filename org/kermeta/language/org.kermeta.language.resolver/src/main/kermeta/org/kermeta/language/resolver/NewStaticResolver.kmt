@@ -138,26 +138,38 @@ class FullStaticResolver
 		
 		//init of context
 		ctxt:= LanguageVisitorContext.new.initialize(unresolvedMetamodels, currentMetamodel, false, false)
-				
-		result := createModelTypeDefinitions(
-			doStaticSetting(
-				checkModelTypeDefinitionBindings(
-					doModelTypeDefinitionResolving(
-						doStructureResolving(
-							doTypeAwareMerging(
-								doPrimitiveTypeResolving(
-									doTypeResolving(
-										//doTypeVariableResolving(
-											preprocess(unresolvedMetamodels, currentMetamodel)
-										//)
+		
+		if (ctxt.handlingModelTypes) then
+			result := createModelTypeDefinitions(
+				doStaticSetting(
+					checkModelTypeDefinitionBindings(
+						doModelTypeDefinitionResolving(
+							doStructureResolving(
+								doTypeAwareMerging(
+									doPrimitiveTypeResolving(
+										doTypeResolving(
+											//doTypeVariableResolving(
+												preprocess(unresolvedMetamodels, currentMetamodel)
+											//)
+										)
 									)
 								)
 							)
 						)
 					)
-				)
-			, currentMetamodel)
-		)
+				, currentMetamodel)
+			)
+		else
+			result := doStaticSetting(
+				doStructureResolving(
+					doTypeAwareMerging(
+						doPrimitiveTypeResolving(
+							doTypeResolving(unresolvedMetamodels)
+						)
+					)
+				), currentMetamodel
+			)
+		end
 	end
 	
 	/* *
@@ -173,10 +185,10 @@ class FullStaticResolver
 			//Fill model type definitions with model element type definitions
 			mm.fillModelTypeDefinitions(ctxt)
 		}
-		unresolvedMetamodels.each{mm|
+		/*unresolvedMetamodels.each{mm|
 			//Add default inheritance to Object to all type definitions
 			mm.addDefaultInheritance()
-		}
+		}*/
 		unresolvedMetamodels.each{mm|
 			//Make a link between each model element type definition and the model type definitions that reference it
 			mm.fillReferencingModelTypeDefinitions()

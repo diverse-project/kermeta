@@ -314,7 +314,7 @@ package structure{
 package behavior {
 	aspect class UnresolvedCall inherits UnresolvedReference, CallExpression, TypeContainer{
 	
-		method resolveStructureReferencedType(context : LanguageVisitorContext) is do
+		method resolveStructureReferencedType(context : LanguageVisitorContext) from Expression is do
 			// must maintain order	
 			from var i : Integer init 0
 			until i==generics.size
@@ -366,6 +366,19 @@ package behavior {
 			end
 		end
 	}
+	
+	aspect class Expression {
+		method resolveStructureReferencedType(context : LanguageVisitorContext) is do
+			if not staticType.isVoid then
+				if staticType.isInstanceOf(UnresolvedType) then
+					if not staticType.asType(UnresolvedType).correspondingType.isVoid then
+						staticType:=staticType.asType(UnresolvedType).correspondingType
+					end
+				end
+			end
+		end
+	}
+	
 	aspect class TypeReference inherits MultiplicityElement{
 	
 		method resolveStructureReferencedType(context : LanguageVisitorContext) is do
