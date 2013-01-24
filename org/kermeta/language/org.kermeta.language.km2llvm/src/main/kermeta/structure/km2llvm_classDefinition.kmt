@@ -162,8 +162,8 @@ aspect class ClassDefinition {
 				// Looking for an operation having the same prototype. 
 				op2 := ownedOperation.detect{o | o.getPrototype(ctx)==strOp}
 				if not op2.isVoid then
-				// It means that a decorator must be generated
-					op2 := ctx.generateDecorator(op2, op)
+				// It means that an adapter must be generated
+					op2 := ctx.generateAdapter(op, op2, ctx)
 					_tableList.add(op2)
 				else
 					_tableList.add(op)
@@ -171,9 +171,6 @@ aspect class ClassDefinition {
 			}
 		} 
 
-		stdio.write(name +":")
-		_tableList.each{elt| stdio.write(" "+elt.llvmName(ctx) + "("+elt.name+")")}
-		stdio.writeln(" ")
 		_positionsSuperTypesTable := Hashtable<String, Integer>.new
 		_definePositionsSuperTypesTable(_positionsSuperTypesTable)
 	end
