@@ -32,7 +32,7 @@ aspect class Operation {
 			else
 				// An ID must be added to the class to avoid several classes to have the same name
 				// in the same class.
-				id := ctx.nextId
+				if id.isVoid then id := ctx.nextId end
 				_llvmName := ctx.llvm.globalVar(getLLVMQualifiedName+id.toString)
 			end
 		end
@@ -121,6 +121,32 @@ aspect class Operation {
 		buf.append(")")
 		result := buf.toString
 		params.clear
+	end
+	
+	
+
+	operation duplicateHeaderUsing(op:Operation, ctx:Context) is do
+		var clazz : Class
+		var param : Parameter
+
+		name := op.name
+		owningClass := ClassDefinition.new
+		owningClass.qualifiedNameLLVM := op.owningClass.qualifiedNameLLVM
+		owningClass.name := op.owningClass.name
+		clazz := Class.new
+		clazz.typeDefinition := op.type.asType(Class).typeDefinition
+		type := clazz
+		op.llvmName(ctx)
+		id := op.id
+		
+		op.ownedParameter.each{p |
+			param := Parameter.new
+			param.name := p.name
+			clazz := Class.new
+			clazz.typeDefinition := p.type.asType(Class).typeDefinition
+			type := clazz
+			ownedParameter.add(param)
+		}
 	end
 }
 

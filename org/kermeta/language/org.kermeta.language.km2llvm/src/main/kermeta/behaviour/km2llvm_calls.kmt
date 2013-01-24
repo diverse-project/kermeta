@@ -154,30 +154,28 @@ aspect class CallOperation {
 	*/
 	operation _generateLLVMDynamicBindingCall(ctx:Context, params:Sequence<LLVMVar>) : String is do
 		var typeRet : String init staticOperation.type.llvmType(ctx)
-		var typeProtoOp : String init staticOperation.getLLVMPrototypeType(ctx)
 		var position : Integer init staticOperation.owningClass.getPositionOperationDynBindTable(staticOperation, ctx)
-		var tableName : String init staticOperation.owningClass.getTableDynBindingName(ctx)
-		var tableType : String init ctx.llvm.pointer(staticOperation.owningClass.getTableDynBindingType(ctx))
-		var localVar1 : String init ctx.nextOperationVar
+		var opProtoType : String init staticOperation.getLLVMPrototypeType(ctx)
+		var callingObject : LLVMVar init params.at(params.size-1)
 		
-		// Getting the pointer of the element of the tab.
-		ctx.operations.append(ctx.llvm.assign(localVar1, 
-			ctx.llvm.load(ctx.llvm.pointer(ctx.llvm.pointer(ctx.llvm.i8)), 
-			ctx.llvm.getelementptr(tableType, tableName, ctx.llvm.i32, 0, ctx.llvm.i64, position, true)))
-		).append("\n")
-		// Casting the pointer of the tab into the type corresponding to the operation.
-		var localVarPtrOp : String init ctx.nextOperationVar
-		ctx.operations.append(ctx.llvm.assign(localVarPtrOp, ctx.llvm.bitcast(ctx.llvm.pointer(ctx.llvm.i8)+" "+localVar1, typeProtoOp, false))).append("\n")
-		// Creating a local that will contain the pointer of the operation from the table.
-		var localVarOp : String init ctx.nextOperationVar
-		ctx.operations.append(ctx.llvm.assign(localVarOp, ctx.llvm.alloca(typeProtoOp))).append("\n")
-		// Storing the content of the tab[i] into the local var.
-		ctx.operations.append(ctx.llvm.store(typeProtoOp, localVarPtrOp, localVarOp)).append("\n")
-		// Loading the operation from its pointer.
-		var ptrOpVar : String init ctx.nextOperationVar
-		ctx.operations.append(ctx.llvm.assign(ptrOpVar, ctx.llvm.load(ctx.llvm.pointer(typeProtoOp), localVarOp))).append("\n")
+		// Casting the pointer corresponding to the calling object into the operation type.
+		// e.g. %"72" = bitcast %"pkgFoo__B"* %"62" to void (%"pkgFoo__B"*)***
+		var var1 : String init ctx.nextOperationVar
+		ctx.operations.append(ctx.llvm.assign(var1, ctx.llvm.bitcast(callingObject.type+" "+callingObject.name, ctx.llvm.pointer(ctx.llvm.pointer(opProtoType)), false))).append("\n")
+		// Loading the pointer
+		// e.g. %"73" = load void (%"pkgFoo__B"*)*** %"72"
+		var var2 : String init ctx.nextOperationVar
+		ctx.operations.append(ctx.llvm.assign(var2, ctx.llvm.load(ctx.llvm.pointer(ctx.llvm.pointer(opProtoType)), var1))).append("\n")
+		// Getting the pointer of the operation
+		// e.g. %"74" = getelementptr void (%"pkgFoo__B"*)** %"73", i64 0
+		var var3 : String init ctx.nextOperationVar
+		ctx.operations.append(ctx.llvm.assign(var3, ctx.llvm.getelementptr(ctx.llvm.pointer(opProtoType), var2, ctx.llvm.i64, position, void, 0, false))).append("\n")
+		// Loading the operation
+		// e.g. %"75" = load void (%"pkgFoo__B"*)** %"74"
+		var var4 : String init ctx.nextOperationVar
+		ctx.operations.append(ctx.llvm.assign(var4, ctx.llvm.load(ctx.llvm.pointer(opProtoType), var3))).append("\n")
 		// Calling the operation
-		result := ctx.llvm.call(ptrOpVar, typeRet, params, void)
+		result := ctx.llvm.call(var4, typeRet, params, void)
 	end
 
 

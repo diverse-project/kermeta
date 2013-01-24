@@ -19,10 +19,6 @@ using kermeta::utils
 
 
 aspect class ClassDefinition {
-	/** All super classes of the class. */
-	reference allSuperClasses : oset ClassDefinition[*]
-
-
 	// Generates cast functions: one for each super and lower types (direct and undirect).
 	operation generateLLVMCast(ctx:Context) is do
 		generateLLVMDirectCast(ctx)
@@ -30,7 +26,6 @@ aspect class ClassDefinition {
 	
 	
 	operation generateLLVMIndirectCast(ctx:Context, types:Sequence<ClassDefinition>, initType:ClassDefinition, superType : Boolean) is do
-		if superType then initType.allSuperClasses.add(self) end
 		ctx.reinitOperationVar
 		// self is the type to cast into the first type (i.e. initType)
 		// All the elements of 'types' are the types necessary to incrementally convert self into initType
@@ -91,7 +86,6 @@ aspect class ClassDefinition {
 		// Creating a cast function for each direct super type.
 		superClasses.each{st |
 			ctx.casts.append(_createCastFunctionSuper(ctx, st, params, fctAttrs, typeCD, selfVar, i))
-			allSuperClasses.add(st)
 			st.superClasses.each{t |
 				types.clear
 				types.add(st)

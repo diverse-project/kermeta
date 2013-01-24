@@ -18,12 +18,14 @@ using org::kermeta::language::llvm
  
 aspect class ClassDefinition {
 	attribute _toIgnore : Boolean
-	
 	/** Direct super classes of the class. Derived from superTypes. */
 	reference superClasses : oset ClassDefinition[*]
-	/** The hash map used for the dynamic binding. */
-	attribute table : Hashtable<String, Operation>
-	attribute _tableList : Sequence<Operation> // The sequence of values of the table.
+	// The sequence of values of the table.
+	reference _tableList : Sequence<Operation> 
+	// Contains the position in _tableList of the beginning of the vtable of each super type.
+	// This table is required during the generation of the constructor to override the vtable of the super types
+	// using the vtable of the current class.
+	attribute _positionsSuperTypesTable : Hashtable<String, Integer>
 
 	operation toIgnore() : Boolean is do
 		if(_toIgnore.isVoid) then
@@ -97,11 +99,10 @@ aspect class ClassDefinition {
 		This table will be used by call operations to support the dynamic binding.
 	*/
 	operation generateLLVMOperationsTable(ctx:Context) is do
-		if table.isVoid then
-			table := Hashtable<String, Operation>.new
+		if _tableList.isVoid then
+			_tableList := Sequence<Operation>.new
 			// Computing the table.
-			_computeOperationsTable(table, ctx)
-			_tableList := table.values.asSequence
+			_computeOperationsTable(ctx)
 			
 			if _tableList.size>0 then
 				var i : Integer init 0
@@ -120,12 +121,20 @@ aspect class ClassDefinition {
 			end
 		end
 	end
+
+	
+	/** Returns the vtable of the class. */
+	operation getLLVMOperationsTable(ctx:Context) : Sequence<Operation> is do
+		if _tableList.isVoid then generateLLVMOperationsTable(ctx) end
+		result := _tableList
+	end
+
 	
 	/**
 		Returns the name of the LLVM variable corresponding to the table dedicated to dynamic binding.
 	*/
 	operation getTableDynBindingName(ctx:Context) : String is do
-		result := ctx.llvm.globalVar(qualifiedNameLLVM+"##dynBind")
+		result := ctx.llvm.globalVar(qualifiedNameLLVM+"##vtable")
 	end
 	
 	
@@ -138,9 +147,48 @@ aspect class ClassDefinition {
 	/**
 		Helpers for the operation generateLLVMOperationsTable
 	*/
-	operation _computeOperationsTable(table:Hashtable<String, Operation>, ctx:Context) is do
-		superClasses.each{sc | sc._computeOperationsTable(table, ctx) }
-		ownedOperation.each{op | table.put(op.getPrototype(ctx), op) }
+	operation _computeOperationsTable(ctx:Context) is do
+		var strOp  : String
+		var op2 : Operation
+
+		// Adding the operations of the class
+		_tableList.addAll(ownedOperation)
+		
+		superClasses.each{sc |
+			// For each vtable of the super types
+			sc.getLLVMOperationsTable(ctx).each{op |
+				// And for each operation of these vtables.
+				strOp := op.getPrototype(ctx)
+				// Looking for an operation having the same prototype. 
+				op2 := ownedOperation.detect{o | o.getPrototype(ctx)==strOp}
+				if not op2.isVoid then
+				// It means that a decorator must be generated
+					op2 := ctx.generateDecorator(op2, op)
+					_tableList.add(op2)
+				else
+					_tableList.add(op)
+				end
+			}
+		} 
+
+		stdio.write(name +":")
+		_tableList.each{elt| stdio.write(" "+elt.llvmName(ctx) + "("+elt.name+")")}
+		stdio.writeln(" ")
+		_positionsSuperTypesTable := Hashtable<String, Integer>.new
+		_definePositionsSuperTypesTable(_positionsSuperTypesTable)
+	end
+	
+	
+	operation _definePositionsSuperTypesTable(positions:Hashtable<String, Integer>) is do
+		var gap : Integer init positions.size+ownedOperation.size
+
+		superClasses.each{sc |
+			if sc._tableList.size>0 then 
+				positions.put(sc.qualifiedNameLLVM, gap)
+				gap := gap + sc._tableList.size
+			end
+			sc._definePositionsSuperTypesTable(positions)
+		}
 	end
 	
 	
@@ -149,7 +197,7 @@ aspect class ClassDefinition {
 	*/
 	operation getPositionOperationDynBindTable(op:Operation, ctx:Context) : Integer is do
 		if _tableList.isVoid then generateLLVMOperationsTable(ctx) end
-		result := _tableList.indexOf(table.getValue(op.getPrototype(ctx)))
+		result := _tableList.indexOf(op)
 	end
 	
 	
@@ -247,13 +295,15 @@ aspect class ClassDefinition {
 			var tableType : String init ctx.llvm.pointer(getTableDynBindingType(ctx))
 	
 			// Setting the dynamic binding table to the class.
-			_generateDynamicBindingTableSetting(ctx, tableType, tableName, varStr3, typeName, var4)
+			_generateDynamicBindingTableSetting(ctx, tableType, tableName, varStr3, typeName, var4, 0)
 			// For all the super types, overriding the table.
+			var keys : Set<String> init _positionsSuperTypesTable.keys
 			var varStrST : String
-			allSuperClasses.each{st |
+
+			keys.each{key |
 				varStr3 := ctx.nextOperationVar
-				varStrST := ctx.generateCastCall(ctx.constructors, var4, qualifiedNameLLVM, st.qualifiedNameLLVM)
-				_generateDynamicBindingTableSetting(ctx, tableType, tableName, varStr3, ctx.llvm.pointer(ctx.llvm.localVar(st.qualifiedNameLLVM)), varStrST)
+				varStrST := ctx.generateCastCall(ctx.constructors, var4, qualifiedNameLLVM, key)
+				_generateDynamicBindingTableSetting(ctx, tableType, tableName, varStr3, ctx.llvm.pointer(ctx.llvm.localVar(key)), varStrST, _positionsSuperTypesTable.getValue(key))
 			}
 		end
 
@@ -262,10 +312,10 @@ aspect class ClassDefinition {
 	end
 	
 	
-	operation _generateDynamicBindingTableSetting(ctx:Context, tableType:String, tableName:String, varObjet:String, objectType:String, varContainer:String) is do
+	operation _generateDynamicBindingTableSetting(ctx:Context, tableType:String, tableName:String, varObjet:String, objectType:String, varContainer:String, position:Integer) is do
 		ctx.constructors.append(ctx.llvm.assign(varObjet, ctx.llvm.getelementptr(objectType, varContainer, ctx.llvm.i32, 0, ctx.llvm.i32, 0, false))).append("\n")
 		ctx.constructors.append(ctx.llvm.store(ctx.llvm.pointer(ctx.llvm.pointer(ctx.llvm.i8)), 
-				ctx.llvm.getelementptr(tableType, tableName, ctx.llvm.i32, 0, ctx.llvm.i32, 0, true), varObjet)).append("\n")
+				ctx.llvm.getelementptr(tableType, tableName, ctx.llvm.i64, 0, ctx.llvm.i64, position, true), varObjet)).append("\n")
 	end
 	
 	

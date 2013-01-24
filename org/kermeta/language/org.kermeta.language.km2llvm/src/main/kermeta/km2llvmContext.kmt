@@ -34,6 +34,8 @@ class Context{
 	attribute getters : StringBuffer
 	// The cast operations
 	attribute casts : StringBuffer
+	// The decorators generated for the dynamic binding.
+	attribute decorators : StringBuffer
 	// The operations
 	attribute operations : StringBuffer
 	// The tables of operations used to do the dynamic binding.
@@ -79,6 +81,7 @@ class Context{
 		operations := StringBuffer.new
 		casts := StringBuffer.new
 		tablesDynBinding := StringBuffer.new
+		decorators := StringBuffer.new
 		cptStrings := 0
 		id := 0
 		reinitOperationVar
@@ -140,6 +143,7 @@ class Context{
 		// The cast operations must be generated at the end to be sure to have the collection lowerTypes filled.
 		classes.each{cl | cl.generateLLVMCast(self)}
 		result.append(casts.toString)
+		result.append(decorators.toString)
 		result.append(operations.toString)
 	end
 	
@@ -173,6 +177,55 @@ class Context{
 		// creating a new variable containing the cast
 		buf.append(llvm.assign(result, llvm.call(llvm.globalVar("cast_"+fromType+"_"+toType), llvm.pointer(llvm.localVar(toType)), params, void))).append("\n")
 		params.clear // cleaning
+	end
+	
+	
+	operation generateDecorator(opFrom:Operation, opTo:Operation) : Operation is do
+		reinitOperationVar
+		var tmp1 : String init opFrom.name
+		var tmp2 : String init opFrom._llvmName
+		opFrom.name := opFrom.name+"#decorator"
+		var proto : String init opFrom.getPrototype(self)
+		opFrom._llvmName := void
+		result := Operation.new
+		result.duplicateHeaderUsing(opFrom, self)
+
+	// Creating the header of the function.	
+		var fctAttr: Sequence<FunctionAttr> init  Sequence<FunctionAttr>.new
+		fctAttr.add(FunctionAttr.inlinehint)
+		var attrs : Sequence<LLVMVar> init  Sequence<LLVMVar>.new
+		var typeFrom : String init llvm.pointer(llvm.localVar(opFrom.owningClass.qualifiedNameLLVM))
+		var typeTo : String init llvm.pointer(llvm.localVar(opTo.owningClass.qualifiedNameLLVM))
+
+		// Creation of the parameters
+		opFrom.ownedParameter.each{param | attrs.add(LLVMVar.new.initialise(param.type.llvmType(self), llvm.localVar(param.name))) }
+		// The last parameter is the calling object
+		attrs.add(LLVMVar.new.initialise(typeFrom, llvm.localVar("self")))
+		
+		decorators.append(llvm.define(LinkageType.internal, opTo.type.llvmType(self), opFrom.llvmName(self), attrs, fctAttr)).append("{\n")
+	// Casting the variable self into the expected type.
+		var v1 : String init generateCastCall(decorators, llvm.localVar("self"), opFrom.owningClass.qualifiedNameLLVM, opTo.owningClass.qualifiedNameLLVM)
+	// Calling the decorated method.
+	// and returning the value returned by the decorated method.
+		var v2 : String init nextOperationVar
+		
+		attrs.removeAt(attrs.size-1) // Removing the parameter self
+		attrs.add(LLVMVar.new.initialise(typeTo, v1)) // to be replaced with the casted object.
+
+		if opTo.type.isVoidType(self) then
+			decorators.append(llvm.call(opTo.llvmName(self), opTo.type.llvmType(self), attrs, void)).append("\n")
+			decorators.append(llvm.ret(llvm.~void, void)).append("\n")
+		else
+			decorators.append(llvm.assign(v2, llvm.call(opTo.llvmName(self), opTo.type.llvmType(self), attrs, void))).append("\n")
+			decorators.append(llvm.ret(opTo.type.llvmType(self), v2)).append("\n")
+		end
+
+		decorators.append("}\n")
+		
+		opFrom._llvmName := tmp2
+		opFrom.name := tmp1
+		fctAttr.clear
+		attrs.clear
 	end
 }
 
