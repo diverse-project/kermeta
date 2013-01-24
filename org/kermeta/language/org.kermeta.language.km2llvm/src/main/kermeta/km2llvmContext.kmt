@@ -93,6 +93,7 @@ class Context{
 		stdLibName.put("kermeta_standard__Boolean", llvm.i1)
 		stdLibName.put("kermeta_standard__Integer", llvm.i32)
 		stdLibName.put("kermeta_io__StdIO", "%struct.kermeta_io__StdIO*")
+		stdLibName.put("kermeta_standard__Object", "%struct.kermeta_standard__Object*")
 		
 		initialiseStdLibHashMap
 	end
@@ -120,6 +121,8 @@ class Context{
 		stdLibCmd.put("@kermeta_standard__Boolean___toString", GenerateBooleanToStringCall.new)
 		
 		stdLibCmd.put("@kermeta_standard__Object___isVoid", GenerateObjectIsVoidCall.new)
+
+		stdLibCmd.put("@kermeta_io__StdIO___writeln", GenerateStdIOWritelnCall.new)
 	end
 	
 	
@@ -135,6 +138,7 @@ class Context{
 		var f : FileIO init FileIO.new
 		
 		result.append(f.readTextFile("file:///home/ablouin/workspace/org.kermeta.language.km2llvm/src/main/C/lib_std/lib_std.s"))
+		result.append("declare i32 @puts(i8*)\n")
 		result.append(strings.toString)
 		result.append(types.toString)
 		result.append(tablesDynBinding.toString)

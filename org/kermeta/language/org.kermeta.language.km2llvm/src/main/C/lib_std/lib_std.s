@@ -272,18 +272,6 @@ define i8* @kermeta_standard__Boolean___toString(i8 zeroext %self) nounwind uwta
 
 declare i8* @strncpy(i8*, i8*, i64) nounwind
 
-define void @kermeta_io__StdIO___writeln(i8* %o, %struct.kermeta_io__StdIO* %self) nounwind uwtable {
-  %1 = alloca i8*, align 8
-  %2 = alloca %struct.kermeta_io__StdIO*, align 8
-  store i8* %o, i8** %1, align 8
-  store %struct.kermeta_io__StdIO* %self, %struct.kermeta_io__StdIO** %2, align 8
-  %3 = load i8** %1, align 8
-  %4 = call i32 @puts(i8* %3)
-  ret void
-}
-
-declare i32 @puts(i8*)
-
 define void @kermeta_io__StdIO___write(i8* %o, %struct.kermeta_io__StdIO* %self) nounwind uwtable {
   %1 = alloca i8*, align 8
   %2 = alloca %struct.kermeta_io__StdIO*, align 8
@@ -318,14 +306,6 @@ define void @kermeta__o__StdIO___error(i8* %o, %struct.kermeta_io__StdIO* %self)
   %4 = load i8** %1, align 8
   %5 = call i32 (%struct._IO_FILE*, i8*, ...)* @fprintf(%struct._IO_FILE* %3, i8* getelementptr inbounds ([3 x i8]* @.str3, i32 0, i32 0), i8* %4)
   ret void
-}
-
-define i8* @kermeta___io__StdIO_read(i8* %o, %struct.kermeta_io__StdIO* %self) nounwind uwtable {
-  %1 = alloca i8*, align 8
-  %2 = alloca %struct.kermeta_io__StdIO*, align 8
-  store i8* %o, i8** %1, align 8
-  store %struct.kermeta_io__StdIO* %self, %struct.kermeta_io__StdIO** %2, align 8
-  ret i8* null
 }
 
 define %struct.kermeta_standard__Object* @kermeta_io__StdIO___container(%struct.kermeta_io__StdIO* %self) nounwind uwtable {

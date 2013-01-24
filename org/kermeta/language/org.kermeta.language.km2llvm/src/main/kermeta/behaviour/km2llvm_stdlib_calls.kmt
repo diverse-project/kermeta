@@ -17,6 +17,19 @@ using org::kermeta::language::llvm
 using org::kermeta::language::behavior
 
 
+// StdIO
+class GenerateStdIOWritelnCall inherits CallGeneratorCmd {
+	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
+		if params.size!=2 then
+			result := GeneratorCmdResult.new.initialise("FIXME GenerateStdIOWritelnCall: 2 operand required: " + params.size.toString, false)
+		else
+			params.removeAt(1) // Removing the callign object.
+			result := GeneratorCmdResult.new.initialise(ctx.llvm.call("@puts", ctx.llvm.i32, params, void), false)
+		end
+	end
+}
+
+
 // Object
 class GenerateObjectIsVoidCall inherits CallGeneratorCmd {
 	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do

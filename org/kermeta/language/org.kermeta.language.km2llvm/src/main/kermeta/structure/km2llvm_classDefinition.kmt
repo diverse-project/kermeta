@@ -44,6 +44,7 @@ aspect class ClassDefinition {
 
 	// Generates the LLVM code
 	method generateLLVM(ctx:Context) is do
+		//FIXME generate table of std classes when available
 		if(not toIgnore) then
 			generateLLVMOperationsTable(ctx)
 			generateLLVMType(ctx)
