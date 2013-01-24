@@ -188,7 +188,7 @@ aspect class Operation
 				true
 			else
 				//stdio.writeln("qualifiedName : " + returnType.getQualifiedName)
-				if (returnType.getQualifiedName.endsWith("#kermeta::standard::Void"))
+				if (returnType.getQualifiedName.endsWith("^kermeta::standard::Void"))
 				then
 					// nothing to do
 					true
