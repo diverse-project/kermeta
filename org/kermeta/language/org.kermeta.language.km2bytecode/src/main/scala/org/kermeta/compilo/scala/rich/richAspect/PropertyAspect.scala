@@ -13,7 +13,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
 
   def visitProperty(thi: Property, res: StringBuilder): Unit = {
     
-    var prefix: String = getPrefix(thi)
+    var prefix: String = Util.getAccessorsPrefix(thi)
       
     if (isImplementingModelTypeInterface()) {      
       prefix = getCompilerConfiguration().modelTypeOperationsPrefix
@@ -42,14 +42,6 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
     }
   }
   
-  def getPrefix(thi : Property) : String = {
-    var res : String = ""
-    if (!Util.hasEcoreTag(thi)) {
-      res = res + "Ker"
-    }
-    return res
-  }  
-
   def generateNonEcorePropertyAccessors(thi: Property, res: StringBuilder, prefix: String) = {
     generateGet(thi, res, prefix)
     generateSet(thi, res, prefix)
@@ -106,6 +98,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
   }
 
   def generateAttribute(thi: Property, res: StringBuilder): Unit = {
+       
     res.append("var ")
     res.append(Util.protectScalaKeyword(thi.getName()))
     res.append(" : ")
@@ -130,6 +123,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
   }
 
   def generateGet(thi: Property, res: StringBuilder, prefix: String): Unit = {
+        
     generateGetSignature(thi, res, prefix)
 
     var hasTypeEq: Boolean = false
@@ -166,7 +160,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
 
           res.append("\tthis.")
 
-          generateScalaGetName(thi, res, getPrefix(thi))
+          Util.generateScalaAccessorName(thi, res)
           res.append(".each(e => {")
 
           res.append("res.add(e.asInstanceOf[")
@@ -179,22 +173,22 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
 
         } else {
           res.append("\n\tif (!this.")
-          generateScalaGetName(thi, res, getPrefix(thi))
+          Util.generateScalaAccessorName(thi, res)
           res.append(".isInstanceOf[")
           res.append(typeName.toString())
           res.append("]) {")
           res.append("richAspect(this.")
-          generateScalaGetName(thi, res, getPrefix(thi))
+          Util.generateScalaAccessorName(thi, res)
           res.append(")")
           res.append("} else {")
           res.append("this.")
-          generateScalaGetName(thi, res, getPrefix(thi))
+          Util.generateScalaAccessorName(thi, res)
           res.append("}")
           res.append("\n  }")
         }
       } else {
         res.append("this.")
-        generateScalaGetName(thi, res, getPrefix(thi))
+        Util.generateScalaAccessorName(thi, res)
         res.append("}")
       }
     } else {
@@ -399,7 +393,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
 
     res.append("  def ")
 
-    generateScalaGetName(thi, res, prefix)
+    Util.generateScalaAccessorName(thi, res)
 
     res.append(" : ")
     if (Util.isAMapEntry(thi.getType()) || thi.getGetterBody != null) { // MapEntry and derived properties doesn't use ReflectiveCollection
@@ -414,12 +408,8 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
       res.append(thiType.toString)
   }
 
-  def generateScalaGetName(thi: Property, res: StringBuilder, prefix: String) = {
-    res.append(prefix + GlobalConfiguration.scalaPrefix)
-    res.append(thi.getName + "")
-  }
-
   def generateSet(thi: Property, res: StringBuilder, prefix: String): Unit = {
+    
     if (!(thi.getIsReadOnly() != null && thi.getIsReadOnly())) {
       generateSetSignature(thi, res, prefix)
 
@@ -464,14 +454,14 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
           res.append(")})")
 
           res.append("\n\tthis.")
-          generateScalaSetName(thi, res, getPrefix(thi))
-          res.append("(newArg)")
+          Util.generateScalaAccessorName(thi, res)
+          res.append("=(newArg)")
 
           res.append("\n  }")
         } else {
           res.append(" this.")
-          generateScalaSetName(thi, res, getPrefix(thi))
-          res.append("(arg")
+          Util.generateScalaAccessorName(thi, res)
+          res.append("=(arg")
           if (thi.getType().isInstanceOf[Class] && !hasTypeEq) {
             res.append(".asInstanceOf[")
             res.append(aspectName)
@@ -514,6 +504,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
   }
 
   def generateScalSet(thi: Property, res: StringBuilder, prefix: String): Unit = {
+    
     if (!(thi.getIsReadOnly() != null && thi.getIsReadOnly())) {
       var currentname: String = thi.getName
 
@@ -631,7 +622,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
     }
   }
 
-  def generateScalaSetSignature(thi: Property, res: StringBuilder, prefix: String) = {
+  def generateScalaSetSignature(thi: Property, res: StringBuilder, prefix: String) = {    
     var currentname: String = thi.getName
     var listType = new StringBuilder
     getListorType(thi, listType)
@@ -645,15 +636,12 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
     //var scalaName = prefix + GlobalConfiguration.scalaPrefix + thi.getName()
 
     res.append("  def ")
-    generateScalaSetName(thi, res, prefix)
-    res.append("(")
+    Util.generateScalaAccessorName(thi, res)
+    
+    res.append("_=(")
     res.append("`~value` : ")
     res.append(listType.toString)
     res.append("):Unit")
-  }
-
-  def generateScalaSetName(thi: Property, res: StringBuilder, prefix: String) = {
-    res.append(prefix + GlobalConfiguration.scalaPrefix + thi.getName() + "_=")
   }
 
   def isCollectionOfObject(listType: String): Boolean = {

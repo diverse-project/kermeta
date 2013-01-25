@@ -544,6 +544,35 @@ object Util extends LogAspect {
     })
     return res
   }
+  
+  /*
+   * Generate names of generated scala accessors (used in PropertyAspect and CallFeatureAspect)
+   */
+  def generateScalaAccessorName(thi: Property, res: StringBuilder) = {
+    res.append(GlobalConfiguration.scalaPrefix + thi.getName())
+  }
+  def generateScalaAccessorName(thi: String, res: StringBuilder) = {
+    res.append(GlobalConfiguration.scalaPrefix + thi)
+  }  
+  def getAccessorsPrefix(thi : Property) : String = {
+    var res : String = ""
+    if (!hasEcoreTag(thi)) {
+      res = res + "Ker"
+    }
+    return res
+  }
+  
+  def isCompilerIgnoreCall(thi : CallProperty) : Boolean = {
+    return hasCompilerIgnoreTag(thi.getStaticProperty().getOwningClass())
+  }
+  
+  def isCompilerIgnoreCall(thi : CallOperation) : Boolean = {    
+    return hasCompilerIgnoreTag(thi.getStaticOperation().getOwningClass())
+  }
+  
+   def generateBindingParameterClass(c : org.kermeta.language.structure.Class, res : StringBuilder) = {
+     helper.generateBindingParameterClass(c, res)
+   }
 }
 
    
