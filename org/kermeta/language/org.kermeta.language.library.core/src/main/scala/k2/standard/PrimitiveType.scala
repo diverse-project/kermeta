@@ -249,7 +249,6 @@ class RichDate(value: java.util.Date) extends EObjectImplForPrimitive with Scala
 }
 
 class RichDouble(value: java.lang.Double) extends RichNumeric[java.lang.Double]{
-	override  def isVoid() : java.lang.Boolean = false;
 	def plus(other : java.lang.Double) : java.lang.Double={value+other}
 	def mult(other : java.lang.Double) : java.lang.Double={value*other}
 	def minus(other : java.lang.Double) : java.lang.Double={return value-other}
@@ -281,7 +280,6 @@ class RichDouble(value: java.lang.Double) extends RichNumeric[java.lang.Double]{
 }
 
 class RichFloat(value: java.lang.Float)extends RichNumeric[java.lang.Float] {
-  override  def isVoid(): java.lang.Boolean = false;
   def plus(other : java.lang.Float) : java.lang.Float={value+other}
   def mult(other : java.lang.Float) : java.lang.Float={value*other}
   def minus(other : java.lang.Float) : java.lang.Float={return value-other}
@@ -360,13 +358,12 @@ class RichStringBuffer(value: java.lang.StringBuilder) extends KermetaObject wit
 }
 
 class RichShort(value: java.lang.Short) extends RichNumeric[java.lang.Short] {
-	  override  def isVoid(): java.lang.Boolean = false;
-      def plus(other : java.lang.Short) : java.lang.Short={(value+other).toShort}
-      def mult(other : java.lang.Short) : java.lang.Short={(value*other).toShort}
-      def minus(other : java.lang.Short) : java.lang.Short={(value-other).toShort}
-      def mod(other : java.lang.Short) : java.lang.Short={return (value % other).toShort}
-      def div(other : java.lang.Short) : java.lang.Short={return (value/other).toShort}
-      def uminus() : java.lang.Short={return (value * (-1)).toShort}
+      override def plus(other : java.lang.Short) : java.lang.Short={(value+other).toShort}
+      override def mult(other : java.lang.Short) : java.lang.Short={(value*other).toShort}
+      override def minus(other : java.lang.Short) : java.lang.Short={(value-other).toShort}
+      override def mod(other : java.lang.Short) : java.lang.Short={return (value % other).toShort}
+      override def div(other : java.lang.Short) : java.lang.Short={return (value/other).toShort}
+      override def uminus() : java.lang.Short={return (value * (-1)).toShort}
 
       override def isLower(other : java.lang.Short) : java.lang.Boolean={value<other}
       def compareTo(other : java.lang.Short) : java.lang.Integer={return value.asInstanceOf[Short].compare(other)}
@@ -391,16 +388,22 @@ class RichShort(value: java.lang.Short) extends RichNumeric[java.lang.Short] {
 
 }
 
-abstract class RichNumeric[G]  extends Comparable[G] with Summable[G]{}
+abstract class RichNumeric[G]  extends Comparable[G] with Summable[G]{
+  override def isVoid() = false
+  def mult(other : G) : G
+  def minus(other : G) : G
+  def mod(other : G) : G
+  def div(other : G) : G
+  def uminus() : G
+}
 
 class RichLong(value: java.lang.Long)  extends RichNumeric[java.lang.Long]{
-	override  def isVoid() = false
-	def plus(other : java.lang.Long) : java.lang.Long = value+other
-	def mult(other : java.lang.Long) : java.lang.Long = value*other
-	def minus(other : java.lang.Long) : java.lang.Long = value-other
-	def mod(other : java.lang.Long) : java.lang.Long = value % other
-	def div(other : java.lang.Long) : java.lang.Long = value/other
-	def uminus() : java.lang.Long = value * (-1)
+	override def plus(other : java.lang.Long) : java.lang.Long = value+other
+	override def mult(other : java.lang.Long) : java.lang.Long = value*other
+	override def minus(other : java.lang.Long) : java.lang.Long = value-other
+	override def mod(other : java.lang.Long) : java.lang.Long = value % other
+	override def div(other : java.lang.Long) : java.lang.Long = value/other
+	override def uminus() : java.lang.Long = value * (-1)
 
 	override def isLower(other : java.lang.Long) = value<other
 	def compareTo(other : java.lang.Long) : java.lang.Integer = value.asInstanceOf[Long].compare(other.longValue)
@@ -423,48 +426,41 @@ class RichLong(value: java.lang.Long)  extends RichNumeric[java.lang.Long]{
 
 
 class RichInteger(value: java.lang.Integer)  extends RichNumeric[java.lang.Integer]{
-    override  def isVoid(): java.lang.Boolean = false;
-    override def isLower(other : java.lang.Integer) : java.lang.Boolean={value<other}
+ 	override def uminus() : java.lang.Integer = value * (-1)
+    def isLower(other : java.lang.Integer) : java.lang.Boolean={value<other}
     def plus(other : Int) :java.lang.Integer={value+other}
-    def plus(other : java.lang.Integer) :java.lang.Integer={value+other.intValue}
+    override def plus(other : java.lang.Integer) :java.lang.Integer={value+other.intValue}
     def mult(other : Int) :java.lang.Integer={value*other}
-    def mult(other : java.lang.Integer) :java.lang.Integer={value*other.intValue}
-    def minus(other : java.lang.Integer) :java.lang.Integer={return value-other.intValue}
-    def minus(other : Int) :java.lang.Integer={return value-other}
-    def equals(other : Int) :Boolean={value==other}
-    def equals(other : Integer) :Boolean={value == other.intValue}
-    def mod(other : Int) :java.lang.Integer={return value % other}
-    def mod(other : java.lang.Integer) :java.lang.Integer={return value % other.intValue}
-    def div(other : Int) :java.lang.Integer={return value/other}
-    def div(other : java.lang.Integer) :java.lang.Integer={return value/(other.intValue)}
+    override def mult(other : java.lang.Integer) :java.lang.Integer={value*other.intValue}
+    override def minus(other : java.lang.Integer) :java.lang.Integer= value-other.intValue
+    def minus(other : Int) :java.lang.Integer= value-other
+    def equals(other : Int) :Boolean= value==other
+    def equals(other : Integer) :Boolean= value == other.intValue
+    def mod(other : Int) :java.lang.Integer= value % other
+    override def mod(other : java.lang.Integer) :java.lang.Integer= value % other.intValue
+    def div(other : Int) :java.lang.Integer= value/other
+    override def div(other : java.lang.Integer) :java.lang.Integer= value/(other.intValue)
 	//def shortValue() : java.lang.Short = value.shortValue()
 	//def intValue() : java.lang.Integer = value.intValue()
 	//def longValue() : java.lang.Long = value.longValue()
 	//def floatValue() : java.lang.Float = value.floatValue()
 	//def doubleValue() : java.lang.Double = value.doubleValue()
-
-    def toReal() : java.lang.Double={return value.doubleValue()} // deprecated in kmt framework
-	def toDouble() : java.lang.Double={return value.doubleValue()}
-    override def compareTo(other : java.lang.Integer) :java.lang.Integer={return value.asInstanceOf[Int].compare(other) }
-    def kcompareTo(other : Int) :java.lang.Integer={return value.asInstanceOf[Int].compare(other.intValue)}
-    
-    def isGreater(other : Int) :java.lang.Boolean={return value>other}
-    override def isGreater(other : java.lang.Integer) :java.lang.Boolean={return value>other.intValue}
+    def toReal() : java.lang.Double= value.doubleValue() // deprecated in kmt framework
+	def toDouble() : java.lang.Double= value.doubleValue()
+    override def compareTo(other : java.lang.Integer) :java.lang.Integer= value.asInstanceOf[Int].compare(other)
+    def kcompareTo(other : Int) :java.lang.Integer= value.asInstanceOf[Int].compare(other.intValue)
+    def isGreater(other : Int) :java.lang.Boolean= value>other
+    override def isGreater(other : java.lang.Integer) :java.lang.Boolean= value>other.intValue
     def isGreaterOrEqual(other : Int) :java.lang.Boolean={value>=other}
-    override def isGreaterOrEqual(other : java.lang.Integer) :java.lang.Boolean={return value>=other.intValue}
-    def uminus() :Int={return value * (-1);}
-    //TODO
-    //def times(body : Integer=>Unit) :{}
-    def isLowerOrEqual(other : Int) :java.lang.Boolean={return  value<=other}
-    override def isLowerOrEqual(other : java.lang.Integer) :java.lang.Boolean={return  value<=other.intValue}
-    def toInt() : java.lang.Integer = {return value}
-	
-//    def times(func : Int => Unit):Unit ={ for(i <- 0 until value){func(i)} }
+    override def isGreaterOrEqual(other : java.lang.Integer) :java.lang.Boolean= value>=other.intValue
+    def isLowerOrEqual(other : Int) :java.lang.Boolean= value<=other
+    override def isLowerOrEqual(other : java.lang.Integer) :java.lang.Boolean= value<=other.intValue
+    def toInt() : java.lang.Integer = value
     def times(func : java.lang.Integer => Unit):Unit ={ for(i <- 0 until value){func(i)} }
     override def getValue():Object = new java.lang.Integer(value)		
 	override def getMetaClass()=k2.utils.ReflexivityLoader.createMetaClass("kermeta.standard.Integer")
-	
 }
+
 
 
 class RichCharacter(value:java.lang.Character)  extends RichValueType with EObjectImplForPrimitive{
