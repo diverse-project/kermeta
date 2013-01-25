@@ -1097,14 +1097,7 @@ package behavior {
 			
 			// see bug #1903, we limit ourself to the search to the nearest common supertype of the thenBody and elseBody
 			var staticTypeOfIF : Type
-			
-			
-			//stdio.writeln("	!!! resolveCallAndInferStatic " + self.toString() + ", condition " + self.condition.toString())
-			//stdio.writeln("	!!! then " + self.thenBody.staticType.toString())
-			if not self.elseBody.isVoid() then
-				stdio.writeln("	!!! else " + self.elseBody.staticType.toString())
-			end
-			
+						
 			self.thenBody := self.thenBody.resolveCallAndInferStatic(context)
 			if self.thenBody.staticType.isVoid then
 				stdio.writeln(" WARNING thenBody.staticType is void in " + self.container().asType(KermetaModelElement).prettyPrint)

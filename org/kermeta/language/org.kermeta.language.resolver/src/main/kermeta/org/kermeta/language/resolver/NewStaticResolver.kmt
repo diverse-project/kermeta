@@ -101,8 +101,6 @@ class FullStaticResolver
        		mm.canUseCachedStructuralTypeDefinitions := true
        	}
        	
-       	
-       	
        	resolvedMetamodels := resolve(unresolvedMetamodels, unresolvedMetamodels.detect{mm|mm.name == currentMetamodelName})
        	resolvedMetamodels.each{mm|
 			checkUnresolved(mm)
@@ -135,9 +133,7 @@ class FullStaticResolver
 	*/
 	operation resolve(unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>, currentMetamodel : org::kermeta::language::structure::Metamodel) : Collection<org::kermeta::language::structure::Metamodel> is do
 		
-		
-		//init of context
-		ctxt:= LanguageVisitorContext.new.initialize(unresolvedMetamodels, currentMetamodel, false, false)
+		var preprocessedMetamodels : Collection<org::kermeta::language::structure::Metamodel> init preprocess(unresolvedMetamodels, currentMetamodel)
 		
 		if (ctxt.handlingModelTypes) then
 			result := createModelTypeDefinitions(
@@ -147,11 +143,7 @@ class FullStaticResolver
 							doStructureResolving(
 								doTypeAwareMerging(
 									doPrimitiveTypeResolving(
-										doTypeResolving(
-											//doTypeVariableResolving(
-												preprocess(unresolvedMetamodels, currentMetamodel)
-											//)
-										)
+										doTypeResolving(preprocessedMetamodels)
 									)
 								)
 							)
@@ -164,7 +156,7 @@ class FullStaticResolver
 				doStructureResolving(
 					doTypeAwareMerging(
 						doPrimitiveTypeResolving(
-							doTypeResolving(unresolvedMetamodels)
+							doTypeResolving(preprocessedMetamodels)
 						)
 					)
 				), currentMetamodel
@@ -178,17 +170,17 @@ class FullStaticResolver
 	operation preprocess(unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>, currentMetamodel : org::kermeta::language::structure::Metamodel) : Collection<org::kermeta::language::structure::Metamodel> is do
 		stdio.writeln("	********************* Preprocessing... *********************")
 		
+		//init of context
 		ctxt:= LanguageVisitorContext.new.initialize(unresolvedMetamodels, currentMetamodel, false, false)
-		
-		
+				
 		unresolvedMetamodels.each{mm|
 			//Fill model type definitions with model element type definitions
 			mm.fillModelTypeDefinitions(ctxt)
 		}
-		/*unresolvedMetamodels.each{mm|
+		unresolvedMetamodels.each{mm|
 			//Add default inheritance to Object to all type definitions
 			mm.addDefaultInheritance()
-		}*/
+		}
 		unresolvedMetamodels.each{mm|
 			//Make a link between each model element type definition and the model type definitions that reference it
 			mm.fillReferencingModelTypeDefinitions()
@@ -278,20 +270,9 @@ class FullStaticResolver
 	*/
 	operation doResolving(unresolvedMetamodels : Collection<org::kermeta::language::structure::Metamodel>, currentMetamodel : org::kermeta::language::structure::Metamodel) : Collection<org::kermeta::language::structure::Metamodel> is do
 		stdio.writeln("	********************* Resolving... *********************")
-       	/*var unresolvedFinder : ResolverUnresolvedFinderVisitor init ResolverUnresolvedFinderVisitor.new
-
-		ctxt := LanguageVisitorContext.new.initialise()
-	
-   		unresolvedMetamodels.accept(unresolvedFinder, ctxt)
+		   		
+   		doStructureResolving(doTypeAwareMerging(doPrimitiveTypeResolving(doTypeResolving(preprocess(unresolvedMetamodels, currentMetamodel)))))
    		
-   		ctxt.currentlyBuiltMetamodel := currentMetamodel*/
-   		
-   		//doStructureResolving(doTypeAwareMerging(doPrimitiveTypeResolving(doTypeResolving(unresolvedMetamodels))))
-   		
-   		stdio.writeln("	+++++++++++++++++++++++++++++++++++++++++")
-   		stdio.writeln("	doResolving, currentlyBuiltMetamodel: " + currentMetamodel.toString)
-   		
-   		resolve(unresolvedMetamodels, currentMetamodel)
        	stdio.writeln("	********************* Resolving done *********************")
        	
        	//checkDangling(unresolvedMetamodels.containingResource())       	
