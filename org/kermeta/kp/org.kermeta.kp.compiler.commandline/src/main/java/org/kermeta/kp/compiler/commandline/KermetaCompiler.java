@@ -642,6 +642,7 @@ public class KermetaCompiler {
 			mergedUnit.getResult().setCurrentMetamodelByName(kp.getMetamodelName());
 			
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Resolving...", LOG_MESSAGE_GROUP, 1);
+			logger.info("Resolving...",LOG_MESSAGE_GROUP);
 			ModelingUnit resolvedUnit = resolveModelingUnit(mergedUnit.getResult(), kpFileURL, false);
 	
 			if (resolvedUnit == null) {
