@@ -28,7 +28,7 @@ aspect class Metamodel {
 		packages.each{pkg | pkg.generateLLVM(ctx)}
 	end
 	
-	method preprocess4LLVM() is do
+	operation preprocess4LLVM() is do
 		packages.each{pkg | pkg.preprocess4LLVM}
 	end
 }

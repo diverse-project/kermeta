@@ -17,15 +17,20 @@ using org::kermeta::language::llvm
 using org::kermeta::language::behavior
 
 
+// Integer
+class GenerateIntegerToStringCall inherits CallGeneratorCmd {
+	// Required to cast the given i1 boolean into a i8 Clang boolean.
+	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
+		result := GeneratorCmdResult.new.initialise(ctx.llvm.call("@kermeta_standard__Integer___toString", ctx.llvm.pointer(ctx.llvm.i8), params, void), false)
+	end
+}
+
+
 // StdIO
 class GenerateStdIOWritelnCall inherits CallGeneratorCmd {
 	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
-		if params.size!=2 then
-			result := GeneratorCmdResult.new.initialise("FIXME GenerateStdIOWritelnCall: 2 operand required: " + params.size.toString, false)
-		else
-			params.removeAt(1) // Removing the callign object.
-			result := GeneratorCmdResult.new.initialise(ctx.llvm.call("@puts", ctx.llvm.i32, params, void), false)
-		end
+		params.removeAt(1) // Removing the callign object.
+		result := GeneratorCmdResult.new.initialise(ctx.llvm.call("@puts", ctx.llvm.i32, params, void), false)
 	end
 }
 
@@ -33,15 +38,11 @@ class GenerateStdIOWritelnCall inherits CallGeneratorCmd {
 // Object
 class GenerateObjectIsVoidCall inherits CallGeneratorCmd {
 	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
-		if params.size!=1 then
-			result := GeneratorCmdResult.new.initialise("FIXME GenerateObjectIsVoidCall: 1 operand required: " + params.size.toString, false)
-		else
-			// If the type is a pointer, it can be compared to null.
-			if call.target.staticType.isPointer(ctx) then
-				result := GeneratorCmdResult.new.initialise(ctx.llvm.icmp(IcmpCondition.eq, call.target.staticType.llvmType(ctx), params.at(0).name, ctx.llvm.null), false)
-			else // otherwise, false is returned and the call is inlined.
-				result := GeneratorCmdResult.new.initialise("false", true)
-			end
+		// If the type is a pointer, it can be compared to null.
+		if call.target.staticType.isPointer(ctx) then
+			result := GeneratorCmdResult.new.initialise(ctx.llvm.icmp(IcmpCondition.eq, call.target.staticType.llvmType(ctx), params.at(0).name, ctx.llvm.null), false)
+		else // otherwise, false is returned and the call is inlined.
+			result := GeneratorCmdResult.new.initialise("false", true)
 		end
 	end
 }
@@ -50,195 +51,167 @@ class GenerateObjectIsVoidCall inherits CallGeneratorCmd {
 class GenerateBooleanToStringCall inherits CallGeneratorCmd {
 	// Required to cast the given i1 boolean into a i8 Clang boolean.
 	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
-		if params.size!=1 then
-			result := GeneratorCmdResult.new.initialise("FIXME GenerateBooleanToStringCall: 1 operand required: " + params.size.toString, false)
-		else
-			var varName : String init ctx.nextOperationVar
-			// Casting i1 to i8
-			ctx.operations.append(ctx.llvm.assign(varName, ctx.llvm.zext(ctx.llvm.i1, ctx.llvm.i8, params.at(0).name))).append("\n")
-			params.at(0).name := varName
-			params.at(0).type := ctx.llvm.i8
-			result := GeneratorCmdResult.new.initialise(ctx.llvm.call("@kermeta_standard__Boolean___toString", ctx.llvm.pointer(ctx.llvm.i8), params, void), false)
-		end
+		var varName : String init ctx.nextOperationVar
+		// Casting i1 to i8
+		ctx.operations.append(ctx.llvm.assign(varName, ctx.llvm.zext(ctx.llvm.i1, ctx.llvm.i8, params.at(0).name))).append("\n")
+		params.at(0).name := varName
+		params.at(0).type := ctx.llvm.i8
+		result := GeneratorCmdResult.new.initialise(ctx.llvm.call("@kermeta_standard__Boolean___toString", ctx.llvm.pointer(ctx.llvm.i8), params, void), false)
 	end
 }
 
 
 class GenerateBooleanOrCall inherits CallGeneratorCmd {
 	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
-		if params.size!=2 then
-			result := GeneratorCmdResult.new.initialise("FIXME GenerateBooleanOrCall: 2 operands required: " + params.size.toString, false)
-		else
-			//FIXME: according to the LLVM doc, only i32 is accepted.
-			result := GeneratorCmdResult.new.initialise(ctx.llvm.~or(ctx.llvm.i1, params.at(1).name, params.at(0).name), false)
-		end
+		//FIXME: according to the LLVM doc, only i32 is accepted.
+		result := GeneratorCmdResult.new.initialise(ctx.llvm.~or(ctx.llvm.i1, params.at(1).name, params.at(0).name), false)
 	end
 }
 
 
 class GenerateBooleanAndCall inherits CallGeneratorCmd {
 	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
-		if params.size!=2 then
-			result := GeneratorCmdResult.new.initialise("FIXME GenerateBooleanAndCall: 2 operands required: " + params.size.toString, false)
-		else
-			//FIXME: according to the LLVM doc, only i32 is accepted.
-			result := GeneratorCmdResult.new.initialise(ctx.llvm.~and(ctx.llvm.i1, params.at(1).name, params.at(0).name), false)
-		end
+		//FIXME: according to the LLVM doc, only i32 is accepted.
+		result := GeneratorCmdResult.new.initialise(ctx.llvm.~and(ctx.llvm.i1, params.at(1).name, params.at(0).name), false)
 	end
 }
 
 
 class GenerateBooleanEqualsCall inherits CallGeneratorCmd {
 	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
-		if params.size!=2 then
-			result := GeneratorCmdResult.new.initialise("FIXME GenerateBooleanEqualsCall: 2 operands required: " + params.size.toString, false)
-		else
-			result := GeneratorCmdResult.new.initialise(ctx.llvm.icmp(IcmpCondition.eq, ctx.llvm.i1, params.at(1).name, params.at(0).name), false)
-		end
+		result := GeneratorCmdResult.new.initialise(ctx.llvm.icmp(IcmpCondition.eq, ctx.llvm.i1, params.at(1).name, params.at(0).name), false)
 	end
 }
 
 
 class GenerateBooleanNotCall inherits CallGeneratorCmd {
 	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
-		if params.size!=1 then
-			result := GeneratorCmdResult.new.initialise("FIXME GenerateBooleanNotCall: 1 operand required: " + params.size.toString, false)
-		else
-			result := GeneratorCmdResult.new.initialise(ctx.llvm.xor(ctx.llvm.i1, params.at(0).name, "true"), false)
-		end
+		result := GeneratorCmdResult.new.initialise(ctx.llvm.xor(ctx.llvm.i1, params.at(0).name, "true"), false)
 	end
 }
 
 
-// Integer
-class GenerateIntegerUminCall inherits CallGeneratorCmd {
+// Numeric
+class GenerateNumericUminCall inherits CallGeneratorCmd {
 	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
-		if params.size!=1 then
-			result := GeneratorCmdResult.new.initialise("FIXME GenerateIntegerUminCall: 1 operand required: " + params.size.toString, false)
-		else
-			result := GeneratorCmdResult.new.initialise(ctx.llvm.sub(ctx.llvm.i32, "0", params.at(0).name), false)
-		end
+		result := GeneratorCmdResult.new.initialise(ctx.llvm.sub(ctx.llvm.i32, "0", params.at(0).name), false)
 	end
 }
 
 
-class GenerateIntegerModCall inherits CallGeneratorCmd {
+class GenerateNumericModCall inherits CallGeneratorCmd {
 	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
-		if params.size!=2 then
-			result := GeneratorCmdResult.new.initialise("FIXME GenerateIntegerModCall: 2 operands required: " + params.size.toString, false)
-		else
-			// The 'modulo' operator is in fact the 'reminder' operator.
-			result := GeneratorCmdResult.new.initialise(ctx.llvm.srem(ctx.llvm.i32, params.at(1).name, params.at(0).name), false)
-		end
+		// The 'modulo' operator is in fact the 'reminder' operator.
+		result := GeneratorCmdResult.new.initialise(ctx.llvm.srem(ctx.llvm.i32, params.at(1).name, params.at(0).name), false)
 	end
 }
 
 
-class GenerateIntegerDivCall inherits CallGeneratorCmd {
+class GenerateNumericDivCall inherits CallGeneratorCmd {
 	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
-		if params.size!=2 then
-			result := GeneratorCmdResult.new.initialise("FIXME GenerateIntegerDivCall: 2 operands required: " + params.size.toString, false)
-		else
-			result := GeneratorCmdResult.new.initialise(ctx.llvm.sdiv(ctx.llvm.i32, params.at(1).name, params.at(0).name), false)
-		end
+		result := GeneratorCmdResult.new.initialise(ctx.llvm.sdiv(ctx.llvm.i32, params.at(1).name, params.at(0).name), false)
 	end
 }
 
 
-class GenerateIntegerMultCall inherits CallGeneratorCmd {
+class GenerateNumericMultCall inherits CallGeneratorCmd {
 	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
-		if params.size!=2 then
-			result := GeneratorCmdResult.new.initialise("FIXME GenerateIntegerMultCall: 2 operands required: " + params.size.toString, false)
-		else
-			result := GeneratorCmdResult.new.initialise(ctx.llvm.mul(ctx.llvm.i32, params.at(1).name, params.at(0).name), false)
-		end
+		result := GeneratorCmdResult.new.initialise(ctx.llvm.mul(ctx.llvm.i32, params.at(1).name, params.at(0).name), false)
 	end
 }
 
 
-class GenerateIntegerIsNotEqualCall inherits CallGeneratorCmd {
+class GenerateNumericMinusCall inherits CallGeneratorCmd {
 	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
-		if params.size!=2 then
-			result := GeneratorCmdResult.new.initialise("FIXME GenerateIntegerIsNotEqualCall: 2 operands required: " + params.size.toString, false)
-		else
-			result := GeneratorCmdResult.new.initialise(ctx.llvm.icmp(IcmpCondition.ne, ctx.llvm.i32, params.at(1).name, params.at(0).name), false)
-		end
-	end
-}
-
-
-class GenerateIntegerIsLowerOrEqualCall inherits CallGeneratorCmd {
-	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
-		if params.size!=2 then
-			result := GeneratorCmdResult.new.initialise("FIXME GenerateIntegerIsLowerOrEqualCall: 2 operands required: " + params.size.toString, false)
-		else
-			result := GeneratorCmdResult.new.initialise(ctx.llvm.icmp(IcmpCondition.sle, ctx.llvm.i32, params.at(1).name, params.at(0).name), false)
-		end
-	end
-}
-
-
-class GenerateIntegerIsLowerCall inherits CallGeneratorCmd {
-	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
-		if params.size!=2 then
-			result := GeneratorCmdResult.new.initialise("FIXME GenerateIntegerIsLowerCall: 2 operands required: " + params.size.toString, false)
-		else
-			result := GeneratorCmdResult.new.initialise(ctx.llvm.icmp(IcmpCondition.slt, ctx.llvm.i32, params.at(1).name, params.at(0).name), false)
-		end
-	end
-}
-
-
-class GenerateIntegerMinusCall inherits CallGeneratorCmd {
-	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
-		if params.size!=2 then
-			result := GeneratorCmdResult.new.initialise("FIXME GenerateIntegerMinusCall: 2 operands required: " + params.size.toString, false)
-		else
+		// Numeric has a generic. So, to define if it is an integer operation or something else the static type must be analysed.
+		if(call.staticType.llvmType(ctx)==ctx.llvm.i32) then
 			result := GeneratorCmdResult.new.initialise(ctx.llvm.sub(ctx.llvm.i32, params.at(1).name, params.at(0).name), false)
+		else
+			stdio.errorln("FIXME TODO GenerateNumericMinusCall for " + call.staticType.llvmType(ctx))
+			result := void
 		end
 	end
 }
 
 
-class GenerateIntegerIsGreaterOrEqualCall inherits CallGeneratorCmd {
+// Summable
+class GenerateSummablePlusCall inherits CallGeneratorCmd {
 	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
-		if params.size!=2 then
-			result := GeneratorCmdResult.new.initialise("FIXME GenerateIntegerIsGreaterOrEqualCall: 2 operands required: " + params.size.toString, false)
-		else
-			result := GeneratorCmdResult.new.initialise(ctx.llvm.icmp(IcmpCondition.sge, ctx.llvm.i32, params.at(1).name, params.at(0).name), false)
-		end
-	end
-}
-
-
-class GenerateIntegerIsGreaterCall inherits CallGeneratorCmd {
-	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
-		if params.size!=2 then
-			result := GeneratorCmdResult.new.initialise("FIXME GenerateIntegerIsGreaterCall: 2 operands required: " + params.size.toString, false)
-		else
-			result := GeneratorCmdResult.new.initialise(ctx.llvm.icmp(IcmpCondition.sgt, ctx.llvm.i32, params.at(1).name, params.at(0).name), false)
-		end
-	end
-} 
-
-
-class GenerateIntegerEqualsCall inherits CallGeneratorCmd {
-	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
-		if params.size!=2 then
-			result := GeneratorCmdResult.new.initialise("FIXME GenerateIntegerEqualsCall: 2 operands required: " + params.size.toString, false)
-		else
-			result := GeneratorCmdResult.new.initialise(ctx.llvm.icmp(IcmpCondition.eq, ctx.llvm.i32, params.at(1).name, params.at(0).name), false)
-		end
-	end
-} 
-
-
-class GenerateIntegerPlusCall inherits CallGeneratorCmd {
-	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
-		if params.size!=2 then
-			result := GeneratorCmdResult.new.initialise("FIXME GenerateIntegerPlusCall: 2 operands required: " + params.size.toString, false)
-		else
+		if(call.staticType.llvmType(ctx)==ctx.llvm.i32) then
 			result := GeneratorCmdResult.new.initialise(ctx.llvm.add(ctx.llvm.i32, params.at(1).name, params.at(0).name), false)
+		else
+			stdio.errorln("FIXME TODO GenerateSummablePlusCall for " + call.staticType.llvmType(ctx))
+			result := void
 		end
 	end
 } 
+
+
+// Comparable
+class GenerateComparableIsNotEqualCall inherits CallGeneratorCmd {
+	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
+		if(call.staticType.llvmType(ctx)==ctx.llvm.i32) then
+			result := GeneratorCmdResult.new.initialise(ctx.llvm.icmp(IcmpCondition.ne, ctx.llvm.i32, params.at(1).name, params.at(0).name), false)
+		else
+			stdio.errorln("FIXME TODO GenerateComparableIsNotEqualCall for " + call.staticType.llvmType(ctx))
+			result := void
+		end
+	end
+}
+
+class GenerateComparableEqualsCall inherits CallGeneratorCmd {
+	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
+		if(call.staticType.llvmType(ctx)==ctx.llvm.i32) then
+			result := GeneratorCmdResult.new.initialise(ctx.llvm.icmp(IcmpCondition.eq, ctx.llvm.i32, params.at(1).name, params.at(0).name), false)
+		else
+			stdio.errorln("FIXME TODO GenerateComparableEqualsCall for " + call.staticType.llvmType(ctx))
+			result := void
+		end
+	end
+} 
+
+class GenerateComparableIsGreaterOrEqualCall inherits CallGeneratorCmd {
+	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
+		if(call.staticType.llvmType(ctx)==ctx.llvm.i32) then
+			result := GeneratorCmdResult.new.initialise(ctx.llvm.icmp(IcmpCondition.sge, ctx.llvm.i32, params.at(1).name, params.at(0).name), false)
+		else
+			stdio.errorln("FIXME TODO GenerateComparableIsGreaterOrEqualCall for " + call.staticType.llvmType(ctx))
+			result := void
+		end
+	end
+}
+
+
+class GenerateComparableIsGreaterCall inherits CallGeneratorCmd {
+	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
+		if(call.staticType.llvmType(ctx)==ctx.llvm.i32) then
+			result := GeneratorCmdResult.new.initialise(ctx.llvm.icmp(IcmpCondition.sgt, ctx.llvm.i32, params.at(1).name, params.at(0).name), false)
+		else
+			stdio.errorln("FIXME TODO GenerateComparableIsGreaterCall for " + call.staticType.llvmType(ctx))
+			result := void
+		end
+	end
+} 
+
+class GenerateComparableIsLowerOrEqualCall inherits CallGeneratorCmd {
+	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
+		if(call.staticType.llvmType(ctx)==ctx.llvm.i32) then
+			result := GeneratorCmdResult.new.initialise(ctx.llvm.icmp(IcmpCondition.sle, ctx.llvm.i32, params.at(1).name, params.at(0).name), false)
+		else
+			stdio.errorln("FIXME TODO GenerateComparableIsLowerOrEqualCall for " + call.staticType.llvmType(ctx))
+			result := void
+		end
+	end
+}
+
+
+class GenerateComparableIsLowerCall inherits CallGeneratorCmd {
+	method generateCall(ctx:Context, params:Sequence<LLVMVar>, call:CallOperation) : GeneratorCmdResult is do
+		if(call.staticType.llvmType(ctx)==ctx.llvm.i32) then
+			result := GeneratorCmdResult.new.initialise(ctx.llvm.icmp(IcmpCondition.slt, ctx.llvm.i32, params.at(1).name, params.at(0).name), false)
+		else
+			stdio.errorln("FIXME TODO GenerateComparableIsLowerCall for " + call.staticType.llvmType(ctx))
+			result := void
+		end
+	end
+}

@@ -101,18 +101,22 @@ class Context{
 	
 	operation initialiseStdLibHashMap() is do
 		stdLibCmd := Hashtable<String, CallGeneratorCmd>.new
-		stdLibCmd.put("@kermeta_standard__Integer___plus", GenerateIntegerPlusCall.new)
-		stdLibCmd.put("@kermeta_standard__Integer___equals", GenerateIntegerEqualsCall.new)
-		stdLibCmd.put("@kermeta_standard__Integer___isGreater", GenerateIntegerIsGreaterCall.new)
-		stdLibCmd.put("@kermeta_standard__Integer___isGreaterOrEqual", GenerateIntegerIsGreaterOrEqualCall.new)
-		stdLibCmd.put("@kermeta_standard__Integer___isLower", GenerateIntegerIsLowerCall.new)
-		stdLibCmd.put("@kermeta_standard__Integer___minus", GenerateIntegerMinusCall.new)
-		stdLibCmd.put("@kermeta_standard__Integer___isLowerOrEqual", GenerateIntegerIsLowerOrEqualCall.new)
-		stdLibCmd.put("@kermeta_standard__Integer___isNotEqual", GenerateIntegerIsNotEqualCall.new)
-		stdLibCmd.put("@kermeta_standard__Integer___mult", GenerateIntegerMultCall.new)
-		stdLibCmd.put("@kermeta_standard__Integer___div", GenerateIntegerDivCall.new)
-		stdLibCmd.put("@kermeta_standard__Integer___mod", GenerateIntegerModCall.new)
-		stdLibCmd.put("@kermeta_standard__Integer___umin", GenerateIntegerUminCall.new)
+		stdLibCmd.put("@kermeta_standard__Numeric___minus", GenerateNumericMinusCall.new)
+		stdLibCmd.put("@kermeta_standard__Numeric___mult", GenerateNumericMultCall.new)
+		stdLibCmd.put("@kermeta_standard__Numeric___div", GenerateNumericDivCall.new)
+		stdLibCmd.put("@kermeta_standard__Numeric___mod", GenerateNumericModCall.new)
+		stdLibCmd.put("@kermeta_standard__Numeric___umin", GenerateNumericUminCall.new)
+		
+		stdLibCmd.put("@kermeta_standard__Summable___plus", GenerateSummablePlusCall.new)
+
+		stdLibCmd.put("@kermeta_standard__Comparable___equals", GenerateComparableEqualsCall.new)
+		stdLibCmd.put("@kermeta_standard__Comparable___isGreater", GenerateComparableIsGreaterCall.new)
+		stdLibCmd.put("@kermeta_standard__Comparable___isGreaterOrEqual", GenerateComparableIsGreaterOrEqualCall.new)
+		stdLibCmd.put("@kermeta_standard__Comparable___isLower", GenerateComparableIsLowerCall.new)
+		stdLibCmd.put("@kermeta_standard__Comparable___isLowerOrEqual", GenerateComparableIsLowerOrEqualCall.new)
+		stdLibCmd.put("@kermeta_standard__Comparable___isNotEqual", GenerateComparableIsNotEqualCall.new)
+		
+		stdLibCmd.put("@kermeta_standard__Integer___toString", GenerateIntegerToStringCall.new)
 		
 		stdLibCmd.put("@kermeta_standard__Boolean___not", GenerateBooleanNotCall.new)
 		stdLibCmd.put("@kermeta_standard__Boolean___equals", GenerateBooleanEqualsCall.new)
