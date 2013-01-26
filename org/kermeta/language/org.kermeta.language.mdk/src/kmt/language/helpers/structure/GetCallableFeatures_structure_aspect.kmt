@@ -118,7 +118,7 @@ aspect class Type {
 	end
 	
 	operation getAllCallableTransformations() : Set<ModelTransformation> is do
-		result := void
+		result := Set<ModelTransformation>.new
 	end
 	
 }

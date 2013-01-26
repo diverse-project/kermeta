@@ -349,3 +349,10 @@ aspect class Package {
 		result := self
 	end
 }
+
+aspect class ModelType {
+	operation initializeFromAModelTypeDefinition(typeDef : ModelTypeDefinition) : ModelType is do
+		self.typeDefinition := typeDef
+		result := self
+	end
+}
