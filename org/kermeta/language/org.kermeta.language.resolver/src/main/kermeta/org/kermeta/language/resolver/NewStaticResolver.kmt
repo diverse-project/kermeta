@@ -171,7 +171,7 @@ class FullStaticResolver
 		stdio.writeln("	********************* Preprocessing... *********************")
 		
 		//init of context
-		ctxt:= LanguageVisitorContext.new.initialize(unresolvedMetamodels, currentMetamodel, false, false)
+		ctxt:= LanguageVisitorContext.new.initialize(unresolvedMetamodels, currentMetamodel, false, true)
 				
 		unresolvedMetamodels.each{mm|
 			//Fill model type definitions with model element type definitions
@@ -324,6 +324,7 @@ class FullStaticResolver
 		unresolvedMetamodels.each{mm|
 			mm.checkModelTypeDefinitionBindings(matchingContext)
 		}
+		ctxt.errors.addAll(matchingContext.errors)
 		result := unresolvedMetamodels
 		stdio.writeln("	********************* ModelTypeDefinitionBindings Checking done *********************")	
 	end

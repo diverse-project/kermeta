@@ -10,8 +10,10 @@ package org::kermeta::language::structure;
 require kermeta
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/modelTypeDefinition/matching/Matching_Helpers.kmt"
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/modelTypeDefinition/matching/Matching_Aspect.kmt"
+require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverException.kmt"
 
 using org::kermeta::language::resolver::matching
+using org::kermeta::language::resolver
 
 aspect class Metamodel
 {
@@ -27,7 +29,48 @@ aspect class ModelTypeDefinition
 	operation checkModelTypeDefinitionBindings(ctxt : MatchingContext) : Void is do 
 		self.ownedBindings.each{b|
 			if b.needToBeCheck then
-				self.isTotalIsomorphicSubtypeOf(b, ctxt)
+				if not (self.isTotalIsomorphicSubtypeOf(b, ctxt)) then
+					var e : ResolverException init ResolverException.new
+					var msg : String init "ModelTypeDefinition " + self.name + "is not a subtypeof ModelTypeDefinition" + b.boundModelTypeDefinition.name + ":\n"
+					ctxt.currentFailedBinding.nonMatchedTypeDefinitions.each{td|
+						msg := msg + "\t No match found for TypeDefinition " + td.name + ".\n"
+					}
+					ctxt.currentFailedBinding.failedCDMatches.each{fc|
+						msg := msg + "\t Potential match found for ClassDefinition " + fc.target.name + ", but:\n"
+						if fc.source.isAbstract.andThen{x|not fc.target.isAbstract} then
+							msg := msg + "\t\t An abstract class can only match another abstract class."
+						end
+						if fc.source.typeParameter.size() != fc.target.typeParameter.size() then
+							msg := msg + "\t\t Matching class must have the same number of types parameters as the matched class."
+						end
+						fc.nonMatchedProperties.each{p|
+							msg := msg + "\t\t No match found for Property " + p.name + ".\n"
+						}
+						fc.failedPropertyMatches.each{fp|
+							msg := msg + "\t\t Potential match found for Property " + fp.target.name ", but:\n"
+							if fp.source.isReadOnly.andThen{x|not fp.target.isReadOnly} then
+								msg := msg + "\t\t\t An read only property can only match another read only property.\n"
+							end
+							if fp.source.lower != fp.target.lower or fp.source.upper != fp.target.upper then
+								msg := msg + "\t\t\t Multiplicities must be the same.\n"
+							end
+							if fp.source.isUnique != fp.target.isUnique then
+								msg := msg + "\t\t\t isUnique attribute must be the same.\n"
+							end
+							if fp.source.isComposite != fp.target.isComposite then
+								msg := msg + "\t\t\t isComposite attribute must be the same.\n"
+							end
+							if fp.source.isOrdered != fp.target.isOrdered then
+								msg := msg + "\t\t\t isOrdered attribute must be the same.\n"
+							end
+						}
+						fc.failedMandatoryPropertyMatches.each{fmp|
+							msg := msg + "\t\t Property " + fmp.name + " is mandatory but do not match any Property.\n"
+						}
+					}
+					e.initialize(msg, b)
+					ctxt.errors.add(e)
+				end
 				b.toCheck := false
 			end
 		}

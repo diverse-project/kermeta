@@ -13,11 +13,9 @@ require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/modelTypeDefinition/matching/Matching_Helpers.kmt"
 require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetAllSuperTypes_TypeDefinition_aspect.kmt"
-require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/IsSubtypeOf.kmt"
 
 using kermeta::standard
 using org::kermeta::language::resolver::matching
-
 
 aspect class ModelTypeDefinition {
 	//Set of unmatched ModelTypeDefinitions
@@ -53,6 +51,7 @@ aspect class ModelTypeDefinition {
 						}						
 						if matchingTd.isVoid then
 							//If we did not find any matching ModelElementTypeDefinition, there is no subtyping relation between self and mtd
+							ctxt.currentFailedBinding.nonMatchedTypeDefinitions.add(tdToMatch)
 							result := false								
 						else
 							//Otherwise empty matchingTd and continue
@@ -110,6 +109,8 @@ aspect class ClassDefinition {
 					result := cd.isAbstract
 				end
 				
+				result := self.typeParameter.size() == cd.typeParameter.size()
+				
 				if result then
 					//Each property in cd must have a corresponding property in self
 					var matchingAtt : Property
@@ -118,6 +119,7 @@ aspect class ClassDefinition {
 							selfAtt.matches(attToMatch, ctxt)
 						}
 						if matchingAtt.isVoid then
+							ctxt.currentFailedCDMatch.nonMatchedProperties.add(attToMatch)
 							result := false
 						else
 							matchingAtt := void
@@ -134,6 +136,7 @@ aspect class ClassDefinition {
 									mandatoryAtt.matches(cdAtt, ctxt)
 								}
 								if matchedAtt.isVoid() then
+									ctxt.currentFailedCDMatch.failedMandatoryPropertyMatches.add(mandatoryAtt)
 									result := false
 								else
 									matchedAtt := void

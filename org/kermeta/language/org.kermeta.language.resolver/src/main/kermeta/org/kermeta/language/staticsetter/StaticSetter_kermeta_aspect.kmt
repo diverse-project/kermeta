@@ -487,6 +487,7 @@ package behavior {
 						ops := callTypeLiteral.typeref.type.realInstanceType.getAllCallableOperations.select{o|o.name==self.name}
 					end
 				end
+				//TODO: Clarify with respect to Model/AnyModel (what are the basic operations provided by Object vs basic transformations provided by Model)
 				//Here we must look into Object which is the implicit superclass of everything
 				if ops.isEmpty then
 					if (context.verbose) then stdio.writeln("Implicit inheritance to Object to find operation : "+self.name) end
@@ -735,6 +736,15 @@ package behavior {
 							callTypeLiteral.setInferedStaticType(context, context.createTypeFromPartialName("org::kermeta::language::structure::FunctionType"))
 						end /*#3*/ end /*#2*/ end /*#1*/
 					end
+					
+					if typeDef.isInstanceOf(ModelTypeDefinition) then
+						if (context.verbose) then stdio.writeln("   resolveCallAndInferStatic>TypeDef found a ModelTypeDefinition " + typeDef.name) end
+						callTypeLiteral.typeref.initialize(org::kermeta::language::structure::ModelType.new.initializeFromAModelTypeDefinition(typeDef.asType(ModelTypeDefinition)))
+						callTypeLiteral.typeref.containedType.add(callTypeLiteral.typeref.type)													
+										
+						callTypeLiteral.setInferedStaticType(context, context.createTypeFromPartialName("org::kermeta::language::structure::ModelType"))
+					end
+					
 					//TODO deal with function types
 					
 					//	this is the CallTypeLiteral that must replace this UnresolvedCall
@@ -750,11 +760,11 @@ package behavior {
 		//MODELTYPE ADDITION
 		operation resolveCallToModelTransformation(context : StaticSetterContext) : CallModelTransformation is do
 			if (context.verbose) then
-				stdio.writeln("resolveCallToOperation "+ self.name)
+				stdio.writeln("resolveCallToModelTransformation "+ self.name)
 			end
 			
 			if (target.isVoid).orElse{x|target.staticType.isVoid.orElse{y|target.staticType.realInstanceType.isVoid}} then 
-				stdio.writeln("Warning: targetType of "+ name +" is void. Cannot test if this is a model operation. Probably due to a previous element that hasn't been resolved" )
+				stdio.writeln("Warning: targetType of "+ name +" is void. Cannot test if this is a model transformation. Probably due to a previous element that hasn't been resolved" )
 				result:=void 
 			else
 				if context.verbose then
@@ -764,20 +774,7 @@ package behavior {
 					stdio.writeln(target.staticType.getAllCallableOperations.toString)
 				end
 				
-				if target.staticType.realInstanceType.isInstanceOf(UnresolvedType) then
-					stdio.writeln(target.staticType.realInstanceType.asType(UnresolvedType).typeIdentifier)
-				end
-				
 				var transfos : Sequence<ModelTransformation> init target.staticType.realInstanceType.getAllCallableTransformations.select{t|t.name==self.name}
-				
-				//TODO: Clarify with respect to AnyModel
-				//Here we must look into Object which is the implicit superclass of everything
-				/*if transfos.isEmpty then
-					if (context.verbose) then stdio.writeln("Implicit inheritance to Object to find operation : "+self.name) end
-					var objectAny : ClassDefinition
-					objectAny := context.getClassDefinitionFromPartialName("kermeta::standard::Object")
-					transfos := objectAny.getAllCallableTransformations.select{t|t.name==self.name}
-				end*/
 				
 				//if we finally found at least one operation
 				if not transfos.isEmpty then
@@ -912,7 +909,8 @@ package behavior {
 				result:=resolveCallToProperty(context)
 			end
 			
-			if result.isVoid() and not context.currentModelTypeDefinition.isVoid() then
+			//If not found, look for a ModelTransformation
+			if result.isVoid() then
 				result:=resolveCallToModelTransformation(context)
 			end
 			
@@ -952,7 +950,8 @@ package behavior {
 		operation inferStaticTypeOfCallOperation(callOperation : CallOperation, op : Operation, context : StaticSetterContext) : Void is do
 			//  The call of operation new that must not return type Object but the corresponding type associated to the new.
 			//TODO Method clone must be supported there as well.
-			if(op.name=="new" and op.owningClass.getQualifiedName().endsWith("^org::kermeta::language::structure::Class") and 
+			if(op.name=="new" and (op.owningClass.getQualifiedName().endsWith("^org::kermeta::language::structure::Class") or
+				op.owningClass.getQualifiedName().endsWith("^org::kermeta::language::structure::ModelType")) and 
 				(not callOperation.target.isVoid).andThen{b | callOperation.target.isInstanceOf(CallTypeLiteral) }) then
 				callOperation.setInferedStaticType(context,callOperation.target.asType(CallTypeLiteral).typeref.type)
 			else

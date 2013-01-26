@@ -9,10 +9,13 @@ package org::kermeta::language::resolver::matching;
 
 require kermeta
 require "platform:/lookup/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/language/helpers/structure/IsSubtypeOf.kmt"
+require "platform:/lookup/org.kermeta.language.resolver/src/main/kermeta/org/kermeta/language/resolver/ResolverException.kmt"
 
 using org::kermeta::language::structure
 using kermeta::standard
 using kermeta::utils
+using org::kermeta::language::resolver
 
 class MatchingContext
 {
@@ -35,6 +38,8 @@ class MatchingContext
 	
 	//True if we are currently looking for matched properties in target ClassDefinition for mandatory properties in src ClassDefinition
 	attribute isMandatoryMatch : Boolean
+	
+	attribute errors : Set<ResolverException>
 	
 	operation initialize(src : ModelTypeDefinition, binding : ModelTypeDefinitionBinding) is do
 		self.currentSrc := src
@@ -105,8 +110,6 @@ class MatchingContext
 			//Otherwise, keep trak for errors
 			if self.isMandatoryMatch then
 				self.currentFailedCDMatch.failedPropertyMatches.add(self.currentFailedPropMatch)
-			else
-				self.currentFailedCDMatch.failedMandatoryPropertyMatches.add(self.currentFailedPropMatch)
 			end
 		end
 		//Restore the previous state
@@ -119,6 +122,7 @@ class FailedBinding {
 	attribute notSuperType : ModelTypeDefinition
 	
 	attribute failedCDMatches : Set<FailedClassDefinitionMatch>
+	reference nonMatchedTypeDefinitions : Set<TypeDefinition>
 }
 
 class FailedClassDefinitionMatch {
@@ -126,7 +130,8 @@ class FailedClassDefinitionMatch {
 	attribute target : ClassDefinition
 	
 	attribute failedPropertyMatches : Set<FailedPropertyMatch>
-	attribute failedMandatoryPropertyMatches : Set<FailedPropertyMatch>
+	attribute failedMandatoryPropertyMatches : Set<Property>
+	reference nonMatchedProperties : Set<Property>
 }
 
 class FailedPropertyMatch {
