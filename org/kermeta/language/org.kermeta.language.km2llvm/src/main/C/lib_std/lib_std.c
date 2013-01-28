@@ -1,4 +1,5 @@
 //clang -S -emit-llvm lib_std.c
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

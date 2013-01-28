@@ -62,11 +62,7 @@ aspect class Class {
 	method isVoidType(ctx:Context) : Boolean is do result := ctx.stdLibName.getValue(qualifiedNameLLVM)=="void" end
 	
 	method llvmType(ctx:Context) : String is do
-		result := ctx.stdLibName.getValue(qualifiedNameLLVM)
-		
-		if(result.isVoid) then
-			result := ctx.llvm.pointer(ctx.llvm.localVar(qualifiedNameLLVM))
-		end
+		result := typeDefinition.llvmType(ctx)
 	end
 	
 	
@@ -146,6 +142,15 @@ aspect class Package  {
 
 
 aspect class TypeDefinition {
+	operation llvmType(ctx:Context) : String is do
+		result := ctx.stdLibName.getValue(qualifiedNameLLVM)
+		
+		if(result.isVoid) then
+			result := ctx.llvm.pointer(ctx.llvm.localVar(qualifiedNameLLVM))
+		end
+	end
+
+
 	// Preprocessing useful for the compilation
 	operation preprocess4LLVM() is do
 		defineLowerSuperTypes

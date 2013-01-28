@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <org_kermeta_language_structure:Metamodel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org_kermeta_language_behavior="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/behavior" xmlns:org_kermeta_language_structure="http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/structure" name="test" uri="http://www.kermeta.org/kermeta/2_1_0/">
   <packages name="pkgFoo">
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="A"/>
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="A" superType="//@packages.1/standard/Integer/equals/@ownedParameter.0/@containedType.0"/>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="B" superType="//@packages.0/B/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//@packages.0/A"/>
       <ownedOperation name="foo" type="//@packages.0/B/foo/@containedType.0">
@@ -64,7 +64,7 @@
         </body>
       </ownedOperation>
     </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Main">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Main" superType="//@packages.1/standard/Integer/equals/@ownedParameter.0/@containedType.0">
       <ownedOperation kTag="//@packages.0/Main/main/@kOwnedTags.0" name="main" type="//@packages.0/Main/main/@containedType.0">
         <kOwnedTags name="main" object="//@packages.0/Main/main"/>
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//@packages.1/standard/Void"/>
@@ -165,13 +165,17 @@
             <target xsi:type="org_kermeta_language_behavior:CallVariable" staticType="//@packages.0/C/@containedType.0" name="b"/>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:Assignment" staticType="//@packages.0/B/@containedType.0">
-            <target xsi:type="org_kermeta_language_behavior:CallProperty" staticType="//@packages.0/B/@containedType.0" name="propCompo" staticProperty="//@packages.0/D/propCompo"/>
-            <value xsi:type="org_kermeta_language_behavior:CallVariable" staticType="//@packages.0/C/@containedType.0" name="b"/>
+            <target xsi:type="org_kermeta_language_behavior:CallProperty" staticType="//@packages.0/B/@containedType.0" name="propCompo" staticProperty="//@packages.0/D/propCompo">
+              <target xsi:type="org_kermeta_language_behavior:CallVariable" staticType="//@packages.0/C/@containedType.0" name="b"/>
+            </target>
+            <value xsi:type="org_kermeta_language_behavior:CallVariable" staticType="//@packages.0/Main/main/@body/@statement.1/@initialization/@containedType.0" name="d"/>
           </statement>
           <statement xsi:type="org_kermeta_language_behavior:CallOperation" staticType="//@packages.1/io/StdIO/writeln/@containedType.0" name="writeln" staticOperation="//@packages.1/io/StdIO/writeln">
-            <parameters xsi:type="org_kermeta_language_behavior:CallOperation" staticType="//@packages.1/io/StdIO/writeln/@ownedParameter.0/@containedType.0" name="toString" staticOperation="//@packages.1/standard/Integer/toString">
+            <parameters xsi:type="org_kermeta_language_behavior:CallOperation" staticType="//@packages.1/io/StdIO/writeln/@ownedParameter.0/@containedType.0" name="toString" staticOperation="//@packages.1/standard/Object/toString">
               <target xsi:type="org_kermeta_language_behavior:CallOperation" staticType="//@packages.1/standard/Integer/equals/@ownedParameter.0/@containedType.0" name="container" staticOperation="//@packages.1/standard/Object/container">
-                <target xsi:type="org_kermeta_language_behavior:CallProperty" staticType="//@packages.0/B/@containedType.0" name="propCompo" staticProperty="//@packages.0/D/propCompo"/>
+                <target xsi:type="org_kermeta_language_behavior:CallProperty" staticType="//@packages.0/B/@containedType.0" name="propCompo" staticProperty="//@packages.0/D/propCompo">
+                  <target xsi:type="org_kermeta_language_behavior:CallVariable" staticType="//@packages.0/C/@containedType.0" name="b"/>
+                </target>
               </target>
             </parameters>
             <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
@@ -183,13 +187,13 @@
         </body>
       </ownedOperation>
     </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//@packages.0/MustNotBeGenerated/@kOwnedTags.0" name="MustNotBeGenerated">
+    <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="//@packages.0/MustNotBeGenerated/@kOwnedTags.0" name="MustNotBeGenerated" superType="//@packages.1/standard/Integer/equals/@ownedParameter.0/@containedType.0">
       <kOwnedTags name="CompilerIgnore" object="//@packages.0/MustNotBeGenerated"/>
     </ownedTypeDefinition>
   </packages>
   <packages name="kermeta">
     <nestedPackage name="io">
-      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="StdIO">
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="StdIO" superType="//@packages.1/standard/Integer/equals/@ownedParameter.0/@containedType.0">
         <kOwnedTags name="CompilerIgnore"/>
         <ownedOperation name="writeln" type="//@packages.1/io/StdIO/writeln/@containedType.0">
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//@packages.1/standard/Void"/>
@@ -201,10 +205,10 @@
       </ownedTypeDefinition>
     </nestedPackage>
     <nestedPackage name="standard">
-      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="String">
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="String" superType="//@packages.1/standard/Integer/equals/@ownedParameter.0/@containedType.0">
         <kOwnedTags name="CompilerIgnore"/>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Void">
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Void" superType="//@packages.0/B/foo/@containedType.0">
         <kOwnedTags name="CompilerIgnore"/>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Integer" superType="//@packages.1/standard/Integer/@containedType.0">
@@ -250,8 +254,9 @@
         <kOwnedTags name="CompilerIgnore"/>
         <ownedOperation name="isVoid" type="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0"/>
         <ownedOperation name="container" type="//@packages.1/standard/Integer/equals/@ownedParameter.0/@containedType.0"/>
+        <ownedOperation name="toString" type="//@packages.1/io/StdIO/writeln/@ownedParameter.0/@containedType.0"/>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Boolean">
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Boolean" superType="//@packages.1/standard/Integer/equals/@ownedParameter.0/@containedType.0">
         <kOwnedTags name="CompilerIgnore"/>
         <ownedOperation name="equals" type="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0">
           <ownedParameter name="obj" type="//@packages.1/standard/Boolean/equals/@ownedParameter.0/@containedType.0">
@@ -267,7 +272,7 @@
           <ownedParameter name="v" type="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0"/>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Numeric">
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Numeric" superType="//@packages.1/standard/Integer/equals/@ownedParameter.0/@containedType.0">
         <kOwnedTags name="CompilerIgnore"/>
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="G"/>
         <ownedOperation name="minus" type="//@packages.1/standard/Numeric/G" isAbstract="true">

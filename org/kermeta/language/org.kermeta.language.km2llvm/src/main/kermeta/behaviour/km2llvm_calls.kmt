@@ -25,15 +25,6 @@ aspect class CallExpression {
 	operation llvmIdentifier(ctx:Context) : String is do
 		result := "FIXME llvmIdentifier: " + self.toString
 	end
-	
-	
-	/**
-		Returns the type of the expression.
-		For instance with a CallVariable instance, the type is the type of the variable.
-	*/
-	operation llvmType(ctx:Context) : String is do
-		result := "FIXME CallExpression::llvmType: " + self.toString
-	end
 }
 
 
@@ -43,17 +34,30 @@ aspect class CallProperty {
 	end
 
 
-	method llvmType(ctx:Context) : String is do
-		result := staticType.llvmType(ctx)
+	method expType() : Type is do
+		result := staticType
 	end
 
 
 	method generateLLVMNoBuffer(ctx:Context) : String is do
-		// The content of the variable (a pointer) is store into a temp var.
+		var targetStr : String init target.generateLLVMNoBuffer(ctx)
+		
+		var params : Sequence<LLVMVar> init  Sequence<LLVMVar>.new
+		// The content of the property is stored into a temp var.
 		var varName : String init ctx.nextOperationVar
-		// The load operation is appended to the string buf while the name of the temp var is returned.
-		ctx.operations.append(ctx.llvm.assign(varName, ctx.llvm.load(ctx.llvm.pointer(staticType.llvmType(ctx)), ctx.llvm.localVar(name)))).append("\n")
+		// Calling the getter
+		var getterName : String init ctx.llvm.globalVar(staticProperty.owningClass.qualifiedNameLLVM + ".#" + name)
+		var targetType : Type init target.expType
+		
+		if targetType.llvmType(ctx)!=staticProperty.owningClass.llvmType(ctx) then // Must cast the calling object into the expected one.
+			targetStr := ctx.generateCastCall(ctx.operations, targetStr, targetType.qualifiedNameLLVM, staticProperty.owningClass.qualifiedNameLLVM)
+		end
+		
+		params.add(LLVMVar.new.initialise(staticProperty.owningClass.llvmType(ctx), targetStr))
+		ctx.operations.append(ctx.llvm.assign(varName, ctx.llvm.call(getterName, staticType.llvmType(ctx), params, void))).append("\n")
 		result := varName
+		
+		params.clear
 	end
 }
 
@@ -63,8 +67,8 @@ aspect class CallVariable {
 		result := ctx.llvm.localVar(name)
 	end
 	
-	method llvmType(ctx:Context) : String is do
-		result := staticType.llvmType(ctx)
+	method expType() : Type is do
+		result := staticType
 	end
 
 

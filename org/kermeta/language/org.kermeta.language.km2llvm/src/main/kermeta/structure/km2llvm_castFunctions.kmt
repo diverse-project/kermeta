@@ -29,12 +29,12 @@ aspect class ClassDefinition {
 		ctx.reinitOperationVar
 		// self is the type to cast into the first type (i.e. initType)
 		// All the elements of 'types' are the types necessary to incrementally convert self into initType
-		var selfVarPtr : String init ctx.llvm.pointer(ctx.llvm.localVar(qualifiedNameLLVM))
+		var selfVarPtr : String init llvmType(ctx)
 		var initVar : String init ctx.llvm.localVar("self")
 		var params : Sequence<LLVMVar> init Sequence<LLVMVar>.new
 		var fctAttrs : Sequence<FunctionAttr> init Sequence<FunctionAttr>.new
 
-		params.add(LLVMVar.new.initialise(ctx.llvm.pointer(ctx.llvm.localVar(initType.qualifiedNameLLVM)), initVar))
+		params.add(LLVMVar.new.initialise(initType.llvmType(ctx), initVar))
 		fctAttrs.add(FunctionAttr.~readonly)
 		// e.g. define internal %"A"* @"cast_C_A"(%"C"* %"self") readonly
 		ctx.casts.append(ctx.llvm.define(LinkageType.internal, selfVarPtr, 
@@ -50,11 +50,10 @@ aspect class ClassDefinition {
 		types.each{t|
 			currVar := ctx.nextOperationVar
 			params.clear
-			params.add(LLVMVar.new.initialise(ctx.llvm.pointer(ctx.llvm.localVar(prevType.qualifiedNameLLVM)), prevVar))
+			params.add(LLVMVar.new.initialise(prevType.llvmType(ctx), prevVar))
 			//e.g. %"v0" = call %"B"* @"cast_C_B"(%"C"* %"self")
 			ctx.casts.append(ctx.llvm.assign(currVar, 
-				ctx.llvm.call(ctx.llvm.globalVar("cast_"+prevType.qualifiedNameLLVM+"_"+t.qualifiedNameLLVM), 
-				ctx.llvm.pointer(ctx.llvm.localVar(t.qualifiedNameLLVM)), params, void))).append("\n")
+				ctx.llvm.call(ctx.llvm.globalVar("cast_"+prevType.qualifiedNameLLVM+"_"+t.qualifiedNameLLVM), t.llvmType(ctx), params, void))).append("\n")
 			prevType := t
 			prevVar := currVar
 			i := i + 1
@@ -74,7 +73,7 @@ aspect class ClassDefinition {
 	
 	operation generateLLVMDirectCast(ctx:Context) is do
 		var params : Sequence<LLVMVar> init Sequence<LLVMVar>.new
-		var typeCD : String init ctx.llvm.pointer(ctx.llvm.localVar(qualifiedNameLLVM))
+		var typeCD : String init llvmType(ctx)
 		var selfVar : String init ctx.llvm.localVar("self")
 		var fctAttrs : Sequence<FunctionAttr> init Sequence<FunctionAttr>.new
 		var alreadyGen:Hashtable<String,String> init Hashtable<String,String>.new
@@ -117,12 +116,12 @@ aspect class ClassDefinition {
 		var i8Ptr : String init ctx.llvm.pointer(ctx.llvm.i8)
 		var sizeGap : Integer init ctx.size.pointer*(1+td.superTypes.indexOf(self))
 		var buf : StringBuffer init StringBuffer.new
-		var tdType : String init ctx.llvm.pointer(ctx.llvm.localVar(td.qualifiedNameLLVM))
+		var tdType : String init td.llvmType(ctx)
 		
 		// Creating the function header
 		buf.append(ctx.llvm.define(LinkageType.internal, tdType, 
 							ctx.llvm.globalVar("cast_"+qualifiedNameLLVM+"_"+td.qualifiedNameLLVM), params, fctAttrs)).append("{\n")
-		buf.append(ctx.llvm.assign(v0, ctx.llvm.bitcast(ctx.llvm.pointer(ctx.llvm.localVar(qualifiedNameLLVM)) + " " + selfVar, i8Ptr, false))).append("\n")
+		buf.append(ctx.llvm.assign(v0, ctx.llvm.bitcast(llvmType(ctx) + " " + selfVar, i8Ptr, false))).append("\n")
 		buf.append(ctx.llvm.assign(v1, ctx.llvm.getelementptr(i8Ptr, v0, ctx.llvm.i64, -sizeGap, void, 0, false))).append("\n")
 		buf.append(ctx.llvm.assign(v2,  ctx.llvm.bitcast(i8Ptr + " " + v1, tdType, false))).append("\n")
 		// Returing the value.
@@ -138,7 +137,7 @@ aspect class ClassDefinition {
 		var v0 : String init ctx.nextOperationVar
 		var v1 : String init ctx.nextOperationVar
 		var buf : StringBuffer init StringBuffer.new
-		var tdType : String init ctx.llvm.pointer(ctx.llvm.localVar(td.qualifiedNameLLVM))
+		var tdType : String init td.llvmType(ctx)
 		// Creating the function header
 		buf.append(ctx.llvm.define(LinkageType.internal, tdType, 
 							ctx.llvm.globalVar("cast_"+qualifiedNameLLVM+"_"+td.qualifiedNameLLVM), params, fctAttrs)).append("{\n")

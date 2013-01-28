@@ -26,6 +26,19 @@ aspect class Expression {
 	operation generateLLVMNoBuffer(ctx:Context) : String is do
 		result := "FIXME generateLLVMNoBuffer: "+self.toString
 	end
+	
+	
+	/**
+		Returns the type of the expression.
+		For instance with a CallVariable instance, the type is the type of the variable.
+	*/
+	operation expType() : Type is do
+		var cd : ClassDefinition init ClassDefinition.new
+		var clazz : Class init Class.new
+		clazz.typeDefinition := cd
+		cd.name := "FIXME Expression::llvmType: " + self.toString
+		result := clazz
+	end
 }
 
 
@@ -72,6 +85,6 @@ aspect class Assignment {
 		end
 
 		// The name of the variable containing the cast is returned.
-		ctx.operations.append(ctx.llvm.store(target.llvmType(ctx), identifierInit, target.llvmIdentifier(ctx))).append("\n")
+		ctx.operations.append(ctx.llvm.store(target.expType.llvmType(ctx), identifierInit, target.llvmIdentifier(ctx))).append("\n")
 	end
 }

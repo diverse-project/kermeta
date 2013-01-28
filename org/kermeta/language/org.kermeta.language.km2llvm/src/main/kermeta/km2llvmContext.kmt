@@ -87,14 +87,14 @@ class Context{
 		reinitOperationVar
 		size := Size64.new
 		result := self
-		
+
 		stdLibName.put("kermeta_standard__Void", llvm.~void)
 		stdLibName.put("kermeta_standard__String", llvm.i8+"*")
 		stdLibName.put("kermeta_standard__Boolean", llvm.i1)
 		stdLibName.put("kermeta_standard__Integer", llvm.i32)
 		stdLibName.put("kermeta_io__StdIO", "%struct.kermeta_io__StdIO*")
 		stdLibName.put("kermeta_standard__Object", "%struct.kermeta_standard__Object*")
-		
+
 		initialiseStdLibHashMap
 	end
 	
@@ -125,6 +125,7 @@ class Context{
 		stdLibCmd.put("@kermeta_standard__Boolean___toString", GenerateBooleanToStringCall.new)
 		
 		stdLibCmd.put("@kermeta_standard__Object___isVoid", GenerateObjectIsVoidCall.new)
+//		stdLibCmd.put("@kermeta_standard__Object___container", GenerateObjectContainerCall.new)
 
 		stdLibCmd.put("@kermeta_io__StdIO___writeln", GenerateStdIOWritelnCall.new)
 	end
@@ -179,11 +180,16 @@ class Context{
 		// The result is the new variable containing the cast.
 		result := nextOperationVar
 		var params:Sequence<LLVMVar> init Sequence<LLVMVar>.new
+		var toty : String init stdLibName.getValue(toType)
+		var froty : String init stdLibName.getValue(fromType)
+		
+		if toty.isVoid then toty := llvm.pointer(llvm.localVar(toType)) end
+		if froty.isVoid then froty := llvm.pointer(llvm.localVar(fromType)) end
 		
 		// The parameter is the object to cast.
-		params.add(LLVMVar.new.initialise(llvm.pointer(llvm.localVar(fromType)), varNameToCast))
+		params.add(LLVMVar.new.initialise(froty, varNameToCast))
 		// creating a new variable containing the cast
-		buf.append(llvm.assign(result, llvm.call(llvm.globalVar("cast_"+fromType+"_"+toType), llvm.pointer(llvm.localVar(toType)), params, void))).append("\n")
+		buf.append(llvm.assign(result, llvm.call(llvm.globalVar("cast_"+fromType+"_"+toType), toty, params, void))).append("\n")
 		params.clear // cleaning
 	end
 	

@@ -5,7 +5,7 @@ target triple = "x86_64-pc-linux-gnu"
 %struct._IO_FILE = type { i32, i8*, i8*, i8*, i8*, i8*, i8*, i8*, i8*, i8*, i8*, i8*, %struct._IO_marker*, %struct._IO_FILE*, i32, i32, i64, i16, i8, [1 x i8], i8*, i64, i8*, i8*, i8*, i8*, i64, i32, [20 x i8] }
 %struct._IO_marker = type { %struct._IO_marker*, %struct._IO_FILE*, i32 }
 %struct.kermeta_io__StdIO = type {}
-%struct.kermeta_standard__Object = type { %struct.kermeta_standard__Object* }
+%struct.kermeta_standard__Object = type { i8**, %struct.kermeta_standard__Object* }
 
 @.str = private unnamed_addr constant [3 x i8] c"%d\00", align 1
 @.str1 = private unnamed_addr constant [5 x i8] c"true\00", align 1
@@ -19,9 +19,29 @@ define %struct.kermeta_standard__Object* @kermeta_standard__Object___container(%
   %1 = alloca %struct.kermeta_standard__Object*, align 8
   store %struct.kermeta_standard__Object* %self, %struct.kermeta_standard__Object** %1, align 8
   %2 = load %struct.kermeta_standard__Object** %1, align 8
-  %3 = getelementptr inbounds %struct.kermeta_standard__Object* %2, i32 0, i32 0
+  %3 = getelementptr inbounds %struct.kermeta_standard__Object* %2, i32 0, i32 1
   %4 = load %struct.kermeta_standard__Object** %3, align 8
   ret %struct.kermeta_standard__Object* %4
+}
+
+define %struct.kermeta_standard__Object* @create_kermeta_standard__Object() nounwind uwtable {
+  %1 = call noalias i8* @malloc(i64 16) nounwind
+  %2 = bitcast i8* %1 to %struct.kermeta_standard__Object*
+  ret %struct.kermeta_standard__Object* %2
+}
+
+declare noalias i8* @malloc(i64) nounwind
+
+define zeroext i1 @kermeta_standard__Object___isVoid(%struct.kermeta_standard__Object* %self) nounwind uwtable {
+  %1 = alloca %struct.kermeta_standard__Object*, align 8
+  store %struct.kermeta_standard__Object* %self, %struct.kermeta_standard__Object** %1, align 8
+  ret i1 false
+}
+
+define i8* @kermeta_standard__Object___toString(%struct.kermeta_standard__Object* %self) nounwind uwtable {
+  %1 = alloca %struct.kermeta_standard__Object*, align 8
+  store %struct.kermeta_standard__Object* %self, %struct.kermeta_standard__Object** %1, align 8
+  ret i8* null
 }
 
 define void @delete_kermeta_standard__String(i8* %s) nounwind uwtable {
@@ -233,41 +253,41 @@ declare double @log10(double) nounwind
 
 declare i32 @abs(i32) nounwind readnone
 
-declare noalias i8* @malloc(i64) nounwind
-
 declare i32 @snprintf(i8*, i64, i8*, ...) nounwind
 
-define %struct.kermeta_standard__Object* @kermeta_standard__Boolean___container(i8 zeroext %self) nounwind uwtable {
+define %struct.kermeta_standard__Object* @kermeta_standard__Boolean___container(i1 zeroext %self) nounwind uwtable {
   %1 = alloca i8, align 1
-  store i8 %self, i8* %1, align 1
+  %2 = zext i1 %self to i8
+  store i8 %2, i8* %1, align 1
   ret %struct.kermeta_standard__Object* null
 }
 
-define i8* @kermeta_standard__Boolean___toString(i8 zeroext %self) nounwind uwtable {
+define i8* @kermeta_standard__Boolean___toString(i1 zeroext %self) nounwind uwtable {
   %1 = alloca i8, align 1
   %str = alloca i8*, align 8
-  store i8 %self, i8* %1, align 1
-  %2 = load i8* %1, align 1
-  %3 = icmp ne i8 %2, 0
-  br i1 %3, label %4, label %8
+  %2 = zext i1 %self to i8
+  store i8 %2, i8* %1, align 1
+  %3 = load i8* %1, align 1
+  %4 = trunc i8 %3 to i1
+  br i1 %4, label %5, label %9
 
-; <label>:4                                       ; preds = %0
-  %5 = call noalias i8* @malloc(i64 4) nounwind
-  store i8* %5, i8** %str, align 8
-  %6 = load i8** %str, align 8
-  %7 = call i8* @strncpy(i8* %6, i8* getelementptr inbounds ([5 x i8]* @.str1, i32 0, i32 0), i64 4) nounwind
-  br label %12
+; <label>:5                                       ; preds = %0
+  %6 = call noalias i8* @malloc(i64 4) nounwind
+  store i8* %6, i8** %str, align 8
+  %7 = load i8** %str, align 8
+  %8 = call i8* @strncpy(i8* %7, i8* getelementptr inbounds ([5 x i8]* @.str1, i32 0, i32 0), i64 4) nounwind
+  br label %13
 
-; <label>:8                                       ; preds = %0
-  %9 = call noalias i8* @malloc(i64 5) nounwind
-  store i8* %9, i8** %str, align 8
-  %10 = load i8** %str, align 8
-  %11 = call i8* @strncpy(i8* %10, i8* getelementptr inbounds ([6 x i8]* @.str2, i32 0, i32 0), i64 5) nounwind
-  br label %12
+; <label>:9                                       ; preds = %0
+  %10 = call noalias i8* @malloc(i64 5) nounwind
+  store i8* %10, i8** %str, align 8
+  %11 = load i8** %str, align 8
+  %12 = call i8* @strncpy(i8* %11, i8* getelementptr inbounds ([6 x i8]* @.str2, i32 0, i32 0), i64 5) nounwind
+  br label %13
 
-; <label>:12                                      ; preds = %8, %4
-  %13 = load i8** %str, align 8
-  ret i8* %13
+; <label>:13                                      ; preds = %9, %5
+  %14 = load i8** %str, align 8
+  ret i8* %14
 }
 
 declare i8* @strncpy(i8*, i8*, i64) nounwind
