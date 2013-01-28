@@ -48,6 +48,7 @@
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="D" superType="//@packages.0/D/@containedType.0">
       <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//@packages.0/C"/>
+      <ownedAttribute name="propCompo" type="//@packages.0/B/@containedType.0" isComposite="true"/>
       <ownedOperation name="foo" type="//@packages.0/D/foo/@containedType.0">
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//@packages.1/standard/Void"/>
         <body xsi:type="org_kermeta_language_behavior:Block">
@@ -163,6 +164,22 @@
           <statement xsi:type="org_kermeta_language_behavior:CallOperation" staticType="//@packages.0/B/foo/@containedType.0" name="foo" staticOperation="//@packages.0/B/foo">
             <target xsi:type="org_kermeta_language_behavior:CallVariable" staticType="//@packages.0/C/@containedType.0" name="b"/>
           </statement>
+          <statement xsi:type="org_kermeta_language_behavior:Assignment" staticType="//@packages.0/B/@containedType.0">
+            <target xsi:type="org_kermeta_language_behavior:CallProperty" staticType="//@packages.0/B/@containedType.0" name="propCompo" staticProperty="//@packages.0/D/propCompo"/>
+            <value xsi:type="org_kermeta_language_behavior:CallVariable" staticType="//@packages.0/C/@containedType.0" name="b"/>
+          </statement>
+          <statement xsi:type="org_kermeta_language_behavior:CallOperation" staticType="//@packages.1/io/StdIO/writeln/@containedType.0" name="writeln" staticOperation="//@packages.1/io/StdIO/writeln">
+            <parameters xsi:type="org_kermeta_language_behavior:CallOperation" staticType="//@packages.1/io/StdIO/writeln/@ownedParameter.0/@containedType.0" name="toString" staticOperation="//@packages.1/standard/Integer/toString">
+              <target xsi:type="org_kermeta_language_behavior:CallOperation" staticType="//@packages.1/standard/Integer/equals/@ownedParameter.0/@containedType.0" name="container" staticOperation="//@packages.1/standard/Object/container">
+                <target xsi:type="org_kermeta_language_behavior:CallProperty" staticType="//@packages.0/B/@containedType.0" name="propCompo" staticProperty="//@packages.0/D/propCompo"/>
+              </target>
+            </parameters>
+            <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral">
+              <typeref name="StdIO" type="//@packages.0/Main/main/@body/@statement.10/@target/@typeref/@containedType.0">
+                <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="//@packages.1/io/StdIO"/>
+              </typeref>
+            </target>
+          </statement>
         </body>
       </ownedOperation>
     </ownedTypeDefinition>
@@ -232,6 +249,7 @@
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Object">
         <kOwnedTags name="CompilerIgnore"/>
         <ownedOperation name="isVoid" type="//@packages.0/Main/main/@body/@statement.4/@stopCondition/@containedType.0"/>
+        <ownedOperation name="container" type="//@packages.1/standard/Integer/equals/@ownedParameter.0/@containedType.0"/>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" name="Boolean">
         <kOwnedTags name="CompilerIgnore"/>

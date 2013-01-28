@@ -32,7 +32,28 @@ aspect class CallExpression {
 		For instance with a CallVariable instance, the type is the type of the variable.
 	*/
 	operation llvmType(ctx:Context) : String is do
-		result := "FIXME llvmType: " + self.toString
+		result := "FIXME CallExpression::llvmType: " + self.toString
+	end
+}
+
+
+aspect class CallProperty {
+	method llvmIdentifier(ctx:Context) : String is do
+		result := ctx.llvm.localVar(name)
+	end
+
+
+	method llvmType(ctx:Context) : String is do
+		result := staticType.llvmType(ctx)
+	end
+
+
+	method generateLLVMNoBuffer(ctx:Context) : String is do
+		// The content of the variable (a pointer) is store into a temp var.
+		var varName : String init ctx.nextOperationVar
+		// The load operation is appended to the string buf while the name of the temp var is returned.
+		ctx.operations.append(ctx.llvm.assign(varName, ctx.llvm.load(ctx.llvm.pointer(staticType.llvmType(ctx)), ctx.llvm.localVar(name)))).append("\n")
+		result := varName
 	end
 }
 
