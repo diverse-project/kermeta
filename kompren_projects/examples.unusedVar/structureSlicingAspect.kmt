@@ -1,6 +1,6 @@
 package org::kermeta::language::structure;
-using kermeta::standard
-using org::kermeta::language::behavior
+using kermeta::standard::*
+using org::kermeta::language::behavior::*
 
 aspect class Operation inherits SlicerVisitor {
 	method visitToAddClasses(theUnusedVarDetector : UnusedVarDetector) is do

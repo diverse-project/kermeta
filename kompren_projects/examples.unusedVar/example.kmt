@@ -1,7 +1,7 @@
 
 package foobar::unusedVars;
 
-using kermeta::standard
+using kermeta::standard::*
 
 class Example {
 	operation foobar(param : String) is do

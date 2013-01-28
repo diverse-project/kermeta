@@ -1,14 +1,16 @@
-KermetaProject "examples.unusedVar"
-	groupId = "org.kermeta.kompren"
-	defaultMainClass ="ex::kermeta::unusedVar::Test"
-	defaultMainOperation = "main"
-	sources = {
-		require "${project.baseUri}/UnusedVarDetector.kmt"
-		require "${project.baseUri}/UnusedVarDetectorAspect.kmt"
-		require "${project.baseUri}/CreationHelper.kmt"
-		require "${project.baseUri}/structureSlicingAspect.kmt"
-		require "${project.baseUri}/TestUnusedVar.kmt"
-	}
-	dependencies = {
-		dependency "library.core" =	"platform:/plugin/org.kermeta.language.library.core", "mvn:org.kermeta.language/language.library.core/2.0.2"
-	}
+resource library_standard ="platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.99-SNAPSHOT"
+//resource library_core ="platform:/plugin/org.kermeta.language.library.core" alternative "mvn:org.kermeta.language/language.library.core/2.0.99-SNAPSHOT"
+//resource kermeta_model = "platform:/plugin/org.kermeta.language.model" alternative "mvn:org.kermeta.language/language.model/2.0.99-SNAPSHOT"
+
+
+importProject library_standard
+//importProject library_core
+
+project testLLVM {
+	import "${project.baseUri}/CreationHelper.kmt"
+	import "${project.baseUri}/structureSlicingAspect.kmt"
+	import "${project.baseUri}/TestUnusedVar.kmt"
+	import "${project.baseUri}/UnusedVarDetector.kmt"
+	import "${project.baseUri}/UnusedVarDetectorAspect.kmt"
+//	import "${kermeta_model.baseUri}/src/main/ecore/kermeta.ecore" using EMFBytecode(kermeta_model)
+}

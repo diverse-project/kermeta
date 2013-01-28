@@ -8,8 +8,7 @@
  */
 package org::kermeta::language::structure;
 
-using kermeta::standard
-using org::kermeta::language::structure
+using kermeta::standard::*
 using kermeta::io::StdIO => stdio
 
 aspect class PrimitiveType {
