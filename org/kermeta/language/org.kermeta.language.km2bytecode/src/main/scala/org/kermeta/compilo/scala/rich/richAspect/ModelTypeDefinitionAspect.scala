@@ -57,25 +57,47 @@ trait ModelTypeDefinitionAspect extends ModelTransformationAspect with ModelElem
         }
         res.append(getQualifiedNameCompilo(b.getBoundModelTypeDefinition()))
       })
-    }/* else {
+    } /* else {
       res.append(" extends ")
       res.append("_root_.k2.standard.KermetaObject")
     }*/
+
     res.append(" {\n")
 
     res.append(UtilModelTypeDefinition.getFixedTypeMembers(mtd))
 
+    res.append("\tvar mt_contents : _root_.k2.standard.KermetaSet[Any] = _root_.k2.standard.KerRichFactory.createSet[Any]\n")
+    
     mtd.getOwnedTransformations().foreach(mt => {
       res.append("\t")
-      res.append(generateModelTransformation(mt))
+      visit(mt, res)
       res.append("\n")
     })
+
+    if (mtd.getOwnedBindings().size() != 0) {
+      mtd.getOwnedBindings().foreach(b => {
+        b.getBoundModelTypeDefinition().getOwnedTransformations().foreach(mt => {
+          res.append("\t")
+          visit(mt, res)
+          res.append("\n")
+        })
+      })
+    }
+
     res.append("}\n")
+
     return res.toString()
   }
-  
-  
-  def visitModelType(mt : ModelType, res : StringBuilder) = {
+
+  def visitModelType(mt: ModelType, res: StringBuilder) = {
     res.append("_root_." + Util.getQualifiedPathWithMetamodel(mt.getTypeDefinition()) + "." + mt.getTypeDefinition().getName())
+  }
+  
+  var implementingModelTypeInterface: Boolean = false
+  def isImplementingModelTypeInterface(): Boolean = {
+    implementingModelTypeInterface
+  }
+  def setImplementingModelTypeInterface(b: Boolean) = {
+    implementingModelTypeInterface = b
   }
 }

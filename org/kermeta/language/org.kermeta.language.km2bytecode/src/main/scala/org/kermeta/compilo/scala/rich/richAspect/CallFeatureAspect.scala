@@ -27,8 +27,9 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
           //MODELTYPE ADDITION
         } else if (thi.getTarget.asInstanceOf[CallTypeLiteral].getTyperef().getType().isInstanceOf[ModelType]) {
           var mt: ModelType = thi.getTarget.asInstanceOf[CallTypeLiteral].getTyperef().getType().asInstanceOf[ModelType]
+          res.append("_root_.")
           res.append(Util.getModelTypeFactoryTypeQualifiedName(mt.getTypeDefinition()))
-          res.append(".create")
+          res.append(".create_Model_")
           res.append(mt.getTypeDefinition().getName())
 
         } else if (thi.getTarget.asInstanceOf[CallTypeLiteral].getTyperef().getType().isInstanceOf[ParameterizedType]) {
@@ -157,6 +158,43 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
     } else
       res.append(Util.protectScalaKeyword(k2.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, thi.getName())))
   }
+  
+  /*def generatePropertyCall(thi: CallProperty, res: StringBuilder) {
+    var TargetType: StringBuilder = new StringBuilder
+    visit(thi.getTarget().getStaticType(), TargetType)
+    var prefix: String = ""
+    if (isImplementingModelTypeInterface() && !Util.isCompilerIgnoreCall(thi)) {
+      prefix = getCompilerConfiguration().modelTypeOperationsPrefix + prefix
+    }
+    res.append(prefix + k2.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, thi.getName))
+  }
+  
+  
+  def generateOperationCall(thi: CallOperation, res: StringBuilder) {
+    var TargetType: StringBuilder = new StringBuilder
+    visit(thi.getTarget().getStaticType(), TargetType)
+//    if (thi.getTarget().getStaticType().isInstanceOf[Class]) {
+//      //          var ops : List[Operation] = thi.getTarget().getStaticType().asInstanceOf[Class].getTypeDefinition.asInstanceOf[ClassDefinition].getOwnedOperation.filter(op => op.getName.equals(thi.getName))
+//      //          if (ops.size>0){
+//      //            res.append(Util.protectScalaKeyword(k2.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, Util.getEcoreRenameOperation(thi.getStaticOperation))))
+//      //          }else{
+//      res.append(Util.protectScalaKeyword(k2.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, Util.getEcoreRenameOperation(thi.getStaticOperation))))
+//      //          } 
+//    } else
+//      res.append(Util.protectScalaKeyword(k2.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, thi.getName())))
+//  }
+    
+    //MODELTYPE ADDITION
+    var prefix: String = ""
+    if (isImplementingModelTypeInterface() && !Util.isCompilerIgnoreCall(thi)) {
+      prefix = getCompilerConfiguration().modelTypeOperationsPrefix + prefix
+    }
+
+    if (thi.getTarget().getStaticType().isInstanceOf[Class]) {
+      res.append(Util.protectScalaKeyword(prefix + k2.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, Util.getEcoreRenameOperation(thi.getStaticOperation))))
+    } else
+      res.append(Util.protectScalaKeyword(prefix + k2.utils.TypeEquivalence.getMethodEquivalence(TargetType.toString, thi.getName())))
+  }*/
 
   //MODELTYPE ADDITION
   def generateModelTransformationCall(thi: CallModelTransformation, res: StringBuilder) = {
@@ -330,6 +368,41 @@ trait CallFeatureAspect extends ObjectVisitor with LogAspect {
       case _ if (thi.getTarget != null && thi.getStaticOperation != null) => { generateTarget(thi, res); res.append("."); generateOperationCall(thi, res); generateParam(thi, res, "(", ")"); }
       case _ if (thi.getTarget == null && thi.getStaticOperation != null) => { res.append(Util.getEcoreRenameOperation(thi.getStaticOperation)); generateParam(thi, res, "(", ")") }
       case _ if (thi.getTarget != null && thi.getStaticOperation == null) => { generateTarget(thi, res); res.append("."); generateName(thi, res) }
+      case _ => log.debug("!!! Uncatch case ")
+
+    }
+  }
+
+  def visitCallModelTransformation(thi: CallModelTransformation, res: StringBuilder) = {
+    thi.getName match {
+      case "clone" => { generateClone(thi, res) }
+
+      case "and" => { res.append("("); generateTarget(thi, res); res.append(").and"); generateParam(thi, res, "(", ")"); }
+      case "toString" if (thi.getParameters().size() == 0) => generateToString(thi, res)
+      case "isNotEqual" if (thi.getParameters().size() == 1) => generateIsNotEqual(thi, res)
+      case "equals" if (thi.getParameters().size() == 1) => { res.append("("); generateTarget(thi, res); res.append(" == "); generateParam(thi, res, "(", ")"); res.append(")"); }
+      case "asType" if (thi.getParameters().size() == 1) => generateAsType(thi, res, thi.getParameters().get(0)) //{generateTarget(thi,res);res.append(".asInstanceOf");generateInstanceOf(thi,res, thi.getParameters.get(0))}
+      case "isInstanceOf" if (thi.getParameters().size() == 1) => generateIsInstanceOf(thi, res, thi.getParameters.get(0))
+
+      case "isVoid" => { res.append("_root_.k2.standard." + GlobalConfiguration.factoryName + ".isVoid("); generateTarget(thi, res); res.append(")"); }
+      case "new" => {
+        generateNew(thi, res)
+      }
+      case _ if (thi.getTarget != null && thi.getStaticTransformation() != null) => {
+        generateTarget(thi, res)
+        res.append(".")
+        generateModelTransformationCall(thi, res)
+        generateParam(thi, res, "(", ")")
+      }
+      case _ if (thi.getTarget == null && thi.getStaticTransformation() != null) => {
+        res.append(thi.getStaticTransformation().getName())
+        generateParam(thi, res, "(", ")")
+      }
+      case _ if (thi.getTarget != null && thi.getStaticTransformation() == null) => {
+        generateTarget(thi, res)
+        res.append(".")
+        generateName(thi, res)
+      }
       case _ => log.debug("!!! Uncatch case ")
 
     }

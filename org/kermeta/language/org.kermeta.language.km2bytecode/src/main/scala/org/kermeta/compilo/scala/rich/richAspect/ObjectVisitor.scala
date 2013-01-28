@@ -45,10 +45,15 @@ trait ObjectVisitor {
   def getTypeMemberName(td : ModelElementTypeDefinition) : String 
   def getModelTypeInterfaceQualifiedName(td : ModelElementTypeDefinition) : String
   def getModelTypeInterfaceName(td : ModelElementTypeDefinition) : String
-  /*def isVisitingModelTypeDefinition() : Boolean
-  def setVisitingModelTypeDefinition(b : Boolean)*/
+
   def getCompilerConfiguration() : CompilerConfiguration
+  
   def isImplementingModelTypeInterface() : Boolean
   def setImplementingModelTypeInterface(b : Boolean)
+  def isImplementingModelTransformation() : Boolean
+  def setImplementingModelTransformation(b : Boolean)
+  
   def hasTypeEquivalence(c: ClassDefinition): Boolean
+    
+  def generateBindingParameterClass(c : org.kermeta.language.structure.Class, res : StringBuilder)
 }

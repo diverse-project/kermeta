@@ -19,8 +19,8 @@ class ScalaAspectVisitor(compilerConfiguration: CompilerConfiguration) extends I
   }
 
   def visit(mm: Metamodel) {
+    UtilModelTypeDefinition.preprocessMetamodel(mm)
     //PreCompiler.visit(par)
-    mm.getOwnedModelTypeDefinitions().foreach(mdt => UtilModelTypeDefinition.preprocessModelTypeDefinition(mdt))
     mm.getOwnedModelTypeDefinitions().foreach(mdt => this.visit(mdt))
     mm.getPackages().foreach(p => (this.visit(p)))
   }
@@ -157,9 +157,7 @@ class ScalaAspectPackageVisitorRunnable(compilerConfiguration: CompilerConfigura
   def close() {}
 
   //MODELTYPE ADDITION	
-  def visit(par: ModelTypeDefinition) {
-    visitor.setVisitingModelTypeDefinition(true)
-
+  def visit(par: ModelTypeDefinition) {    
     var res: StringBuilder = new StringBuilder
     var genpackageName: StringBuilder = new StringBuilder
 
@@ -173,8 +171,8 @@ class ScalaAspectPackageVisitorRunnable(compilerConfiguration: CompilerConfigura
 
     res.append(visitor.generateModelTypeDefinitionInterface(par))
 
-    Util.generateFile(genpackageName.toString(), par.getName(), res.toString())
-
+    Util.generateFile(genpackageName.toString(), "MT_" + par.getName(), res.toString())
+    
     par.getTypeDefinitions().foreach(td => {
       if (!Util.hasCompilerIgnoreTag(td)) {
         if (td.isInstanceOf[ClassDefinition]) {
@@ -191,12 +189,12 @@ class ScalaAspectPackageVisitorRunnable(compilerConfiguration: CompilerConfigura
     res2.append("import _root_.k2.standard._\n")
     res2.append("import _root_.k2.standard.JavaCollectionConversions._\n")
     res2.append("import _root_.k2.standard.PrimitiveConversion._\n")
+    res2.append("import " + "_root_." + GlobalConfiguration.frameworkGeneratedPackageName + "." + GlobalConfiguration.implicitConvTraitName + "._\n")
+
 
     res2.append(visitor.generateModelTypeDefinitionAspect(par))
 
-    Util.generateFile(genpackageName.toString(), par.getName() + "Aspect", res2.toString())
-
-    visitor.setVisitingModelTypeDefinition(false)
+    Util.generateFile(genpackageName.toString(), "MT_" + par.getName() + "Aspect", res2.toString())
   }
 
 }

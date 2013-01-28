@@ -9,6 +9,35 @@ import org.kermeta.language.structure.ModelType
 trait ModelTransformationAspect extends ObjectVisitor with ParameterAspect {
 
   def visitModelTransformation(mt: ModelTransformation, res: StringBuilder) {
+    
+    setImplementingModelTransformation(true)
+    
+    res.append(generateModelTransformationSignature(mt))
+    res.append(" = {\n")
+
+    if (mt.getName() == "getContents") {
+      res.append("\treturn mt_contents\n}\n")
+    } else {
+      res.append("var `~result` : ")
+      this.getListorType(mt, res)
+      res.append(" = null.asInstanceOf[")
+      this.getListorType(mt, res)
+      res.append("]; \n  { \n")
+      if (mt.getBody != null) {
+        visit(mt.getBody(), res)
+      }
+      res append "        }\n"
+
+      var res1 = new StringBuilder
+      this.getListorType(mt, res1)
+      if ("Unit".equals(res1.toString) || "_root_.k2.standard.Void".equals(res1.toString) || "_root_.scala.Unit".equals(res1.toString)) {
+        res append " \n}\n"
+      } else {
+        res append " return `~result`\n}\n"
+      }
+    }
+    
+    setImplementingModelTransformation(false)
 
   }
 
@@ -22,32 +51,6 @@ trait ModelTransformationAspect extends ObjectVisitor with ParameterAspect {
 
     res.append(" : ")
     getListorType(mt, res)
-
-    return res.toString()
-  }
-
-  def generateModelTransformation(mt: ModelTransformation): String = {
-    var res: StringBuilder = new StringBuilder()
-    res.append(generateModelTransformationSignature(mt))
-    res.append(" = {\n")
-
-    res.append("var `~result` : ")
-    this.getListorType(mt, res)
-    res.append(" = null.asInstanceOf[")
-    this.getListorType(mt, res)
-    res.append("]; \n  { \n")
-    if (mt.getBody != null) {
-      visit(mt.getBody(), res)
-    }
-    res append "        }\n"
-
-    var res1 = new StringBuilder
-    this.getListorType(mt, res1)
-    if ("Unit".equals(res1.toString) || "_root_.k2.standard.Void".equals(res1.toString) || "_root_.scala.Unit".equals(res1.toString)) {
-      res append " \n}\n"
-    } else {
-      res append " return `~result`\n}\n"
-    }
 
     return res.toString()
   }
@@ -97,4 +100,14 @@ trait ModelTransformationAspect extends ObjectVisitor with ParameterAspect {
       res.append(res1.toString)
     }
   }
+  
+    
+  var implementingModelTransformation: Boolean = false
+  def isImplementingModelTransformation(): Boolean = {
+    implementingModelTransformation
+  }
+  def setImplementingModelTransformation(b: Boolean) = {
+    implementingModelTransformation = b
+  }
+
 }

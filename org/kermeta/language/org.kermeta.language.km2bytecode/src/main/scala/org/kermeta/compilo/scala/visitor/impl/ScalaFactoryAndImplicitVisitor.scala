@@ -494,7 +494,7 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
   }
 
   //MODELTYPE ADDITION
-  def visit(par: ModelTypeDefinition) = {
+  def visit(par: ModelTypeDefinition) = {    
     //TFactory generation
     var tfactory: StringBuilder = new StringBuilder
     tfactory.append("package ")
@@ -505,7 +505,7 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
     tfactory.append(" {\n")
     tfactory.append(UtilModelTypeDefinition.getBoundedTypeMembers(par))
 
-    tfactory.append("\tdef create")
+    tfactory.append("\tdef create_Model_")
     tfactory.append(par.getName())
     tfactory.append("() : ")
     tfactory.append("_root_.")
@@ -549,7 +549,7 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
     factory.append(" {\n")
     factory.append(UtilModelTypeDefinition.getFixedTypeMembers(par))
 
-    factory.append("\tdef create")
+    factory.append("\tdef create_Model_")
     factory.append(par.getName())
     factory.append("() : ")
     factory.append("_root_.")

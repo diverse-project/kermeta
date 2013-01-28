@@ -100,6 +100,14 @@ trait ClassDefinitionAspect extends ObjectVisitor {
         res.append("\n")
         thi.getOwnedOperation filter (op => !Util.hasEcoreTag(op)) foreach (op => visit(op, res))
         res.append("\n")
+        
+        UtilModelTypeDefinition.getOperationsFromMatchedClassDefinitions(thi) match {
+          case Some(s) => s.foreach(op => {
+            visit(op, res)
+          })
+          case None =>
+        }
+        
         setImplementingModelTypeInterface(false)
       }
       
@@ -395,6 +403,19 @@ trait ClassDefinitionAspect extends ObjectVisitor {
     }
   }
 
+   def generateBindingParameterClass(c : org.kermeta.language.structure.Class, res : StringBuilder) = {
+    if (c.getTypeParamBinding().size() > 0) {
+      res.append("[")
+      var i = 0;
+      c.getTypeParamBinding.foreach { binding =>
+        if (i > 0) { res.append(",") }
+        visit(binding.getType, res)
+        i = i + 1
+      }
+      res.append("]")
+    }
+  }
+  
   def generateMapEntryWrapper(thi: ClassDefinition, res: StringBuilder, compilerConfiguration: CompilerConfiguration) = {
     res.append("class ")
     res.append(thi.getName())

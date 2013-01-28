@@ -132,6 +132,10 @@ class PackageVisitor(compilerConfiguration: CompilerConfiguration) extends Objec
       case o: CallProperty => {
         visitCallProperty(o, res)
       }
+      //MODELTYPE ADDITION
+      case o: CallModelTransformation => {
+        visitCallModelTransformation(o, res)
+      }
       case o: CallEnumLiteral => {
         visitCallEnumLiteral(o, res)
       }
@@ -144,22 +148,19 @@ class PackageVisitor(compilerConfiguration: CompilerConfiguration) extends Objec
       case o: CallExpression => {
         visitCallExpression(o, res)
       }
-      //MODELTYPE ADDITION //Must be before case o: ObjectTypeVariable, since VirtualType is a subtype of ObjectTypeVariable
+      //MODELTYPE ADDITION
       case o: VirtualType => {
         visitVirtualType(o, res)
       }
       case o: ObjectTypeVariable => {
         visitObjectTypeVariable(o, res)
       }
-      //TODO: MODELTYPE ADDITION
+      //MODELTYPE ADDITION
       case o: ModelType => {
         visitModelType(o, res)
       }
       case o: ModelTransformation => {
-        visit(o, res)
-      }
-      case o: ModelTypeVariable => {
-
+        visitModelTransformation(o, res)
       }
       case _ => {
         Console.err.println("Match problem in PackageVisitor.scala with " + e.toString())
@@ -287,8 +288,7 @@ class PackageVisitor(compilerConfiguration: CompilerConfiguration) extends Objec
     }
   }
 
-  def visitCallVariable(thi: CallVariable, res: StringBuilder): Unit = {
-
+  def visitCallVariable(thi: CallVariable, res: StringBuilder): Unit = {   
     res.append(Util.protectScalaKeyword(thi.getName()))
     log.debug(thi.getName() + " " + thi.getStaticType())
     if (thi.getStaticType().isInstanceOf[Class])
@@ -587,7 +587,15 @@ class PackageVisitor(compilerConfiguration: CompilerConfiguration) extends Objec
     if (qualifiedName.equals("org.kermeta.language.structure.Object") || qualifiedName.equals("_root_.org.kermeta.language.structure.Object")) {
       res.append(qualifiedName.replace("org.kermeta.language.structure.Object", "java.lang.Object"))
     } else {
-      res.append(qualifiedName)
+//      if (isImplementingModelTransformation() && !hasTypeEquivalence(thi.getTypeDefinition().asInstanceOf[ClassDefinition])) {
+//        
+//    	println("Visiting class " + thi.getName() + " isImplementingModelTransformation");
+//        
+//        res.append("_root_."+Util.getQualifiedNamedAspect(thi.getTypeDefinition()))
+//      } else {
+        res.append(qualifiedName)
+//      }
+      
     }
     /* Check Generique Param */
 
@@ -1050,26 +1058,9 @@ class PackageVisitor(compilerConfiguration: CompilerConfiguration) extends Objec
   }
 
   //MODELTYPEADDITION
-  var visitingModelTypeDefinition: Boolean = false
-  def isVisitingModelTypeDefinition(): Boolean = {
-    visitingModelTypeDefinition
-  }
-  def setVisitingModelTypeDefinition(b: Boolean) = {
-    visitingModelTypeDefinition = b
-  }
-
   var generateAttributeType: Boolean = false
 
   def getCompilerConfiguration(): CompilerConfiguration = {
     return compilerConfiguration
   }
-
-  var implementingModelTypeInterface: Boolean = false
-  def isImplementingModelTypeInterface(): Boolean = {
-    implementingModelTypeInterface
-  }
-  def setImplementingModelTypeInterface(b: Boolean) = {
-    implementingModelTypeInterface = b
-  }
-
 }
