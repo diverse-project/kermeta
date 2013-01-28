@@ -1,13 +1,11 @@
-KermetaProject "examples.clazz"
-	groupId = "examples"
-	defaultMainClass ="ex::classModel::Test"
-	defaultMainOperation = "main"
-	sources = {
-		require "${project.baseUri}/ClassModel.ecore"
-		require "${project.baseUri}/InheritanceSlicerAspect.kmt"
-		require "${project.baseUri}/InheritanceSlicer.kmt"
-		require "${project.baseUri}/TestClassModelSlicer.kmt"
-	}
-	dependencies = {
-		dependency "library.core" =	"platform:/plugin/org.kermeta.language.library.core", "mvn:org.kermeta.language/language.library.core/2.0.2"
-	}
+resource library_standard ="platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.99-SNAPSHOT"
+
+importProject library_standard
+
+project examples_clazz {   
+	import "${project.baseUri}/ClassModel.ecore"
+	import "${project.baseUri}/InheritanceSlicerAspect.kmt"
+	import "${project.baseUri}/InheritanceSlicer.kmt"
+	import "${project.baseUri}/TestClassModelSlicer.kmt"
+}
+

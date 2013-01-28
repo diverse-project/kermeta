@@ -1,6 +1,6 @@
 package ex::classModel;
-using kermeta::standard
-using kermeta::utils
+using kermeta::standard::*
+using kermeta::utils::*
 using kermeta::io::StdIO => stdio
 class SlicerVisitor {
 	attribute visitedPass : Boolean

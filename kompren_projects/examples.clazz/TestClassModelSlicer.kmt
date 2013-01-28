@@ -6,17 +6,40 @@
  */
 package ex::classModel;
 
-using kermeta::standard
-
+using kermeta::standard::*
+using org::kermeta::language::structure::*
+using kermeta::emfpersistence::*
+using kermeta::io::StdIO => stdio
 
 class Test {
 	operation main() : Void is do
 		var requiredClazzs : Bag<Clazz> init Bag<Clazz>.new
-		var cm : ClassModel init createClassModel(requiredClazzs)
+		var cm : ClassModel init createClassModel(requiredClazzs) //loadModel()
+		var clazz : Clazz init cm.classes.one
+		
+		stdio.writeln(cm.getMetaClass.name + " " + cm.getMetaClass.typeDefinition.container.asType(Package).name +
+				" " + cm.getMetaClass.typeDefinition.container.asType(Package).container.asType(Package).name)
 
 		var pruning : InheritanceSlicer init InheritanceSlicer.new.initialise(requiredClazzs)
 
 		pruning.launch()
+	end
+	
+	operation loadModel() : ClassModel is do
+   		var repository : ResourceSet init ResourceSet.new
+   		var resource : Resource init repository.createResource("platform:/resource/examples.clazz/ClassModel.xmi", "platform:/resource/examples.clazz/ClassModel.ecore")
+       	resource.load(void)
+       	
+       	result := void
+
+		from var it : Iterator<Object> init resource.getContents.iterator
+		until it.isOff
+		loop
+			var next : Object init it.next
+			if(next.isInstanceOf(ClassModel)) then                 
+				result ?= next
+			end
+		end
 	end
 	
 	
@@ -45,6 +68,6 @@ class Test {
 		c3.superClasses.add(c4)
 		c4.superClasses.add(c5)
 
-		requiredClazzs.add(c1)
+		requiredClazzs.add(c3)
 	end
 }
