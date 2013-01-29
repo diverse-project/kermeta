@@ -17,10 +17,19 @@ public interface KmBinaryMerger {
 	
 	
 	/**
-     * will merge two ModelingUnit into a single ModelingUnit
+     * will merge two ModelingUnit into a single ModelingUnit with the classic kermeta merge strategy
      * @param first_mu
      * @param second_mu
      * @return
      */
     public abstract ErrorProneResult<ModelingUnit> merge(ModelingUnit first_mu, ModelingUnit second_mu);
+    
+    /**
+     * will merge two ModelingUnit into a single ModelingUnit using the generic strategy
+     * This strategy works only on highly identical models like duplicated metamodel imports
+     * @param first_mu
+     * @param second_mu
+     * @return
+     */
+    public abstract ErrorProneResult<ModelingUnit> genericMerge(ModelingUnit first_mu, ModelingUnit second_mu);
 }

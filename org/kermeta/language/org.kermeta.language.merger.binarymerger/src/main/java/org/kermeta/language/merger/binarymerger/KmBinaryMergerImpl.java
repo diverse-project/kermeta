@@ -31,5 +31,10 @@ public class KmBinaryMergerImpl  implements org.kermeta.language.merger.binaryme
 	public ErrorProneResult<ModelingUnit> merge(ModelingUnit first_mu, ModelingUnit second_mu) {
 	
         return operations.merge(first_mu, second_mu);
-	}           
+	} 
+	@Override
+	public ErrorProneResult<ModelingUnit> genericMerge(ModelingUnit first_mu, ModelingUnit second_mu) {
+	
+        return operations.genericMerge(first_mu, second_mu);
+	}
 }

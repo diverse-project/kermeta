@@ -45,6 +45,9 @@ class BinaryMerger
 		result := context.errors
 	end
 	
+	/**
+	 * normal merger for kermeta programs, use kermeta strategy
+	 */
 	operation merge(primaryMetamodels : Collection<Metamodel>, aspectMetamodels : Collection<Metamodel>) : Collection<Metamodel> is do
 		
 		
@@ -55,7 +58,7 @@ class BinaryMerger
 		metamodelsToMerge.addAll(aspectMetamodels)
 		
 		
-		context := org::kermeta::ecore::binarymerger::BinaryMergerContext.new
+		context := org::kermeta::ecore::binarymerger::BinaryMergerContext.new.initialize
 			
 		do 
 			// for each metamodels to be merged, either add it into the result or merge it in the appropriate existing metamodel
@@ -82,7 +85,65 @@ class BinaryMerger
 		
 			context.elementsNeedingReferenceMerge.each{o |
 				do
-					o.asType(KermetaModelElement).mergeReferences
+					o.asType(KermetaModelElement).mergeReferences(context)
+				rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
+					getErrors.add(mergeException)
+				end
+			}
+			context.movedElementsNeedingReferenceFix.each{o |
+				o.asType(KermetaModelElement).fixReferences
+			}
+		rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
+			getErrors.add(mergeException)
+		end
+		
+		
+		result := mergedMetamodels
+	end
+	
+	
+	/**
+	 * use the default strategy merger, it meges everything, but works only on strictly identical structures 
+	 * useful for merging imported projects that aren't meant to be changed
+	 */
+	operation genericMerge(primaryMetamodels : Collection<Metamodel>, aspectMetamodels : Collection<Metamodel>) : Collection<Metamodel> is do
+		
+		
+		var mergedMetamodels : Collection<Metamodel> init OrderedSet<Metamodel>.new
+		mergedMetamodels.addAll(primaryMetamodels)
+		var metamodelsToMerge : Collection<Metamodel> init OrderedSet<Metamodel>.new
+		// everything should be merged in case several metamodel with the same name already exist in the primary collection
+		metamodelsToMerge.addAll(aspectMetamodels)
+		
+		
+		context := org::kermeta::ecore::binarymerger::BinaryMergerContext.new.initialize
+		context.useGenericMerge := true	
+		do 
+			// for each metamodels to be merged, either add it into the result or merge it in the appropriate existing metamodel
+			metamodelsToMerge.each{mmToMerge|
+			
+				var existingCorrespondingMMs : Collection<Metamodel> init mergedMetamodels.select{ alreadyMergedMM |
+					mmToMerge.name == alreadyMergedMM.name
+				} 
+				
+				if (existingCorrespondingMMs.isEmpty) then
+					// simply add this mm
+					mergedMetamodels.add(mmToMerge)
+				else do
+					mmToMerge.similarElementInMergedModel := existingCorrespondingMMs.one // there is normally only one CorrespondingMM  
+					mmToMerge.binaryMerger_MoveToMergedModel(context)
+					//context.movedElementsNeedingReferenceFix.add(mmToMerge)
+					//context.elementsNeedingReferenceMerge.add(mmToMerge)
+					rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
+						getErrors.add(mergeException)
+					end
+				end
+				
+			}
+		
+			context.elementsNeedingReferenceMerge.each{o |
+				do
+					o.asType(KermetaModelElement).mergeReferences(context)
 				rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 					getErrors.add(mergeException)
 				end

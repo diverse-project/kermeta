@@ -11,7 +11,7 @@ package kermeta {
 	package language {
 		package behavior {
 			aspect class Assignment {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
 					// TODO deal with aspectElementObj not a strict instance of Assignment
 					var aspectElement : org::kermeta::language::behavior::Assignment
 					aspectElement ?= aspectElementObj
@@ -25,20 +25,21 @@ package kermeta {
 						if (not self.~value.isVoid) and (not aspectElement.~value.isVoid) then
 							result := result and self.~value == aspectElement.~value
 						end
-
 						if (not self.isCast.isVoid) and (not aspectElement.isCast.isVoid) then
 							result := result and self.isCast == aspectElement.isCast
 						end
-
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class Expression {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					// TODO deal with aspectElementObj not a strict instance of Expression
 					var aspectElement : org::kermeta::language::behavior::Expression
 					aspectElement ?= aspectElementObj
@@ -50,10 +51,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class CallExpression {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
 					// TODO deal with aspectElementObj not a strict instance of CallExpression
 					var aspectElement : org::kermeta::language::behavior::CallExpression
 					aspectElement ?= aspectElementObj
@@ -61,21 +66,21 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
-
 						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 							result := result and self.name == aspectElement.name
 						end
-
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class Block {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
 					// TODO deal with aspectElementObj not a strict instance of Block
 					var aspectElement : org::kermeta::language::behavior::Block
 					aspectElement ?= aspectElementObj
@@ -87,10 +92,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class CallVariable {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallExpression is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallExpression is do
 					// TODO deal with aspectElementObj not a strict instance of CallVariable
 					var aspectElement : org::kermeta::language::behavior::CallVariable
 					aspectElement ?= aspectElementObj
@@ -101,15 +110,18 @@ package kermeta {
 						if (not self.isAtpre.isVoid) and (not aspectElement.isAtpre.isVoid) then
 							result := result and self.isAtpre == aspectElement.isAtpre
 						end
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallExpression is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class CallFeature {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallExpression is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallExpression is do
 					// TODO deal with aspectElementObj not a strict instance of CallFeature
 					var aspectElement : org::kermeta::language::behavior::CallFeature
 					aspectElement ?= aspectElementObj
@@ -120,19 +132,21 @@ package kermeta {
 						if (not self.target.isVoid) and (not aspectElement.target.isVoid) then
 							result := result and self.target == aspectElement.target
 						end
-
 						if (not self.isAtpre.isVoid) and (not aspectElement.isAtpre.isVoid) then
 							result := result and self.isAtpre == aspectElement.isAtpre
 						end
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallExpression is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class CallSuperOperation {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallOperation is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallOperation is do
 					// TODO deal with aspectElementObj not a strict instance of CallSuperOperation
 					var aspectElement : org::kermeta::language::behavior::CallSuperOperation
 					aspectElement ?= aspectElementObj
@@ -144,10 +158,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallOperation is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class CallResult {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallVariable is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallVariable is do
 					// TODO deal with aspectElementObj not a strict instance of CallResult
 					var aspectElement : org::kermeta::language::behavior::CallResult
 					aspectElement ?= aspectElementObj
@@ -159,10 +177,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallVariable is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class CallValue {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallExpression is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallExpression is do
 					// TODO deal with aspectElementObj not a strict instance of CallValue
 					var aspectElement : org::kermeta::language::behavior::CallValue
 					aspectElement ?= aspectElementObj
@@ -174,10 +196,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallExpression is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class Conditional {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
 					// TODO deal with aspectElementObj not a strict instance of Conditional
 					var aspectElement : org::kermeta::language::behavior::Conditional
 					aspectElement ?= aspectElementObj
@@ -198,10 +224,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class Raise {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
 					// TODO deal with aspectElementObj not a strict instance of Raise
 					var aspectElement : org::kermeta::language::behavior::Raise
 					aspectElement ?= aspectElementObj
@@ -216,10 +246,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class Rescue {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					// TODO deal with aspectElementObj not a strict instance of Rescue
 					var aspectElement : org::kermeta::language::behavior::Rescue
 					aspectElement ?= aspectElementObj
@@ -230,19 +264,21 @@ package kermeta {
 						if (not self.exceptionType.isVoid) and (not aspectElement.exceptionType.isVoid) then
 							result := result and self.exceptionType == aspectElement.exceptionType
 						end
-
 						if (not self.exceptionName.isVoid) and (not aspectElement.exceptionName.isVoid) then
 							result := result and self.exceptionName == aspectElement.exceptionName
 						end
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class TypeReference {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
 					// TODO deal with aspectElementObj not a strict instance of TypeReference
 					var aspectElement : org::kermeta::language::behavior::TypeReference
 					aspectElement ?= aspectElementObj
@@ -253,15 +289,18 @@ package kermeta {
 						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 							result := result and self.name == aspectElement.name
 						end
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class Literal {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
 					// TODO deal with aspectElementObj not a strict instance of Literal
 					var aspectElement : org::kermeta::language::behavior::Literal
 					aspectElement ?= aspectElementObj
@@ -273,10 +312,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class EmptyExpression {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
 					// TODO deal with aspectElementObj not a strict instance of EmptyExpression
 					var aspectElement : org::kermeta::language::behavior::EmptyExpression
 					aspectElement ?= aspectElementObj
@@ -288,10 +331,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class JavaStaticCall {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
 					// TODO deal with aspectElementObj not a strict instance of JavaStaticCall
 					var aspectElement : org::kermeta::language::behavior::JavaStaticCall
 					aspectElement ?= aspectElementObj
@@ -299,23 +346,24 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 						if (not self.jclass.isVoid) and (not aspectElement.jclass.isVoid) then
 							result := result and self.jclass == aspectElement.jclass
 						end
-
 						if (not self.jmethod.isVoid) and (not aspectElement.jmethod.isVoid) then
 							result := result and self.jmethod == aspectElement.jmethod
 						end
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class LambdaExpression {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
 					// TODO deal with aspectElementObj not a strict instance of LambdaExpression
 					var aspectElement : org::kermeta::language::behavior::LambdaExpression
 					aspectElement ?= aspectElementObj
@@ -330,10 +378,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class LambdaParameter {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					// TODO deal with aspectElementObj not a strict instance of LambdaParameter
 					var aspectElement : org::kermeta::language::behavior::LambdaParameter
 					aspectElement ?= aspectElementObj
@@ -344,19 +396,21 @@ package kermeta {
 						if (not self.type.isVoid) and (not aspectElement.type.isVoid) then
 							result := result and self.type == aspectElement.type
 						end
-
 						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 							result := result and self.name == aspectElement.name
 						end
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class IntegerLiteral {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Literal is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Literal is do
 					// TODO deal with aspectElementObj not a strict instance of IntegerLiteral
 					var aspectElement : org::kermeta::language::behavior::IntegerLiteral
 					aspectElement ?= aspectElementObj
@@ -367,15 +421,18 @@ package kermeta {
 						if (not self.~value.isVoid) and (not aspectElement.~value.isVoid) then
 							result := result and self.~value == aspectElement.~value
 						end
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Literal is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class StringLiteral {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Literal is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Literal is do
 					// TODO deal with aspectElementObj not a strict instance of StringLiteral
 					var aspectElement : org::kermeta::language::behavior::StringLiteral
 					aspectElement ?= aspectElementObj
@@ -386,15 +443,18 @@ package kermeta {
 						if (not self.~value.isVoid) and (not aspectElement.~value.isVoid) then
 							result := result and self.~value == aspectElement.~value
 						end
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Literal is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class BooleanLiteral {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Literal is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Literal is do
 					// TODO deal with aspectElementObj not a strict instance of BooleanLiteral
 					var aspectElement : org::kermeta::language::behavior::BooleanLiteral
 					aspectElement ?= aspectElementObj
@@ -405,15 +465,18 @@ package kermeta {
 						if (not self.~value.isVoid) and (not aspectElement.~value.isVoid) then
 							result := result and self.~value == aspectElement.~value
 						end
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Literal is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class CallTypeLiteral {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Literal is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Literal is do
 					// TODO deal with aspectElementObj not a strict instance of CallTypeLiteral
 					var aspectElement : org::kermeta::language::behavior::CallTypeLiteral
 					aspectElement ?= aspectElementObj
@@ -428,10 +491,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Literal is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class VoidLiteral {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Literal is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Literal is do
 					// TODO deal with aspectElementObj not a strict instance of VoidLiteral
 					var aspectElement : org::kermeta::language::behavior::VoidLiteral
 					aspectElement ?= aspectElementObj
@@ -443,10 +510,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Literal is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class Loop {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
 					// TODO deal with aspectElementObj not a strict instance of Loop
 					var aspectElement : org::kermeta::language::behavior::Loop
 					aspectElement ?= aspectElementObj
@@ -467,10 +538,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class SelfExpression {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
 					// TODO deal with aspectElementObj not a strict instance of SelfExpression
 					var aspectElement : org::kermeta::language::behavior::SelfExpression
 					aspectElement ?= aspectElementObj
@@ -482,10 +557,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class VariableDecl {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
 					// TODO deal with aspectElementObj not a strict instance of VariableDecl
 					var aspectElement : org::kermeta::language::behavior::VariableDecl
 					aspectElement ?= aspectElementObj
@@ -499,19 +578,21 @@ package kermeta {
 						if (not self.type.isVoid) and (not aspectElement.type.isVoid) then
 							result := result and self.type == aspectElement.type
 						end
-
 						if (not self.identifier.isVoid) and (not aspectElement.identifier.isVoid) then
 							result := result and self.identifier == aspectElement.identifier
 						end
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::Expression is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class UnresolvedCall {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::UnresolvedReference is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::UnresolvedReference is do
 					// TODO deal with aspectElementObj not a strict instance of UnresolvedCall
 					var aspectElement : org::kermeta::language::behavior::UnresolvedCall
 					aspectElement ?= aspectElementObj
@@ -522,33 +603,27 @@ package kermeta {
 						if (not self.target.isVoid) and (not aspectElement.target.isVoid) then
 							result := result and self.target == aspectElement.target
 						end
-
-
-
 						if (not self.isAtpre.isVoid) and (not aspectElement.isAtpre.isVoid) then
 							result := result and self.isAtpre == aspectElement.isAtpre
 						end
-
 						if (not self.isCalledWithParenthesis.isVoid) and (not aspectElement.isCalledWithParenthesis.isVoid) then
 							result := result and self.isCalledWithParenthesis == aspectElement.isCalledWithParenthesis
 						end
-
-
-
 						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 							result := result and self.name == aspectElement.name
 						end
-
-
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::UnresolvedReference is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class CallOperation {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallFeature is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallFeature is do
 					// TODO deal with aspectElementObj not a strict instance of CallOperation
 					var aspectElement : org::kermeta::language::behavior::CallOperation
 					aspectElement ?= aspectElementObj
@@ -560,10 +635,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallFeature is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class CallProperty {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallFeature is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallFeature is do
 					// TODO deal with aspectElementObj not a strict instance of CallProperty
 					var aspectElement : org::kermeta::language::behavior::CallProperty
 					aspectElement ?= aspectElementObj
@@ -575,10 +654,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallFeature is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class CallEnumLiteral {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallExpression is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallExpression is do
 					// TODO deal with aspectElementObj not a strict instance of CallEnumLiteral
 					var aspectElement : org::kermeta::language::behavior::CallEnumLiteral
 					aspectElement ?= aspectElementObj
@@ -590,10 +673,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallExpression is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class CallModelTransformation {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallFeature is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallFeature is do
 					// TODO deal with aspectElementObj not a strict instance of CallModelTransformation
 					var aspectElement : org::kermeta::language::behavior::CallModelTransformation
 					aspectElement ?= aspectElementObj
@@ -605,6 +692,10 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::behavior::CallFeature is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 		}
@@ -614,7 +705,7 @@ package kermeta {
 
 
 			aspect class KermetaModelElement {
-				operation localMatch( aspectElementObj : kermeta::standard::Object) : Boolean is do
+				operation genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean is do
 					// TODO deal with aspectElementObj not a strict instance of KermetaModelElement
 					var aspectElement : org::kermeta::language::structure::KermetaModelElement
 					aspectElement ?= aspectElementObj
@@ -626,50 +717,47 @@ package kermeta {
 						result := false
 					end
 				end
+				operation localMatch( aspectElementObj : kermeta::standard::Object) : Boolean is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 
 			aspect class Operation {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
 					// TODO deal with aspectElementObj not a strict instance of Operation
-					/* disable merge of operation because we cannot correctly deal with its UnresolvedType
-					   the operations are duplicated, and resolved after , then a fusion is applied 
-					   (see bug 1962)
 					var aspectElement : org::kermeta::language::structure::Operation
 					aspectElement ?= aspectElementObj
 					if not aspectElement.isVoid then
 
 						
 						result := super( aspectElement)
-						*/
-						/* ignore abstract and body -> will raise an exception in case of conflict */
-					    /*
 						if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
 							result := result and self.body == aspectElement.body
 						end
 						if (not self.isAbstract.isVoid) and (not aspectElement.isAbstract.isVoid) then
 							result := result and self.isAbstract == aspectElement.isAbstract
 						end
-
 						if (not self.uniqueName.isVoid) and (not aspectElement.uniqueName.isVoid) then
 							result := result and self.uniqueName == aspectElement.uniqueName
 						end
-						*/
-					/*	if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 							result := result and self.name == aspectElement.name
 						end
-					else */
+					else
 						result := false
-					/* end */
+					end
+				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
 				end
 			}
 
 			aspect class Property {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
 					// TODO deal with aspectElementObj not a strict instance of Property
-					/* disable merge of operation because we cannot correctly deal with its UnresolvedType
-					   the operations are duplicated, and resolved after, then a fusion is applied 
-					   (see bug 1962)
 					var aspectElement : org::kermeta::language::structure::Property
 					aspectElement ?= aspectElementObj
 					if not aspectElement.isVoid then
@@ -682,48 +770,42 @@ package kermeta {
 						if (not self.setterBody.isVoid) and (not aspectElement.setterBody.isVoid) then
 							result := result and self.setterBody == aspectElement.setterBody
 						end
-
-
-
 						if (not self.isReadOnly.isVoid) and (not aspectElement.isReadOnly.isVoid) then
 							result := result and self.isReadOnly == aspectElement.isReadOnly
 						end
-
 						if (not self.default.isVoid) and (not aspectElement.default.isVoid) then
 							result := result and self.default == aspectElement.default
 						end
-
 						if (not self.isComposite.isVoid) and (not aspectElement.isComposite.isVoid) then
 							result := result and self.isComposite == aspectElement.isComposite
 						end
-
 						if (not self.isDerived.isVoid) and (not aspectElement.isDerived.isVoid) then
 							result := result and self.isDerived == aspectElement.isDerived
 						end
-
 						if (not self.isID.isVoid) and (not aspectElement.isID.isVoid) then
 							result := result and self.isID == aspectElement.isID
 						end
-
 						if (not self.isGetterAbstract.isVoid) and (not aspectElement.isGetterAbstract.isVoid) then
 							result := result and self.isGetterAbstract == aspectElement.isGetterAbstract
 						end
-
 						if (not self.isSetterAbstract.isVoid) and (not aspectElement.isSetterAbstract.isVoid) then
 							result := result and self.isSetterAbstract == aspectElement.isSetterAbstract
 						end
-
 						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 							result := result and self.name == aspectElement.name
 						end
-					else */
+					else
 						result := false
-					//end
+					end
+				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
 				end
 			}
 
 			aspect class Type {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					// TODO deal with aspectElementObj not a strict instance of Type
 					var aspectElement : org::kermeta::language::structure::Type
 					aspectElement ?= aspectElementObj
@@ -735,10 +817,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class TypeContainer {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					// TODO deal with aspectElementObj not a strict instance of TypeContainer
 					var aspectElement : org::kermeta::language::structure::TypeContainer
 					aspectElement ?= aspectElementObj
@@ -750,10 +836,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class EnumerationLiteral {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
 					// TODO deal with aspectElementObj not a strict instance of EnumerationLiteral
 					var aspectElement : org::kermeta::language::structure::EnumerationLiteral
 					aspectElement ?= aspectElementObj
@@ -765,10 +855,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class TypeVariableBinding {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
 					// TODO deal with aspectElementObj not a strict instance of TypeVariableBinding
 					var aspectElement : org::kermeta::language::structure::TypeVariableBinding
 					aspectElement ?= aspectElementObj
@@ -780,10 +874,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class MultiplicityElement {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypedElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypedElement is do
 					// TODO deal with aspectElementObj not a strict instance of MultiplicityElement
 					var aspectElement : org::kermeta::language::structure::MultiplicityElement
 					aspectElement ?= aspectElementObj
@@ -794,31 +892,30 @@ package kermeta {
 						if (not self.isOrdered.isVoid) and (not aspectElement.isOrdered.isVoid) then
 							result := result and self.isOrdered == aspectElement.isOrdered
 						end
-
 						if (not self.isUnique.isVoid) and (not aspectElement.isUnique.isVoid) then
 							result := result and self.isUnique == aspectElement.isUnique
 						end
-
 						if (not self.lower.isVoid) and (not aspectElement.lower.isVoid) then
 							result := result and self.lower == aspectElement.lower
 						end
-
 						if (not self.upper.isVoid) and (not aspectElement.upper.isVoid) then
 							result := result and self.upper == aspectElement.upper
 						end
-
 						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 							result := result and self.name == aspectElement.name
 						end
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypedElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class TypeDefinition {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
 					// TODO deal with aspectElementObj not a strict instance of TypeDefinition
 					var aspectElement : org::kermeta::language::structure::TypeDefinition
 					aspectElement ?= aspectElementObj
@@ -826,19 +923,21 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-						/* Ignore isAspect attribute
 						if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
 							result := result and self.isAspect == aspectElement.isAspect
 						end
-						*/
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class Class {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ParameterizedType is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ParameterizedType is do
 					// TODO deal with aspectElementObj not a strict instance of Class
 					var aspectElement : org::kermeta::language::structure::Class
 					aspectElement ?= aspectElementObj
@@ -846,25 +945,24 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
-
-
 						if (not self.isAbstract.isVoid) and (not aspectElement.isAbstract.isVoid) then
 							result := result and self.isAbstract == aspectElement.isAbstract
 						end
-
 						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 							result := result and self.name == aspectElement.name
 						end
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ParameterizedType is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class DataType {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
 					// TODO deal with aspectElementObj not a strict instance of DataType
 					var aspectElement : org::kermeta::language::structure::DataType
 					aspectElement ?= aspectElementObj
@@ -872,24 +970,24 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 						if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
 							result := result and self.isAspect == aspectElement.isAspect
 						end
-
 						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 							result := result and self.name == aspectElement.name
 						end
-
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class Enumeration {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::DataType is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::DataType is do
 					// TODO deal with aspectElementObj not a strict instance of Enumeration
 					var aspectElement : org::kermeta::language::structure::Enumeration
 					aspectElement ?= aspectElementObj
@@ -897,25 +995,24 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
-
 						if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
 							result := result and self.isAspect == aspectElement.isAspect
 						end
-
 						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 							result := result and self.name == aspectElement.name
 						end
-
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::DataType is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class NamedElement {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					// TODO deal with aspectElementObj not a strict instance of NamedElement
 					var aspectElement : org::kermeta::language::structure::NamedElement
 					aspectElement ?= aspectElementObj
@@ -926,15 +1023,18 @@ package kermeta {
 						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 							result := result and self.name == aspectElement.name
 						end
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class Package {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
 					// TODO deal with aspectElementObj not a strict instance of Package
 					var aspectElement : org::kermeta::language::structure::Package
 					aspectElement ?= aspectElementObj
@@ -942,22 +1042,21 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
-
-
 						if (not self.uri.isVoid) and (not aspectElement.uri.isVoid) then
 							result := result and self.uri == aspectElement.uri
 						end
-
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class Parameter {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
 					// TODO deal with aspectElementObj not a strict instance of Parameter
 					var aspectElement : org::kermeta::language::structure::Parameter
 					aspectElement ?= aspectElementObj
@@ -965,19 +1064,21 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 							result := result and self.name == aspectElement.name
 						end
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class PrimitiveType {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::DataType is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::DataType is do
 					// TODO deal with aspectElementObj not a strict instance of PrimitiveType
 					var aspectElement : org::kermeta::language::structure::PrimitiveType
 					aspectElement ?= aspectElementObj
@@ -985,25 +1086,24 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
-
 						if (not self.isAspect.isVoid) and (not aspectElement.isAspect.isVoid) then
 							result := result and self.isAspect == aspectElement.isAspect
 						end
-
 						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 							result := result and self.name == aspectElement.name
 						end
-
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::DataType is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class TypedElement {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
 					// TODO deal with aspectElementObj not a strict instance of TypedElement
 					var aspectElement : org::kermeta::language::structure::TypedElement
 					aspectElement ?= aspectElementObj
@@ -1011,20 +1111,22 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 							result := result and self.name == aspectElement.name
 						end
-
 					else
 						result := false
 					end
+				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
 				end
 			}
 
 
 			aspect class Tag {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					// TODO deal with aspectElementObj not a strict instance of Tag
 					var aspectElement : org::kermeta::language::structure::Tag
 					aspectElement ?= aspectElementObj
@@ -1032,23 +1134,24 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 							result := result and self.name == aspectElement.name
 						end
-
 						if (not self.~value.isVoid) and (not aspectElement.~value.isVoid) then
 							result := result and self.~value == aspectElement.~value
 						end
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class AbstractProperty {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					// TODO deal with aspectElementObj not a strict instance of AbstractProperty
 					var aspectElement : org::kermeta::language::structure::AbstractProperty
 					aspectElement ?= aspectElementObj
@@ -1060,10 +1163,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class Constraint {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
 					// TODO deal with aspectElementObj not a strict instance of Constraint
 					var aspectElement : org::kermeta::language::structure::Constraint
 					aspectElement ?= aspectElementObj
@@ -1074,27 +1181,25 @@ package kermeta {
 						if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
 							result := result and self.body == aspectElement.body
 						end
-
-
-
-
 						if (not self.stereotype.isVoid) and (not aspectElement.stereotype.isVoid) then
 							result := result and self.stereotype == aspectElement.stereotype
 						end
-
 						if (not self.language.isVoid) and (not aspectElement.language.isVoid) then
 							result := result and self.language == aspectElement.language
 						end
-
 					else
 						result := false
 					end
+				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
 				end
 			}
 
 
 			aspect class ClassDefinition {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::GenericTypeDefinition is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::GenericTypeDefinition is do
 					// TODO deal with aspectElementObj not a strict instance of ClassDefinition
 					var aspectElement : org::kermeta::language::structure::ClassDefinition
 					aspectElement ?= aspectElementObj
@@ -1102,24 +1207,28 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-						/* removes isAbstract and isSingleton from signature
 						if (not self.isAbstract.isVoid) and (not aspectElement.isAbstract.isVoid) then
 							result := result and self.isAbstract == aspectElement.isAbstract
 						end
-
 						if (not self.isSingleton.isVoid) and (not aspectElement.isSingleton.isVoid) then
 							result := result and self.isSingleton == aspectElement.isSingleton
 						end
-						*/
+						if (not self.isFinal.isVoid) and (not aspectElement.isFinal.isVoid) then
+							result := result and self.isFinal == aspectElement.isFinal
+						end
 					else
 						result := false
 					end
+				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::GenericTypeDefinition is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
 				end
 			}
 
 
 			aspect class Metamodel {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					// TODO deal with aspectElementObj not a strict instance of Metamodel
 					var aspectElement : org::kermeta::language::structure::Metamodel
 					aspectElement ?= aspectElementObj
@@ -1127,20 +1236,27 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
-
 						if (not self.uri.isVoid) and (not aspectElement.uri.isVoid) then
 							result := result and self.uri == aspectElement.uri
 						end
-
+						if (not self.isResolved.isVoid) and (not aspectElement.isResolved.isVoid) then
+							result := result and self.isResolved == aspectElement.isResolved
+						end
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+							result := result and self.name == aspectElement.name
+						end
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class ModelElementTypeDefinitionContainer {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
 					// TODO deal with aspectElementObj not a strict instance of ModelElementTypeDefinitionContainer
 					var aspectElement : org::kermeta::language::structure::ModelElementTypeDefinitionContainer
 					aspectElement ?= aspectElementObj
@@ -1152,10 +1268,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class GenericTypeDefinition {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ModelElementTypeDefinition is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ModelElementTypeDefinition is do
 					// TODO deal with aspectElementObj not a strict instance of GenericTypeDefinition
 					var aspectElement : org::kermeta::language::structure::GenericTypeDefinition
 					aspectElement ?= aspectElementObj
@@ -1167,10 +1287,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ModelElementTypeDefinition is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class ParameterizedType {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
 					// TODO deal with aspectElementObj not a strict instance of ParameterizedType
 					var aspectElement : org::kermeta::language::structure::ParameterizedType
 					aspectElement ?= aspectElementObj
@@ -1182,10 +1306,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class TypeVariable {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
 					// TODO deal with aspectElementObj not a strict instance of TypeVariable
 					var aspectElement : org::kermeta::language::structure::TypeVariable
 					aspectElement ?= aspectElementObj
@@ -1193,20 +1321,21 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
-
 						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 							result := result and self.name == aspectElement.name
 						end
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class ObjectTypeVariable {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeVariable is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeVariable is do
 					// TODO deal with aspectElementObj not a strict instance of ObjectTypeVariable
 					var aspectElement : org::kermeta::language::structure::ObjectTypeVariable
 					aspectElement ?= aspectElementObj
@@ -1214,19 +1343,21 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 							result := result and self.name == aspectElement.name
 						end
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeVariable is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class ModelTypeVariable {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeVariable is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeVariable is do
 					// TODO deal with aspectElementObj not a strict instance of ModelTypeVariable
 					var aspectElement : org::kermeta::language::structure::ModelTypeVariable
 					aspectElement ?= aspectElementObj
@@ -1241,10 +1372,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeVariable is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class VirtualType {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ObjectTypeVariable is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ObjectTypeVariable is do
 					// TODO deal with aspectElementObj not a strict instance of VirtualType
 					var aspectElement : org::kermeta::language::structure::VirtualType
 					aspectElement ?= aspectElementObj
@@ -1252,22 +1387,21 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
-
-
-
 						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 							result := result and self.name == aspectElement.name
 						end
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ObjectTypeVariable is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class Model {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					// TODO deal with aspectElementObj not a strict instance of Model
 					var aspectElement : org::kermeta::language::structure::Model
 					aspectElement ?= aspectElementObj
@@ -1279,10 +1413,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class AbstractOperation {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					// TODO deal with aspectElementObj not a strict instance of AbstractOperation
 					var aspectElement : org::kermeta::language::structure::AbstractOperation
 					aspectElement ?= aspectElementObj
@@ -1294,10 +1432,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class UnresolvedType {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
 					// TODO deal with aspectElementObj not a strict instance of UnresolvedType
 					var aspectElement : org::kermeta::language::structure::UnresolvedType
 					aspectElement ?= aspectElementObj
@@ -1308,15 +1450,18 @@ package kermeta {
 						if (not self.typeIdentifier.isVoid) and (not aspectElement.typeIdentifier.isVoid) then
 							result := result and self.typeIdentifier == aspectElement.typeIdentifier
 						end
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class UnresolvedReference {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					// TODO deal with aspectElementObj not a strict instance of UnresolvedReference
 					var aspectElement : org::kermeta::language::structure::UnresolvedReference
 					aspectElement ?= aspectElementObj
@@ -1328,10 +1473,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class UnresolvedProperty {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::AbstractProperty is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::AbstractProperty is do
 					// TODO deal with aspectElementObj not a strict instance of UnresolvedProperty
 					var aspectElement : org::kermeta::language::structure::UnresolvedProperty
 					aspectElement ?= aspectElementObj
@@ -1342,15 +1491,18 @@ package kermeta {
 						if (not self.propertyIdentifier.isVoid) and (not aspectElement.propertyIdentifier.isVoid) then
 							result := result and self.propertyIdentifier == aspectElement.propertyIdentifier
 						end
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::AbstractProperty is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class UnresolvedOperation {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::AbstractOperation is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::AbstractOperation is do
 					// TODO deal with aspectElementObj not a strict instance of UnresolvedOperation
 					var aspectElement : org::kermeta::language::structure::UnresolvedOperation
 					aspectElement ?= aspectElementObj
@@ -1358,20 +1510,21 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
 						if (not self.operationIdentifier.isVoid) and (not aspectElement.operationIdentifier.isVoid) then
 							result := result and self.operationIdentifier == aspectElement.operationIdentifier
 						end
-
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::AbstractOperation is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class Using {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					// TODO deal with aspectElementObj not a strict instance of Using
 					var aspectElement : org::kermeta::language::structure::Using
 					aspectElement ?= aspectElementObj
@@ -1382,19 +1535,21 @@ package kermeta {
 						if (not self.fromQName.isVoid) and (not aspectElement.fromQName.isVoid) then
 							result := result and self.fromQName == aspectElement.fromQName
 						end
-
 						if (not self.toName.isVoid) and (not aspectElement.toName.isVoid) then
 							result := result and self.toName == aspectElement.toName
 						end
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class ProductType {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
 					// TODO deal with aspectElementObj not a strict instance of ProductType
 					var aspectElement : org::kermeta::language::structure::ProductType
 					aspectElement ?= aspectElementObj
@@ -1406,10 +1561,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class FunctionType {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
 					// TODO deal with aspectElementObj not a strict instance of FunctionType
 					var aspectElement : org::kermeta::language::structure::FunctionType
 					aspectElement ?= aspectElementObj
@@ -1421,10 +1580,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeContainer is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class VoidType {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
 					// TODO deal with aspectElementObj not a strict instance of VoidType
 					var aspectElement : org::kermeta::language::structure::VoidType
 					aspectElement ?= aspectElementObj
@@ -1436,10 +1599,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class UnresolvedInferredType {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::UnresolvedReference is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::UnresolvedReference is do
 					// TODO deal with aspectElementObj not a strict instance of UnresolvedInferredType
 					var aspectElement : org::kermeta::language::structure::UnresolvedInferredType
 					aspectElement ?= aspectElementObj
@@ -1451,10 +1618,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::UnresolvedReference is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class UnresolvedTypeVariable {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::UnresolvedReference is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::UnresolvedReference is do
 					// TODO deal with aspectElementObj not a strict instance of UnresolvedTypeVariable
 					var aspectElement : org::kermeta::language::structure::UnresolvedTypeVariable
 					aspectElement ?= aspectElementObj
@@ -1462,21 +1633,21 @@ package kermeta {
 
 						
 						result := super( aspectElement)
-
-
-
 						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
 							result := result and self.name == aspectElement.name
 						end
-
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::UnresolvedReference is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class ModelTypeDefinitionBinding {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					// TODO deal with aspectElementObj not a strict instance of ModelTypeDefinitionBinding
 					var aspectElement : org::kermeta::language::structure::ModelTypeDefinitionBinding
 					aspectElement ?= aspectElementObj
@@ -1488,10 +1659,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class ClassDefinitionBinding {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					// TODO deal with aspectElementObj not a strict instance of ClassDefinitionBinding
 					var aspectElement : org::kermeta::language::structure::ClassDefinitionBinding
 					aspectElement ?= aspectElementObj
@@ -1503,10 +1678,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class EnumerationBinding {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					// TODO deal with aspectElementObj not a strict instance of EnumerationBinding
 					var aspectElement : org::kermeta::language::structure::EnumerationBinding
 					aspectElement ?= aspectElementObj
@@ -1518,10 +1697,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class PropertyBinding {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					// TODO deal with aspectElementObj not a strict instance of PropertyBinding
 					var aspectElement : org::kermeta::language::structure::PropertyBinding
 					aspectElement ?= aspectElementObj
@@ -1533,10 +1716,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class OperationBinding {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					// TODO deal with aspectElementObj not a strict instance of OperationBinding
 					var aspectElement : org::kermeta::language::structure::OperationBinding
 					aspectElement ?= aspectElementObj
@@ -1548,10 +1735,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class AdaptationOperator {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
 					// TODO deal with aspectElementObj not a strict instance of AdaptationOperator
 					var aspectElement : org::kermeta::language::structure::AdaptationOperator
 					aspectElement ?= aspectElementObj
@@ -1563,10 +1754,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::NamedElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class UseAdaptationOperator {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					// TODO deal with aspectElementObj not a strict instance of UseAdaptationOperator
 					var aspectElement : org::kermeta::language::structure::UseAdaptationOperator
 					aspectElement ?= aspectElementObj
@@ -1578,10 +1773,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class PropertyAdaptationOperator {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::AdaptationOperator is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::AdaptationOperator is do
 					// TODO deal with aspectElementObj not a strict instance of PropertyAdaptationOperator
 					var aspectElement : org::kermeta::language::structure::PropertyAdaptationOperator
 					aspectElement ?= aspectElementObj
@@ -1605,10 +1804,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::AdaptationOperator is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class UnresolvedAdaptationOperator {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::AdaptationOperator is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::AdaptationOperator is do
 					// TODO deal with aspectElementObj not a strict instance of UnresolvedAdaptationOperator
 					var aspectElement : org::kermeta::language::structure::UnresolvedAdaptationOperator
 					aspectElement ?= aspectElementObj
@@ -1620,10 +1823,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::AdaptationOperator is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class AdaptationParameter {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypedElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypedElement is do
 					// TODO deal with aspectElementObj not a strict instance of AdaptationParameter
 					var aspectElement : org::kermeta::language::structure::AdaptationParameter
 					aspectElement ?= aspectElementObj
@@ -1638,10 +1845,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypedElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class OperationAdaptationOperator {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::AdaptationOperator is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::AdaptationOperator is do
 					// TODO deal with aspectElementObj not a strict instance of OperationAdaptationOperator
 					var aspectElement : org::kermeta::language::structure::OperationAdaptationOperator
 					aspectElement ?= aspectElementObj
@@ -1656,10 +1867,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::AdaptationOperator is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class ModelElementTypeDefinition {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeDefinition is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeDefinition is do
 					// TODO deal with aspectElementObj not a strict instance of ModelElementTypeDefinition
 					var aspectElement : org::kermeta::language::structure::ModelElementTypeDefinition
 					aspectElement ?= aspectElementObj
@@ -1671,10 +1886,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeDefinition is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class ModelType {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
 					// TODO deal with aspectElementObj not a strict instance of ModelType
 					var aspectElement : org::kermeta::language::structure::ModelType
 					aspectElement ?= aspectElementObj
@@ -1686,10 +1905,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::Type is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class FilteredMetamodelReference {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					// TODO deal with aspectElementObj not a strict instance of FilteredMetamodelReference
 					var aspectElement : org::kermeta::language::structure::FilteredMetamodelReference
 					aspectElement ?= aspectElementObj
@@ -1701,10 +1924,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class ModelTypeDefinition {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeDefinition is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeDefinition is do
 					// TODO deal with aspectElementObj not a strict instance of ModelTypeDefinition
 					var aspectElement : org::kermeta::language::structure::ModelTypeDefinition
 					aspectElement ?= aspectElementObj
@@ -1716,10 +1943,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::TypeDefinition is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class ModelTransformation {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
 					// TODO deal with aspectElementObj not a strict instance of ModelTransformation
 					var aspectElement : org::kermeta::language::structure::ModelTransformation
 					aspectElement ?= aspectElementObj
@@ -1730,14 +1961,24 @@ package kermeta {
 						if (not self.body.isVoid) and (not aspectElement.body.isVoid) then
 							result := result and self.body == aspectElement.body
 						end
+						if (not self.isAbstract.isVoid) and (not aspectElement.isAbstract.isVoid) then
+							result := result and self.isAbstract == aspectElement.isAbstract
+						end
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+							result := result and self.name == aspectElement.name
+						end
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::MultiplicityElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class UnresolvedModelTypeDefinition {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ModelTypeDefinition is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ModelTypeDefinition is do
 					// TODO deal with aspectElementObj not a strict instance of UnresolvedModelTypeDefinition
 					var aspectElement : org::kermeta::language::structure::UnresolvedModelTypeDefinition
 					aspectElement ?= aspectElementObj
@@ -1749,10 +1990,14 @@ package kermeta {
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ModelTypeDefinition is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class UnresolvedModelTransformation {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ModelTransformation is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ModelTransformation is do
 					// TODO deal with aspectElementObj not a strict instance of UnresolvedModelTransformation
 					var aspectElement : org::kermeta::language::structure::UnresolvedModelTransformation
 					aspectElement ?= aspectElementObj
@@ -1760,14 +2005,21 @@ package kermeta {
 
 						
 						result := super( aspectElement)
+						if (not self.name.isVoid) and (not aspectElement.name.isVoid) then
+							result := result and self.name == aspectElement.name
+						end
 					else
 						result := false
 					end
 				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::ModelTransformation is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
+				end
 			}
 
 			aspect class ModelTypeDefinitionContainer {
-				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+				method genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
 					// TODO deal with aspectElementObj not a strict instance of ModelTypeDefinitionContainer
 					var aspectElement : org::kermeta::language::structure::ModelTypeDefinitionContainer
 					aspectElement ?= aspectElementObj
@@ -1778,6 +2030,10 @@ package kermeta {
 					else
 						result := false
 					end
+				end
+				method localMatch( aspectElementObj : kermeta::standard::Object) : Boolean from org::kermeta::language::structure::KermetaModelElement is do
+					//change the following line in order to customize the localMatch for this class
+					result := genericLocalMatch(aspectElementObj)
 				end
 			}
 
