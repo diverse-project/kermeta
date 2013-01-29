@@ -206,46 +206,7 @@ aspect class CallFeature {
 		self.target := target
 		result := self
 	end
-	
-	/**
-	 * Creates a new CallFeature to produce a propertyName.toString
-	 * 
-	 * @param propertyName
-	 *            element on which th toString method is called
-	 */
-	operation initializeForAToString(propertyName : String) : CallFeature is do
-		self.initialize("toString")
-		self.target := CallFeature.new.initialize(propertyName)
-		result := self
-	end
-	
-	/**
-	 * Creates a new CallFeature to produce a propertyName.isKindOf(type)
-	 *
-	 * @param propertyName
-	 *            element on which th isKindOf method is called
-	 * @param typeTest
-	 *            type to test through the isKindOf method
-	 * @param typesFromFramework
-	 *            types from framework this CallFeature needs
-	 */
-	operation initializeForAnIsKindOf(propertyName : String, typeTest : ClassDefinition, typesFromFramework : Hashtable<String,ClassDefinition>) : CallFeature is do
-		self.initialize("isKindOf")
-		//var cl_tl : Class init Class.new.initializeFromAClassDefinition(typesFromFramework.getValue("org::kermeta::language::structure::Class"))
-		//var cl_tr : Class init Class.new.initializeFromAClassDefinition(typeTest)
-		//var cl_pt : Class init Class.new.initializeFromAClassDefinition(typesFromFramework.getValue("org::kermeta::language::structure::Class"))
-		//var cl_ft : Class init Class.new.initializeFromAClassDefinition(typesFromFramework.getValue("kermeta::standard::Boolean"))
-		//var pt : ProductType init ProductType.new.initialize(cl_pt)
-		//var ft : FunctionType init FunctionType.new.initialize(pt, cl_ft)
-		//var tl : TypeLiteral init TypeLiteral.new.initializeTypeRef(cl_tl,cl_tr)
-		var tl : CallTypeLiteral init CallTypeLiteral.new
-		
-		//??!!?? CallFeature has not a containedType
-		//self.containedType.add(ft)
-		self.parameters.add(tl)
-		self.target := CallFeature.new.initialize(propertyName)
-		result := self
-	end
+
 }
 
 aspect class TypeReference {
