@@ -125,10 +125,10 @@ class MainRunnerGenerator(ecorePackages: java.util.List[Package], visitor: Packa
     res.append("    _root_.org.kermeta.utils.helpers.emf.ExtensibleURIConverterImplURIMapHelper.fillMapFromSystemPropertyFile(false)\n")
 
     res.append("    " + "_root_.")
-    if (ecorePackages.filter { e => visitor.getQualifiedName(e).equals(packageFullName) }.size == 1) {
+    /*if (ecorePackages.filter { e => visitor.getQualifiedName(e).equals(packageFullName) }.size == 1) {
       res.append(GlobalConfiguration.scalaAspectPrefix + ".")
 
-    }
+    }*/
     res.append(k2.utils.TypeEquivalence.getPackageEquivalence(packageFullName))
 
     res.append("." + GlobalConfiguration.factoryName + ".create" + cd.getName + "." + op.getName)
