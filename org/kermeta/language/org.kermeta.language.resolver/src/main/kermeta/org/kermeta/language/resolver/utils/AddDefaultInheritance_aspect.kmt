@@ -11,6 +11,7 @@ require kermeta
 require "platform:/resource/org.kermeta.language.model/src/main/ecore/kermeta.ecore"
 require "platform:/resource/org.kermeta.language.mdk/src/kmt/language/helpers/eachOwnedElement_kermeta_aspect.kmt"
 require "platform:/resource/org.kermeta.language.mdk/src/kmt/language/helpers/structure/GetQualifiedName_structure_aspect.kmt"
+require "platform:/lookup/org.kermeta.language.mdk/src/kmt/standard/StringUtils.kmt"
 
 aspect class KermetaModelElement
 {
@@ -29,9 +30,11 @@ aspect class ModelTypeDefinition
 {
 	method addDefaultInheritance() : Void is do
 		super()
-		if self.superType.isEmpty() and not (self.getQualifiedName() == "kermeta_standard^kermeta::standard::Object") then
+		// use qualified name kermeta::standard::Object instead of a full qualified name like kermeta_standard^kermeta::standard::Object
+		// because we aren't sure that we aren't in an extends of the framework
+		if self.superType.isEmpty() and (not self.getQualifiedName().endsWith("^kermeta::standard::Object")) then
 			var parent : UnresolvedType init UnresolvedType.new
-			parent.typeIdentifier := "kermeta_standard^kermeta::standard::Object"
+			parent.typeIdentifier := "kermeta::standard::Object"
 			self.superType.add(parent)
 			self.containedType.add(parent)
 		end
@@ -42,9 +45,11 @@ aspect class ClassDefinition
 {
 	method addDefaultInheritance() : Void is do
 		super()
-		if self.superType.isEmpty() and not (self.getQualifiedName() == "kermeta_standard^kermeta::standard::Object") then
+		// use qualified name kermeta::standard::Object instead of a full qualified name like kermeta_standard^kermeta::standard::Object
+		// because we aren't sure that we aren't in an extends of the framework
+		if self.superType.isEmpty() and not (self.getQualifiedName().endsWith("^kermeta::standard::Object")) then
 			var parent : UnresolvedType init UnresolvedType.new
-			parent.typeIdentifier := "kermeta_standard^kermeta::standard::Object"
+			parent.typeIdentifier := "kermeta::standard::Object"
 			self.superType.add(parent)
 			self.containedType.add(parent)
 		end
