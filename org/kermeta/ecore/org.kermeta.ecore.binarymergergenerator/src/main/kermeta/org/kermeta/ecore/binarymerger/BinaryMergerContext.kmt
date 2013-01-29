@@ -35,7 +35,14 @@ class BinaryMergerContext
 	 */
 	reference errors : org::kermeta::ecore::binarymerger::BinaryMergerException[*]
 	
+	/**
+	 * if true, will merge only exact similar things,
+	 * if false, then will use the possibly customized version (initialized to false by default)
+	 */
+	attribute useGenericMerge : Boolean
+	
 	operation initialize() : BinaryMergerContext is do
+		useGenericMerge := false
 	 	result := self
 	 end
 	

@@ -131,6 +131,8 @@ aspect class EClass {
 		content.append(context.indentString)
 		content.append("end")
 		
+		
+		
 		context.popIndent
 		content.append(context.indentString)
 		result := content.append("}").toString()

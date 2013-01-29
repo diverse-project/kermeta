@@ -238,9 +238,21 @@ aspect class EReference {
 		var mangledName : String init context.ecoreHelper.getMangledIdentifier(self.name) 
 		if (self.containment) then
 			if self.upperBound==1 then
-				content.append(context.indentString)				
-				content.append("mergedModelElement."+mangledName+" ?= self.selectUnaryProperty(\""+mangledName+
+				content.append(context.indentString)
+				content.append("if context.useGenericMerge then")
+				context.pushIndent
+					content.append(context.indentString)
+					content.append("mergedModelElement."+mangledName+" ?= self.selectFirstNonVoidProperty(\""+mangledName+
 													"\", self."+mangledName+", mergedModelElement."+ mangledName + ")")
+				content.append("else")
+				context.pushIndent
+					content.append(context.indentString)				
+					content.append("mergedModelElement."+mangledName+" ?= self.selectUnaryProperty(\""+mangledName+
+													"\", self."+mangledName+", mergedModelElement."+ mangledName + ")")
+				context.popIndent
+				content.append(context.indentString)
+				content.append("end")
+					
 			else	
 				content.append(context.indentString)
 				content.append("self.")				
@@ -257,8 +269,20 @@ aspect class EReference {
 					content.append(context.indentString)
 					content.append("equivalent_"+self.name+" := mergedModelElement."+mangledName+".detect{ merged_"+self.name+" |")
 					context.pushIndent
-						content.append(context.indentString) 
-						content.append("aspect_"+self.name+".localMatch(merged_"+self.name+")")
+						content.append(context.indentString)
+						content.append("if context.useGenericMerge then")
+							context.pushIndent
+							content.append(context.indentString) 
+							content.append("aspect_"+self.name+".genericLocalMatch(merged_"+self.name+")")
+							context.popIndent
+						content.append(context.indentString)
+						content.append("else")
+							context.pushIndent
+							content.append(context.indentString) 
+							content.append("aspect_"+self.name+".localMatch(merged_"+self.name+")")
+							context.popIndent
+						content.append(context.indentString)
+						content.append("end")
 					context.popIndent
 					content.append(context.indentString)														
 					content.append("}")

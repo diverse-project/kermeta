@@ -38,4 +38,15 @@ class Mergeable
 			result := self
 		end
 	end
+	
+	/**
+	 * used by generic merge strategy
+	 */
+	operation selectFirstNonVoidProperty( propertyName: kermeta::standard::String, primaryValue : kermeta::standard::Object, aspectValue : kermeta::standard::Object) : kermeta::standard::Object is do				
+		result := primaryValue
+		// select non void value
+		if (not aspectValue.isVoid) and (primaryValue.isVoid) then
+			result := aspectValue
+		end
+	end
 }

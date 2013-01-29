@@ -189,7 +189,7 @@ aspect class EClass {
 			content.append("operation")
 		end end
 		
-		content.append(" mergeReferences( ) : Void")
+		content.append(" mergeReferences( context : BinaryMergerContext ) : Void")
 		
 		if self.eSuperTypes.size()>0 then
 			 content.append(" from " + context.ecoreHelper.getClassifierQualifiedName(self.eSuperTypes.first))
@@ -207,10 +207,10 @@ aspect class EClass {
 				//content.append(context.indentString)
 				content.append("// workaround compiler V2 bug, cannot call super on a Class named \"Object\" \n")
 				content.append(context.indentString)
-				content.append("// super()")
+				content.append("// super(context)")
 			else
 				//content.append(context.indentString)
-				content.append("super()")
+				content.append("super(context)")
 			end
 		end					
 		self.eachOwnedElement{ e |
@@ -352,7 +352,25 @@ aspect class EReference {
 						content.append(context.indentString) 
 						content.append("// select content in aspect element which aren't in the mergedModel element")
 						content.append(context.indentString)
-						content.append("not mergedModelElement."+mangledName+".exists{ p | p.localMatch(o)}")
+						content.append("not mergedModelElement."+mangledName+".exists{ p | ")
+						context.pushIndent
+							content.append(context.indentString)
+							content.append("if context.useGenericMerge then")
+							context.pushIndent
+								content.append(context.indentString)
+								content.append("p.genericLocalMatch(o)")
+							context.popIndent
+							content.append(context.indentString)
+							content.append("else")
+							context.pushIndent
+								content.append(context.indentString)
+								content.append("p.localMatch(o)")
+							context.popIndent
+							content.append(context.indentString)
+							content.append("end")
+						context.popIndent
+						content.append(context.indentString)
+						content.append("}")
 					context.popIndent
 					content.append(context.indentString)
 					content.append("}.collect{ c |")

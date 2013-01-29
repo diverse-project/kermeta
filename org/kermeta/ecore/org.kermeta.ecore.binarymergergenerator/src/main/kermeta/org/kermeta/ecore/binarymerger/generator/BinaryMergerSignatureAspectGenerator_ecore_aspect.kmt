@@ -69,6 +69,7 @@ aspect class EClass {
 		content.append(context.indentString)
 				
 		
+		// #############   genericLocalMatch ###################
 		if self.eSuperTypes.size()>0 then
 			content.append("method")
 		else if (context.isMMReflexiveKermeta) then
@@ -83,7 +84,7 @@ aspect class EClass {
 			content.append("operation")
 		end end
 		
-		content.append(" localMatch( aspectElementObj : kermeta::standard::Object) : Boolean")
+		content.append(" genericLocalMatch( aspectElementObj : kermeta::standard::Object) : Boolean")
 		
 		if self.eSuperTypes.size()>0 then
 			 content.append(" from " + context.ecoreHelper.getClassifierQualifiedName(self.eSuperTypes.first))
@@ -151,6 +152,39 @@ aspect class EClass {
 		context.popIndent
 		content.append(context.indentString)
 		content.append("end")
+		context.popIndent
+		content.append(context.indentString)
+		content.append("end")
+		
+		
+		// #############   customizable localMatch ###################
+		content.append(context.indentString)
+		if self.eSuperTypes.size()>0 then
+			content.append("method")
+		else if (context.isMMReflexiveKermeta) then
+			// special case of creating  methods on kermeta itself
+			if (self.name == "Object") then
+				content.append("operation")
+			else
+				content.append("method")
+			end
+			
+		else
+			content.append("operation")
+		end end
+		
+		content.append(" localMatch( aspectElementObj : kermeta::standard::Object) : Boolean")
+		
+		if self.eSuperTypes.size()>0 then
+			 content.append(" from " + context.ecoreHelper.getClassifierQualifiedName(self.eSuperTypes.first))
+		end
+		
+		content.append(" is do")
+		context.pushIndent
+		content.append(context.indentString)
+		content.append("//change the following line in order to customize the localMatch for this class")
+		content.append(context.indentString)
+		content.append("result := genericLocalMatch(aspectElementObj)")
 		context.popIndent
 		content.append(context.indentString)
 		content.append("end")
