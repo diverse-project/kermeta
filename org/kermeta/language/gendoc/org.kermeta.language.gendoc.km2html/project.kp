@@ -1,0 +1,18 @@
+resource kermeta_standard ="platform:/plugin/org.kermeta.language.library.standard" alternative "mvn:org.kermeta.language/language.library.standard/2.0.99-SNAPSHOT"
+//resource kermeta_model ="platform:/plugin/org.kermeta.language.model" alternative "mvn:org.kermeta.language/language.model/2.0.99-SNAPSHOT"
+
+//importProject kermeta_standard
+
+project kermeta_km2html extends kermeta_standard {
+//project kermeta_prettyprinter {
+
+	mainClass "kermeta_km2html^gendoc::HtmlGenerator"
+	mainOperation "generateHtml"
+	
+	import "${project.baseUri}/src/main/kmt/Km2Html.kmt"
+	import "${project.baseUri}/src/main/kmt/Km2Html_structure_aspect.kmt"
+//	import "${kermeta_model.baseUri}/src/main/ecore/kermeta.ecore"
+
+}
+
+
