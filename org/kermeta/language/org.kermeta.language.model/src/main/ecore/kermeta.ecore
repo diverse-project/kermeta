@@ -93,7 +93,7 @@
             </eAnnotations>
           </eStructuralFeatures>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="CallFeature" eSuperTypes="#//kermeta/language/behavior/CallExpression">
+        <eClassifiers xsi:type="ecore:EClass" name="CallFeature" abstract="true" eSuperTypes="#//kermeta/language/behavior/CallExpression">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="documentation" value="CallFeature is the model element that refers to the use of a feature, i.e either &#xA;a property or an operation in a statement. In &lt;code>stdio.writeln(&quot;hello&quot;)&lt;/code>, &#xA;&lt;code>writeln&lt;/code> is a CallFeature."/>
           </eAnnotations>
@@ -630,7 +630,8 @@
             </eAnnotations>
           </eStructuralFeatures>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EClass" name="MultiplicityElement" eSuperTypes="#//kermeta/language/structure/TypedElement">
+        <eClassifiers xsi:type="ecore:EClass" name="MultiplicityElement" abstract="true"
+            eSuperTypes="#//kermeta/language/structure/TypedElement">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="documentation" value=" Model elements with a multiplicity [lower..upper] inherit this class"/>
           </eAnnotations>
@@ -954,7 +955,7 @@
               transient="true" defaultValueLiteral="false"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="ModelElementTypeDefinitionContainer"
-            eSuperTypes="#//kermeta/language/structure/NamedElement">
+            abstract="true" eSuperTypes="#//kermeta/language/structure/NamedElement">
           <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
             <details key="documentation" value="Abstraction of the notion of containment for type definitions. Now, kermeta metamodel contains one container&#xA;element, that is Package. In a later release, ModelTypeDefinition will be the main container for type and&#xA;package definition."/>
           </eAnnotations>
@@ -1277,7 +1278,7 @@
         <eClassifiers xsi:type="ecore:EClass" name="UnresolvedModelTransformation"
             eSuperTypes="#//kermeta/language/structure/ModelTransformation #//kermeta/language/structure/UnresolvedReference"/>
         <eClassifiers xsi:type="ecore:EClass" name="ModelTypeDefinitionContainer"
-            eSuperTypes="#//kermeta/language/structure/KermetaModelElement">
+            abstract="true" eSuperTypes="#//kermeta/language/structure/KermetaModelElement">
           <eStructuralFeatures xsi:type="ecore:EReference" name="ownedModelTypeDefinitions"
               upperBound="-1" eType="#//kermeta/language/structure/ModelTypeDefinition"
               containment="true"/>

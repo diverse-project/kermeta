@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see org.kermeta.language.structure.StructurePackage#getModelTypeDefinitionContainer()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface ModelTypeDefinitionContainer extends KermetaModelElement {

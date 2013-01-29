@@ -29,7 +29,7 @@ import org.kermeta.language.behavior.Expression;
  *
  * @generated
  */
-public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
+public abstract class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	/**
 	 * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference.
 	 * <!-- begin-user-doc -->

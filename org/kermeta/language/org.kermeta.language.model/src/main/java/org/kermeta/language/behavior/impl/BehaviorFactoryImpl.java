@@ -63,7 +63,6 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements BehaviorFactory
 			case BehaviorPackage.ASSIGNMENT: return createAssignment();
 			case BehaviorPackage.BLOCK: return createBlock();
 			case BehaviorPackage.CALL_VARIABLE: return createCallVariable();
-			case BehaviorPackage.CALL_FEATURE: return createCallFeature();
 			case BehaviorPackage.CALL_SUPER_OPERATION: return createCallSuperOperation();
 			case BehaviorPackage.CALL_RESULT: return createCallResult();
 			case BehaviorPackage.CALL_VALUE: return createCallValue();
@@ -121,16 +120,6 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements BehaviorFactory
 	public CallVariable createCallVariable() {
 		CallVariableImpl callVariable = new CallVariableImpl();
 		return callVariable;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public CallFeature createCallFeature() {
-		CallFeatureImpl callFeature = new CallFeatureImpl();
-		return callFeature;
 	}
 
 	/**

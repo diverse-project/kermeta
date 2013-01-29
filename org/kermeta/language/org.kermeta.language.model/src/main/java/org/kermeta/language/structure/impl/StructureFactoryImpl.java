@@ -111,7 +111,6 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 			case StructurePackage.PROPERTY: return createProperty();
 			case StructurePackage.ENUMERATION_LITERAL: return createEnumerationLiteral();
 			case StructurePackage.TYPE_VARIABLE_BINDING: return createTypeVariableBinding();
-			case StructurePackage.MULTIPLICITY_ELEMENT: return createMultiplicityElement();
 			case StructurePackage.TYPE_DEFINITION: return createTypeDefinition();
 			case StructurePackage.CLASS: return createClass();
 			case StructurePackage.ENUMERATION: return createEnumeration();
@@ -122,7 +121,6 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 			case StructurePackage.CONSTRAINT: return createConstraint();
 			case StructurePackage.CLASS_DEFINITION: return createClassDefinition();
 			case StructurePackage.METAMODEL: return createMetamodel();
-			case StructurePackage.MODEL_ELEMENT_TYPE_DEFINITION_CONTAINER: return createModelElementTypeDefinitionContainer();
 			case StructurePackage.OBJECT_TYPE_VARIABLE: return createObjectTypeVariable();
 			case StructurePackage.MODEL_TYPE_VARIABLE: return createModelTypeVariable();
 			case StructurePackage.VIRTUAL_TYPE: return createVirtualType();
@@ -153,7 +151,6 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 			case StructurePackage.MODEL_TRANSFORMATION: return createModelTransformation();
 			case StructurePackage.UNRESOLVED_MODEL_TYPE_DEFINITION: return createUnresolvedModelTypeDefinition();
 			case StructurePackage.UNRESOLVED_MODEL_TRANSFORMATION: return createUnresolvedModelTransformation();
-			case StructurePackage.MODEL_TYPE_DEFINITION_CONTAINER: return createModelTypeDefinitionContainer();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -254,16 +251,6 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MultiplicityElement createMultiplicityElement() {
-		MultiplicityElementImpl multiplicityElement = new MultiplicityElementImpl();
-		return multiplicityElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public TypeDefinition createTypeDefinition() {
 		TypeDefinitionImpl typeDefinition = new TypeDefinitionImpl();
 		return typeDefinition;
@@ -354,16 +341,6 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelElementTypeDefinitionContainer createModelElementTypeDefinitionContainer() {
-		ModelElementTypeDefinitionContainerImpl modelElementTypeDefinitionContainer = new ModelElementTypeDefinitionContainerImpl();
-		return modelElementTypeDefinitionContainer;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public ObjectTypeVariable createObjectTypeVariable() {
 		ObjectTypeVariableImpl objectTypeVariable = new ObjectTypeVariableImpl();
 		return objectTypeVariable;
@@ -447,16 +424,6 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	public UnresolvedModelTransformation createUnresolvedModelTransformation() {
 		UnresolvedModelTransformationImpl unresolvedModelTransformation = new UnresolvedModelTransformationImpl();
 		return unresolvedModelTransformation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ModelTypeDefinitionContainer createModelTypeDefinitionContainer() {
-		ModelTypeDefinitionContainerImpl modelTypeDefinitionContainer = new ModelTypeDefinitionContainerImpl();
-		return modelTypeDefinitionContainer;
 	}
 
 	/**

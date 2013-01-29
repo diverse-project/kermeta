@@ -53,15 +53,6 @@ public interface BehaviorFactory extends EFactory {
 	CallVariable createCallVariable();
 
 	/**
-	 * Returns a new object of class '<em>Call Feature</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Call Feature</em>'.
-	 * @generated
-	 */
-	CallFeature createCallFeature();
-
-	/**
 	 * Returns a new object of class '<em>Call Super Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

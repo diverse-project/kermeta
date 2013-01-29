@@ -35,7 +35,7 @@ import org.kermeta.language.structure.StructurePackage;
  *
  * @generated
  */
-public class ModelElementTypeDefinitionContainerImpl extends NamedElementImpl implements ModelElementTypeDefinitionContainer {
+public abstract class ModelElementTypeDefinitionContainerImpl extends NamedElementImpl implements ModelElementTypeDefinitionContainer {
 	/**
 	 * The cached value of the '{@link #getOwnedTypeDefinition() <em>Owned Type Definition</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

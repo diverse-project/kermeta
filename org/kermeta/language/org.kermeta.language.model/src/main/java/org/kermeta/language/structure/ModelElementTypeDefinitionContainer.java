@@ -27,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.kermeta.language.structure.StructurePackage#getModelElementTypeDefinitionContainer()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface ModelElementTypeDefinitionContainer extends NamedElement {

@@ -29,7 +29,7 @@ import org.kermeta.language.structure.StructurePackage;
  *
  * @generated
  */
-public class MultiplicityElementImpl extends TypedElementImpl implements MultiplicityElement {
+public abstract class MultiplicityElementImpl extends TypedElementImpl implements MultiplicityElement {
 	/**
 	 * The default value of the '{@link #getIsOrdered() <em>Is Ordered</em>}' attribute.
 	 * <!-- begin-user-doc -->

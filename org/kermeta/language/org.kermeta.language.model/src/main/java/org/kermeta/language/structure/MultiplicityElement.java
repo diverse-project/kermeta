@@ -28,7 +28,7 @@ package org.kermeta.language.structure;
  * </p>
  *
  * @see org.kermeta.language.structure.StructurePackage#getMultiplicityElement()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface MultiplicityElement extends TypedElement {

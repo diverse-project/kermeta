@@ -27,7 +27,7 @@ package org.kermeta.language.behavior;
  * </p>
  *
  * @see org.kermeta.language.behavior.BehaviorPackage#getCallFeature()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface CallFeature extends CallExpression {

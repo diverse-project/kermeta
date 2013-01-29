@@ -62,15 +62,6 @@ public interface StructureFactory extends EFactory {
 	TypeVariableBinding createTypeVariableBinding();
 
 	/**
-	 * Returns a new object of class '<em>Multiplicity Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Multiplicity Element</em>'.
-	 * @generated
-	 */
-	MultiplicityElement createMultiplicityElement();
-
-	/**
 	 * Returns a new object of class '<em>Type Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -152,15 +143,6 @@ public interface StructureFactory extends EFactory {
 	ClassDefinition createClassDefinition();
 
 	/**
-	 * Returns a new object of class '<em>Model Element Type Definition Container</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Model Element Type Definition Container</em>'.
-	 * @generated
-	 */
-	ModelElementTypeDefinitionContainer createModelElementTypeDefinitionContainer();
-
-	/**
 	 * Returns a new object of class '<em>Object Type Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -240,15 +222,6 @@ public interface StructureFactory extends EFactory {
 	 * @generated
 	 */
 	UnresolvedModelTransformation createUnresolvedModelTransformation();
-
-	/**
-	 * Returns a new object of class '<em>Model Type Definition Container</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Model Type Definition Container</em>'.
-	 * @generated
-	 */
-	ModelTypeDefinitionContainer createModelTypeDefinitionContainer();
 
 	/**
 	 * Returns a new object of class '<em>Virtual Type</em>'.
