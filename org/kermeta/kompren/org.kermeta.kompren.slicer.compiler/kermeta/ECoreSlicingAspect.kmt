@@ -7,7 +7,7 @@
 package ecore;
 
 using kermeta::standard::*
-using org2::kermeta::kompren::slicer::*
+using ^org2::kermeta::kompren::slicer::*
 
 aspect class EStructuralFeature {
 	operation getValidKermetaName() : String is do
