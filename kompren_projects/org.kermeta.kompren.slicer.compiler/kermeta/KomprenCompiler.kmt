@@ -13,6 +13,7 @@ using ecore::*
 using kermeta::io::StdIO => stdio
 
 class KomprenCompiler {
+	@main "platform:/resource/org.kermeta.kompren.slicer.compiler/examples/clazz/clazz.kompren"
 	operation compile(uriSlicer : String) is do
 		var slicerModel : Slicer := getSlicerModel(uriSlicer)
 		var pkg 		: EPackage init getEcoreModel(slicerModel.uriMetamodel).one
