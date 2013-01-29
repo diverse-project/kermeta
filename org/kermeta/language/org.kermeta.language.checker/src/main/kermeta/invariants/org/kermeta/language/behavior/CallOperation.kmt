@@ -240,7 +240,7 @@ aspect class CallOperation
 			loop
 				
 				//stdio.writeln("--------")
-				//stdio.writeln("calling isSubtypeOf on parameter : " + self.parameters.at(i).staticType.toString)
+				//stdio.writeln("calling isSubtypeOf on parameter : " +self.parameters.at(i).staticType.toString + " " + self.toString + " " + self.parameters.at(i).toString)
 				var expectedType : Type init helper.createTypeFromMultiplicityElement(self.staticOperation.ownedParameter.at(i))
 				//stdio.writeln("                   expected type : " + expectedType.toString)
 				myresult := myresult and (self.parameters.at(i).staticType.isSubTypeOf(expectedType.cloneWithBindings(typesToSet)))	
