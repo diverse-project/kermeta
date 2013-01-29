@@ -166,29 +166,6 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.MultiplicityElement} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected MultiplicityElementItemProvider multiplicityElementItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.kermeta.language.structure.MultiplicityElement}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createMultiplicityElementAdapter() {
-		if (multiplicityElementItemProvider == null) {
-			multiplicityElementItemProvider = new MultiplicityElementItemProvider(this);
-		}
-
-		return multiplicityElementItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.TypeDefinition} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -393,29 +370,6 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 		}
 
 		return classDefinitionItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.ModelElementTypeDefinitionContainer} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ModelElementTypeDefinitionContainerItemProvider modelElementTypeDefinitionContainerItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.kermeta.language.structure.ModelElementTypeDefinitionContainer}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createModelElementTypeDefinitionContainerAdapter() {
-		if (modelElementTypeDefinitionContainerItemProvider == null) {
-			modelElementTypeDefinitionContainerItemProvider = new ModelElementTypeDefinitionContainerItemProvider(this);
-		}
-
-		return modelElementTypeDefinitionContainerItemProvider;
 	}
 
 	/**
@@ -1132,29 +1086,6 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.language.structure.ModelTypeDefinitionContainer} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ModelTypeDefinitionContainerItemProvider modelTypeDefinitionContainerItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.kermeta.language.structure.ModelTypeDefinitionContainer}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createModelTypeDefinitionContainerAdapter() {
-		if (modelTypeDefinitionContainerItemProvider == null) {
-			modelTypeDefinitionContainerItemProvider = new ModelTypeDefinitionContainerItemProvider(this);
-		}
-
-		return modelTypeDefinitionContainerItemProvider;
-	}
-
-	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1257,7 +1188,6 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 		if (propertyItemProvider != null) propertyItemProvider.dispose();
 		if (enumerationLiteralItemProvider != null) enumerationLiteralItemProvider.dispose();
 		if (typeVariableBindingItemProvider != null) typeVariableBindingItemProvider.dispose();
-		if (multiplicityElementItemProvider != null) multiplicityElementItemProvider.dispose();
 		if (typeDefinitionItemProvider != null) typeDefinitionItemProvider.dispose();
 		if (classItemProvider != null) classItemProvider.dispose();
 		if (enumerationItemProvider != null) enumerationItemProvider.dispose();
@@ -1268,7 +1198,6 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 		if (constraintItemProvider != null) constraintItemProvider.dispose();
 		if (classDefinitionItemProvider != null) classDefinitionItemProvider.dispose();
 		if (metamodelItemProvider != null) metamodelItemProvider.dispose();
-		if (modelElementTypeDefinitionContainerItemProvider != null) modelElementTypeDefinitionContainerItemProvider.dispose();
 		if (objectTypeVariableItemProvider != null) objectTypeVariableItemProvider.dispose();
 		if (modelTypeVariableItemProvider != null) modelTypeVariableItemProvider.dispose();
 		if (virtualTypeItemProvider != null) virtualTypeItemProvider.dispose();
@@ -1299,7 +1228,6 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 		if (modelTransformationItemProvider != null) modelTransformationItemProvider.dispose();
 		if (unresolvedModelTypeDefinitionItemProvider != null) unresolvedModelTypeDefinitionItemProvider.dispose();
 		if (unresolvedModelTransformationItemProvider != null) unresolvedModelTransformationItemProvider.dispose();
-		if (modelTypeDefinitionContainerItemProvider != null) modelTypeDefinitionContainerItemProvider.dispose();
 	}
 
 }

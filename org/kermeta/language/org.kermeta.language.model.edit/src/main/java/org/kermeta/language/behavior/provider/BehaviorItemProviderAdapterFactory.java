@@ -143,29 +143,6 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.language.behavior.CallFeature} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected CallFeatureItemProvider callFeatureItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.kermeta.language.behavior.CallFeature}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createCallFeatureAdapter() {
-		if (callFeatureItemProvider == null) {
-			callFeatureItemProvider = new CallFeatureItemProvider(this);
-		}
-
-		return callFeatureItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.kermeta.language.behavior.CallSuperOperation} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -819,7 +796,6 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 		if (assignmentItemProvider != null) assignmentItemProvider.dispose();
 		if (blockItemProvider != null) blockItemProvider.dispose();
 		if (callVariableItemProvider != null) callVariableItemProvider.dispose();
-		if (callFeatureItemProvider != null) callFeatureItemProvider.dispose();
 		if (callSuperOperationItemProvider != null) callSuperOperationItemProvider.dispose();
 		if (callResultItemProvider != null) callResultItemProvider.dispose();
 		if (callValueItemProvider != null) callValueItemProvider.dispose();

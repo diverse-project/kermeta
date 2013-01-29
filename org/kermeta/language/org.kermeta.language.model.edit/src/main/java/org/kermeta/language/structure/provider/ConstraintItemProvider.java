@@ -218,11 +218,6 @@ public class ConstraintItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.CONSTRAINT__BODY,
-				 BehaviorFactory.eINSTANCE.createCallFeature()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createCallOperation()));
 
 		newChildDescriptors.add

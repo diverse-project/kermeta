@@ -170,11 +170,6 @@ public class LambdaExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.Literals.LAMBDA_EXPRESSION__BODY,
-				 BehaviorFactory.eINSTANCE.createCallFeature()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.LAMBDA_EXPRESSION__BODY,
 				 BehaviorFactory.eINSTANCE.createCallOperation()));
 
 		newChildDescriptors.add

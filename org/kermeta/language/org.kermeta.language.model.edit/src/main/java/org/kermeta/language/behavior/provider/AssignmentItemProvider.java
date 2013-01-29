@@ -190,11 +190,6 @@ public class AssignmentItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.Literals.ASSIGNMENT__TARGET,
-				 BehaviorFactory.eINSTANCE.createCallFeature()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.ASSIGNMENT__TARGET,
 				 BehaviorFactory.eINSTANCE.createCallOperation()));
 
 		newChildDescriptors.add
@@ -246,11 +241,6 @@ public class AssignmentItemProvider
 			(createChildParameter
 				(BehaviorPackage.Literals.ASSIGNMENT__VALUE,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.ASSIGNMENT__VALUE,
-				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
 		newChildDescriptors.add
 			(createChildParameter

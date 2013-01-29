@@ -196,11 +196,6 @@ public class VariableDeclItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
-				 BehaviorFactory.eINSTANCE.createCallFeature()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createCallOperation()));
 
 		newChildDescriptors.add

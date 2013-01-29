@@ -247,11 +247,6 @@ public class ModelTransformationItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.MODEL_TRANSFORMATION__BODY,
-				 BehaviorFactory.eINSTANCE.createCallFeature()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.MODEL_TRANSFORMATION__BODY,
 				 BehaviorFactory.eINSTANCE.createCallOperation()));
 
 		newChildDescriptors.add

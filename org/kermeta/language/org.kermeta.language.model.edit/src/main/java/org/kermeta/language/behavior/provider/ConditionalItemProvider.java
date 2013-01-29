@@ -167,11 +167,6 @@ public class ConditionalItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.Literals.CONDITIONAL__THEN_BODY,
-				 BehaviorFactory.eINSTANCE.createCallFeature()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.CONDITIONAL__THEN_BODY,
 				 BehaviorFactory.eINSTANCE.createCallOperation()));
 
 		newChildDescriptors.add
@@ -292,11 +287,6 @@ public class ConditionalItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.Literals.CONDITIONAL__ELSE_BODY,
-				 BehaviorFactory.eINSTANCE.createCallFeature()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.CONDITIONAL__ELSE_BODY,
 				 BehaviorFactory.eINSTANCE.createCallOperation()));
 
 		newChildDescriptors.add
@@ -413,11 +403,6 @@ public class ConditionalItemProvider
 			(createChildParameter
 				(BehaviorPackage.Literals.CONDITIONAL__CONDITION,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.CONDITIONAL__CONDITION,
-				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -292,11 +292,6 @@ public class OperationItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.OPERATION__BODY,
-				 BehaviorFactory.eINSTANCE.createCallFeature()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.OPERATION__BODY,
 				 BehaviorFactory.eINSTANCE.createCallOperation()));
 
 		newChildDescriptors.add
