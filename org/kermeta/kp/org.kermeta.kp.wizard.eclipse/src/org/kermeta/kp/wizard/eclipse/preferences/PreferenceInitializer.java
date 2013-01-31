@@ -36,7 +36,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 				"importProject library_standard\n" +
 
 				"project ${project.name} {\n"+ 
-				"\tmainClass \"${project.name}#${package.name}::${class.name}\"\n"+ 
+				"\tmainClass \"${project.name}^${package.name}::${class.name}\"\n"+ 
 				"\tmainOperation \"${operation.name}\"\n\n"+
 					
 				"\timport \"${project.baseUri}/src/main/kmt/${class.name}.kmt\"\n"+ 
