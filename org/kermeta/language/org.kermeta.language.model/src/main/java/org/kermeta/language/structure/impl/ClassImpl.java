@@ -152,9 +152,7 @@ public class ClassImpl extends ParameterizedTypeImpl implements org.kermeta.lang
 					sb.append(", ");
 					first = false;
 				}
-				if(tpb.getType() instanceof NamedElement){
-					sb.append(((NamedElement)tpb.getType()).getName());
-				}
+				sb.append(Helper.getTypeName(tpb.getType()));				
 			}
 			sb.append("]");
 		}
