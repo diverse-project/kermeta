@@ -443,6 +443,17 @@ public class KermetaCompiler {
 			}*/
 
 			CollectSourcesHelper collectSourceHelper = new CollectSourcesHelper(this, logger);
+			
+			
+			// merging importProject
+			logger.progress(getMainProgressGroup()+".kp2bytecode", "Identifing projects to import...", LOG_MESSAGE_GROUP, 1);
+						
+			MergeImportProjectBuilder mergeImportProjectBuilder = new MergeImportProjectBuilder(this, logger);
+			ErrorProneResult<ModelingUnit> mergedImportProjects = mergeImportProjectBuilder.getMergedImportProjects(kp);
+			// TODO find a way to disable previous preresolve if mergedImport has changed
+			// currently the preresolve isn't aware if the import changes !!!
+			
+			
 			logger.progress(getMainProgressGroup()+".kp2bytecode", "Identifing sources to load...", LOG_MESSAGE_GROUP, 1);
 			ArrayList<TracedURL> kpSources = collectSourceHelper.getSources4Merge(kp,kpFileURL);
 			if (kpSources.size() == 0) {
@@ -493,7 +504,11 @@ public class KermetaCompiler {
 				logger.progress(getMainProgressGroup()+".kp2bytecode", "PreresolveLoading "+kpPreResolveSources.size()+" sources...", LOG_MESSAGE_GROUP, 1);
 				
 				if (kpPreResolveSources.size() != 0) {
-					List<ModelingUnit> preresolveModelingUnits = collectSourceHelper.getSourceModelingUnits(kp, kpPreResolveSources, dirtyMU);				
+					List<ModelingUnit> preresolveModelingUnits = collectSourceHelper.getSourceModelingUnits(kp, kpPreResolveSources, dirtyMU);
+					if (mergedImportProjects != null) {
+						// add the importProject as preresolve
+						preresolveModelingUnits.add(0, mergedImportProjects.getResult());
+					}
 					logger.progress(getMainProgressGroup()+".kp2bytecode", "PreresolveMerging " + preresolveModelingUnits.size() + " files...", LOG_MESSAGE_GROUP, 1);
 					ErrorProneResult<ModelingUnit> preresolvedMergedUnit = mergeModelingUnits(kp, preresolveModelingUnits);
 			
@@ -518,23 +533,27 @@ public class KermetaCompiler {
 					
 					logger.progress(getMainProgressGroup()+".kp2bytecode", "PreResolving...", LOG_MESSAGE_GROUP, 1);
 					preResolvedUnit = resolveModelingUnit(preresolvedMergedUnit.getResult(), kpFileURL, true);
-			
-					if (preResolvedUnit == null || preResolvedUnit.getMetamodels().isEmpty()) {
-						this.errorMessage = "The preresolved result is not valid. Compilation not complete for this project.";
-						logger.logProblem(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
-						logger.log(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP);
-						this.hasFailed = true;
-						return preResolvedUnit;
-					}
-					else{
-						URI saveKMURI = URI.createURI(preResolveCacheUrl);
-						preResolvedUnit.setName(saveKMURI.lastSegment());
-						new ModelingUnitConverter(true,saveKMURI.toFileString(), logger).saveMu(preResolvedUnit, saveKMURI);
-						
-						savePreResolveSrcList(preResolveSrcListUrl,kpPreResolveSources);
-					}
-			
 				}
+				else {
+					// use the importProject as preresolve
+					if (mergedImportProjects != null){preResolvedUnit = mergedImportProjects.getResult();}
+				}
+				if (preResolvedUnit == null || preResolvedUnit.getMetamodels().isEmpty()) {
+					this.errorMessage = "The preresolved result is not valid. Compilation not complete for this project.";
+					logger.logProblem(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP, new FileReference(FileHelpers.StringToURL(kpFileURL)));
+					logger.log(MessagingSystem.Kind.UserERROR, this.errorMessage, LOG_MESSAGE_GROUP);
+					this.hasFailed = true;
+					return preResolvedUnit;
+				}
+				else{
+					URI saveKMURI = URI.createURI(preResolveCacheUrl);
+					preResolvedUnit.setName(saveKMURI.lastSegment());
+					new ModelingUnitConverter(true,saveKMURI.toFileString(), logger).saveMu(preResolvedUnit, saveKMURI);
+					
+					savePreResolveSrcList(preResolveSrcListUrl,kpPreResolveSources);
+				}
+			
+				
 			}
 			
 			// deal with the remaining merge an resolve

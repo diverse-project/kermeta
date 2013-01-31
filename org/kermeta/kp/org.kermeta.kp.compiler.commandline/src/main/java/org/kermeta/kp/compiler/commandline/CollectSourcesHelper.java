@@ -256,8 +256,8 @@ public class CollectSourcesHelper {
 
 	/**
 	 * Get all sources for the given project including dependencies (ie.
-	 * ImportProjectJar and ImportProjectSources) and indirectly loaded sources
-	 * Ie. everything that need to go in the merge process
+	 *  ImportProjectSources) and indirectly loaded sources
+	 * Ie. everything that need to go in the normal merge process for the current Metamodel
 	 * 
 	 * @param kp
 	 * @param kpFileUrl
@@ -272,6 +272,20 @@ public class CollectSourcesHelper {
 		kpSources.addAll(getResolvedImportProjectSources(kp, kpFileUrl));
 		logger.debug("(getSources4Merge) found " + kpSources.size()
 				+ " files sources", getMessageGroup());
+		return kpSources;
+	}
+	/**
+	 * Get all import km for the given project including  indirectly loaded projects
+	 * Ie. everything that need to go in the generic merge process, ie.that suppose that if a metamodel appears twice it must be the very same
+	 * 
+	 * @param kp
+	 * @param kpFileUrl
+	 * @return
+	 * @throws IOException
+	 */
+	public ArrayList<TracedURL> getProjects4GenericMerge(KermetaProject kp) throws IOException {
+
+		ArrayList<TracedURL> kpSources = new ArrayList<TracedURL>();
 		KpVariableExpander varExpander = new KpVariableExpander(kp.eResource()
 				.getURI().toString(), kp, compiler.fileSystemConverter, logger);
 
