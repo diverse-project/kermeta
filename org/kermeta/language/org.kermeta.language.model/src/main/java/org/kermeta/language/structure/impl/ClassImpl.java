@@ -17,6 +17,7 @@ import org.kermeta.language.structure.Property;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.Type;
 import org.kermeta.language.structure.TypeVariableBinding;
+import org.kermeta.language.util.Helper;
 
 /**
  * <!-- begin-user-doc -->

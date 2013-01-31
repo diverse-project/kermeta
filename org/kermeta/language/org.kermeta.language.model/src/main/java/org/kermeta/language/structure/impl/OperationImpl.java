@@ -25,10 +25,12 @@ import org.kermeta.language.structure.ClassDefinition;
 import org.kermeta.language.structure.Constraint;
 import org.kermeta.language.structure.Operation;
 import org.kermeta.language.structure.Parameter;
+import org.kermeta.language.structure.ParameterizedType;
 import org.kermeta.language.structure.StructurePackage;
 import org.kermeta.language.structure.Type;
 import org.kermeta.language.structure.TypeVariable;
 import org.kermeta.language.structure.UnresolvedOperation;
+import org.kermeta.language.util.Helper;
 
 /**
  * <!-- begin-user-doc -->
@@ -381,9 +383,9 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 		if (uniqueName==null) {
 			StringBuffer unique = new StringBuffer();
 			unique.append(this.getName());
-			unique.append(getOwnedParameter().size());
+			unique.append("_"+getOwnedParameter().size()+"_");
 			for (Parameter aParameter : getOwnedParameter()) {
-				unique.append(aParameter.getType());
+				unique.append(Helper.getTypeName(aParameter.getType()));
 			}
 			setUniqueName(unique.toString());
 		}
