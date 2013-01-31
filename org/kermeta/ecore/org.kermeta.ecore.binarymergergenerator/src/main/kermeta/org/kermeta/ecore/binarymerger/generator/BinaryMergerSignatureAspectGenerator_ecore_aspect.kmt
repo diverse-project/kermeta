@@ -210,7 +210,7 @@ aspect class EReference {
 				content.append("if (not self."+mangledName+".isVoid) and (not aspectElement."+mangledName+".isVoid) then")
 				context.pushIndent
 				content.append(context.indentString)
-				content.append("result := result and self."+mangledName+" == aspectElement."+mangledName)					
+				content.append("result := result and self."+mangledName+".genericLocalMatch(aspectElement."+mangledName+")")					
 				context.popIndent
 				content.append(context.indentString)
 				content.append("end")		
