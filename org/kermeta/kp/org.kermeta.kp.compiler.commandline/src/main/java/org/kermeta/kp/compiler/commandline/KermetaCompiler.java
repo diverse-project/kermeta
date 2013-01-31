@@ -79,7 +79,7 @@ public class KermetaCompiler {
 	
 	public static String DEFAULT_KP_METAINF_LOCATION_IN_JAR = "/META-INF/kermeta";
 	public static String DEFAULT_REFLEXIVITY_LOCATION_IN_JAR = "/META-INF/kermeta";
-	public static String DEFAULT_REFLEXIVITY_LOCATION_IN_ECLIPSE = "/target";
+	public static String DEFAULT_REFLEXIVITY_LOCATION_IN_ECLIPSE = "/target/resources"+DEFAULT_REFLEXIVITY_LOCATION_IN_JAR;
 	public static String DEFAULT_KP_LOCATION_IN_JAR = DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/project.kp";
 	public static String DEFAULT_KP_LOCATION_IN_FOLDER = "/project.kp";
 	public static String DEFAULT_BINARY_LOCATION_IN_ECLIPSE = "/target/scalaclasses";

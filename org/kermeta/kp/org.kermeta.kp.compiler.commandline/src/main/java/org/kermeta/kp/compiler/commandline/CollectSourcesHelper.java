@@ -234,7 +234,7 @@ public class CollectSourcesHelper {
 					"getResolvedImportProjectSources found only "+kps.size() + " kp projects in resources while looking in " + kp.getImportedProjectSources().size() +" ImportedProjectSources"
 					, getMessageGroup());
 		}
-		else{
+		else if(kp.getImportedProjectSources().size() > 0) {
 			logger.log(
 					MessagingSystem.Kind.DevINFO,
 					"getResolvedImportProjectSources found "+kps.size() + " kp projects while looking in " + kp.getImportedProjectSources().size() +" ImportedProjectSources"
