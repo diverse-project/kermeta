@@ -71,6 +71,8 @@ class BinaryMerger
 				if (existingCorrespondingMMs.isEmpty) then
 					// simply add this mm
 					mergedMetamodels.add(mmToMerge)
+					// mark as moved element so its references could be fixed
+					context.movedElementsNeedingReferenceFix.add(mmToMerge)
 				else do
 					mmToMerge.similarElementInMergedModel := existingCorrespondingMMs.one // there is normally only one CorrespondingMM  
 					mmToMerge.binaryMerger_MoveToMergedModel(context)
@@ -90,8 +92,20 @@ class BinaryMerger
 					getErrors.add(mergeException)
 				end
 			}
+			var indirectlyMovedElements : Bag<KermetaModelElement> init Bag<KermetaModelElement>.new 
 			context.movedElementsNeedingReferenceFix.each{o |
 				o.asType(KermetaModelElement).fixReferences
+				o.asType(KermetaModelElement).eachOwnedElement{ e |  
+					if e.isInstanceOf(KermetaModelElement) then
+				   		indirectlyMovedElements.add(e.asType(KermetaModelElement))
+				   	end
+				   	e
+				}
+			}
+			// indirectly moved elements, will also need reference fix
+			stdio.writeln("fixing references of indirectly moved elements")
+			indirectlyMovedElements.each{ o |
+				o.fixReferences
 			}
 		rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 			getErrors.add(mergeException)
@@ -129,6 +143,8 @@ class BinaryMerger
 				if (existingCorrespondingMMs.isEmpty) then
 					// simply add this mm
 					mergedMetamodels.add(mmToMerge)
+					// mark as moved element so its references could be fixed
+					context.movedElementsNeedingReferenceFix.add(mmToMerge)
 				else do
 					mmToMerge.similarElementInMergedModel := existingCorrespondingMMs.one // there is normally only one CorrespondingMM  
 					mmToMerge.binaryMerger_MoveToMergedModel(context)
@@ -148,9 +164,22 @@ class BinaryMerger
 					getErrors.add(mergeException)
 				end
 			}
+			var indirectlyMovedElements : Bag<KermetaModelElement> init Bag<KermetaModelElement>.new 
 			context.movedElementsNeedingReferenceFix.each{o |
 				o.asType(KermetaModelElement).fixReferences
+				o.asType(KermetaModelElement).eachOwnedElement{ e |  
+					if e.isInstanceOf(KermetaModelElement) then
+				   		indirectlyMovedElements.add(e.asType(KermetaModelElement))
+				   	end
+				   	e
+				}
 			}
+			// indirectly moved elements, will also need reference fix
+			stdio.writeln("fixing references of indirectly moved elements")
+			indirectlyMovedElements.each{ o |
+				o.fixReferences
+			}
+			
 		rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 			getErrors.add(mergeException)
 		end

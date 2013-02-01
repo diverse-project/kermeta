@@ -20,7 +20,7 @@ class BinaryMergerContext
 {
 
 	/**
-	 * List of elements that may require a fix of their references (ie. link not involved in the composition)
+	 * List of elements that may require a fix of their references (ie. have link not involved in the composition)
 	 */
 	reference movedElementsNeedingReferenceFix : bag Mergeable[0..*]
 	

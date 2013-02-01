@@ -49,4 +49,17 @@ class Mergeable
 			result := aspectValue
 		end
 	end
+	
+	/**
+	 * indicates if this element has already been marked for referenceMerge
+	 * void is considered as false
+	 */
+	attribute isAddedForReferenceMerge : kermeta::standard::Boolean
+	
+	/**
+	 * indicates if this element has already been marked for referenceFix
+	 * void is considered as false
+	 */
+	attribute isAddedForReferenceFix : kermeta::standard::Boolean
+	
 }
