@@ -1196,14 +1196,11 @@ package kermeta {
 					var aspectModelElement : org::kermeta::language::structure::ParameterizedType
 					aspectModelElement ?= self.similarElementInAspectModel
 					super()
-					stdio.writeln("[fixReferences]1"+self.toString + " " +self.container.toString)
 					if not self.typeDefinition.isVoid then
-						self.typeDefinition := self.typeDefinition.getElementInMergedModel.asType(org::kermeta::language::structure::GenericTypeDefinition)
-						/* if not self.typeDefinition.similarElementInMergedModel.isVoid then
+						if not self.typeDefinition.similarElementInMergedModel.isVoid then
 							// element pointed by this moved element is still in the unmoved model
-							stdio.writeln("[fixReferences]2"+self.toString + " " +self.container.toString)
 							self.typeDefinition := self.typeDefinition.similarElementInMergedModel.asType(org::kermeta::language::structure::GenericTypeDefinition)
-						end */
+						end
 					end
 				end
 				method mergeReferences( context : BinaryMergerContext ) : Void from org::kermeta::language::structure::Type is do

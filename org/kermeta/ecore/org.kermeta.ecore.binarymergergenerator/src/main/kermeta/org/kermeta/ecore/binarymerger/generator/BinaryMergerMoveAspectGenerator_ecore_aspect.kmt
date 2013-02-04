@@ -258,7 +258,7 @@ aspect class EReference {
 				content.append("if (not mergedModelElement."+mangledName+".isVoid and (not (mergedModelElement."+mangledName+" == self."+mangledName+"))) then")
 				context.pushIndent
 					content.append(context.indentString)
-					content.append("if mergedModelElement."+mangledName+".asType(Mergeable).isAddedForReferenceFix.isVoid then")
+					content.append("if mergedModelElement."+mangledName+".asType(Mergeable).isAddedForReferenceFix.isVoid  then")
 					context.pushIndent
 						content.append(context.indentString)
 						content.append("context.movedElementsNeedingReferenceFix.add(mergedModelElement."+mangledName+".asType(Mergeable))")
@@ -319,8 +319,9 @@ aspect class EReference {
 						content.append(context.indentString)
 						content.append("mergedModelElement."+mangledName+".add(aspect_"+self.name+")")
 						content.append(context.indentString)
-						content.append("if aspect_"+self.name+".asType(Mergeable).isAddedForReferenceFix.isVoid then")
+						content.append("if aspect_"+self.name+".asType(Mergeable).isAddedForReferenceFix.isVoid   then")
 						context.pushIndent
+							content.append(context.indentString)
 							content.append("// mark moved element so its references could be fixed")
 							content.append(context.indentString)
 							content.append("context.movedElementsNeedingReferenceFix.add(aspect_"+self.name+".asType(Mergeable))")
@@ -344,7 +345,7 @@ aspect class EReference {
 			if (not (involvedInComposition or self.derived or self.transient)) then
 				
 				content.append(context.indentString)
-				content.append("if self.isAddedForReferenceMerge.isVoid then")
+				content.append("if self.isAddedForReferenceMerge.isVoid   then")
 				context.pushIndent
 					content.append(context.indentString)
 					content.append("// it has some reference ("+mangledName+") not involved in composition, these aspects elements will need to be passed to mergeReferences function")

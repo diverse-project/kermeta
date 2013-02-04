@@ -92,21 +92,24 @@ class BinaryMerger
 					getErrors.add(mergeException)
 				end
 			}
-			var indirectlyMovedElements : Bag<KermetaModelElement> init Bag<KermetaModelElement>.new 
+			//var indirectlyMovedElements : Bag<KermetaModelElement> init Bag<KermetaModelElement>.new 
 			context.movedElementsNeedingReferenceFix.each{o |
 				o.asType(KermetaModelElement).fixReferences
-				o.asType(KermetaModelElement).eachOwnedElement{ e |  
+				/*o.asType(KermetaModelElement).eachOwnedElement{ e |  
 					if e.isInstanceOf(KermetaModelElement) then
-				   		indirectlyMovedElements.add(e.asType(KermetaModelElement))
+						if e.asType(KermetaModelElement).isAddedForReferenceFix.isVoid  then
+				   			indirectlyMovedElements.add(e.asType(KermetaModelElement))
+				   			e.asType(KermetaModelElement).isAddedForReferenceFix := true
+				   		end
 				   	end
 				   	e
-				}
+				}*/
 			}
 			// indirectly moved elements, will also need reference fix
-			stdio.writeln("fixing references of indirectly moved elements")
-			indirectlyMovedElements.each{ o |
+			stdio.writeln("standard kermeta merge : ignores fixing references of indirectly moved elements")
+			/*indirectlyMovedElements.each{ o |
 				o.fixReferences
-			}
+			}*/
 		rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
 			getErrors.add(mergeException)
 		end
@@ -165,17 +168,23 @@ class BinaryMerger
 				end
 			}
 			var indirectlyMovedElements : Bag<KermetaModelElement> init Bag<KermetaModelElement>.new 
+			var nbAlreadyFixed : Integer init 0
 			context.movedElementsNeedingReferenceFix.each{o |
 				o.asType(KermetaModelElement).fixReferences
 				o.asType(KermetaModelElement).eachOwnedElement{ e |  
 					if e.isInstanceOf(KermetaModelElement) then
-				   		indirectlyMovedElements.add(e.asType(KermetaModelElement))
+						if e.asType(KermetaModelElement).isAddedForReferenceFix.isVoid  then
+				   			indirectlyMovedElements.add(e.asType(KermetaModelElement))
+				   			e.asType(KermetaModelElement).isAddedForReferenceFix := true
+				   		else
+				   			nbAlreadyFixed := nbAlreadyFixed +1
+				   		end
 				   	end
 				   	e
 				}
 			}
 			// indirectly moved elements, will also need reference fix
-			stdio.writeln("fixing references of indirectly moved elements")
+			stdio.writeln("generic merge : fixing references of "+ indirectlyMovedElements.size.toString + " indirectly moved elements (nbAlreadyFixed="+nbAlreadyFixed.toString+ ")")
 			indirectlyMovedElements.each{ o |
 				o.fixReferences
 			}

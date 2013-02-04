@@ -28,7 +28,7 @@ package kermeta {
 								mergedModelElement.target ?= self.selectUnaryProperty("target", self.target, mergedModelElement.target)
 							end
 							if (not mergedModelElement.target.isVoid and (not (mergedModelElement.target == self.target))) then
-								if mergedModelElement.target.asType(Mergeable).isAddedForReferenceFix.isVoid then
+								if mergedModelElement.target.asType(Mergeable).isAddedForReferenceFix.isVoid  then
 									context.movedElementsNeedingReferenceFix.add(mergedModelElement.target.asType(Mergeable))
 									mergedModelElement.target.isAddedForReferenceFix := true
 								end
@@ -39,7 +39,7 @@ package kermeta {
 								mergedModelElement.~value ?= self.selectUnaryProperty("~value", self.~value, mergedModelElement.~value)
 							end
 							if (not mergedModelElement.~value.isVoid and (not (mergedModelElement.~value == self.~value))) then
-								if mergedModelElement.~value.asType(Mergeable).isAddedForReferenceFix.isVoid then
+								if mergedModelElement.~value.asType(Mergeable).isAddedForReferenceFix.isVoid  then
 									context.movedElementsNeedingReferenceFix.add(mergedModelElement.~value.asType(Mergeable))
 									mergedModelElement.~value.isAddedForReferenceFix := true
 								end
@@ -61,7 +61,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -84,10 +85,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a Expression")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (staticType) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							self.containedType.each{aspect_containedType | 
@@ -105,7 +105,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -143,16 +144,16 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.parameters.add(aspect_parameters)
-									if aspect_parameters.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_parameters.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_parameters.asType(Mergeable))
 										aspect_parameters.isAddedForReferenceFix := true
 									end
 								end
 							}
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (staticTypeVariableBindings) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							// select value for unary attribute
@@ -172,7 +173,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -210,7 +212,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.statement.add(aspect_statement)
-									if aspect_statement.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_statement.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_statement.asType(Mergeable))
 										aspect_statement.isAddedForReferenceFix := true
 									end
@@ -231,7 +234,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.rescueBlock.add(aspect_rescueBlock)
-									if aspect_rescueBlock.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_rescueBlock.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_rescueBlock.asType(Mergeable))
 										aspect_rescueBlock.isAddedForReferenceFix := true
 									end
@@ -252,7 +256,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -292,7 +297,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -321,7 +327,7 @@ package kermeta {
 								mergedModelElement.target ?= self.selectUnaryProperty("target", self.target, mergedModelElement.target)
 							end
 							if (not mergedModelElement.target.isVoid and (not (mergedModelElement.target == self.target))) then
-								if mergedModelElement.target.asType(Mergeable).isAddedForReferenceFix.isVoid then
+								if mergedModelElement.target.asType(Mergeable).isAddedForReferenceFix.isVoid  then
 									context.movedElementsNeedingReferenceFix.add(mergedModelElement.target.asType(Mergeable))
 									mergedModelElement.target.isAddedForReferenceFix := true
 								end
@@ -343,7 +349,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -366,10 +373,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a CallSuperOperation")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (superType) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							self.containedType.each{aspect_containedType | 
@@ -387,7 +393,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -425,7 +432,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -463,7 +471,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -492,7 +501,7 @@ package kermeta {
 								mergedModelElement.thenBody ?= self.selectUnaryProperty("thenBody", self.thenBody, mergedModelElement.thenBody)
 							end
 							if (not mergedModelElement.thenBody.isVoid and (not (mergedModelElement.thenBody == self.thenBody))) then
-								if mergedModelElement.thenBody.asType(Mergeable).isAddedForReferenceFix.isVoid then
+								if mergedModelElement.thenBody.asType(Mergeable).isAddedForReferenceFix.isVoid  then
 									context.movedElementsNeedingReferenceFix.add(mergedModelElement.thenBody.asType(Mergeable))
 									mergedModelElement.thenBody.isAddedForReferenceFix := true
 								end
@@ -503,7 +512,7 @@ package kermeta {
 								mergedModelElement.elseBody ?= self.selectUnaryProperty("elseBody", self.elseBody, mergedModelElement.elseBody)
 							end
 							if (not mergedModelElement.elseBody.isVoid and (not (mergedModelElement.elseBody == self.elseBody))) then
-								if mergedModelElement.elseBody.asType(Mergeable).isAddedForReferenceFix.isVoid then
+								if mergedModelElement.elseBody.asType(Mergeable).isAddedForReferenceFix.isVoid  then
 									context.movedElementsNeedingReferenceFix.add(mergedModelElement.elseBody.asType(Mergeable))
 									mergedModelElement.elseBody.isAddedForReferenceFix := true
 								end
@@ -514,7 +523,7 @@ package kermeta {
 								mergedModelElement.condition ?= self.selectUnaryProperty("condition", self.condition, mergedModelElement.condition)
 							end
 							if (not mergedModelElement.condition.isVoid and (not (mergedModelElement.condition == self.condition))) then
-								if mergedModelElement.condition.asType(Mergeable).isAddedForReferenceFix.isVoid then
+								if mergedModelElement.condition.asType(Mergeable).isAddedForReferenceFix.isVoid  then
 									context.movedElementsNeedingReferenceFix.add(mergedModelElement.condition.asType(Mergeable))
 									mergedModelElement.condition.isAddedForReferenceFix := true
 								end
@@ -534,7 +543,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -563,7 +573,7 @@ package kermeta {
 								mergedModelElement.expression ?= self.selectUnaryProperty("expression", self.expression, mergedModelElement.expression)
 							end
 							if (not mergedModelElement.expression.isVoid and (not (mergedModelElement.expression == self.expression))) then
-								if mergedModelElement.expression.asType(Mergeable).isAddedForReferenceFix.isVoid then
+								if mergedModelElement.expression.asType(Mergeable).isAddedForReferenceFix.isVoid  then
 									context.movedElementsNeedingReferenceFix.add(mergedModelElement.expression.asType(Mergeable))
 									mergedModelElement.expression.isAddedForReferenceFix := true
 								end
@@ -583,7 +593,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -621,7 +632,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.body.add(aspect_body)
-									if aspect_body.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_body.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_body.asType(Mergeable))
 										aspect_body.isAddedForReferenceFix := true
 									end
@@ -633,7 +645,7 @@ package kermeta {
 								mergedModelElement.exceptionType ?= self.selectUnaryProperty("exceptionType", self.exceptionType, mergedModelElement.exceptionType)
 							end
 							if (not mergedModelElement.exceptionType.isVoid and (not (mergedModelElement.exceptionType == self.exceptionType))) then
-								if mergedModelElement.exceptionType.asType(Mergeable).isAddedForReferenceFix.isVoid then
+								if mergedModelElement.exceptionType.asType(Mergeable).isAddedForReferenceFix.isVoid  then
 									context.movedElementsNeedingReferenceFix.add(mergedModelElement.exceptionType.asType(Mergeable))
 									mergedModelElement.exceptionType.isAddedForReferenceFix := true
 								end
@@ -691,7 +703,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -729,7 +742,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -767,7 +781,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.parameters.add(aspect_parameters)
-									if aspect_parameters.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_parameters.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_parameters.asType(Mergeable))
 										aspect_parameters.isAddedForReferenceFix := true
 									end
@@ -792,7 +807,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -830,7 +846,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.parameters.add(aspect_parameters)
-									if aspect_parameters.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_parameters.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_parameters.asType(Mergeable))
 										aspect_parameters.isAddedForReferenceFix := true
 									end
@@ -842,7 +859,7 @@ package kermeta {
 								mergedModelElement.body ?= self.selectUnaryProperty("body", self.body, mergedModelElement.body)
 							end
 							if (not mergedModelElement.body.isVoid and (not (mergedModelElement.body == self.body))) then
-								if mergedModelElement.body.asType(Mergeable).isAddedForReferenceFix.isVoid then
+								if mergedModelElement.body.asType(Mergeable).isAddedForReferenceFix.isVoid  then
 									context.movedElementsNeedingReferenceFix.add(mergedModelElement.body.asType(Mergeable))
 									mergedModelElement.body.isAddedForReferenceFix := true
 								end
@@ -862,7 +879,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -891,7 +909,7 @@ package kermeta {
 								mergedModelElement.type ?= self.selectUnaryProperty("type", self.type, mergedModelElement.type)
 							end
 							if (not mergedModelElement.type.isVoid and (not (mergedModelElement.type == self.type))) then
-								if mergedModelElement.type.asType(Mergeable).isAddedForReferenceFix.isVoid then
+								if mergedModelElement.type.asType(Mergeable).isAddedForReferenceFix.isVoid  then
 									context.movedElementsNeedingReferenceFix.add(mergedModelElement.type.asType(Mergeable))
 									mergedModelElement.type.isAddedForReferenceFix := true
 								end
@@ -932,7 +950,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -972,7 +991,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -1012,7 +1032,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -1041,7 +1062,7 @@ package kermeta {
 								mergedModelElement.typeref ?= self.selectUnaryProperty("typeref", self.typeref, mergedModelElement.typeref)
 							end
 							if (not mergedModelElement.typeref.isVoid and (not (mergedModelElement.typeref == self.typeref))) then
-								if mergedModelElement.typeref.asType(Mergeable).isAddedForReferenceFix.isVoid then
+								if mergedModelElement.typeref.asType(Mergeable).isAddedForReferenceFix.isVoid  then
 									context.movedElementsNeedingReferenceFix.add(mergedModelElement.typeref.asType(Mergeable))
 									mergedModelElement.typeref.isAddedForReferenceFix := true
 								end
@@ -1061,7 +1082,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -1099,7 +1121,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -1128,7 +1151,7 @@ package kermeta {
 								mergedModelElement.initialization ?= self.selectUnaryProperty("initialization", self.initialization, mergedModelElement.initialization)
 							end
 							if (not mergedModelElement.initialization.isVoid and (not (mergedModelElement.initialization == self.initialization))) then
-								if mergedModelElement.initialization.asType(Mergeable).isAddedForReferenceFix.isVoid then
+								if mergedModelElement.initialization.asType(Mergeable).isAddedForReferenceFix.isVoid  then
 									context.movedElementsNeedingReferenceFix.add(mergedModelElement.initialization.asType(Mergeable))
 									mergedModelElement.initialization.isAddedForReferenceFix := true
 								end
@@ -1139,7 +1162,7 @@ package kermeta {
 								mergedModelElement.body ?= self.selectUnaryProperty("body", self.body, mergedModelElement.body)
 							end
 							if (not mergedModelElement.body.isVoid and (not (mergedModelElement.body == self.body))) then
-								if mergedModelElement.body.asType(Mergeable).isAddedForReferenceFix.isVoid then
+								if mergedModelElement.body.asType(Mergeable).isAddedForReferenceFix.isVoid  then
 									context.movedElementsNeedingReferenceFix.add(mergedModelElement.body.asType(Mergeable))
 									mergedModelElement.body.isAddedForReferenceFix := true
 								end
@@ -1150,7 +1173,7 @@ package kermeta {
 								mergedModelElement.stopCondition ?= self.selectUnaryProperty("stopCondition", self.stopCondition, mergedModelElement.stopCondition)
 							end
 							if (not mergedModelElement.stopCondition.isVoid and (not (mergedModelElement.stopCondition == self.stopCondition))) then
-								if mergedModelElement.stopCondition.asType(Mergeable).isAddedForReferenceFix.isVoid then
+								if mergedModelElement.stopCondition.asType(Mergeable).isAddedForReferenceFix.isVoid  then
 									context.movedElementsNeedingReferenceFix.add(mergedModelElement.stopCondition.asType(Mergeable))
 									mergedModelElement.stopCondition.isAddedForReferenceFix := true
 								end
@@ -1170,7 +1193,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -1208,7 +1232,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -1237,7 +1262,7 @@ package kermeta {
 								mergedModelElement.initialization ?= self.selectUnaryProperty("initialization", self.initialization, mergedModelElement.initialization)
 							end
 							if (not mergedModelElement.initialization.isVoid and (not (mergedModelElement.initialization == self.initialization))) then
-								if mergedModelElement.initialization.asType(Mergeable).isAddedForReferenceFix.isVoid then
+								if mergedModelElement.initialization.asType(Mergeable).isAddedForReferenceFix.isVoid  then
 									context.movedElementsNeedingReferenceFix.add(mergedModelElement.initialization.asType(Mergeable))
 									mergedModelElement.initialization.isAddedForReferenceFix := true
 								end
@@ -1248,7 +1273,7 @@ package kermeta {
 								mergedModelElement.type ?= self.selectUnaryProperty("type", self.type, mergedModelElement.type)
 							end
 							if (not mergedModelElement.type.isVoid and (not (mergedModelElement.type == self.type))) then
-								if mergedModelElement.type.asType(Mergeable).isAddedForReferenceFix.isVoid then
+								if mergedModelElement.type.asType(Mergeable).isAddedForReferenceFix.isVoid  then
 									context.movedElementsNeedingReferenceFix.add(mergedModelElement.type.asType(Mergeable))
 									mergedModelElement.type.isAddedForReferenceFix := true
 								end
@@ -1270,7 +1295,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -1308,7 +1334,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.usings.add(aspect_usings)
-									if aspect_usings.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_usings.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_usings.asType(Mergeable))
 										aspect_usings.isAddedForReferenceFix := true
 									end
@@ -1320,21 +1347,19 @@ package kermeta {
 								mergedModelElement.target ?= self.selectUnaryProperty("target", self.target, mergedModelElement.target)
 							end
 							if (not mergedModelElement.target.isVoid and (not (mergedModelElement.target == self.target))) then
-								if mergedModelElement.target.asType(Mergeable).isAddedForReferenceFix.isVoid then
+								if mergedModelElement.target.asType(Mergeable).isAddedForReferenceFix.isVoid  then
 									context.movedElementsNeedingReferenceFix.add(mergedModelElement.target.asType(Mergeable))
 									mergedModelElement.target.isAddedForReferenceFix := true
 								end
 							end
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (targetParent) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (generics) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							// select value for unary attribute
@@ -1356,16 +1381,16 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.parameters.add(aspect_parameters)
-									if aspect_parameters.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_parameters.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_parameters.asType(Mergeable))
 										aspect_parameters.isAddedForReferenceFix := true
 									end
 								end
 							}
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (staticTypeVariableBindings) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							// select value for unary attribute
@@ -1385,16 +1410,16 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
 								end
 							}
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (staticType) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
@@ -1414,10 +1439,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a CallOperation")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (staticOperation) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							self.containedType.each{aspect_containedType | 
@@ -1435,7 +1459,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -1458,10 +1483,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a CallProperty")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (staticProperty) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							self.containedType.each{aspect_containedType | 
@@ -1479,7 +1503,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -1502,10 +1527,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a CallEnumLiteral")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (staticEnumLiteral) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							self.containedType.each{aspect_containedType | 
@@ -1523,7 +1547,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -1546,10 +1571,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a CallModelTransformation")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (staticTransformation) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							self.containedType.each{aspect_containedType | 
@@ -1567,7 +1591,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -1596,10 +1621,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a KermetaModelElement")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (kTag) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							self.kOwnedTags.each{aspect_kOwnedTags | 
@@ -1617,7 +1641,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.kOwnedTags.add(aspect_kOwnedTags)
-									if aspect_kOwnedTags.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_kOwnedTags.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_kOwnedTags.asType(Mergeable))
 										aspect_kOwnedTags.isAddedForReferenceFix := true
 									end
@@ -1646,10 +1671,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a Operation")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (raisedException) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							self.ownedParameter.each{aspect_ownedParameter | 
@@ -1667,7 +1691,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.ownedParameter.add(aspect_ownedParameter)
-									if aspect_ownedParameter.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_ownedParameter.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_ownedParameter.asType(Mergeable))
 										aspect_ownedParameter.isAddedForReferenceFix := true
 									end
@@ -1688,7 +1713,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.~pre.add(aspect_pre)
-									if aspect_pre.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_pre.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_pre.asType(Mergeable))
 										aspect_pre.isAddedForReferenceFix := true
 									end
@@ -1709,7 +1735,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.~post.add(aspect_post)
-									if aspect_post.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_post.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_post.asType(Mergeable))
 										aspect_post.isAddedForReferenceFix := true
 									end
@@ -1721,7 +1748,7 @@ package kermeta {
 								mergedModelElement.body ?= self.selectUnaryProperty("body", self.body, mergedModelElement.body)
 							end
 							if (not mergedModelElement.body.isVoid and (not (mergedModelElement.body == self.body))) then
-								if mergedModelElement.body.asType(Mergeable).isAddedForReferenceFix.isVoid then
+								if mergedModelElement.body.asType(Mergeable).isAddedForReferenceFix.isVoid  then
 									context.movedElementsNeedingReferenceFix.add(mergedModelElement.body.asType(Mergeable))
 									mergedModelElement.body.isAddedForReferenceFix := true
 								end
@@ -1741,16 +1768,16 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.ownedUnresolvedOperations.add(aspect_ownedUnresolvedOperations)
-									if aspect_ownedUnresolvedOperations.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_ownedUnresolvedOperations.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_ownedUnresolvedOperations.asType(Mergeable))
 										aspect_ownedUnresolvedOperations.isAddedForReferenceFix := true
 									end
 								end
 							}
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (typeParameter) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							// select value for unary attribute
@@ -1774,10 +1801,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a Property")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (opposite) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							if context.useGenericMerge then
@@ -1786,7 +1812,7 @@ package kermeta {
 								mergedModelElement.getterBody ?= self.selectUnaryProperty("getterBody", self.getterBody, mergedModelElement.getterBody)
 							end
 							if (not mergedModelElement.getterBody.isVoid and (not (mergedModelElement.getterBody == self.getterBody))) then
-								if mergedModelElement.getterBody.asType(Mergeable).isAddedForReferenceFix.isVoid then
+								if mergedModelElement.getterBody.asType(Mergeable).isAddedForReferenceFix.isVoid  then
 									context.movedElementsNeedingReferenceFix.add(mergedModelElement.getterBody.asType(Mergeable))
 									mergedModelElement.getterBody.isAddedForReferenceFix := true
 								end
@@ -1797,7 +1823,7 @@ package kermeta {
 								mergedModelElement.setterBody ?= self.selectUnaryProperty("setterBody", self.setterBody, mergedModelElement.setterBody)
 							end
 							if (not mergedModelElement.setterBody.isVoid and (not (mergedModelElement.setterBody == self.setterBody))) then
-								if mergedModelElement.setterBody.asType(Mergeable).isAddedForReferenceFix.isVoid then
+								if mergedModelElement.setterBody.asType(Mergeable).isAddedForReferenceFix.isVoid  then
 									context.movedElementsNeedingReferenceFix.add(mergedModelElement.setterBody.asType(Mergeable))
 									mergedModelElement.setterBody.isAddedForReferenceFix := true
 								end
@@ -1817,7 +1843,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.ownedUnresolvedProperties.add(aspect_ownedUnresolvedProperties)
-									if aspect_ownedUnresolvedProperties.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_ownedUnresolvedProperties.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_ownedUnresolvedProperties.asType(Mergeable))
 										aspect_ownedUnresolvedProperties.isAddedForReferenceFix := true
 									end
@@ -1888,7 +1915,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -1928,16 +1956,14 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a TypeVariableBinding")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (variable) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (type) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
@@ -1984,10 +2010,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a TypeDefinition")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (superType) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							// select value for unary attribute
@@ -2007,7 +2032,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -2047,10 +2073,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a DataType")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (superType) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							// select value for unary attribute
@@ -2072,7 +2097,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -2110,16 +2136,16 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.ownedLiteral.add(aspect_ownedLiteral)
-									if aspect_ownedLiteral.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_ownedLiteral.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_ownedLiteral.asType(Mergeable))
 										aspect_ownedLiteral.isAddedForReferenceFix := true
 									end
 								end
 							}
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (superType) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							// select value for unary attribute
@@ -2141,7 +2167,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -2198,7 +2225,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.nestedPackage.add(aspect_nestedPackage)
-									if aspect_nestedPackage.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_nestedPackage.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_nestedPackage.asType(Mergeable))
 										aspect_nestedPackage.isAddedForReferenceFix := true
 									end
@@ -2219,7 +2247,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.ownedAdaptationOperators.add(aspect_ownedAdaptationOperators)
-									if aspect_ownedAdaptationOperators.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_ownedAdaptationOperators.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_ownedAdaptationOperators.asType(Mergeable))
 										aspect_ownedAdaptationOperators.isAddedForReferenceFix := true
 									end
@@ -2242,7 +2271,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.ownedTypeDefinition.add(aspect_ownedTypeDefinition)
-									if aspect_ownedTypeDefinition.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_ownedTypeDefinition.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_ownedTypeDefinition.asType(Mergeable))
 										aspect_ownedTypeDefinition.isAddedForReferenceFix := true
 									end
@@ -2284,16 +2314,14 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a PrimitiveType")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (instanceType) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (superType) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							// select value for unary attribute
@@ -2315,7 +2343,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -2338,10 +2367,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a TypedElement")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (type) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							// select value for unary attribute
@@ -2364,10 +2392,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a Tag")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (object) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							// select value for unary attribute
@@ -2414,7 +2441,7 @@ package kermeta {
 								mergedModelElement.body ?= self.selectUnaryProperty("body", self.body, mergedModelElement.body)
 							end
 							if (not mergedModelElement.body.isVoid and (not (mergedModelElement.body == self.body))) then
-								if mergedModelElement.body.asType(Mergeable).isAddedForReferenceFix.isVoid then
+								if mergedModelElement.body.asType(Mergeable).isAddedForReferenceFix.isVoid  then
 									context.movedElementsNeedingReferenceFix.add(mergedModelElement.body.asType(Mergeable))
 									mergedModelElement.body.isAddedForReferenceFix := true
 								end
@@ -2462,7 +2489,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.~inv.add(aspect_inv)
-									if aspect_inv.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_inv.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_inv.asType(Mergeable))
 										aspect_inv.isAddedForReferenceFix := true
 									end
@@ -2483,7 +2511,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.ownedAttribute.add(aspect_ownedAttribute)
-									if aspect_ownedAttribute.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_ownedAttribute.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_ownedAttribute.asType(Mergeable))
 										aspect_ownedAttribute.isAddedForReferenceFix := true
 									end
@@ -2504,7 +2533,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.ownedOperation.add(aspect_ownedOperation)
-									if aspect_ownedOperation.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_ownedOperation.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_ownedOperation.asType(Mergeable))
 										aspect_ownedOperation.isAddedForReferenceFix := true
 									end
@@ -2531,7 +2561,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -2570,7 +2601,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.packages.add(aspect_packages)
-									if aspect_packages.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_packages.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_packages.asType(Mergeable))
 										aspect_packages.isAddedForReferenceFix := true
 									end
@@ -2591,7 +2623,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.referencedMetamodels.add(aspect_referencedMetamodels)
-									if aspect_referencedMetamodels.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_referencedMetamodels.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_referencedMetamodels.asType(Mergeable))
 										aspect_referencedMetamodels.isAddedForReferenceFix := true
 									end
@@ -2618,7 +2651,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.ownedModelTypeDefinitions.add(aspect_ownedModelTypeDefinitions)
-									if aspect_ownedModelTypeDefinitions.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_ownedModelTypeDefinitions.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_ownedModelTypeDefinitions.asType(Mergeable))
 										aspect_ownedModelTypeDefinitions.isAddedForReferenceFix := true
 									end
@@ -2656,7 +2690,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.ownedTypeDefinition.add(aspect_ownedTypeDefinition)
-									if aspect_ownedTypeDefinition.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_ownedTypeDefinition.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_ownedTypeDefinition.asType(Mergeable))
 										aspect_ownedTypeDefinition.isAddedForReferenceFix := true
 									end
@@ -2679,10 +2714,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a GenericTypeDefinition")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (typeParameter) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							self.containedType.each{aspect_containedType | 
@@ -2700,7 +2734,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -2738,7 +2773,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.virtualTypeBinding.add(aspect_virtualTypeBinding)
-									if aspect_virtualTypeBinding.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_virtualTypeBinding.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_virtualTypeBinding.asType(Mergeable))
 										aspect_virtualTypeBinding.isAddedForReferenceFix := true
 									end
@@ -2759,16 +2795,16 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.typeParamBinding.add(aspect_typeParamBinding)
-									if aspect_typeParamBinding.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_typeParamBinding.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_typeParamBinding.asType(Mergeable))
 										aspect_typeParamBinding.isAddedForReferenceFix := true
 									end
 								end
 							}
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (typeDefinition) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
@@ -2788,10 +2824,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a TypeVariable")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (supertype) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							// select value for unary attribute
@@ -2832,10 +2867,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a ModelTypeVariable")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (virtualType) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							// select value for unary attribute
@@ -2857,16 +2891,14 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a VirtualType")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (typeDefinition) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (modelTypeVariable) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							self.typeParamBinding.each{aspect_typeParamBinding | 
@@ -2884,7 +2916,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.typeParamBinding.add(aspect_typeParamBinding)
-									if aspect_typeParamBinding.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_typeParamBinding.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_typeParamBinding.asType(Mergeable))
 										aspect_typeParamBinding.isAddedForReferenceFix := true
 									end
@@ -2909,10 +2942,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a Model")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (contents) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
@@ -2964,16 +2996,16 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.usings.add(aspect_usings)
-									if aspect_usings.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_usings.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_usings.asType(Mergeable))
 										aspect_usings.isAddedForReferenceFix := true
 									end
 								end
 							}
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (generics) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							// select value for unary attribute
@@ -2993,7 +3025,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -3069,7 +3102,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -3113,10 +3147,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a ProductType")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (type) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
@@ -3136,16 +3169,14 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a FunctionType")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (left) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (right) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
@@ -3199,10 +3230,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a UnresolvedTypeVariable")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (supertype) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							self.containedType.each{aspect_containedType | 
@@ -3220,7 +3250,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -3260,7 +3291,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.ownedClassDefinitionBindings.add(aspect_ownedClassDefinitionBindings)
-									if aspect_ownedClassDefinitionBindings.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_ownedClassDefinitionBindings.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_ownedClassDefinitionBindings.asType(Mergeable))
 										aspect_ownedClassDefinitionBindings.isAddedForReferenceFix := true
 									end
@@ -3281,7 +3313,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.usedAdaptationOperators.add(aspect_usedAdaptationOperators)
-									if aspect_usedAdaptationOperators.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_usedAdaptationOperators.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_usedAdaptationOperators.asType(Mergeable))
 										aspect_usedAdaptationOperators.isAddedForReferenceFix := true
 									end
@@ -3302,22 +3335,21 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.ownedEnumerationBindings.add(aspect_ownedEnumerationBindings)
-									if aspect_ownedEnumerationBindings.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_ownedEnumerationBindings.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_ownedEnumerationBindings.asType(Mergeable))
 										aspect_ownedEnumerationBindings.isAddedForReferenceFix := true
 									end
 								end
 							}
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (boundModelTypeDefinition) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (targetedTransformations) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							self.ownedModelTypeDefinitions.each{aspect_ownedModelTypeDefinitions | 
@@ -3335,7 +3367,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.ownedModelTypeDefinitions.add(aspect_ownedModelTypeDefinitions)
-									if aspect_ownedModelTypeDefinitions.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_ownedModelTypeDefinitions.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_ownedModelTypeDefinitions.asType(Mergeable))
 										aspect_ownedModelTypeDefinitions.isAddedForReferenceFix := true
 									end
@@ -3373,7 +3406,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.ownedPropertyBindings.add(aspect_ownedPropertyBindings)
-									if aspect_ownedPropertyBindings.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_ownedPropertyBindings.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_ownedPropertyBindings.asType(Mergeable))
 										aspect_ownedPropertyBindings.isAddedForReferenceFix := true
 									end
@@ -3394,22 +3428,21 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.ownedOperationBindings.add(aspect_ownedOperationBindings)
-									if aspect_ownedOperationBindings.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_ownedOperationBindings.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_ownedOperationBindings.asType(Mergeable))
 										aspect_ownedOperationBindings.isAddedForReferenceFix := true
 									end
 								end
 							}
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (source) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (target) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
@@ -3429,16 +3462,14 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a EnumerationBinding")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (source) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (target) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
@@ -3458,16 +3489,14 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a PropertyBinding")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (source) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (target) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
@@ -3487,16 +3516,14 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a OperationBinding")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (source) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (target) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
@@ -3516,10 +3543,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a AdaptationOperator")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (parameters) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
@@ -3539,10 +3565,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a UseAdaptationOperator")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (parameters) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							self.ownedUnresolved.each{aspect_ownedUnresolved | 
@@ -3560,16 +3585,16 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.ownedUnresolved.add(aspect_ownedUnresolved)
-									if aspect_ownedUnresolved.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_ownedUnresolved.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_ownedUnresolved.asType(Mergeable))
 										aspect_ownedUnresolved.isAddedForReferenceFix := true
 									end
 								end
 							}
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (usedOperator) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
@@ -3589,10 +3614,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a PropertyAdaptationOperator")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (target) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							// select value for unary attribute
@@ -3656,10 +3680,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a OperationAdaptationOperator")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (target) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							// select value for unary attribute
@@ -3696,7 +3719,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -3719,10 +3743,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a ModelType")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (typeDefinition) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
@@ -3742,10 +3765,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a FilteredMetamodelReference")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (metamodel) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 						rescue (mergeException : org::kermeta::ecore::binarymerger::BinaryMergerException)
@@ -3765,10 +3787,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a ModelTypeDefinition")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (metamodel) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							self.ownedBindings.each{aspect_ownedBindings | 
@@ -3786,7 +3807,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.ownedBindings.add(aspect_ownedBindings)
-									if aspect_ownedBindings.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_ownedBindings.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_ownedBindings.asType(Mergeable))
 										aspect_ownedBindings.isAddedForReferenceFix := true
 									end
@@ -3807,16 +3829,16 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.ownedTransformations.add(aspect_ownedTransformations)
-									if aspect_ownedTransformations.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_ownedTransformations.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_ownedTransformations.asType(Mergeable))
 										aspect_ownedTransformations.isAddedForReferenceFix := true
 									end
 								end
 							}
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (typeDefinitions) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							self.containedType.each{aspect_containedType | 
@@ -3834,7 +3856,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -3857,10 +3880,9 @@ package kermeta {
 					if (not mergedModelElement.isVoid) then
 						do
 							//stdio.writeln("Merging content of a ModelTransformation")
-							if self.isAddedForReferenceMerge.isVoid then
+							if self.isAddedForReferenceMerge.isVoid   then
 								// it has some reference (typeParameters) not involved in composition, these aspects elements will need to be passed to mergeReferences function
 								context.elementsNeedingReferenceMerge.add(self)
-								
 								self.isAddedForReferenceMerge := true
 							end
 							if context.useGenericMerge then
@@ -3869,7 +3891,7 @@ package kermeta {
 								mergedModelElement.body ?= self.selectUnaryProperty("body", self.body, mergedModelElement.body)
 							end
 							if (not mergedModelElement.body.isVoid and (not (mergedModelElement.body == self.body))) then
-								if mergedModelElement.body.asType(Mergeable).isAddedForReferenceFix.isVoid then
+								if mergedModelElement.body.asType(Mergeable).isAddedForReferenceFix.isVoid  then
 									context.movedElementsNeedingReferenceFix.add(mergedModelElement.body.asType(Mergeable))
 									mergedModelElement.body.isAddedForReferenceFix := true
 								end
@@ -3889,7 +3911,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.ownedParameter.add(aspect_ownedParameter)
-									if aspect_ownedParameter.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_ownedParameter.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_ownedParameter.asType(Mergeable))
 										aspect_ownedParameter.isAddedForReferenceFix := true
 									end
@@ -3931,7 +3954,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.containedType.add(aspect_containedType)
-									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_containedType.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_containedType.asType(Mergeable))
 										aspect_containedType.isAddedForReferenceFix := true
 									end
@@ -3988,7 +4012,8 @@ package kermeta {
 								else
 									// move it in merged model
 									mergedModelElement.ownedModelTypeDefinitions.add(aspect_ownedModelTypeDefinitions)
-									if aspect_ownedModelTypeDefinitions.asType(Mergeable).isAddedForReferenceFix.isVoid then// mark moved element so its references could be fixed
+									if aspect_ownedModelTypeDefinitions.asType(Mergeable).isAddedForReferenceFix.isVoid   then
+										// mark moved element so its references could be fixed
 										context.movedElementsNeedingReferenceFix.add(aspect_ownedModelTypeDefinitions.asType(Mergeable))
 										aspect_ownedModelTypeDefinitions.isAddedForReferenceFix := true
 									end
