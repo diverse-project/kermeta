@@ -29,6 +29,8 @@ public class KermetaProjectHelper {
 	public static String DEFAULT_REFLEXIVITY_METAINF_LOCATION_IN_JAR = "/META-INF/kermeta";
 	public static String DEFAULT_KP_LOCATION_IN_JAR = DEFAULT_KP_METAINF_LOCATION_IN_JAR + "/project.kp";
 	public static String DEFAULT_KP_LOCATION_IN_FOLDER = "/project.kp";
+	public static String DEFAULT_BINARY_LOCATION_IN_FOLDER = "/target/scalaclasses";
+	public static String DEFAULT_EMFBINARY_LOCATION_IN_FOLDER = "/target/emfclasses";
 	
 	public static  List<KermetaProject> collectKermetaProjectFromImports(KermetaProject kp) {
 
