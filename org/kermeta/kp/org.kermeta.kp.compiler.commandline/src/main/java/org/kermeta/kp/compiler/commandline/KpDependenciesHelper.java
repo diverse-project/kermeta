@@ -47,13 +47,14 @@ public class KpDependenciesHelper {
 		for(ImportProject dep : kp.getImportedProjects()){
 			String containerUrl = varExpander.getSelectedUrl4ReusableResource(dep.getProjectResource());
 			// add it in classpath	
-			if( containerUrl.endsWith(".jar")){
+			String currenEntryPath = convertUrlToclassPath(containerUrl);
+			if( currenEntryPath.endsWith(".jar")){
 				result.add(convertUrlToclassPath(containerUrl));
 			}
 			else{
 				// add it as an eclipse project
-				result.add(convertUrlToclassPath(containerUrl)+KermetaProjectHelper.DEFAULT_BINARY_LOCATION_IN_FOLDER);
-				result.add(convertUrlToclassPath(containerUrl)+KermetaProjectHelper.DEFAULT_EMFBINARY_LOCATION_IN_FOLDER);
+				result.add(currenEntryPath+KermetaProjectHelper.DEFAULT_BINARY_LOCATION_IN_FOLDER+"/");
+				result.add(currenEntryPath+KermetaProjectHelper.DEFAULT_EMFBINARY_LOCATION_IN_FOLDER+"/");
 			}
 			
 			// if it is a kermeta project, add its DependentProjectsClassPath
@@ -71,7 +72,7 @@ public class KpDependenciesHelper {
 			String containerUrl = varExpander.getSelectedUrl4ReusableResource(dep.getProjectResource());
 						
 			// if it is a kermeta project, add its DependentProjectsClassPath
-			String kpFileURL = containerUrl.endsWith(".jar")?	"jar:"+containerUrl+"!"+KermetaProjectHelper.DEFAULT_KP_LOCATION_IN_JAR : containerUrl+KermetaProjectHelper.DEFAULT_KP_LOCATION_IN_FOLDER; 
+			String kpFileURL = containerUrl.endsWith(".jar") || containerUrl.endsWith("bundlefile")?	"jar:"+containerUrl+"!"+KermetaProjectHelper.DEFAULT_KP_LOCATION_IN_JAR : containerUrl+KermetaProjectHelper.DEFAULT_KP_LOCATION_IN_FOLDER; 
 			KermetaProject foundProject = KpResourceHelper.findKermetaProject( kpFileURL, kp.eResource());
 			if(foundProject != null){
 				KpVariableExpander innerVarExpander = new KpVariableExpander(kpFileURL, foundProject, varExpander.getFileSystemConverter(), varExpander.getLogger());				
