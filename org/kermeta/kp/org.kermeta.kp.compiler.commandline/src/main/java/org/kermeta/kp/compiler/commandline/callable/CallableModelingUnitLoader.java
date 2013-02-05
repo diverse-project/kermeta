@@ -73,6 +73,9 @@ public class CallableModelingUnitLoader implements Callable<ModelingUnit> {
 					String mmName = kp.getMetamodelName();
 					for(org.kermeta.language.structure.Metamodel mm : mu.getMetamodels()){
 						mm.setName(mmName);
+						for(org.kermeta.language.structure.ModelTypeDefinition mtd : mm.getOwnedModelTypeDefinitions()) {
+							mtd.setName(mmName);
+						}
 					}
 				}
 				return mu;

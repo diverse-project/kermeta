@@ -1109,7 +1109,7 @@ public class KermetaCompiler {
 			
 		}
 		org.kermeta.compilo.scala.Compiler km2ScalaCompiler = new org.kermeta.compilo.scala.Compiler();
-		km2ScalaCompiler.compile(URLDecoder.decode(kmFileURL,"UTF-8"), new CompilerConfiguration());
+		km2ScalaCompiler.compile(URLDecoder.decode(kmFileURL,"UTF-8"), new CompilerConfiguration(), kp.getMetamodelName());
 	}
 
 	private void initializeforBuilding(KermetaProject kp, String targetGeneratedSourceFolder, String targetFolder, String userAdditionalClassPath) {
