@@ -34,6 +34,8 @@ class SlicerGenerator {
 	
 	reference rootClass : EClass
 	
+	attribute shortNameSlicer : String
+	
 	
 	
 	operation initialise(slicerModel : Slicer, ~metamodel : EPackage, modelURI : String) : SlicerGenerator is do
@@ -47,15 +49,16 @@ class SlicerGenerator {
 		updateModelForStrictSlicing()
 		slicerAspectGenerator:= SlicerAspectGenerator.new.initialise(self)
 		slicerClassGenerator := SlicerClassGenerator.new.initialise(self)
+		shortNameSlicer := slicerModel.name.split("\\.").last
 		
 		self.slicerModel.slicedElements.each{se |
 			if(se.isInstanceOf(SlicedProperty)) then
-				var rel : SlicedProperty init se.asType(SlicedProperty)
+				var rel : SlicedProperty := se.asType(SlicedProperty)
 				if(not rel.opposite.isVoid) then
 					hasOpposite := true
 					// We change the slicing data to use of the opposite.
-					var ref : EReference init EReference.new
-					var relation : SlicedProperty init SlicedProperty.new
+					var ref : EReference := EReference.new
+					var relation : SlicedProperty := SlicedProperty.new
 					ref.name := rel.opposite.name
 					ref.eType:= rel.domain.eContainingClass
 					ref.eOpposite := rel.domain.asType(EReference)
@@ -87,14 +90,14 @@ class SlicerGenerator {
 	
 	operation updateModelForStrictSlicing() is do
 		if(slicerModel.strict) then
-			slicerModel.onEnd := "		var repository : ResourceSet init ResourceSet.new
+			slicerModel.onEnd := "		var repository : ResourceSet := ResourceSet.new
 		var resource : Resource 
 		//TODO: replace ./slice.xmi by a valid path, as platform:/project/slice.xmi
  		resource ?= repository.createResource(\"./slice.xmi\", \"" + slicerModel.uriMetamodel + "\")
  		
- 		var elts : OrderedSet<Object> init OrderedSet<Object>.new 
+ 		var elts : OrderedSet<Object> := OrderedSet<Object>.new 
  		sliceRoots.each{elt |
- 		 	var cont : Object init elt.container
+ 		 	var cont : Object := elt.container
  			if(cont.isVoid.orElse{b | cont.asType(SlicerVisitor).sliced.isVoid.orElse{b2 | not cont.asType(SlicerVisitor).sliced}}) then
  				elts.add(elt.dup)
  			end
@@ -103,7 +106,7 @@ class SlicerGenerator {
  		resource.save(void)"
  		
  			slicerModel.helper := "	operation addToRoot(obj : Object) is do
-		var cont : Object init obj.container
+		var cont : Object := obj.container
 		if(cont.isVoid.orElse{b | cont.isInstanceOf(SlicerVisitor)}) then
 			sliceRoots.add(obj)
 		end"
@@ -116,9 +119,9 @@ class SlicerGenerator {
 	// relation must be sliced too. This process occurs only when the slicer is defined as strict.
 	// This operation also checks that if an abstract class is sliced, all its concrete sub-types are sliced as well.
 	operation checkClassesToSlice() is do
-		var size : Integer init slicerModel.slicedElements.size
-		var coll : Bag<SlicedClass> init Bag<SlicedClass>.new
-		var slicedClassesToRemove : Sequence<SlicedClass> init Sequence<SlicedClass>.new
+		var size : Integer := slicerModel.slicedElements.size
+		var coll : Bag<SlicedClass> := Bag<SlicedClass>.new
+		var slicedClassesToRemove : Sequence<SlicedClass> := Sequence<SlicedClass>.new
 	
 		if(slicerModel.strict) then
 			var newSlicedClass : SlicedClass
@@ -127,7 +130,7 @@ class SlicerGenerator {
 			slicerModel.slicedClasses.each{sc | sc.domain.eStructuralFeatures.each{sf |
 				if(sf.isInstanceOf(EReference)) then
 					ref:= sf.asType(EReference)
-					var condi : Boolean init (ref.lowerBound==1).andThen{b | 
+					var condi : Boolean := (ref.lowerBound==1).andThen{b | 
 						not slicerModel.slicedClasses.exists{cl | cl.domain.getQualifiedName==ref.eType.getQualifiedName}}.andThen{b2 |
 						not coll.exists{cl2 | cl2.domain.getQualifiedName==ref.eType.getQualifiedName}}
 					if(condi) then
@@ -147,11 +150,11 @@ class SlicerGenerator {
 
 			if(sc.domain.~abstract) then slicedClassesToRemove.add(sc) end
 			
-			var sub : Sequence<EClass> init sc.domain.getConcreteSubClasses(allClasses)
+			var sub : Sequence<EClass> := sc.domain.getConcreteSubClasses(allClasses)
 			sub.each{subClass |
 				if((not slicerModel.slicedClasses.exists{sc2 | sc2.domain.getQualifiedName==subClass.getQualifiedName}).andThen{b2 |
 					not coll.exists{cl2 | cl2.domain.getQualifiedName==subClass.getQualifiedName}}) then
-					var slicedClass : SlicedClass init SlicedClass.new
+					var slicedClass : SlicedClass := SlicedClass.new
 					slicedClass.domain := subClass
 					coll.add(slicedClass)
 				end
@@ -170,7 +173,7 @@ class SlicerGenerator {
 	
 	// Computes the root class of the metamodel.
 	operation computeRootClass() : EClass is do
-		var roots : Sequence<EClass> init allClasses.select{clazz | clazz.canBeRootClass(allClasses) }
+		var roots : Sequence<EClass> := allClasses.select{clazz | clazz.canBeRootClass(allClasses) }
 		
 		if(roots.isEmpty()) then
 			result := void
@@ -192,7 +195,7 @@ class SlicerGenerator {
 				aspectisedClasses.add(rel.domain.eContainingClass)
 			end
 			if(rel.domain.eType.isInstanceOf(EClass)) then
-				var eclass : EClass init rel.domain.eType.asType(EClass)
+				var eclass : EClass := rel.domain.eType.asType(EClass)
 				if(not aspectisedClasses.exists{cl | cl.getQualifiedName==eclass.getQualifiedName}) then
 					aspectisedClasses.add(eclass)
 				end
@@ -232,14 +235,14 @@ class SlicerGenerator {
 		result := ""
 
 		if(classes.size>1) then
-			var packagesName : Bag<String> init Bag<String>.new
+			var packagesName : Bag<String> := Bag<String>.new
 			packagesName.add(classes.last().ePackage.getQualifiedName())
 
-			from var i : Integer init classes.size()-2
+			from var i : Integer := classes.size()-2
 			// Skipping the first element which has been converted as the default package.
 			until i<0
 			loop
-				var name : String init classes.at(i).ePackage.getQualifiedName()
+				var name : String := classes.at(i).ePackage.getQualifiedName()
 
 				if(not packagesName.contains(name)) then
 					packagesName.add(name)
@@ -256,14 +259,14 @@ class SlicerGenerator {
 		result := ""
 
 		if(classes.size>1) then
-			var packagesName : Bag<String> init Bag<String>.new
+			var packagesName : Bag<String> := Bag<String>.new
 			packagesName.add(classes.last().ePackage.getQualifiedName())
 
-			from var i : Integer init classes.size()-2
+			from var i : Integer := classes.size()-2
 			// Skipping the first element which has been converted as the default package.
 			until i<0
 			loop
-				var name : String init classes.at(i).ePackage.getQualifiedName()
+				var name : String := classes.at(i).ePackage.getQualifiedName()
 
 				if(not packagesName.contains(name)) then
 					packagesName.add(name)
@@ -286,41 +289,38 @@ class SlicerGenerator {
 	
 	
 	operation generateCodeKP(modelAspectFileName : String, slicerFileName : String, requiredAspectFileNames : Bag<String>) : String is do
-		var metamodelName : String init slicerModel.uriMetamodel.split("/").last
-		var pkgName : String init getPackageFromClasses(aspectisedClasses).replaceAll(";\n", "::" + slicerModel.name).replaceAll("package ", "")
+		var metamodelName : String := slicerModel.uriMetamodel.split("/").last
+		var pkgName : String := getPackageFromClasses(aspectisedClasses).replaceAll(";\n", "::" + shortNameSlicer).replaceAll("package ", "")
 	
-		result := "KermetaProject \"" + slicerModel.name + "\"\n\tgroupId = \"my.group\"\n\t" +
-					"defaultMainClass =\"" + pkgName + "\"\n\t" +
-					"defaultMainOperation = \"launch\"\n\tsources = {\n\t\t" +
-					"require \"${project.baseUri}/" + modelAspectFileName + "\"\n\t\t" +
-					"require \"${project.baseUri}/" + slicerFileName + "\"\n\t\t"
-					
-		requiredAspectFileNames.each{name | result := result + "require \"${project.baseUri}/" + name + "\"\n\t\t" }
-		
-		result := result + "require \"${project.baseUri}/" + metamodelName + "\"\n\t}\n\tdependencies = {\n\t\t" +
-			"dependency \"library.core\" =	\"platform:/plugin/org.kermeta.language.library.core\", \"mvn:org.kermeta.language/language.library.core/2.0.2\"\n\t}\n"
+		result := "resource library_standard =\"platform:/plugin/org.kermeta.language.library.standard\" alternative \"mvn:org.kermeta.language/language.library.standard/2.0.99-SNAPSHOT\"\nimportProject library_standard\nproject "
+		result := result + slicerModel.name.replaceAll("\\.", "_") + "{\n"
+		result := result + 
+					"\tmainClass \""+slicerModel.name+"^" + pkgName + "\"\n\tmainOperation \"launch\"\n\timport \"${project.baseUri}/" + 
+					metamodelName + "\"\n\timport \"${project.baseUri}/" + modelAspectFileName + 
+					"\"\n\timport \"${project.baseUri}/" + slicerFileName + "\"\n"
+		requiredAspectFileNames.each{name | result := result + "\timport \"${project.baseUri}/" + name + "\"\n" }
+		result := result + "}\n"
 	end
 	
 	
 	operation copyMetamodel() is do
-		var metamodelName : String init slicerModel.uriMetamodel.split("/").last
+		var metamodelName : String := slicerModel.uriMetamodel.split("/").last
 		FileIO.writeTextFile(("platform:/resource/" + slicerModel.name + "/" + metamodelName).toURI, FileIO.readTextFile(slicerModel.uriMetamodel.toURI))
 	end 
 	
 	
 	operation saveCode() is do
-		var aspectFileNames : Bag<String> init Bag<String>.new
-		
-		requiredAspectFiles.keys.each{key | aspectFileNames.add(key.split("::").last + "SlicingAspect.kmt") }
+		var aspectFileNames : Bag<String> := Bag<String>.new
 
-		FileIO.writeTextFile(("platform:/resource/" + slicerModel.name + "/" + slicerModel.name + ".kp").toURI, 
-							generateCodeKP(slicerModel.name + "Aspect.kmt", slicerModel.name + ".kmt", aspectFileNames))
-		FileIO.writeTextFile(("platform:/resource/" + slicerModel.name + "/" + slicerModel.name + "Aspect.kmt").toURI, slicerAspectGenerator.generatedCode)
-		FileIO.writeTextFile(("platform:/resource/" + slicerModel.name + "/" + slicerModel.name + ".kmt").toURI, slicerClassGenerator.generatedCode)
+		requiredAspectFiles.keys.each{key | aspectFileNames.add(key.split("::").last + "SlicingAspect.kmt") }
+		FileIO.writeTextFile(("platform:/resource/" + slicerModel.name + "/project.kp").toURI, 
+							generateCodeKP(shortNameSlicer + "Aspect.kmt", shortNameSlicer + ".kmt", aspectFileNames))
+		FileIO.writeTextFile(("platform:/resource/" + slicerModel.name + "/" + shortNameSlicer + "Aspect.kmt").toURI, slicerAspectGenerator.generatedCode)
+		FileIO.writeTextFile(("platform:/resource/" + slicerModel.name + "/" + shortNameSlicer + ".kmt").toURI, slicerClassGenerator.generatedCode)
 		copyMetamodel()
 		
 		requiredAspectFiles.keys.each{key |
-			var subPkgs : Sequence<String> init key.split("::")
+			var subPkgs : Sequence<String> := key.split("::")
 			FileIO.writeTextFile(("platform:/resource/" + slicerModel.name + "/" + subPkgs.last + "SlicingAspect.kmt").toURI, requiredAspectFiles.getValue(key))
 		}
 	end

@@ -24,8 +24,8 @@ class SlicerClassGenerator inherits Generator {
 		generatedCode := slicerGenerator.getPackageFromClasses(slicerGenerator.aspectisedClasses)
 						
 		// The helper may contain 'require' statements that must be placed at this place.
-		if not linedHelper.isVoid then
-			var requireStr : String init "require \""
+		if not linedHelper.isVoid then//FIXME
+			var requireStr : String := "require \""
 			linedHelper.collect{str | 
 				if str.contains(requireStr) then
 					generatedCode := generatedCode + str + "\n"
@@ -35,15 +35,15 @@ class SlicerClassGenerator inherits Generator {
 		end
 						
 		if(slicerGenerator.slicerModel.strict) then
-			generatedCode := generatedCode + "using kermeta::emfpersistence" 
+			generatedCode := generatedCode + "using kermeta::emfpersistence::*" 
 		end
    					     
-   		generatedCode := generatedCode + "\nusing kermeta::standard\nusing kermeta::utils\nusing kermeta::io::StdIO => stdio\n" +
+   		generatedCode := generatedCode + "\nusing kermeta::standard::*\nusing kermeta::utils::*\nusing kermeta::io::StdIO => stdio\n" +
 						 slicerGenerator.getUsingsFromClasses(slicerGenerator.aspectisedClasses)
 		
 		// The helper may contain 'using' statements that must be placed at this place.
 		if not linedHelper.isVoid then
-			var usingStr : String init "using "
+			var usingStr : String := "using "
 			linedHelper.collect{str | 
 				if str.contains(usingStr) then
 					generatedCode := generatedCode + str + "\n"
@@ -52,7 +52,7 @@ class SlicerClassGenerator inherits Generator {
 			}
 		end					 
 						 
-		generatedCode := generatedCode + "class " + slicerGenerator.slicerModel.name + " {\n"
+		generatedCode := generatedCode + "class " + slicerGenerator.shortNameSlicer + " {\n"
 
 		if(slicerGenerator.slicerModel.strict) then
 			generatedCode := generatedCode + "\treference sliceRoots : Bag<SlicerVisitor>\n"
@@ -147,7 +147,7 @@ class SlicerClassGenerator inherits Generator {
 
 		slicerGenerator.slicerModel.slicedProperties.each{rel |
 			if(not rel.expression.isVoid) then
-				var type : EClass init rel.domain.eType.asType(EClass)
+				var type : EClass := rel.domain.eType.asType(EClass)
 				result := result + "\toperation on" + rel.domain.eContainingClass.name + rel.domain.name + "Added(" + rel.src.varName + " : " + 
 						rel.domain.eContainingClass.name + ", " + rel.tgt.varName + " : " + type.name + ") is do\n"
 				
@@ -187,8 +187,8 @@ class SlicerClassGenerator inherits Generator {
 		if(not slicerGenerator.slicerModel.strict) then
 			slicerGenerator.slicerModel.slicedClasses.each{eclass |
 				if(not eclass.expression.isVoid) then
-					var varName : String init eclass.domain.getVarNameClassifier()
-					var endCode : String init ""
+					var varName : String := eclass.domain.getVarNameClassifier()
+					var endCode : String := ""
 		
 					result := result + "\t\tself." + eclass.domain.getAddedAttributeName() + ".each{" + varName + " | "
 		
@@ -204,7 +204,7 @@ class SlicerClassGenerator inherits Generator {
 			}
 			slicerGenerator.slicerModel.slicedProperties.each{rel |
 				if(not rel.expression.isVoid) then
-					var varName : String init "the" + rel.domain.name
+					var varName : String := "the" + rel.domain.name
 					result := result + "\t\tself.added" + rel.domain.name + ".each{" + varName + " | self.on" +
 							rel.domain.eContainingClass.name + rel.domain.name + "Added(" + varName + ".src, " + varName + ".tar) }\n"
 				end
@@ -216,7 +216,7 @@ class SlicerClassGenerator inherits Generator {
 
 
 	operation generateIntialiseOperation() : String is do
-		var i : Integer init 0
+		var i : Integer := 0
 		result := "\toperation initialise("
 
 		slicerGenerator.slicerModel.inputClasses.each{clazz |
@@ -245,7 +245,7 @@ class SlicerClassGenerator inherits Generator {
 			result := result + ", model : " + slicerGenerator.rootClass.name
 		end
 
-		result := result + ") : " + slicerGenerator.slicerModel.name + " is do\n"
+		result := result + ") : " + slicerGenerator.shortNameSlicer + " is do\n"
 		result := result + "\t\tresult := self\n"
 
 		if(slicerGenerator.hasOpposite) then
