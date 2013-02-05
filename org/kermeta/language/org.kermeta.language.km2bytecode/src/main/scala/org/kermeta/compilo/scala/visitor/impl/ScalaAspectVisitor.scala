@@ -14,8 +14,10 @@ class ScalaAspectVisitor(compilerConfiguration: CompilerConfiguration) extends I
 
   def visit(mu: ModelingUnit) {
     //PreCompiler.visit(par)
-    mu.getMetamodels().foreach(p =>
-      (this.visit(p)))
+//    mu.getMetamodels().foreach(p =>
+//      (this.visit(p)))
+     
+    this.visit(mu.getCurrentMetamodel())
   }
 
   def visit(mm: Metamodel) {

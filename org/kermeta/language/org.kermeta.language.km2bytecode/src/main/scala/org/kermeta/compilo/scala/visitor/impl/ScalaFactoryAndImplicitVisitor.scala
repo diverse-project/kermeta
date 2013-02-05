@@ -168,8 +168,10 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
 
   def visit(par: ModelingUnit) {
     ecorePackages = new java.util.ArrayList[Package]()
-    par.getMetamodels().foreach({ mm => addPackage(mm.getPackages()) })
+    //par.getMetamodels().foreach({ mm => addPackage(mm.getPackages()) })
 
+    addPackage(par.getCurrentMetamodel().getPackages())
+    
     //TODO gérer le cas des package venant d'ecore
     var res: StringBuilder = new StringBuilder
     var resinitEclipse: StringBuilder = new StringBuilder
@@ -235,8 +237,9 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
     // generate the Util.scala file (used for call on Types)
     UtilObjectGenerator.genetateUtilObject(compilerConfiguration.kermetaStandardMMName)
 
-    par.getMetamodels().foreach(mm => new AcceptableMetamodel(mm).accept(this))
+    //par.getMetamodels().foreach(mm => new AcceptableMetamodel(mm).accept(this))
 
+    new AcceptableMetamodel(par.getCurrentMetamodel()).accept(this)
   }
 
   def visit(mm: Metamodel) {

@@ -61,7 +61,14 @@ object Main extends LogAspect {
     var useFSC = false
     var scalacompile = true
     var propertyfile = "kermetaCompiler.properties"
+      
+    //TODO before run: Fix here the name of the metamodel/project for which we want to generate scala code
+    var currentlyBuiltMetamodelName : String = ""
 
+    if (currentlyBuiltMetamodelName == "") {
+      throw new RuntimeException("You must fix the name of the metamodel to generate before running the km2bytecode project.")
+    }
+      
     for (a <- args) {
       log.debug("Param : " + a)
     }
@@ -138,7 +145,7 @@ object Main extends LogAspect {
       log.info("KM compilation begin on " + inputFile)
       time = System.currentTimeMillis()
       var configuration = new CompilerConfiguration 
-      compilo.compile(inputFile, configuration)
+      compilo.compile(inputFile, configuration, currentlyBuiltMetamodelName)
       endtime = System.currentTimeMillis()
       println("time to generate scala : " + (endtime - time))
     } else {

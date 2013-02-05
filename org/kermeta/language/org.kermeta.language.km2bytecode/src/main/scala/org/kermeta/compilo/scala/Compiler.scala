@@ -17,7 +17,7 @@ import org.kermeta.language.util.ModelingUnit
 
 class Compiler extends LogAspect {
 
-    def compile(url : _root_.java.lang.String, configuration : CompilerConfiguration){
+    def compile(url : _root_.java.lang.String, configuration : CompilerConfiguration, currentlyBuiltMetamodelName : String){
         log.debug("Cleaning Output Step")
         Util.cleanFolder(GlobalConfiguration.outputFolder)
         Util.cleanFolder(GlobalConfiguration.outputBinFolder)
@@ -29,6 +29,7 @@ class Compiler extends LogAspect {
         /* Loading Model KM Step */
         var startTime = System.currentTimeMillis
         var mu : ModelingUnit = t.loadKM(url).asInstanceOf[ModelingUnit] /* Load KM Model */
+        mu.setCurrentMetamodelByName(currentlyBuiltMetamodelName)
         configuration.kermetaStandardMMName = Util.getKermetaStandardMetamodelName(mu)
         var v : IVisitable = new AcceptableModelingUnit(mu) 
 

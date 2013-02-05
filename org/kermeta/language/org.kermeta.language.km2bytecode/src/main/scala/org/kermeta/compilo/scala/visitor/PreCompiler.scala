@@ -12,7 +12,8 @@ object PreCompiler {
    */
   def visit(o:org.kermeta.language.structure.KermetaModelElement) : Unit = o match {
     case mu:ModelingUnit => 
-      mu.getMetamodels().foreach(visit)
+      //mu.getMetamodels().foreach(visit)
+      visit(mu.getCurrentMetamodel())
     case mm : Metamodel =>
       mm.getPackages().foreach(visit)
     case o:Package => 
