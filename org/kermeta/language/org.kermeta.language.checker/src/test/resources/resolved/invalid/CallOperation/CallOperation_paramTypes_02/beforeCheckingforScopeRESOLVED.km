@@ -8278,84 +8278,145 @@
       </nestedPackage>
     </packages>
   </org_kermeta_language_structure:Metamodel>
-  <org_kermeta_language_structure:Metamodel name="CallOperation_paramTypes_04">
+  <org_kermeta_language_structure:Metamodel name="CallOperation_paramTypes_02">
     <packages kTag="/1/@packages.0/@kOwnedTags.0" name="test">
-      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_04/003_CallOperation_paramTypes_04.kmt;225;488" object="/1/@packages.0"/>
+      <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;180;617" object="/1/@packages.0"/>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="/1/@packages.0/@ownedTypeDefinition.0/@kOwnedTags.0" name="Main" superType="/1/@packages.0/@ownedTypeDefinition.0/@containedType.0">
-        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_04/003_CallOperation_paramTypes_04.kmt;244;384" object="/1/@packages.0/@ownedTypeDefinition.0"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;196;484" object="/1/@packages.0/@ownedTypeDefinition.0"/>
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0/@packages.0/@nestedPackage.0/@ownedTypeDefinition.2"/>
         <ownedOperation kTag="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@kOwnedTags.0" name="main" type="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@containedType.0" isOrdered="true">
-          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_04/003_CallOperation_paramTypes_04.kmt;269;379" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0"/>
+          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;215;480" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0/@packages.0/@nestedPackage.0/@ownedTypeDefinition.0"/>
-          <body xsi:type="org_kermeta_language_behavior:Block" kTag="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@kOwnedTags.0" staticType="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1/@containedType.0">
-            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_04/003_CallOperation_paramTypes_04.kmt;296;379" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body"/>
-            <statement xsi:type="org_kermeta_language_behavior:VariableDecl" kTag="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@kOwnedTags.0" staticType="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@containedType.0" identifier="b">
-              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_04/003_CallOperation_paramTypes_04.kmt;308;354" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0"/>
+          <body xsi:type="org_kermeta_language_behavior:Block" kTag="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@kOwnedTags.0">
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;242;480" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body"/>
+            <statement xsi:type="org_kermeta_language_behavior:VariableDecl" kTag="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@kOwnedTags.0" staticType="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@containedType.0" identifier="a">
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;257;288" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0"/>
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0/@packages.0/@nestedPackage.0/@ownedTypeDefinition.0"/>
               <initialization xsi:type="org_kermeta_language_behavior:CallOperation" kTag="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@initialization/@kOwnedTags.0 /1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@initialization/@kOwnedTags.1" staticType="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@initialization/@containedType.0" name="new" staticOperation="/0/@packages.1/@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.0/@ownedOperation.0">
-                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_04/003_CallOperation_paramTypes_04.kmt;340;354" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@initialization"/>
-                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_04/003_CallOperation_paramTypes_04.kmt;331;354" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@initialization"/>
-                <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1/@packages.0/@ownedTypeDefinition.2">
-                  <typeParamBinding variable="/1/@packages.0/@ownedTypeDefinition.2/@containedType.0" type="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@initialization/@containedType.0/@typeParamBinding.0/@containedType.0">
-                    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0/@packages.0/@nestedPackage.0/@ownedTypeDefinition.3"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;277;288" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@initialization"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;273;288" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@initialization"/>
+                <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1/@packages.0/@ownedTypeDefinition.1">
+                  <typeParamBinding variable="/1/@packages.0/@ownedTypeDefinition.1/@containedType.0" type="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@initialization/@containedType.0/@typeParamBinding.0/@containedType.0">
+                    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1/@packages.0/@ownedTypeDefinition.3"/>
                   </typeParamBinding>
                 </containedType>
                 <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral" kTag="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@initialization/@target/@kOwnedTags.0" staticType="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@initialization/@target/@containedType.0">
-                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_04/003_CallOperation_paramTypes_04.kmt;331;340" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@initialization/@target"/>
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;273;277" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@initialization/@target"/>
                   <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0/@packages.1/@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.0"/>
-                  <typeref name="B" type="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@initialization/@target/@typeref/@containedType.0">
-                    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1/@packages.0/@ownedTypeDefinition.2">
-                      <typeParamBinding variable="/1/@packages.0/@ownedTypeDefinition.2/@containedType.0" type="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@initialization/@target/@typeref/@containedType.0/@typeParamBinding.0/@containedType.0">
-                        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0/@packages.0/@nestedPackage.0/@ownedTypeDefinition.3"/>
+                  <typeref name="A" type="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@initialization/@target/@typeref/@containedType.0">
+                    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1/@packages.0/@ownedTypeDefinition.1">
+                      <typeParamBinding variable="/1/@packages.0/@ownedTypeDefinition.1/@containedType.0" type="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@initialization/@target/@typeref/@containedType.0/@typeParamBinding.0/@containedType.0">
+                        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1/@packages.0/@ownedTypeDefinition.3"/>
                       </typeParamBinding>
                     </containedType>
                   </typeref>
                 </target>
               </initialization>
-              <type name="B&lt;String>" type="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@type/@containedType.0" isOrdered="true">
-                <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1/@packages.0/@ownedTypeDefinition.2">
-                  <typeParamBinding variable="/1/@packages.0/@ownedTypeDefinition.2/@containedType.0" type="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@type/@containedType.0/@typeParamBinding.0/@containedType.0">
-                    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0/@packages.0/@nestedPackage.0/@ownedTypeDefinition.3"/>
+              <type name="A&lt;C>" type="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@type/@containedType.0" isOrdered="true">
+                <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1/@packages.0/@ownedTypeDefinition.1">
+                  <typeParamBinding variable="/1/@packages.0/@ownedTypeDefinition.1/@containedType.0" type="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@type/@containedType.0/@typeParamBinding.0/@containedType.0">
+                    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1/@packages.0/@ownedTypeDefinition.3"/>
                   </typeParamBinding>
                 </containedType>
               </type>
             </statement>
-            <statement xsi:type="org_kermeta_language_behavior:CallOperation" kTag="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1/@kOwnedTags.0 /1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1/@kOwnedTags.1" staticType="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1/@containedType.0" name="foo" staticOperation="/1/@packages.0/@ownedTypeDefinition.1/@ownedOperation.0">
-              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_04/003_CallOperation_paramTypes_04.kmt;355;371" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1"/>
-              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_04/003_CallOperation_paramTypes_04.kmt;354;371" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1"/>
+            <statement xsi:type="org_kermeta_language_behavior:VariableDecl" kTag="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1/@kOwnedTags.0" staticType="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1/@containedType.0" identifier="b">
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;288;315" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1"/>
               <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0/@packages.0/@nestedPackage.0/@ownedTypeDefinition.0"/>
-              <parameters xsi:type="org_kermeta_language_behavior:IntegerLiteral" kTag="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1/@parameters.0/@kOwnedTags.0 /1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1/@parameters.0/@kOwnedTags.1" staticType="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1/@parameters.0/@containedType.0" value="1">
-                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_04/003_CallOperation_paramTypes_04.kmt;360;361" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1/@parameters.0"/>
-                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_04/003_CallOperation_paramTypes_04.kmt;360;361" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1/@parameters.0"/>
-                <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0/@packages.0/@nestedPackage.0/@ownedTypeDefinition.4"/>
+              <initialization xsi:type="org_kermeta_language_behavior:CallOperation" kTag="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1/@initialization/@kOwnedTags.0 /1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1/@initialization/@kOwnedTags.1" staticType="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1/@initialization/@containedType.0" name="new" staticOperation="/0/@packages.1/@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.0/@ownedOperation.0">
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;304;315" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1/@initialization"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;303;315" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1/@initialization"/>
+                <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1/@packages.0/@ownedTypeDefinition.2"/>
+                <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral" kTag="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1/@initialization/@target/@kOwnedTags.0" staticType="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1/@initialization/@target/@containedType.0">
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;303;304" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1/@initialization/@target"/>
+                  <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0/@packages.1/@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.0"/>
+                  <typeref name="B" type="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1/@initialization/@target/@typeref/@containedType.0">
+                    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1/@packages.0/@ownedTypeDefinition.2"/>
+                  </typeref>
+                </target>
+              </initialization>
+              <type name="B" type="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1/@type/@containedType.0" isOrdered="true">
+                <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1/@packages.0/@ownedTypeDefinition.2"/>
+              </type>
+            </statement>
+            <statement xsi:type="org_kermeta_language_behavior:VariableDecl" kTag="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.2/@kOwnedTags.0" staticType="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.2/@containedType.0" identifier="c">
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;315;356" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.2"/>
+              <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0/@packages.0/@nestedPackage.0/@ownedTypeDefinition.0"/>
+              <initialization xsi:type="org_kermeta_language_behavior:CallOperation" kTag="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.2/@initialization/@kOwnedTags.0 /1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.2/@initialization/@kOwnedTags.1" staticType="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.2/@initialization/@containedType.0" name="new" staticOperation="/0/@packages.1/@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.0/@ownedOperation.0">
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;331;356" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.2/@initialization"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;330;356" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.2/@initialization"/>
+                <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1/@packages.0/@ownedTypeDefinition.3"/>
+                <target xsi:type="org_kermeta_language_behavior:CallTypeLiteral" kTag="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.2/@initialization/@target/@kOwnedTags.0" staticType="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.2/@initialization/@target/@containedType.0">
+                  <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;330;331" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.2/@initialization/@target"/>
+                  <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0/@packages.1/@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@ownedTypeDefinition.0"/>
+                  <typeref name="C" type="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.2/@initialization/@target/@typeref/@containedType.0">
+                    <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1/@packages.0/@ownedTypeDefinition.3"/>
+                  </typeref>
+                </target>
+              </initialization>
+              <type name="C" type="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.2/@type/@containedType.0" isOrdered="true">
+                <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1/@packages.0/@ownedTypeDefinition.3"/>
+              </type>
+            </statement>
+            <statement xsi:type="org_kermeta_language_behavior:UnresolvedCall" kTag="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.3/@kOwnedTags.0 /1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.3/@kOwnedTags.1" name="foo" generics="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.3/@containedType.0" isCalledWithParenthesis="true">
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;357;475" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.3"/>
+              <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;356;475" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.3"/>
+              <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1/@packages.0/@ownedTypeDefinition.2"/>
+              <parameters xsi:type="org_kermeta_language_behavior:CallVariable" kTag="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.3/@parameters.0/@kOwnedTags.0 /1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.3/@parameters.0/@kOwnedTags.1" staticType="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1/@type/@containedType.0" name="b">
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;365;366" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.3/@parameters.0"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;365;366" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.3/@parameters.0"/>
               </parameters>
-              <target xsi:type="org_kermeta_language_behavior:CallVariable" kTag="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1/@target/@kOwnedTags.0" staticType="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@type/@containedType.0" name="b">
-                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_04/003_CallOperation_paramTypes_04.kmt;354;355" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.1/@target"/>
+              <parameters xsi:type="org_kermeta_language_behavior:CallVariable" kTag="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.3/@parameters.1/@kOwnedTags.0 /1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.3/@parameters.1/@kOwnedTags.1" staticType="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.2/@type/@containedType.0" name="c">
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;368;369" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.3/@parameters.1"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;368;369" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.3/@parameters.1"/>
+              </parameters>
+              <parameters xsi:type="org_kermeta_language_behavior:CallEnumLiteral" kTag="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.3/@parameters.2/@kOwnedTags.0 /1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.3/@parameters.2/@kOwnedTags.1" staticType="/1/@packages.0/@ownedTypeDefinition.4" staticEnumLiteral="/1/@packages.0/@ownedTypeDefinition.4/@ownedLiteral.2">
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;373;375" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.3/@parameters.2"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;371;375" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.3/@parameters.2"/>
+              </parameters>
+              <parameters xsi:type="org_kermeta_language_behavior:CallVariable" kTag="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.3/@parameters.3/@kOwnedTags.0 /1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.3/@parameters.3/@kOwnedTags.1" staticType="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.2/@type/@containedType.0" name="c">
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;377;378" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.3/@parameters.3"/>
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;377;378" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.3/@parameters.3"/>
+              </parameters>
+              <usings fromQName="kermeta::standard::*" toName=""/>
+              <usings fromQName="kermeta::io::StdIO" toName="stdio"/>
+              <target xsi:type="org_kermeta_language_behavior:CallVariable" kTag="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.3/@target/@kOwnedTags.0" staticType="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@type/@containedType.0" name="a">
+                <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;356;357" object="/1/@packages.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.3/@target"/>
               </target>
             </statement>
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="/1/@packages.0/@ownedTypeDefinition.1/@kOwnedTags.0" name="A" superType="/1/@packages.0/@ownedTypeDefinition.1/@containedType.1" typeParameter="/1/@packages.0/@ownedTypeDefinition.1/@containedType.0">
-        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_04/003_CallOperation_paramTypes_04.kmt;384;446" object="/1/@packages.0/@ownedTypeDefinition.1"/>
+        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;484;560" object="/1/@packages.0/@ownedTypeDefinition.1"/>
         <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="X"/>
         <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0/@packages.0/@nestedPackage.0/@ownedTypeDefinition.2"/>
-        <ownedOperation kTag="/1/@packages.0/@ownedTypeDefinition.1/@ownedOperation.0/@kOwnedTags.0" name="foo" type="/1/@packages.0/@ownedTypeDefinition.1/@ownedOperation.0/@containedType.0" isOrdered="true">
-          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_04/003_CallOperation_paramTypes_04.kmt;399;441" object="/1/@packages.0/@ownedTypeDefinition.1/@ownedOperation.0"/>
+        <ownedOperation kTag="/1/@packages.0/@ownedTypeDefinition.1/@ownedOperation.0/@kOwnedTags.0" name="foo" type="/1/@packages.0/@ownedTypeDefinition.1/@ownedOperation.0/@containedType.1" isOrdered="true" typeParameter="/1/@packages.0/@ownedTypeDefinition.1/@ownedOperation.0/@containedType.0">
+          <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;501;556" object="/1/@packages.0/@ownedTypeDefinition.1/@ownedOperation.0"/>
+          <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="Y"/>
           <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0/@packages.0/@nestedPackage.0/@ownedTypeDefinition.0"/>
+          <ownedParameter name="y" type="/1/@packages.0/@ownedTypeDefinition.1/@ownedOperation.0/@containedType.0" isOrdered="true"/>
           <ownedParameter name="x" type="/1/@packages.0/@ownedTypeDefinition.1/@containedType.0" isOrdered="true"/>
+          <ownedParameter name="e" type="/1/@packages.0/@ownedTypeDefinition.4" isOrdered="true"/>
           <body xsi:type="org_kermeta_language_behavior:Block" kTag="/1/@packages.0/@ownedTypeDefinition.1/@ownedOperation.0/@body/@kOwnedTags.0" staticType="/1/@packages.0/@ownedTypeDefinition.1/@ownedOperation.0/@body/@containedType.0">
-            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_04/003_CallOperation_paramTypes_04.kmt;430;441" object="/1/@packages.0/@ownedTypeDefinition.1/@ownedOperation.0/@body"/>
+            <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;544;556" object="/1/@packages.0/@ownedTypeDefinition.1/@ownedOperation.0/@body"/>
             <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0/@packages.0/@nestedPackage.0/@ownedTypeDefinition.0"/>
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="/1/@packages.0/@ownedTypeDefinition.2/@kOwnedTags.0" name="B" superType="/1/@packages.0/@ownedTypeDefinition.2/@containedType.1" typeParameter="/1/@packages.0/@ownedTypeDefinition.2/@containedType.0">
-        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_04/003_CallOperation_paramTypes_04.kmt;446;483" object="/1/@packages.0/@ownedTypeDefinition.2"/>
-        <containedType xsi:type="org_kermeta_language_structure:ObjectTypeVariable" name="Y"/>
-        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/1/@packages.0/@ownedTypeDefinition.1">
-          <typeParamBinding variable="/1/@packages.0/@ownedTypeDefinition.1/@containedType.0" type="/1/@packages.0/@ownedTypeDefinition.2/@containedType.0"/>
-        </containedType>
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="/1/@packages.0/@ownedTypeDefinition.2/@kOwnedTags.0" name="B" superType="/1/@packages.0/@ownedTypeDefinition.2/@containedType.0">
+        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;560;576" object="/1/@packages.0/@ownedTypeDefinition.2"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0/@packages.0/@nestedPackage.0/@ownedTypeDefinition.2"/>
+      </ownedTypeDefinition>
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:ClassDefinition" kTag="/1/@packages.0/@ownedTypeDefinition.3/@kOwnedTags.0" name="C" superType="/1/@packages.0/@ownedTypeDefinition.3/@containedType.0">
+        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;576;591" object="/1/@packages.0/@ownedTypeDefinition.3"/>
+        <containedType xsi:type="org_kermeta_language_structure:Class" typeDefinition="/0/@packages.0/@nestedPackage.0/@ownedTypeDefinition.2"/>
+      </ownedTypeDefinition>
+      <ownedTypeDefinition xsi:type="org_kermeta_language_structure:Enumeration" kTag="/1/@packages.0/@ownedTypeDefinition.4/@kOwnedTags.0" name="Ee">
+        <kOwnedTags name="traceability_text_reference" value="file:/C:/Users/dvojtise/workspaces/runtimeWorkbench/CallOperation_paramTypes_02/003_CallOperation_paramTypes_02.kmt;591;614" object="/1/@packages.0/@ownedTypeDefinition.4"/>
+        <ownedLiteral name="a"/>
+        <ownedLiteral name="b"/>
+        <ownedLiteral name="c"/>
       </ownedTypeDefinition>
     </packages>
   </org_kermeta_language_structure:Metamodel>
