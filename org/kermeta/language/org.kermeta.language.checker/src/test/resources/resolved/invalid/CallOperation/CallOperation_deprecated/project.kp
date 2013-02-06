@@ -8,6 +8,6 @@ importProject library_standard
 project CallOperation_deprecated {
 
 	
-	import "${project.baseUri}/003_CallOperation_deprecated.kmt" 
+	import "${project.baseUri}/003_CallOperation_deprecated.kmt"
 
 }
