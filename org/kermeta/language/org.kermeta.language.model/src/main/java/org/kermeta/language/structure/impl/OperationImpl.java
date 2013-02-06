@@ -156,16 +156,6 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	protected static final String UNIQUE_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getUniqueName() <em>Unique Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getUniqueName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String uniqueName = UNIQUE_NAME_EDEFAULT;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -205,6 +195,38 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 		isAbstract = newIsAbstract;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.OPERATION__IS_ABSTRACT, oldIsAbstract, isAbstract));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public String getUniqueName() {
+		//if (uniqueName==null) {
+			StringBuffer unique = new StringBuffer();
+			unique.append(this.getName());
+			unique.append("_"+getOwnedParameter().size());
+			for (Parameter aParameter : getOwnedParameter()) {
+				unique.append("_");
+				unique.append(Helper.getTypeName(aParameter.getType()));
+			}
+			//setUniqueName(unique.toString());
+		//}
+		//return uniqueName;
+			return unique.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUniqueName(String newUniqueName) {
+		// TODO: implement this method to set the 'Unique Name' attribute
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -373,37 +395,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 		return typeParameter;
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	@Override
-	public String getUniqueName() {
-		if (uniqueName==null) {
-			StringBuffer unique = new StringBuffer();
-			unique.append(this.getName());
-			unique.append("_"+getOwnedParameter().size()+"_");
-			for (Parameter aParameter : getOwnedParameter()) {
-				unique.append(Helper.getTypeName(aParameter.getType()));
-			}
-			setUniqueName(unique.toString());
-		}
-		return uniqueName;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setUniqueName(String newUniqueName) {
-		String oldUniqueName = uniqueName;
-		uniqueName = newUniqueName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.OPERATION__UNIQUE_NAME, oldUniqueName, uniqueName));
-	}
+	
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -616,7 +608,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 			case StructurePackage.OPERATION__IS_ABSTRACT:
 				return IS_ABSTRACT_EDEFAULT == null ? isAbstract != null : !IS_ABSTRACT_EDEFAULT.equals(isAbstract);
 			case StructurePackage.OPERATION__UNIQUE_NAME:
-				return UNIQUE_NAME_EDEFAULT == null ? uniqueName != null : !UNIQUE_NAME_EDEFAULT.equals(uniqueName);
+				return UNIQUE_NAME_EDEFAULT == null ? getUniqueName() != null : !UNIQUE_NAME_EDEFAULT.equals(getUniqueName());
 		}
 		return super.eIsSet(featureID);
 	}
@@ -633,8 +625,6 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (isAbstract: ");
 		result.append(isAbstract);
-		result.append(", uniqueName: ");
-		result.append(uniqueName);
 		result.append(')');
 		return result.toString();
 	}

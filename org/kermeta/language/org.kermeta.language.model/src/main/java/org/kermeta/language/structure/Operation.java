@@ -67,6 +67,33 @@ public interface Operation extends MultiplicityElement, AbstractOperation {
 	void setIsAbstract(Boolean value);
 
 	/**
+	 * Returns the value of the '<em><b>Unique Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The uniqueName of an Operation is a calculated value. It returns a value that will be unique for this Operation
+	 * even if the name of the operation itself is shared by several Operation in the context of operation overloading.
+	 * Currently, the value is calculated using the number of parameters. (TODO should be more precise but this implies that we really support operation overloading in all kermeta workflow)
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Unique Name</em>' attribute.
+	 * @see #setUniqueName(String)
+	 * @see org.kermeta.language.structure.StructurePackage#getOperation_UniqueName()
+	 * @model dataType="org.kermeta.language.structure.String" transient="true" volatile="true" derived="true"
+	 * @generated
+	 */
+	String getUniqueName();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.language.structure.Operation#getUniqueName <em>Unique Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Unique Name</em>' attribute.
+	 * @see #getUniqueName()
+	 * @generated
+	 */
+	void setUniqueName(String value);
+
+	/**
 	 * Returns the value of the '<em><b>Raised Exception</b></em>' reference list.
 	 * The list contents are of type {@link org.kermeta.language.structure.Type}.
 	 * <!-- begin-user-doc -->
@@ -214,36 +241,5 @@ public interface Operation extends MultiplicityElement, AbstractOperation {
 	 * @generated
 	 */
 	EList<TypeVariable> getTypeParameter();
-
-	/**
-	 * Returns the value of the '<em><b>Unique Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Unique Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The uniqueName of an Operation is a calculated value. It returns a value that will be unique for this Operation
-	 * even if the name of the operation itself is shared by several Operation in the context of operation overloading.
-	 * Currently, the value is calculated using the number of parameters. (TODO should be more precise but this implies that we really support operation overloading in all kermeta workflow)
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Unique Name</em>' attribute.
-	 * @see #setUniqueName(String)
-	 * @see org.kermeta.language.structure.StructurePackage#getOperation_UniqueName()
-	 * @model dataType="org.kermeta.language.structure.String" transient="true" derived="true"
-	 * @generated
-	 */
-	String getUniqueName();
-
-	/**
-	 * Sets the value of the '{@link org.kermeta.language.structure.Operation#getUniqueName <em>Unique Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Unique Name</em>' attribute.
-	 * @see #getUniqueName()
-	 * @generated
-	 */
-	void setUniqueName(String value);
 
 } // Operation

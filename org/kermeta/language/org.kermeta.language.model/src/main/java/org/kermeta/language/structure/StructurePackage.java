@@ -4803,6 +4803,17 @@ public interface StructurePackage extends EPackage {
 	EAttribute getOperation_IsAbstract();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.kermeta.language.structure.Operation#getUniqueName <em>Unique Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Unique Name</em>'.
+	 * @see org.kermeta.language.structure.Operation#getUniqueName()
+	 * @see #getOperation()
+	 * @generated
+	 */
+	EAttribute getOperation_UniqueName();
+
+	/**
 	 * Returns the meta object for the reference list '{@link org.kermeta.language.structure.Operation#getRaisedException <em>Raised Exception</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4889,17 +4900,6 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getOperation_TypeParameter();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.kermeta.language.structure.Operation#getUniqueName <em>Unique Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Unique Name</em>'.
-	 * @see org.kermeta.language.structure.Operation#getUniqueName()
-	 * @see #getOperation()
-	 * @generated
-	 */
-	EAttribute getOperation_UniqueName();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.language.structure.Property <em>Property</em>}'.
@@ -6886,6 +6886,14 @@ public interface StructurePackage extends EPackage {
 		EAttribute OPERATION__IS_ABSTRACT = eINSTANCE.getOperation_IsAbstract();
 
 		/**
+		 * The meta object literal for the '<em><b>Unique Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OPERATION__UNIQUE_NAME = eINSTANCE.getOperation_UniqueName();
+
+		/**
 		 * The meta object literal for the '<em><b>Raised Exception</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6948,14 +6956,6 @@ public interface StructurePackage extends EPackage {
 		 * @generated
 		 */
 		EReference OPERATION__TYPE_PARAMETER = eINSTANCE.getOperation_TypeParameter();
-
-		/**
-		 * The meta object literal for the '<em><b>Unique Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute OPERATION__UNIQUE_NAME = eINSTANCE.getOperation_UniqueName();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.language.structure.impl.PropertyImpl <em>Property</em>}' class.
