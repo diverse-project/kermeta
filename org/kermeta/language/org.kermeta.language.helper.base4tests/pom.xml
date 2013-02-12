@@ -77,7 +77,13 @@
     	<groupId>org.eclipse.ui</groupId>
     	<artifactId>workbench</artifactId>
     	<version>[3.7.1-v20120104-1859,3.8.0)</version>
-    	
+    	<exclusions>
+    	<!-- exclude buggy dependency -->
+    		<exclusion>
+    			<artifactId>app</artifactId>
+    			<groupId>org.eclipse.equinox</groupId>
+    		</exclusion>
+    	</exclusions>
 	</dependency>
 	
 	
