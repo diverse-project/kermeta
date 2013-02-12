@@ -4,6 +4,7 @@
 		<artifactId>language.root</artifactId>
 		<groupId>org.kermeta.language</groupId>
 		<version>2.0.99-SNAPSHOT</version>
+		<relativePath>../org.kermeta.language.root</relativePath>
 	</parent>
 	<!-- workaround bug apt !? -->
 	<!-- <groupId>org.kermeta.language</groupId> 
@@ -75,7 +76,7 @@
 	<dependency>
     	<groupId>org.eclipse.ui</groupId>
     	<artifactId>workbench</artifactId>
-    	<version>[3.7.1-v20120104-1859,)</version>
+    	<version>[3.7.1-v20120104-1859,3.8.0)</version>
     	
 	</dependency>
 	
