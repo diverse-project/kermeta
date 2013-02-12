@@ -144,6 +144,13 @@
             <groupId>org.eclipse.core</groupId>
             <artifactId>runtime</artifactId>
             <version>[3.5.0,4.0.0)</version>
+            <exclusions>
+	            <!-- exclude buggy dependency -->
+	    		<exclusion>
+	    			<artifactId>app</artifactId>
+	    			<groupId>org.eclipse.equinox</groupId>
+	    		</exclusion>
+	    	</exclusions>
         </dependency>
         <dependency>
             <groupId>org.eclipse.emf</groupId>
