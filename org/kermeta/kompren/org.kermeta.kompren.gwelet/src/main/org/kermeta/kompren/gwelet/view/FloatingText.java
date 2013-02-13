@@ -15,6 +15,8 @@ public class FloatingText implements Selectable {
 
 	protected RoleView role;
 
+	protected Rectangle bound;
+
 	protected double tx;
 
 	protected double ty;
@@ -25,6 +27,7 @@ public class FloatingText implements Selectable {
 
 		this.role = role;
 		this.text = text;
+		bound = new Rectangle(0, 0, -1, -1);
 		tx = 0.;
 		ty = 0.;
 	}
@@ -32,9 +35,17 @@ public class FloatingText implements Selectable {
 
 
 	public void paint(final Graphics2D g, final Rectangle visibleScene) {
-		Point2D position = getPosition();
+		if(bound.width<0) {
+			final Rectangle2D bounds = new TextLayout(text, g.getFont(), g.getFontRenderContext()).getBounds();
+			bound.width = (int) bounds.getWidth();
+			bound.height = (int) bounds.getHeight();
+		}
 
-		if(position.getX()<visibleScene.width+visibleScene.x && position.getY()<visibleScene.height+visibleScene.y)
+		Point2D position = getPosition();
+		bound.x =(int) position.getX();
+		bound.y =(int) position.getY();
+
+		if(visibleScene==null || visibleScene.contains(bound) || visibleScene.intersects(bound))
 			g.drawString(text, (int)position.getX(), (int)position.getY());
 	}
 
@@ -47,6 +58,7 @@ public class FloatingText implements Selectable {
 
 	public void setText(final String text) {
 		this.text = text;
+		bound.width = -1;
 	}
 
 
@@ -79,8 +91,8 @@ public class FloatingText implements Selectable {
 
 	@Override
 	public void translate(final double gapx, final double gapy) {
-		this.tx += gapx;
-		this.ty += gapy;
+		tx += gapx;
+		ty += gapy;
 	}
 
 
