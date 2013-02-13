@@ -8,6 +8,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.kermeta.kompren.diagram.view.interfaces.HandlerHandler;
 import org.kermeta.kompren.diagram.view.interfaces.IDecorationView;
 import org.kermeta.kompren.diagram.view.interfaces.IEntityView;
 import org.kermeta.kompren.diagram.view.interfaces.IHandler;
@@ -20,7 +21,7 @@ import org.malai.picking.Picker;
  * A relation view can be established between two entities.
  * @author Arnaud Blouin
  */
-public class RelationView extends ComponentView implements IRelationView {
+public class RelationView extends ComponentView implements IRelationView, HandlerHandler {
 	/** The source entity. */
 	protected IEntityView entitySrc;
 
@@ -59,13 +60,14 @@ public class RelationView extends ComponentView implements IRelationView {
 		sourceDecoration 	= null;
 		targetDecoration 	= null;
 		handlersVisible		= false;
+		bound				= new Rectangle();
 		updateLineColor(255);
 
 		Point2D pt1 = new Point2D.Double();
 		Point2D pt2 =  new Point2D.Double();
 
-		handlers.add(new Handler(pt1, this));
-		handlers.add(new Handler(pt2, this));
+		handlers.add(new Handler(pt1, this, this));
+		handlers.add(new Handler(pt2, this, this));
 
 		if(src==target) {
 			getRecursiveRelationPoints(pt1, pt2);
@@ -74,11 +76,13 @@ public class RelationView extends ComponentView implements IRelationView {
 			segments.add(new SegmentView(pt1, pt3));
 			segments.add(new SegmentView(pt3, pt4));
 			segments.add(new SegmentView(pt4, pt2));
-			handlers.add(1, new Handler(pt3, this));
-			handlers.add(2, new Handler(pt4, this));
+			handlers.add(1, new Handler(pt3, this, this));
+			handlers.add(2, new Handler(pt4, this, this));
 		}
 		else
 			segments.add(new SegmentView(pt1, pt2));
+
+		update();
 	}
 
 
@@ -107,7 +111,10 @@ public class RelationView extends ComponentView implements IRelationView {
 
 	@Override
 	public void paint(final Graphics2D g, final Rectangle visibleScene) {
-		if(isVisible()) {
+		if(!isVisible()) return;
+
+		if(visibleScene==null ||
+				visibleScene.contains(segments.get(0).getPointSource()) || visibleScene.contains(segments.get(segments.size()-1).getPointTarget())){
 			g.setColor(getLineColor());
 
 			for(final ISegmentView view : segments)
@@ -157,7 +164,30 @@ public class RelationView extends ComponentView implements IRelationView {
 
 	@Override
 	public void update() {
-		// Nothing to do.
+		double[] mins = {Double.MIN_VALUE, Double.MIN_VALUE};
+		double[] maxs = {Double.MAX_VALUE, Double.MAX_VALUE};
+
+		for(final ISegmentView seg : segments) {
+			getMinMaxValues(mins, maxs, seg.getPointSource().getX(), seg.getPointSource().getY());
+			getMinMaxValues(mins, maxs, seg.getPointTarget().getX(), seg.getPointTarget().getY());
+		}
+
+		if(sourceDecoration!=null) {
+			Rectangle2D rec = sourceDecoration.getPath().getBounds2D();
+			getMinMaxValues(mins, maxs, rec.getMinX(), rec.getMinY());
+			getMinMaxValues(mins, maxs, rec.getMaxX(), rec.getMaxY());
+		}
+
+		if(targetDecoration!=null) {
+			Rectangle2D rec = targetDecoration.getPath().getBounds2D();
+			getMinMaxValues(mins, maxs, rec.getMinX(), rec.getMinY());
+			getMinMaxValues(mins, maxs, rec.getMaxX(), rec.getMaxY());
+		}
+
+		bound.x = (int) mins[0];
+		bound.y = (int) mins[1];
+		bound.width = (int) (maxs[0]-mins[0]);
+		bound.height = (int) (maxs[1]-mins[1]);
 	}
 
 
@@ -178,6 +208,7 @@ public class RelationView extends ComponentView implements IRelationView {
 	public void setSourceDecoration(final IDecorationView sourceDecoration) {
 		setDecoration(this.sourceDecoration, sourceDecoration);
 		this.sourceDecoration = sourceDecoration;
+		update();
 	}
 
 
@@ -201,6 +232,7 @@ public class RelationView extends ComponentView implements IRelationView {
 	public void setTargetDecoration(final IDecorationView targetDecoration) {
 		setDecoration(this.targetDecoration, targetDecoration);
 		this.targetDecoration = targetDecoration;
+		update();
 	}
 
 
@@ -250,27 +282,7 @@ public class RelationView extends ComponentView implements IRelationView {
 
 	@Override
 	public Rectangle2D getBorders() {
-		double[] mins = {Double.MIN_VALUE, Double.MIN_VALUE};
-		double[] maxs = {Double.MAX_VALUE, Double.MAX_VALUE};
-
-		for(final ISegmentView seg : segments) {
-			getMinMaxValues(mins, maxs, seg.getPointSource().getX(), seg.getPointSource().getY());
-			getMinMaxValues(mins, maxs, seg.getPointTarget().getX(), seg.getPointTarget().getY());
-		}
-
-		if(sourceDecoration!=null) {
-			Rectangle2D rec = sourceDecoration.getPath().getBounds2D();
-			getMinMaxValues(mins, maxs, rec.getMinX(), rec.getMinY());
-			getMinMaxValues(mins, maxs, rec.getMaxX(), rec.getMaxY());
-		}
-
-		if(targetDecoration!=null) {
-			Rectangle2D rec = targetDecoration.getPath().getBounds2D();
-			getMinMaxValues(mins, maxs, rec.getMinX(), rec.getMinY());
-			getMinMaxValues(mins, maxs, rec.getMaxX(), rec.getMaxY());
-		}
-
-		return new Rectangle2D.Double(mins[0], mins[1], maxs[0]-mins[0], maxs[1]-mins[1]);
+		return new Rectangle2D.Double(bound.x, bound.y, bound.width, bound.height);
 	}
 
 
@@ -301,6 +313,8 @@ public class RelationView extends ComponentView implements IRelationView {
 						segments.get(i).replacePointSource(seg.getPointSource());
 					}
 				}
+
+				update();
 			}
 		}
 
@@ -340,10 +354,12 @@ public class RelationView extends ComponentView implements IRelationView {
 				else
 					segments.add(i+1, newSeg);
 
-				handlers.add(i+1, new Handler(newPt, this));
+				handlers.add(i+1, new Handler(newPt, this, this));
 			}
 			else
 				i++;
+
+		update();
 	}
 
 
@@ -356,6 +372,8 @@ public class RelationView extends ComponentView implements IRelationView {
 			pt = segments.get(i).getPointTarget();
 			pt.setLocation(pt.getX()+tx, pt.getY()+ty);
 		}
+
+		update();
 	}
 
 
@@ -463,5 +481,11 @@ public class RelationView extends ComponentView implements IRelationView {
 
 	public void setEntityTar(final IEntityView entityTar) {
 		this.entityTar = entityTar;
+	}
+
+
+	@Override
+	public void onMove(final IHandler handler) {
+		update();
 	}
 }

@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
+import org.kermeta.kompren.diagram.view.interfaces.HandlerHandler;
 import org.kermeta.kompren.diagram.view.interfaces.IHandler;
 import org.malai.picking.Picker;
 
@@ -17,14 +18,17 @@ public class Handler implements IHandler {
 
 	protected Picker picker;
 
+	protected HandlerHandler handler;
 
-	public Handler(final Point2D point, final Picker picker) {
+
+	public Handler(final Point2D point, final Picker picker, final HandlerHandler handler) {
 		super();
 
-		if(point==null || picker==null)
+		if(point==null || picker==null || handler==null)
 			throw new IllegalArgumentException();
 
 		this.picker = picker;
+		this.handler = handler;
 		setPoint(point);
 	}
 
@@ -66,6 +70,7 @@ public class Handler implements IHandler {
 	@Override
 	public void translate(final double tx, final double ty) {
 		point.setLocation(point.getX()+tx, point.getY()+ty);
+		handler.onMove(this);
 	}
 
 
