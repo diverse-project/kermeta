@@ -2,6 +2,7 @@ package org.kermeta.kompren.diagram.view.impl;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
@@ -105,7 +106,7 @@ public class RelationView extends ComponentView implements IRelationView {
 
 
 	@Override
-	public void paint(final Graphics2D g) {
+	public void paint(final Graphics2D g, final Rectangle visibleScene) {
 		if(isVisible()) {
 			g.setColor(getLineColor());
 
@@ -113,10 +114,10 @@ public class RelationView extends ComponentView implements IRelationView {
 				view.paint(g);
 
 			if(sourceDecoration!=null)
-				sourceDecoration.paint(g);
+				sourceDecoration.paint(g, visibleScene);
 
 			if(targetDecoration!=null)
-				targetDecoration.paint(g);
+				targetDecoration.paint(g, visibleScene);
 
 			if(handlersVisible)
 				for(final IHandler handler : handlers)

@@ -1,6 +1,7 @@
 package org.kermeta.kompren.gwelet.view;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.font.TextLayout;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
@@ -30,9 +31,11 @@ public class FloatingText implements Selectable {
 
 
 
-	public void paint(final Graphics2D g) {
+	public void paint(final Graphics2D g, final Rectangle visibleScene) {
 		Point2D position = getPosition();
-		g.drawString(text, (int)position.getX(), (int)position.getY());
+
+		if(position.getX()<visibleScene.width+visibleScene.x && position.getY()<visibleScene.height+visibleScene.y)
+			g.drawString(text, (int)position.getX(), (int)position.getY());
 	}
 
 

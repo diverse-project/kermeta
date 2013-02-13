@@ -17,7 +17,12 @@
     </parent>
     
     <build>
-	    <sourceDirectory>src</sourceDirectory>
+	    <sourceDirectory>src/main/</sourceDirectory>
+   		<resources>
+	      <resource>
+	        <directory>src/resources/</directory>
+	      </resource>
+	    </resources>
         <plugins>
             <!-- Creation of the bundle jar and its manifest -->
             <plugin>

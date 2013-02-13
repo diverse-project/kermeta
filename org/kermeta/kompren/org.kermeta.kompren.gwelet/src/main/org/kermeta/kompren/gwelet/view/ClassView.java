@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.Stroke;
 import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
@@ -217,7 +218,7 @@ public class ClassView extends RectangleEntityView {
 
 
 	@Override
-	public void paint(final Graphics2D g) {
+	public void paint(final Graphics2D g, final Rectangle visibleScene) {
 		if(!isVisible())
 			return ;
 
@@ -239,11 +240,11 @@ public class ClassView extends RectangleEntityView {
 
 		if(propertiesVisible)
 			for(AttributeView attr : attributes)
-				attr.paint(g);
+				attr.paint(g, visibleScene);
 
 		if(operationsVisible)
 			for(OperationView op : operations)
-				op.paint(g);
+				op.paint(g, visibleScene);
 
 //		for(IAnchor anchor : anchors)
 //			anchor.paint(g);

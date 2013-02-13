@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
@@ -160,12 +161,23 @@ public class ModelView extends MPanel implements IModelView {
 
 		if(isEnabled()) {
 			g2.scale(zoom, zoom);
+			Rectangle scene;
+
+			if(scrollpane==null)
+				scene=null;
+			else {
+				scene = scrollpane.getViewport().getViewRect();
+				scene.height /= zoom;
+				scene.width /= zoom;
+				scene.x /= zoom;
+				scene.y /= zoom;
+			}
 
 			for(IEntityView entity : entities)
-				entity.paint(g2);
+				entity.paint(g2, scene);
 
 			for(IRelationView relation : relations)
-				relation.paint(g2);
+				relation.paint(g2, scene);
 
 			g2.scale(1./zoom, 1./zoom);
 		}

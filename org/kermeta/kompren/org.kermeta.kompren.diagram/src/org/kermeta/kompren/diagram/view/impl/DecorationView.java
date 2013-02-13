@@ -1,6 +1,7 @@
 package org.kermeta.kompren.diagram.view.impl;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 
 import org.kermeta.kompren.diagram.view.interfaces.IDecorationView;
@@ -105,7 +106,7 @@ public class DecorationView extends View implements IDecorationView {
 
 
 	@Override
-	public void paint(final Graphics2D g) {
+	public void paint(final Graphics2D g, final Rectangle visibleScene) {
 		double lineAngle = getAngle();
 		Point2D position = getPosition();
 

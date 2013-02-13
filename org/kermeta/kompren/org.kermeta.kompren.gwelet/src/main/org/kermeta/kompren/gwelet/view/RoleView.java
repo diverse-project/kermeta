@@ -1,6 +1,7 @@
 package org.kermeta.kompren.gwelet.view;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
@@ -139,11 +140,11 @@ public class RoleView {
 
 
 
-	public void paint(final Graphics2D g) {
+	public void paint(final Graphics2D g, final Rectangle visibleScene) {
 		if(view.isVisible() && name!=null && cardText!=null && (name.text.length()>0 || cardText.text.length()>0)) {
 			g.setFont(view.getEntitySrc().getFont());
-			name.paint(g);
-			cardText.paint(g);
+			name.paint(g, visibleScene);
+			cardText.paint(g, visibleScene);
 		}
 	}
 

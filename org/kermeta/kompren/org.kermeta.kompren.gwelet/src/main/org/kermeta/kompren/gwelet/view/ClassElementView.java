@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.font.TextLayout;
 import java.awt.geom.Point2D;
 
@@ -57,7 +58,7 @@ public abstract class ClassElementView extends ComponentView {
 
 
 	@Override
-	public void paint(final Graphics2D g) {
+	public void paint(final Graphics2D g, final Rectangle visibleScene) {
 		if(visibility==Visibility.STANDARD && entity.getVisibility()==Visibility.STANDARD) {
 			g.setColor(entity.getTextColor());
 			g.setFont(getFont());

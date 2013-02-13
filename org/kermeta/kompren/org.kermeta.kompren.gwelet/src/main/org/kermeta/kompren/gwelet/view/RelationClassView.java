@@ -1,6 +1,7 @@
 package org.kermeta.kompren.gwelet.view;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 
 import org.kermeta.kompren.diagram.view.impl.RelationView;
@@ -109,16 +110,16 @@ public class RelationClassView extends RelationView {
 
 
 	@Override
-	public void paint(final Graphics2D g) {
-		super.paint(g);
+	public void paint(final Graphics2D g, final Rectangle visibleScene) {
+		super.paint(g, visibleScene);
 
 		g.setColor(getLineColor());
 
 		if(roleSrc!=null)
-			roleSrc.paint(g);
+			roleSrc.paint(g, visibleScene);
 
 		if(roleTar!=null)
-			roleTar.paint(g);
+			roleTar.paint(g, visibleScene);
 	}
 
 
