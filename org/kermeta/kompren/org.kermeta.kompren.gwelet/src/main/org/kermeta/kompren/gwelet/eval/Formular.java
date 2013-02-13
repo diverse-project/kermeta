@@ -31,7 +31,7 @@ public class Formular extends JPanel {
 
 	protected JPanel toolbar;
 
-	protected JComboBox mouse;
+	protected JComboBox<String> mouse;
 
 	protected JSpinner ageS;
 
@@ -39,13 +39,13 @@ public class Formular extends JPanel {
 
 	protected JSpinner screen;
 
-	protected JComboBox sexCB;
+	protected JComboBox<String> sexCB;
 
-	protected JComboBox statusCB;
+	protected JComboBox<String> statusCB;
 
-	protected JComboBox xpMdeCB;
+	protected JComboBox<String> xpMdeCB;
 
-	protected JComboBox xpUmlCB;
+	protected JComboBox<String> xpUmlCB;
 
 	protected JButton validateB;
 
@@ -80,7 +80,7 @@ public class Formular extends JPanel {
 		questionsP.add(new JLabel("Mouse/touchpad:"), constraint);
 		constraint.gridx++;
 
-		mouse = new JComboBox(new String[]{"Mouse", "Touchpad"});
+		mouse = new JComboBox<String>(new String[]{"Mouse", "Touchpad"});
 		questionsP.add(mouse, constraint);
 		constraint.gridx=0;
 		constraint.gridy++;
@@ -112,7 +112,7 @@ public class Formular extends JPanel {
 		questionsP.add(new JLabel("Gender:"), constraint);
 		constraint.gridx++;
 
-		sexCB = new JComboBox(new String[]{"Male", "Female"});
+		sexCB = new JComboBox<String>(new String[]{"Male", "Female"});
 		questionsP.add(sexCB, constraint);
 		constraint.gridx=0;
 		constraint.gridy++;
@@ -120,7 +120,7 @@ public class Formular extends JPanel {
 		questionsP.add(new JLabel("Status:"), constraint);
 		constraint.gridx++;
 
-		statusCB = new JComboBox(new String[]{"Student", "Ph.D. student", "Engineer", "Researcher"});
+		statusCB = new JComboBox<String>(new String[]{"Student", "Ph.D. student", "Engineer", "Researcher"});
 		questionsP.add(statusCB, constraint);
 		constraint.gridx=0;
 		constraint.gridy++;
@@ -128,7 +128,7 @@ public class Formular extends JPanel {
 		questionsP.add(new JLabel("MDE background:"), constraint);
 		constraint.gridx++;
 
-		xpMdeCB = new JComboBox(new String[]{"None", "0-2 years", "2-5 years", "5-10 years", "+10 years"});
+		xpMdeCB = new JComboBox<String>(new String[]{"None", "0-2 years", "2-5 years", "5-10 years", "+10 years"});
 		questionsP.add(xpMdeCB, constraint);
 		constraint.gridx=0;
 		constraint.gridy++;
@@ -136,7 +136,7 @@ public class Formular extends JPanel {
 		questionsP.add(new JLabel("UML background:"), constraint);
 		constraint.gridx++;
 
-		xpUmlCB = new JComboBox(new String[]{"No knowledge", "Few knowledge", "Some knowledge", "Expert"});
+		xpUmlCB = new JComboBox<String>(new String[]{"No knowledge", "Few knowledge", "Some knowledge", "Expert"});
 		questionsP.add(xpUmlCB, constraint);
 		constraint.gridx=0;
 		constraint.gridy++;
