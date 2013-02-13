@@ -221,6 +221,22 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 
 				result := UnresolvedType.new.initialize(typeName)
 				
+				type.eTypeParameters.each{tp|
+					if (tp.eBounds.size() > 1) then
+						//TODO: Error. A TypeVariable can have only one supertype in Kermeta
+					else
+						var unresolvedType : UnresolvedType
+						if (tp.eBounds.isEmpty()) then
+							unresolvedType := UnresolvedType.new.initialize("kermeta::standard::Object")							
+						else
+							var bound : EGenericType init tp.eBounds.one
+							unresolvedType := getUnresolvedType(bound, bound.eClassifier)
+						end
+						result.generics.add(unresolvedType)
+						result.containedType.add(unresolvedType)
+					end
+				}
+				
 				if(not genericType.isVoid) then
 					genericType.targetKermetaObject := result
 				end
