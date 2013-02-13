@@ -43,7 +43,7 @@ public class FloatingText implements Selectable {
 
 		Point2D position = getPosition();
 		bound.x =(int) position.getX();
-		bound.y =(int) position.getY();
+		bound.y =(int) position.getY()-bound.height;
 
 		if(visibleScene==null || visibleScene.contains(bound) || visibleScene.intersects(bound))
 			g.drawString(text, (int)position.getX(), (int)position.getY());
@@ -73,18 +73,14 @@ public class FloatingText implements Selectable {
 		if(text==null || text.length()==0)
 			return false;
 
-		return getBorders().contains(x, y);
+		return bound.contains(x, y);
 	}
 
 
 
 	@Override
 	public Rectangle2D getBorders() {
-		Point2D position = getPosition();
-		final Rectangle2D rec = new TextLayout(text, role.view.getEntitySrc().getFont(), EntityView.FONT_RENDER_CONT).getBounds();
-		rec.setFrame(position.getX(), position.getY()-rec.getHeight(), rec.getWidth(), rec.getHeight());
-
-		return rec;
+		return new Rectangle2D.Double(bound.x, bound.y, bound.width, bound.height);
 	}
 
 

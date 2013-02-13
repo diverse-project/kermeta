@@ -17,7 +17,7 @@
 	<classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.systemservices.api/2.0.6/utils.systemservices.api-2.0.6.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.helpers/2.0.6/utils.helpers-2.0.6.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/malai/malai.core/0.2-SNAPSHOT/malai.core-0.2-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="/home/ablouin/.m2/repository/org/kermeta/kompren/kompren.diagram/2.0.9-SNAPSHOT/kompren.diagram-2.0.9-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="/home/ablouin/.m2/repository/org/kermeta/kompren/kompren.diagram/2.0.9-SNAPSHOT/kompren.diagram-2.0.9-SNAPSHOT.jar" sourcepath="/org.kermeta.kompren.diagram"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
