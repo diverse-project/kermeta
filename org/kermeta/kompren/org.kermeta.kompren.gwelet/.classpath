@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.ecore2km/2.0.2/language.ecore2km-2.0.2.jar"/>
+	<classpathentry kind="src" path="src/resources"/>
+	<classpathentry kind="src" path="src/main"/>
+	<classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.ecore2km/2.0.6/language.ecore2km-2.0.6.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/kermeta/emf/emf.lib/2.7.0/emf.lib-2.7.0.jar"/>
-	<classpathentry kind="src" path="/org.kermeta.language.model"/>
+	<classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.model/2.0.6/language.model-2.0.6.jar"/>
 	<classpathentry kind="var" path="M2_REPO/fr/irisa/triskell/kermeta/kermeta.model/1.4.0/kermeta.model-1.4.0.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/osgi/org.osgi.core/4.2.0/org.osgi.core-4.2.0.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/scala-lang/scala-library/2.9.0-1/scala-library-2.9.0-1.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.ecore2km.api/2.0.3-SNAPSHOT/language.ecore2km.api-2.0.3-SNAPSHOT.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/kermeta/traceability/traceability.model/2.0.3-SNAPSHOT/traceability.model-2.0.3-SNAPSHOT.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.loader.km.api/2.0.2/language.loader.km.api-2.0.2.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.loader.km/2.0.2/language.loader.km-2.0.2.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/kermeta/kompren/kompren.gwelet.slicer/2.0.7-SNAPSHOT/kompren.gwelet.slicer-2.0.7-SNAPSHOT.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.library.core/2.0.2/language.library.core-2.0.2.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.systemservices.api/2.0.3-SNAPSHOT/utils.systemservices.api-2.0.3-SNAPSHOT.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.helpers/2.0.3-SNAPSHOT/utils.helpers-2.0.3-SNAPSHOT.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.framework.scala/1.4.4-SNAPSHOT/language.framework.scala-1.4.4-SNAPSHOT.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.ecore2km.api/2.0.6/language.ecore2km.api-2.0.6.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/kermeta/traceability/traceability.model/2.0.6/traceability.model-2.0.6.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/kermeta/kompren/kompren.gwelet.slicer/2.0.9-SNAPSHOT/kompren.gwelet.slicer-2.0.9-SNAPSHOT.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/kermeta/language/language.library.core/2.0.6/language.library.core-2.0.6.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.systemservices.api/2.0.6/utils.systemservices.api-2.0.6.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/kermeta/utils/utils.helpers/2.0.6/utils.helpers-2.0.6.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/malai/malai.core/0.2-SNAPSHOT/malai.core-0.2-SNAPSHOT.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.kermeta.kompren.diagram"/>
+	<classpathentry kind="lib" path="/home/ablouin/.m2/repository/org/kermeta/kompren/kompren.diagram/2.0.9-SNAPSHOT/kompren.diagram-2.0.9-SNAPSHOT.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
