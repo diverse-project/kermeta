@@ -45,6 +45,8 @@ public class PolylineDecorationView extends DecorationView implements IPolygonDe
 		for(int i=1; i<pts.length; i++)
 			path.lineTo(pts[i].getX(), pts[i].getY());
 
+		bound = path.getBounds();
+
 		return true;
 	}
 

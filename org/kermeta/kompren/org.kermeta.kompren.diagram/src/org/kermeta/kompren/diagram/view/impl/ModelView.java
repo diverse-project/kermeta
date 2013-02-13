@@ -65,6 +65,7 @@ public class ModelView extends MPanel implements IModelView {
 		entities 		= new ActiveArrayList<IEntityView>();
 		relations		= new ActiveArrayList<IRelationView>();
 		selection		= new ActiveArrayList<Selectable>();
+		setDoubleBuffered(true);
 	}
 
 
@@ -148,6 +149,8 @@ public class ModelView extends MPanel implements IModelView {
 	@Override
 	public void paint(final Graphics g) {
 		Graphics2D g2 = (Graphics2D)g;
+		Rectangle rec = scrollpane.getViewport().getViewRect();
+		g.setClip(rec.x, rec.y, rec.width, rec.height);
 
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);

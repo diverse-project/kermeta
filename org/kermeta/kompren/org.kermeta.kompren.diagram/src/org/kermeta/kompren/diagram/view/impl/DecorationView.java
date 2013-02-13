@@ -107,18 +107,23 @@ public class DecorationView extends View implements IDecorationView {
 
 	@Override
 	public void paint(final Graphics2D g, final Rectangle visibleScene) {
-		double lineAngle = getAngle();
 		Point2D position = getPosition();
 
-		g.translate(position.getX(), position.getY());
-		boolean okRotation = beginRotation(position, g, lineAngle)!=null;
+		bound.x = (int) position.getX();
+		bound.y = (int) position.getY();
 
-		paintDecoration(g);
+		if(visibleScene==null || visibleScene.contains(bound) || visibleScene.intersects(bound)) {
+			g.translate(position.getX(), position.getY());
+			double lineAngle = getAngle();
+			boolean okRotation = beginRotation(position, g, lineAngle)!=null;
 
-		if(okRotation)
-			endRotation(g, lineAngle);
+			paintDecoration(g);
 
-		g.translate(-position.getX(), -position.getY());
+			if(okRotation)
+				endRotation(g, lineAngle);
+
+			g.translate(-position.getX(), -position.getY());
+		}
 	}
 
 
