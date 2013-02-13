@@ -76,6 +76,7 @@ public class ClassView extends RectangleEntityView {
 		attributes	   		= new ArrayList<AttributeView>();
 		operations	   		= new ArrayList<OperationView>();
 		relations			= new ArrayList<RelationClassView>();
+		bound				= new Rectangle();
 		setSelected(false);
 		update();
 		initAnchors();
@@ -219,24 +220,25 @@ public class ClassView extends RectangleEntityView {
 
 	@Override
 	public void paint(final Graphics2D g, final Rectangle visibleScene) {
-		if(!isVisible())
-			return ;
+		if(!isVisible()) return ;
 
-		final Rectangle2D titleBounds = getTitleBounds();
-		final int textWidth  		= (int) titleBounds.getWidth();
-		final int textHeight  		= (int) titleBounds.getHeight();
-		final int textHeaderHeight 	= (int) (textHeight + HEIGHT_HEADER_GAP);
+		if(visibleScene==null || visibleScene.contains(bound) || visibleScene.intersects(bound)) {
+			final Rectangle2D titleBounds = getTitleBounds();
+			final int textWidth  		= (int) titleBounds.getWidth();
+			final int textHeight  		= (int) titleBounds.getHeight();
+			final int textHeaderHeight 	= (int) (textHeight + HEIGHT_HEADER_GAP);
 
-		g.setColor(fillingColor);
-		g.fill(path);
-		g.setColor(lineColor);
-		g.setStroke(lineStroke);
-		g.draw(path);
-		g.setStroke(BASIC_STROKE);
-		g.setColor(Color.BLACK);
-		g.setFont(getTitleFont());
-		g.drawString(name, (float)centre.x-textWidth/2, (float)centre.y-getPreferredSize().height/2+textHeight+(textHeaderHeight-textHeight)/2);
-		g.setFont(getFont());
+			g.setColor(fillingColor);
+			g.fill(path);
+			g.setColor(lineColor);
+			g.setStroke(lineStroke);
+			g.draw(path);
+			g.setStroke(BASIC_STROKE);
+			g.setColor(Color.BLACK);
+			g.setFont(getTitleFont());
+			g.drawString(name, (float)centre.x-textWidth/2, (float)centre.y-getPreferredSize().height/2+textHeight+(textHeaderHeight-textHeight)/2);
+			g.setFont(getFont());
+		}
 
 		if(propertiesVisible)
 			for(AttributeView attr : attributes)
@@ -308,6 +310,7 @@ public class ClassView extends RectangleEntityView {
 		}
 
 		updateAnchorsPosition(oldBorders);
+		bound = path.getBounds();
 	}
 
 
