@@ -29,7 +29,7 @@ class Test {
 		var metamodels : Collection<Metamodel> init ecore2km.convert(pkgs.one, "default")
 //		var visitor : MMVisitor init MMVisitor.new
 //		modelingUnit.accept(visitor)
-		//saveKmModel(metamodels, path + ".km")
+		saveKmModel(metamodels, path + ".km")
 		stdio.writeln("End.")
 	end
 	
