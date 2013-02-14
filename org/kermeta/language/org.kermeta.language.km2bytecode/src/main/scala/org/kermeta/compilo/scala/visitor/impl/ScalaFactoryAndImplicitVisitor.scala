@@ -158,6 +158,9 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
   }
   var ecorePackages: java.util.List[Package] = _
 
+  /**
+   * update ecorePackages with this package and subpackage if they comes from ecore
+   */
   def addPackage(packs: java.util.List[Package]): Unit = {
     packs.foreach({ e =>
       if (Util.hasEcoreTag(e))
@@ -167,12 +170,12 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
   }
 
   def visit(par: ModelingUnit) {
+    // gestion des cas des package venant d'ecore
     ecorePackages = new java.util.ArrayList[Package]()
-    //par.getMetamodels().foreach({ mm => addPackage(mm.getPackages()) })
+    par.getMetamodels().foreach({ mm => addPackage(mm.getPackages()) })
 
-    addPackage(par.getCurrentMetamodel().getPackages())
     
-    //TODO gérer le cas des package venant d'ecore
+    
     var res: StringBuilder = new StringBuilder
     var resinitEclipse: StringBuilder = new StringBuilder
     res.append("package " + GlobalConfiguration.scalaAspectPrefix + "runner \n")
