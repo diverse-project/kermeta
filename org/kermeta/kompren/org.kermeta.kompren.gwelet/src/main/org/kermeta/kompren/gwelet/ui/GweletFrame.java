@@ -1,14 +1,5 @@
 package org.kermeta.kompren.gwelet.ui;
 
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.Transferable;
-import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DropTarget;
-import java.awt.dnd.DropTargetDragEvent;
-import java.awt.dnd.DropTargetDropEvent;
-import java.awt.dnd.DropTargetEvent;
-import java.awt.dnd.DropTargetListener;
-
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 
@@ -88,7 +79,7 @@ public class GweletFrame extends UI {
 		MappingRegistry.REGISTRY.addMapping(new Selection2VisualiserMapping(canvas.getSelection(), visualiser));
 
 		UIManager.INSTANCE.registerUI(this);
-        new DropTarget(this, new MyDragDropListener());
+//        new DropTarget(this, new MyDragDropListener());
 	}
 
 
@@ -199,47 +190,47 @@ public class GweletFrame extends UI {
 	}
 
 
-	class MyDragDropListener implements DropTargetListener {
-	    @Override
-	    public void drop(final DropTargetDropEvent event) {
-	        // Accept copy drops
-	        event.acceptDrop(DnDConstants.ACTION_COPY);
-		    // Get the transfer which can provide the dropped item data
-		    Transferable transferable = event.getTransferable();
-		    // Get the data formats of the dropped item
-		    DataFlavor[] flavors = transferable.getTransferDataFlavors();
-
-		    // Loop through the flavors
-		    for(DataFlavor flavor : flavors)
-		        try{
-		            // If the drop items are files
-		            if(flavor.isFlavorTextType()) {
-		                // Get all of the dropped files
-		            	Object obj = transferable.getTransferData(flavor);
-
-		            	if(obj instanceof String) {
-	            			GweletFrame.this.open((String)obj);
-	            			return ;
-		            	}
-		            }
-		        }catch(Exception e) { e.printStackTrace(); }
-
-		    // Inform that the drop is complete
-		    event.dropComplete(true);
-	    }
-
-	    @Override
-	    public void dragEnter(final DropTargetDragEvent event) { /* */ }
-
-	    @Override
-	    public void dragExit(final DropTargetEvent event) { /* */ }
-
-	    @Override
-	    public void dragOver(final DropTargetDragEvent event) { /* */ }
-
-	    @Override
-	    public void dropActionChanged(final DropTargetDragEvent event) { /* */ }
-	}
+//	class MyDragDropListener implements DropTargetListener {
+//	    @Override
+//	    public void drop(final DropTargetDropEvent event) {
+//	        // Accept copy drops
+//	        event.acceptDrop(DnDConstants.ACTION_COPY);
+//		    // Get the transfer which can provide the dropped item data
+//		    Transferable transferable = event.getTransferable();
+//		    // Get the data formats of the dropped item
+//		    DataFlavor[] flavors = transferable.getTransferDataFlavors();
+//
+//		    // Loop through the flavors
+//		    for(DataFlavor flavor : flavors)
+//		        try{
+//		            // If the drop items are files
+//		            if(flavor.isFlavorTextType()) {
+//		                // Get all of the dropped files
+//		            	Object obj = transferable.getTransferData(flavor);
+//
+//		            	if(obj instanceof String) {
+//	            			GweletFrame.this.open((String)obj);
+//	            			return ;
+//		            	}
+//		            }
+//		        }catch(Exception e) { e.printStackTrace(); }
+//
+//		    // Inform that the drop is complete
+//		    event.dropComplete(true);
+//	    }
+//
+//	    @Override
+//	    public void dragEnter(final DropTargetDragEvent event) { /* */ }
+//
+//	    @Override
+//	    public void dragExit(final DropTargetEvent event) { /* */ }
+//
+//	    @Override
+//	    public void dragOver(final DropTargetDragEvent event) { /* */ }
+//
+//	    @Override
+//	    public void dropActionChanged(final DropTargetDragEvent event) { /* */ }
+//	}
 
 
 	public BasicZoomer getZoomer() {
