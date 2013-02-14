@@ -21,24 +21,26 @@ using org::kermeta::language::structure
 
 class Test {
 	operation main() : Void is do
-		var path : String init "platform:/resource/org.kermeta.language.ecore2km/src/main/test/resources/Ecore"
+		var path : String init "platform:/resource/org.kermeta.language.ecore2km/src/main/test/resources/RAM"
 		var ecore2km : Ecore2km init Ecore2km.new
 		stdio.writeln("Loading "+path + ".ecore...")
 		var pkgs : Bag<EPackage> init getEcoreModel(path + ".ecore")
 		stdio.writeln("Converting "+path + ".ecore...")		
-		var modelingUnit : ModelingUnit init ecore2km.convert(pkgs.one, "default")
+		var metamodels : Collection<Metamodel> init ecore2km.convert(pkgs.one, "default")
 //		var visitor : MMVisitor init MMVisitor.new
 //		modelingUnit.accept(visitor)
-		saveKmModel(modelingUnit, path + ".km")
+		//saveKmModel(metamodels, path + ".km")
 		stdio.writeln("End.")
 	end
 	
 	
-	operation saveKmModel(modelingUnit : ModelingUnit, path : String) : Void is do
-		var uriMM : String init "http://www.kermeta.org/kermeta/2_0_0/"
+	operation saveKmModel(metamodels : Collection<Metamodel>, path : String) : Void is do
+		var uriMM : String init "http://www.kermeta.org/kermeta/2_1_0//org/kermeta/language/structure"
 		var repository : EMFRepository init EMFRepository.new
 		var resource : Resource init repository.createResource(path, uriMM)
-		resource.add(modelingUnit)
+		metamodels.each{metamodel |
+			resource.add(metamodel)
+		}
 		resource.save()
 	end
 	
