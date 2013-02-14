@@ -489,6 +489,22 @@ class EcoreStructure2kmStructure inherits EcoreVisitor {
 				// Creating the Kermeta object type variable.
 				var typeVar : ObjectTypeVariable init ObjectTypeVariable.new		
 				typeVar.name := typeParam.name
+				
+				var unresolvedBound : UnresolvedType
+				if (typeParam.eBounds.size() > 1) then
+					//TODO: Message -> Only one bound authorized in Kermeta, by default setted to Object
+					unresolvedBound := UnresolvedType.new.initialize("kermeta::standard::Object")
+				else					
+					if (typeParam.eBounds.size() == 0) then
+						unresolvedBound := UnresolvedType.new.initialize("kermeta::standard::Object")
+					else
+						var bound : EGenericType init typeParam.eBounds.one
+						unresolvedBound := getUnresolvedType(bound, bound.eClassifier)
+					end
+				end
+				typeVar.supertype := unresolvedBound					
+				stdio.writeln("$$$$$$$$ Adding supertype: " + unresolvedBound.typeIdentifier + " to type variable: " + typeVar.name)
+				
 				// Adding the type variable into the generic type definition.
 				gtd.typeParameter.add(typeVar)
 				gtd.containedType.add(typeVar)

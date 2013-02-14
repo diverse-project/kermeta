@@ -22,6 +22,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Mapping" abstract="true">
     <eTypeParameters name="T">
       <eBounds eClassifier="#//MappableElement"/>
+      <eBounds eClassifier="#//Classifier"/>
     </eTypeParameters>
     <eStructuralFeatures xsi:type="ecore:EReference" name="toElement" lowerBound="1">
       <eGenericType eTypeParameter="#//Mapping/T"/>
