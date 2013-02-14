@@ -78,7 +78,7 @@ public class GweletFrame extends UI {
 		ModelViewMapper.initMapper(getPresentation(Model.class, MetamodelView.class));
 		undoredoer = new UndoRedoManager(composer);
 		scroller = new Scroller(canvas);
-		zoomer = new BasicZoomer(canvas);
+		zoomer = new BasicZoomer(canvas, true);
 		hand = new Hand(canvas);
 		visualiserManager = new VisualiserManager(composer, layeredPanel, canvas);
 		visualiser = new Visualiser(composer);

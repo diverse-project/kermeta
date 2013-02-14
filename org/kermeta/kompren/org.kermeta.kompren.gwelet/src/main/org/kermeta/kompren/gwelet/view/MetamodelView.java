@@ -27,12 +27,6 @@ public class MetamodelView extends ModelView {
 	}
 
 
-//	@Override
-//	public void paint(final Graphics g) {
-//		super.paint(g);
-//		System.out.println(scrollpane.getViewport().getViewRect());
-//	}
-
 
 	@Override
 	public List<IEntityView> getRootEntities() {
