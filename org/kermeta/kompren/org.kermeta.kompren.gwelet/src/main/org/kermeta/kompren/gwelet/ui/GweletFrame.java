@@ -54,7 +54,6 @@ public class GweletFrame extends UI {
 	protected MLayeredPane layeredPanel;
 
 
-	@SuppressWarnings("unused")
 	public GweletFrame() {
 		super();
 

@@ -14,7 +14,6 @@ import java.util.List;
 
 import javax.swing.BoundedRangeModel;
 import javax.swing.JScrollBar;
-import javax.swing.SwingUtilities;
 
 import org.kermeta.kompren.diagram.layout.ILayoutStrategy;
 import org.kermeta.kompren.diagram.view.interfaces.IAnchor;
@@ -257,6 +256,7 @@ public class ModelView extends MPanel implements IModelView {
 		Rectangle2D rec;
 		double xMin = Double.MAX_VALUE;
 		double yMin = Double.MAX_VALUE;
+		final double gap = 4000;
 
 		for(final IEntityView entity : entities) {
 			rec = entity.getBorders();
@@ -270,8 +270,8 @@ public class ModelView extends MPanel implements IModelView {
 			if(rec.getMinY() < yMin) yMin = rec.getMinY();
 		}
 
-		xMin = 10-xMin;
-		yMin = 10-yMin;
+		xMin = gap-xMin;
+		yMin = gap-yMin;
 
 		for(IEntityView entity : entities) {
 			entity.translate(xMin, yMin);
@@ -298,7 +298,7 @@ public class ModelView extends MPanel implements IModelView {
 						maxY = dim.getMaxY();
 				}
 
-			setPreferredSize(new Dimension((int)(maxX*zoom), (int)(maxY*zoom)));
+			setPreferredSize(new Dimension((int)(maxX*zoom)+2000, (int)(maxY*zoom)+2000));
 		}
 		else setPreferredSize(new Dimension(0, 0));
 	}
@@ -497,25 +497,17 @@ public class ModelView extends MPanel implements IModelView {
 	@Override
 	public void setZoom(final double x, final double y, final double zoomingLevel) {
 		if(zoomingLevel<=getMaxZoom() && zoomingLevel>=getMinZoom() && zoomingLevel!=zoom) {
-			final double dx = (zoomingLevel-zoom)*x;
-			final double dy = (zoomingLevel-zoom)*y;
-			final JScrollBar barVert = getScrollbar(true);
-			final JScrollBar barHori = getScrollbar(false);
+			final double dx = (zoomingLevel-zoom)*x/zoom;
+			final double dy = (zoomingLevel-zoom)*y/zoom;
+			final Point pt = scrollpane.getViewport().getViewPosition();
+			pt.x += dx;
+			pt.y += dy;
 			this.zoom = zoomingLevel;
 
 			updateModelElements();
 			updatePreferredSize();
+			getScrollpane().getViewport().setViewPosition(pt);
 			revalidate();
-
-	        Runnable moveScrollbars = new Runnable() {
-	            @Override
-				public void run() {
-	            	barHori.setValue((int)(barHori.getValue()+dx/2.));
-	            	barVert.setValue((int)(barVert.getValue()+dy/2.));
-	            }
-	        };
-
-	        SwingUtilities.invokeLater(moveScrollbars);
 		}
 	}
 
@@ -566,7 +558,7 @@ public class ModelView extends MPanel implements IModelView {
 
 	@Override
 	public double getZoomIncrement() {
-		return 0.1;
+		return 0.05;
 	}
 
 
