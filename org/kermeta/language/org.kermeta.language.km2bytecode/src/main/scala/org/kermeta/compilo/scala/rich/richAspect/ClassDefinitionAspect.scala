@@ -35,7 +35,7 @@ trait ClassDefinitionAspect extends ObjectVisitor {
       res.append("trait ")
       res.append(thi.getName())
       res.append("Aspect")
-      generateParamerterClass(thi, res)
+      generateParamerterClassWithBounds(thi, res)
       if (thi.getSuperType.size == 0) {
         res append " extends "
         res.append("_root_.k2.standard.KermetaObject")
@@ -390,6 +390,31 @@ trait ClassDefinitionAspect extends ObjectVisitor {
       }
     }
   }
+  
+  def generateParamerterClassWithBounds(thi: ClassDefinition, res1: StringBuilder) = {
+    if (thi.getTypeParameter().size() > 0) {
+      var i = 0
+      var res: StringBuilder = new StringBuilder
+      res.append("[")
+      thi.getTypeParameter().foreach { param =>
+        if (!param.isInstanceOf[ModelTypeVariable]) {
+          if (i > 0)
+            res.append(",")
+          res.append(getQualifiedNameCompilo(param))
+          if (param.getSupertype() != null) {
+            res.append(" <: ")
+            res.append(getQualifiedNameCompilo(param.getSupertype()))
+          }
+          i = i + 1
+        }
+      }
+      res.append("]")
+      if (i > 0) {
+        res1.append(res)
+      }
+    }
+  }
+  
   def generateBindingParamerterClass(thi: ClassDefinition, superC: Class, res1: StringBuilder) = {
     if (superC.getTypeParamBinding().size() > 0) {
       res1.append("[")

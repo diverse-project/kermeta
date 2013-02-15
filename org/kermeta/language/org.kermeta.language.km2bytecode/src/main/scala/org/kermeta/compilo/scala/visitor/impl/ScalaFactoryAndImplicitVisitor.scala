@@ -342,12 +342,14 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
       genpackageName.append(".")
 
       var param: StringBuilder = new StringBuilder
+      var paramWithBounds : StringBuilder = new StringBuilder
       visitor.generateParamerterClass(par, param);
+      visitor.generateParamerterClassWithBounds(par, paramWithBounds);
 
       if (Util.hasEcoreTag(par)) {
         if (!Util.isAMapEntry(par)) {
           var implName: String = Util.getImplPackageSuffix(packageName.toString)
-          viewDefTemp.append(" class Rich" + par.getName() + param.toString)
+          viewDefTemp.append(" class Rich" + par.getName() + paramWithBounds.toString)
           if (Util.hasEcoreFromAPITag(par))
             viewDefTemp.append(" extends " + Util.protectScalaKeyword(k2.utils.TypeEquivalence.getTypeEquivalence(ecorepackageName.toString + par.getName())) + param.toString)
           else
@@ -366,7 +368,7 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
          * Implicit generation if Util.hasEcoreTag(par)
          */
         if ("EObject".equals(par.getName)) {
-          implicitDef append " implicit def richAspect" + param.toString + "(v : " + Util.protectScalaKeyword(k2.utils.TypeEquivalence.getTypeEquivalence(ecorepackageName.toString + par.getName())) + param.toString + ") = v.asInstanceOf[k2.standard.KermetaObject]\n"
+          implicitDef append " implicit def richAspect" + paramWithBounds.toString + "(v : " + Util.protectScalaKeyword(k2.utils.TypeEquivalence.getTypeEquivalence(ecorepackageName.toString + par.getName())) + param.toString + ") = v.asInstanceOf[k2.standard.KermetaObject]\n"
         } else if ("EGenericType".equals(par.getName)) {
           implicitDef.append(" implicit def richAspect(v : org.eclipse.emf.ecore.EGenericType) : " + Util.protectScalaKeyword(packageName.toString + "." + par.getName + "Aspect") + " = { \n")
           implicitDef.append(" if (v.isInstanceOf[" + Util.protectScalaKeyword(packageName.toString + "." + par.getName + "Aspect") + "])\n")
@@ -380,11 +382,11 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
           implicitDef append Util.protectScalaKeyword(visitor.getQualifiedNameCompilo(par))
           implicitDef append Util.protectScalaKeyword(") = v.wrappedvalue\n")
         } else {
-          implicitDef append " implicit def richAspect" + param.toString + "(v : " + Util.protectScalaKeyword(k2.utils.TypeEquivalence.getTypeEquivalence(ecorepackageName.toString + par.getName())) + param.toString + ") = v.asInstanceOf[" + (Util.protectScalaKeyword(packageName.toString) + "." + par.getName + "Aspect").replace(GlobalConfiguration.scalaAspectPrefix + ".org.kermeta.language.structure.ObjectAspect", "org.kermeta.language.structureScalaAspect.aspect.ObjectAspect" + param.toString) + param.toString + "]\n"
+          implicitDef append " implicit def richAspect" + paramWithBounds.toString + "(v : " + Util.protectScalaKeyword(k2.utils.TypeEquivalence.getTypeEquivalence(ecorepackageName.toString + par.getName())) + param.toString + ") = v.asInstanceOf[" + (Util.protectScalaKeyword(packageName.toString) + "." + par.getName + "Aspect").replace(GlobalConfiguration.scalaAspectPrefix + ".org.kermeta.language.structure.ObjectAspect", "org.kermeta.language.structureScalaAspect.aspect.ObjectAspect" + param.toString) + param.toString + "]\n"
 
         }
         if (Util.hasEcoreFromAPITag(par) || par.getIsAbstract) {
-          implicitDef append " implicit def richAspect" + param.toString + "(v : " + Util.protectScalaKeyword(packageName.toString + "." + par.getName() + "Aspect") + param.toString + ") = v.asInstanceOf[" + Util.protectScalaKeyword(visitor.getPQualifiedNameCompilo(par.eContainer()) + "." + par.getName) + param.toString + "]\n"
+          implicitDef append " implicit def richAspect" + paramWithBounds.toString + "(v : " + Util.protectScalaKeyword(packageName.toString + "." + par.getName() + "Aspect") + param.toString + ") = v.asInstanceOf[" + Util.protectScalaKeyword(visitor.getPQualifiedNameCompilo(par.eContainer()) + "." + par.getName) + param.toString + "]\n"
         } else if (Util.isAMapEntry(par)) {
 
           implicitDef append " implicit def richAspect(v : "
@@ -393,14 +395,14 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
           implicitDef.append(visitor.getQualifiedNameCompilo(par))
           implicitDef.append(" ( v )\n")
         } else
-          implicitDef append " implicit def richAspect" + param.toString + "(v : " + Util.protectScalaKeyword(packageName.toString + "." + par.getName() + "Aspect") + param.toString + ") = v.asInstanceOf[" + Util.protectScalaKeyword(visitor.getPQualifiedNameCompilo(par.eContainer()) + Util.getImplPackageSuffix(packageName.toString) + par.getName + "Impl") + param.toString + "]\n"
+          implicitDef append " implicit def richAspect" + paramWithBounds.toString + "(v : " + Util.protectScalaKeyword(packageName.toString + "." + par.getName() + "Aspect") + param.toString + ") = v.asInstanceOf[" + Util.protectScalaKeyword(visitor.getPQualifiedNameCompilo(par.eContainer()) + Util.getImplPackageSuffix(packageName.toString) + par.getName + "Impl") + param.toString + "]\n"
       } else {
 
         //Tisse la class d'implem ecore hérité'
         var cd = getEcoreSuperClass(par)
 
         //cd.eContainer().asInstanceOf[KermetaModelElementAspect].getQualifiedNameCompilo +".impl." + cd.getName +"Impl
-        viewDefTemp.append(" class Rich" + par.getName() + param.toString + " extends ")
+        viewDefTemp.append(" class Rich" + par.getName() + paramWithBounds.toString + " extends ")
         if (!IsAnExceptionChildren(par)) {
           if (cd != null) {
             viewDefTemp.append(visitor.getQualifiedNameCompilo(cd.eContainer().asInstanceOf[KermetaModelElement]) + ".impl." + cd.getName + "Impl with ")
@@ -426,8 +428,8 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
         /*
          * Implicit generation if !Util.hasEcoreTag(par)
          */
-        implicitDef append " implicit def richAspect" + param.toString + "(v : " + k2.utils.TypeEquivalence.getTypeEquivalence(packageName.toString + "." + par.getName()) + param.toString + ") = v.asInstanceOf[" + packageName.toString + "." + par.getName + "Aspect" + param.toString + "]\n"
-        implicitDef append " implicit def richAspect" + param.toString + "(v : " + packageName.toString + "." + par.getName() + "Aspect" + param.toString + ") = v.asInstanceOf[" + packageName.toString + "." + par.getName + param.toString + "]\n"
+        implicitDef append " implicit def richAspect" + paramWithBounds.toString + "(v : " + k2.utils.TypeEquivalence.getTypeEquivalence(packageName.toString + "." + par.getName()) + param.toString + ") = v.asInstanceOf[" + packageName.toString + "." + par.getName + "Aspect" + param.toString + "]\n"
+        implicitDef append " implicit def richAspect" + paramWithBounds.toString + "(v : " + packageName.toString + "." + par.getName() + "Aspect" + param.toString + ") = v.asInstanceOf[" + packageName.toString + "." + par.getName + param.toString + "]\n"
       }
 
       if (!par.getIsAbstract()) {
@@ -437,12 +439,12 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
             if (!Util.hasEcoreFromAPITag(par)) {
               factoryDefClass.append(" override")
             }
-            factoryDefClass.append(" def create" + par.getName() + param.toString + "() : " + Util.protectScalaKeyword(k2.utils.TypeEquivalence.getTypeEquivalence(ecorepackageName.toString + par.getName()) + param.toString) + " = { ")
+            factoryDefClass.append(" def create" + par.getName() + paramWithBounds.toString + "() : " + Util.protectScalaKeyword(k2.utils.TypeEquivalence.getTypeEquivalence(ecorepackageName.toString + par.getName()) + param.toString) + " = { ")
             generateCreateBody(packageName.toString(), par.getName(), param.toString(), factoryDefClass)
             factoryDefClass.append(" }\n")
           }
         } else {
-          factoryDefClass.append(" def create" + par.getName() + param.toString + "() : " + Util.protectScalaKeyword(k2.utils.TypeEquivalence.getTypeEquivalence(packageName.toString + "." + par.getName()) + param.toString) + " = { ")
+          factoryDefClass.append(" def create" + par.getName() + paramWithBounds.toString + "() : " + Util.protectScalaKeyword(k2.utils.TypeEquivalence.getTypeEquivalence(packageName.toString + "." + par.getName()) + param.toString) + " = { ")
           generateCreateBody(packageName.toString(), par.getName(), param.toString(), factoryDefClass)
           factoryDefClass.append(" }\n")
         }
