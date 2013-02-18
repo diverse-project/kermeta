@@ -1,5 +1,7 @@
 package org.kermeta.kompren.gwelet.ui;
 
+import java.awt.geom.Point2D;
+
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 
@@ -15,6 +17,7 @@ import org.kermeta.kompren.gwelet.model.Model;
 import org.kermeta.kompren.gwelet.view.ClassModelBasicStrategy;
 import org.kermeta.kompren.gwelet.view.MetamodelView;
 import org.kermeta.kompren.gwelet.view.ModelViewMapper;
+import org.malai.action.library.MoveCamera;
 import org.malai.instrument.Instrument;
 import org.malai.instrument.library.BasicZoomer;
 import org.malai.instrument.library.Scroller;
@@ -186,6 +189,19 @@ public class GweletFrame extends UI {
 
 	public void open(final String path) {
 		ModelViewMapper.getMapper().build(path);
+
+		MoveCamera action = new MoveCamera();
+		MetamodelView view = getCanvas();
+
+		if(!view.getEntities().isEmpty()) {
+			Point2D pt = view.getEntityAt(0).getCentre();
+			action.setScrollPane(view.getScrollpane());
+			action.setPx(pt.getX());
+			action.setPy(pt.getY());
+
+			if(action.canDo()) action.doIt();
+			action.flush();
+		}
 	}
 
 
