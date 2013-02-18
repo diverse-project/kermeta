@@ -497,16 +497,21 @@ public class ModelView extends MPanel implements IModelView {
 	@Override
 	public void setZoom(final double x, final double y, final double zoomingLevel) {
 		if(zoomingLevel<=getMaxZoom() && zoomingLevel>=getMinZoom() && zoomingLevel!=zoom) {
-			final double dx = (zoomingLevel-zoom)*x/zoom;
-			final double dy = (zoomingLevel-zoom)*y/zoom;
-			final Point pt = scrollpane.getViewport().getViewPosition();
-			pt.x += dx;
-			pt.y += dy;
+			double oldZoom = zoom;
 			this.zoom = zoomingLevel;
 
 			updateModelElements();
 			updatePreferredSize();
-			getScrollpane().getViewport().setViewPosition(pt);
+
+			if(!Number.NUMBER.equals(-1., x) || !Number.NUMBER.equals(-1., y)) {
+				final double dx = (zoomingLevel-oldZoom)*x/oldZoom;
+				final double dy = (zoomingLevel-oldZoom)*y/oldZoom;
+				final Point pt = scrollpane.getViewport().getViewPosition();
+				pt.x += dx;
+				pt.y += dy;
+				getScrollpane().getViewport().setViewPosition(pt);
+			}
+
 			revalidate();
 		}
 	}
