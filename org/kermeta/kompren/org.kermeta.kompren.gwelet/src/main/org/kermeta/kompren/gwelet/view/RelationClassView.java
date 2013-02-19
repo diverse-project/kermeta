@@ -7,6 +7,7 @@ import java.awt.geom.Rectangle2D;
 import org.kermeta.kompren.diagram.view.impl.RelationView;
 import org.kermeta.kompren.diagram.view.interfaces.IEntityView;
 import org.kermeta.kompren.gwelet.view.RoleView.Cardinality;
+import org.malai.picking.Pickable;
 
 /**
  * Defines a relation established between two classes.
@@ -100,12 +101,27 @@ public class RelationClassView extends RelationView {
 
 		if(!contains) {
 			if(roleSrc!=null)
-				contains = roleSrc.getBorders().contains(x, y);
+				contains = roleSrc.contains(x, y);
 			if(!contains && roleTar!=null)
-				contains = roleTar.getBorders().contains(x, y);
+				contains = roleTar.contains(x, y);
 		}
 
 		return contains;
+	}
+
+
+	@Override
+	public Pickable getPickableAt(final double x, final double y) {
+		Pickable pickable = super.getPickableAt(x, y);
+
+		if(pickable==null)
+			if(roleSrc!=null && roleSrc.contains(x, y))
+				pickable = roleSrc;
+			else
+				if(roleTar!=null && roleTar.contains(x, y))
+					pickable = roleTar;
+
+		return pickable;
 	}
 
 

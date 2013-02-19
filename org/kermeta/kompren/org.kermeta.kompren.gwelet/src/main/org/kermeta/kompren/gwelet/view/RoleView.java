@@ -5,8 +5,11 @@ import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
+import org.malai.picking.Pickable;
+import org.malai.picking.Picker;
 
-public class RoleView {
+
+public class RoleView implements Pickable {
 	public static enum Cardinality{
 		ZERO_ONE {
 			@Override
@@ -177,8 +180,21 @@ public class RoleView {
 	}
 
 
+	public FloatingText getFloatingTextAt(final double x, final double y) {
+		if(cardText!=null && cardText.contains(x, y)) return cardText;
+		if(name!=null && name.contains(x, y)) return name;
+		return null;
+	}
+
+
 	@Override
-	public int hashCode() {
-		return super.hashCode();
+	public boolean contains(final double x, final double y) {
+		return cardText!=null && cardText.contains(x, y) || name!=null && name.contains(x, y);
+	}
+
+
+	@Override
+	public Picker getPicker() {
+		return null;
 	}
 }

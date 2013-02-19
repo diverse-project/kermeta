@@ -45,8 +45,10 @@ public class FloatingText implements Selectable {
 		bound.x =(int) position.getX();
 		bound.y =(int) position.getY()-bound.height;
 
-		if(visibleScene==null || visibleScene.contains(bound) || visibleScene.intersects(bound))
+		if(visibleScene==null || visibleScene.contains(bound) || visibleScene.intersects(bound)) {
 			g.drawString(text, (int)position.getX(), (int)position.getY());
+			g.draw(bound);
+		}
 	}
 
 

@@ -11,6 +11,7 @@ import org.kermeta.kompren.diagram.view.interfaces.IEntityView;
 import org.kermeta.kompren.diagram.view.interfaces.IHandler;
 import org.kermeta.kompren.diagram.view.interfaces.IModelView;
 import org.kermeta.kompren.diagram.view.interfaces.IRelationView;
+import org.malai.picking.Pickable;
 
 public class FooHand implements MouseListener, MouseMotionListener {
 	protected IModelView diagram;
@@ -18,6 +19,8 @@ public class FooHand implements MouseListener, MouseMotionListener {
 	protected IEntityView draggedShape;
 
 	protected IHandler draggedHandler;
+
+	protected FloatingText draggedRole;
 
 	protected double startX;
 
@@ -39,6 +42,7 @@ public class FooHand implements MouseListener, MouseMotionListener {
 	protected void reinit() {
 		draggedShape 	= null;
 		draggedHandler 	= null;
+		draggedRole 	= null;
 		startX 			= 0.;
 		startY 			= 0.;
 	}
@@ -89,11 +93,12 @@ public class FooHand implements MouseListener, MouseMotionListener {
 			final double px = e.getX()/diagram.getZoom();
 			final double py = e.getY()/diagram.getZoom();
 			IRelationView rel;
+			Pickable pickable;
 
 			for(i=0; i<nbRel && draggedHandler==null; i++) {
 				rel = diagram.getRelationAt(i);
 
-				if(rel.isVisible() && rel.isHandlersVisible())
+				if(rel.isVisible() && !rel.isOptimHidden() && rel.isHandlersVisible())
 					draggedHandler = rel.getHandlersAt(px, py);
 			}
 //
@@ -116,17 +121,24 @@ public class FooHand implements MouseListener, MouseMotionListener {
 //			}
 
 //			if(draggedShape==null && draggedHandler==null)
-			if(diagram.getSelection().isEmpty() && draggedHandler==null)
+			if(diagram.getSelection().isEmpty() && draggedHandler==null) {
 				for(i=0; i<nbRel && draggedHandler==null; i++) {
 					rel = diagram.getRelationAt(i);
 
-					if(rel.contains(px, py)) {
-						rel.addPoint(new Point2D.Double(px, py));
-						rel.setHandlersVisible(true);
-						draggedHandler = rel.getHandlersAt(px, py);
-						diagram.refresh();
+					if(rel.isVisible() && !rel.isOptimHidden() && rel.contains(px, py)) {
+						pickable = rel.getPickableAt(px, py);
+
+						if(pickable instanceof RoleView)
+							draggedRole = ((RoleView)pickable).getFloatingTextAt(px, py);
+						else {
+							rel.addPoint(new Point2D.Double(px, py));
+							rel.setHandlersVisible(true);
+							draggedHandler = rel.getHandlersAt(px, py);
+							diagram.refresh();
+						}
 					}
 				}
+			}
 
 			startX = px;
 			startY = py;
@@ -180,6 +192,9 @@ public class FooHand implements MouseListener, MouseMotionListener {
 						relation.update();
 
 				diagram.updatePreferredSize();
+				diagram.refresh();
+			}else if(draggedRole!=null) {
+				draggedRole.translate(gapX, gapY);
 				diagram.refresh();
 			}
 

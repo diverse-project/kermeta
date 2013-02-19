@@ -8,7 +8,7 @@ import org.kermeta.kompren.diagram.view.interfaces.IDecorationView;
 import org.kermeta.kompren.diagram.view.interfaces.IRelationView;
 import org.kermeta.kompren.diagram.view.interfaces.ISegmentView;
 
-public class DecorationView extends View implements IDecorationView {
+public abstract class DecorationView extends View implements IDecorationView {
 	/** Defines if the decoration is at the source position of the relation. */
 	protected boolean isSource;
 

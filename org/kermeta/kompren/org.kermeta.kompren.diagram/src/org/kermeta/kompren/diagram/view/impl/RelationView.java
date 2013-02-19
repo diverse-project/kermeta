@@ -129,7 +129,9 @@ public class RelationView extends ComponentView implements IRelationView, Handle
 			if(handlersVisible)
 				for(final IHandler handler : handlers)
 					handler.paint(g);
-		}
+
+			isOptimHidden = false;
+		}else isOptimHidden = true;
 	}
 
 

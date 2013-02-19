@@ -13,6 +13,9 @@ public interface IComponentView extends IView {
 	 */
 	void onPruning(final boolean isHidePolicy);
 
+
+	boolean isOptimHidden();
+
 	/**
 	 * Actions to do when the component is no more pruned.
 	 */

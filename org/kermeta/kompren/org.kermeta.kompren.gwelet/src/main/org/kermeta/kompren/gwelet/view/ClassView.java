@@ -238,7 +238,9 @@ public class ClassView extends RectangleEntityView {
 			g.setFont(getTitleFont());
 			g.drawString(name, (float)centre.x-textWidth/2, (float)centre.y-getPreferredSize().height/2+textHeight+(textHeaderHeight-textHeight)/2);
 			g.setFont(getFont());
-		}
+
+			isOptimHidden = false;
+		} else isOptimHidden = true;
 
 		if(propertiesVisible)
 			for(AttributeView attr : attributes)

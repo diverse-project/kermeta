@@ -19,6 +19,8 @@ public abstract class ComponentView extends View implements IComponentView {
 
 	protected Stroke lineStroke;
 
+	protected boolean isOptimHidden;
+
 
 	/**
 	 * Initialises the component.
@@ -29,6 +31,13 @@ public abstract class ComponentView extends View implements IComponentView {
 		visibility 	= Visibility.STANDARD;
 		lineColor	= Color.BLACK;
 		lineStroke = new BasicStroke(2f);
+		isOptimHidden = false;
+	}
+
+
+	@Override
+	public boolean isOptimHidden() {
+		return isOptimHidden;
 	}
 
 
