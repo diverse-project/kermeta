@@ -32,6 +32,7 @@ import org.malai.instrument.library.BasicZoomer;
 import org.malai.interaction.Interaction;
 import org.malai.interaction.library.KeyPressure;
 import org.malai.interaction.library.MenuItemPressed;
+import org.malai.interaction.library.Press;
 import org.malai.interaction.library.TextChanged;
 import org.malai.ui.UIComposer;
 import org.malai.widget.MPopupMenu;
@@ -81,6 +82,7 @@ public class Completioner extends WidgetInstrument {
 			addLink(new TextChanged2SetCompletion(this));
 			addLink(new MenuItem2ZoomOn(this));
 			addLink(new EnterEscape2HidePopupMenu(this));
+			addLink(new ClickIn2ShowMenu(this));
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
@@ -128,6 +130,26 @@ public class Completioner extends WidgetInstrument {
 		}
 	}
 
+
+
+	private class ClickIn2ShowMenu extends Link<SetVisibleComponent, Press, Completioner> {
+		public ClickIn2ShowMenu(final Completioner ins) throws InstantiationException, IllegalAccessException {
+			super(ins, false, SetVisibleComponent.class, Press.class);
+		}
+
+		@Override
+		public void initAction() {
+			action.setVisible(true);
+			action.setComponent(instrument.textField.getComponentPopupMenu());
+			action.setPx(instrument.textField.getLocationOnScreen().getX());
+			action.setPy(instrument.textField.getLocationOnScreen().getY()+instrument.textField.getHeight());
+		}
+
+		@Override
+		public boolean isConditionRespected() {
+			return instrument.textField.getComponentPopupMenu().getComponentCount()>0;
+		}
+	}
 
 
 
