@@ -11,6 +11,7 @@ import java.awt.LayoutManager2;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Ellipse2D;
 
 import javax.swing.AbstractButton;
 import javax.swing.JComponent;
@@ -79,44 +80,64 @@ public class MPieMenu extends MPanel {
 	}
 
 
+	@Override
+	public boolean contains(final int x, final int y) {
+		return new Ellipse2D.Double(0, 0, getWidth(), getHeight()).contains(x, y);
+	}
+
 
 	@Override
 	public Component add(final Component comp, final int index) {
-		if(comp instanceof AbstractButton)
-			addActionListener((AbstractButton)comp);
-		return super.add(comp, index);
+		if(comp instanceof MPieMenuButton) {
+			addToMenu(comp);
+			return super.add(comp, index);
+		}
+		return null;
 	}
 
 
 	@Override
 	public void add(final Component comp, final Object constraints, final int index) {
-		if(comp instanceof AbstractButton)
-			addActionListener((AbstractButton)comp);
-		super.add(comp, constraints, index);
+		if(comp instanceof MPieMenuButton) {
+			addToMenu(comp);
+			super.add(comp, constraints, index);
+		}
 	}
 
 
 	@Override
 	public void add(final Component comp, final Object constraints) {
-		if(comp instanceof AbstractButton)
-			addActionListener((AbstractButton)comp);
-		super.add(comp, constraints);
+		if(comp instanceof MPieMenuButton) {
+			addToMenu(comp);
+			super.add(comp, constraints);
+		}
 	}
 
 
 	@Override
 	public Component add(final Component comp) {
-		if(comp instanceof AbstractButton)
-			addActionListener((AbstractButton)comp);
-		return super.add(comp);
+		if(comp instanceof MPieMenuButton) {
+			addToMenu(comp);
+			return super.add(comp);
+		}
+		return null;
 	}
 
 
 	@Override
 	public Component add(final String name, final Component comp) {
-		if(comp instanceof AbstractButton)
-			addActionListener((AbstractButton)comp);
-		return super.add(name, comp);
+		if(comp instanceof MPieMenuButton) {
+			addToMenu(comp);
+			return super.add(name, comp);
+		}
+		return null;
+	}
+
+
+	private void addToMenu(final Component comp) {
+		MPieMenuButton but = (MPieMenuButton)comp;
+		addActionListener(but);
+		but.setPieMenu(this);
 	}
 
 
@@ -136,6 +157,7 @@ public class MPieMenu extends MPanel {
 
 		g.setColor(new Color(192, 192, 192, 210));
 		g.fillOval(0, 0, width, height);
+		paintChildren(g2);
 
 		g.setColor(BORDER_COLOR);
 		final int centreCircle = 6;
@@ -148,11 +170,10 @@ public class MPieMenu extends MPanel {
 		if(nbComp>1) {
 			final double angle = Math.PI*2./nbComp;
 			for(int i=0; i<nbComp; i++)
-				g.drawLine(cx, cy, (int)(width/2.+width/2.*Math.cos(angle*(i+1.)+Math.PI/2.)), (int)(height/2.+height/2.*Math.sin(angle*(i+1.)+Math.PI/2.)));
+				g.drawLine(cx, cy, (int)(cx+width/2.*Math.cos(angle*(i+1.)+Math.PI/2.)), (int)(cy+height/2.*Math.sin(angle*(i+1.)+Math.PI/2.)));
 		}
 
 		paintBorder(g2);
-		paintChildren(g2);
 	}
 
 
@@ -187,19 +208,24 @@ public class MPieMenu extends MPanel {
 				final int nbComp = MPieMenu.this.getComponentCount();
 				final double angle = Math.PI*2./nbComp;
 				final int width = getWidth();
-				final int height = getHeight();
+//				final int height = getHeight();
 				Dimension dim;
-				Component comp;
+				MPieMenuButton comp;
 
 				for(int i=0; i<nbComp; i++) {
-					comp = MPieMenu.this.getComponent(i);
+					comp = (MPieMenuButton) MPieMenu.this.getComponent(i);
 					dim = comp.getPreferredSize();
 					comp.setSize(dim);
 
-					comp.setBounds(
-						(int)(width/2.+width/3.5*Math.cos(angle*(i+1.)+Math.PI/2.+Math.PI/nbComp)-dim.getWidth()/2.),
-						(int)(height/2.+height/3.5*Math.sin(angle*(i+1.)+Math.PI/2.+Math.PI/nbComp)-dim.getHeight()/2.),
-						(int)dim.getWidth(), (int)dim.getHeight());
+//					comp.setBounds(
+//						(int)(width/2.+width/3.5*Math.cos(angle*(i+1.)+Math.PI/2.+Math.PI/nbComp)-dim.getWidth()/2.),
+//						(int)(height/2.+height/3.5*Math.sin(angle*(i+1.)+Math.PI/2.+Math.PI/nbComp)-dim.getHeight()/2.),
+//						(int)dim.getWidth(), (int)dim.getHeight());
+//					comp.setBounds(width/2, width/2, width/2, width/2);
+					comp.setAngle(angle);
+					comp.setButtonWidth(width/2.);
+					comp.setPositionInMenu(i);
+					comp.updatePath();
 				}
 			}
 		}

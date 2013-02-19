@@ -9,6 +9,7 @@ import org.kermeta.kompren.diagram.instrument.Hand;
 import org.kermeta.kompren.gwelet.eval.QuestionsPanel;
 import org.kermeta.kompren.gwelet.eval.QuestionsPanel.TypeEval;
 import org.kermeta.kompren.gwelet.instruments.Completioner;
+import org.kermeta.kompren.gwelet.instruments.UndoRedoManagerGwelet;
 import org.kermeta.kompren.gwelet.instruments.ViewReiniter;
 import org.kermeta.kompren.gwelet.instruments.Visualiser;
 import org.kermeta.kompren.gwelet.instruments.VisualiserManager;
@@ -46,7 +47,7 @@ public class GweletFrame extends UI {
 
 	protected ViewReiniter reiniter;
 
-	protected UndoRedoManager undoredoer;
+	protected UndoRedoManagerGwelet undoredoer;
 
 	protected Completioner completioner;
 
@@ -69,7 +70,7 @@ public class GweletFrame extends UI {
 		composer = new GweletUIBuilder(this);
 		canvas.setLayoutStrategy(new ClassModelBasicStrategy(canvas));
 		ModelViewMapper.initMapper(getPresentation(Model.class, MetamodelView.class));
-		undoredoer = new UndoRedoManager(composer);
+		undoredoer = new UndoRedoManagerGwelet(composer);
 		scroller = new Scroller(canvas);
 		zoomer = new BasicZoomer(canvas, true);
 		hand = new Hand(canvas);

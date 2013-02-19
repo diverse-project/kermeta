@@ -1,15 +1,15 @@
 package org.kermeta.kompren.gwelet.instruments;
 
 import org.kermeta.kompren.gwelet.actions.ReinitView;
+import org.kermeta.kompren.gwelet.ui.MPieMenuButton;
 import org.kermeta.kompren.gwelet.view.MetamodelView;
 import org.malai.instrument.Link;
 import org.malai.instrument.WidgetInstrument;
 import org.malai.interaction.library.ButtonPressed;
 import org.malai.ui.UIComposer;
-import org.malai.widget.MButton;
 
 public class ViewReiniter extends WidgetInstrument {
-	protected MButton reinit;
+	protected MPieMenuButton reinit;
 
 	protected MetamodelView canvas;
 
@@ -22,7 +22,7 @@ public class ViewReiniter extends WidgetInstrument {
 
 	@Override
 	protected void initialiseWidgets() {
-		reinit = new MButton("Reinit");
+		reinit = new MPieMenuButton("Reinit");
 		reinit.setToolTipText("Reinitialises the view.");
 	}
 
@@ -37,7 +37,7 @@ public class ViewReiniter extends WidgetInstrument {
 		}
 	}
 
-	public MButton getReinit() {
+	public MPieMenuButton getReinit() {
 		return reinit;
 	}
 

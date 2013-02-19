@@ -12,6 +12,7 @@ import org.kermeta.kompren.gwelet.eval.QuestionsPanel;
 import org.kermeta.kompren.gwelet.eval.QuestionsPanel.TypeEval;
 import org.kermeta.kompren.gwelet.model.ModelUtils;
 import org.kermeta.kompren.gwelet.ui.GweletFrame;
+import org.kermeta.kompren.gwelet.ui.MPieMenuButton;
 import org.kermeta.kompren.gwelet.view.ClassView;
 import org.kermeta.kompren.gwelet.view.ModelViewMapper;
 import org.kermeta.kompren.gwelet.visualisation.GweletSlicer;
@@ -19,18 +20,17 @@ import org.malai.instrument.Link;
 import org.malai.instrument.WidgetInstrument;
 import org.malai.interaction.library.ButtonPressed;
 import org.malai.ui.UIComposer;
-import org.malai.widget.MButton;
 import org.malai.widget.MSpinner;
 
 public class Visualiser extends WidgetInstrument {
 
-	protected MButton superClasses;
+	protected MPieMenuButton superClasses;
 
-	protected MButton lowerClasses;
+	protected MPieMenuButton lowerClasses;
 
-	protected MButton pruning;
+	protected MPieMenuButton pruning;
 
-	protected MButton flat;
+	protected MPieMenuButton flat;
 
 	protected GweletFrame frame;
 
@@ -49,10 +49,10 @@ public class Visualiser extends WidgetInstrument {
 
 	@Override
 	protected void initialiseWidgets() {
-		superClasses 	= new MButton(new ImageIcon(Class.class.getResource("/res/hierar.png")));
-		pruning 		= new MButton(new ImageIcon(Class.class.getResource("/res/prune.png")));
-		flat 			= new MButton(new ImageIcon(Class.class.getResource("/res/flat.png")));
-		lowerClasses 	= new MButton("subCl");
+		superClasses 	= new MPieMenuButton(new ImageIcon(Class.class.getResource("/res/hierar.png")));
+		pruning 		= new MPieMenuButton(new ImageIcon(Class.class.getResource("/res/prune.png")));
+		flat 			= new MPieMenuButton(new ImageIcon(Class.class.getResource("/res/flat.png")));
+		lowerClasses 	= new MPieMenuButton("subCl");
 		radius 			= new MSpinner(new MSpinner.MSpinnerNumberModel(0, 0, 1000, 1), new JLabel("Radius:"));
 
 		superClasses.setToolTipText("Shows the super classes of the selected class.");
@@ -92,22 +92,22 @@ public class Visualiser extends WidgetInstrument {
 	}
 
 
-	public MButton getSuperClasses() {
+	public MPieMenuButton getSuperClasses() {
 		return superClasses;
 	}
 
 
-	public MButton getLowerClasses() {
+	public MPieMenuButton getLowerClasses() {
 		return lowerClasses;
 	}
 
 
-	public MButton getPruning() {
+	public MPieMenuButton getPruning() {
 		return pruning;
 	}
 
 
-	public MButton getFlat() {
+	public MPieMenuButton getFlat() {
 		return flat;
 	}
 
