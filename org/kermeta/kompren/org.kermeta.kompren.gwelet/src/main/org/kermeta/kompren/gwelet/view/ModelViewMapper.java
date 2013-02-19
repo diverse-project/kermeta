@@ -188,7 +188,7 @@ public final class ModelViewMapper {
 		for(List<ClassDefinition> list : cdAdded.values())
 			for(ClassDefinition cd : list) {
 				String qname = ModelUtils.INSTANCE.getQualifiedName(cd);//FIXME only for eval
-				if(!qname.startsWith("org.kermeta") && !qname.startsWith("kermeta")) {//FIXME only for eval
+				if(!qname.startsWith("org.kermeta") && !qname.startsWith("kermeta") && !qname.startsWith("org.Dummy")) {//FIXME only for eval
 					createInheritanceView(cd, ModelUtils.INSTANCE.getQualifiedName(cd), view);
 					createAssociations(cd, view);
 				}
@@ -229,7 +229,7 @@ public final class ModelViewMapper {
 
 	private void createClassDefinition(final ClassDefinition cd, final MetamodelView view) {
 		String qname = ModelUtils.INSTANCE.getQualifiedName(cd);//FIXME only for eval
-		if(qname.startsWith("org.kermeta") || qname.startsWith("kermeta"))//FIXME only for eval
+		if(qname.startsWith("org.kermeta") || qname.startsWith("kermeta") || qname.startsWith("org.Dummy"))//FIXME only for eval
 			return ;
 
 		List<ClassDefinition> cdFirst = cdAdded.get(qname);
