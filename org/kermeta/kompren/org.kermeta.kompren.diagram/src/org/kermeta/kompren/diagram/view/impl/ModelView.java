@@ -175,11 +175,15 @@ public class ModelView extends MPanel implements IModelView {
 				scene.y /= zoom;
 			}
 
-			for(IEntityView entity : entities)
-				entity.paint(g2, scene);
+			synchronized(entities) {
+				for(IEntityView entity : entities)
+					entity.paint(g2, scene);
+			}
 
-			for(IRelationView relation : relations)
-				relation.paint(g2, scene);
+			synchronized(relations) {
+				for(IRelationView relation : relations)
+					relation.paint(g2, scene);
+			}
 
 			g2.scale(1./zoom, 1./zoom);
 		}
@@ -207,7 +211,9 @@ public class ModelView extends MPanel implements IModelView {
 	@Override
 	public void addEntity(final IEntityView entity) {
 		if(entity!=null)
-			entities.add(entity);
+			synchronized(entities) {
+				entities.add(entity);
+			}
 	}
 
 
@@ -339,7 +345,7 @@ public class ModelView extends MPanel implements IModelView {
 	@Override
 	public void addRelation(final int position, final IRelationView relation) {
 		if(relation!=null && position<entities.size() && position>=0) {
-			relations.add(position, relation);
+			synchronized(relations) {relations.add(position, relation);}
 			anchorRelation(relation);
 		}
 	}
@@ -348,7 +354,7 @@ public class ModelView extends MPanel implements IModelView {
 	@Override
 	public void addRelation(final IRelationView relation) {
 		if(relation!=null) {
-			relations.add(relation);
+			synchronized(relations) {relations.add(relation);}
 			anchorRelation(relation);
 		}
 	}
@@ -365,10 +371,10 @@ public class ModelView extends MPanel implements IModelView {
 	@Override
 	public void addEntity(final int position, final IEntityView entity) {
 		if(entity!=null && position<entities.size() && position>=0)
-			entities.add(position, entity);
+			synchronized(entities) {entities.add(position, entity);}
 		else
 			if((position==-1 || position==entities.size()) && entity!=null)
-				entities.add(entity);
+				synchronized(entities) {entities.add(entity);}
 	}
 
 
