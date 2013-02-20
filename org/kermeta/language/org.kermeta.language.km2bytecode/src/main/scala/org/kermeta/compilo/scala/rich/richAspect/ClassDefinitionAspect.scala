@@ -35,7 +35,7 @@ trait ClassDefinitionAspect extends ObjectVisitor {
       res.append("trait ")
       res.append(thi.getName())
       res.append("Aspect")
-      generateParamerterClassWithBounds(thi, res)
+      generateTypeParameterForClassDefinitionWithBounds(thi, res)
       if (thi.getSuperType.size == 0) {
         res append " extends "
         res.append("_root_.k2.standard.KermetaObject")
@@ -79,7 +79,7 @@ trait ClassDefinitionAspect extends ObjectVisitor {
       }
 
       var param: StringBuilder = new StringBuilder
-      generateParamerterClass(thi, param)
+      generateTypeParameterForClassDefinition(thi, param)
       if (!Util.hasEcoreFromAPITag(thi)) {
         res append " with " + Util.protectScalaKeyword("_root_." + getPQualifiedNamedBase(thi) + param.toString)
       } else
@@ -124,7 +124,7 @@ trait ClassDefinitionAspect extends ObjectVisitor {
       res.append("trait ")
       res.append(thi.getName())
       res.append("Aspect")
-      generateParamerterClass(thi, res)
+      generateTypeParameterForClassDefinition(thi, res)
 
       if (thi.getSuperType.size == 0) {
         //TODO extends a superClassAspect
@@ -145,7 +145,7 @@ trait ClassDefinitionAspect extends ObjectVisitor {
         })
       }
       res append " with " + Util.protectScalaKeyword("_root_." + getQualifiedNamedBase(thi))
-      generateParamerterClass(thi, res)
+      generateTypeParameterForClassDefinition(thi, res)
 
       //MODELTYPEADDITION
       //Add extends with Model Type interfaces
@@ -371,7 +371,7 @@ trait ClassDefinitionAspect extends ObjectVisitor {
     return result
   }
 
-  def generateParamerterClass(thi: ClassDefinition, res1: StringBuilder) = {
+  def generateTypeParameterForClassDefinition(thi: ClassDefinition, res1: StringBuilder) = {
     if (thi.getTypeParameter().size() > 0) {
       var i = 0
       var res: StringBuilder = new StringBuilder
@@ -391,7 +391,7 @@ trait ClassDefinitionAspect extends ObjectVisitor {
     }
   }
   
-  def generateParamerterClassWithBounds(thi: ClassDefinition, res1: StringBuilder) = {
+  def generateTypeParameterForClassDefinitionWithBounds(thi: ClassDefinition, res1: StringBuilder) = {
     if (thi.getTypeParameter().size() > 0) {
       var i = 0
       var res: StringBuilder = new StringBuilder

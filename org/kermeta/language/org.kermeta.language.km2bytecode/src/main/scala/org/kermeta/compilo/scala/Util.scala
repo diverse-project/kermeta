@@ -173,14 +173,34 @@ object Util extends LogAspect {
   /**
    * Utility method, generate src file
    * @param repName Target directory name, sub directory separated by .
-   * @param fileName Target file name
+   * @param fileName Target file name without extension
    * @param content Target file content
    */
-  def generateFile(repName: String, fileName: String, content: String) {
+  def generateScalaFile(repName: String, fileName: String, content: String) {
+    generateFile(GlobalConfiguration.outputFolder, repName, fileName + ".scala", content)
+  }
+  
+  /**
+   * Utility method, generate src file
+   * @param repName Target directory name, sub directory separated by .
+   * @param fileName Target file name without extension
+   * @param content Target file content
+   */
+  def generateJavaFile(repName: String, fileName: String, content: String) {
+    generateFile(GlobalConfiguration.javaOutputFolder, repName, fileName + ".java", content)
+  }
+  
+   /**
+   * Utility method, generate src file
+   * @param repName Target directory name, sub directory separated by .
+   * @param fileName Target file name with its extension
+   * @param content Target file content
+   */
+  def generateFile(outputFolder : String,  repName: String, fileName: String, content: String) {
     // println("REPNAME="+repName+"-"+fileName)
-    var f: java.io.File = new java.io.File(GlobalConfiguration.outputFolder + java.io.File.separator + repName.replace(".", java.io.File.separator))
+    var f: java.io.File = new java.io.File(outputFolder + java.io.File.separator + repName.replace(".", java.io.File.separator))
     if (!f.exists()) f.mkdirs
-    var f1: java.io.File = new java.io.File(GlobalConfiguration.outputFolder + java.io.File.separator + repName.replace(".", java.io.File.separator) + java.io.File.separator + fileName + ".scala")
+    var f1: java.io.File = new java.io.File(outputFolder + java.io.File.separator + repName.replace(".", java.io.File.separator) + java.io.File.separator + fileName )
     var output: java.io.FileOutputStream = new java.io.FileOutputStream(f1)
     var writer: java.io.PrintWriter = new java.io.PrintWriter(output)
     writer.println(content)
@@ -188,6 +208,7 @@ object Util extends LogAspect {
     writer.close
     output.close
   }
+  
 
   def cleanFolder(repName: String) {
     if (repName != null) {
@@ -441,6 +462,35 @@ object Util extends LogAspect {
     return helper.getQualifiedPathWithoutMetamodel(thi)
   }
 
+  /**
+   * return the string corresponding the this type
+   * may raise an exception for unsupported type so if can be catched and the caller can ignore this operation. 
+   */
+  def getTypeAsJavaType(multiplicityElement : MultiplicityElement) : String =  {
+    var res: StringBuilder = new StringBuilder
+    if (multiplicityElement.getUpper > 1 || multiplicityElement.getUpper == -1) {
+      if (multiplicityElement.getIsOrdered != null && multiplicityElement.getIsOrdered) {
+        res.append("org.eclipse.emf.common.util.EList<")
+      } else {
+        //TODO gestion des SETs
+        res.append("org.eclipse.emf.common.util.EList<")
+      }
+
+      getTypeAsJavaType(multiplicityElement.getType(), res)
+      res.append(">")
+
+    } else {
+      getTypeAsJavaType(multiplicityElement.getType(), res)
+    }
+    return res.toString
+  }
+  def getTypeAsJavaType(typ : Type, res: StringBuilder)  {
+    throw new RuntimeException("type not supported for java generation "+ typ.toString)
+  }
+  def getTypeAsJavaType(clazz : Class, res: StringBuilder)  {
+    res.append(getPQualifiedNamedBase(clazz.getTypeDefinition()))
+  }
+  
   //MODELTYPE ADDITION
   /*
    * getNames for type members and model type interfaces

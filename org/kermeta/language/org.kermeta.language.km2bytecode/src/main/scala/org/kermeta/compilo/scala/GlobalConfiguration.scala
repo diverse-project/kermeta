@@ -70,7 +70,8 @@ object GlobalConfiguration extends LogAspect {
         result
       }
       scalaAspectPrefix = props.getString("project.artefact.id").replace(".", "")
-      outputFolder = outputProject + "/src"
+      outputFolder = outputProject + "/src/scala"
+      javaOutputFolder = outputProject + "/src/java"
       outputBinFolder = outputProject + "/bin"
       additionalClassPath = if (props.containsKey("user.additional.classpath")) { List.fromString(props.getString("user.additional.classpath"), ',') } else { null }
       workspaceURI = if (props.containsKey("workspace.platform.uri")) { props.getString("workspace.platform.uri") } else { null }
@@ -127,6 +128,7 @@ object GlobalConfiguration extends LogAspect {
   var factoryName: String = "KerRichFactory"
   var outputProject: String = null
   var outputFolder: String = null
+  var javaOutputFolder: String = null
   var outputBinFolder: String = null
   var scalaPrefix: String = "Scala"
   @scala.reflect.BeanProperty
@@ -134,6 +136,8 @@ object GlobalConfiguration extends LogAspect {
   var workspaceURI: String = null
   var pluginURI: String = null
   var withRich: Boolean = true
+  
+  var generateJavaHelper :  Boolean = false
 
   def baseClass(): String = {
     var baseClass = props.getProperty("baseClass")

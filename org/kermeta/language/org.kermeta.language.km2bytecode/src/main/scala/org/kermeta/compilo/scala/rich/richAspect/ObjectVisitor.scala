@@ -36,7 +36,7 @@ trait ObjectVisitor {
         
   def visitTypeParam(thi:org.kermeta.language.structure.Type,res:StringBuilder)
 	 
-  def generateParamerterClass(thi:org.kermeta.language.structure.ClassDefinition,res1:StringBuilder)
+  def generateTypeParameterForClassDefinition(thi:org.kermeta.language.structure.ClassDefinition,res1:StringBuilder)
   
   def getQualifiedPathWithMetamodel(thi: EObject): String  
   def getQualifiedPathWithoutMetamodel(thi: EObject): String

@@ -20,7 +20,7 @@ object UtilObjectGenerator {
     template.append("    def clone(t:org.kermeta.language.structure.Class, o:Any):Any={return null;}\n")
     template.append("}\n")
 
-    Util.generateFile("scalaUtil", "Util", template.toString)
+    Util.generateScalaFile("scalaUtil", "Util", template.toString)
 
   }
 }

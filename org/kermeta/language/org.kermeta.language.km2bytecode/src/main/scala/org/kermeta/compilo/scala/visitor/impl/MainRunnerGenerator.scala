@@ -141,7 +141,7 @@ class MainRunnerGenerator(ecorePackages: java.util.List[Package], visitor: Packa
     res.append(")")
     res.append("\n  }\n}")
     // generates the file
-    Util.generateFile(GlobalConfiguration.scalaAspectPrefix + "runner." + packageName, cd.getName + "_" + op.getName, res.toString())
+    Util.generateScalaFile(GlobalConfiguration.scalaAspectPrefix + "runner." + packageName, cd.getName + "_" + op.getName, res.toString())
   }
 
   /**
@@ -177,7 +177,7 @@ class MainRunnerGenerator(ecorePackages: java.util.List[Package], visitor: Packa
     res.append(")")
     res.append("\n  }\n}")
     // generates the file
-    Util.generateFile(GlobalConfiguration.scalaAspectPrefix + "runner." + mmQName, mtd.getName + "_" + t.getName, res.toString())
+    Util.generateScalaFile(GlobalConfiguration.scalaAspectPrefix + "runner." + mmQName, mtd.getName + "_" + t.getName, res.toString())
   }
 
 }

@@ -73,7 +73,7 @@ trait ModelElementTypeDefinitionAspect extends ObjectVisitor with OperationAspec
     })
     res.append("}\n")
 
-    Util.generateFile(Util.getQualifiedPathWithMetamodel(cd), Util.getModelTypeInterfaceName(cd), res.toString())
+    Util.generateScalaFile(Util.getQualifiedPathWithMetamodel(cd), Util.getModelTypeInterfaceName(cd), res.toString())
   }
 
   /*

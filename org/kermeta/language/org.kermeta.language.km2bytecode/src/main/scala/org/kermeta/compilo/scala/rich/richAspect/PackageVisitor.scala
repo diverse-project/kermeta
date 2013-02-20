@@ -685,7 +685,7 @@ class PackageVisitor(compilerConfiguration: CompilerConfiguration) extends Objec
         i = i + 1
       }
       res append " = Value\n" + "}"
-      Util.generateFile(k2.utils.TypeEquivalence.getPackageEquivalence(getQualifiedName(thi.eContainer())), thi.getName, res.toString())
+      Util.generateScalaFile(k2.utils.TypeEquivalence.getPackageEquivalence(getQualifiedName(thi.eContainer())), thi.getName, res.toString())
     }
 
   }

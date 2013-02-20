@@ -235,7 +235,7 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
     val mrg = new MainRunnerGenerator(ecorePackages, visitor, compilerConfiguration)
     // generates the default runner file
     mrg.generateDefaultRunner(par, res)
-    Util.generateFile(GlobalConfiguration.scalaAspectPrefix + "runner", "DefaultRunner", res.toString())
+    Util.generateScalaFile(GlobalConfiguration.scalaAspectPrefix + "runner", "DefaultRunner", res.toString())
 
     // generate the Util.scala file (used for call on Types)
     UtilObjectGenerator.genetateUtilObject(compilerConfiguration.kermetaStandardMMName)
@@ -267,7 +267,7 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
       viewtype.append("Aspect")
       viewtype.append("\n")
     })
-    Util.generateFile(Util.getQualifiedName(mm), GlobalConfiguration.viewDefTraitName, viewtype.toString())
+    Util.generateScalaFile(Util.getQualifiedName(mm), GlobalConfiguration.viewDefTraitName, viewtype.toString())
 
   }
 
@@ -301,8 +301,8 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
         factoryDef.append(factoryDefClass.toString())
         //viewDef append "}\n"
         factoryDef append "}\n"
-        Util.generateFile(actualPackage, GlobalConfiguration.factoryName, factoryDef.toString())
-        Util.generateFile(actualPackage, GlobalConfiguration.viewDefTraitName, viewDef.toString())
+        Util.generateScalaFile(actualPackage, GlobalConfiguration.factoryName, factoryDef.toString())
+        Util.generateScalaFile(actualPackage, GlobalConfiguration.viewDefTraitName, viewDef.toString())
         viewDef.clear
         factoryDef.clear
       }
@@ -341,17 +341,17 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
       
       genpackageName.append(".")
 
-      var param: StringBuilder = new StringBuilder
+      var param: StringBuilder = new StringBuilder     
       var paramWithBounds : StringBuilder = new StringBuilder
-      visitor.generateParamerterClass(par, param);
-      visitor.generateParamerterClassWithBounds(par, paramWithBounds);
+      visitor.generateTypeParameterForClassDefinition(par, param);
+      visitor.generateTypeParameterForClassDefinitionWithBounds(par, paramWithBounds);
 
       if (Util.hasEcoreTag(par)) {
         if (!Util.isAMapEntry(par)) {
           var implName: String = Util.getImplPackageSuffix(packageName.toString)
           viewDefTemp.append(" class Rich" + par.getName() + paramWithBounds.toString)
           if (Util.hasEcoreFromAPITag(par))
-            viewDefTemp.append(" extends " + Util.protectScalaKeyword(k2.utils.TypeEquivalence.getTypeEquivalence(ecorepackageName.toString + par.getName())) + param.toString)
+              viewDefTemp.append(" extends " + Util.protectScalaKeyword(k2.utils.TypeEquivalence.getTypeEquivalence(ecorepackageName.toString + par.getName())) + param.toString)
           else
             viewDefTemp.append(" extends " + Util.protectScalaKeyword(k2.utils.TypeEquivalence.getTypeEquivalence(ecorepackageName.toString + implName.substring(1, implName.size) + par.getName() + "Impl")) + param.toString)
           viewDefTemp.append(" with " + Util.protectScalaKeyword(packageName.toString + "." + par.getName + "Aspect") + param.toString + " ")
@@ -395,10 +395,10 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
           implicitDef.append(visitor.getQualifiedNameCompilo(par))
           implicitDef.append(" ( v )\n")
         } else
-          implicitDef append " implicit def richAspect" + paramWithBounds.toString + "(v : " + Util.protectScalaKeyword(packageName.toString + "." + par.getName() + "Aspect") + param.toString + ") = v.asInstanceOf[" + Util.protectScalaKeyword(visitor.getPQualifiedNameCompilo(par.eContainer()) + Util.getImplPackageSuffix(packageName.toString) + par.getName + "Impl") + param.toString + "]\n"
-      } else {
+            implicitDef append " implicit def richAspect" + paramWithBounds.toString + "(v : " + Util.protectScalaKeyword(packageName.toString + "." + par.getName() + "Aspect") + param.toString + ") = v.asInstanceOf[" + Util.protectScalaKeyword(visitor.getPQualifiedNameCompilo(par.eContainer()) + Util.getImplPackageSuffix(packageName.toString) + par.getName + "Impl") + param.toString + "]\n"
+        } else {
 
-        //Tisse la class d'implem ecore hérité'
+          //Tisse la class d'implem ecore hérité'
         var cd = getEcoreSuperClass(par)
 
         //cd.eContainer().asInstanceOf[KermetaModelElementAspect].getQualifiedNameCompilo +".impl." + cd.getName +"Impl
@@ -498,7 +498,7 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
 
   def close {
     implicitDef append "}\n"
-    Util.generateFile(GlobalConfiguration.frameworkGeneratedPackageName, GlobalConfiguration.implicitConvTraitName, implicitDef.toString())
+    Util.generateScalaFile(GlobalConfiguration.frameworkGeneratedPackageName, GlobalConfiguration.implicitConvTraitName, implicitDef.toString())
   }
 
   //MODELTYPE ADDITION
@@ -524,7 +524,7 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
       if (!Util.hasCompilerIgnoreTag(td)) {
         if (td.isInstanceOf[ClassDefinition] && !td.asInstanceOf[ClassDefinition].getIsAbstract()) {
           var param: StringBuilder = new StringBuilder
-          visitor.generateParamerterClass(td.asInstanceOf[ClassDefinition], param)
+          visitor.generateTypeParameterForClassDefinition(td.asInstanceOf[ClassDefinition], param)
 
           tfactory.append("\tdef create")
           tfactory.append(td.getName())
@@ -537,7 +537,7 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
       }
     })
     tfactory.append("\n}")
-    Util.generateFile(Util.getQualifiedName(par), Util.getModelTypeFactoryInterfaceName(), tfactory.toString())
+    Util.generateScalaFile(Util.getQualifiedName(par), Util.getModelTypeFactoryInterfaceName(), tfactory.toString())
 
     //Factory generation
     var factory: StringBuilder = new StringBuilder
@@ -575,7 +575,7 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
       if (!Util.hasCompilerIgnoreTag(td)) {
         if (td.isInstanceOf[ClassDefinition] && !td.asInstanceOf[ClassDefinition].getIsAbstract()) {
           var param: StringBuilder = new StringBuilder
-          visitor.generateParamerterClass(td.asInstanceOf[ClassDefinition], param)
+          visitor.generateTypeParameterForClassDefinition(td.asInstanceOf[ClassDefinition], param)
 
           factory.append("\tdef create")
           factory.append(td.getName())
@@ -590,7 +590,7 @@ class ScalaFactoryAndImplicitVisitor(compilerConfiguration: CompilerConfiguratio
     })
     factory.append("\n}")
     
-    Util.generateFile(Util.getQualifiedName(par), Util.getModelTypeFactoryTypeName(), factory.toString())
+    Util.generateScalaFile(Util.getQualifiedName(par), Util.getModelTypeFactoryTypeName(), factory.toString())
   }
 
 }

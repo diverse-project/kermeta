@@ -714,7 +714,7 @@ trait PropertyAspect extends ObjectVisitor with LogAspect {
       } else {
         res.append(Util.protectScalaKeyword(getQualifiedNamedAspect(thi.getOwningClass)))
       }
-      generateParamerterClass(thi.getOwningClass(), res)
+      generateTypeParameterForClassDefinition(thi.getOwningClass(), res)
     }
   }
 }
