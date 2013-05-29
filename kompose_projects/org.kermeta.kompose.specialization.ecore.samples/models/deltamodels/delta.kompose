@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="ASCII"?>
-<kompose:Composer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:kompose="http://www.kermeta.org/kompose" primaryModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/deltamodels/Out.ecore" aspectModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/deltamodels/ABCBank3.ecore" composedModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/deltamodels/XYZBank3.ecore" metamodelName="http://www.eclipse.org/emf/2002/Ecore"/>
+<kompose:Composer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kompose="http://www.kermeta.org/kompose" primaryModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/deltamodels/ABCBank3.ecore" aspectModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/deltamodels/XYZBank3.ecore" composedModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/deltamodels/Out.ecore" metamodelName="http://www.eclipse.org/emf/2002/Ecore">
+  <predirectivesPM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="abcbank3::SuperCurrent"/>
+    <value xsi:type="kompose:StringLiteral" value="Basic"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="abcbank3::WebInfo"/>
+    <value xsi:type="kompose:StringLiteral" value="InternetBanking"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="abcbank3"/>
+    <value xsi:type="kompose:StringLiteral" value="xyzbank"/>
+  </predirectivesPM>
+</kompose:Composer>

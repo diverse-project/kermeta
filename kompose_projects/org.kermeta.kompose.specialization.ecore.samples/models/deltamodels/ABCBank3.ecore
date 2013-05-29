@@ -17,7 +17,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="WebInfo"/>
   <eClassifiers xsi:type="ecore:EClass" name="BillingReports"/>
   <eClassifiers xsi:type="ecore:EClass" name="Bank">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="" upperBound="-1" eType="#//Account"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accounts" upperBound="-1"
+        eType="#//Account" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>
