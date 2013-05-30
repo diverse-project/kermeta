@@ -2,4 +2,9 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kompose FeatureModel Specialization Sample Models
 Bundle-SymbolicName: org.kermeta.kompose.specialization.fm.samples
-Bundle-Version: 0.0.5
+Bundle-Version: 1.0.0
+Bundle-Activator: org.kermeta.kompose.specialization.fm.samples.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
