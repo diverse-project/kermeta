@@ -1,0 +1,127 @@
+<project name="full_kermeta_studio_updatesite" default="all">
+	<!-- configuration properties -->		
+	<!-- project configuration -->
+	<property environment="env"/>
+
+	<property name="env.WORKSPACE" location="."/>
+	
+	<property name="source.features.and.bundles.downloaded.zip" location="${env.WORKSPACE}/tmp/features_and_bundles.zip"/>	
+	<property name="gmf.features.and.bundles.downloaded.zip" location="${env.WORKSPACE}/tmp/gmf.zip"/>
+	<property name="source.features.and.bundles.url" value="http://tipimouss.irisa.fr:8090/job/full_kermeta_studio_compile/lastSuccessfulBuild/artifact/full_kermeta_studio_compile/I.DevelopmentBuild/org.kermeta.studio.main.feature-DevelopmentBuild.zip"/>		
+	<property name="updatesite.repository" location="${env.WORKSPACE}/updatesite"/>
+	<property name="category.definition" location="./category.xml"/>
+	<property name="source.features.and.bundles" location="${env.WORKSPACE}/build/features_and_bundles"/>	
+	
+	<property name="studio.base.dir" location="${env.WORKSPACE}/studiobase/"/>
+	<property name="studio.archive.extension" value="tar.gz"/>
+	<property name="studio.base.url" value="http://tipimouss.irisa.fr:8090/job/provision_eclipse_indigo_bases_for_kermeta/lastSuccessfulBuild/artifact/provision_eclipse_indigo_bases_for_kermeta/build/kermeta_indigo_linux_x86_base.${studio.archive.extension}"/>
+	<property name="eclipse.bin.home" location="${studio.base.dir}/eclipse"/>
+	<property name="equinox.jar.filename" value="org.eclipse.equinox.launcher_1.2.0.v20110502.jar"/>
+	<property name="deploy.server" value="web1.irisa.fr"/>
+	<property name="deploy.user" value="web-kermeta"/>
+	<property name="deploy.path" value="/home/web/apache/sites/kermeta.org/htdocs/integration_build/update_modmap"/>
+	
+	<target name="modmap_test" depends="get_studio_base, publish_features_and_bundles, publish_categories"/>
+	
+	<target name="all" depends="get_studio_base, publish_features_and_bundles, publish_categories, get_site_template">
+		<antcall target="upload" />
+	</target>
+	
+	<target name="publish_features_and_bundles" depends="get_repository_source">
+		<delete dir="${updatesite.repository}" failonerror="false"/>
+		<java jar="${eclipse.bin.home}/plugins/${equinox.jar.filename}"
+				           fork="true"
+				           failonerror="true"
+				           maxmemory="128m"
+				           >
+					<arg value="-application"/>
+					<arg value="org.eclipse.equinox.p2.publisher.FeaturesAndBundlesPublisher"/>
+					<arg value="-metadataRepository"/>
+					<arg value="file:/${updatesite.repository}"/>
+					<arg value="-artifactRepository"/>
+					<arg value="file:/${updatesite.repository}"/>
+					<arg value="-source"/>
+					<arg value="${source.features.and.bundles}/eclipse"/>
+					<arg value="-compress"/>
+					<arg value="-publishArtifacts"/>
+				</java>	
+	</target>
+	<target name="publish_categories" depends="publish_features_and_bundles">
+			<java jar="${eclipse.bin.home}/plugins/${equinox.jar.filename}"
+					           fork="true"
+					           failonerror="true"
+					           maxmemory="128m"
+					           >
+						<arg value="-console"/>
+						<arg value="-consolelog "/>
+						<arg value="-application"/>
+						<arg value="org.eclipse.equinox.p2.publisher.CategoryPublisher"/>
+						<arg value="-metadataRepository"/>
+						<arg value="file:/${updatesite.repository}"/>
+						<arg value="-categoryDefinition"/>
+						<arg value="file:/${category.definition}"/>
+						<arg value="-categoryQualifier"/>
+						<arg value="-compress"/>
+			</java>	
+	</target>
+	<target name="get_site_template">
+		<copy todir="${updatesite.repository}">
+			<fileset dir="${env.WORKSPACE}/site-template/fr.irisa.triskell.kermeta.site" includes="**" >
+				<exclude name="readme.txt"/>
+				<exclude name="*_build.xml"/>
+			</fileset>	
+		</copy>
+	</target>
+	<target name="upload">
+		<chmod perm="g+w">
+			<fileset dir="${updatesite.repository}">
+			    <include name="**/**"/>
+			 </fileset>
+		</chmod>
+		<sshexec host="${deploy.server}"
+		         username="${deploy.user}"
+				 keyfile="${key.file}"
+				 passphrase=""
+			     trust="yes"
+			     command="rm -Rf ${deploy.path};  
+						  mkdir ${deploy.path};"/>
+		<scp todir="${deploy.user}@${deploy.server}:${deploy.path}"
+			keyfile="${key.file}"
+			passphrase=""
+		    trust="yes">
+		    <fileset dir="${updatesite.repository}">
+		      <include name="**/**"/>
+		    </fileset>
+		</scp>
+		<!-- override the site.xml with the correct category.xml -->
+		<scp file="category.xml" remoteTofile="${deploy.user}@${deploy.server}:${deploy.path}/site.xml"
+			keyfile="${key.file}"
+			passphrase=""
+		    trust="yes">
+		</scp>
+	</target>
+	<target name="get_studio_base">
+		<ant antfile="get_studio_base_build.xml">
+  			<property name="studio.base.url" value="${studio.base.url}"/>
+  			<property name="archive.extension" value="${studio.archive.extension}"/>
+			<property name="studio.base.dir" location="${studio.base.dir}"/>
+		</ant>
+	</target>
+	<target name="get_repository_source">
+		<delete dir="${source.features.and.bundles}" failonerror="false"/>
+		<mkdir dir="${env.WORKSPACE}/tmp"/>
+		<get src="${source.features.and.bundles.url}" 
+					dest="${source.features.and.bundles.downloaded.zip}"
+					usetimestamp="true"/>
+		<unzip dest="${source.features.and.bundles}"
+			src="${source.features.and.bundles.downloaded.zip}">
+		</unzip> 	
+	</target>
+	<target name="addGMF">
+		<get src="http://eclipse.ialto.org/modeling/gmp/gmf-tooling/downloads/drops/2.4.0/S201106290629/gmf-sdk-2.4.0RC2.zip"
+			dest="${gmf.features.and.bundles.downloaded.zip}"
+			usetimestamp="true"/>
+		<unzip dest="${source.features.and.bundles}"
+			src=""/>
+	</target>
+</project>
