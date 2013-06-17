@@ -237,6 +237,9 @@ aspect class Merge{
 	method toString() : String is do
 		result := "MERGE " + ~value.toString + " with " + target.toString
 	end
+	
+	method execute(model : kompose::Mergeable, ctx : kompose::Context) is do
+	end
 }
 
 aspect class Set{
